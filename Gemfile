@@ -1,7 +1,5 @@
 source 'https://rubygems.org'
 
-source 'https://rubygems.org'
-
 gem 'chartkick'
 gem 'nokogiri'
 gem 'capybara'
@@ -12,18 +10,21 @@ gem 'thin'
 gem 'json'
 gem 'rake'
 gem 'selenium-webdriver'
-gem 'pg'
 gem 'tux'
+
+group :production do 
+  gem 'pg'
+end
 
 group :test, :development do
   gem 'shotgun'
+  gem 'sqlite3'
 end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.3'
 
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
