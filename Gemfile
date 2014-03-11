@@ -7,6 +7,7 @@ gem 'poltergeist'
 gem 'rspec'
 gem 'json'
 gem 'selenium-webdriver'
+gem 'ffi', "= 1.9.0"
 
 group :production do 
   gem 'pg'
