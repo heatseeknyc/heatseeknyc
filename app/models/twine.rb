@@ -33,7 +33,6 @@ class Twine < ActiveRecord::Base
   end
 
   def get_reading
-    binding.pry
     session = ScrapeDriver.new
     session.visit 'https://twine.cc/login?next=%2F'
     session.fill_in 'email', :with => "wm.jeffries@gmail.com"

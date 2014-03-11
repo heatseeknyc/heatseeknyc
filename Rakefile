@@ -9,6 +9,7 @@ desc "get temperature from twine"
 task :get_reading => :environment do
   twine = Twine.find_by(name: "twine1")
   twine.get_reading
+  puts twine.readings.last.temp
   twine.save
 end
 
