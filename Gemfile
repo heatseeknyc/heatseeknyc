@@ -5,12 +5,8 @@ gem 'nokogiri'
 gem 'capybara'
 gem 'poltergeist'
 gem 'rspec'
-gem 'pry-nav'
-gem 'thin'
 gem 'json'
-gem 'rake'
 gem 'selenium-webdriver'
-gem 'tux'
 
 group :production do 
   gem 'pg'
@@ -18,7 +14,6 @@ group :production do
 end
 
 group :test, :development do
-  gem 'shotgun'
   gem 'sqlite3'
 end
 
