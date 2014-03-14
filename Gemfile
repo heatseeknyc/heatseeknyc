@@ -9,9 +9,9 @@ gem 'json'
 gem 'selenium-webdriver'
 gem 'ffi', "= 1.9.0"
 gem 'pry'
+gem 'pg'
 
 group :production do 
-  gem 'pg'
   gem 'rails_12factor'
 end
 
