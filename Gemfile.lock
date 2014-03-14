@@ -27,6 +27,8 @@ GEM
       tzinfo (~> 0.3.37)
     arel (4.0.2)
     atomic (1.1.15)
+    bootstrap-sass (3.1.1.0)
+      sass (~> 3.2)
     builder (3.1.4)
     capybara (2.2.1)
       mime-types (>= 1.16)
@@ -94,6 +96,7 @@ GEM
     rails_12factor (0.0.2)
       rails_serve_static_assets
       rails_stdout_logging
+    rails_layout (1.0.11)
     rails_serve_static_assets (0.0.2)
     rails_stdout_logging (0.0.3)
     railties (4.0.3)
@@ -159,6 +162,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bootstrap-sass
   capybara
   chartkick
   coffee-rails (~> 4.0.0)
@@ -172,6 +176,7 @@ DEPENDENCIES
   pry
   rails (= 4.0.3)
   rails_12factor
+  rails_layout
   rspec
   sass-rails (~> 4.0.0)
   sdoc
