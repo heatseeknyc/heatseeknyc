@@ -9,6 +9,7 @@ gem 'json'
 gem 'selenium-webdriver'
 gem 'ffi', "= 1.9.0"
 gem 'pry'
+gem 'pg'
 
 gem 'bootstrap-sass'
 group :development do
@@ -16,7 +17,6 @@ group :development do
 end
 
 group :production do 
-  gem 'pg'
   gem 'rails_12factor'
 end
 
