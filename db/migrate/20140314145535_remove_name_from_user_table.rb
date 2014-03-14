@@ -1,5 +1,5 @@
 class RemoveNameFromUserTable < ActiveRecord::Migration
   def change
-    remove_column :user_tables, :name, :string
+    remove_column :users, :name, :string
   end
 end
