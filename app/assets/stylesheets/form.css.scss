@@ -1,0 +1,26 @@
+#form-id {
+  padding-top: 20px;
+}
+
+
+@media only screen and (min-width: 640px) {
+  #form-id {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+}
+
+
+@media only screen and (min-width: 800px) {
+  #form-id {
+    padding-left: 15%;
+    padding-right: 15%;
+  }
+}
+
+@media only screen and (min-width: 990px) {
+  #form-id {
+    padding-left: 0%;
+    padding-right: 0%;
+  }
+}
