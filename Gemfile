@@ -10,6 +10,11 @@ gem 'selenium-webdriver'
 gem 'ffi', "= 1.9.0"
 gem 'pry'
 
+gem 'bootstrap-sass'
+group :development do
+  gem 'rails_layout'
+end
+
 group :production do 
   gem 'pg'
   gem 'rails_12factor'
