@@ -17,3 +17,8 @@ desc "make twine1"
 task :twine1 => :environment do
   Twine.create(name: "twine1")
 end
+
+desc "make user1"
+task :user1 => [:environment] do
+  User.create(first_name: "user1")
+end

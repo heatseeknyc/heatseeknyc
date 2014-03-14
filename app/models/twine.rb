@@ -1,5 +1,6 @@
 class Twine < ActiveRecord::Base
   has_many :readings
+  belongs_to :user
 
   def chart_hash
       if readings.empty?
@@ -43,6 +44,6 @@ class Twine < ActiveRecord::Base
     noko = Nokogiri::HTML(session.html)
     session.driver.quit
     temp = noko.css(".temperature-value").text.to_i
-    self.readings.create(temp: temp)
+    self.readings.create(temp: temp, user: self.user)
   end
 end
