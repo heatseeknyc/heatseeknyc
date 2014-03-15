@@ -1,7 +1,5 @@
 class TwineController < ApplicationController
   def index
-    twine = Twine.find_by(name: "twine1")
-    @chart_hash = twine.chart_hash
-    @range = twine.range
+    @user = User.find_by(first_name: "user1")
   end
 end
