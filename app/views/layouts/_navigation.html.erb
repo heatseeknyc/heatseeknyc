@@ -2,7 +2,13 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
-      <%= link_to 'Home', root_path, class: 'navbar-brand' %>
+      <% if current_user %>
+        <%= link_to 'Home', root_path, class: 'navbar-brand' %>
+        <p class='navbar-brand' id="pipe-spacing">|</p>
+        <%= link_to 'Settings', edit_user_path, class: 'navbar-brand' %>
+      <% else %>
+        <%= link_to "Login", "/users/sign_in", class: 'navbar-brand' %>
+      <% end %>
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
