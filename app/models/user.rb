@@ -91,12 +91,32 @@ class User < ActiveRecord::Base
   end
 
   def reading_hash
-    reading_nested_array.to_h
+    self.reading_nested_array.to_h
   end
 
   def reading_nested_array
     self.readings.map do |reading|
       [reading.created_at, reading.temp]
     end
+  end
+
+  def bars
+    {"Avg Day" => avg_day_temp, "Avg Night" => avg_night_temp}
+  end
+
+  def avg_day_temp
+    day_temps = []
+    self.reading_hash.each do |time, temp|
+      day_temps << temp if (6..22).include?(time.hour)
+    end
+    day_temps.sum / day_temps.size
+  end
+
+  def avg_night_temp
+    night_temps = []
+    self.reading_hash.each do |time, temp|
+      night_temps << temp if !(6..22).include?(time.hour)
+    end
+    night_temps.sum / night_temps.size
   end
 end
