@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
   def legal_hash
     Hash.new.tap do |legal_hash|
       time_array.each do |time|
-        if (6..22).include?(time.hour)
+        if (6..22).include?(time.hour - 5)
         legal_hash[time] = 68
         else
         legal_hash[time] = 55
