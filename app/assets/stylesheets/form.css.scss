@@ -5,8 +5,8 @@
 
 @media only screen and (min-width: 640px) {
   #form-id {
-    padding-left: 5%;
-    padding-right: 5%;
+    padding-left: 10%;
+    padding-right: 10%;
   }
 }
 
@@ -18,9 +18,11 @@
   }
 }
 
-@media only screen and (min-width: 990px) {
+@media only screen and (min-width: 992px) {
   #form-id {
     padding-left: 0%;
     padding-right: 0%;
+    position:relative;
+    left: 33%;
   }
 }
