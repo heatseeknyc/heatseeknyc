@@ -1,4 +1,8 @@
-<h2>Users</h2>
-<% @users.each do |u| %>
-  <%= u.first_name %> <br/>
-<% end %>
+
+<div class="col-xs-offset-5">
+  <h2>Users</h2>
+  <% @users.each do |u| %>
+    <a href="/users/<%= u.id %>" class="user-name"><%= u.first_name %></a>
+    <hr class="underline-user">
+  <% end %>
+</div>

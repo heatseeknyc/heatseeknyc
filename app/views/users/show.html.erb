@@ -1,1 +1,4 @@
-show.html.erb
+<div class="show-layout">
+  <h3>Hello, <%= @user.first_name %></h3>
+  <%= line_chart(@chart_hash, @range) %>
+</div>
