@@ -22,9 +22,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    twine = Twine.find_by(name: "twine1")
-    @chart_hash = twine.chart_hash
-    @range = twine.range
   end
 
   private
