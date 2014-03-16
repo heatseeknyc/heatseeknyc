@@ -1,0 +1,13 @@
+.graph {
+  float: left;
+  width: 100%;
+}
+
+@media only screen and (min-width: 700px) {
+  #bar {
+    width: 33%;
+  }
+  #line {
+    width: 67%;
+  }
+}

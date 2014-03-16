@@ -1,5 +1,5 @@
 <div class="show-layout">
   <h3>Hello, <%= current_user.first_name %></h3>
-  <%= line_chart(current_user.lines, current_user.range) %>
-  <%= column_chart(current_user.bars) %>
+  <div class="graph" id="bar"><%= column_chart(current_user.bars, ) %></div>
+  <div class="graph" id="line"><%= line_chart(current_user.lines, current_user.range) %></div>
 </div>
