@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
   def legal_hash
     Hash.new.tap do |legal_hash|
       time_array.each do |time|
-        if (6..22).include?(time.hour - 5)
+        if (6..22).include?((time.hour - 5) % 24)
         legal_hash[time] = 68
         else
         legal_hash[time] = 55
@@ -107,7 +107,7 @@ class User < ActiveRecord::Base
   def avg_day_temp
     day_temps = []
     self.reading_hash.each do |time, temp|
-      day_temps << temp if (6..22).include?(time.hour)
+      day_temps << temp if (6..22).include?((time.hour - 5) % 24)
     end
     day_temps.sum / day_temps.size
   end
@@ -115,7 +115,7 @@ class User < ActiveRecord::Base
   def avg_night_temp
     night_temps = []
     self.reading_hash.each do |time, temp|
-      night_temps << temp if !(6..22).include?(time.hour)
+      night_temps << temp if !(6..22).include?((time.hour - 5) % 24)
     end
     night_temps.sum / night_temps.size
   end
