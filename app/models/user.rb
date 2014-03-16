@@ -96,12 +96,9 @@ class User < ActiveRecord::Base
   end
 
   def reading_hash
-    self.reading_nested_array.to_h
-  end
-
-  def reading_nested_array
-    self.readings.map do |reading|
-      [reading.created_at, reading.temp]
+    self.readings.inject({}) do |reading_hash, reading|  
+      reading_hash[reading.created_at] = reading.temp
+      reading_hash
     end
   end
 
