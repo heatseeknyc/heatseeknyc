@@ -1,8 +1,7 @@
 <div class="col-md-4" id="form-id">
-
   <h2>Sign up</h2>
 
-  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <%= form_for(resource, :as => resource_name, :url => users_path) do |f| %>
     <%= devise_error_messages! %>
 
     <dl><%= f.label :first_name %>:
@@ -14,21 +13,18 @@
     <dl><%= f.label :address %>:
     <%= f.text_field :address, class: "form-control" %></dl>
 
-    <dl><%= f.label :email %>
+    <dl><%= f.label :email %>:
     <%= f.email_field :email, class: "form-control" %></dl>
 
     <dl><%= f.label :twine %>:
     <%= f.text_field :twine, name: "twine", class: "form-control" %></dl>
 
-    <dl><%= f.label :password %>
+    <dl><%= f.label :password %>:
     <%= f.password_field :password, class: "form-control" %></dl>
 
-    <dl><%= f.label :password_confirmation %>
+    <dl><%= f.label :password_confirmation %>:
     <%= f.password_field :password_confirmation, class: "form-control" %></dl>
 
     <div><%= f.submit "Sign up", class: "btn btn-primary" %></div>
   <% end %>
-
-  <%= render "devise/shared/links" %>
-
-<div>
+</div>

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!, except: [:index, :show]
   # before_action :set_user, only: [:show, :new, :update, :destroy]
   def index
     @users = User.all
@@ -21,11 +21,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    if current_user.id == params[:id]
-      @user = User.find(params[:id])
-    else
-      redirect_to "/users/sign_in"
-    end
+    @user = User.find(params[:id])
   end
 
   private

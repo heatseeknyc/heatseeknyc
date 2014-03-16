@@ -1,4 +1,4 @@
 <div class="show-layout">
-  <h3>Hello, <%= @user.first_name %></h3>
-  <%= line_chart(@user.lines, @user.range) %>
+  <h3>Hello, <%= current_user.first_name %></h3>
+  <%= line_chart(current_user.lines, current_user.range) %>
 </div>

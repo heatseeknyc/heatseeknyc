@@ -3,9 +3,10 @@
   <div class="container">
     <div class="navbar-header">
       <% if current_user %>
-        <%= link_to 'Home', root_path, class: 'navbar-brand' %>
+        <%= link_to 'Home', user_path(current_user), class: 'navbar-brand' %>
         <p class='navbar-brand' id="pipe-spacing">|</p>
-        <%= link_to 'Settings', edit_user_path, class: 'navbar-brand' %>
+        <%= link_to 'Settings', edit_user_registration_path, class: 'navbar-brand' %>
+        <%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'navbar-brand', id: 'logout-id' %>
       <% else %>
         <%= link_to "Login", "/users/sign_in", class: 'navbar-brand' %>
       <% end %>
