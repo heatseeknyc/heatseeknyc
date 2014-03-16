@@ -114,7 +114,13 @@ class User < ActiveRecord::Base
     self.reading_hash.each do |time, temp|
       day_temps << temp if (6..22).include?((time.hour - 5) % 24)
     end
-    day_temps.sum / day_temps.size
+    sum_of_temps = day_temps.sum 
+    count_of_temps = day_temps.size
+    if count_of_temps == 0
+      avg_temp = 0
+    else
+      avg_temp = sum_of_temps / count_of_temps
+    end
   end
 
   def avg_night_temp
@@ -122,7 +128,14 @@ class User < ActiveRecord::Base
     self.reading_hash.each do |time, temp|
       night_temps << temp if !(6..22).include?((time.hour - 5) % 24)
     end
-    night_temps.sum / night_temps.size
+    sum_of_temps = night_temps.sum 
+    count_of_temps = night_temps.size
+    
+    if count_of_temps == 0
+      avg_temp = 0
+    else
+      avg_temp = sum_of_temps / count_of_temps
+    end
   end
 
   def twine
