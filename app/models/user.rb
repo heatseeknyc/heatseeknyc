@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :readings
+  has_one :twine
 
   validates_presence_of :first_name
   validates_presence_of :last_name
@@ -135,8 +136,9 @@ class User < ActiveRecord::Base
     end
   end
 
-  def twine
+  def twine=(twine_name)
     #this lets forms work and will be used to assign twines 
+    temp_twine = Twine.find_by(:name => twine_name)
+    temp_twine.user(self.id)
   end
-
 end
