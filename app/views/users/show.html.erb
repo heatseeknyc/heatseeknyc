@@ -1,9 +1,16 @@
+<div class="collaborator-bar"><ul></ul></div>
 <div class="show-layout">
   <h3>Hello, <%= current_user.first_name %></h3>
-  <div class="graph" id="bar"><%= column_chart(current_user.bars) %></div>
-  <div class="graph" id="line"><%= line_chart(current_user.lines, min: 50, max: 80, :library => {
+  <div class="graph" id="bar">
+    <%= column_chart(current_user.bars) %>
+  </div>
+  <div class="graph" id="line">
+    <%= line_chart(current_user.lines, min: 50, max: 80, :library => {
     legend: {position: 'bottom'},
     curveType: 'none',
       explorer: {keepInBounds: true, axis: 'horizontal'}
     }) %></div>
 </div>
+
+<!-- With the javascript detect touch if its a phone and if it so that it drops the menu down
+have the div have auto-height -->
