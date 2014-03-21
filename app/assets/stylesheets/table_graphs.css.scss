@@ -7,22 +7,35 @@
   float: right;
   background-color: #fff;
   width: 100%;
-  border-bottom: 1px solid #dddddd;
-  border-top: 1px solid #dddddd;
+}
+
+.table-border-fix {
+  border-bottom: 3px solid #ddd;
+  border-top: 3px solid #ddd;
+  width: 96%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.table {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media only screen and (min-width: 700px) {
   #bar {
-    width: 50%;
+    width: 55%;
   }
   #table {
-    width: 50%;
+    width: 45%;
     height: 300px;
+  }
+
+  .table-border-fix {
     border-color: #fff;
   }
-  .table{
-    width: 96%
-  }
+
   .table > thead > tr > th, 
   .table > tbody > tr > td, {
     padding: 40px 0px;

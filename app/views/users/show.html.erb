@@ -5,27 +5,29 @@
     <%= column_chart(current_user.bars) %>
   </div>
   <div id="table">
-    <table class="table">
-      <thead>
-        <tr>
-          <th></th>
-          <th>Daytime</th>
-          <th>Nighttime</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Highest</td>
-          <td>72</td>
-          <td>65</td>
-        </tr>
-        <tr>
-          <td>Lowest</td>
-          <td>63</td>
-          <td>54</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-border-fix">
+      <table class="table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Daytime</th>
+            <th>Nighttime</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Highest</td>
+            <td>72</td>
+            <td>65</td>
+          </tr>
+          <tr>
+            <td>Lowest</td>
+            <td>63</td>
+            <td>54</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <div class="graph" id="line">
