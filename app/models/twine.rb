@@ -5,7 +5,7 @@ class Twine < ActiveRecord::Base
   def get_reading
     session = ScrapeDriver.new
     session.visit 'https://twine.cc/login?next=%2F'
-    session.fill_in 'email', :with => "wm.jeffries+1@gmail.com"
+    session.fill_in 'email', :with => self.email
     session.fill_in 'password', :with => "33west26"
     sleep 1 + rand(1..10)/50
     session.click_button 'signin'

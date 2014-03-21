@@ -7,10 +7,11 @@ Twinenyc::Application.load_tasks
 
 desc "get temperature from twine"
 task :get_reading => :environment do
-  twine = Twine.find_by(name: "twine1")
-  twine.get_reading
-  puts twine.readings.last.temp
-  twine.save
+  Twine.all.each do |twine|
+    twine.get_reading
+    puts twine.readings.last.temp
+    twine.save
+  end
 end
 
 desc "make twine1"
