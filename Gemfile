@@ -4,17 +4,17 @@ gem 'chartkick'
 gem 'nokogiri'
 gem 'capybara'
 gem 'poltergeist'
-gem 'rspec'
 gem 'json'
 gem 'selenium-webdriver'
 gem 'ffi', "= 1.9.0"
-gem 'pry'
 gem 'pg'
 gem 'devise'
 gem 'tzinfo'
-
 gem 'bootstrap-sass'
-group :development do
+
+group :test, :development do
+  gem 'rspec-rails'
+  gem 'pry-nav'
   gem 'rails_layout'
   gem 'better_errors'
   gem 'binding_of_caller'
