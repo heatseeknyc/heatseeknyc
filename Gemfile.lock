@@ -56,6 +56,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.7.0)
+    database_cleaner (1.2.0)
     debug_inspector (0.0.2)
     devise (3.2.3)
       bcrypt-ruby (~> 3.0)
@@ -203,6 +204,7 @@ DEPENDENCIES
   capybara
   chartkick
   coffee-rails (~> 4.0.0)
+  database_cleaner
   devise
   factory_girl_rails
   ffi (= 1.9.0)
