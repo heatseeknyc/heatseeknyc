@@ -14,6 +14,7 @@ gem 'bootstrap-sass'
 
 group :test, :development do
   gem 'rspec-rails'
+  gem 'simplecov'
   gem 'pry-nav'
   gem 'rails_layout'
   gem 'better_errors'
