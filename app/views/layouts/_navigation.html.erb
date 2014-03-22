@@ -6,9 +6,11 @@
         <%= link_to 'Home', user_path(current_user), class: 'navbar-brand' %>
         <p class='navbar-brand' id="pipe-spacing">|</p>
         <%= link_to 'Settings', edit_user_registration_path, class: 'navbar-brand' %>
+        <h1 id="site-name"><span class="red">Heat</span> <span class="blue">Seek</span> <span class="light-blue">NYC</span></h1>
         <%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'navbar-brand', id: 'logout-id' %>
       <% else %>
         <%= link_to "Login", "/users/sign_in", class: 'navbar-brand' %><p class='navbar-brand' id="pipe-spacing">|</p><%= link_to "Sign Up", "/users/sign_up", class: 'navbar-brand' %>
+        <h1 id="site-name"><span class="red">Heat</span> <span class="blue">Seek</span> <span class="light-blue">NYC</span></h1>
       <% end %>
     </div>
     <div class="collapse navbar-collapse">

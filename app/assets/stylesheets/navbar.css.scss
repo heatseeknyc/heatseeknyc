@@ -1,9 +1,85 @@
+@import url("http://fonts.googleapis.com/css?family=Duru+Sans");
+
+.navbar-fixed-top {
+  height: 65px;
+}
 .navbar > .container .navbar-brand, .navbar > main .navbar-brand, .navbar > .container-fluid .navbar-brand {
   margin-left: 0px;
+  position: relative;
+  top: 20px;
 }
 
 #logout-id {
   float: right;
+  top: -27px;
+}
+
+#site-name {
+  font-size: 20px;
+  font-family: 'Duru Sans', sans-serif;
+  position: relative;
+  top: -7px;
+  left: -24%;
+  font-weight: 100;
+  line-height: 0.9;
+}
+
+.red {color: #BF1F15;}
+.blue {color: #5D35CC;}
+.light-blue {color: #428bca;}
+
+@media only screen and (min-width: 360px) {
+  #site-name {
+    left: -12%;
+  }
+}
+
+@media only screen and (min-width: 400px) {
+  #site-name {
+    left: -6%;
+  }
+}
+
+@media only screen and (min-width: 440px) {
+  #site-name {
+    left: -3%;
+  }
+}
+
+@media only screen and (min-width: 480px) {
+  #site-name {
+    left: 1%;
+  }
+}
+
+@media only screen and (min-width: 520px) {
+  #site-name {
+    left: 6%;
+  }
+}
+
+@media only screen and (min-width: 560px) {
+  #site-name {
+    left: 9%;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  #site-name {
+    left: 12%;
+  }
+}
+
+@media only screen and (min-width: 680px) {
+  #site-name {
+    left: 15%;
+  }
+}
+
+@media only screen and (min-width: 720px) {
+  #site-name {
+    left: 20%;
+  }
 }
 
 @media only screen and (min-width: 768px) {
@@ -11,16 +87,36 @@
     position: relative;
     left: 215%;
   }
+
+  #site-name {
+    font-size: 28px;
+    top: -55px;
+    left: 158%;
+  }
+
+  .red {
+    position: relative;
+    top: 25px;
+    left: -69%;
+  }
 }
 
 @media only screen and (min-width: 991px) {
   #logout-id {
     left: 310%;
   }
+
+  #site-name {
+    left: 220%;
+  }
 }
 
 @media only screen and (min-width: 1200px) {
   #logout-id {
     left: 395%;
+  }
+
+  #site-name {
+    left: 260%;  
   }
 }
