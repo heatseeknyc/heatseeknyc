@@ -11,6 +11,7 @@ gem 'ffi', "= 1.9.0"
 gem 'pry'
 gem 'pg'
 gem 'devise'
+gem 'tzinfo'
 
 gem 'bootstrap-sass'
 group :development do
