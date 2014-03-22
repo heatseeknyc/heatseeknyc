@@ -14,19 +14,17 @@ gem 'bootstrap-sass'
 
 group :test, :development do
   gem 'rspec-rails'
+  gem 'factory_girl_rails'
   gem 'simplecov'
   gem 'pry-nav'
   gem 'rails_layout'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'sqlite3'
 end
 
 group :production do 
   gem 'rails_12factor'
-end
-
-group :test, :development do
-  gem 'sqlite3'
 end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
