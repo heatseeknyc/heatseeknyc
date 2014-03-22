@@ -3,120 +3,106 @@
 .navbar-fixed-top {
   height: 65px;
 }
-.navbar > .container .navbar-brand, .navbar > main .navbar-brand, .navbar > .container-fluid .navbar-brand {
-  margin-left: 0px;
+
+.custom-navbar {
   position: relative;
-  top: 20px;
+  top: -23px;
 }
 
 #logout-id {
   float: right;
-  top: -27px;
 }
 
 #site-name {
   font-size: 20px;
   font-family: 'Duru Sans', sans-serif;
-  position: relative;
-  top: -7px;
-  left: -24%;
   font-weight: 100;
   line-height: 0.9;
+  text-align: center;
 }
 
 .red {color: #BF1F15;}
 .blue {color: #5D35CC;}
 .light-blue {color: #428bca;}
 
-@media only screen and (min-width: 360px) {
-  #site-name {
-    left: -12%;
-  }
-}
-
-@media only screen and (min-width: 400px) {
-  #site-name {
-    left: -6%;
-  }
-}
-
-@media only screen and (min-width: 440px) {
-  #site-name {
-    left: -3%;
-  }
-}
-
-@media only screen and (min-width: 480px) {
-  #site-name {
-    left: 1%;
-  }
-}
-
-@media only screen and (min-width: 520px) {
-  #site-name {
-    left: 6%;
-  }
-}
-
-@media only screen and (min-width: 560px) {
-  #site-name {
-    left: 9%;
-  }
-}
-
-@media only screen and (min-width: 600px) {
-  #site-name {
-    left: 12%;
-  }
-}
-
-@media only screen and (min-width: 680px) {
-  #site-name {
-    left: 15%;
-  }
-}
-
-@media only screen and (min-width: 720px) {
-  #site-name {
-    left: 20%;
-  }
-}
-
 @media only screen and (min-width: 768px) {
   #logout-id {
     position: relative;
-    left: 215%;
+    left: 260%;
   }
 
   #site-name {
     font-size: 28px;
-    top: -55px;
-    left: 158%;
+    position: relative;
+    left: 130%;
   }
 
-  .red {
-    position: relative;
-    top: 25px;
-    left: -69%;
+  .custom-navbar {
+    top: -43px;
   }
 }
 
-@media only screen and (min-width: 991px) {
+@media only screen and (min-width: 992px) {
   #logout-id {
-    left: 310%;
+    left: 365%;
   }
 
   #site-name {
-    left: 220%;
+    left: 182%;
+  }
+}
+
+@media only screen and (min-width: 1100px) {
+  #logout-id {
+    left: 395%;
+  }
+
+  #navbar-leftside {
+    position: relative;
+    left: -25%;
+  }
+}
+
+@media only screen and (min-width: 1150px) {
+  #logout-id {
+    left: 410%;
+  }
+
+  #navbar-leftside {
+    left: -34%;
   }
 }
 
 @media only screen and (min-width: 1200px) {
   #logout-id {
-    left: 395%;
+    left: 466%;
   }
 
   #site-name {
-    left: 260%;  
+    left: 225%;
+  }
+
+  #navbar-leftside {
+    left: 0%;
+  }
+}
+
+@media only screen and (min-width: 1300px) {
+  #logout-id {
+    left: 493%;
+  }
+
+  #navbar-leftside {
+    left: -27%;
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+  #logout-id {
+    left: 518%;
+  }
+
+  #navbar-leftside {
+    left: -50%;
   }
 }
