@@ -18,5 +18,6 @@ class Twine < ActiveRecord::Base
     new_reading.twine = self
     new_reading.user = self.user
     new_reading.save
+    new_reading
   end
 end
