@@ -204,4 +204,5 @@ DEPENDENCIES
   selenium-webdriver
   sqlite3
   turbolinks
+  tzinfo
   uglifier (>= 1.3.0)
