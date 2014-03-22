@@ -77,7 +77,16 @@ module Graphable
     end
 
     def reading_hash
-      readings.pluck(:created_at, :temp).to_h
+      # readings.pluck(:created_at, :temp).to_h // done with helper methods until tristan upgrades to ruby 2.1
+      hashify(reading_nested_array)
+    end
+
+    def reading_nested_array
+      readings.pluck(:created_at, :temp)
+    end
+
+    def hashify(nested_array)
+      nested_array.each_with_object({}) { |pair, hsh| hsh[pair[0]] = pair[1] }
     end
 
     def avg_day_temp
