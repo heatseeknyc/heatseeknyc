@@ -19,6 +19,7 @@ group :test, :development do
   gem 'database_cleaner'
   gem 'simplecov'
   gem 'pry-nav'
+  gem 'launchy'
   gem 'rails_layout'
   gem 'better_errors'
   gem 'binding_of_caller'
