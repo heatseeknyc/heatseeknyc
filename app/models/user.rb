@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_many :readings
   has_one :twine
+  has_many :user_collaborators
+  has_many :collaborators, through: :user_collaborators
 
   validates_presence_of :first_name
   validates_presence_of :last_name
