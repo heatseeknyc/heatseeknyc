@@ -1,24 +1,25 @@
 require 'spec_helper'
 
 describe Twine do
-  let!(:twine1) { create(:twine) }
-  before :each do 
-    twine1.readings.create(attributes_for(:reading))
-    twine1.readings.create(attributes_for(:reading))
-  end
+  
   it "has readings" do
+    twine1 = create(:twine)
+    reading1 = create(:reading, twine: twine1)
+    reading2 = create(:reading, twine: twine1)
     expect(twine1.readings.count).to eq 2
   end
 
   describe "#get_reading" do
     it "makes a new reading" do
-      reading = twine1.get_reading
-      expect(reading).to be_an_instance_of(Reading)
+      twine_with_reading = create(:twine)
+      reading1 = twine_with_reading.get_reading
+      expect(twine_with_reading.readings.first).to eq reading1
     end
 
-    it "assigns readings to twine" do
+    it "assigns readings to correct user" do
+      twine1 = create(:twine)
       reading = twine1.get_reading
-      expect(reading.twine).to eq twine1
+      expect(reading.user).to eq twine1.user
     end
   end
 end
