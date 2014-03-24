@@ -29,7 +29,11 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    if collaborator?
+      @user = User.find(params[:id])
+    else
+      redirect_to "users/#{current_user.id}"
+    end
   end
 
   private

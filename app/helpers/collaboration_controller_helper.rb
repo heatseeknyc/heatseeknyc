@@ -1,0 +1,2 @@
+module CollaborationControllerHelper
+end
