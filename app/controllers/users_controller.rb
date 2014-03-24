@@ -29,8 +29,9 @@ class UsersController < ApplicationController
   end
 
   def show
-    if collaborator?
-      @user = User.find(params[:id])
+    @user = User.find(params[:id])
+    if current_user.collaborator?(params[:id]) || params[:id].to_i == current_user.id
+      render action: 'show'
     else
       redirect_to "users/#{current_user.id}"
     end

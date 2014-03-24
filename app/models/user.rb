@@ -24,4 +24,8 @@ class User < ActiveRecord::Base
     temp_twine = Twine.find_by(:name => twine_name)
     temp_twine.user(self.id)
   end
+
+  def collaborator?(params_id)
+    !self.collaborations.where(collaborator_id: params_id.to_i).empty?
+  end
 end
