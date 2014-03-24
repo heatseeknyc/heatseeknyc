@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
 
   has_many :readings
   has_one :twine
+  has_many :user_collaborators
+  has_many :collaborators, through: :user_collaborators
 
   has_many :collaborations
   has_many :collaborators, :through => :collaborations

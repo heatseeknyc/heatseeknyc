@@ -5,7 +5,7 @@
     <%= column_chart(@user.bars) %>
   </div>
 
-  <%= render "table" %>
+  <%= render "table", :user => @user %>
 
   <div class="graph" id="line">
     <%= line_chart(@user.lines, min: 50, max: 80, :library => {
