@@ -33,7 +33,7 @@ describe "viewing other pages" do
   end
 
   it "will always link to user settings in nav bar" do
-    visit user_path(@user)
+    visit user_path(@user) 
     click_on @collaborator.first_name
     click_on "Settings"
     prefilled_content = find_field("user_first_name").value

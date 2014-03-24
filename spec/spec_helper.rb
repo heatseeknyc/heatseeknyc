@@ -15,6 +15,11 @@ Spork.prefork do
   require 'rspec/rails'
   require 'rspec/autorun'
   require 'capybara/rails'
+  require "rails/application"
+  Spork.trap_method(Rails::Application, :reload_routes!)
+  
+  require File.dirname(__FILE__) + "/../config/environment.rb"
+  
   include Warden::Test::Helpers
 
   # Requires supporting ruby files with custom matchers and macros, etc,
@@ -28,6 +33,9 @@ Spork.prefork do
   RSpec.configure do |config|
     config.include FactoryGirl::Syntax::Methods
     config.include Devise::TestHelpers, :type => :controller
+    config.treat_symbols_as_metadata_keys_with_true_values = true
+    config.filter_run :focus => true
+    config.run_all_when_everything_filtered = true
 
     config.before(:suite) do
       begin
