@@ -13,17 +13,11 @@
 
 ActiveRecord::Schema.define(version: 20140322233815) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "collaborations", force: true do |t|
     t.integer  "user_id"
     t.integer  "collaborator_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "collaborators_tables", force: true do |t|
   end
 
   create_table "readings", force: true do |t|
@@ -58,6 +52,6 @@ ActiveRecord::Schema.define(version: 20140322233815) do
     t.string   "email",                  default: "", null: false
   end
 
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
 end
