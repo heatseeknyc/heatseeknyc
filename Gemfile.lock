@@ -90,6 +90,10 @@ GEM
     guard-rspec (4.2.4)
       guard (~> 2.1)
       rspec (>= 2.14, < 4.0)
+    guard-spork (1.5.1)
+      childprocess (>= 0.2.3)
+      guard (>= 1.1)
+      spork (>= 0.8.4)
     hike (1.2.3)
     i18n (0.6.9)
     jbuilder (1.5.3)
@@ -196,6 +200,10 @@ GEM
       simplecov-html (~> 0.8.0)
     simplecov-html (0.8.0)
     slop (3.5.0)
+    spork (1.0.0rc4)
+    spork-rails (4.0.0)
+      rails (>= 3.0.0, < 5)
+      spork (>= 1.0rc0)
     sprockets (2.11.0)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -242,6 +250,7 @@ DEPENDENCIES
   factory_girl_rails
   ffi (= 1.9.0)
   guard-rspec
+  guard-spork
   jbuilder (~> 1.2)
   jquery-rails
   json
@@ -258,6 +267,7 @@ DEPENDENCIES
   sdoc
   selenium-webdriver
   simplecov
+  spork-rails
   sqlite3
   turbolinks
   tzinfo

@@ -12,7 +12,7 @@ describe "viewing your own page" do
 
 end
 describe "viewing other pages" do
-  
+
   before(:each) do
     @user = create(:user, first_name: "Walter")
     login_as(@user, scope: :user)

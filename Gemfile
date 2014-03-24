@@ -15,6 +15,8 @@ gem 'bootstrap-sass'
 group :test, :development do
   gem 'rspec-rails'
   gem 'guard-rspec'
+  gem 'spork-rails'
+  gem 'guard-spork'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem 'simplecov'
