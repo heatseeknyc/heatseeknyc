@@ -2,10 +2,15 @@ class Reading < ActiveRecord::Base
   belongs_to :twine
   belongs_to :user
 
-  def time_to_the_minute
-    time = self.created_at.to_i
-    seconds = time % 60
-    time -= seconds
-    Time.at(time)
+  validates :twine_id, presence: true
+  validates :user_id, presence: true
+  validates :temp, presence: true
+
+  def self.new_from_twine(temp, twine, user)
+    new.tap do |r|
+      r.temp = temp
+      r.twine = twine
+      r.user = user
+    end
   end
 end
