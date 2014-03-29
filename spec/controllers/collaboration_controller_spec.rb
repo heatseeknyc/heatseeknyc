@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe CollaborationController do
+describe CollaborationsController do
 
 end
