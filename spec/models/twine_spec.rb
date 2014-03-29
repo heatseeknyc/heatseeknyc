@@ -11,7 +11,7 @@ describe Twine do
 
   describe "#get_reading" do
     it "makes a new reading" do
-      twine_with_reading = create(:twine)
+      twine_with_reading = create(:twine, email: "wm.jeffries+1@gmail.com")
       reading1 = twine_with_reading.get_reading
       expect(twine_with_reading.readings.first).to eq reading1
     end
