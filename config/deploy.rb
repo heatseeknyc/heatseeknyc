@@ -2,7 +2,7 @@ require 'bundler/capistrano' # for bundler support
 
 set :application, "twinenyc"
 set :repository,  "git@github.com:wfjeff/twinenyc.git"
-set :user, "twinedbuser"
+set :user, "william"
 set :deploy_to, "/home/#{ user }/#{ application }"
 set :use_sudo, false
 
