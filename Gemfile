@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'figaro'
 gem 'rvm-capistrano'
 gem 'chartkick'
 gem 'nokogiri'

@@ -30,4 +30,23 @@ namespace :deploy do
   task :restart, :roles => :app, :except => { :no_release => true } do
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
   end
+  task :symlink_keys, :roles => :app do
+    run "#{try_sudo} ln -nfs /home/#{user}/#{application}/shared/application.yml /home/#{user}/#{application}/current/config/application.yml"
+  end
 end
+
+after "deploy:update", "deploy:symlink_keys"
+
+
+
+
+
+
+
+
+
+
+
+
+
+

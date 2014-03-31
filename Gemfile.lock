@@ -86,6 +86,9 @@ GEM
       factory_girl (~> 4.4.0)
       railties (>= 3.0.0)
     ffi (1.9.0)
+    figaro (0.7.0)
+      bundler (~> 1.0)
+      rails (>= 3, < 5)
     formatador (0.2.4)
     guard (2.3.0)
       formatador (>= 0.2.4)
@@ -265,6 +268,7 @@ DEPENDENCIES
   devise
   factory_girl_rails
   ffi (= 1.9.0)
+  figaro
   guard-rspec
   guard-spork
   jbuilder (~> 1.2)
