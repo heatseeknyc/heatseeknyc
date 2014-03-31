@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'rvm-capistrano'
 gem 'chartkick'
 gem 'nokogiri'
 gem 'capybara'

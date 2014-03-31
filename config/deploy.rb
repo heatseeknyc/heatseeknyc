@@ -1,4 +1,5 @@
 require 'bundler/capistrano' # for bundler support
+require "rvm/capistrano"
 
 set :application, "twinenyc"
 set :repository,  "git@github.com:wfjeff/twinenyc.git"
