@@ -35,7 +35,7 @@ namespace :deploy do
   end
 end
 
-before "deploy:restart", "deploy:symlink_keys"
+after "deploy:finalize_update", "deploy:symlink_keys"
 
 
 
