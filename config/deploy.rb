@@ -31,11 +31,11 @@ namespace :deploy do
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
   end
   task :symlink_keys, :roles => :app do
-    run "#{try_sudo} ln -nfs /home/#{user}/#{application}/shared/application.yml /home/#{user}/#{application}/current/config/application.yml"
+    run "ln -nfs /home/#{user}/#{application}/shared/application.yml /home/#{user}/#{application}/current/config/application.yml"
   end
 end
 
-after "deploy:finalize_update", "deploy:symlink_keys"
+before "deploy:restart", "deploy:symlink_keys"
 
 
 
