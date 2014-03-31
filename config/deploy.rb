@@ -1,3 +1,4 @@
+load 'deploy/assets'
 require 'bundler/capistrano' # for bundler support
 require "rvm/capistrano"
 
@@ -17,7 +18,7 @@ role :app, "107.170.98.204"                          # This may be the same as y
 # role :db,  "107.170.98.204/5432", :primary => true # This is where Rails migrations will run
 
 # if you want to clean up old releases on each deploy uncomment this:
-after "deploy:restart", "deploy:cleanup"
+# after "deploy:restart", "deploy:cleanup"
 
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts
