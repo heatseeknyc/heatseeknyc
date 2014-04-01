@@ -140,6 +140,7 @@ GEM
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     orm_adapter (0.5.0)
+    pdf-core (0.2.5)
     pg (0.17.1)
     poltergeist (1.5.0)
       capybara (~> 2.1)
@@ -147,6 +148,12 @@ GEM
       multi_json (~> 1.0)
       websocket-driver (>= 0.2.0)
     polyglot (0.3.4)
+    prawn (1.0.0)
+      pdf-core (~> 0.2.2)
+      ttfunk (~> 1.1.1)
+    prawnto (0.1.1)
+      prawn
+      rails (>= 2.1)
     pry (0.9.12.6)
       coderay (~> 1.0)
       method_source (~> 0.8)
@@ -241,6 +248,7 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
+    ttfunk (1.1.1)
     turbolinks (2.2.1)
       coffee-rails
     tzinfo (0.3.39)
@@ -278,6 +286,7 @@ DEPENDENCIES
   nokogiri
   pg
   poltergeist
+  prawnto
   pry-nav
   rails (= 4.0.3)
   rails_12factor
