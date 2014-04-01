@@ -23,3 +23,8 @@ desc "make user1"
 task :user1 => [:environment] do
   User.create(first_name: "user1")
 end
+
+desc "say hello to first user"
+task :hello => [:environment] do
+  puts "hello #{User.first.name}"
+end
