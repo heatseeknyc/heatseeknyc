@@ -1,1 +1,17 @@
-<%# add navigation links to this file %>
+<% if current_user %>
+
+  <div id="navbar-leftside">
+    <%= link_to 'Home', user_path(current_user), class: 'navbar-brand navbar-left' %>
+    <p class='navbar-brand' id="pipe-spacing">|</p>
+    <%= link_to 'Settings', edit_user_registration_path, class: 'navbar-brand navbar-left' %>
+  </div>
+
+  <%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'navbar-brand navbar-right', id: 'logout-id' %>
+
+<% else %>
+
+  <%= link_to "Login", "/users/sign_in", class: 'navbar-brand' %>
+  <p class='navbar-brand navbar-left' id="pipe-spacing">|
+  </p><%= link_to "Sign Up", "/users/sign_up", class: 'navbar-brand navbar-left' %>
+
+<% end %>

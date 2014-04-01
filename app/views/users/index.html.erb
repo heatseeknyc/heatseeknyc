@@ -4,6 +4,5 @@
     <hr class="underline-user">
     <a href="/users/<%= u.id %>" class="user-name"><%= u.first_name %></a>
     <%= link_to "Add Collaborator", user_collaborations_path(current_user, collaborator_id: u), method: :post %>
-    <%#= link_to "Remove", [current_user, collaboration], method: :delete %>
   <% end %>
 </div>

@@ -1,0 +1,16 @@
+<div class="btn-group">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+    Collaborations <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+
+    <% current_user.collaborations.each do |c| %>
+      <li>
+        <a href="/users/<%=c.collaborator.id%>">
+        <%= c.collaborator.first_name %> <%= c.collaborator.last_name %></a>
+        <%#= link_to "Remove", [current_user, c], method: :delete %>
+      </li>
+    <% end %>
+    
+  </ul>
+</div>
