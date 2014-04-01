@@ -21,3 +21,7 @@
 every 1.hour do
   command "bundle exec rake get_reading RAILS_ENV=production"
 end
+
+every 1.minute do
+  command "bundle exec rake hello RAILS_ENV=production"
+end
