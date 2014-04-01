@@ -20,9 +20,9 @@ set :output, "log/cron.log"
 
 # Learn more: http://github.com/javan/whenever
 every 1.hour do
-  command "bundle exec rake get_reading RAILS_ENV=production", environment: :development
+  rake "get_reading", environment: :development
 end
 
 every 1.minute do
-  command "bundle exec rake hello RAILS_ENV=production", environment: :development
+  rake "hello", environment: :development
 end
