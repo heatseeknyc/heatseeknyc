@@ -20,9 +20,5 @@ set :output, "log/cron.log"
 
 # Learn more: http://github.com/javan/whenever
 every 1.hour do
-  rake "get_reading" #, environment: :production
-end
-
-every 1.minute do
-  rake "hello" #, environment: :production
+  rake "get_reading" 
 end
