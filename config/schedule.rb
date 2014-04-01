@@ -19,5 +19,5 @@
 
 # Learn more: http://github.com/javan/whenever
 every 1.hour do
-  rake "get_reading"
+  command "bundle exec rake get_reading RAILS_ENV=production"
 end
