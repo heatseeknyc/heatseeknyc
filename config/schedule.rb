@@ -5,6 +5,7 @@
 
 # Example:
 #
+set :environment, "development"
 set :output, "log/cron.log"
 #
 # every 2.hours do
