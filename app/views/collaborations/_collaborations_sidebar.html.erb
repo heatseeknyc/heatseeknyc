@@ -1,12 +1,12 @@
 <div class="sidebar .col-md-3 .col-md-offset-3" id="form-id">
-  <h1>Collaborators</h1>
+  <h1 id="collaborator-h1" class="text-center">Collaborators</h1>
   <ul>
     <% current_user.collaborations.each do |c| %>
       <hr class="underline-user">
       <li class="sidebar-li">
-        <a href="/users/<%=c.collaborator.id%>">
+        <a class="user-links" href="/users/<%=c.collaborator.id%>">
         <%= c.collaborator.first_name %> <%= c.collaborator.last_name %></a>
-        <%= link_to "Remove", [current_user, c], method: :delete %>
+        <%= link_to "", [current_user, c], method: :delete, :class => "glyphicon glyphicon-remove remove-user-links" %>
         <br>
       </li>
     <% end %>

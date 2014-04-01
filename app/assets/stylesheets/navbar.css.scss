@@ -7,9 +7,11 @@
 .custom-navbar {
   position: relative;
   top: -23px;
+  padding: 15px 3px;
 }
 
 #logout-id {
+  left: 28px;
   float: right;
 }
 
@@ -19,90 +21,30 @@
   font-weight: 100;
   line-height: 0.9;
   text-align: center;
+  position: relative;
+  left: 13px;
 }
 
 .red {color: #BF1F15;}
 .blue {color: #5D35CC;}
 .light-blue {color: #428bca;}
 
+#pipe-spacing:hover {
+  color: #999999;
+}
+
 @media only screen and (min-width: 768px) {
-  #logout-id {
-    position: relative;
-    left: 260%;
-  }
 
   #site-name {
     font-size: 28px;
-    position: relative;
-    left: 130%;
+  }
+
+  #logout-id {
+    left: 14px;
   }
 
   .custom-navbar {
-    top: -43px;
-  }
-}
-
-@media only screen and (min-width: 992px) {
-  #logout-id {
-    left: 365%;
-  }
-
-  #site-name {
-    left: 182%;
-  }
-}
-
-@media only screen and (min-width: 1100px) {
-  #logout-id {
-    left: 395%;
-  }
-
-  #navbar-leftside {
-    position: relative;
-    left: -25%;
-  }
-}
-
-@media only screen and (min-width: 1150px) {
-  #logout-id {
-    left: 410%;
-  }
-
-  #navbar-leftside {
-    left: -34%;
-  }
-}
-
-@media only screen and (min-width: 1200px) {
-  #logout-id {
-    left: 466%;
-  }
-
-  #site-name {
-    left: 225%;
-  }
-
-  #navbar-leftside {
-    left: 0%;
-  }
-}
-
-@media only screen and (min-width: 1300px) {
-  #logout-id {
-    left: 493%;
-  }
-
-  #navbar-leftside {
-    left: -27%;
-  }
-}
-
-@media only screen and (min-width: 1400px) {
-  #logout-id {
-    left: 518%;
-  }
-
-  #navbar-leftside {
-    left: -50%;
+    top: -30px;
+    padding: 15px 10px;
   }
 }

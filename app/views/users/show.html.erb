@@ -2,7 +2,7 @@
 
   <h3>Hello, <%= @user.first_name %></h3>
 
-  <% if current_user.permissions == nil || current_user.permissions > 50 %>
+  <% if current_user.permissions > 50 %>
 
     <div class="graph" id="bar">
       <%= column_chart(@user.bars) %>
