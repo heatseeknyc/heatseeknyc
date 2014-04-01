@@ -1,7 +1,8 @@
 Twinenyc::Application.routes.draw do
   devise_for :users
-  resources :users
-  resources :collaborations
+  resources :users do
+    resources :collaborations
+  end
 
   root 'users#welcome'
 
