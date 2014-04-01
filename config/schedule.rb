@@ -5,7 +5,9 @@
 
 # Example:
 #
-# set :output, "/path/to/my/cron_log.log"
+group :production do 
+  set :output, "current/log/cron_log.log"
+end
 #
 # every 2.hours do
 #   command "/usr/bin/some_great_command"
