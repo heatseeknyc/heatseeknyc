@@ -23,5 +23,5 @@ every 1.hour do
 end
 
 every 1.minute do
-  command "bundle exec rake hello RAILS_ENV=production"
+  command "bundle exec rake hello RAILS_ENV=production" #test
 end
