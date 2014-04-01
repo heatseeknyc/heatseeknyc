@@ -1,15 +1,41 @@
 <div class="show-layout">
+
   <h3>Hello, <%= @user.first_name %></h3>
-  <div class="graph" id="bar">
-    <%= column_chart(@user.bars) %>
+
+  <% if current_user.permissions == nil || current_user.permissions > 50 %>
+
+    <div class="graph" id="bar">
+      <%= column_chart(@user.bars) %>
+    </div>
+
+    <%= render "table", :user => @user %>
+
+    <div class="graph" id="line">
+      <%= line_chart(@user.lines, min: 50, max: 80, :library => {
+      legend: {position: 'bottom'},
+      curveType: 'none',
+        explorer: {keepInBounds: true, axis: 'horizontal'}
+      }) %>
+    </div>
+
+  <% else %>
+
+  <div id="row">
+    <div class="form-group" id="search-box"> 
+        <%= form_tag users_path, { :method => :get }  do %> 
+
+          <dl><%= label_tag :q, "Search", :class => "sr-only" %>
+          <%= text_field_tag :q, "", :class => "form-control", :autofocus => true %></dl>
+          
+          <br>
+
+          <%= submit_tag "Search", :class => "btn btn-lg btn-primary", :id => "search-button" %>
+        <% end %>
+    </div>
   </div>
 
-  <%= render "table", :user => @user %>
+    <%= render "collaborations/collaborations_sidebar" %>
 
-  <div class="graph" id="line">
-    <%= line_chart(@user.lines, min: 50, max: 80, :library => {
-    legend: {position: 'bottom'},
-    curveType: 'none',
-      explorer: {keepInBounds: true, axis: 'horizontal'}
-    }) %></div>
+  <% end %>
+
 </div>

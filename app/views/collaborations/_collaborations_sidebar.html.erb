@@ -1,11 +1,14 @@
-<h1>Collaborators</h1>
-<ul>
-  <% current_user.collaborations.each do |c| %>
-    <li>
-      <a href="/users/<%=c.collaborator.id%>">
-      <%= c.collaborator.first_name %> <%= c.collaborator.last_name %></a>
-      <%= link_to "Remove", [current_user, c], method: :delete %>
-      <br>
-    </li>
-  <% end %>
-</ul>
+<div class="sidebar .col-md-3 .col-md-offset-3" id="form-id">
+  <h1>Collaborators</h1>
+  <ul>
+    <% current_user.collaborations.each do |c| %>
+      <hr class="underline-user">
+      <li class="sidebar-li">
+        <a href="/users/<%=c.collaborator.id%>">
+        <%= c.collaborator.first_name %> <%= c.collaborator.last_name %></a>
+        <%= link_to "Remove", [current_user, c], method: :delete %>
+        <br>
+      </li>
+    <% end %>
+  </ul>
+</div>
