@@ -20,22 +20,15 @@
 
   <% else %>
 
-  <div id="row">
-    <div class="form-group" id="search-box"> 
-        <%= form_tag users_path, { :method => :get }  do %> 
 
-          <dl><%= label_tag :q, "Search", :class => "sr-only" %>
+    <div class="search-box"> 
+        <%= form_tag users_path, method: :get do %> 
+          <dl><%= label_tag :q, "Find a User" %>
           <%= text_field_tag :q, "", :class => "form-control", :autofocus => true %></dl>
-          
-          <br>
-
           <%= submit_tag "Search", :class => "btn btn-lg btn-primary", :id => "search-button" %>
         <% end %>
     </div>
-  </div>
-
     <%= render "collaborations/collaborations_sidebar" %>
-
   <% end %>
 
 </div>

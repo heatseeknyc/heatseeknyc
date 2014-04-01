@@ -1,17 +1,26 @@
-#collaborator-h1 {
+.collaborators-sidebar {
+  margin-top: 20px;
+  height: 300px;
+  overflow: auto;
+}
+
+h1#collaborator-h1 {
+  margin-top: 5px;
+  font-size: 25px;
+  font-weight: 1000;
 }
 
 .sidebar-li {
   list-style: none;
 }
 
-a.remove-user-links {
+a.remove-user-link {
   float: right;
   position: relative;
-  left: -10%;
+  left: -5%;
   color: #d9534f;
 }
 
-a.remove-user-links:hover {
+a.remove-user-link:hover {
   color: #d2322d;
 }

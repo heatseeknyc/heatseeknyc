@@ -1,4 +1,4 @@
-.user-name {
+.user-link {
   font-size: 18px;
 }
 
@@ -11,6 +11,17 @@
   margin: 0 -8px 16px -8px;
 }
 
-a.user-links:hover {
+a.user-link:hover {
   text-decoration: none;
+}
+
+a.add-user-link {
+  float: right;
+  position: relative;
+  left: -5%;
+  color: #5cb85c; 
+}
+
+a.add-user-link:hover {
+  color: #47a447;
 }
