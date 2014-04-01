@@ -26,5 +26,5 @@ end
 
 desc "say hello to first user"
 task :hello => [:environment] do
-  puts "hello #{User.first_name}"
+  puts "hello #{User.first.first_name}"
 end
