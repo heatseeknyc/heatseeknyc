@@ -21,7 +21,7 @@
   <% else %>
 
 
-    <div class="search-box"> 
+    <div class="search-box .col-xs-6 .col-xs-offset-6"> 
         <%= form_tag users_path, method: :get do %> 
           <dl><%= label_tag :q, "Find a User" %>
           <%= text_field_tag :q, "", :class => "form-control", :autofocus => true %></dl>
