@@ -7,10 +7,10 @@ class Reading < ActiveRecord::Base
   validates :temp, presence: true
   validates :outdoor_temp, presence: true
 
-  def self.new_from_twine(temp, outside_temp, twine, user)
+  def self.new_from_twine(temp, outdoor_temp, twine, user)
     new.tap do |r|
       r.temp = temp
-      r.outside_temp = outside_temp
+      r.outdoor_temp = outdoor_temp
       r.twine = twine
       r.user = user
     end
