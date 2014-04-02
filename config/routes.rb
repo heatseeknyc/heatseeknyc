@@ -1,8 +1,11 @@
 Twinenyc::Application.routes.draw do
   devise_for :users
+  get 'users/search' => 'users#search', as: :search_user
   resources :users do
     resources :collaborations
   end
+  
+
 
   root 'users#welcome'
 

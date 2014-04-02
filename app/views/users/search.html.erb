@@ -1,0 +1,12 @@
+
+<h1> Results </h1>
+<%= r.first_name %>
+<% end %>
+
+
+
+<% @results.each do |r| %>
+    <hr class="underline-user">
+    <a href="/users/<%= r.id %>" class="user-link"><%= r.first_name %> <%= r.last_name %></a>
+    <%= link_to "", user_collaborations_path(current_user, collaborator_id: r), method: :post, :class => "glyphicon glyphicon-plus add-user-link" %>
+  <% end %>

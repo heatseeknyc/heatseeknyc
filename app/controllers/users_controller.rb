@@ -37,6 +37,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def search
+    @results = User.search(params[:q])
+  end
+
   private
     def set_user
       
