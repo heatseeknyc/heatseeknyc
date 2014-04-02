@@ -85,6 +85,29 @@ module Graphable
       readings.pluck(:created_at, :temp)
     end
 
+    def table_array
+      User.first.reading_nested_array.map do |c| 
+        [
+          c[0].strftime("%l:%M %p"), 
+          c[0].strftime("%b %e, %Y "), 
+          c[1]
+        ]
+      end
+    end
+
+    def padded_table_array
+      User.first.reading_nested_array.map do |c| 
+        [
+          c[0].strftime("%l:%M %p"), 
+          c[0].strftime("%b %e, %Y "), 
+          c[1],
+          "",
+          "",
+          ""
+        ]
+      end
+    end
+
     def hashify(nested_array)
       nested_array.each_with_object({}) { |pair, hsh| hsh[pair[0]] = pair[1] }
     end

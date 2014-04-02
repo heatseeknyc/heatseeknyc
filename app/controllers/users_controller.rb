@@ -1,3 +1,4 @@
+require 'prawn'
 class UsersController < ApplicationController
   before_action :authenticate_user!, except: [:index, :welcome, :sign_in]
 
@@ -35,6 +36,16 @@ class UsersController < ApplicationController
     else
       redirect_to "users/#{current_user.id}"
     end
+  end
+
+  def download_pdf
+    writer = PDFWriter.new_from_user_id(params[:id])
+
+    file = writer.generate_pdf
+    filename = writer.filename
+    type = writer.content_type
+
+    send_data(file, filename: filename, type: type)
   end
 
   private

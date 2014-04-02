@@ -4,6 +4,8 @@ Twinenyc::Application.routes.draw do
     resources :collaborations
   end
 
+  get 'users/:id/download' => 'users#download_pdf'
+
   root 'users#welcome'
 
   # The priority is based upon order of creation: first created -> highest priority.

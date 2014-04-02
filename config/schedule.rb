@@ -5,7 +5,6 @@
 
 # Example:
 #
-set :environment, "production"
 set :output, "log/cron.log"
 #
 # every 2.hours do
@@ -19,6 +18,6 @@ set :output, "log/cron.log"
 # end
 
 # Learn more: http://github.com/javan/whenever
-every 1.hour do
-  rake "get_reading" 
+every 1.minute do
+  rake "get_reading" , :environment => :production
 end
