@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'wunderground'
 gem 'airbrake'
 gem 'prawn'
 gem 'figaro'
