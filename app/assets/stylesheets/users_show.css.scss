@@ -1,7 +1,27 @@
+.search-box{
+  margin-top: 20px;
+}
+
+// if future changes make sure media only matches the collaboration_sidebar.css.scss
+@media only screen and (min-width: 450px) {
+  .search-box {
+    margin-top: 40px;
+  }
+}
 
 @media only screen and (min-width: 640px) {
   #show-layout {
     padding-left: 25%;
     padding-right: 10%;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .search-box {
+    float: left;
+    width: 55%;
+    position: relative;
+    top: 200px;
+    left: 60px;
   }
 }
