@@ -17,7 +17,10 @@ class User < ActiveRecord::Base
 
   before_save :create_search_names
 
+  include Timeable::InstanceMethods
+  include Measurable::InstanceMethods
   include Graphable::InstanceMethods
+  include Regulatable::InstanceMethods
 
   def twine=(twine_name)
     #this lets forms work and will be used to assign twines 

@@ -45,8 +45,15 @@ class Twine < ActiveRecord::Base
       noko.css(TEMP_SELECTOR).text
   end
 
+  def current_outside_temp
+    w_api = Wunderground.new(ENV["WUNDERGROUND_API_KEY"])
+    zip_code = self.user.zip_code
+    json_object = w_api.conditions_for(zip_code)
+    json_object["current_observation"]["temp_f"]
+  end
+
   def make_and_return_reading_from_temp(temp)
-      reading = Reading.new_from_twine(temp, self, self.user)
+      reading = Reading.new_from_twine(temp, current_outside_temp, self, self.user)
       reading.save
       return reading
   end
