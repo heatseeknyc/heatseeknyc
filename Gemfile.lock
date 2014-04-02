@@ -26,6 +26,9 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
     addressable (2.3.5)
+    airbrake (3.1.16)
+      builder
+      multi_json
     arel (4.0.2)
     atomic (1.1.15)
     bcrypt (3.1.7)
@@ -258,6 +261,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  airbrake
   better_errors
   binding_of_caller
   bootstrap-sass

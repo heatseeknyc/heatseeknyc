@@ -50,3 +50,6 @@ after "deploy:finalize_update", "deploy:symlink_keys"
 
 
 
+
+        require './config/boot'
+        require 'airbrake/capistrano'
