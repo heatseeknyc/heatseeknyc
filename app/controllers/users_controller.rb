@@ -47,6 +47,10 @@ class UsersController < ApplicationController
     send_data(file, filename: filename, type: type)
   end
 
+  def search
+    @results = User.search(params[:q])
+  end
+
   private
     def set_user
       
