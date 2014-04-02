@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'prawnto'
+gem 'prawn'
 gem 'figaro'
 gem 'rvm-capistrano'
 gem 'chartkick'
