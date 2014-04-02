@@ -14,10 +14,12 @@ class User < ActiveRecord::Base
   # has_many :inverse_collaborations, :class_name => "Collaboration", :foreign_key => "collaborator_id"
   # has_many :inverse_collaborators, :through => :inverse_collaborations, :source => :user
 
-  validates_presence_of :first_name
-  validates_presence_of :last_name
+  validates :first_name, :length => {minimum: 2}
+  validates :last_name, :length => {minimum: 2}
   validates_presence_of :address
   validates_presence_of :email
+
+  before_save :create_search_names
 
   include Graphable::InstanceMethods
 
@@ -30,4 +32,20 @@ class User < ActiveRecord::Base
   def collaborator?(params_id)
     !self.collaborations.where(collaborator_id: params_id.to_i).empty?
   end
+
+  def create_search_names
+    self.search_first_name = self.first_name.downcase
+    self.search_last_name = self.last_name.downcase
+  end
+
+  def self.search(search)
+    search_arr = search.downcase.split
+    if search_arr[1] != nil
+      where(['search_first_name LIKE ? OR search_last_name LIKE ?', "%#{search_arr[0]}%", "%#{search_arr[1]}%"])
+    else
+      where(['search_first_name LIKE ? OR search_last_name LIKE ?', "%#{search_arr[0]}%", "%#{search_arr[0]}%"])
+    end
+  end
+
+
 end
