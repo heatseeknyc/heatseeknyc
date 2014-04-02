@@ -6,13 +6,9 @@ class User < ActiveRecord::Base
 
   has_many :readings
   has_one :twine
-  has_many :user_collaborators
-  has_many :collaborators, through: :user_collaborators
 
-  has_many :collaborations
-  has_many :collaborators, :through => :collaborations
-  # has_many :inverse_collaborations, :class_name => "Collaboration", :foreign_key => "collaborator_id"
-  # has_many :inverse_collaborators, :through => :inverse_collaborations, :source => :user
+  has_many :collaborations, dependent: :destroy
+  has_many :collaborators, through: :collaborations, dependent: :destroy
 
   validates :first_name, :length => {minimum: 2}
   validates :last_name, :length => {minimum: 2}
@@ -30,7 +26,7 @@ class User < ActiveRecord::Base
   end
 
   def collaborator?(params_id)
-    !self.collaborations.where(collaborator_id: params_id.to_i).empty?
+    !self..collaborations.where(id: params_id).empty?
   end
 
   def create_search_names

@@ -1,15 +1,15 @@
 <div class="show-layout">
 
-  <h3>Hello, <%= current_user.first_name %></h3>
+  <h3><%= @user.first_name %>'s Page</h3>
   
   <div class="graph" id="bar">
-    <%= column_chart(current_user.bars) %>
+    <%= column_chart(@user.bars) %>
   </div>
 
-  <%= render "table", :user => current_user %>
+  <%= render "users/table", :user => @user %>
 
   <div class="graph" id="line">
-    <%= line_chart(current_user.lines, min: 50, max: 80, :library => {
+    <%= line_chart(@user.lines, min: 50, max: 80, :library => {
     legend: {position: 'bottom'},
     curveType: 'none',
       explorer: {keepInBounds: true, axis: 'horizontal'}

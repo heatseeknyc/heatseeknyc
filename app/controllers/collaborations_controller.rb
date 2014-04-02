@@ -16,4 +16,15 @@ class CollaborationsController < ApplicationController
     flash[:notice] = "Ended Collaboration."
     redirect_to current_user
   end
+
+  def show
+    if current_user.collaborator?(params[:id])
+      @user = User.find(Collaboration.find(params[:id]).collaborator_id)
+      render "show"
+    else
+      flash[:error] = "You are not authorized to see this user's page."
+      redirect_to current_user
+    end
+  end
+
 end

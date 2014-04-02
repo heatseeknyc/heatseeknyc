@@ -4,8 +4,7 @@
     <% current_user.collaborations.each do |c| %>
       <hr class="underline-user text-center">
       <li class="sidebar-li">
-        <a class="user-link" href="/users/<%=c.collaborator.id%>">
-        <%= c.collaborator.first_name %> <%= c.collaborator.last_name %></a>
+        <%= link_to "#{c.collaborator.first_name} #{c.collaborator.last_name}", [current_user, c], method: :get, :class => "user-link" %>
         <%= link_to "", [current_user, c], method: :delete, :class => "glyphicon glyphicon-remove remove-user-link" %>
         <br>
       </li>

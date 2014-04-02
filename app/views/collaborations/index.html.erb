@@ -1,11 +1,12 @@
-<div class="col-xs-offset-5">
-  <h1>Collaborators</h1>
+<br>
+<div class="col-xs-6 container">
+  <h1 id="collaborator-h1" class="text-center">Collaborators</h1>
   <ul>
     <% current_user.collaborations.each do |c| %>
-      <li>
-        <a class="user-links" href="/users/<%=c.collaborator.id%>">
-        <%= c.collaborator.first_name %> <%= c.collaborator.last_name %></a>
-        <%= link_to "Remove", [current_user, c], method: :delete %>
+      <hr class="underline-user text-center">
+      <li class="sidebar-li">
+        <%= link_to "#{c.collaborator.first_name} #{c.collaborator.last_name}", [current_user, c], method: :get, :class => "user-link" %>
+        <%= link_to "", [current_user, c], method: :delete, :class => "glyphicon glyphicon-remove remove-user-link" %>
         <br>
       </li>
     <% end %>
