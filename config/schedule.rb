@@ -18,6 +18,11 @@ set :output, "log/cron.log"
 # end
 
 # Learn more: http://github.com/javan/whenever
+<<<<<<< HEAD
 every 1.hour do
   rake "get_reading",  :environment => :production
+=======
+every 1.minute do
+  rake "get_reading" , :environment => :production
+>>>>>>> prawn
 end

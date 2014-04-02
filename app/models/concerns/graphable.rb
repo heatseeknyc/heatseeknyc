@@ -85,6 +85,35 @@ module Graphable
       readings.pluck(:created_at, :temp)
     end
 
+    def table_array
+      self.reading_nested_array.each_with_object([]) do |row_cells, arr|
+        datetime, actual_temp = *row_cells
+        arr << build_row(datetime, actual_temp)
+      end
+    end
+
+    def build_row(datetime, actual_temp)
+      required_temp = temp_required_at(datetime)
+      note = check_violation(actual_temp, required_temp)
+      [pretty_time(datetime), pretty_date(datetime), actual_temp, "", "", note]
+    end
+
+    def temp_required_at(datetime)
+      during_the_day?(datetime) ? day_time_legal_requirement : night_time_legal_requirement
+    end
+
+    def check_violation(actual_temp, required_temp)
+      actual_temp < required_temp ? "Violation" : ""
+    end
+
+    def pretty_time(datetime)
+      datetime.strftime("%l:%M %p")
+    end
+
+    def pretty_date(datetime)
+      datetime.strftime("%b %e, %Y ")
+    end
+
     def hashify(nested_array)
       nested_array.each_with_object({}) { |pair, hsh| hsh[pair[0]] = pair[1] }
     end
@@ -125,6 +154,10 @@ module Graphable
         night_temps << temp if night_time_hours_include?(hour)
       end
       night_temps
+    end
+
+    def during_the_day?(datetime)
+      day_time_hours_include?(datetime.hour)
     end
 
     def day_time_hours_include?(hour)

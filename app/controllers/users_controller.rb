@@ -37,6 +37,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def download_pdf
+    writer = PDFWriter.new_from_user_id(params[:id])
+
+    file = writer.generate_pdf
+    filename = writer.filename
+    type = writer.content_type
+
+    send_data(file, filename: filename, type: type)
+  end
+
   private
     def set_user
       
