@@ -86,26 +86,32 @@ module Graphable
     end
 
     def table_array
-      User.first.reading_nested_array.map do |c| 
-        [
-          c[0].strftime("%l:%M %p"), 
-          c[0].strftime("%b %e, %Y "), 
-          c[1]
-        ]
+      self.reading_nested_array.each_with_object([]) do |row_cells, arr|
+        datetime, actual_temp = *row_cells
+        arr << build_row(datetime, actual_temp)
       end
     end
 
-    def padded_table_array
-      User.first.reading_nested_array.map do |c| 
-        [
-          c[0].strftime("%l:%M %p"), 
-          c[0].strftime("%b %e, %Y "), 
-          c[1],
-          "",
-          "",
-          ""
-        ]
-      end
+    def build_row(datetime, actual_temp)
+      required_temp = temp_required_at(datetime)
+      note = check_violation(actual_temp, required_temp)
+      [pretty_time(datetime), pretty_date(datetime), actual_temp, "", "", note]
+    end
+
+    def temp_required_at(datetime)
+      during_the_day?(datetime) ? day_time_legal_requirement : night_time_legal_requirement
+    end
+
+    def check_violation(actual_temp, required_temp)
+      actual_temp < required_temp ? "Violation" : ""
+    end
+
+    def pretty_time(datetime)
+      datetime.strftime("%l:%M %p")
+    end
+
+    def pretty_date(datetime)
+      datetime.strftime("%b %e, %Y ")
     end
 
     def hashify(nested_array)
@@ -148,6 +154,10 @@ module Graphable
         night_temps << temp if night_time_hours_include?(hour)
       end
       night_temps
+    end
+
+    def during_the_day?(datetime)
+      day_time_hours_include?(datetime.hour)
     end
 
     def day_time_hours_include?(hour)

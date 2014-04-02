@@ -33,6 +33,6 @@ class PDFWriter
     pdf.move_down 5
     pdf.font FONT, FONT_OPTIONS
     pdf.table [HEADERS], cell_style: HEADER_OPTIONS
-    pdf.table self.user.padded_table_array, cell_style: TABLE_OPTIONS
+    pdf.table self.user.table_array, cell_style: TABLE_OPTIONS
   end
 end
