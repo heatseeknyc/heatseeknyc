@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
   end
 
   def collaborator?(params_id)
-    !self..collaborations.where(id: params_id).empty?
+    !self.collaborations.where(id: params_id).empty?
   end
 
   def create_search_names
