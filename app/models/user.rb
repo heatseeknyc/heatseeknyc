@@ -46,5 +46,7 @@ class User < ActiveRecord::Base
     end
   end
 
-
+  def most_recent_temp
+    self.readings.last.temp
+  end
 end
