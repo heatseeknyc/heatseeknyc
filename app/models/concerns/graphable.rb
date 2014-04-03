@@ -52,16 +52,21 @@ module Graphable
       readings.pluck(:created_at, :temp, :outdoor_temp)
     end
 
+    def reverse_reading_nested_array
+      readings.order(created_at: :desc).pluck(:created_at, :temp, :outdoor_temp)
+    end
+
     def table_array
-      self.reading_nested_array.each_with_object([]) do |row_cells, arr|
+      self.reverse_reading_nested_array.each_with_object([]) do |row_cells, arr|
         arr << build_row(row_cells)
       end
     end
 
     def build_row(row_cells)
-      datetime, actual_temp, outdoor_temp = *row_cells
-      note = notes_text(datetime, actual_temp, outdoor_temp)
-      [pretty_time(datetime), pretty_date(datetime), actual_temp, outdoor_temp, "", note]
+      datetime, indoor_temp, outdoor_temp = *row_cells
+      datetime = adjust_for_time_zone(datetime)
+      note = notes_text(datetime, indoor_temp, outdoor_temp)
+      [pretty_time(datetime), pretty_date(datetime), indoor_temp, outdoor_temp, "", note]
     end
 
     def notes_text(datetime, indoor_temp, outdoor_temp)
