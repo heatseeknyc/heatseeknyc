@@ -1,2 +1,0 @@
-class TwineController < ApplicationController
-end

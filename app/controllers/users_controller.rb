@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, except: :welcome
+  before_action :authenticate_user!, except: [:welcome, :demo]
 
   def welcome
     if current_user

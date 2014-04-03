@@ -1,0 +1,15 @@
+<div class="jumbotron col-xs-12 col-sm-10 col-md-6  col-lg-4" id="twine-jumbo">
+  <div class="container-fluid">
+    <h1 class="text-center"><%= @twine.name %></h1>
+    <p class="text-center"><span>email: <%= @twine.email %></span></p>
+
+    <% if @twine.user %>
+      <div class="responsive-font-wrapper"><p class="responsive-font">status: currently assigned to <%= @twine.user %></p><div>
+      <%= link_to "Assigned User", user_path(@twine.user) %>
+    <% else %>
+      <div class="responsive-font-wrapper"><p class="text-center responsive-font">status: currently unassigned</p></div>
+    <% end %>
+
+    <a href="/" class="btn btn-primary btn-block">Home</a>
+  </div>
+</div>

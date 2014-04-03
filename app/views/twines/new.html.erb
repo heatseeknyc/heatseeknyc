@@ -1,0 +1,11 @@
+<div class="col-md-4" id="form-id">
+  <%= form_for @twine do |f| -%>
+    <dl><%= f.label :name %>:
+    <%= f.text_field :name, class: "form-control" %></dl>
+
+    <dl><%= f.label :email %>:
+    <%= f.text_field :email, class: "form-control" %></dl>
+    
+    <%= f.submit class: "btn btn-primary" %>
+  <% end -%>
+<div>

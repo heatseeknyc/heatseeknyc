@@ -1,3 +1,38 @@
 // Place all the styles related to the twine controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.jumbotron {
+  float: none;
+  background-color: #ddd;
+  margin: 5%;
+  padding: 0%;
+  margin-right: auto;
+  margin-left: auto;
+  word-wrap:break-word;
+}
+
+.responsive-font-wrapper {
+  font-size: 100%;
+}
+
+.responsive-font {
+  font-size: .5em;
+}
+
+#twine-jumbo {
+  height: 100%;
+  font-size: 90%;
+}
+
+#twine-jumbo div.container-fluid {
+  font-size: 1em;
+}
+
+#twine-jumbo div.container-fluid h1 {
+  font-size: 4em;
+}
+
+#twine-jumbo div.container-fluid p {
+  font-size: 1em;
+}
