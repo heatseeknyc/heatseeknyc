@@ -1,3 +1,10 @@
 .body {
   background-color: #eee;
  }
+
+ // this fixes an error w/ bootstrap not letting the error message appear correctly
+.alert {
+  position: relative;
+  top: 18px;
+  z-index: 10000;
+}

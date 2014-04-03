@@ -16,7 +16,7 @@ class CollaborationsController < ApplicationController
   def destroy
     @collaboration = current_user.collaborations.find(params[:id])
     @collaboration.destroy
-    flash[:notice] = "Ended Collaboration."
+    flash[:error] = "Ended Collaboration."
     redirect_to current_user
   end
 

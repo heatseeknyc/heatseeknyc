@@ -42,6 +42,7 @@ a.user-settings-link {
 
 a.user-settings-link:hover {
   color: #666;
+  text-decoration: none;
 }
 
 a.remove-user-link {
@@ -53,6 +54,7 @@ a.remove-user-link {
 
 a.remove-user-link:hover {
   color: #d2322d;
+  text-decoration: none;
 }
 
 @media only screen and (min-width: 450px) {

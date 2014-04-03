@@ -57,15 +57,16 @@ class UsersController < ApplicationController
   end
 
   def search
-    @results = User.search(params[:q])
+    @query = params[:q]
+    @results = User.search(@query)
     respond_to do |f|
       f.html do
         if @results.empty?
-          flash[:error] = "Unable to find user #{params[:q]}."
+          flash[:error] = "Unable to find user #{@query}."
           redirect_to current_user
         end
       end
-      f.js if !@results.empty?
+      f.js
     end
   end
 

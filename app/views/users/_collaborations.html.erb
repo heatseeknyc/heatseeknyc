@@ -8,7 +8,7 @@
         <% if current_user.admin? %>
           <%= link_to "", edit_user_path(c), :class => "glyphicon glyphicon-wrench user-settings-link" %>
         <% end %>
-        <%= link_to "", [current_user, c], method: :delete, :class => "glyphicon glyphicon-remove remove-user-link" %>
+        <%= link_to "", [current_user, c], method: :delete, :class => "glyphicon glyphicon-remove remove-user-link", data: { confirm: "Are you sure?" } %>
         <br>
       </li>
     <% end %>
