@@ -1,6 +1,6 @@
 <% if @results.empty? %>
+  $(".alert").remove();
   $(".show-layout").prepend('<%= j render "search_failure" %>');
-  console.log(@query);
 <% else %>
   $("#search-results").remove();
   $(".search-box").append('<%= j render "search_results" %>');
