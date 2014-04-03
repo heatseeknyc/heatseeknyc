@@ -21,11 +21,7 @@ module Timeable
     end
 
     def night_time_hours
-      all_hours - day_time_hours
-    end
-
-    def all_hours
-      (0...24).to_a
+      (0...24).to_a - day_time_hours
     end
 
     def time_offset_in_seconds
@@ -45,8 +41,7 @@ module Timeable
     end
 
     def pretty_time(datetime)
-      adjusted_datetime = adjust_for_time_zone(datetime)
-      adjusted_datetime.strftime("%l:%M %p")
+      datetime.strftime("%l:%M %p")
     end
 
     def pretty_date(datetime)
