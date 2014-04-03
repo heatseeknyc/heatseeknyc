@@ -42,13 +42,13 @@ class User < ActiveRecord::Base
     self.twine.name if self.twine
   end
 
-  def has_collaboration?(collaborations_id)
+  def has_collaboration?(collaboration_id)
     collaboration = find_collaboration(collaboration_id)
-    !collaboration.empty? && collaboration.confirmed
+    # !collaboration.empty? && collaboration.confirmed
   end
 
   def find_collaboration(collaboration_id)
-    self.collaborations.where(id: collaborations_id)
+    self.collaborations.where(id: collaboration_id)
   end
 
   def admin?
