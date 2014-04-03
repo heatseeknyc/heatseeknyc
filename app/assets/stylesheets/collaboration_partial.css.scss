@@ -5,6 +5,12 @@
 }
 // this is the container in the collaboration index page
 
+#search-results {
+  height: 300px;
+  overflow: auto;
+}
+
+// this if for the partial
 #collaborator-ul {
   padding-left: 0;
 }
@@ -60,15 +66,3 @@ a.remove-user-link:hover {
     height: 500px;
   }
 }
-
-// @media only screen and (min-width: 900px) {
-//   .collaborators-sidebar {
-//     position: relative;
-//     left: 15px;
-//     margin: 0px;
-//     margin-right: 0; 
-//     height: 700px;
-//     width: 35%;
-//     float: right;    
-//   }
-// }
