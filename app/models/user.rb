@@ -12,9 +12,7 @@ class User < ActiveRecord::Base
 
   validates :first_name, :length => {minimum: 2}
   validates :last_name, :length => {minimum: 2}
-  validates :zip_code, :length => {is: 5}
-  validates_presence_of :address
-  validates_presence_of :email
+  validates_presence_of :address, :email, :zip_code
 
   before_save :create_search_names
 
