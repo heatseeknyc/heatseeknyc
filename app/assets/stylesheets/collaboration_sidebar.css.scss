@@ -27,6 +27,17 @@ h1#collaborator-h1 {
   list-style: none;
 }
 
+a.user-settings-link {
+  float: right;
+  position: relative;
+  left: -15%;
+  color: #999;
+}
+
+a.user-settings-link:hover {
+  color: #666;
+}
+
 a.remove-user-link {
   float: right;
   position: relative;
