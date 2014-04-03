@@ -49,4 +49,8 @@ class User < ActiveRecord::Base
   def most_recent_temp
     self.readings.last.temp
   end
+
+  def has_readings?
+    !self.readings.empty?
+  end
 end
