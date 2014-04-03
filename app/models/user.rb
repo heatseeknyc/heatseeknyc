@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
 
   validates :first_name, :length => {minimum: 2}
   validates :last_name, :length => {minimum: 2}
+  validates :zip_code, :length => {is: 5}, numericality: true
   validates_presence_of :address
   validates_presence_of :email
 
@@ -22,14 +23,33 @@ class User < ActiveRecord::Base
   include Graphable::InstanceMethods
   include Regulatable::InstanceMethods
 
+  PERMISSIONS = {
+    admin: 25,
+    lawyer: 50,
+    user: 100
+  }
+
   def twine=(twine_name)
     #this lets forms work and will be used to assign twines 
     temp_twine = Twine.find_by(:name => twine_name)
     temp_twine.user(self.id)
   end
 
+  def twine_by_name=(twine_name)
+    temp_twine = Twine.find_by(:name => twine_name)
+    temp_twine.user(self.id)
+  end
+
+  def twine_by_name
+    self.twine.name if self.twine
+  end
+
   def collaborator?(params_id)
     !self.collaborations.where(id: params_id).empty?
+  end
+
+  def admin?
+    self.permissions <= 25
   end
 
   def create_search_names
