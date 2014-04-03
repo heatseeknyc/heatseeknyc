@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :welcome, :sign_in]
+  before_action :authenticate_user!, except: :welcome
 
   def welcome
     if current_user
@@ -7,6 +7,16 @@ class UsersController < ApplicationController
     else
       redirect_to "/users/sign_in"
     end
+  end
+
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+    @user.update_without_password(user_params)
+    redirect_to "/users/#{current_user.id}/collaborations/#{@user.id}"
   end
 
   def index
@@ -22,7 +32,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(new_user_params)
+    @user = User.new(user_params)
     if @user.valid?
       @user.save
       redirect_to "/users"
@@ -59,8 +69,7 @@ class UsersController < ApplicationController
       
     end
 
-    def new_user_params
-      params.require(:user).permit(:first_name, :last_name, :address, :email)
+    def user_params
+      params.require(:user).permit(:first_name, :last_name, :address, :email, :zip_code, :permissions)
     end
-
 end
