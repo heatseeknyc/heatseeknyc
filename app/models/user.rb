@@ -27,19 +27,15 @@ class User < ActiveRecord::Base
     user: 100
   }
 
-  def twine=(twine_name)
-    #this lets forms work and will be used to assign twines 
+  def twine_name=(twine_name)
+    return nil if twine_name == ""
     temp_twine = Twine.find_by(:name => twine_name)
     temp_twine.user(self.id)
+    self.update(twine: temp_twine)
   end
 
-  def twine_by_name=(twine_name)
-    temp_twine = Twine.find_by(:name => twine_name)
-    temp_twine.user(self.id)
-  end
-
-  def twine_by_name
-    self.twine.name if self.twine
+  def twine_name
+    self.twine.name unless self.twine.nil?
   end
 
   def has_collaboration?(collaboration_id)
