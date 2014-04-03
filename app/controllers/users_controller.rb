@@ -10,7 +10,11 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.all
+    if current_user.permissions <= 50
+      @users = User.all
+    else
+      redirect_to current_user
+    end
   end
 
   def new
