@@ -1,7 +1,8 @@
 <div class="show-layout">
 
   <h3><%= @user.first_name %>'s Page</h3>
-  
+  <h5>Your last reading was <%= @user.most_recent_temp %> degrees</h5>
+
   <div class="graph" id="bar">
     <%= column_chart(@user.bars) %>
   </div>

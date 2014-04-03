@@ -1,6 +1,7 @@
 <div class="show-layout">
 
   <h3>Hello, <%= current_user.first_name %></h3>
+  <h5>Your last reading was <%= current_user.most_recent_temp %> degrees</h5>
   
   <div class="graph" id="bar">
     <%= column_chart(current_user.bars) %>
