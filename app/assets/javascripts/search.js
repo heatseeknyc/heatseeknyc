@@ -5,10 +5,10 @@
 // });
 
 // $.ajax($(e.target).attr("action"), {
-// //     method: "POST",
-// //     data: formString,      
-// //     dataType: "script"
-// //   });
+//     method: "POST",
+//     data: formString,      
+//     dataType: "script"
+//   });
 
 // $(document).ready(function(){});
 
@@ -29,9 +29,16 @@
 
 //   $.ajax($(e.target).attr("action")
 
+  // var searchTerm = e.currentTarget.form[1].value;
 
 // $("form#search-form").on("submit", function(e){
 //   e.preventDefault();
-//   var searchTerm = e.currentTarget.form[1].value;
+//   var searchTerm = e.currentTarget[1].value
 //   debugger
+      
+    // $.ajax($(e.target.action), {
+    //   method: "POST",
+    //   data: formString,
+    //   dataType: "script"
+    // });
 // });

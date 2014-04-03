@@ -5,8 +5,12 @@
 }
 // this is the container in the collaboration index page
 
+#collaborator-ul {
+  padding-left: 0;
+}
+
 .collaborators-sidebar {
-  margin-top: 20px;
+  margin-top: 80px;
   margin-left: auto;
   margin-right: auto;
   height: 300px;
@@ -46,14 +50,14 @@ a.remove-user-link:hover {
   }
 }
 
-@media only screen and (min-width: 900px) {
-  .collaborators-sidebar {
-    position: relative;
-    left: 15px;
-    margin: 0px;
-    margin-right: 0; 
-    height: 700px;
-    width: 35%;
-    float: right;    
-  }
-}
+// @media only screen and (min-width: 900px) {
+//   .collaborators-sidebar {
+//     position: relative;
+//     left: 15px;
+//     margin: 0px;
+//     margin-right: 0; 
+//     height: 700px;
+//     width: 35%;
+//     float: right;    
+//   }
+// }

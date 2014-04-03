@@ -1,11 +1,17 @@
 <div class="show-layout">
   <h3>Hello, <%= current_user.first_name %></h3>
-  <div class="search-box .col-xs-6 .col-xs-offset-6"> 
-      <%= form_tag search_user_path, method: :get, id: "search-form" do %> 
-        <dl><%= label_tag :q, "Find a User" %>
-        <%= text_field_tag :q, "", :class => "form-control", autofocus: true %></dl>
-        <%= submit_tag "Search", :class => "btn btn-lg btn-primary", id: "search-button" %>
-      <% end %>
+  <div class="col-xs-12 container" id="permissions-show-div">
+    <div class="search-box"> 
+        <%= form_tag search_user_path, method: :get, id: "search-form" do %> 
+          <dl>
+            <%= label_tag :q, "Find a User" %>
+            <br>
+            <%= text_field_tag :q, "", :class => "form-control", autofocus: true %>
+            <%= submit_tag "Search", :class => "btn btn-lg btn-primary", id: "search-button" %>
+          </dl>
+        <% end %>
+    </div>
+    <br>
+    <%= render "collaborations/collaborations_sidebar" %>
   </div>
-  <%= render "collaborations/collaborations_sidebar" %>
 </div>
