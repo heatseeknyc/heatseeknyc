@@ -52,6 +52,10 @@ class UsersController < ApplicationController
       flash[:error] = "Unable to find user #{params[:q]}."
       redirect_to current_user
     end
+    respond_to do |f|
+      f.html {redirect_to current_user}
+      f.json
+    end
   end
 
   private

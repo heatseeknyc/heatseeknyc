@@ -1,44 +1,23 @@
-// $("input#search-button").on("submit", function(e){
-//   e.preventDefault();
-//   var searchTerm = e.currentTarget.form[1].value;
-//   debugger
-// });
+console.log("loaded");
+$(document).ready(function(){
+  $("form#search-form").on("submit", function(e){
+    e.preventDefault();
+    var searchTerm = e.currentTarget[1].value;
+    debugger
+    console.log("clicked on form search form");
+    $.ajax(e.target.action, {
+      method: "GET",
+      data: "q=" + searchTerm,
+      dataType: "json"
+      success: console.log("something was sent")
+    });
+  });
+});
 
-// $.ajax($(e.target).attr("action"), {
-//     method: "POST",
-//     data: formString,      
-//     dataType: "script"
-//   });
-
-// $(document).ready(function(){});
 
 
-// $(document).on("submit", "form[data-ajax=true]", function(e){
-//   e.preventDefault()
-//   var formString = $(e.target).serialize();
-
-//   $.ajax($(e.target).attr("action"), {
-//     method: "POST",
-//     data: formString,      
-//     dataType: "script"
-//   });
-
-// $("input#search-button").on("click", function(e){
-//   e.preventDefault
-//   var searchTerm = e.currentTarget.form[1].value;
-
-//   $.ajax($(e.target).attr("action")
-
-  // var searchTerm = e.currentTarget.form[1].value;
-
-// $("form#search-form").on("submit", function(e){
-//   e.preventDefault();
-//   var searchTerm = e.currentTarget[1].value
-//   debugger
-      
-    // $.ajax($(e.target.action), {
-    //   method: "POST",
-    //   data: formString,
-    //   dataType: "script"
-    // });
-// });
+$("#new_post").append(xhr.responseText);
+  }).bind("ajax:error", function(e, xhr, status, error) {
+    return $("#new_post").append("<p>ERROR</p>");
+  });
+});
