@@ -5,6 +5,9 @@
       <hr class="underline-user text-center">
       <li class="sidebar-li">
         <%= link_to "#{c.collaborator.first_name} #{c.collaborator.last_name}", [current_user, c], method: :get, :class => "user-link" %>
+        <% if current_user.admin? %>
+          <%= link_to "", edit_user_path(c), :class => "glyphicon glyphicon-wrench user-settings-link" %>
+        <% end %>
         <%= link_to "", [current_user, c], method: :delete, :class => "glyphicon glyphicon-remove remove-user-link" %>
         <br>
       </li>
