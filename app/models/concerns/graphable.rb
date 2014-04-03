@@ -52,8 +52,12 @@ module Graphable
       readings.pluck(:created_at, :temp, :outdoor_temp)
     end
 
+    def reverse_reading_nested_array
+      readings.order(created_at: :desc).pluck(:created_at, :temp, :outdoor_temp)
+    end
+
     def table_array
-      self.reading_nested_array.each_with_object([]) do |row_cells, arr|
+      self.reverse_reading_nested_array.each_with_object([]) do |row_cells, arr|
         arr << build_row(row_cells)
       end
     end
