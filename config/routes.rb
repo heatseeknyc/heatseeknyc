@@ -7,7 +7,8 @@ Twinenyc::Application.routes.draw do
   
 
 
-  get 'users/:id/download' => 'users#download_pdf'
+  get 'users/:id/download' => 'users#download_pdf', as: :pdf_download
+  get 'users/:user_id/collaborations/:id/download' => 'users#download_pdf'
 
   root 'users#welcome'
 
