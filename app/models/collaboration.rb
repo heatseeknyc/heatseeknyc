@@ -6,4 +6,8 @@ class Collaboration < ActiveRecord::Base
   def valid_relationship?
     self.user_id != self.collaborator_id
   end
+
+  def confirmed
+    true #placeholder method until we add functionality for confirming lawyers
+  end
 end

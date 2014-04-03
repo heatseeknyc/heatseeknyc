@@ -21,7 +21,7 @@ class CollaborationsController < ApplicationController
   end
 
   def show
-    if current_user.collaborator?(params[:id])
+    if current_user.has_collaboration?(params[:id])
       @user = User.find(Collaboration.find(params[:id]).collaborator_id)
       render "show"
     else
