@@ -8,7 +8,6 @@ class CollaborationsController < ApplicationController
       f.js
       f.html do
         if @collaboration.save
-          binding.pry
           flash[:notice] = "Added collaborator."
           redirect_to root_url
         else
