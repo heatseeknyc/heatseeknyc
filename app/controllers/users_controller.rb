@@ -58,7 +58,7 @@ class UsersController < ApplicationController
 
   def search
     @query = params[:q]
-    @results = User.search(@query)
+    @results = User.search(@query).reject {|r| r == current_user}
     respond_to do |f|
       f.html do
         if @results.empty?

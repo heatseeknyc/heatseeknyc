@@ -5,6 +5,7 @@ class CollaborationsController < ApplicationController
     @collaboration = current_user.collaborations.build(:collaborator_id => params[:collaborator_id])
     
     respond_to do |f|
+      f.js
       f.html do
         if @collaboration.save
           binding.pry
@@ -15,15 +16,20 @@ class CollaborationsController < ApplicationController
           redirect_to root_url
         end
       end
-      f.js
     end
   end
 
   def destroy
     @collaboration = current_user.collaborations.find(params[:id])
     @collaboration.destroy
-    flash[:error] = "Ended Collaboration."
-    redirect_to current_user
+    
+    respond_to do |f|
+      f.js
+      f.html do 
+        flash[:error] = "Ended Collaboration."
+        redirect_to current_user
+      end
+    end
   end
 
   def show

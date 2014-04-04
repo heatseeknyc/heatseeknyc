@@ -12,6 +12,7 @@
         <% end %>
     </div>
     <br>
-    <%= render "collaborations" if !current_user.collaborations.empty? %>
+    <div id="append-collaborations"></div>
+    <% render_collaborators_for(current_user) %>
   </div>
 </div>

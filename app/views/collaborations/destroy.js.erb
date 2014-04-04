@@ -1,7 +1,7 @@
-<% if @collaboration.save %>
+<% if !@collaboration.persisted? %>
   $(".collaborators-sidebar").remove();
   $("#append-collaborations").append('<%= j render "users/collaborations" %>');
 <% else %>
   $(".alert").remove();
-  $(".show-layout").prepend('<%= j render "create_collaboration_failure_message" %>');
+  $(".show-layout").prepend('<%= j render_collaborators_for(current_user) %>');
 <% end %>
