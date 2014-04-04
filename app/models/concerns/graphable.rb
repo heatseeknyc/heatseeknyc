@@ -28,16 +28,12 @@ module Graphable
       end
     end
 
-    def range(margin = 5)
-      {min: self.range_min - margin, max: self.range_max + margin}
+    def range_min(margin = 5)
+      self.temps_with_legal_requirement.min - margin
     end
 
-    def range_min
-      self.temps_with_legal_requirement.min
-    end
-
-    def range_max
-      self.temps_with_legal_requirement.max
+    def range_max(margin = 5)
+      self.temps_with_legal_requirement.max + margin
     end
 
     def reading_time_array
