@@ -4,12 +4,18 @@ class CollaborationsController < ApplicationController
   def create
     @collaboration = current_user.collaborations.build(:collaborator_id => params[:collaborator_id])
     
-    if @collaboration.save
-      flash[:notice] = "Added collaborator."
-      redirect_to root_url
-    else
-      flash[:error] = "Unable to add collaborator."
-      redirect_to root_url
+    respond_to do |f|
+      f.html do
+        if @collaboration.save
+          binding.pry
+          flash[:notice] = "Added collaborator."
+          redirect_to root_url
+        else
+          flash[:error] = "Unable to add collaborator."
+          redirect_to root_url
+        end
+      end
+      f.js render "create.js"
     end
   end
 
