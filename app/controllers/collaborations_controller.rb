@@ -15,7 +15,7 @@ class CollaborationsController < ApplicationController
           redirect_to root_url
         end
       end
-      f.js render "create.js"
+      f.js
     end
   end
 
