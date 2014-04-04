@@ -27,5 +27,6 @@ users.each do |user|
 
     current_temp -= 2 if current_temp > 68
     current_temp += 2 if current_temp < 52
+    user.save
   end
 end
