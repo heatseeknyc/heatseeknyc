@@ -4,4 +4,5 @@
 <% else %>
   $("#search-results").remove();
   $(".search-box").append('<%= j render "search_results" %>');
+    addUserFunction();
 <% end %>

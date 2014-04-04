@@ -22,7 +22,7 @@ class CollaborationsController < ApplicationController
   def destroy
     @collaboration = current_user.collaborations.find(params[:id])
     @collaboration.destroy
-    
+
     respond_to do |f|
       f.js
       f.html do 
