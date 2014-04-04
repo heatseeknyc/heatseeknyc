@@ -2,7 +2,7 @@
   <h3>Hello, <%= current_user.first_name %></h3>
   <div class="col-xs-12 container" id="permissions-show-div">
     <div class="search-box"> 
-        <%= form_tag search_user_path, method: :get, id: "search-form" do %> 
+        <%= form_tag search_user_path, method: :get, id: "search-form", remote: true do %> 
           <dl>
             <%= label_tag :q, "Find a User" %>
             <br>
@@ -11,7 +11,10 @@
           </dl>
         <% end %>
     </div>
-    <br>
-    <%= render "collaborations/collaborations_sidebar" %>
+  <br>
+  <div id="append-collaborations"></div>
+
+  <%= render_collaborators_for(current_user) %>
+
   </div>
 </div>

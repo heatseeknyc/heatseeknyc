@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  include UserControllerHelper
   before_action :authenticate_user!, except: [:welcome, :demo]
 
   def welcome
@@ -57,10 +58,16 @@ class UsersController < ApplicationController
   end
 
   def search
-    @results = User.search(params[:q])
-    if @results.empty?
-      flash[:error] = "Unable to find user #{params[:q]}."
-      redirect_to current_user
+    @query = params[:q]
+    @results = User.search(@query).reject {|r| r == current_user}
+    respond_to do |f|
+      f.html do
+        if @results.empty?
+          flash[:error] = "Unable to find user #{@query}."
+          redirect_to current_user
+        end
+      end
+      f.js
     end
   end
 

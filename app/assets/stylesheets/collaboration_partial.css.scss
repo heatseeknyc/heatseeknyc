@@ -5,6 +5,12 @@
 }
 // this is the container in the collaboration index page
 
+#search-results {
+  height: 300px;
+  overflow: auto;
+}
+
+// this if for the partial
 #collaborator-ul {
   padding-left: 0;
 }
@@ -36,6 +42,7 @@ a.user-settings-link {
 
 a.user-settings-link:hover {
   color: #666;
+  text-decoration: none;
 }
 
 a.remove-user-link {
@@ -47,6 +54,7 @@ a.remove-user-link {
 
 a.remove-user-link:hover {
   color: #d2322d;
+  text-decoration: none;
 }
 
 @media only screen and (min-width: 450px) {
@@ -60,15 +68,3 @@ a.remove-user-link:hover {
     height: 500px;
   }
 }
-
-// @media only screen and (min-width: 900px) {
-//   .collaborators-sidebar {
-//     position: relative;
-//     left: 15px;
-//     margin: 0px;
-//     margin-right: 0; 
-//     height: 700px;
-//     width: 35%;
-//     float: right;    
-//   }
-// }
