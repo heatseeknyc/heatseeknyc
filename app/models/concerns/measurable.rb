@@ -24,11 +24,11 @@ module Measurable
 
     def reading_nested_arrays(measurements)
       define_method("reading_nested_array") do 
-        readings.pluck(*measurements).compact
+        readings.pluck(:created_at, *measurements).compact
       end
 
       define_method("reverse_reading_nested_array") do 
-        readings.pluck(*measurements).order(created_at: :desc).compact
+        readings.order(created_at: :desc).pluck(:created_at, *measurements).compact
       end
     end
 
