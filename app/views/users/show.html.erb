@@ -13,10 +13,10 @@
   <div class="graph" id="line">
     <%= line_chart(current_user.lines, min: 50, max: 80, :library => {
     legend: {position: 'bottom'},
-    curveType: 'none',
-      explorer: {keepInBounds: true, axis: 'horizontal'}
+    curveType: 'none'
     }) %>
-    <%= link_to 'Download PDF', pdf_download_path(current_user) %>
+    <br>
+    <%= link_to 'Download PDF', pdf_download_path(current_user), class: "btn btn-primary" %>
   </div>
 
 </div>
