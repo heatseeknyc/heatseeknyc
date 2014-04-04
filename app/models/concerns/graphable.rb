@@ -24,12 +24,20 @@ module Graphable
       {"Avg Day" => avg_day_temp, "Avg Night" => avg_night_temp}
     end
 
+    def low_temps
+      [temps.min, outdoor_temps.min, 55].compact
+    end
+
+    def high_temps
+      [temps.max, outdoor_temps.max, 68].compact
+    end
+
     def range_min(margin = 5)
-      [temps.min, outdoor_temps.min, 55].min - margin
+      low_temps.min - margin
     end
 
     def range_max(margin = 5)
-      [temps.max, outdoor_temps.max, 68].max + margin
+      high_temps.max + margin
     end
 
     def reading_time_array
