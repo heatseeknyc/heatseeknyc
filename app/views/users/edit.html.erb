@@ -17,7 +17,7 @@
     <dl><%= f.label :twine_name %>:
     <%= f.text_field :twine_name, class: "form-control" %></dl>
     
-    <% if @user.permissions > 0 %>
+    <% if @user.permissions > 0 && !@user.is_demo_user? %>
       <dl><%= f.label :permissions %>:
       <%= f.select :permissions, User::PERMISSIONS, class: "form-control" %></dl>
     <% end %>

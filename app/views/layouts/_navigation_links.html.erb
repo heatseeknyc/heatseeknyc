@@ -3,7 +3,11 @@
   <div id="navbar-leftside">
     <%= link_to 'Home', user_path(current_user), class: 'navbar-brand navbar-left custom-navbar' %>
     <p class='navbar-brand custom-navbar' id="pipe-spacing">|</p>
-    <%= link_to 'Settings', edit_user_registration_path, class: 'navbar-brand navbar-left custom-navbar' %>
+    <% if current_user.is_demo_user? %>
+      <%= link_to 'Settings', edit_user_path(current_user), class: 'navbar-brand navbar-left custom-navbar' %>
+    <% else %>
+      <%= link_to 'Settings', edit_user_registration_path, class: 'navbar-brand navbar-left custom-navbar' %>
+    <% end %>
   </div>
 
   <%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'navbar-brand navbar-right custom-navbar', id: 'logout-id' %>
