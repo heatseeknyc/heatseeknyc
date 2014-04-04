@@ -17,7 +17,8 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     @user.update_without_password(user_params)
-    redirect_to "/users/#{current_user.id}/collaborations/#{@user.id}"
+    @collaboration = current_user.collaborations.where(collaborator_id: @user.id).first
+    redirect_to "/users/#{current_user.id}/collaborations/#{@collaboration.id}"
   end
 
   def index
