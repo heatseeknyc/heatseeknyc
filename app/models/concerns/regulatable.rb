@@ -56,7 +56,17 @@ module Regulatable
       else
         night_time_temps_below_minimum?(indoor_temp, outdoor_temp)
       end
-    end  
+    end
+
+    def violation_count
+      readings.reduce(0) do |count, r| 
+        if in_violation?(r.created_at, r.temp, r.outdoor_temp)
+          count + 1 
+        else
+          count 
+        end
+      end
+    end
   end
   
   # def self.included(receiver)

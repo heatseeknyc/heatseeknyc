@@ -3,6 +3,12 @@
   width: 100%;
 }
 
+#bar {
+  float: left;
+  background-color: #fff;
+  width: 100%;
+}
+
 #table {
   float: right;
   background-color: #fff;
@@ -23,10 +29,27 @@
   margin-left: auto;
   margin-right: auto;
 }
+.stat-description {
+  text-align: center;
+  font-size: 2.5em;
+  font-weight: 100;
+  padding: 20px;
+  padding-top: 30px;
+}
+
+.stat-num {
+  text-align: center;
+  margin-top: -3%;
+  font-size: 9.5em;
+  font-weight: 300;
+  padding: 10px; 
+  padding-bottom: 6.5%;
+}
 
 @media only screen and (min-width: 700px) {
   #bar {
     width: 55%;
+    height: 300px;
   }
   #table {
     width: 45%;
