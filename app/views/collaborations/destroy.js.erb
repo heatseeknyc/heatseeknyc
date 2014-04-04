@@ -1,5 +1,5 @@
 <% if !@collaboration.persisted? %>
-  $("div.collaborators-sidebar").remove();
+  $(".collaborators-sidebar").remove();
   $("div#append-collaborations").append('<%= j render_collaborators_for(current_user) %>');
 <% else %>
   $(".alert").remove();
