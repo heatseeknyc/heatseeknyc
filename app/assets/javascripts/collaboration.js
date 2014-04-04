@@ -7,6 +7,10 @@ var addUserFunction = function () {
       })
       .done(function( script ) {
         $(addUserLi).remove();
+        if ($(".search-results-ul").children().length == 0)
+        {
+          $(".search-results-ul").parent().remove();
+        }
       })
       .fail(function() {
       });
