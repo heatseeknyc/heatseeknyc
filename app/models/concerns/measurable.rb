@@ -3,7 +3,7 @@ module Measurable
 
     def define_measureable_methods(metrics, cycles, measurements)
       metric_cycle_measures(metrics, cycles, measurements)  
-      pluck_measurements(measurements)
+      reading_nested_arrays(measurements)
       measurement_nested_arrays(measurements)
       measurement_hashes(measurements)
       measurement_methods(measurements)
@@ -22,9 +22,13 @@ module Measurable
       end
     end
 
-    def pluck_measurements(measurements)
-      define_method("pluck_measurements") do 
-        pluck(*measurements).compact
+    def reading_nested_arrays(measurements)
+      define_method("reading_nested_array") do 
+        readings.pluck(*measurements).compact
+      end
+
+      define_method("reverse_reading_nested_array") do 
+        readings.pluck(*measurements).order(created_at: :desc).compact
       end
     end
 
@@ -58,7 +62,7 @@ module Measurable
   
   module InstanceMethods
     def avg(array)
-      return 0 if array.empty?
+      return nil if array.empty?
       array.sum / array.size
     end
 
@@ -95,14 +99,6 @@ module Measurable
         array << temp if self.send("#{cycle}_time_hours_include?", hour)
       end
       array
-    end
-
-    def reading_nested_array
-      readings.pluck_measurements
-    end
-
-    def reverse_reading_nested_array
-      readings.order(created_at: :desc).pluck_measurements
     end
   end
   
