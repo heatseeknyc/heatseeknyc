@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
 
   include Timeable::InstanceMethods
   include Measurable::InstanceMethods
+  extend Measurable::ClassMethods
   include Graphable::InstanceMethods
   include Regulatable::InstanceMethods
 
@@ -26,6 +27,12 @@ class User < ActiveRecord::Base
     lawyer: 50,
     user: 100
   }
+
+  METRICS = [:min, :max, :avg]
+  CYCLES = [:day, :night]
+  MEASUREMENTS = [:temp, :outdoor_temp]
+  
+  define_measureable_methods(METRICS, CYCLES, MEASUREMENTS)
 
   def twine_name=(twine_name)
     return nil if twine_name == ""

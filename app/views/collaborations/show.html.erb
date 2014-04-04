@@ -4,19 +4,9 @@
   <% if @user.has_readings? %>
     <h5>Your last reading was <%= @user.most_recent_temp %> degrees</h5>
   <% end %>
-  <div class="graph" id="bar">
-    <%= column_chart(@user.bars) %>
-  </div>
 
+  <%= render "users/bar_graph", :user => @user %>
   <%= render "users/table", :user => @user %>
-
-  <div class="graph" id="line">
-    <%= line_chart(@user.lines, min: @user.range_min, max: @user.range_max, :library => {
-    legend: {position: 'bottom'},
-    curveType: 'none',
-      explorer: {keepInBounds: true, axis: 'horizontal'}
-    }) %>
-    <%= link_to 'Download PDF', pdf_download_path(@user) %>
-  </div>
+  <%= render "users/line_graph", :user => @user %>
 
 </div>

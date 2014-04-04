@@ -1,66 +1,109 @@
 module Measurable
   module ClassMethods
+
+    def define_measureable_methods(metrics, cycles, measurements)
+      metric_cycle_measures(metrics, cycles, measurements)  
+      pluck_measurements(measurements)
+      measurement_nested_arrays(measurements)
+      measurement_hashes(measurements)
+      measurement_methods(measurements)
+    end
     
+    def metric_cycle_measures(metrics, cycles, measurements)
+      metrics.each do |metric|
+        cycles.each do |cycle|
+          measurements.each do |measurement|
+            define_method("#{metric}_#{cycle}_#{measurement}") do 
+              array = self.send("get_cycle_#{measurement}s", cycle)
+              self.send(metric, array)
+            end
+          end
+        end
+      end
+    end
+
+    def pluck_measurements(measurements)
+      define_method("pluck_measurements") do 
+        pluck(*measurements).compact
+      end
+    end
+
+    def measurement_nested_arrays(measurements)
+      measurements.each do |measurement|
+        define_method("#{measurement}_nested_array") do 
+          readings.pluck(:created_at, measurement).compact
+        end
+      end
+    end
+
+    def measurement_hashes(measurements)
+      measurements.each do |measurement|
+        define_method("#{measurement}_hash") do 
+          send("#{measurement}_nested_array").each_with_object({}) do |pair, hsh| 
+            key, value = *pair
+            hsh[key] = value
+          end
+        end
+      end
+    end
+
+    def measurement_methods(measurements)
+      measurements.each do |measurement|
+        define_method("#{measurement}s") do 
+          readings.pluck(measurement).compact
+        end
+      end
+    end
   end
   
   module InstanceMethods
-    def temps
-      readings.pluck(:temp)
+    def avg(array)
+      return 0 if array.empty?
+      array.sum / array.size
     end
 
-    def avg_day_temp
-      day_temps = self.get_day_temps
-      return 0 if day_temps.empty?
-
-      sum_of_temps = day_temps.sum 
-      count_of_temps = day_temps.size
-
-      avg_temp = sum_of_temps / count_of_temps
+    def max(array)
+      array.max
     end
 
-    def avg_night_temp
-      night_temps = self.get_night_temps
-      return 0 if night_temps.empty?
-
-      sum_of_temps = night_temps.sum 
-      count_of_temps = night_temps.size
-      
-      avg_temp = sum_of_temps / count_of_temps
+    def min(array)
+      array.min
     end
 
-    def get_day_temps
-      day_temps = []
-      self.reading_hash.each do |time, temp|
+    def get_cycle_temps(cycle)
+      temp_array = []
+      self.temp_nested_array.each do |time, temp|
         hour = time.hour + time_offset_in_hours
-        day_temps << temp if day_time_hours_include?(hour)
+        temp_array << temp if self.send("#{cycle}_time_hours_include?", hour)
       end
-      day_temps
+      temp_array
     end
 
-    def get_night_temps
-      night_temps = []
-      self.reading_hash.each do |time, temp|
+    def get_cycle_outdoor_temps(cycle)
+      outdoor_temp_array = []
+      self.outdoor_temp_nested_array.each do |time, temp|
         hour = time.hour + time_offset_in_hours
-        night_temps << temp if night_time_hours_include?(hour)
+        outdoor_temps << temp if self.send("#{cycle}_time_hours_include?", hour)
       end
-      night_temps
+      outdoor_temp_array
     end
 
-    def lowest_day_time
-      get_day_temps.min
-    end
-    
-    def lowest_night_time
-      get_night_temps.min
-    end
-
-    def highest_day_time
-      get_day_temps.max
+    def get_cycle_metric(cycle, measurement)
+      array = []
+      self.send("#{measurement}_nested_array").each do |time, measure|
+        hour = time.hour + time_offset_in_hours
+        array << temp if self.send("#{cycle}_time_hours_include?", hour)
+      end
+      array
     end
 
-    def highest_night_time
-      get_night_temps.max
-    end  
+    def reading_nested_array
+      readings.pluck_measurements
+    end
+
+    def reverse_reading_nested_array
+      readings.order(created_at: :desc).pluck_measurements
+    end
   end
   
   # def self.included(receiver)

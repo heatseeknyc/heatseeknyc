@@ -8,11 +8,15 @@ module Graphable
     def lines
       [{
         :name => "actual temperature", 
-        :data => self.chart_hash
+        :data => self.temp_hash
       },
       {
         :name => "legal minimum", 
         :data => self.legal_hash
+      },
+      {
+        :name => "outdoor temperature",
+        :data => self.outdoor_temp_hash
       }]
     end
     
@@ -20,36 +24,16 @@ module Graphable
       {"Avg Day" => avg_day_temp, "Avg Night" => avg_night_temp}
     end
 
-    def chart_hash
-      if readings.empty?
-        return {Time.now => 0} 
-      else
-        reading_hash
-      end
-    end
-
     def range_min(margin = 5)
-      self.temps_with_legal_requirement.min - margin
+      [temps.min, outdoor_temps.min, 55].min - margin
     end
 
     def range_max(margin = 5)
-      self.temps_with_legal_requirement.max + margin
+      [temps.max, outdoor_temps.max, 68].max + margin
     end
 
     def reading_time_array
       readings.pluck(:created_at)
-    end
-
-    def reading_hash
-      hashify(reading_nested_array)
-    end
-
-    def reading_nested_array
-      readings.pluck(:created_at, :temp, :outdoor_temp)
-    end
-
-    def reverse_reading_nested_array
-      readings.order(created_at: :desc).pluck(:created_at, :temp, :outdoor_temp)
     end
 
     def table_array
@@ -71,10 +55,6 @@ module Graphable
 
     def temp_required_at(datetime)
       during_the_day?(datetime) ? day_time_legal_requirement : night_time_legal_requirement
-    end
-
-    def hashify(nested_array)
-      nested_array.each_with_object({}) { |pair, hsh| hsh[pair[0]] = pair[1] }
     end
   end
 
