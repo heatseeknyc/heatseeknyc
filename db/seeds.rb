@@ -15,7 +15,7 @@ users.each do |user|
   current_temp = 65
   current_outdoor_temp = 40
   200.times do
-    reading = Reading.create(created_at: current_time, temp: current_temp, outdoor_temp: current_outdoor_temp, user: user, twine: user.twine)
+    user.readings << Reading.create(created_at: current_time, temp: current_temp, outdoor_temp: current_outdoor_temp, user: user, twine: user.twine)
     current_time -= 3600
     if user.during_the_day?(current_time)
       current_temp += rand(-3..2)
