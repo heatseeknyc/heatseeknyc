@@ -33,6 +33,7 @@ class User < ActiveRecord::Base
   METRICS = [:min, :max, :avg]
   CYCLES = [:day, :night]
   MEASUREMENTS = [:temp, :outdoor_temp]
+  DEMO_ACCOUNT_EMAILS = ['demo-user@heatseeknyc.com','demo-lawyer@heatseeknyc.com']
   
   define_measureable_methods(METRICS, CYCLES, MEASUREMENTS)
 
@@ -41,6 +42,10 @@ class User < ActiveRecord::Base
     temp_twine = Twine.find_by(:name => twine_name)
     temp_twine.user(self.id)
     self.update(twine: temp_twine)
+  end
+
+  def is_demo_user?
+    DEMO_ACCOUNT_EMAILS.include?(self.email)
   end
 
   def twine_name
