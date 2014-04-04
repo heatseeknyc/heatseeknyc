@@ -8,13 +8,15 @@ class User < ActiveRecord::Base
   has_one :twine
 
   has_many :collaborations, dependent: :destroy
-  has_many :collaborators, through: :collaborations, dependent: :destroy
+  has_many :collaborators, through: :collaborations
 
   validates :first_name, :length => {minimum: 2}
   validates :last_name, :length => {minimum: 2}
   validates_presence_of :address, :email, :zip_code
 
   before_save :create_search_names
+
+  before_destroy :destroy_all_collaborations
 
   include Timeable::InstanceMethods
   include Measurable::InstanceMethods
@@ -78,5 +80,9 @@ class User < ActiveRecord::Base
 
   def has_readings?
     !self.readings.empty?
+  end
+
+  def destroy_all_collaborations
+    Collaboration.where("user_id = ? OR collaborator_id = ?", self.id, self.id).destroy_all
   end
 end
