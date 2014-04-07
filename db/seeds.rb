@@ -5,6 +5,36 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+unless User.find_by(email: "jane@heatseeknyc.com")
+  User.create(
+    :first_name => "Jane",
+    :last_name => "Doe",
+    :address => "100 Fake St",
+    :zip_code => "10004",
+    :email => "jane@heatseeknyc.com",
+    :password => '33west26',
+  )
+
+  User.create(
+    :first_name => "John",
+    :last_name => "Doe",
+    :address => "100 Fake St",
+    :zip_code => "10004",
+    :email => "john@heatseeknyc.com",
+    :password => '33west26',
+  )
+
+  User.create(
+    :first_name => "Demo User",
+    :last_name => "Account",
+    :address => "100 Fake St",
+    :zip_code => "10004",
+    :email => "demo-user@heatseeknyc.com",
+    :password => '33west26',
+  )
+end
+
 jane = User.find_by(email: "jane@heatseeknyc.com")
 john = User.find_by(email: "john@heatseeknyc.com")
 demo = User.find_by(email: "demo-user@heatseeknyc.com")

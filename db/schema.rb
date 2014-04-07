@@ -23,9 +23,6 @@ ActiveRecord::Schema.define(version: 20140402222319) do
     t.datetime "updated_at"
   end
 
-  create_table "collaborators_tables", force: true do |t|
-  end
-
   create_table "readings", force: true do |t|
     t.integer  "temp"
     t.integer  "twine_id"
