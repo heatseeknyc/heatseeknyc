@@ -43,3 +43,9 @@ describe "viewing other pages" do
     expect(page).to have_content @user.first_name
   end
 end
+
+# describe "adding collaborators" do
+
+#   client = create(:user, permissions: 100)
+  
+#   end

@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140402222319) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "collaborations", force: true do |t|
     t.integer  "user_id"
     t.integer  "collaborator_id"
@@ -57,6 +60,6 @@ ActiveRecord::Schema.define(version: 20140402222319) do
     t.string   "zip_code"
   end
 
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
