@@ -4,7 +4,7 @@ module Timeable
   end
   
   module InstanceMethods
-  def during_the_day?(datetime)
+    def during_the_day?(datetime)
       day_time_hours_include?(datetime.hour)
     end
 
@@ -41,11 +41,11 @@ module Timeable
     end
 
     def pretty_time(datetime)
-      datetime.strftime("%l:%M %p")
+      datetime.strftime("%-l:%M %p")
     end
 
     def pretty_date(datetime)
-      datetime.strftime("%b %e, %Y ")
+      datetime.strftime("%b %-e, %Y")
     end  
   end
   
