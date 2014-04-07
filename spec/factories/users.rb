@@ -2,7 +2,8 @@
 
 FactoryGirl.define do 
   factory :user do
-    address "11 Broadway, New York, NY 10004"
+    address "11 Broadway, New York, NY"
+    zip_code "10004"
     sequence(:first_name) { |n| "Bob#{n}" }
     last_name "Smith"
     password "secretpassword"

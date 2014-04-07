@@ -3,6 +3,7 @@
 FactoryGirl.define do 
   factory :reading do
     temp 64
+    outdoor_temp 40
     association :user
     association :twine
   
