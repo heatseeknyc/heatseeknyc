@@ -33,7 +33,12 @@ class User < ActiveRecord::Base
   METRICS = [:min, :max, :avg]
   CYCLES = [:day, :night]
   MEASUREMENTS = [:temp, :outdoor_temp]
-  DEMO_ACCOUNT_EMAILS = ['demo-user@heatseeknyc.com','demo-lawyer@heatseeknyc.com']
+  DEMO_ACCOUNT_EMAILS = [
+    'demo-user@heatseeknyc.com',
+    'demo-lawyer@heatseeknyc.com',
+     "jane@heatseeknyc.com",
+     "john@heatseeknyc.com"
+  ]
   
   define_measureable_methods(METRICS, CYCLES, MEASUREMENTS)
 
