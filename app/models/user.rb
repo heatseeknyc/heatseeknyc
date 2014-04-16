@@ -49,6 +49,10 @@ class User < ActiveRecord::Base
     self.update(twine: temp_twine)
   end
 
+  def self.account_demo_user?(user_id)
+    DEMO_ACCOUNT_EMAILS.include?(User.find(user_id).email)
+  end
+
   def is_demo_user?
     DEMO_ACCOUNT_EMAILS.include?(self.email)
   end

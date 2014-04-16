@@ -4,6 +4,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    render "demo_edit" if current_user.is_demo_user?
   end
 
   def update
