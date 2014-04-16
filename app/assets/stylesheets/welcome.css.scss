@@ -1,3 +1,20 @@
-// Place all the styles related to the Welcome controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+#demo-user-btn {
+  background-color: #5D35CC;
+  border-color: #5A4499;
+}
+
+#demo-user-btn:hover {
+  background-color: #452897;
+  border-color: #301185;
+}
+
+
+#demo-lawyer-btn {
+  background-color: #428bca;
+  border-color: #357ebd;
+}
+
+#demo-lawyer-btn:hover {
+  background-color: #3276b1;
+  border-color: #285e8e;
+}
