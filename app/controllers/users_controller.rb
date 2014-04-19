@@ -2,16 +2,9 @@ class UsersController < ApplicationController
   include UserControllerHelper
   before_action :authenticate_user!, except: [:welcome, :demo]
 
-  def welcome
-    if current_user
-      redirect_to "/users/#{current_user.id}"
-    else
-      redirect_to "/users/sign_in"
-    end
-  end
-
   def edit
     @user = User.find(params[:id])
+    render "demo_edit" if current_user.is_demo_user?
   end
 
   def update
@@ -73,10 +66,6 @@ class UsersController < ApplicationController
   end
 
   private
-    def set_user
-      
-    end
-
     def user_params
       params.require(:user).permit(:first_name, :last_name, :address, :email, :zip_code, :permissions, :twine_name)
     end

@@ -1,12 +1,12 @@
 $(document).ready(function(){
-  $("#demo-lawyer").on("click", function(e){
-    $("#user_email").val("demo-lawyer@heatseeknyc.com");
-    $("#user_password").val("33west26");
-    $("input[value='Sign in']").click();
+  $("#demo-user-btn").on("click", function(e){
+    $(".hidden-email-field").val("demo-user@heatseeknyc.com");
+    $(".hidden-password-field").val("33west26");
+    $("form").submit();
   });
-  $("#demo-user").on("click", function(e){
-    $("#user_email").val("demo-user@heatseeknyc.com");
-    $("#user_password").val("33west26");
-    $("input[value='Sign in']").click();
+  $("#demo-lawyer-btn").on("click", function(e){
+    $(".hidden-email-field").val("demo-lawyer@heatseeknyc.com");
+    $(".hidden-password-field").val("33west26");
+    $("form").submit();
   });
 });

@@ -1,0 +1,7 @@
+<%= form_for(:user, :url => session_path(:user), id: "hidden-sign-in-field") do |f|  %>
+    <%= f.email_field :email, type: "hidden", :class => "hidden-email-field"  %></dl>
+    <%= f.password_field :password, type: "hidden", :class => "hidden-password-field"  %></dl>
+
+  <button type="button" class="btn btn-primary btn-lg btn-block" id="demo-user-btn">Click Me To Be A Demo User!</a>
+  <button type="button" class="btn btn-primary btn-lg btn-block" id="demo-lawyer-btn">Click Me To Be A Demo Lawyer!</a>
+<% end %>

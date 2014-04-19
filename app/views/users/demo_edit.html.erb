@@ -1,0 +1,33 @@
+<div class="col-md-4" id="form-id">
+  <h2>Edit User</h2>
+    
+    <dl><label for="user_first_name">First name</label>:
+    <input autofocus="autofocus" class="form-control" id="user_first_name" type="text" value="<%= current_user.first_name %>"></dl>
+
+    <dl><label for="user_last_name">Last name</label>:
+    <input class="form-control" id="user_last_name" type="text" value="<%= current_user.last_name %>"></dl>
+
+    <dl><label for="user_address">Address</label>:
+    <input class="form-control" id="user_address" type="text" value="<%= current_user.address %>"></dl>
+
+    <dl><label for="user_zip_code">Zip code</label>:
+    <input class="form-control" id="user_zip_code" type="text" value="<%= current_user.zip_code %>"></dl>
+
+    <dl><label for="user_email">Email</label>:
+    <input class="form-control" id="user_email" type="email" value="<%= current_user.email %>"></dl>
+
+    <dl><label for="user_password">Password</label>: <i>(leave blank if you don't want to change it)</i>
+    <input autocomplete="off" class="form-control" id="user_password" type="password"></dl>
+
+    <dl><label for="user_password_confirmation">Password confirmation</label>:
+    <input class="form-control" id="user_password_confirmation" type="password"></dl>
+
+    <dl><label for="user_current_password">Current password</label>: <i>(we need your current password to confirm your changes)</i>
+    <input class="form-control" id="user_current_password" type="password"></dl>
+
+    <div><input class="btn btn-primary" name="commit" type="button" value="Update"></div>
+
+  <h3>Cancel my account</h3>
+
+  <p>Unhappy? </p><input name="_method" type="hidden" value="delete"><input class="btn btn-danger" data-confirm="Are you sure?" type="button" value="Cancel my account"><p></p>
+</div>
