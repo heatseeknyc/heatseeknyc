@@ -1,4 +1,5 @@
-[![Code Climate](https://codeclimate.com/github/wfjeff/twinenyc.png)](https://codeclimate.com/github/wfjeff/twinenyc)[![Build Status](https://travis-ci.org/wfjeff/twinenyc.svg)](https://travis-ci.org/wfjeff/twinenyc)
+[![Code Climate](https://codeclimate.com/github/wfjeff/twinenyc.png)](https://codeclimate.com/github/wfjeff/twinenyc)
+[![Build Status](https://travis-ci.org/wfjeff/twinenyc.svg)](https://travis-ci.org/wfjeff/twinenyc)
 == README
 
 This README would normally document whatever steps are necessary to get the
