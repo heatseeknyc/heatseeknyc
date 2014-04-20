@@ -63,6 +63,7 @@ class User < ActiveRecord::Base
 
   def has_collaboration?(collaboration_id)
     collaboration = find_collaboration(collaboration_id)
+    !find_collaboration(collaboration_id).empty?
     # !collaboration.empty? && collaboration.confirmed
   end
 
@@ -72,6 +73,10 @@ class User < ActiveRecord::Base
 
   def admin?
     self.permissions <= 25
+  end
+
+  def lawyer?
+    self.permissions <= 50
   end
 
   def create_search_names
