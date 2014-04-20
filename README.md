@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/wfjeff/twinenyc.svg)](https://travis-ci.org/wfjeff/twinenyc)
 [![Code Climate](https://codeclimate.com/github/wfjeff/twinenyc.png)](https://codeclimate.com/github/wfjeff/twinenyc)
 [![Gemnasium](https://gemnasium.com/wfjeff/twinenyc.png)](https://gemnasium.com/wfjeff/twinenyc)
+[![Coverage Status](https://coveralls.io/repos/wfjeff/twinenyc/badge.png)](https://coveralls.io/r/wfjeff/twinenyc)
 
 #Heat Seek NYC
 
