@@ -16,6 +16,7 @@ gem 'tzinfo'
 gem 'bootstrap-sass'
 
 group :test, :development do
+  gem 'travis'
   gem 'selenium-webdriver'
   gem 'capybara'
   gem 'rspec-rails'
