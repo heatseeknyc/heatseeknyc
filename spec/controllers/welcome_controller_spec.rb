@@ -3,9 +3,9 @@ require 'spec_helper'
 describe WelcomeController do
 
   describe "GET 'index'" do
-    it "returns http success" do
+    it "returns the splash page" do
       get 'index'
-      response.should be_success
+      response.should include("NYC")
     end
   end
 
