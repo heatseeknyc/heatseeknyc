@@ -15,6 +15,7 @@ gem 'pg'
 gem 'devise'
 gem 'tzinfo'
 gem 'bootstrap-sass'
+gem 'zip'
 
 group :test, :development do
   gem 'travis'
