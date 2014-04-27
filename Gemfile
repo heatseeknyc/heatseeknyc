@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'coveralls', require: false
 gem 'wunderground'
-gem 'airbrake'
+gem 'airbrake', git: "git@github.com:TSiege/airbrake.git"
 gem 'prawn'
 gem 'figaro'
 gem 'rvm-capistrano'
@@ -15,7 +15,7 @@ gem 'pg'
 gem 'devise'
 gem 'tzinfo'
 gem 'bootstrap-sass'
-gem 'zip'
+# gem 'zip'
 
 group :test, :development do
   gem 'travis'
