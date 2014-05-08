@@ -16,12 +16,13 @@ describe "viewing your own page" do
   it "shows you a table with accurate summary data" do
     james = create(:user, first_name: "James")
     login_as(james, scope: :user)
-    create(:reading, :day_time, user: james, temp: 56)
+    create(:reading, :day_time, user: james, temp: 55)
     create(:reading, :day_time, user: james, temp: 57)
     create(:reading, :night_time, user: james, temp: 51)
     create(:reading, :night_time, user: james, temp: 53)
     visit user_path(james)
-    expect(page).to have_content "56"
+    sleep(2)
+    expect(page).to have_content "55"
     expect(page).to have_content "57"
     expect(page).to have_content "51"
     expect(page).to have_content "53"
