@@ -16,6 +16,7 @@ describe "viewing your own page" do
   it "shows you a table with accurate summary data" do
     james = create(:user, first_name: "James")
     login_as(james, scope: :user)
+    Reading.delete_all
     create(:reading, :day_time, user: james, temp: 55)
     create(:reading, :day_time, user: james, temp: 57)
     create(:reading, :night_time, user: james, temp: 51)
