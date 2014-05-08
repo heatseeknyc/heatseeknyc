@@ -17,14 +17,14 @@ describe "viewing your own page" do
     james = create(:user, first_name: "James")
     login_as(james, scope: :user)
     Reading.all.each do |reading|
-      puts "#{reading} before create"
+      puts "#{reading.temp} before create"
     end
     create(:reading, :day_time, user: james, temp: 55)
     create(:reading, :day_time, user: james, temp: 57)
     create(:reading, :night_time, user: james, temp: 51)
     create(:reading, :night_time, user: james, temp: 53)
     Reading.all.each do |reading|
-      puts "#{reading} after create"
+      puts "#{reading.temp} after create"
     end
     visit user_path(james)
     sleep(2)
