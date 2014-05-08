@@ -2,10 +2,24 @@ module Measurable
   module ClassMethods
 
     def define_measureable_methods(metrics, cycles, measurements)
+      metric_cycle_measures(metrics, cycles, measurements)  
       reading_nested_arrays(measurements)
       measurement_nested_arrays(measurements)
       measurement_hashes(measurements)
       measurement_methods(measurements)
+    end
+    
+    def metric_cycle_measures(metrics, cycles, measurements)
+      metrics.each do |metric|
+        cycles.each do |cycle|
+          measurements.each do |measurement|
+            define_method("#{metric}_#{cycle}_#{measurement}") do 
+              array = self.send("get_cycle_#{measurement}s", cycle)
+              self.send(metric, array)
+            end
+          end
+        end
+      end
     end
 
     def reading_nested_arrays(measurements)
