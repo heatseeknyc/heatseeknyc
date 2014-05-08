@@ -53,8 +53,8 @@ class Twine < ActiveRecord::Base
   end
 
   def make_and_return_reading_from_temp(temp)
-      reading = Reading.new_from_twine(temp, self.current_outdoor_temp, self, self.user)
-      reading.save
-      return reading
+    reading = Reading.new_from_twine(temp, self.current_outdoor_temp, self, self.user)
+    reading.save
+    return reading
   end
 end
