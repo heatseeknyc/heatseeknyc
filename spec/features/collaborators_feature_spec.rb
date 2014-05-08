@@ -28,6 +28,7 @@ describe "viewing your own page" do
     end
     visit user_path(james)
     sleep(2)
+    puts page
     expect(page).to have_content "55"
     expect(page).to have_content "57"
     expect(page).to have_content "51"
