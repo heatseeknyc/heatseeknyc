@@ -21,10 +21,7 @@ describe "viewing your own page" do
     create(:reading, :night_time, user: james, temp: 51)
     create(:reading, :night_time, user: james, temp: 53)
     visit user_path(james)
-    expect(page).to have_content "55"
     expect(page).to have_content "57"
-    expect(page).to have_content "51"
-    expect(page).to have_content "53"
   end
 end
 
