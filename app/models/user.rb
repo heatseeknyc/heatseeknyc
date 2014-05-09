@@ -104,4 +104,15 @@ class User < ActiveRecord::Base
   def destroy_all_collaborations
     Collaboration.where("user_id = ? OR collaborator_id = ?", self.id, self.id).destroy_all
   end
+
+  # def method_missing(name, *args)
+  #   name_keywords = name.to_s.match(/(min|max|avg)_(day|night)_(temp|outdoor_temp)/)
+  #   if name_keywords
+  #     array = self.send("get_cycle_#{name_keywords[3]}s", name_keywords[2].to_sym)
+  #     self.send(name_keywords[1].to_sym, array)
+  #   else
+  #     super
+  #   end
+  # end
+
 end
