@@ -1,3 +1,4 @@
+[![CodeShip](https://www.codeship.io/projects/13e8e870-b9be-0131-0742-5af5088413f2/status)](https://www.codeship.io/projects/13e8e870-b9be-0131-0742-5af5088413f2/status)
 [![Code Climate](https://codeclimate.com/github/wfjeff/twinenyc.png)](https://codeclimate.com/github/wfjeff/twinenyc)
 [![Coverage Status](https://coveralls.io/repos/wfjeff/twinenyc/badge.png)](https://coveralls.io/r/wfjeff/twinenyc)
 
