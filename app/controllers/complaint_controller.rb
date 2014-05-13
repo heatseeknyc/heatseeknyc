@@ -1,0 +1,2 @@
+class ComplaintController < ApplicationController
+end
