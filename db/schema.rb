@@ -27,8 +27,8 @@ ActiveRecord::Schema.define(version: 20140402222319) do
   end
 
   create_table "complaints", force: true do |t|
-    t.string  "created_date"
-    t.string  "closed_date"
+    t.date    "created_date"
+    t.date    "closed_date"
     t.string  "agency"
     t.string  "agency_name"
     t.string  "complaint_type"
