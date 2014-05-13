@@ -16,6 +16,7 @@ gem 'devise'
 gem 'tzinfo'
 gem 'bootstrap-sass'
 gem 'zip'
+gem 'leaflet-rails'
 
 group :test, :development do
   gem 'travis'
