@@ -13,11 +13,40 @@
 
 ActiveRecord::Schema.define(version: 20140402222319) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "collaborations", force: true do |t|
     t.integer  "user_id"
     t.integer  "collaborator_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "collaborators_tables", force: true do |t|
+  end
+
+  create_table "complaints", force: true do |t|
+    t.string  "created_date"
+    t.string  "closed_date"
+    t.string  "agency"
+    t.string  "agency_name"
+    t.string  "complaint_type"
+    t.string  "descriptor"
+    t.string  "location_type"
+    t.integer "incident_zip"
+    t.string  "incident_address"
+    t.string  "street_name"
+    t.string  "community_board"
+    t.string  "borough"
+    t.float   "latitude"
+    t.float   "longitude"
+  end
+
+  create_table "products", id: false, force: true do |t|
+    t.string  "name",        limit: 100
+    t.text    "description"
+    t.integer "stock_count"
   end
 
   create_table "readings", force: true do |t|
@@ -57,6 +86,6 @@ ActiveRecord::Schema.define(version: 20140402222319) do
     t.string   "zip_code"
   end
 
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

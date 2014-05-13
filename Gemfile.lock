@@ -138,6 +138,7 @@ GEM
     json (1.8.1)
     launchy (2.4.2)
       addressable (~> 2.3)
+    leaflet-rails (0.7.2)
     libwebsocket (0.1.8)
       addressable
       websocket
@@ -338,6 +339,7 @@ DEPENDENCIES
   jquery-rails
   json
   launchy
+  leaflet-rails
   nokogiri
   pg
   poltergeist
