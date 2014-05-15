@@ -1,1 +1,10 @@
-<div id="map"></div>
+<div id="map">
+  <%= map(:center => {
+      :latlng => [40.788, -73.942],
+      :zoom => 12
+  }) %>
+</div>
+
+<script type="text/javascript">
+  var complaints = <%= @complaints %>;
+</script>

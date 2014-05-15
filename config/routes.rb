@@ -9,6 +9,7 @@ Twinenyc::Application.routes.draw do
   get 'users/:id/download' => 'users#download_pdf', as: :pdf_download
   get 'users/:user_id/collaborations/:id/download' => 'users#download_pdf'
 
+  get "complaints/" => "complaint#index", as: :complaints
   root 'welcome#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
