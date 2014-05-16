@@ -1,7 +1,11 @@
 $(document).ready(function(){
   // complaints is a variable made available to the complaints/index.html.erb
-  addComplaintsToMap(complaints);
-}
+  try {
+    addComplaintsToMap(complaints);
+  }catch(err){
+    // does nothing if there is no complaints
+  }
+});
 
 // converts complaint lat/long to latlng objects in an array
 function createLatLngs(complaintsCoordinates){
@@ -12,12 +16,12 @@ function createLatLngs(complaintsCoordinates){
     );
   });
   return convertedLatLngArray;
-};
+}
 
 // adds complaints to map
 function addComplaintsToMap(complaintsCoordinates){
   var convertedComplaints = createLatLngs(complaintsCoordinates);
   L.heatLayer(
-    convertedComplaints, {radius: 10, gradient: {0.4: 'blue', 0.65: 'lime', 1: 'red'}}
+    convertedComplaints, {radius: 8, gradient: {0.25: 'blue', 0.55: 'lime', 0.75: 'yellow', 1: 'red'}}
   ).addTo(map);
-};
+}

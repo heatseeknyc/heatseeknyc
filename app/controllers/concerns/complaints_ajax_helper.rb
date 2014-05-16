@@ -1,0 +1,3 @@
+class Concerns::ComplaintsAjaxHelper
+  
+end
