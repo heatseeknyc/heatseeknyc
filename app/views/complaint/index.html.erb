@@ -4,8 +4,24 @@
       :zoom => 12
   }) %>
 </div>
+<br>
+<div id="heat-map-query-box">
+  <%= form_tag complaints_query_path, method: :get, remote: true do %> 
+    <dl>
+      <%= label_tag :borough, "Borough" %>
+      <%= text_field_tag :borough, "", :class => "form-control", autofocus: true %>
+
+      <%= label_tag :zip_code, "Zip Code" %>
+      <%= text_field_tag :zip_codep, "", :class => "form-control", autofocus: true %>
+
+      <%= label_tag :date, "Date" %>
+      <%= date_field_tag :date, "", :class => "form-control", autofocus: true %>
+      <br>
+      <%= submit_tag "Search", :class => "btn btn-lg btn-primary", id: "heat-map-search-button" %>
+    </dl>
+  <% end %>
+</div>
 
 <script type="text/javascript">
   var complaints = <%= @complaints %>;
-  debugger;
 </script>

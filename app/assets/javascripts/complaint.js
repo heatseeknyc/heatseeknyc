@@ -22,6 +22,12 @@ function createLatLngs(complaintsCoordinates){
 function addComplaintsToMap(complaintsCoordinates){
   var convertedComplaints = createLatLngs(complaintsCoordinates);
   L.heatLayer(
-    convertedComplaints, {radius: 8, gradient: {0.25: 'blue', 0.55: 'lime', 0.75: 'yellow', 1: 'red'}}
+    convertedComplaints, 
+    {
+      radius: 8, 
+      gradient: {0.25: 'blue', 0.55: 'lime', 0.75: 'yellow', 0.95: 'red'},
+      blur: 14
+      // for more heatmap options see https://github.com/Leaflet/Leaflet.heat
+    }
   ).addTo(map);
 }
