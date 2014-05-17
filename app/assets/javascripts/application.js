@@ -14,4 +14,5 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require leaflet
+//= require select2
 //= require_tree .
