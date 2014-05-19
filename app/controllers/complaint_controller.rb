@@ -1,10 +1,9 @@
 class ComplaintController < ApplicationController
   def index
-    @complaints = Complaint.where("id < 200001 AND latitude IS NOT NULL").pluck(:latitude, :longitude)
+    @complaints = Complaint.where("id < 1 AND latitude IS NOT NULL").pluck(:latitude, :longitude)
   end
 
   def query
-    binding.pry
-    @complaints = Concerns::ComplaintAjaxHelper.custom_query(params)  
+    @complaints = Concerns::ComplaintAjaxHelper.custom_query_from(params)  
   end
 end

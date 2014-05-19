@@ -17,4 +17,14 @@ class Complaint < ActiveRecord::Base
   def self.coordinates_by_date_range(beggining_winter, ending_winter = beggining_winter)
     where(["created_date >= ? AND closed_date <= ?", beggining_winter[0], ending_winter[1]]).pluck(:latitude, :longitude)
   end
+
+  def self.add_density_to_geojson
+    json_hash = JSON.parse(File.open("app/assets/javascripts/nyc-zip-code-tabulation-areas-polygons.geojson").read)
+    hash_with_density = json_hash["features"].each do |feature|
+      total = Complaint.where(zip_code: feature["properties"]["postalCode"]).count
+      feature["properties"]["density"] = total
+    end
+    new_hash = {"type" => "FeatureCollection", "features" => hash_with_density}
+  end
+
 end
