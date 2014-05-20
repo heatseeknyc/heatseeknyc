@@ -1,0 +1,2 @@
+module ComplaintHelper
+end
