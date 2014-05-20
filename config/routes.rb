@@ -8,11 +8,11 @@ Twinenyc::Application.routes.draw do
   resources :twines, only: [:show, :new, :create]
   get 'users/:id/download' => 'users#download_pdf', as: :pdf_download
   get 'users/:user_id/collaborations/:id/download' => 'users#download_pdf'
-  get 'coldmap' => 'welcome#coldmap'
+  # get 'coldmap' => 'welcome#coldmap'
   get 'supplemental' => 'welcome#supplemental'
 
   get "complaints/query" => "complaint#query"
-  get "complaints/" => "complaint#index", as: :complaints
+  get "coldmap/" => "complaint#index"
   root 'welcome#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
