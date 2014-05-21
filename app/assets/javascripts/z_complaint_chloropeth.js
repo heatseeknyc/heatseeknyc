@@ -111,4 +111,11 @@ $(document).ready(function(){
 
   legend.addTo(map);
 
+  map.attributionControl._container.innerHTML = 
+    "<a href='http://leafletjs.com' title='A JS library for interactive maps'>Leaflet</a> | " + 
+    "Map Data © <a href='http://www.openstreetmap.org/about'>OpenStreetMap</a> " +
+    "contributors, <a href='http://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA</a>, " + 
+    "Tile Set © <a href='https://www.mapbox.com/about/'>Mapbox</a>, " + 
+    "Complaint Data © <a href='https://nycopendata.socrata.com/'>NYC Open Data</a>";
+
 });

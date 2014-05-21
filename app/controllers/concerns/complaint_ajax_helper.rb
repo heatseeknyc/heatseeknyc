@@ -24,13 +24,3 @@ class Concerns::ComplaintAjaxHelper
   end
 
 end
-
-params = {
-  "utf8"=>"✓",
-  "borough"=>"Bronx,Brooklyn",
-  "zip_code"=>"10314,11418,11105,11355",
-  "date"=>"2014-05-20",
-  "commit"=>"Search",
-  "controller"=>"complaint",
-  "action"=>"query"
-}
