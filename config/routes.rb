@@ -13,6 +13,8 @@ Twinenyc::Application.routes.draw do
 
   get "complaints/query" => "complaint#query"
   get "coldmap/" => "complaint#index"
+  get "sponsors" => "welcome#sponsors"
+  get "team" => "welcome#team"
   root 'welcome#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
