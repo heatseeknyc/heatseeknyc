@@ -1,8 +1,8 @@
 class Reading < ActiveRecord::Base
   belongs_to :twine
+  belongs_to :sensor
   belongs_to :user
 
-  validates :twine_id, presence: true
   validates :user_id, presence: true
   validates :temp, presence: true
   validates :outdoor_temp, presence: true
