@@ -102,6 +102,8 @@ GEM
     figaro (0.7.0)
       bundler (~> 1.0)
       rails (>= 3, < 5)
+    font-awesome-rails (4.0.3.2)
+      railties (>= 3.2, < 5.0)
     formatador (0.2.4)
     gh (0.13.2)
       addressable
@@ -335,6 +337,7 @@ DEPENDENCIES
   factory_girl_rails
   ffi (= 1.9.0)
   figaro
+  font-awesome-rails
   guard-rspec
   guard-spork
   jbuilder (~> 1.2)
