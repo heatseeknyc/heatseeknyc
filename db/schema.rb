@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140702181725) do
+ActiveRecord::Schema.define(version: 20140702194735) do
 
   create_table "collaborations", force: true do |t|
     t.integer  "user_id"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20140702181725) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "outdoor_temp"
+    t.integer  "sensor_id"
   end
 
   create_table "sensors", force: true do |t|

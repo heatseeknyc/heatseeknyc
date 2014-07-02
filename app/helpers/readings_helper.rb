@@ -1,0 +1,2 @@
+module ReadingsHelper
+end
