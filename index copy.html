@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link href="bootstrap-3.2.0-dist/css/bootstrap.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <!-- Custom styles for this template -->
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic|Oswald:700' rel='stylesheet' type='text/css'>
+    <link href="css/styles.css" rel="stylesheet">
+    
+  </head>
+  <body>
+  
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+             <a class="brand" href="#">Heat Seek</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right darktheme">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">About <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="about">About Heat Seek</a></li>
+                <li><a href="team">Our Team</a></li>
+                <li><a href="news">News</a></li>
+                <li><a href="news">View Demo</a></li>
+              </ul>
+            </li>
+            <li><a href="#coldmap">Cold Map</a></li>
+            <li class="signin"><a href="#signin">Sign in &rsaquo;</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+    
+	<div id="overlay"></div>    
+	<div id="video-container">
+		<!--
+		<video preload id="ditto-video" width="640" height="360">
+			<source src="media/video.webm" type="video/webm" />
+			<source id="mobile-mp4" src="media/video-full.mp4" type="video/mp4" />	</video>
+		-->
+	</div>
+	<!--<div id="debug" style="position:absolute;z-index:999999;top:0;left:0;"></div>-->
+	<div id="video-controls">
+		<span class="glyphicon glyphicon-remove" id="close-video"></span>
+	</div>
+
+	<div id="homesplash">
+		<div id="center-control">
+			<div class="" id="center-content">
+				<div class="logo"></div>
+				<h3>Keeping the heat on this winter.</h3>
+				<a href="javascript:void(0);" id="play-button"><span></span></a>
+			</div>
+		</div>
+	</div>
+	
+    <div id="features" class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+      	<div class="col-sm-4 feature featureOne"><a href="about">How It Works</a></div>
+        <div class="col-sm-4 feature featureTwo"><a href="coldmap">See The Cold Map</a></div>
+        <div class="col-sm-4 feature featureThree"><a href="demo">View Our Demo</a></div>
+      </div>
+    </div> 
+
+	<div id="linkGroups" class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+      	<div class="col-sm-4 linkGroup pressLinks">
+      		<h3>Press</h3>
+			<div class="row">
+				<div class="col-xs-4"><a href="press">Press link 1</a></div>
+				<div class="col-xs-4"><a href="press">Press link 2</a></div>
+				<div class="col-xs-4"><a href="press">Press link 3</a></div>
+			</div>
+			<div class="row">
+				<div class="col-xs-4"><a href="press">Press link 1</a></div>
+				<div class="col-xs-4"><a href="press">Press link 2</a></div>
+			</div>
+      	</div>
+        <div class="col-sm-4 linkGroup sponsorLinks">
+        	<h3>Sponsors</h3>
+        </div>
+        <div class="col-sm-4 linkGroup socialLinks">
+        	<h3>Follow Us</h3>
+        </div>
+      </div>
+    </div> 
+
+    <footer>&copy; Heat Seek NYC</footer>
+      
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!--<script type="text/javascript" src="js/jquery.scrolly.js"></script>-->
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    
+    <script type="text/javascript" src="js/video.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+    <script src="bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+  </body>
+</html>

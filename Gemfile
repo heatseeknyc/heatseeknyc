@@ -14,7 +14,7 @@ gem 'ffi', "= 1.9.0"
 gem 'pg'
 gem 'devise'
 gem 'tzinfo'
-gem 'bootstrap-sass'
+# gem 'bootstrap-sass'
 gem 'zip'
 gem 'leaflet-rails'
 gem "select2-rails"
