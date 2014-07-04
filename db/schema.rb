@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140513140122) do
+ActiveRecord::Schema.define(version: 20140702194735) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,9 +21,6 @@ ActiveRecord::Schema.define(version: 20140513140122) do
     t.integer  "collaborator_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "collaborators_tables", force: true do |t|
   end
 
   create_table "complaints", force: true do |t|
@@ -43,12 +40,6 @@ ActiveRecord::Schema.define(version: 20140513140122) do
     t.float   "longitude"
   end
 
-  create_table "products", id: false, force: true do |t|
-    t.string  "name",        limit: 100
-    t.text    "description"
-    t.integer "stock_count"
-  end
-
   create_table "readings", force: true do |t|
     t.integer  "temp"
     t.integer  "twine_id"
@@ -56,6 +47,14 @@ ActiveRecord::Schema.define(version: 20140513140122) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "outdoor_temp"
+    t.integer  "sensor_id"
+  end
+
+  create_table "sensors", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "twines", force: true do |t|
