@@ -15,6 +15,7 @@ Twinenyc::Application.routes.draw do
   get "coldmap/" => "complaint#index"
   get "sponsors" => "welcome#sponsors"
   get "team" => "welcome#team"
+  get "about" => "welcome#about"
   get "zohoverify/verifyforzoho.html" => "application#zoho"
   root 'welcome#index'
 

@@ -1,11 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <%= favicon_link_tag "favicon.ico" %>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    
+    <!-- Do we need these two script tags? -->
     <script src="//www.google.com/jsapi"></script>
     <script src="chartkick.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- _________________________________ -->
+    
+    <!-- New fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic|Oswald:700' rel='stylesheet' type='text/css'>
+    
     <title><%= content_for?(:title) ? yield(:title) : "Heat Seek NYC" %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Twinenyc" %>">
     <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
@@ -17,8 +27,8 @@
       <%= render 'layouts/navigation' %>
     </header>
     <main role="main">
-       <%= render 'layouts/messages' %>
-       <%= yield %>
+      <%= render 'layouts/messages' %>
+      <%= yield %>
     </main>
   </body>
 </html>
