@@ -1,9 +1,22 @@
-<br>
-<div class="col-xs-12 col-sm-8  col-md-6  col-lg-6 container">
-  <%#= video_tag 'helpers.mp4', :size => "320x240", :controls => true %>
-  <%= render "about_us" %>
+<div id="overlay"></div>    
+<div id="video-container">
+  <!--
+  <video preload id="ditto-video" width="640" height="360">
+    <source src="media/video.webm" type="video/webm" />
+    <source id="mobile-mp4" src="media/video-full.mp4" type="video/mp4" />  </video>
+  -->
+</div>
+<!--<div id="debug" style="position:absolute;z-index:999999;top:0;left:0;"></div>-->
+<div id="video-controls">
+  <span class="glyphicon glyphicon-remove" id="close-video"></span>
+</div>
 
-  <div class="col-xs-13 col-sm-8  col-md-8  col-lg-8 container">
-    <%= render "demo_logins" %>
+<div id="homesplash">
+  <div id="center-control">
+    <div class="" id="center-content">
+      <div class="logo"></div>
+      <h3>Keeping the heat on this winter.</h3>
+      <a href="javascript:void(0);" id="play-button"><span></span></a>
+    </div>
   </div>
 </div>

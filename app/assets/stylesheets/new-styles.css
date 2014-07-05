@@ -40,7 +40,7 @@ color:#ff9a33;
 
 .navbar .brand {
 	position: absolute;
-	background: url("../images/heat_seek-logo-@2x.png") no-repeat top left;
+	background: url("heat_seek-logo-@2x.png") no-repeat top left;
 	left:15px;
 	width: 128px;
 	height: 43px;
@@ -194,12 +194,8 @@ color:#ff9a33;
 }
 
 
-
-
-
-
 #homesplash {
-	background: #efefee url('../images/nyc_snow-edited_crop.jpg') no-repeat top center;
+	background: #efefee url('nyc_snow-edited_crop.jpg') no-repeat top center;
 	background-attachment: fixed;
 	background-size: cover;
 	-webkit-background-size: cover;
@@ -214,7 +210,7 @@ color:#ff9a33;
 
 
 #homesplash .logo {
-	background: url("../images/heat_seek_logo_splash-@2x.png") no-repeat;
+	background: url("heat_seek_logo_splash-@2x.png") no-repeat;
 	width: 150px;
 	height: 160px;
 	background-size: 100%;
@@ -231,6 +227,30 @@ color:#ff9a33;
 	transition: opacity 0.1s ease-out;  /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
 }
 
+/*----Edit by Ethan Ozelius -----*/
+
+.about-bullets{
+	font-size: 22px;
+	font: #000;
+}
+
+/*--- End of Edit by Ethan Ozelius--------*/
+
+/*for about page */
+#about-center-control {
+	display: block;
+	text-align: center;
+	padding: 30px 0 0;
+	margin: auto;
+	height: auto;
+	overflow: hidden;
+}
+
+.jumbotron {
+	opacity: 0.8
+}
+
+/* end of about section styles */
 
 /* VIDEO */
 
@@ -279,12 +299,21 @@ color:#ff9a33;
 	overflow: hidden;
 }
 
+#center-control-extend{
+	display: block;
+	text-align: center;
+	padding: 0;
+	margin: auto;
+	height: 675px;
+	overflow: hidden;
+}
+
 #center-content #play-button {
 	margin-top: 20px;
 	display: inline-block;
 	width: 77px;
 	height: 77px;
-	background: url("../images/play-button-@2x.png") no-repeat;
+	background: url("play-button-@2x.png") no-repeat;
 	background-size: 77px 77px;
 	-webkit-transition: background .2s ease-in-out;
 	-moz-transition: background .2s ease-in-out;
@@ -293,11 +322,9 @@ color:#ff9a33;
 	transition: background .2s ease-in-out;
 }
 #center-content #play-button:hover {
-	background: url("../images/play-button-hover-@2x.png") no-repeat;
+	background: url("play-button-hover-@2x.png") no-repeat;
 	background-size: 77px 77px;
 }
-
-
 
 #features {	
 width:100%;
@@ -439,4 +466,23 @@ footer {
 	color:#ffffff;
 	padding-left:15px;
 	padding-top:15px;
+}
+
+div.featureThree a:hover {
+	color: #252729 !important;
+	cursor: default;
+}
+
+.betabeat {
+	background: url(betabeat_logo_normal_100px.png) no-repeat;
+	height: 50px;
+	width: 50px;
+}
+.betabeat:hover {
+	background: url(betabeat_logo_hover_100px.png) no-repeat;
+}
+
+a#coming-soon:hover {
+	color: #9D9E9F;
+
 }
