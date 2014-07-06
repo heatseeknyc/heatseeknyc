@@ -1,0 +1,66 @@
+.logo-buttons {
+  height: 100px;
+  width: 100px;
+  background-size: 100% !important;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  -webkit-transition: opacity 0.1s ease-out;  /* Chrome 1-25, Safari 3.2+ */
+  -moz-transition: opacity 0.1s ease-out;  /* Firefox 4-15 */
+  -o-transition: opacity 0.1s ease-out;  /* Opera 10.50â€“12.00 */
+  transition: opacity 0.1s ease-out;  /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
+}
+
+.medium {
+  background: image-url("medium_logo_normal_100px.png") no-repeat;
+}
+.medium:hover {
+  background: image-url("medium_logo_hover_100px.png") no-repeat;
+}
+
+.betabeat {
+  background: image-url("betabeat_logo_normal_100px.png") no-repeat;
+}
+.betabeat:hover {
+  background: image-url("betabeat_logo_hover_100px.png") no-repeat;
+}
+
+.nytm {
+  background: image-url("nytm_logo_normal_100px.png") no-repeat;
+}
+.nytm:hover {
+  background: image-url("nytm_logo_hover_100px.png") no-repeat;
+}
+
+.flatiron {
+  background: image-url("flatiron_logo_normal_100px.png") no-repeat;
+}
+.flatiron:hover {
+  background: image-url("flatiron_logo_hover_100px.png") no-repeat;
+}
+
+.pdm {
+  background: image-url("pdm_logo_normal_100px.png") no-repeat;
+  width: 190px;
+}
+.pdm:hover {
+  background: image-url("pdm_logo_hover_100px.png") no-repeat;
+}
+
+.twitter {
+  background: image-url("twitter_logo_normal_100px.png") no-repeat;
+}
+.twitter:hover {
+  background: image-url("twitter_logo_hover_100px.png") no-repeat;
+}
+
+.facebook {
+  background: image-url("fb_logo_normal_100px.png") no-repeat;
+}
+.facebook:hover {
+  background: image-url("fb_logo_hover_100px.png") no-repeat;
+}
+
+.linkGroup.sponsorLinks {
+  display: inherit !important;
+}
