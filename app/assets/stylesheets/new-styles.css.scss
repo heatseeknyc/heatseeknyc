@@ -40,7 +40,7 @@ color:#ff9a33;
 
 .navbar .brand {
 	position: absolute;
-	background: url("heat_seek-logo-@2x.png") no-repeat top left;
+	background: image-url("heat_seek-logo-@2x.png") no-repeat top left;
 	left:15px;
 	width: 128px;
 	height: 43px;
@@ -474,12 +474,12 @@ div.featureThree a:hover {
 }
 
 .betabeat {
-	background: url(betabeat_logo_normal_100px.png) no-repeat;
+	background: image-url('betabeat_logo_normal_100px.png') no-repeat;
 	height: 50px;
 	width: 50px;
 }
 .betabeat:hover {
-	background: url(betabeat_logo_hover_100px.png) no-repeat;
+	background: image-url('betabeat_logo_hover_100px.png') no-repeat;
 }
 
 a#coming-soon:hover {
