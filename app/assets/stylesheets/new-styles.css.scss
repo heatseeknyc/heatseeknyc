@@ -474,12 +474,12 @@ div.featureThree a:hover {
 }
 
 .betabeat {
-	background: image-url(betabeat_logo_normal_100px.png) no-repeat;
+	background: image-url("betabeat_logo_normal_100px.png") no-repeat;
 	height: 50px;
 	width: 50px;
 }
 .betabeat:hover {
-	background: image-url(betabeat_logo_hover_100px.png) no-repeat;
+	background: image-url("betabeat_logo_hover_100px.png") no-repeat;
 }
 
 a#coming-soon:hover {
