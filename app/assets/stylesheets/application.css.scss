@@ -13,7 +13,6 @@
  *= require select2
  *= require bootstrap
  *= require_self
- *= require new-styles
- *= require heat_map
+ *= require_tree .
 
  */
