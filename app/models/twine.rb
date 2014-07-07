@@ -46,7 +46,7 @@ class Twine < ActiveRecord::Base
   end
 
   def current_outdoor_temp
-    WeatherMan.current_outdoor_temp
+    WeatherMan.current_outdoor_temp(user.zip_code)
   end
 
   def make_and_return_reading_from_temp(temp)
