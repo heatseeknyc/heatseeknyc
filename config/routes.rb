@@ -6,6 +6,9 @@ Twinenyc::Application.routes.draw do
     resources :collaborations
   end
   resources :twines, only: [:show, :new, :create]
+
+  post 'readings' => 'readings#create'
+
   get 'users/:id/download' => 'users#download_pdf', as: :pdf_download
   get 'users/:user_id/collaborations/:id/download' => 'users#download_pdf'
   # get 'coldmap' => 'welcome#coldmap'
@@ -16,7 +19,6 @@ Twinenyc::Application.routes.draw do
   get "sponsors" => "welcome#sponsors"
   get "team" => "welcome#team"
   get "about" => "welcome#about"
-  get "zohoverify/verifyforzoho.html" => "application#zoho"
   root 'welcome#index'
 
   # The priority is based upon order of creation: first created -> highest priority.

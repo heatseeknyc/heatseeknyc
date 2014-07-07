@@ -13,9 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20140702194735) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "collaborations", force: true do |t|
     t.integer  "user_id"
     t.integer  "collaborator_id"
@@ -36,8 +33,8 @@ ActiveRecord::Schema.define(version: 20140702194735) do
     t.string  "street_name"
     t.string  "community_board"
     t.string  "borough"
-    t.float   "latitude"
-    t.float   "longitude"
+    t.decimal "latitude",         precision: 15, scale: 0
+    t.decimal "longitude",        precision: 15, scale: 0
   end
 
   create_table "readings", force: true do |t|
@@ -63,6 +60,12 @@ ActiveRecord::Schema.define(version: 20140702194735) do
     t.string  "email"
   end
 
+  create_table "user_collaborators", force: true do |t|
+    t.integer "user_id"
+    t.integer "collaborator_id"
+    t.integer "permissions"
+  end
+
   create_table "users", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -85,6 +88,6 @@ ActiveRecord::Schema.define(version: 20140702194735) do
     t.string   "zip_code"
   end
 
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
 end
