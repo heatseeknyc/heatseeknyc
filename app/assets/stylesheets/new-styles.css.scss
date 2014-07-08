@@ -289,3 +289,19 @@ footer {
 #close-video {
 	font-family: 'helvetica';
 }
+
+a.btn-wide-black,
+a.btn-black {
+	color: white;
+	background-color: black;
+	border-radius: 0;
+	font-family: Oswald, sans-serif;
+	font-size: 0.8em;
+	margin-left: 12px;
+}
+
+a.btn-wide-black {
+	padding: 7px 70px 7px 70px;
+	font-family: 'HelveticaNeue-Bold', arial, sans-serif;
+	font-size: 0.5em;
+}
