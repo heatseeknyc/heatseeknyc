@@ -20,6 +20,7 @@ Twinenyc::Application.routes.draw do
   get "team" => "welcome#team"
   get "about" => "welcome#about"
   get "how-it-works" => "welcome#how_it_works"
+  get "demo" => "welcome#demo"
   root 'welcome#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
