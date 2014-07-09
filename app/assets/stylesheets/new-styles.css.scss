@@ -280,31 +280,3 @@ footer {
 #close-video {
 	font-family: 'helvetica';
 }
-
-a.btn-wide-black,
-a.btn-black {
-	color: white;
-	background-color: black;
-	border-radius: 0;
-	font-family: Oswald, sans-serif;
-	font-size: 0.8em;
-	margin-left: 12px;
-	display: inline-block;
-	margin-top: 10px;
-}
-
-a.btn-wide-black {
-	padding: 7px 70px 7px 70px;
-	font-family: 'HelveticaNeue-Bold', arial, sans-serif;
-	font-size: 0.5em;
-}
-
-@media (max-width: 770px) {
-	a.btn-wide-black {
-		padding: 7px;
-	}	
-}
-
-#vote-for-us {
-	color: #fb500b;
-}
