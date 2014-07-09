@@ -19,7 +19,6 @@ Twinenyc::Application.routes.draw do
   get "sponsors" => "welcome#sponsors"
   get "team" => "welcome#team"
   get "about" => "welcome#about"
-  get "how-it-works" => "welcome#how_it_works"
   get "vote-for-us" => "welcome#vote_for_us"
   get "demo" => "welcome#demo"
   root 'welcome#index'
