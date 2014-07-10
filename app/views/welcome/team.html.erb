@@ -1,69 +1,148 @@
-<div class="team-bio">
-  <div class="col-xs-12">
-    <h2>Core Team</h2>
+<div class="container">
+  <div class="col-xs-12 core-team">
+    <center><h2 class="core-team-title">CORE TEAM</h2></center>
   </div>
-  <div class="col-xs-12"><hr></div>
-  <div class="col-sm-3">
-    <%= image_tag "tristan.jpg" %>
-    <h3>Tristan Siegel</h3>
-    <h4>User Experience Lead</h4>
-    <p>From the project's beginning Tristan's been in charge of user experience as well as sharing back-end developing duties with Heat Seek's other co-founder, William.</p>
-    <a href="mailto:tristan@heatseeknyc.com"><i class="fa fa-envelope"></i></a>
-    <a href="https://twitter.com/ttsiege"><i class="fa fa-twitter"></i></a>
-    <a href="http://www.linkedin.com/in/tristantsiegel"><i class="fa fa-linkedin"></i></a>
-  </div>
-  <div class="col-sm-3">
-    <%= image_tag "william.jpg" %>
-    <h3>William Jeffries</h3>
-    <h4>Back-End Lead</h4>
-    <p>William is a web developer with a passion for social justice. He's a rubyist, a yogi, and a super friendly person. He has been on the project since the beginning and is always ready to answer technical questions from any area of the project, or just talk about why it's such important work.</p>
-  </div>
-  <div class="col-sm-3">
-    <%= image_tag "andrea.jpg" %>
-    <h3>Andrea Acevedo</h3>
-    <h4>Design Lead</h4>
-    <p>Andrea comes from the public service design world working previously at the City of Boston branding SMEs and initiatives and more recently at Participle where she designed new services that tackled social issues in the UK. She was fortunate to stumble upon Heat Seek’s co-founders at the Big Apps launch and will be working on the design of the app and helping out on the UX.</p>
-  </div>
-  <div class="col-sm-3">
-    <%= image_tag "ethan.jpg" %>
-    <h3>Ethan Ozelius</h3>
-    <h4>Front-End Lead</h4>
-    <p>As Lead Front-End Developer, Ethan is working with a great team rebuilding Heat Seek NYC to efficiently serve all users. Ethan will be working with the design team to turn ideas into code.</p>
-  </div>
-  <div class="col-sm-3">
-    <%= image_tag "daniel.jpg" %>
-    <h3>Daniel Kronovet</h3>
-    <h4>Hardware Lead</h4>
-    <p>A classmate of Tristan and William's at the Flatiron School, Daniel joined up as the Hardware Lead shortly after they decided to take the project to BigApps. Currently a software engineer at ParagonMeasure, a health technology startup, Daniel is excited about helping improve the sensor system which drives Heat Seek.</p>
-  </div>
-  <div class="col-sm-3">
-    <%= image_tag "jarryd.jpg" %>
-    <h3>Jarryd Hammel</h3>
-    <h4>Business Development Lead</h4>
-    <p>Jarryd comes to Heat Seek NYC with several years of experience as a corporate finance advisor. He is currently pursuing his MBA at the Wharton Scool. As Business Dev lead, Jarryd is focused on refining Heat Seek NYC's message and building the community and organizational ties we need to maximize our social impact.</p>
-  </div>
-  <div class="col-xs-12">
-    <h2>Contributors</h2>
-  </div>
-  <div class="col-xs-12"><hr></div>
-  <% 3.times do %>
-    <div class="col-xs-12 col-sm-3 team-bio">
-      <%= image_tag "tristan.jpg" %>
-      <h3>Name!</h3>
-      <h4>Role!</h4>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce imperdiet, nulla eu vulputate mattis, ipsum dolor cursus nulla, laoreet laoreet dui nisi et arcu. Suspendisse potenti. Vestibulum magna nunc, blandit ac dui vitae, luctus blandit augue. Donec mattis, mauris nec congue mattis, orci arcu venenatis mi, ut auctor tellus felis vel ante. Pellentesque pulvinar id ipsum et dignissim. Duis euismod augue quis nisl pulvinar facilisis. Suspendisse lobortis sapien a diam viverra aliquam. Cras vel nunc diam. In rutrum nulla ac erat eleifend, vel tincidunt sem pulvinar. Quisque eget massa sit amet ligula tempus elementum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+</div>
+  
+<!--Team Bios-->
+<div class="container">
+
+  <!--Tristan-->
+    <div class="core-team-member col-lg-3 col-md-4 col-sm-6 col-xs-12 ">
+      <div class="tristan-pic"></div>
+      <!--bio-->
+      <h3 class="name_bios">TRISTAN SIEGAL</h3>
+      <h4 class="job_bios">Co-Founder</h4>
+      <p class="social_bios">From the project's beginning Tristan's been in charge of user experience as well as sharing back-end developing duties with Heat Seek's other co-founder, William.</p>
+      
+        <a href="#"><%= fa_icon 'envelope 2x' %></a>
+        <a href="https://twitter.com/ttsiege"><%= fa_icon 'twitter 2x' %></a>
+        <a href="www.linkedin.com/in/tristantsiegel"><%= fa_icon 'linkedin 2x' %></a>
+      
     </div>
-  <% end %>
-  <div class="col-xs-12">
-    <h2>Advisors</h2>
-  </div>
-  <div class="col-xs-12"><hr></div>
-  <% 3.times do %>
-    <div class="col-xs-12 col-sm-3 team-bio">
-      <%= image_tag "tristan.jpg" %>
-      <h3>Name!</h3>
-      <h4>Role!</h4>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce imperdiet, nulla eu vulputate mattis, ipsum dolor cursus nulla, laoreet laoreet dui nisi et arcu. Suspendisse potenti. Vestibulum magna nunc, blandit ac dui vitae, luctus blandit augue. Donec mattis, mauris nec congue mattis, orci arcu venenatis mi, ut auctor tellus felis vel ante. Pellentesque pulvinar id ipsum et dignissim. Duis euismod augue quis nisl pulvinar facilisis. Suspendisse lobortis sapien a diam viverra aliquam. Cras vel nunc diam. In rutrum nulla ac erat eleifend, vel tincidunt sem pulvinar. Quisque eget massa sit amet ligula tempus elementum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    
+  <!--William-->
+    <div class="core-team-member col-lg-3 col-md-4 col-sm-6 col-xs-12 ">
+      <div class="william-pic"></div>
+      <!--bio-->
+      <h3 class="name_bios">WILLIAM JEFFRIES</h3>
+      <h4 class="job_bios">Co-Founder</h4>
+      <p class="social_bios">William is a web developer with a passion for social justice.  He's a rubyist, a yogi, and a super friendly person. He has been on the project since the beginning and is always ready to answer technical questions from any area of the project, or just about why its such important work.  </p>
+      
+        <a href="#"><%= fa_icon 'envelope 2x' %></a>
+        <a href="https://twitter.com/williamcodes"><%= fa_icon 'twitter 2x' %></a>
+        <a href="https://www.linkedin.com/in/williamjeffries"><%= fa_icon 'linkedin 2x' %></a>
+      
     </div>
-  <% end %>
+
+  <!--Andrea-->
+    <div class="core-team-member col-lg-3 col-md-4 col-sm-6 col-xs-12 ">
+      <div class="andrea-pic"></div>
+      <!--bio-->
+      <h3 class="name_bios">ANDREA ACEVEDO</h3>
+      <h4 class="job_bios">Design Lead</h4>
+      <p class="social_bios">Andrea comes from the public service design world working previously at the City of Boston branding SMEs and initiatives and more recently at Participle where she designed new services that tackled social issues in the UK. She was fortunate to stumble upon Heat Seek’s co-founders at the Big Apps launch and will be working on the design of the app and helping out on the UX.</p>
+      
+        <a href="#"><%= fa_icon 'envelope 2x' %></a>
+        <a href="#"><%= fa_icon 'twitter 2x' %></a>
+        <a href="https://www.linkedin.com/in/andreaacevedo"><%= fa_icon 'linkedin 2x' %></a>
+      
+    </div>    
+    
+    
+  <!--Daniel-->
+    <div class="core-team-member col-lg-3 col-md-4 col-sm-6 col-xs-12 ">
+      <div class="daniel-pic"></div>
+      <!--bio-->
+      <h3 class="name_bios">DANIEL KRONOVET</h3>
+      <h4 class="job_bios">Hareware Lead</h4>
+      <p class="social_bios">A classmate of Tristan and William's at the Flatiron School, Daniel joined up as the Hardware Lead shortly after the founders decided to take the project to the BigApps.  Currently employed as a software engineer with ParagonMeasure, a health technology startup, Daniel is excited about helping improve the sensor system which drives Heat Seek.</p>
+      
+        <a href="#"><%= fa_icon 'envelope 2x' %></a>
+        <a href="https://twitter.com/kronosapiens"><%= fa_icon 'twitter 2x' %></a>
+        <a href="https://www.linkedin.com/in/dkronovet"><%= fa_icon 'linkedin 2x' %></a>
+      
+    </div>  
+    
+    
+  <!--Jarryd-->
+    <div class="core-team-member col-lg-3 col-md-4 col-sm-6 col-xs-12 ">
+      <div class="jarryd-pic"></div>
+      <!--bio-->
+      <h3 class="name_bios">JARRYD HAMMEL</h3>
+      <h4 class="job_bios">Business Development Lead</h4>
+      <p class="social_bios">Jarryd comes to Heat Seek NYC with several years of experience as a corporate finance advisor.  He is currently pursuing his MBA at the Wharton School.  As Biz Dev Lead, Jarryd is focused on refining Heat Seek NYC's message and building the community and organizational ties we need to maximize our social impact.</p>
+      
+        <a href="#"><%= fa_icon 'envelope 2x' %></a>
+        <a href="https://twitter.com/jarrydhammel"><%= fa_icon 'twitter 2x' %></a>
+        <a href="https://www.linkedin.com/in/jarrydhammel"><%= fa_icon 'linkedin 2x' %></a>
+      
+    </div>  
+  
+  
+  <!--Tom-->
+    <div class="core-team-member col-lg-3 col-md-4 col-sm-6 col-xs-12 ">
+      <div class="tom-pic"></div>
+      <!--bio-->
+      <h3 class="name_bios">TOM HUNTER</h3>
+      <h4 class="job_bios">Marketing Lead</h4>
+      <p class="social_bios">Tom has an eclectic background ranging from hedge fund analyst to parade mascot. He joins Heat Seek NYC to help further our mission of keeping the heat on in NYC and to help pioneer the algorithmic advocacy movement.</p>
+      
+        <a href="#"><%= fa_icon 'envelope 2x' %></a>
+        <a href=""><%= fa_icon 'twitter 2x' %></a>
+        <a href="#"><%= fa_icon 'linkedin 2x' %></a>
+      
+    </div>
+  
+  <!--Ethan-->
+    <div class="core-team-member col-lg-3 col-md-4 col-sm-6 col-xs-12 ">
+      <div class="ethan-pic"></div>
+      <!--bio-->
+      <h3 class="name_bios">ETHAN OZELIUS</h3>
+      <h4 class="job_bios">Front-end Lead</h4>
+      <p class="social_bios">As Lead Front-end developer, Ethan works with a great team of designers and developers, to build an efficient website for all users.</p>         
+      
+        <a href="#"><%= fa_icon 'envelope 2x' %></a>
+        <a href="#"><%= fa_icon 'twitter 2x' %></a>
+        <a href="http://www.linkedin.com/pub/ethan-ozelius/96/4b6/688"><%= fa_icon 'linkedin 2x' %></a>
+      
+    </div>
+  
+    
+</div> <!--End of Team Bios-->
+
+
+
+<!--Contributors-->
+<div class="col-sm-10 spacer_bar"></div>
+<div class="col-sm-10 spacer_bar"></div>
+
+<div class="col-xs-1"></div>
+<div class="row">
+  <div class="col-xs-2"></div>
+  <div class="container col-xs-8">
+    <h2 class="core-team-title">CONTRIBUTORS</h2>
+    <div class="contributor">
+        
+      <h3 class="name_bios">Megan Houston</h3>
+      <h4 class="job_bios">Law</h4>
+      <p>Megan has a background in sustainable development and environmental law.  After graduating from the University of Florida with a B. Design, she worked for an architecture firm as a project manager and designer.  In 2008, she moved to New York to earn an M.S. in Urban Environmental Systems Management from Pratt Institute.  Since then, Megan has analyzed energy efficiency financing programs, tracked building metrics, and reported on green building barriers.  During law School, Megan interned for the U.S. Environmental Protection Agency, Citizens Housing &amp Planning Council, Enterprise Community Partners, and Brooklyn Legal Services Corporation A.  She graduated from Brooklyn Law School in 2013 and began a legal fellowship with the NYC Department of Environmental Protection.</p>      
+    </div>
+    
+    <div class="contributor">
+      
+      <h3 class="name_bios">Harold Cooper</h3>
+      <h4 class="job_bios">Hardware</h4>
+      <p>Harold is work hard develop better and more efficient models, equipment and hardware for HeatSeekNYC.  All while keeping productivity, functionality, and ease of use everyone involved in mind.</p>         
+      
+    </div>
+    
+    <div class="contributor">
+      
+      <h3 class="name_bios">Ding Li</h3>
+      <h4 class="job_bios">Data Science</h4>
+      <p>Ding loves data. As a data scientist and founder of Smart Data Net, he develops business intelligence tools to help users stay on top of key business indicators with real-time data.  Ding started his career at the UPenn School of Medicine and has help develop business intelligence systems for organizations such as the American Institute of Physics, NBC, Estee Lauder, and Adobe. Ding holds one Masters degree in Telecommunications and Computer Science from UPenn and a Second Masters in Polymer Chemistry from the Chinese Academy of Science in Beijing.  In his spare time, Ding enjoys programming animations and creating digital art with his two daughters.  </p>         
+      
+    </div>
+  </div>
 </div>
