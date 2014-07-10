@@ -1,0 +1,76 @@
+@import 'shared';
+
+.how-it-works-title{
+  @extend .stylish-title;
+}
+
+.how-it-works-title {
+  padding: 5px;
+  margin-top: 0px;  
+}
+
+.how-it-works {
+  background-color: white;
+  text-align: center;
+
+  h4 {
+    text-transform: uppercase;
+    font-family: Oswald;
+  }
+
+  div {
+    padding-bottom: 5px auto 5px auto;
+    &:last-child {
+      margin-bottom: 80px;
+    }
+  }
+
+  a {
+    display: block;
+    position: relative;
+    top: -51px;
+    visibility: hidden;
+  }
+}
+
+@media (min-width: 760px){
+  .how-it-works div {
+    padding-left: 80px;
+    padding-right: 80px;
+  }  
+}
+
+
+#connect-icon,
+#analyze-icon,
+#identify-icon,
+#act-icon {
+  height: 126px;
+  width: 126px;
+  padding: 20px;
+  margin: 40px auto 40px auto;
+  -webkit-transition: opacity 0.1s ease-out;  /* Chrome 1-25, Safari 3.2+ */
+  -moz-transition: opacity 0.1s ease-out;  /* Firefox 4-15 */
+  -o-transition: opacity 0.1s ease-out;  /* Opera 10.50â€“12.00 */
+  transition: opacity 0.1s ease-out;  /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
+}
+
+#connect-icon {
+  background: image-url("connect_icon.png") no-repeat;
+  @include image-2x("connect_icon_2@2x.png", 100px, 100px);
+}
+
+#analyze-icon{
+  background: image-url("analyze_icon.png") no-repeat;
+  @include image-2x("analyze_icon_2@2x.png", 100px, 100px);
+}
+
+#identify-icon {
+  background: image-url("identify_icon.png") no-repeat;
+  @include image-2x("identify_icon_2@2x.png", 100px, 100px);
+}
+
+#act-icon {
+  background: image-url("act_icon.png") no-repeat;
+  @include image-2x("act_icon_2@2x.png", 100px, 100px);
+}

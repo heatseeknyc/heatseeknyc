@@ -1,7 +1,21 @@
-#map {
-  height: 500px;
-  width: 100%;
-  margin-bottom: 20px !important;
+@import 'shared';
+
+#coldmap {
+  h1 {
+    @extend .stylish-title;
+  }
+
+  p {
+    font-size: 1.5em;
+  } 
+
+  #map {
+    margin-bottom: 400px;
+    height: 500px;
+    width: 100%;
+    margin-top: 50px;
+    margin-bottom: 70px;
+  }
 }
 
 div.info.legend.leaflet-control {
