@@ -15,6 +15,7 @@
   text-align: left;
 }
 
+a.btn-splash,
 a.btn-black {
   color: white;
   background-color: black;
@@ -23,6 +24,10 @@ a.btn-black {
   font-size: 0.8em;
   margin: 10px auto 40px 12px;
   display: inline-block;
+}
+
+a.btn-splash {
+  margin-bottom: 10px;
 }
 
 #vote-for-us {
