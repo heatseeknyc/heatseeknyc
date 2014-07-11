@@ -23,7 +23,13 @@
         </li>
         <li><a href="coldmap">Cold Map</a></li>
         <li><a href="demo">Demo</a></li>
-        <li class="signin"><a href="users/sign_in">Sign in &rsaquo;</a></li>
+          <li class="signin">
+        <% if user_signed_in? %>
+          <%= link_to 'Sign out', destroy_user_session_path, :method => :delete %>
+        <% else %>
+          <a href="/users/sign_in">Sign in &rsaquo;</a>
+        <% end %>
+          </li>
       </ul>
     </div><!--/.nav-collapse -->
   </div>
