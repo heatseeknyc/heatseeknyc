@@ -1,0 +1,9 @@
+@import 'shared';
+
+.media-title {
+  @extend .stylish-title;
+}
+
+#media-page {
+  margin-bottom: 70px;
+}
