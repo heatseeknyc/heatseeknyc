@@ -21,7 +21,7 @@ class Reading < ActiveRecord::Base
   def self.create_from_params(params)
     sensor = Sensor.find_by(name: params[:sensor_name])
     temp = params[:temp]
-    time = Time.parse params[:time]
+    time = Time.at params[:time]
     user = sensor.user
     outdoor_temp = WeatherMan.current_outdoor_temp(user.zip_code)
 
