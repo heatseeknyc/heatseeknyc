@@ -1,0 +1,46 @@
+.about p,
+.about li {
+  text-align: left;
+}
+
+.about h4 {
+  text-align: center;
+}
+
+.about li {
+  font-size: 2em;
+}
+
+.to-vote {
+  text-align: left;
+}
+
+a.btn-splash,
+a.btn-black {
+  color: white;
+  background-color: black;
+  border-radius: 0;
+  font-family: Oswald, sans-serif;
+  font-size: 0.8em;
+  margin: 10px auto 40px 12px;
+  display: inline-block;
+}
+
+a.btn-splash {
+  margin-bottom: 10px;
+}
+
+#vote-for-us {
+  color: #fb500b;
+}
+
+.vote {
+  @extend .about;
+}
+
+.vote .vote-bullets {
+  font-size: 1.5em;
+  line-height: 2em;
+  font-weight: bold;
+}
+

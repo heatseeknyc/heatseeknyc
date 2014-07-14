@@ -1,0 +1,22 @@
+@import 'shared';
+
+.responsive-side {
+  @extend .col-sm-1;
+  @extend .col-md-2;
+  @extend .col-lg-3;
+}
+
+.responsive-main {
+  @extend .col-sm-10;
+  @extend .col-md-8;
+  @extend .col-lg-6;
+}
+
+#login-form {
+  margin: 30px auto 30px auto;
+  border-radius: 2%;
+  .btn {
+    background-color: $theme-red;   
+    border-color: $theme-orange;   
+  }
+}

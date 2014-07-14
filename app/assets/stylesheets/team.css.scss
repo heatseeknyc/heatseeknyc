@@ -1,3 +1,79 @@
-.team-bio {
-  padding: 0 3% 0 3%;
+@import 'shared';
+
+@mixin member-pic($member) {
+  background: image-url("#{$member}.jpg") no-repeat;
+  overflow: hidden;
+  background-size: 100%;
+  width: 225px;
+  height: 225px;
+}
+
+@mixin member-images($members) {
+  @each $member in $members {
+    .#{$member}-pic {
+      @include member-pic($member);
+    }
+  }
+}
+
+$members: 'andrea', 'daniel', 'ethan', 'jarryd', 'tristan', 'william', 'tom';
+
+.core-team-member {
+  margin-bottom: 20px;
+  height: 570px;
+  
+  i {
+    margin-top: 10px;
+  }
+
+  h3 {
+    text-transform: uppercase;
+  }
+
+  @include member-images($members);
+
+}
+
+.core-team-title {
+  @extend .stylish-title;
+}
+
+.spacer-bar{
+  background-color: #252729;
+  height: 6px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.core_team{
+  margin: 10px 0 10px 0;
+  font-family: source sans pro;
+  font-weight: bold;
+  font-size: 25px; 
+  transform:scale(1,1.39); /* W3C */
+    -webkit-transform:scale(1,1.39); /* Safari and Chrome */
+    -moz-transform:scale(1,1.39); /* Firefox */
+    -ms-transform:scale(1,1.39); /* IE 9 */
+    -o-transform:scale(1,1.39); /* Opera */
+}
+
+.name_bios{
+  font-family: source sans pro;
+  font-weight: bold;
+}
+
+.job_bios{
+  font-style: italic;
+}
+
+.contributor {
+  margin-bottom: 30px;
+  
+  &:last-child{
+    margin-bottom: 50px;
+  }
+
+  h3 {
+    text-transform: uppercase;
+  }
 }

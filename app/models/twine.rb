@@ -46,10 +46,7 @@ class Twine < ActiveRecord::Base
   end
 
   def current_outdoor_temp
-    w_api = Wunderground.new(ENV["WUNDERGROUND_API_KEY"])
-    zip_code = self.user.zip_code
-    json_object = w_api.conditions_for(zip_code)
-    json_object["current_observation"]["temp_f"]
+    WeatherMan.current_outdoor_temp(user.zip_code)
   end
 
   def make_and_return_reading_from_temp(temp)

@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :readings
   has_one :twine
+  has_many :sensors
 
   has_many :collaborations, dependent: :destroy
   has_many :collaborators, through: :collaborations

@@ -14,10 +14,11 @@ gem 'ffi', "= 1.9.0"
 gem 'pg'
 gem 'devise'
 gem 'tzinfo'
-gem 'bootstrap-sass'
+# gem 'bootstrap-sass'
 gem 'zip'
 gem 'leaflet-rails'
-gem "select2-rails"
+gem 'select2-rails'
+gem 'font-awesome-rails'
 
 group :test, :development do
   gem 'travis'
@@ -63,7 +64,7 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 
 # Turbolinks following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+# gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'

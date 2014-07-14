@@ -1,0 +1,36 @@
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+         <a class="brand" href="/">Heat Seek</a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right darktheme">
+        <li><a href="vote-for-us" id="vote-for-us">Vote For Us!</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">About <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="about">About Heat Seek</a></li>
+<!--        <li><a href="news">News</a></li> -->
+            <li><a href="about#how-it-works">How It Works</a></li>
+            <li><a href="team">Our Team</a></li>
+          </ul>
+        </li>
+        <li><a href="coldmap">Cold Map</a></li>
+        <li><a href="demo">Demo</a></li>
+          <li class="signin">
+        <% if user_signed_in? %>
+          <%= link_to 'Sign out', destroy_user_session_path, :method => :delete %>
+        <% else %>
+          <a href="/users/sign_in">Sign in &rsaquo;</a>
+        <% end %>
+          </li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</div>
