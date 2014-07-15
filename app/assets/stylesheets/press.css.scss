@@ -1,15 +1,15 @@
 @import 'shared';
 
-.media-title {
+.press-title {
   @extend .stylish-title;
   margin-bottom: 0;
 }
 
-#media-page {
+#press-page {
   margin-bottom: 70px;
 }
 
-.media .article {
+.press .article {
   background-color: $theme-blue-lighten-2;
   padding: 5px 25px 15px 25px;
   margin: 10px;

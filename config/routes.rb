@@ -21,7 +21,7 @@ Twinenyc::Application.routes.draw do
   get "about" => "welcome#about"
   get "vote-for-us" => "welcome#vote_for_us"
   get "demo" => "welcome#demo"
-  get "media" => "welcome#media"
+  get "press" => "welcome#press"
   root 'welcome#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
