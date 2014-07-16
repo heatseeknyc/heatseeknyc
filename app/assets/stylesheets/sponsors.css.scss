@@ -1,0 +1,17 @@
+@import 'shared';
+
+.sponsors-title,
+.partners-title {
+  @extend .stylish-title;
+}
+
+#sponsors-page {
+  margin-bottom: 70px;
+}
+
+.partner {
+  font-size: 2em;
+  padding-right: 15%;
+  padding-left: 15%;
+
+}
