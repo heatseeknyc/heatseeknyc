@@ -32,6 +32,13 @@ $members: 'andrea', 'daniel', 'ethan', 'jarryd', 'tristan', 'william', 'tom';
 
   @include member-images($members);
 
+  .fa {
+    padding: 1px;
+  }
+
+  &:last-child{
+    height: auto;
+  }
 }
 
 .core-team-title {
@@ -77,3 +84,4 @@ $members: 'andrea', 'daniel', 'ethan', 'jarryd', 'tristan', 'william', 'tom';
     text-transform: uppercase;
   }
 }
+
