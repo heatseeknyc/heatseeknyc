@@ -16,7 +16,8 @@
   }
 }
 
-$members: 'andrea', 'daniel', 'ethan', 'jarryd', 'tristan', 'william', 'tom';
+$members: 'andrea', 'daniel', 'ethan', 'jarryd', 'tristan', 
+          'william', 'tom', 'noelle';
 
 .core-team-member {
   margin-bottom: 20px;
@@ -36,7 +37,8 @@ $members: 'andrea', 'daniel', 'ethan', 'jarryd', 'tristan', 'william', 'tom';
     padding: 1px;
   }
 
-  &:last-child{
+  &:last-child,
+  &:nth-last-child(2) {
     height: auto;
   }
 }
