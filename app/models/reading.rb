@@ -24,7 +24,7 @@ class Reading < ActiveRecord::Base
     time = Time.at params[:time].to_i
     user = sensor.user
     last_reading = Reading.last
-    if last_reading.created_at < Time.now - 60
+    if last_reading && last_reading.created_at < Time.now - 60
       outdoor_temp = WeatherMan.current_outdoor_temp(user.zip_code)
     else
       outdoor_temp = last_reading.outdoor_temp
