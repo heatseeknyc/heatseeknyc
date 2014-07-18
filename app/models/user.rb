@@ -98,6 +98,15 @@ class User < ActiveRecord::Base
     self.readings.last.temp
   end
 
+  def current_temp
+    last_reading = self.readings.last
+    if last_reading.created_at > Time.now - 60 * 60 * 3
+      "#{last_reading.temp}°"
+    else
+      "51°"  #CHANGE TO - - -°
+    end
+  end
+
   def has_readings?
     !self.readings.empty?
   end
