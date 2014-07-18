@@ -1,11 +1,13 @@
-<div class="show-layout">
+<div id='user-show'>
+	<div class="show-layout">
 
-  <h3>Hello <%= current_user.first_name %></h3>
-  <% if current_user.has_readings? %>
-    <h5>Your last reading was <%= current_user.most_recent_temp %> degrees</h5>
-  <% end %>
+	  <h3>Hello <%= current_user.first_name %></h3>
+	  <% if current_user.has_readings? %>
+	    <h5>Your last reading was <%= current_user.most_recent_temp %> degrees</h5>
+	  <% end %>
 
-  <%= render "bar_graph", :user => current_user %>
-  <%= render "table", :user => current_user %>
-  <%= render "line_graph", :user => current_user %>
+	  <%= render "bar_graph", :user => current_user %>
+	  <%= render "table", :user => current_user %>
+	  <%= render "line_graph", :user => current_user %>
+	</div>
 </div>
