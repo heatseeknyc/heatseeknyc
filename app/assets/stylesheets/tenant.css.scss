@@ -1,0 +1,71 @@
+@import 'shared';
+.show-layout {
+  margin: 0;
+  width: 100%;
+  #line {
+    margin-bottom: 80px;
+    border-bottom: solid 3px black;
+    padding-bottom: 30px;
+  }
+
+  .show-top {
+    padding-top: 15px;
+    padding-bottom: 45px;
+    background: $theme-blue;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: Oswald;
+
+    
+    .stat-num {
+      font-size: 8em;
+      border-bottom: solid 3px $theme-black;
+      &.temp-num{
+        padding-left: 22px;
+      }
+    }
+
+    .address {
+      font-size: 1em;
+      font-family: 'Source Sans Pro'
+    }
+
+    h3 {
+      font-weight: bold;
+    }
+  }
+
+  div.upper-bar {
+    border-top: solid 3px $theme-black;
+    border-bottom: solid 3px $theme-black;
+    @media (min-width: 760px) {
+      border-top: none;
+    }
+
+    .btn.btn-primary.btn-download {
+      background: inherit;
+      border: solid 3px $theme-black;
+      border-radius: 0;
+      margin: 10px;
+      color: $theme-black;
+      font-family: 'Oswald';
+    }
+
+    @media (min-width: 760px) {
+      .btn.btn-primary.btn-download {
+        float: right;
+        margin-top: 20px;
+      }
+
+      .show-top {
+        padding-top: 0;
+        padding-bottom: 30px;
+        
+      }
+      
+      .user-info {
+        float: left;
+      }
+    }
+  }
+}

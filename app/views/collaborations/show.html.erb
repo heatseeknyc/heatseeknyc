@@ -1,12 +1,1 @@
-<div class="show-layout">
-
-  <h3><%= @user.first_name %>'s Page</h3>
-  <% if @user.has_readings? %>
-    <h5>Your last reading was <%= @user.most_recent_temp %> degrees</h5>
-  <% end %>
-
-  <%= render "users/bar_graph", :user => @user %>
-  <%= render "users/table", :user => @user %>
-  <%= render "users/line_graph", :user => @user %>
-
-</div>
+<%= render partial: "users/show", :user => @user %>
