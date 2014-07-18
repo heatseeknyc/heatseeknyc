@@ -68,6 +68,7 @@ class UsersController < ApplicationController
   def live_update
     user = User.find_by(first_name: "Live Update")
     user.readings.first.destroy if user.readings.count > 50
+    user.readings.delete_all if user.readings.count > 60
 
     respond_to do |f|
       f.html
