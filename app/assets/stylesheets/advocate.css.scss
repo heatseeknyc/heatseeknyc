@@ -1,0 +1,83 @@
+#collaborator-ul .sidebar-li {
+	height: 80px;
+	font-size: 23px;
+	background-color: white;
+	list-style-type: none;
+	margin: 4px 0 0 0;
+	border-bottom: 3px solid #ff9a33;
+}
+
+.sidebar-li > .user-link{
+	color: #262729;
+	text-decoration: none;
+	font-family: 'Source Sans Pro', 'sans-serif';
+}
+
+.sidebar-li{
+	padding: 7px 0 7px 7px;
+}
+
+#q {
+	width: 200px;
+	float: right;
+}
+
+#collaborator-h1{
+	font-family: 'Oswald';
+	margin-bottom: 20px;
+	padding: 15px;
+	border-bottom: 5px solid #262729;
+	border-top: 5px solid #262729;
+}
+
+.address_zip{
+	font-size: 14px;
+	font-family: 'Source Sans Pro', 'sans-serif';
+	display: block;
+	padding-top: 4px;
+}
+
+#collaborator-ul{
+	padding: 0;
+}
+
+#wrench{
+	width: 83px;
+	height: 77px;
+	background-color: red;
+	float: right;
+	margin-top: -65px;
+	border-left: 5px solid #ff9a33;
+}
+
+#edit{
+	width: 83px;
+	height: 77px;
+	background-color: blue;
+	float: right;
+	margin-top: -65px;
+	border-left: 5px solid #ff9a33;
+}
+
+
+
+
+/*
+
+#collaborator-ul > li > a.glyphicon.glyphicon-remove.remove-user-link{
+	width: 83px;
+	height: 80px;
+	background-image: url('../images/x_button.png');
+	margin: -8px -7px 0 0;
+	border-left: 7px solid #ff9a33;
+}
+
+#collaborator-ul > li > a.glyphicon.glyphicon-wrench.user-settings-link{
+	width: 83px;
+	height: 80px;
+	background-image: url('../images/wrench.png');
+	margin: -8px -7px 0 5px;
+	border-left: 7px solid #ff9a33;
+}
+
+*/
