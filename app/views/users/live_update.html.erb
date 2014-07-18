@@ -1,0 +1,10 @@
+<div class="show-layout">
+  <h2>Live Demo</h2>
+  <h3>Hello <%= current_user.first_name %></h3>
+  <% if current_user.has_readings? %>
+    <h5>Your last reading was <%= current_user.most_recent_temp %> degrees</h5>
+  <% end %>
+  <div id="live-update">
+    <%= render "live_update", :current_user => current_user %>
+  </div>
+</div>

@@ -65,6 +65,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def live_update
+    user = User.find_by(first_name: "Live Update")
+    user.readings.first.destroy if user.readings.count > 50
+
+    respond_to do |f|
+      f.html
+      f.js
+    end
+  end
+
   private
     def user_params
       params.require(:user).permit(:first_name, :last_name, :address, :email, :zip_code, :permissions, :twine_name)
