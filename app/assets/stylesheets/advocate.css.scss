@@ -1,3 +1,5 @@
+@import "shared";
+
 #collaborator-ul .sidebar-li {
 	height: 80px;
 	font-size: 23px;
@@ -42,21 +44,23 @@
 }
 
 #wrench{
-	width: 83px;
+	@media (min-width: 500px) {
+		width: 83px;
+	}
 	height: 77px;
-	background-color: red;
 	float: right;
 	margin-top: -65px;
 	border-left: 5px solid #ff9a33;
 }
 
 #edit{
-	width: 83px;
 	height: 77px;
-	background-color: blue;
 	float: right;
 	margin-top: -65px;
 	border-left: 5px solid #ff9a33;
+	@media (min-width: 500px) {
+		width: 83px;
+	}
 }
 
 
@@ -81,3 +85,20 @@
 }
 
 */
+
+.advocate-layout {
+	background: $theme-orange;
+
+	h3 {
+		font-family: Oswald;
+		text-transform: uppercase;
+	}
+
+	#collaborator-h1 {
+		text-transform: uppercase;
+		font-family: "Source Sans Pro";
+		font-size: 2.4em;
+		text-align: left;
+		padding-left: 0;
+	}
+}
