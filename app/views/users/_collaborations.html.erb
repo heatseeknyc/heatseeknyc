@@ -1,11 +1,11 @@
 <div class="collaborators-sidebar">
-  <div class="container xs-12">
-  <h1 id="collaborator-h1" class="text-center">My Tenant List</h1>
+  <div>
+    <h1 id="collaborator-h1" class="text-center">My Tenant List</h1>
   </div>
   <ul id="collaborator-ul">
     <% current_user.collaborations.each do |c| %>
       
-      <div class="container xs-12">
+      <div>
         <li class="sidebar-li">
           <%= link_to "#{c.collaborator.first_name} #{c.collaborator.last_name}", [current_user, c], method: :get, :class => "user-link" %>
           <p class="address_zip"><%= "#{c.collaborator.address}, #{c.collaborator.zip_code}" %></p>

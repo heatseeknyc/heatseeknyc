@@ -22,6 +22,10 @@
 #q {
 	width: 200px;
 	float: right;
+	background-color: $theme-orange;
+	border: solid 3px $theme-black;
+	border-radius: 0;
+	margin-right: 45px;
 }
 
 #collaborator-h1{
@@ -44,9 +48,6 @@
 }
 
 #wrench{
-	@media (min-width: 500px) {
-		width: 83px;
-	}
 	height: 77px;
 	float: right;
 	margin-top: -65px;
@@ -58,9 +59,6 @@
 	float: right;
 	margin-top: -65px;
 	border-left: 5px solid #ff9a33;
-	@media (min-width: 500px) {
-		width: 83px;
-	}
 }
 
 .add-user-link {
@@ -72,27 +70,6 @@
 		width: 83px;
 	}	
 }
-
-
-/*
-
-#collaborator-ul > li > a.glyphicon.glyphicon-remove.remove-user-link{
-	width: 83px;
-	height: 80px;
-	background-image: url('../images/x_button.png');
-	margin: -8px -7px 0 0;
-	border-left: 7px solid #ff9a33;
-}
-
-#collaborator-ul > li > a.glyphicon.glyphicon-wrench.user-settings-link{
-	width: 83px;
-	height: 80px;
-	background-image: url('../images/wrench.png');
-	margin: -8px -7px 0 5px;
-	border-left: 7px solid #ff9a33;
-}
-
-*/
 
 .advocate-layout {
 	background: $theme-orange;
@@ -112,7 +89,25 @@
 }
 
 .user-settings-link,
+.add-user-link,
 .remove-user-link {
 	padding-top: 30px;
 	text-align: center;
+	@media (min-width: 500px) {
+		width: 83px;
+	}
+}
+
+#search-button {
+	/*display: none;*/
+	float: right;
+	margin-right: -230px;
+	background-color: $theme-orange;
+	border: solid 3px $theme-black;
+	height: 34px;
+}
+
+.collaborators-sidebar {
+	padding-right: 15px;
+	padding-left: 15px;
 }
