@@ -7,7 +7,7 @@
             <%= label_tag :q, "Find a User" %>
             <br>
             <%= "The Demo Lawyer can only add other demo accounts." if current_user.is_demo_user? %>
-            <%= text_field_tag :q, "", :class => "form-control", autofocus: true %>
+            <%= text_field_tag :q, "", :class => "form-control", autofocus: true, placeholder: "Find a tenant..." %>
             <%= submit_tag "Search", :class => "btn btn-lg btn-primary", id: "search-button" %>
           </dl>
         <% end %>
