@@ -4,10 +4,14 @@
     <div class="search-box"> 
         <%= form_tag search_user_path, method: :get, id: "search-form", remote: true do %> 
           <dl>
-            <%= "The Demo Lawyer can only add other demo accounts." if current_user.is_demo_user? %>
-            <%= text_field_tag :q, "", :class => "form-control", autofocus: true, placeholder: "Find a tenant..." %>
-            <%= submit_tag "Search", :class => "btn btn-lg btn-primary", id: "search-button" %>
-          </dl>
+            <%= label_tag :q, "Find a User" %>
+            <br>
+            <div class="center-text">
+              <%= "The Demo Lawyer can only add other demo accounts." if current_user.is_demo_user? %>
+              <%= submit_tag "Search", :class => "btn btn-lg btn-primary pull-right", id: "search-button" %>
+              <%= text_field_tag :q, "", :class => "form-control pull-right", autofocus: true, :placeholder => "Find a Tenant"%>
+            </div>
+s          </dl>
         <% end %>
     </div>
   <br>

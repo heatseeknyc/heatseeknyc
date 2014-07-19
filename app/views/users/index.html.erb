@@ -4,7 +4,7 @@
   <% @users.each do |u| %>
     <hr class="underline-user text-center">
     <li class="sidebar-li">
-    <a href="/users/<%= u.id %>" class="user-link"><%= u.first_name %> <%= u.last_name %> </a>
+    <a href="/users/<%= u.id %>" class="user-link"><%= u.first_name %> <%= u.last_name %></a>
     <%= link_to "", user_collaborations_path(current_user, collaborator_id: u), method: :post, :class => "glyphicon glyphicon-plus add-user-link" %>
     <br>
     </li>

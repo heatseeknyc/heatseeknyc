@@ -21,7 +21,10 @@
 
 #q {
 	width: 200px;
+	border: 3px solid #262729;
+	border-radius: 0;
 	float: right;
+	background-color: #ff9a33;
 }
 
 #collaborator-h1{
@@ -63,28 +66,18 @@
 	}
 }
 
-
-
-
-/*
-
-#collaborator-ul > li > a.glyphicon.glyphicon-remove.remove-user-link{
-	width: 83px;
-	height: 80px;
-	background-image: url('../images/x_button.png');
-	margin: -8px -7px 0 0;
-	border-left: 7px solid #ff9a33;
+#search-button{
+	height: 34px;
+	background-color: #ff9a33;
+	margin-left: 8px;
+	border-radius: 0;
+	border: 3px solid #262729;
+	line-height: 9px;
 }
 
-#collaborator-ul > li > a.glyphicon.glyphicon-wrench.user-settings-link{
-	width: 83px;
-	height: 80px;
-	background-image: url('../images/wrench.png');
-	margin: -8px -7px 0 5px;
-	border-left: 7px solid #ff9a33;
-}
+#permissions-show-div{
+	display:inline;
 
-*/
 
 .advocate-layout {
 	background: $theme-orange;
@@ -101,10 +94,4 @@
 		text-align: left;
 		padding-left: 0;
 	}
-}
-
-.user-settings-link,
-.remove-user-link {
-	padding-top: 30px;
-	text-align: center;
 }
