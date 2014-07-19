@@ -5,55 +5,19 @@
   <ul id="collaborator-ul">
     <% current_user.collaborations.each do |c| %>
       
-    <div class="container xs-12">
-      <!--User 1-->
-      <li class="sidebar-li">
-        <%= link_to "#{c.collaborator.first_name} #{c.collaborator.last_name}", [current_user, c], method: :get, :class => "user-link" %>
-        <p class="address_zip">999 Fake Street 11432</p>
-        
-        <% if current_user.admin? %>
-          <%= link_to "", edit_user_path(c.collaborator_id), :class => "glyphicon glyphicon-wrench user-settings-link", :id => "wrench" %>
-        <% end %>
-        <%= link_to "", [current_user, c], method: :delete, :class => "glyphicon glyphicon-remove remove-user-link", :id => "edit", data: { confirm: "Are you sure?" }, data: {remote: true} %>
-        <br>
-      </li>
+      <div class="container xs-12">
+        <li class="sidebar-li">
+          <%= link_to "#{c.collaborator.first_name} #{c.collaborator.last_name}", [current_user, c], method: :get, :class => "user-link" %>
+          <p class="address_zip">999 Fake Street 11432</p>
+          
+          <% if current_user.admin? %>
+            <%= link_to "", edit_user_path(c.collaborator_id), :class => "fa fa-wrench user-settings-link", :id => "wrench" %>
+          <% end %>
+          <%= link_to "", [current_user, c], method: :delete, :class => "fa fa-times remove-user-link", :id => "edit", data: { confirm: "Are you sure?" }, data: {remote: true} %>
+          <br>
+        </li>
+      </div>
 
-      <!--User 2-->
-      <li class="sidebar-li">
-        <%= link_to "#{c.collaborator.first_name} #{c.collaborator.last_name}", [current_user, c], method: :get, :class => "user-link" %>
-        <p class="address_zip">999 Fake Street 11432</p>
-        
-        <% if current_user.admin? %>
-          <%= link_to "", edit_user_path(c.collaborator_id), :class => "glyphicon glyphicon-wrench user-settings-link", :id => "wrench" %>
-        <% end %>
-        <%= link_to "", [current_user, c], method: :delete, :class => "glyphicon glyphicon-remove remove-user-link", :id => "edit", data: { confirm: "Are you sure?" }, data: {remote: true} %>
-        <br>
-      </li>
-
-      <!--User 3-->
-      <li class="sidebar-li">
-        <%= link_to "#{c.collaborator.first_name} #{c.collaborator.last_name}", [current_user, c], method: :get, :class => "user-link" %>
-        <p class="address_zip">999 Fake Street 11432</p>
-        
-        <% if current_user.admin? %>
-          <%= link_to "", edit_user_path(c.collaborator_id), :class => "glyphicon glyphicon-wrench user-settings-link", :id => "wrench" %>
-        <% end %>
-        <%= link_to "", [current_user, c], method: :delete, :class => "glyphicon glyphicon-remove remove-user-link", :id => "edit", data: { confirm: "Are you sure?" }, data: {remote: true} %>
-        <br>
-      </li>
-
-      <!--User4-->
-      <li class="sidebar-li">
-        <%= link_to "#{c.collaborator.first_name} #{c.collaborator.last_name}", [current_user, c], method: :get, :class => "user-link" %>
-        <p class="address_zip">999 Fake Street 11432</p>
-        
-        <% if current_user.admin? %>
-          <%= link_to "", edit_user_path(c.collaborator_id), :class => "glyphicon glyphicon-wrench user-settings-link", :id => "wrench" %>
-        <% end %>
-        <%= link_to "", [current_user, c], method: :delete, :class => "glyphicon glyphicon-remove remove-user-link", :id => "edit", data: { confirm: "Are you sure?" }, data: {remote: true} %>
-        <br>
-      </li> <!--end of Users-->
-    </div>
     <% end %>
   </ul>
 </div>
