@@ -63,7 +63,15 @@
 	}
 }
 
-
+.add-user-link {
+	height: 77px;
+	float: right;
+	margin-top: -65px;
+	border-left: 5px solid $theme-orange;
+	@media (min-width: 500px) {
+		width: 83px;
+	}	
+}
 
 
 /*
