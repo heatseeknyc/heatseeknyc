@@ -12,8 +12,6 @@ Twinenyc::Application.routes.draw do
   get 'users/:id/download' => 'users#download_pdf', as: :pdf_download
   get 'users/:id/live_update' => 'users#live_update'
   get 'users/:user_id/collaborations/:id/download' => 'users#download_pdf'
-  # get 'coldmap' => 'welcome#coldmap'
-  get 'supplemental' => 'welcome#supplemental'
 
   get "complaints/query" => "complaint#query"
   get "coldmap/" => "complaint#index"

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   include UserControllerHelper
-  before_action :authenticate_user!, except: [:welcome, :demo]
+  before_action :authenticate_user!
 
   def edit
     @user = User.find(params[:id])

@@ -14,17 +14,16 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">About <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="about">About Heat Seek</a></li>
-<!--        <li><a href="news">News</a></li> -->
-            <li><a href="about#how-it-works">How It Works</a></li>
-            <li><a href="team">Our Team</a></li>
-            <li><a href="sponsors">Sponsors</a></li>
-            <li><a href="press">Press</a></li>
-            <li><a href="nycbigapps">NYCBigApps</a></li>
+            <li><%= link_to "About Heat Seek", about_path %></li>
+            <li><%= link_to "How It Works", about_path(anchor: "how-it-works") %></li>
+            <li><%= link_to "Our Team", team_path %></li>
+            <li><%= link_to "Sponsors", sponsors_path %></li>
+            <li><%= link_to "Press", press_path %></li>
+            <li><%= link_to "NYCBigApps", nycbigapps_path %></li>
           </ul>
         </li>
-        <li><a href="coldmap">Cold Map</a></li>
-        <li><a href="demo">Demo</a></li>
+        <li><%= link_to "Cold Map", coldmap_path %></li>
+        <li><%= link_to "Demo", demo_path %></li>
           <li class="signin">
         <% if user_signed_in? %>
           <%= link_to 'Sign out', destroy_user_session_path, :method => :delete %>
