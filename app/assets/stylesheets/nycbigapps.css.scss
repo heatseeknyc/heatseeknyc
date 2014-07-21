@@ -1,46 +1,22 @@
-.about p,
-.about li {
-  text-align: left;
+@import 'shared';
+
+.bigapps-title {
+  @extend .stylish-title;
 }
 
-.about h4 {
-  text-align: center;
-}
+.bigapps {
+  h3 {
+    padding-left: 20px;
+  }
 
-.about li {
-  font-size: 2em;
-}
+  p {
+    text-indent: 40px;
 
-.to-vote {
-  text-align: left;
+    &:last-child,
+    &:nth-last-child(2){
+      text-indent: 20px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+  }
 }
-
-a.btn-splash,
-a.btn-black {
-  color: white;
-  background-color: black;
-  border-radius: 0;
-  font-family: Oswald, sans-serif;
-  font-size: 0.8em;
-  margin: 10px auto 40px 12px;
-  display: inline-block;
-}
-
-a.btn-splash {
-  margin-bottom: 10px;
-}
-
-#vote-for-us {
-  color: #fb500b;
-}
-
-.vote {
-  @extend .about;
-}
-
-.vote .vote-bullets {
-  font-size: 1.5em;
-  line-height: 2em;
-  font-weight: bold;
-}
-

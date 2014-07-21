@@ -23,3 +23,16 @@
 .about-title {
   @extend .stylish-title;
 }
+
+.about p,
+.about li {
+  text-align: left;
+}
+
+.about h4 {
+  text-align: center;
+}
+
+.about li {
+  font-size: 2em;
+}
