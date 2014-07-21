@@ -20,7 +20,7 @@ Twinenyc::Application.routes.draw do
   get "sponsors" => "welcome#sponsors"
   get "team" => "welcome#team"
   get "about" => "welcome#about"
-  get "vote-for-us" => "welcome#vote_for_us"
+  get "nycbigapps" => "welcome#nycbigapps"
   get "demo" => "welcome#demo"
   get "press" => "welcome#press"
   root 'welcome#index'
