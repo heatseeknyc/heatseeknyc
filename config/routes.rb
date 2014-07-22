@@ -19,8 +19,10 @@ Twinenyc::Application.routes.draw do
   get "team" => "welcome#team"
   get "about" => "welcome#about"
   get "nycbigapps" => "welcome#nycbigapps"
+  get "vote-for-us" => "welcome#nycbigapps"
   get "demo" => "welcome#demo"
   get "press" => "welcome#press"
+  get "blog" => "welcome#blog"
   root 'welcome#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
