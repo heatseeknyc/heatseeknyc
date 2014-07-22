@@ -1,0 +1,59 @@
+@import 'shared';
+
+.blog {
+  text-align: center;
+
+  .twitter-embed {
+    max-width: 100%;
+    margin-bottom: 70px;
+  }
+
+  .blog-title{
+    @extend .stylish-title;
+  }
+
+  ol.tumblr_posts {
+    list-style: none;
+    padding-left: 0;
+    line-height: 3em;
+
+    li.tumblr_post {
+      margin-bottom: 35px;
+      padding: 0 35px 35px 35px;
+
+      .tumblr_caption {
+        line-height: 3em;
+        font-size: 2em;
+        font-family: Oswald;
+      }
+
+      .tumblr_title {
+        font-size: 3em;
+        font-family: Oswald;
+      }
+
+      &:nth-child(3n) {
+        border-bottom: 2px solid $theme-red;
+
+      }
+
+      &:nth-child(3n+1) {
+        border-bottom: 2px solid $theme-orange;
+      }
+
+      &:nth-child(3n+2) {
+        border-bottom: 2px solid $theme-blue;
+      }
+
+      div.tumblr_body {
+        font-family: 'Source Sans Pro';
+      }
+
+      img.tumblr_photo {
+        max-width: 100%;
+        height: auto;
+      }
+    }
+  }
+
+}
