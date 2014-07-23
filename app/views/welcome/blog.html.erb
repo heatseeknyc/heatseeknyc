@@ -1,13 +1,30 @@
+<%= render 'facebook_script_tag' %>
+
 <div class="blog clearfix">
   <div class="container">
     <h4 class="blog-title">Heat Seek Blog</h4>
-    <div class="container col-xs-12 col-sm-8">
+    
+    <div class="col-md-3 fb-loc-large">
+      <div class="facebook-embed">
+        <%= render 'facebook_embed' %>
+      </div>
+    </div>
+    
+    <div class="container col-xs-12 col-md-6">
       <%= render 'tumblr_embed' %>
     </div>
-    <div class="col-xs-12 col-sm-4">
+
+    <div class="col-xs-12 fb-loc-small">
+      <div class="facebook-embed">
+        <%= render 'facebook_embed' %>
+      </div>
+    </div>
+    
+    <div class="col-xs-12 col-md-3">
       <div class="twitter-embed">
         <%= render 'twitter_embed' %>
       </div>
     </div>
+    
   </div>
 </div>

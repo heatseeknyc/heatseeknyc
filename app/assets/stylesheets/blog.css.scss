@@ -2,10 +2,27 @@
 
 .blog {
   text-align: center;
-
+  
+  .facebook-embed,
   .twitter-embed {
-    max-width: 100%;
     margin-bottom: 70px;
+    max-width: 100%;
+
+    iframe {
+      width: 100% !important;
+    }
+  }
+
+  @media (min-width: 992px) {
+    .fb-loc-small {
+      display: none;
+    }
+  }
+
+  @media (max-width: 991px) {
+    .fb-loc-large {
+      display: none;
+    }
   }
 
   .blog-title{
@@ -56,4 +73,13 @@
     }
   }
 
+}
+
+#fb-root {
+  display: none;
+}
+ 
+/* To fill the container and nothing else */
+.fb_iframe_widget, .fb_iframe_widget span, .fb_iframe_widget span iframe[style] {
+  width: 100% !important;
 }
