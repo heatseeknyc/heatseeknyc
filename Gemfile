@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'coveralls', require: false
 gem 'wunderground'
 gem 'airbrake'
-gem 'prawn'
+gem 'prawn', '1.0.0'
 gem 'figaro'
 gem 'rvm-capistrano'
 gem 'chartkick'
