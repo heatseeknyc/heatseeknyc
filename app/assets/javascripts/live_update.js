@@ -4,7 +4,7 @@ var live_update = function(){
   $.get( "live_update.js", function( data ) {
     console.log(data);
     // $("#live-update-contents").html(
-    eval(data);
+    // eval(data);
   });
 };
 
