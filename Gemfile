@@ -24,7 +24,7 @@ group :test, :development do
   gem 'travis'
   gem 'selenium-webdriver'
   gem 'capybara'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 2.14.2'
   gem 'guard-rspec'
   gem 'spork-rails'
   gem 'guard-spork'
