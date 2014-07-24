@@ -12,6 +12,7 @@ Twinenyc::Application.routes.draw do
   get 'users/:id/download' => 'users#download_pdf', as: :pdf_download
   get 'users/:id/live_update' => 'users#live_update'
   get 'users/:user_id/collaborations/:id/download' => 'users#download_pdf'
+  get "demo" => "users#demo"
 
   get "complaints/query" => "complaint#query"
   get "coldmap/" => "complaint#index"
@@ -20,7 +21,7 @@ Twinenyc::Application.routes.draw do
   get "about" => "welcome#about"
   get "nycbigapps" => "welcome#nycbigapps"
   get "vote-for-us" => "welcome#nycbigapps"
-  get "demo" => "welcome#demo"
+  # get "demo" => "welcome#demo"
   get "press" => "welcome#press"
   get "blog" => "welcome#blog"
   root 'welcome#index'

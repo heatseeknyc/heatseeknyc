@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   include UserControllerHelper
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:demo]
 
   def edit
     @user = User.find(params[:id])
@@ -74,6 +74,11 @@ class UsersController < ApplicationController
       f.html
       f.js
     end
+  end
+
+  def demo
+    demo = User.find_by(email: 'demo-lawyer@heatseeknyc.com')
+    sign_in_and_redirect(demo)
   end
 
   private
