@@ -52,6 +52,8 @@ $theme-grey-lighten-1: #BBBCBC;
 $theme-grey-lighten-2: #D9D9DA;
 $theme-grey-lighten-3: #F7F7F7;
 
+$theme-white: #F7F7F7;
+
 $theme-black-blue-1: #535F62;
 $theme-black-blue-2: #81969B;
 $theme-black-blue-3: #AFCDD4;
@@ -68,8 +70,8 @@ $theme-black-blue-3: #AFCDD4;
 }
 
 .stylish-title {
-  border-top: 4px solid #000;
-  border-bottom: 4px solid #000;
+  border-top: 4px solid $theme-black;
+  border-bottom: 4px solid $theme-black;
   margin-top: 40px;
   margin-bottom: 40px;
   font-size: 3.2em;
