@@ -25,7 +25,8 @@
 	background-color: $theme-orange;
 	border: solid 3px $theme-black;
 	border-radius: 0;
-	margin-right: 45px;
+	margin-right: 5px;
+	margin-top: 20px;
 }
 
 #collaborator-h1{
@@ -48,14 +49,14 @@
 }
 
 #wrench{
-	height: 77px;
+	height: 78px;
 	float: right;
 	margin-top: -65px;
 	border-left: 5px solid #ff9a33;
 }
 
 #edit{
-	height: 77px;
+	height: 78px;
 	float: right;
 	margin-top: -65px;
 	border-left: 5px solid #ff9a33;
@@ -99,15 +100,52 @@
 }
 
 #search-button {
-	/*display: none;*/
 	float: right;
-	margin-right: -230px;
 	background-color: $theme-orange;
 	border: solid 3px $theme-black;
 	height: 34px;
+	margin-top: 20px;
 }
 
 .collaborators-sidebar {
 	padding-right: 15px;
 	padding-left: 15px;
+}
+
+.container .core-team-member > div {
+	height: 239px;
+	width: 239px;
+}
+
+.advocate-button{
+	font-family: 'Oswald';
+	padding: 1px 20px 1px 20px;
+}
+@media (max-width: 768px) {
+	.advocate-button{
+		display: none;
+	}
+
+}
+
+@media (min-width: 768px) {
+	#search-button > i{
+		display: none;
+	}
+}
+
+.advocate-layout .collaborators-sidebar{
+	padding-right: 0;
+}
+
+#permissions-show-div {
+	padding-left: 0;
+}
+
+#advocate-bar h3 {
+	float: left;
+}
+
+.collaborators-sidebar{
+	padding-left: 0;
 }
