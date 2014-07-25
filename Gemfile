@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'google-analytics-rails'
 gem 'coveralls', require: false
 gem 'wunderground'
 gem 'airbrake'
