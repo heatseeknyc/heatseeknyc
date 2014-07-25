@@ -1,10 +1,11 @@
+@import 'shared';
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
   padding-top: 51px;
   padding-bottom: 0px;
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 400;
-  color:#252729;
+  color:$theme-black;
   font-size:10px;
   line-height: 1.2;
 }
@@ -14,11 +15,11 @@ p {
 }
 
 a, a:link, a:visited {
-color:#fb500b;
+color:$theme-red;
 }
 
 a:hover{
-color:#ff9a33;
+color:$theme-orange;
 }
 
 #homesplash {
@@ -30,11 +31,6 @@ color:#ff9a33;
 	-moz-background-size: cover;
 	padding: 0;
 }
-
-#center-control {
-
-}
-
 
 #homesplash .logo {
 	background: image-url("heat_seek_logo_splash-@2x.png") no-repeat;
@@ -101,11 +97,12 @@ color:#ff9a33;
 	-ms-transition: opacity .2s ease-in-out;
 	-o-transition: opacity .2s ease-in-out;
 	transition: opacity .2s ease-in-out;
-}
-#video-controls:hover {
-	opacity: 1;
-	filter: alpha(opacity=100);
-	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+	
+	&:hover {
+		opacity: 1;
+		filter: alpha(opacity=100);
+		-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+	}
 }
 
 #center-control {
@@ -138,10 +135,11 @@ color:#ff9a33;
 	-ms-transition: background .2s ease-in-out;
 	-o-transition: background .2s ease-in-out;
 	transition: background .2s ease-in-out;
-}
-#center-content #play-button:hover {
-	background: image-url("play-button-hover-@2x.png") no-repeat;
-	background-size: 77px 77px;
+	
+	&:hover {
+		background: image-url("play-button-hover-@2x.png") no-repeat;
+		background-size: 77px 77px;
+	}
 }
 
 #features {	
@@ -151,15 +149,15 @@ padding:0px;
 overflow: hidden;
 font-family: 'Oswald', sans-serif;
 font-weight: 700;
+	.featureOne { background: $theme-blue; }
+	.featureTwo{ background: $theme-orange; }
+	.featureThree { background: $theme-red; }
+
+	.feature a:hover{
+		color: $theme-grey-lighten-3;
+	}
 }
 
-#features .featureOne { background:#afcdd4; }
-#features .featureTwo{ background:#ff9a33; }
-#features .featureThree { background:#fb500b; }
-
-#features .feature a:hover{
-color:#ffffff;
-}
 
 /* Mobile first */
 
@@ -167,68 +165,72 @@ color:#ffffff;
 	font-size: 2em;
 }
 
-#features .feature {
-	padding-top:40px;
-	padding-bottom:40px;
-}
+#features {
+	.feature {
+		padding-top:40px;
+		padding-bottom:40px;
 
-#features .feature a{
-font-size: 2.8em;
-line-height:1.2;
-width:210px;
-padding-top:18px;
-padding-bottom:18px;
-margin-left: auto;
-margin-right: auto;
-display:block;
-text-align:center;
-border-top:solid #252729 4px;
-border-bottom: solid #252729 4px;
-text-transform:uppercase;
-color:#252729;
-text-decoration:none;
+		a {
+			font-size: 2.8em;
+			line-height: 1.2;
+			width: 210px;
+			padding-top: 18px;
+			padding-bottom: 18px;
+			margin-left: auto;
+			margin-right: auto;
+			display: block;
+			text-align: center;
+			border-top: solid $theme-black 4px;
+			border-bottom: solid $theme-black 4px;
+			text-transform: uppercase;
+			color: $theme-black;
+			text-decoration: none;
+		}
+	}
 }
 
 #linkGroups {
-background:#ffffff;
-width:100%;
-margin:0px;
-padding:0px;
-overflow: hidden;
-}
+	background: $theme-grey-lighten-3;
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+	overflow: hidden;
 
-#linkGroups .linkGroup {
-	padding-top:40px;
-	padding-bottom:40px;
-	text-align:center;
-}
+	.linkGroup {
+		padding-top:40px;
+		padding-bottom:40px;
+		text-align:center;
+		
+		h3 {
+			display:inline;
+			font-size:2.4em;
+			text-transform:uppercase;
+			color:$theme-black;
+			border-bottom: solid $theme-black 3px;
+		}
 
-#linkGroups .linkGroup h3 {
-	display:inline;
-	font-size:2.4em;
-	text-transform:uppercase;
-	color:#252729;
-	border-bottom: solid #252729 3px;
-}
-
-#linkGroups .linkGroup .row {
-	margin-top:30px;
-	font-size:1.4em;
-	color:#252729;
+		.row {
+			margin-top:30px;
+			font-size:1.4em;
+			color:$theme-black;
+		}
+	}
 }
 
 /* tablets */
 
 @media (min-width: 768px) {
-	#features .feature a {
-    	width:130px;
-    	border-top:solid #252729 4px;
-		border-bottom: solid #252729 4px;
-  	}
  	#features .feature {
 		padding-top:50px;
 		padding-bottom:50px;
+		
+		a {
+    	width:130px;
+    	border-top:solid $theme-black 4px;
+			border-bottom: solid $theme-black 4px;
+  	}
 	}
+	
 	
 	#homesplash h3 {
 		font-size: 2.4em;
@@ -236,7 +238,7 @@ overflow: hidden;
 	
 	#linkGroups .linkGroup h3 {
 		font-size:2.8em;
-		border-bottom: solid #252729 4px;
+		border-bottom: solid $theme-black 4px;
 	}
 }
 
@@ -244,35 +246,36 @@ overflow: hidden;
 /* large tablets and desktop */
 
 @media (min-width: 992px) {
-	#features .feature a {
-		font-size: 4.5em;
-		width:200px;
-		padding-top:28px;
-		padding-bottom:28px;
-		border-top:solid #252729 5px;
-		border-bottom: solid #252729 5px;
-
-  	}
 	#features .feature {
 		padding-top:75px;
 		padding-bottom:75px;
-
+		
+		a {
+			font-size: 4.5em;
+			width:200px;
+			padding-top:28px;
+			padding-bottom:28px;
+			border-top:solid $theme-black 4px;
+			border-bottom: solid $theme-black 4px;
+		}
 	}
+
+
 	#homesplash h3 {
 		font-size: 3em;
 	}
 	
 	#linkGroups .linkGroup h3 {
 		font-size:3em;
-		border-bottom: solid #252729 5px;
+		border-bottom: solid $theme-black 4px;
 	}
 }
 
 footer {
-	background:#252729;
+	background:$theme-black;
 	font-size:1.4em;
 	height:51px;
-	color:#ffffff;
+	color:$theme-black;
 	padding-left:15px;
 	padding-top:15px;
 }
