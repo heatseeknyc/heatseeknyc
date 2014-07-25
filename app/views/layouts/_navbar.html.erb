@@ -25,13 +25,13 @@
         </li>
         <li><%= link_to "Cold Map", coldmap_path %></li>
         <li><%= link_to "Demo", demo_path %></li>
-          <li class="signin">
+        
         <% if user_signed_in? %>
-          <%= link_to 'Sign out', destroy_user_session_path, :method => :delete %>
+          <%= render 'layouts/account_menu' %>
         <% else %>
-          <a href="/users/sign_in">Sign in &rsaquo;</a>
+          <li class="signin"><a href="/users/sign_in">Sign in &rsaquo;</a></li>
         <% end %>
-          </li>
+        
       </ul>
     </div><!--/.nav-collapse -->
   </div>

@@ -2,7 +2,7 @@
 .navbar {
     font-family: 'Source Sans Pro', sans-serif;
     text-transform:uppercase;
-    background-color: $theme-white;
+    background-color: #fff;
     border:0;
 }
 
@@ -46,24 +46,22 @@
   background-image: none;
   border: 0;
   border-radius: 0px;
-}
+  
+  &:hover,
+  &:focus{
+    background-color: $theme-black;
+   
+   .icon-bar {
+      background-color: $theme-white;
+    }
+  }
 
-
-
-.navbar-default .navbar-toggle:hover,
-.navbar-default .navbar-toggle:focus{
-   background-color: $theme-black;
-}
-.navbar-default .navbar-toggle:hover .icon-bar,
-.navbar-default .navbar-toggle:focus .icon-bar {
-  background-color: $theme-white;
-}
-
-.navbar-default .navbar-toggle .icon-bar {
-  background-color: $theme-black;
-  width: 18px;
-  height: 4px;
-  border-radius:0px;
+  .icon-bar {
+    background-color: $theme-black;
+    width: 18px;
+    height: 4px;
+    border-radius:0px;
+  }
 }
 
 .navbar-toggle .icon-bar + .icon-bar {
@@ -91,36 +89,44 @@
   border-radius: 0px;
 }
 
-.navbar-default .navbar-nav > li > a {
-  color: $theme-black;
-}
-.navbar-default .navbar-nav > li > a:hover,
-.navbar-default .navbar-nav > li > a:focus {
-  color: $theme-red;
-  background-color: transparent;
+.navbar-default .navbar-nav > li {
+  & > a {
+    color: $theme-black;
+  
+    &:hover,
+    &:focus {
+      color: $theme-red;
+      background-color: transparent;
+    }
+  }
+} 
+
+.darktheme .dropdown-menu > li > a {
+  &:link,
+  &:visited {
+    color: $theme-white;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: $theme-red;
+  }
 }
 
-.darktheme .dropdown-menu > li > a:link,
-.darktheme .dropdown-menu > li > a:visited {
-  color: $theme-white;
+.navbar-nav > li.signin > a {
+  &:link,
+  &:visited
+   {
+    color:$theme-orange;
+  }
+
+  &:hover,
+  &:focus
+   {
+    color:$theme-red;
+  }
 }
 
-.darktheme .dropdown-menu > li > a:hover,
-.darktheme .dropdown-menu > li > a:focus {
-  background-color: $theme-red;
-}
-
-.navbar-nav > li.signin > a:link,
-.navbar-nav > li.signin > a:visited
- {
-  color:$theme-orange;
-}
-
-.navbar-nav > li.signin > a:hover,
-.navbar-nav > li.signin > a:focus
- {
-  color:$theme-red;
-}
 
 @media (max-width: 767px) {
 
@@ -129,43 +135,45 @@
     border:0;
     border-radius:0px;
     
-  }
-  .navbar-default .navbar-nav > li > a{
-    color: $theme-white;
-  }
-  
-  .navbar-default .navbar-nav > li > a:hover,
-  .navbar-default .navbar-nav > li > a:focus
-  {
-    color: $theme-white;
-    background-color: $theme-red;
-  }
-  
-  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
-    color: $theme-white;
-    line-height: 2;
-  }
+    & > li > a{
+      color: $theme-white;
 
-  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
-  .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
-    color: $theme-white;
-    background-color: $theme-red;
-  }
-  .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
-  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
-  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
-    color: $theme-white;
-    background-color: $theme-red;
-  }
-  .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a,
-  .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a:hover,
-  .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a:focus {
-    color: $theme-white;
-    background-color: $theme-red;
+      &:hover,
+      &:focus {
+        background-color: $theme-red;
+      }
+    }
+    
+    & .open .dropdown-menu {
+      & > li > a {
+        line-height: 2;
+        
+        &:hover,
+        &:focus {
+          background-color: $theme-red;
+        }
+      }
+      
+      & > .active > a,
+      & > .active > a:hover,
+      & > .active > a:focus {
+        background-color: $theme-red;
+      }
+
+      & > .disabled > a,
+      & > .disabled > a:hover,
+      & > .disabled > a:focus {
+        background-color: $theme-red;
+      }
+    }
   }
   
   .navbar-nav > li.signin
   {
     border-top:solid $theme-orange 1px;
   }
+}
+
+.navbar-default .navbar-nav .account-dropdown {
+  color: $theme-orange;
 }
