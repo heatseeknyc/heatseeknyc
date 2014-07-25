@@ -78,7 +78,8 @@ class UsersController < ApplicationController
 
   def demo
     demo = User.find_by(email: 'demo-lawyer@heatseeknyc.com')
-    sign_in_and_redirect(demo)
+    sign_in(demo)
+    redirect_to user_path(demo)
   end
 
   private
