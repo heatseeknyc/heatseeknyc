@@ -84,6 +84,7 @@
 .remove-user-link {
 	padding-top: 30px;
 	text-align: center;
+	width: 40px;
 
 	&:hover {
 		color: $theme-red;
@@ -91,7 +92,7 @@
 		text-decoration: none;
 	}
 
-	@media (min-width: 500px) {
+	@media (min-width: 480px) {
 		width: 83px;
 	}
 }
