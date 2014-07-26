@@ -62,16 +62,6 @@
 	border-left: 4px solid #ff9a33;
 }
 
-.add-user-link {
-	height: 78px;
-	float: right;
-	margin-top: -65px;
-	border-left: 4px solid $theme-orange;
-	@media (min-width: 500px) {
-		width: 83px;
-	}	
-}
-
 .advocate-layout {
 	background: $theme-orange;
 
@@ -94,9 +84,27 @@
 .remove-user-link {
 	padding-top: 30px;
 	text-align: center;
+
+	&:hover {
+		color: $theme-red;
+		background-color: $theme-black;
+		text-decoration: none;
+	}
+
 	@media (min-width: 500px) {
 		width: 83px;
 	}
+}
+
+.add-user-link {
+	height: 78px;
+	float: right;
+	margin-top: -65px;
+	border-left: 4px solid $theme-orange;
+	
+	@media (min-width: 500px) {
+		width: 83px;
+	}	
 }
 
 #search-button {
@@ -148,4 +156,9 @@
 
 .collaborators-sidebar{
 	padding-left: 0;
+}
+
+#search-results {
+	padding-left: 0;
+	padding-right: 0;
 }
