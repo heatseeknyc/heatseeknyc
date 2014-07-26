@@ -7,6 +7,7 @@
     
     <%= favicon_link_tag "favicon.ico" %>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//www.google.com/jsapi"></script>
     
     <!-- New fonts -->
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic|Oswald:700' rel='stylesheet' type='text/css'>
@@ -18,7 +19,6 @@
     <%= csrf_meta_tags %>
     
     <%= analytics_init if Rails.env.production? %>
-    <script src="//www.google.com/jsapi"></script>
   </head>
 
 
