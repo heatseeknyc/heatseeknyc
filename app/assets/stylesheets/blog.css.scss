@@ -13,18 +13,6 @@
     }
   }
 
-  @media (min-width: 992px) {
-    .feed-loc-small {
-      display: none;
-    }
-  }
-
-  @media (max-width: 991px) {
-    .feed-loc-large {
-      display: none;
-    }
-  }
-
   .blog-title{
     @extend .stylish-title;
   }
