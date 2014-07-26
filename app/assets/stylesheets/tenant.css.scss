@@ -29,6 +29,9 @@
       font-size: 1em;
       font-family: 'Source Sans Pro';
       text-align: left;
+      @media (max-width: 768px) {
+        text-align: center;
+      }
     }
 
     h3 {
@@ -39,7 +42,7 @@
   div.upper-bar {
     border-top: solid 3px $theme-black;
     border-bottom: solid 3px $theme-black;
-    @media (min-width: 760px) {
+    @media (min-width: 768px) {
       border-top: none;
     }
 
