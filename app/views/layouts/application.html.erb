@@ -16,7 +16,9 @@
     <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
     <%= csrf_meta_tags %>
-     <%= analytics_init if Rails.env.production? %>
+    
+    <%= analytics_init if Rails.env.production? %>
+    <script src="//www.google.com/jsapi"></script>
   </head>
 
 
@@ -33,10 +35,7 @@
 
     </main>
 
-    <!-- Do we need these two script tags? -->
-    <script src="//www.google.com/jsapi"></script>
-    <!-- <script src="chartkick.js"></script> -->
-    <!-- Apparently not the chartkick.js, but the google api yes, otherwise the user line graph breaks -->    
+    
     
   </body>
 </html>
