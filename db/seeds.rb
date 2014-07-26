@@ -33,6 +33,14 @@ unless User.find_by(email: "jane@heatseeknyc.com")
     :email => "demo-user@heatseeknyc.com",
     :password => '33west26',
   )
+  User.create(
+    :first_name => "Demo Lawyer",
+    :last_name => "Account",
+    :address => "100 Fake St",
+    :zip_code => "10004",
+    :email => 'demo-lawyer@heatseeknyc.com',
+    :password => '33west26',
+  )
 end
 
 jane = User.find_by(email: "jane@heatseeknyc.com")
