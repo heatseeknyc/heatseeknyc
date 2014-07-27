@@ -26,11 +26,16 @@
 #q {
 	width: 200px;
 	float: right;
+	color: $theme-black;
 	background-color: $theme-orange;
 	border: solid 3px $theme-black;
 	border-radius: 0;
 	margin-right: 5px;
 	margin-top: 20px;
+
+	&:focus {
+		box-shadow: none;
+	}
 }
 
 #collaborator-h1{
@@ -114,10 +119,6 @@
 	border: solid 3px $theme-black;
 	height: 34px;
 	margin-top: 20px;
-
-	input:focus {
-		outline: none;
-	}
 }
 
 .collaborators-sidebar {
