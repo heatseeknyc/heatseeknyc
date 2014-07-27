@@ -114,6 +114,10 @@
 	border: solid 3px $theme-black;
 	height: 34px;
 	margin-top: 20px;
+
+	input:focus {
+		outline: none;
+	}
 }
 
 .collaborators-sidebar {
