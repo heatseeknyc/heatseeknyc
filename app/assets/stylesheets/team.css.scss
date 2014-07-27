@@ -37,8 +37,7 @@ $members: 'andrea', 'harold', 'daniel', 'ethan', 'jarryd', 'tristan',
     padding: 1px;
   }
 
-  &:last-child,
-  &:nth-last-child(2) {
+  &:last-child {
     height: auto;
   }
 }
