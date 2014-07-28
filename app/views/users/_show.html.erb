@@ -1,11 +1,17 @@
 <div class="show-layout container">
   <div class="row">
     <div class="show-top col-xs-12">
-      <div class="upper-bar clearfix">
-      <div class="user-info">
+      
+      <div class="user-info user-info-mobile">
         <h3><%= "#{user.first_name} #{user.last_name}" %></h3>
         <h4 class="address"><%= "#{user.address}, #{user.zip_code}" %></h4>
       </div>
+
+      <div class="upper-bar clearfix">
+        <div class="user-info user-info-desktop">
+          <h3><%= "#{user.first_name} #{user.last_name}" %></h3>
+          <h4 class="address"><%= "#{user.address}, #{user.zip_code}" %></h4>
+        </div>
         <%= link_to 'Download Report (PDF)', pdf_download_path(user), class: "btn btn-primary btn-download" %>
       </div>
       
