@@ -38,7 +38,7 @@ unless User.find_by(email: "jane@heatseeknyc.com")
     :last_name => "Account",
     :address => "100 Fake St",
     :zip_code => "10004",
-    :email => 'demo-lawyer@heatseeknyc.com',
+    :email => "demo-lawyer@heatseeknyc.com",
     :password => '33west26',
   )
 end
@@ -46,9 +46,10 @@ end
 jane = User.find_by(email: "jane@heatseeknyc.com")
 john = User.find_by(email: "john@heatseeknyc.com")
 demo = User.find_by(email: "demo-user@heatseeknyc.com")
+lawyer = User.find_by(email: "demo-lawyer@heatseeknyc.com")
 now = Time.now
 current_time = now - (now.to_i % 3600)
-users = [jane, john, demo]
+users = [jane, john, demo, lawyer]
 users.each do |user|
   user.readings.clear
   current_temp = 65
