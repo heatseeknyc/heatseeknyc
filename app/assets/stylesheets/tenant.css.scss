@@ -20,6 +20,10 @@
       padding-top: 0;
       padding-bottom: 30px;
     }
+
+    .current-temp, .violations {
+      min-width: 260px;
+    }
     
     .stat-num {
       font-size: 133px;
