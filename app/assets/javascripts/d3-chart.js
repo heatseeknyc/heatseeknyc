@@ -5,6 +5,8 @@ $(document).ready(function(){
 // instead of all the readings a user has
 
 
+// Also need to add a div to attach d3 chart to
+
 
 
 
