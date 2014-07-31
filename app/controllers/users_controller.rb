@@ -38,6 +38,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    binding.pry
     render "permissions_show" if current_user.permissions <= 50
   end
 
