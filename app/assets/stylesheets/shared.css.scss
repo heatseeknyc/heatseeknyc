@@ -74,10 +74,15 @@ $theme-black-blue-3: #AFCDD4;
   border-bottom: 4px solid $theme-black;
   margin-top: 40px;
   margin-bottom: 40px;
-  font-size: 3.2em;
+  font-size: 36px;
   font-family: Oswald;
   text-align: center;
   padding: 15px;
   line-height: 50px;
   text-transform: uppercase;
+  
+  @media (max-width: 768px) {
+    font-size: 23px;
+    line-height: 37px;
+  }
 }

@@ -1,17 +1,14 @@
 @import 'shared';
 
-.how-it-works-title{
-  @extend .stylish-title;
-}
-
-.how-it-works-title {
-  padding: 5px;
-  margin-top: 0px;  
-}
-
 .how-it-works {
   background-color: white;
   text-align: center;
+
+  .how-it-works-title {
+    @extend .stylish-title;
+    padding: 5px;
+    margin-top: 0px;  
+  }
 
   h4 {
     text-transform: uppercase;
@@ -20,6 +17,7 @@
 
   div {
     padding-bottom: 5px auto 5px auto;
+
     &:last-child {
       margin-bottom: 80px;
     }
@@ -33,20 +31,12 @@
   }
 }
 
-@media (min-width: 760px){
-  .how-it-works div {
-    padding-left: 80px;
-    padding-right: 80px;
-  }  
-}
-
-
 #connect-icon,
 #analyze-icon,
 #identify-icon,
 #act-icon {
-  height: 126px;
-  width: 126px;
+  height: 100px;
+  width: 100px;
   padding: 20px;
   margin: 40px auto 40px auto;
   -webkit-transition: opacity 0.1s ease-out;  /* Chrome 1-25, Safari 3.2+ */
@@ -74,3 +64,24 @@
   background: image-url("act_icon.png") no-repeat;
   @include image-2x("act_icon_2@2x.png", 100px, 100px);
 }
+
+/* Mobile */
+
+@media (max-width: 768px) {
+  .how-it-works {
+    h4 {
+      font-size: 23px;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 21px;
+    }
+
+    div {
+      padding-left: 80px;
+      padding-right: 80px;
+    }
+  }
+}
+
