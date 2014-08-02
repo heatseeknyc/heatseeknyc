@@ -13,6 +13,7 @@ Twinenyc::Application.routes.draw do
   get 'users/:id/live_update' => 'users#live_update'
   get 'users/:user_id/collaborations/:id/download' => 'users#download_pdf'
   get "demo" => "users#demo"
+  get "account" => "welcome#mockup"
 
   get "complaints/query" => "complaint#query"
   get "coldmap/" => "complaint#index"
