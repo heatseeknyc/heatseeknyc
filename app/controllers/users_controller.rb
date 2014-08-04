@@ -38,8 +38,13 @@ class UsersController < ApplicationController
   end
 
   def show
-    binding.pry
-    render "permissions_show" if current_user.permissions <= 50
+    respond_to do |f|
+      f.html { render "permissions_show" if current_user.permissions <= 50 }
+      f.json do
+        @data = User.find(params[:id]).readings.pluck(:temp)
+        render json: @data
+      end
+    end
   end
 
   def download_pdf

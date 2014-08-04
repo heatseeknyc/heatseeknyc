@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140702194735) do
+ActiveRecord::Schema.define(version: 20140803233230) do
 
   create_table "collaborations", force: true do |t|
     t.integer  "user_id"
@@ -33,8 +33,8 @@ ActiveRecord::Schema.define(version: 20140702194735) do
     t.string  "street_name"
     t.string  "community_board"
     t.string  "borough"
-    t.decimal "latitude",         precision: 15, scale: 0
-    t.decimal "longitude",        precision: 15, scale: 0
+    t.decimal "latitude",         precision: 15, scale: 13
+    t.decimal "longitude",        precision: 15, scale: 13
   end
 
   create_table "readings", force: true do |t|
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20140702194735) do
     t.integer  "user_id"
     t.integer  "outdoor_temp"
     t.integer  "sensor_id"
+    t.boolean  "violation"
   end
 
   create_table "sensors", force: true do |t|
