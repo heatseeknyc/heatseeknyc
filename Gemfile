@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'will_paginate'
+gem 'tumblr_client', '0.8.1'
 gem 'google-analytics-rails'
 gem 'coveralls', require: false
 gem 'wunderground'

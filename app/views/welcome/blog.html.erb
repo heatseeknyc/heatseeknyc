@@ -5,7 +5,80 @@
     <h4 class="blog-title">Heat Seek Blog</h4>
     
     <div class="container col-xs-12 col-md-9">
-      <%= render 'tumblr_embed' %>
+      <ol class="tumblr_posts">
+        <% @entries.each do |entry| %>
+          <!-- <p class="inspect"><%#= entry.inspect %></p> -->
+          
+          <li class="tumblr_post">
+            <% if entry['type'] == 'video' %>
+              <div class="tumblr_video">
+                <%= entry["player"][2]['embed_code'].html_safe %>
+              </div>
+              <p class="tumblr_caption">
+                <%= entry['caption'].html_safe %>
+              </p>
+            <% end %>
+
+            <% if entry['type'] == 'audio' %>
+              <div class="tumblr_audio">
+                <%= entry["player"].html_safe %>
+              </div>
+              <p class="tumblr_caption">
+                <%= entry['caption'].html_safe %>
+              </p>
+            <% end %>
+
+            <% if entry['type'] == 'text' %>
+              <div class="tumblr_text">
+                <%= entry["body"].html_safe %>
+              </div>
+            <% end %>
+
+            <% if entry['type'] == 'chat' %>
+              <div class="tumblr_title">
+                <%= entry["title"].html_safe %>
+              </div>
+              <div class="tumblr_chat">
+                <%= entry["body"].html_safe %>
+              </div>
+            <% end %>
+
+            <% if entry['type'] == 'link' %>
+              <div class="tumblr_title">
+                <%= link_to entry["title"].html_safe, entry["url"] %>
+              </div>
+              <div class="tumblr_description">
+                <%= entry["description"].html_safe %>
+              </div>
+            <% end %>
+
+            <% if entry['type'] == 'quote' %>
+              <div class="tumblr_text">
+                <%= entry["text"].html_safe %>
+              </div>
+              <div class="tumblr_source">
+                <%= entry["source"].html_safe %>
+              </div>
+            <% end %>
+
+            <% if entry['type'] == 'photo' %>
+              <% entry["photos"].each do |photo| %>
+                <%= image_tag photo["alt_sizes"][0]['url'], class: "tumblr_photo" %>
+                <p class="tumblr_caption">
+                  <%= entry['caption'].html_safe %>
+                </p>
+              <% end %>
+            <% end %>
+
+            <p class="tumblr_date"><%= Time.at(entry['timestamp']).strftime("%b %d, %Y") %></p>
+
+          </li>        
+        <% end %>
+        
+      </ol>
+
+      <%= will_paginate @entries %>
+
     </div>
     
     <div class="col-xs-12 col-md-3">
