@@ -27,7 +27,7 @@ D3Chart.prototype.setLine = function(first_argument) {
   var monthNames = [ "January", "February", "March", "April", "May", "June",
       "July", "August", "September", "October", "November", "December" ];
 
-  var maxDataPointsForDots = 50,
+  var maxDataPointsForDots = 500,
     transitionDuration = 1000;
 
   var svg = null,
@@ -159,7 +159,6 @@ D3Chart.prototype.setLine = function(first_argument) {
     //   .duration(transitionDuration)
     //   .style('opacity', 1)
     //   .attr("transform", function(d) { 
-    //     debugger; 
     //     return "translate(" + x(d.date) + "," + y(d.temp) + ")"; 
     //   });
 
@@ -184,7 +183,7 @@ D3Chart.prototype.setLine = function(first_argument) {
 // however it appears that is not being added to the svg
 
     var circles = dataCirclesGroup.selectAll('.data-point').data(data);
-debugger
+
     circles.enter()
       .append('svg:circle')
       .attr('class', 'data-point')
@@ -197,7 +196,7 @@ debugger
       .style('opacity', 1)
       .attr('cx', function(d) { return x(d.date) })
       .attr('cy', function(d) { return y(d.temp) });
-debugger
+
     circles
       .transition()
       .duration(transitionDuration)
@@ -205,7 +204,7 @@ debugger
       .attr('cy', function(d) { return y(d.temp) })
       .attr('r', function() { return (data.length <= maxDataPointsForDots) ? pointRadius : 0 })
       .style('opacity', 1);
-debugger
+
     circles
       .exit()
       .transition()
@@ -215,7 +214,7 @@ debugger
       .attr('cy', function() { return y(0) })
       .style("opacity", 1e-6)
       .remove();
-debugger
+
     $('svg circle').tipsy({ 
       gravity: 'w', 
       html: true, 
