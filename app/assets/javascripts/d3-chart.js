@@ -214,13 +214,13 @@ D3Chart.prototype.setLine = function(first_argument) {
       .attr('cy', function() { return y(0) })
       .style("opacity", 1e-6)
       .remove();
-
+    
     $('svg circle').tipsy({ 
       gravity: 'w', 
       html: true, 
       title: function() {
         var d = this.__data__;
-        // var pDate = d.date;
+        var pDate = d.date;
         return 'Date: ' + pDate.getDate() + " " + monthNames[pDate.getMonth()] + " " + pDate.getFullYear() + '<br>temp: ' + d.temp; 
       }
     });
