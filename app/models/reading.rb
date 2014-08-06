@@ -10,7 +10,7 @@ class Reading < ActiveRecord::Base
   before_save :get_outdoor_temp, unless: :outdoor_temp
   # having a boolean column called violation will ease data representations
   # I'm not sure how we're implementing any of this anymore.
-  before_save :in_violation?
+  # before_save :in_violation?
 
   def self.new_from_twine(temp, outdoor_temp, twine, user)
     new.tap do |r|

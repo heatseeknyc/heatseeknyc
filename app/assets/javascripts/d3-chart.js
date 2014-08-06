@@ -96,7 +96,6 @@ D3Chart.prototype.setLine = function(first_argument) {
     var line = d3.svg.line()
       // assign the X function to plot our line as we wish
       .x(function(d,i) { 
-        debugger
         // verbose logging to show what's actually being done
         //console.log('Plotting X temp for date: ' + d.date + ' using index: ' + i + ' to be at: ' + x(d.date) + ' using our xScale.');
         // return the X coordinate where we want to plot this datapoint
@@ -144,23 +143,25 @@ D3Chart.prototype.setLine = function(first_argument) {
     dataLines.enter().append('path')
       .attr('class', 'data-line')
       .style('opacity', 0.3)
-      .attr("d", line(data));
-      /*
+      .attr("d", line(data))
       .transition()
       .delay(transitionDuration / 2)
       .duration(transitionDuration)
-        .style('opacity', 1)
-        .attr('x1', function(d, i) { return (i > 0) ? xScale(data[i - 1].date) : xScale(d.date); })
-        .attr('y1', function(d, i) { return (i > 0) ? yScale(data[i - 1].temp) : yScale(d.temp); })
-        .attr('x2', function(d) { return xScale(d.date); })
-        .attr('y2', function(d) { return yScale(d.temp); });
-      */
+      .style('opacity', 1);
+      // .attr('x1', function(d, i) { return (i > 0) ? xScale(data[i - 1].date) : xScale(d.date); })
+      // .attr('y1', function(d, i) { return (i > 0) ? yScale(data[i - 1].temp) : yScale(d.temp); })
+      // .attr('x2', function(d) { return xScale(d.date); })
+      // .attr('y2', function(d) { return yScale(d.temp); });
+      
 
-    dataLines.transition()
-      .attr("d", line)
-      .duration(transitionDuration)
-      .style('opacity', 1)
-      .attr("transform", function(d) { debugger; return "translate(" + x(d.date) + "," + y(d.temp) + ")"; });
+    // dataLines.transition()
+    //   .attr("d", line)
+    //   .duration(transitionDuration)
+    //   .style('opacity', 1)
+    //   .attr("transform", function(d) { 
+    //     debugger; 
+    //     return "translate(" + x(d.date) + "," + y(d.temp) + ")"; 
+    //   });
 
     dataLines.exit()
       .transition()
@@ -179,8 +180,11 @@ D3Chart.prototype.setLine = function(first_argument) {
       dataCirclesGroup = svg.append('svg:g');
     }
 
-    var circles = dataCirclesGroup.selectAll('.data-point').data(data);
+// the cricles should be getting created in the following lines
+// however it appears that is not being added to the svg
 
+    var circles = dataCirclesGroup.selectAll('.data-point').data(data);
+debugger
     circles.enter()
       .append('svg:circle')
       .attr('class', 'data-point')
@@ -193,7 +197,7 @@ D3Chart.prototype.setLine = function(first_argument) {
       .style('opacity', 1)
       .attr('cx', function(d) { return x(d.date) })
       .attr('cy', function(d) { return y(d.temp) });
-
+debugger
     circles
       .transition()
       .duration(transitionDuration)
@@ -201,7 +205,7 @@ D3Chart.prototype.setLine = function(first_argument) {
       .attr('cy', function(d) { return y(d.temp) })
       .attr('r', function() { return (data.length <= maxDataPointsForDots) ? pointRadius : 0 })
       .style('opacity', 1);
-
+debugger
     circles
       .exit()
       .transition()
@@ -211,7 +215,7 @@ D3Chart.prototype.setLine = function(first_argument) {
       .attr('cy', function() { return y(0) })
       .style("opacity", 1e-6)
       .remove();
-
+debugger
     $('svg circle').tipsy({ 
       gravity: 'w', 
       html: true, 
