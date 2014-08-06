@@ -16,6 +16,6 @@
 //= require bootstrap.min.js
 //= require jquery.fitvids.js
 //= require jquery.scrolly.js
-
+//= require jquery.tipsy.js
 //= require select2
 //= require_tree .
