@@ -190,7 +190,10 @@ D3Chart.prototype.setLine = function(first_argument) {
       .style('opacity', 1e-6)
       .attr('cx', function(d) { return x(d.date) })
       .attr('cy', function() { return y(0) })
-      .attr('r', function() { return (data.length <= maxDataPointsForDots) ? pointRadius : 0 })
+      .attr('r', function(d) { 
+        debugger;
+        return (data.length <= maxDataPointsForDots) ? pointRadius : 0 
+      })
       .transition()
       .duration(transitionDuration)
       .style('opacity', 1)
