@@ -11,6 +11,7 @@ class Reading < ActiveRecord::Base
   # having a boolean column called violation will ease data representations
   # I'm not sure how we're implementing any of this anymore.
   # So I'm adding the method to directly in the reading model.
+  # The violation column is default to false, not sure if we need or should do that.
   before_save :set_violation_boolean
 
   def in_violation?
