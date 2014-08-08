@@ -15,6 +15,7 @@ class Reading < ActiveRecord::Base
   before_save :set_violation_boolean
 
   def in_violation?
+    # binding.pry
     if created_at.hour >= 6 && created_at.hour <= 22
       outdoor_temp < 55 && temp < 68
     else
@@ -23,7 +24,7 @@ class Reading < ActiveRecord::Base
   end
 
   def set_violation_boolean
-    violation = in_violation?
+    self.violation = in_violation?
   end
 
   def self.new_from_twine(temp, outdoor_temp, twine, user)
