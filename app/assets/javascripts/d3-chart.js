@@ -205,7 +205,10 @@ D3Chart.prototype.setLine = function(first_argument) {
       .duration(transitionDuration)
       .attr('cx', function(d) { return x(d.date) })
       .attr('cy', function(d) { return y(d.temp) })
-      .attr('r', function() { return (data.length <= maxDataPointsForDots) ? pointRadius : 0 })
+      .attr('r', function(d) { 
+        debugger;
+        return (data.length <= maxDataPointsForDots) ? pointRadius : 0
+      })
       .style('opacity', 1);
 
     circles
