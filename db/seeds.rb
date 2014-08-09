@@ -52,22 +52,23 @@ current_time = now - (now.to_i % 3600)
 users = [jane, john, demo, lawyer]
 users.each do |user|
   user.readings.clear
-
+  current_temp = 70
+  current_outdoor_temp = 45
   200.times do
     current_time -= 3600
     if user.during_the_day?(current_time)
-      current_temp = rand(55..75)
-      current_outdoor_temp = rand(30..60)
+      current_temp += rand(-3..2)
+      current_outdoor_temp += rand(-1..3)
     else
-      current_temp = rand(45..65)
-      current_outdoor_temp = rand(20..50)
+      current_temp += rand(-2..3)
+      current_outdoor_temp += rand(-1..3)
     end
 
-    # current_temp -= 2 if current_temp > 68
-    current_temp += rand(2..5) if current_temp < 52
-    # current_outdoor_temp -= 2 if current_outdoor_temp > 55
-    current_outdoor_temp += rand(2..5) if current_outdoor_temp < 25
+    current_temp -= 2 if current_temp > 68
+    current_temp += 2 if current_temp < 52
+    current_outdoor_temp -= 2 if current_outdoor_temp > 55
+    current_outdoor_temp += 2 if current_outdoor_temp < 25
+
     user.readings << Reading.new(created_at: current_time, temp: current_temp, outdoor_temp: current_outdoor_temp, user: user, twine: user.twine)
-    # user.save
   end
 end
