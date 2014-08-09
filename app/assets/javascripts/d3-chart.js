@@ -158,7 +158,7 @@ D3Chart.prototype.setLine = function(first_argument) {
     //   .attr("d", line)
     //   .duration(transitionDuration)
     //   .style('opacity', 1)
-    //   .attr("transform", function(d) { 
+    //   .attr("transform", function(d) {
     //     return "translate(" + x(d.date) + "," + y(d.temp) + ")"; 
     //   });
 
@@ -187,12 +187,11 @@ D3Chart.prototype.setLine = function(first_argument) {
     circles.enter()
       .append('svg:circle')
       .attr('class', 'data-point')
-      .style('opacity', 1e-6)
+      .style('opacity', 1)
       .attr('cx', function(d) { return x(d.date) })
       .attr('cy', function() { return y(0) })
-      .attr('r', function(d) { 
-        debugger;
-        return (data.length <= maxDataPointsForDots) ? pointRadius : 0 
+      .attr('r', function(d) {
+        return d.violation ? pointRadius : 0;
       })
       .transition()
       .duration(transitionDuration)
@@ -200,16 +199,15 @@ D3Chart.prototype.setLine = function(first_argument) {
       .attr('cx', function(d) { return x(d.date) })
       .attr('cy', function(d) { return y(d.temp) });
 
-    circles
-      .transition()
-      .duration(transitionDuration)
-      .attr('cx', function(d) { return x(d.date) })
-      .attr('cy', function(d) { return y(d.temp) })
-      .attr('r', function(d) { 
-        debugger;
-        return (data.length <= maxDataPointsForDots) ? pointRadius : 0
-      })
-      .style('opacity', 1);
+    // circles
+    //   .transition()
+    //   .duration(transitionDuration)
+    //   .attr('cx', function(d) { return x(d.date) })
+    //   .attr('cy', function(d) { return y(d.temp) })
+    //   .attr('r', function(d) { 
+    //     return d.violation ? pointRadius : null
+    //   })
+    //   .style('opacity', 1);
 
     circles
       .exit()
@@ -232,13 +230,11 @@ D3Chart.prototype.setLine = function(first_argument) {
     });
   }
  
-  // create a simple data array that we'll plot with a line (this array represents only the Y temps, X will just be the index location)
   $.ajax({
     url: /\/users\/\d+/.exec(document.URL)[0],
     dataType: "JSON",
     success: function(response){
       draw(response);
-  
     },
     error: function(response){
       console.log("error");
