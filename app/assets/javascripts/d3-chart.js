@@ -1,26 +1,5 @@
 $(document).ready(function(){
 
-// I need to get an ajax call for the data
-// that query should return a set number of days
-// instead of all the readings a user has
-
-
-// Also need to add a div to attach d3 chart to
-
-/*
-function D3Chart (margins) {
-  this.margins = margins;
-  this.width = 1000 - margins[1] - margins[3];
-  this.height = 400 - margins[0] - margins[2];
-  this.data = data // or maybe an ajax request?
-
-}
-
-D3Chart.prototype.setLine = function(first_argument) {
-  // body...
-};
-*/
-
   var w = 900,
       h = 450;
 
@@ -229,20 +208,19 @@ D3Chart.prototype.setLine = function(first_argument) {
       }
     });
   }
- 
-  $.ajax({
-    url: /\/users\/\d+/.exec(document.URL)[0],
-    dataType: "JSON",
-    success: function(response){
-      draw(response);
-    },
-    error: function(response){
-      console.log("error");
-      console.log(response);
-    }
-  });
 
-		
-
+  if($("#chart").length > 0){
+    $.ajax({
+      url: /\/users\/\d+/.exec(document.URL)[0],
+      dataType: "JSON",
+      success: function(response){
+        draw(response);
+      },
+      error: function(response){
+        console.log("error");
+        console.log(response);
+      }
+    });
+  }
 
 });
