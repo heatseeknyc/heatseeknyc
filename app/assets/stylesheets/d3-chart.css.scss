@@ -1,40 +1,42 @@
-.data-line {
-  stroke: steelblue;
-  stroke-width: 2;
-  fill: none;
-  stroke-dasharray: 0;
+#d3-chart {
+  .data-line {
+    stroke: steelblue;
+    stroke-width: 2;
+    fill: none;
+    stroke-dasharray: 0;
+  }
+
+  path {
+    stroke: #eee;
+    stroke-width: 2;
+    stroke-dasharray: 0;
+    fill: none;
+  }
+
+  .area {
+    /*fill: lightsteelblue;*/
+  }
+
+  text {
+    font-family: Arial;
+    font-size: 8pt;
+    fill: #787878;
+  }
+
+  line {
+    stroke: #CDCDCD;
+    stroke-width: 0.5;
+    /* stroke-dasharray: 3 3; */
+    fill: none;
+  }
+
+  .data-point {
+    stroke: steelblue;
+    stroke-width: 2;
+    fill: #FFF;
+  }
 }
 
-path {
-  stroke: #eee;
-  stroke-width: 2;
-  stroke-dasharray: 0;
-  fill: none;
-}
-
-.area {
-  /*fill: lightsteelblue;*/
-}
-
-text {
-  font-family: Arial;
-  font-size: 8pt;
-  fill: #787878;
-}
-
-line {
-  stroke: #CDCDCD;
-  stroke-width: 0.5;
-  /* stroke-dasharray: 3 3; */
-  fill: none;
-}
-
-.data-point {
-  stroke: steelblue;
-  stroke-width: 2;
-  fill: #FFF;
-}
-
-#chart {
-        margin: 0;
+#d3-chart {
+  margin: 0;
 }

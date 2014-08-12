@@ -19,3 +19,4 @@
 //= require jquery.tipsy.js
 //= require select2
 //= require_tree .
+

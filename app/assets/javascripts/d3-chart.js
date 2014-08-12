@@ -32,9 +32,9 @@ $(document).ready(function(){
     var yAxis = d3.svg.axis().scale(y).orient('left').tickSize(-w + margin * 2).tickPadding(10);
     var t = null;
 
-    svg = d3.select('#chart').select('svg').select('g');
+    svg = d3.select('#d3-chart').select('svg').select('g');
     if (svg.empty()) {
-      svg = d3.select('#chart')
+      svg = d3.select('#d3-chart')
         .append('svg:svg')
         .attr('width', w)
         .attr('height', h)
@@ -209,7 +209,7 @@ $(document).ready(function(){
     });
   }
 
-  if($("#chart").length > 0){
+  if($("#d3-chart").length > 0){
     $.ajax({
       url: /\/users\/\d+/.exec(document.URL)[0],
       dataType: "JSON",
