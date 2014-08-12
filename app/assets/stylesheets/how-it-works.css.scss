@@ -31,20 +31,6 @@
   }
 }
 
-#connect-icon,
-#analyze-icon,
-#identify-icon,
-#act-icon {
-  height: 100px;
-  width: 100px;
-  padding: 20px;
-  margin: 40px auto 40px auto;
-  -webkit-transition: opacity 0.1s ease-out;  /* Chrome 1-25, Safari 3.2+ */
-  -moz-transition: opacity 0.1s ease-out;  /* Firefox 4-15 */
-  -o-transition: opacity 0.1s ease-out;  /* Opera 10.50â€“12.00 */
-  transition: opacity 0.1s ease-out;  /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
-}
-
 #connect-icon {
   background: image-url("connect_icon.png") no-repeat;
   @include image-2x("connect_icon_2@2x.png", 100px, 100px);
@@ -63,6 +49,22 @@
 #act-icon {
   background: image-url("act_icon.png") no-repeat;
   @include image-2x("act_icon_2@2x.png", 100px, 100px);
+}
+
+#connect-icon,
+#analyze-icon,
+#identify-icon,
+#act-icon {
+  height: 100px;
+  width: 100px;
+  padding: 20px;
+  margin: 40px auto 40px auto;
+  -webkit-background-size: 100px 100px;
+  background-size: 100px 100px;
+  -webkit-transition: opacity 0.1s ease-out;  /* Chrome 1-25, Safari 3.2+ */
+  -moz-transition: opacity 0.1s ease-out;  /* Firefox 4-15 */
+  -o-transition: opacity 0.1s ease-out;  /* Opera 10.50â€“12.00 */
+  transition: opacity 0.1s ease-out;  /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
 }
 
 /* Mobile */
