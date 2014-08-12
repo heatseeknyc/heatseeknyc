@@ -12,25 +12,6 @@
  *= require leaflet
  *= require select2
  *= require bootstrap
- *= require shared
- *= require about
- *= require advocate
- *= require blog
- *= require d3-chart
- *= require demo
- *= require footer-logos
- *= require how-it-works
- *= require login
- *= require mail-chimp
- *= require navbar-overrides
- *= require new-styles
- *= require nycbigapps
- *= require press
- *= require shared
- *= require team
- *= require tenant
- *= require coldmap
+ *= require_tree .
  *= require_self
  */
-
- @import 'shared';
