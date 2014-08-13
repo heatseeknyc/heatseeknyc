@@ -44,7 +44,7 @@
 
 /* Mobile */
 
-@media (max-width: 768px) {
+@media (max-width: $screen-xs-max) {
   .about {
     p {
       font-size: 18px;

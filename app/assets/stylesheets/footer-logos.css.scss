@@ -1,15 +1,4 @@
-.logo-buttons {
-  height: 100px;
-  width: 100px;
-  background-size: 100% !important;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  -webkit-transition: opacity 0.1s ease-out;  /* Chrome 1-25, Safari 3.2+ */
-  -moz-transition: opacity 0.1s ease-out;  /* Firefox 4-15 */
-  -o-transition: opacity 0.1s ease-out;  /* Opera 10.50â€“12.00 */
-  transition: opacity 0.1s ease-out;  /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
-}
+@import 'shared';
 
 .medium {
   background: image-url("medium_logo_normal_100px.png") no-repeat;
@@ -72,4 +61,20 @@
 
 .linkGroup.sponsorLinks {
   display: inherit !important;
+}
+
+.logo-buttons, .logo-buttons:hover {
+  height: 100px;
+  width: 100px;
+  background-size: 75%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  -webkit-transition: opacity 0.1s ease-out;  /* Chrome 1-25, Safari 3.2+ */
+  -moz-transition: opacity 0.1s ease-out;  /* Firefox 4-15 */
+  -o-transition: opacity 0.1s ease-out;  /* Opera 10.50â€“12.00 */
+  transition: opacity 0.1s ease-out;  /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
+  @media (min-width: $screen-lg-min) {
+    background-size: 100%;
+  }
 }
