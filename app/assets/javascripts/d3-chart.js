@@ -202,7 +202,9 @@ $(document).ready(function(){
     
     $('svg circle').tipsy({ 
       gravity: 'w', 
-      html: true, 
+      html: true,
+      topOffset: 4.6,
+      leftOffset: 9.5,
       title: function() {
         var d = this.__data__;
         var pDate = d.date;
