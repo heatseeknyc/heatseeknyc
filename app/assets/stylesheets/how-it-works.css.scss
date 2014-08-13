@@ -80,10 +80,11 @@
       line-height: 21px;
     }
 
-    div {
-      padding-left: 80px;
-      padding-right: 80px;
+    @media (min-width: 480px) {
+      div {
+        padding-left: 80px;
+        padding-right: 80px;
+      }
     }
   }
 }
-
