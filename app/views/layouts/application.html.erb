@@ -22,7 +22,7 @@
   </head>
 
 
-  <body class="body">
+  <body class="body <%= yield(:template) %>">
     <header>
       <%= render 'layouts/navbar' %>
     </header>

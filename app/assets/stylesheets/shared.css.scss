@@ -99,3 +99,20 @@ $theme-black-blue-3: #AFCDD4;
     line-height: 37px;
   }
 }
+
+html, body {
+  height: 100%;
+}
+
+main {
+  padding-bottom: 51px;
+  overflow: auto;
+  min-height: 100%;
+}
+
+footer {
+  position: relative;
+  margin-top: -51px;
+  height: 51px;
+  clear: both;
+}
