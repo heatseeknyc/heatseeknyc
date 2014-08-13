@@ -224,6 +224,12 @@
         return $(this).offset().left > ($(document).scrollLeft() + $(window).width() / 2) ? 'e' : 'w';
     };
     
+// top: 504.552612px;
+// left: 56.361809px;
+
+// top: 497.5526123046875px;
+// left: 48.36180877685547px;
+
     /**
      * yields a closure of the supplied parameters, producing a function that takes
      * no arguments and is suitable for use as an autogravity function like so:

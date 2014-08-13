@@ -97,8 +97,8 @@ $(document).ready(function(){
        .transition()
        .delay(transitionDuration / 2)
        .duration(transitionDuration)
-        .style('opacity', 1)
-                          .attr("transform", function(d) { return "translate(" + x(d.date) + "," + y(d.temp) + ")"; });
+       .style('opacity', 1)
+       .attr("transform", function(d) { return "translate(" + x(d.date) + "," + y(d.temp) + ")"; });
         */
 
     var garea = d3.svg.area()
@@ -107,7 +107,7 @@ $(document).ready(function(){
         // verbose logging to show what's actually being done
         return x(d.date); 
       })
-                .y0(h - margin * 2)
+      .y0(h - margin * 2)
       .y1(function(d) { 
         // verbose logging to show what's actually being done
         return y(d.temp); 
@@ -175,7 +175,9 @@ $(document).ready(function(){
       .transition()
       .duration(transitionDuration)
       .style('opacity', 1)
-      .attr('cx', function(d) { return x(d.date) })
+      .attr('cx', function(d) { 
+        return x(d.date) 
+      })
       .attr('cy', function(d) { return y(d.temp) });
 
     // circles
@@ -204,7 +206,9 @@ $(document).ready(function(){
       title: function() {
         var d = this.__data__;
         var pDate = d.date;
-        return 'Date: ' + pDate.getDate() + " " + monthNames[pDate.getMonth()] + " " + pDate.getFullYear() + '<br>temp: ' + d.temp; 
+        return 'Date: ' + pDate.getDate() + " "
+          + monthNames[pDate.getMonth()] + " " 
+          + pDate.getFullYear() + '<br>temp: ' + d.temp; 
       }
     });
   }
