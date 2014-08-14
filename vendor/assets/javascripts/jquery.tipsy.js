@@ -52,9 +52,8 @@
               break;
             case 's':
               tp = {
-                top: pos.top - actualHeight - this.options.offset, 
-                left: pos.left + pos.width / 2 - actualWidth / 2
-              };
+                top: pos.top - actualHeight - this.options.offset - this.options.topOffset, 
+                left: pos.left + pos.width / 2 - actualWidth / 2 + this.options.leftOffset              };
               break;
             case 'e':
               tp = {

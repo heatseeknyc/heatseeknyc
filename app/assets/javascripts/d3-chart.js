@@ -201,10 +201,10 @@ $(document).ready(function(){
       .remove();
     
     $('svg circle').tipsy({ 
-      gravity: 'w',
+      gravity: 's',
       html: true,
-      topOffset: 4.6,
-      leftOffset: 9.5,
+      topOffset: 1.5,
+      leftOffset: 4.15,
       title: function() {
         var d = this.__data__;
         var pDate = d.date;
