@@ -65,7 +65,7 @@
             case 'w':
               tp = {
                 top: pos.top + pos.height / 2 - actualHeight / 2 + this.options.topOffset, 
-                left: pos.left + pos.width + this.options.offset + this.options.topOffset
+                left: pos.left + pos.width + this.options.offset + this.options.leftOffset
               };
               break;
           }

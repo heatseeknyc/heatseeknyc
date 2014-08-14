@@ -201,7 +201,7 @@ $(document).ready(function(){
       .remove();
     
     $('svg circle').tipsy({ 
-      gravity: 'w', 
+      gravity: 'w',
       html: true,
       topOffset: 4.6,
       leftOffset: 9.5,
@@ -210,7 +210,8 @@ $(document).ready(function(){
         var pDate = d.date;
         return 'Date: ' + pDate.getDate() + " "
           + monthNames[pDate.getMonth()] + " " 
-          + pDate.getFullYear() + '<br>temp: ' + d.temp; 
+          + pDate.getFullYear() + '<br>Unit Temp: ' + d.temp
+          + '<br>Outdoor Temp: ' + d.outdoor_temp; 
       }
     });
   }

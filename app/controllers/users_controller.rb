@@ -41,7 +41,7 @@ class UsersController < ApplicationController
     respond_to do |f|
       f.html { render "permissions_show" if current_user.permissions <= 50 }
       f.json do
-        @readings = User.find(params[:id]).readings
+        @readings = User.find(params[:id]).readings.order("id DESC")
         render json: @readings
       end
     end
