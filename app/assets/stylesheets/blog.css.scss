@@ -1,5 +1,9 @@
 @import 'shared';
 
+.blog-title{
+  @extend .stylish-title;
+}
+
 .blog {
   text-align: center;
   
@@ -11,10 +15,10 @@
     iframe {
       width: 100% !important;
     }
-  }
 
-  .blog-title{
-    @extend .stylish-title;
+    @media (max-width: $screen-sm-max) {
+      display: none;
+    }
   }
 
   ol.tumblr_posts {
@@ -25,6 +29,7 @@
     li.tumblr_post {
       margin-bottom: 35px;
       padding: 0 35px 35px 35px;
+      border-bottom: 4px solid $theme-black;
 
       .tumblr_caption {
         line-height: 3em;
@@ -37,19 +42,6 @@
         font-family: Oswald;
       }
 
-      &:nth-child(3n) {
-        border-bottom: 2px solid $theme-red;
-
-      }
-
-      &:nth-child(3n+1) {
-        border-bottom: 2px solid $theme-orange;
-      }
-
-      &:nth-child(3n+2) {
-        border-bottom: 2px solid $theme-blue;
-      }
-
       div.tumblr_body {
         font-family: 'Source Sans Pro';
       }
@@ -57,6 +49,10 @@
       .tumblr_photo {
         max-width: 100%;
         height: auto;
+      }
+
+      .tumblr_date {
+        color: $theme-grey;
       }
     }
   }

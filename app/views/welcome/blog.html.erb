@@ -1,13 +1,18 @@
 <%= render 'facebook_script_tag' %>
 
+<h4 class="blog-title">Heat Seek Blog</h4>
 <div class="blog clearfix">
   <div class="container">
-    <h4 class="blog-title">Heat Seek Blog</h4>
+    
+    <div class="col-md-3">
+      <div class="twitter-embed">
+        <%= render 'twitter_embed' %>
+      </div>
+    </div>
     
     <div class="container col-xs-12 col-md-9">
       <ol class="tumblr_posts">
         <% @entries.each do |entry| %>
-          <!-- <p class="inspect"><%#= entry.inspect %></p> -->
           
           <li class="tumblr_post">
             <% if entry['type'] == 'video' %>
@@ -70,7 +75,7 @@
               <% end %>
             <% end %>
 
-            <p class="tumblr_date"><%= Time.at(entry['timestamp']).strftime("%b %d, %Y") %></p>
+            <p class="tumblr_date"><%= format_tumblr_date(entry['timestamp']) %></p>
 
           </li>        
         <% end %>
@@ -80,12 +85,5 @@
       <%= will_paginate @entries %>
 
     </div>
-    
-    <div class="col-xs-12 col-md-3">
-      <div class="twitter-embed">
-        <%= render 'twitter_embed' %>
-      </div>
-    </div>
-
   </div>
 </div>
