@@ -1,19 +1,19 @@
 $(document).ready(function(){
-
+      // Chart size
   var w = 900,
-      h = 450;
-
-  var monthNames = [ "January", "February", "March", "April", "May", "June",
-      "July", "August", "September", "October", "November", "December" ];
-
-  var maxDataPointsForDots = 500,
-    transitionDuration = 1000;
-
-  var svg = null,
-    yAxisGroup = null,
-    xAxisGroup = null,
-    dataCirclesGroup = null,
-    dataLinesGroup = null;
+      h = 450,
+      // Date variables
+      days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
+      monthNames = [ "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December" ],
+      // d3 variables
+      maxDataPointsForDots = 500,
+      transitionDuration = 1000,
+      svg = null,
+      yAxisGroup = null,
+      xAxisGroup = null,
+      dataCirclesGroup = null,
+      dataLinesGroup = null;
 
   function draw(response) {
     var data = response;
@@ -199,6 +199,14 @@ $(document).ready(function(){
       .attr('cy', function() { return y(0) })
       .style("opacity", 1e-6)
       .remove();
+
+    function legalMinimumFor(reading){
+      if(reading.getHours() >= 6 && reading.getHours() <= 20){
+        return '68';
+      }else{
+        return '55';
+      }
+    }
     
     $('svg circle').tipsy({ 
       gravity: 's',
@@ -208,10 +216,14 @@ $(document).ready(function(){
       title: function() {
         var d = this.__data__;
         var pDate = d.date;
-        return 'Date: ' + pDate.getDate() + " "
-          + monthNames[pDate.getMonth()] + " " 
-          + pDate.getFullYear() + '<br>Unit Temp: ' + d.temp
-          + '<br>Outdoor Temp: ' + d.outdoor_temp; 
+        return pDate.getDate() + ' '
+          + monthNames[pDate.getMonth()] + ' '
+          + pDate.getFullYear() + '<br>'
+          + days[ pDate.getDay() ] + 'Tuesday at '
+          + '<i>Temperature in violation</i><br>'
+          + '<br>Temperature in Apt: ' + d.temp
+          + '<br>Temperature Outside: ' + d.outdoor_temp
+          + '<br>Legal minimum: ' + legalMinimumFor(pDate);
       }
     });
   }
