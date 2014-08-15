@@ -219,11 +219,12 @@ $(document).ready(function(){
         return pDate.getDate() + ' '
           + monthNames[pDate.getMonth()] + ' '
           + pDate.getFullYear() + '<br>'
-          + days[ pDate.getDay() ] + 'Tuesday at '
+          + days[ pDate.getDay() ] + ' at '
+          // + converted hour + min + AM or PM
           + '<i>Temperature in violation</i><br>'
-          + '<br>Temperature in Apt: ' + d.temp
-          + '<br>Temperature Outside: ' + d.outdoor_temp
-          + '<br>Legal minimum: ' + legalMinimumFor(pDate);
+          + '<br>Temperature in Apt: ' + d.temp + '°'
+          + '<br>Temperature Outside: ' + d.outdoor_temp + '°'
+          + '<br>Legal minimum: ' + legalMinimumFor(pDate) + '°';
       }
     });
   }
