@@ -1,14 +1,16 @@
 @import 'shared';
 
+.how-it-works-title {
+  @extend .stylish-title;
+  padding: 5px;
+  margin-top: 0px;  
+}
+
 .how-it-works {
   background-color: white;
   text-align: center;
-
-  .how-it-works-title {
-    @extend .stylish-title;
-    padding: 5px;
-    margin-top: 0px;  
-  }
+  padding-left: 30px;
+  padding-right: 30px;
 
   h4 {
     text-transform: uppercase;
