@@ -204,7 +204,7 @@ $(document).ready(function(){
       gravity: 's',
       html: true,
       topOffset: 1.5,
-      leftOffset: 4.15,
+      leftOffset: 3.75,
       title: function() {
         var d = this.__data__;
         var pDate = d.date;
