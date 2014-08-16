@@ -1,0 +1,106 @@
+#ks-main {
+	background-color: #c8dbdf;
+	padding: 20px 15px;
+}
+
+.ks-title {
+	margin-top: 40px;
+	border-top: 4px solid black;
+	border-bottom: 4px solid black;
+
+}
+
+#kickstarter .stylish-title {
+  margin-top: 10px;
+  font-size: 36px;
+  font-family: Oswald;
+  font-weight: bold;
+  text-align: center;
+
+  padding: 5px;
+  line-height: 36px;
+  text-transform: uppercase;
+  
+  @media (max-width: 768px) {
+    font-size: 23px;
+    line-height: 50px;
+  }
+}
+
+.ks-greeting {
+	width: 100%;
+	height: 100%;
+	border-top: none;
+	margin: 40px 0;
+	padding: 10px;
+}
+
+.ks-greeting h4 {
+	font-weight: bold;
+}
+
+.ks-greeting p {
+	margin-left: 20px;
+}
+
+.progress {
+	margin: 0 auto;
+	margin-bottom: 30px;
+	width: 70%;
+	height: 25px;
+}
+
+.ks-progress-bar {
+	-webkit-progress-value:none;
+	width:100%;
+	height: 100%;
+	border-radius: 3px;
+}
+
+.ks-progress-bar::-webkit-progress-bar{
+	background-color: #fff;
+}
+
+.ks-progress-bar::-webkit-progress-value{
+	background-color: #808080;
+}
+
+.ks-share-title {
+	border-top: 4px solid black;
+	border-bottom: 4px solid black;
+}
+
+.ks-share h4{
+	font-size: 23px;
+	text-align: center;
+	text-transform: uppercase;
+	font-family: Oswald;
+	font-weight: bold;
+}
+
+.ks-share div {
+	border-right: 1px solid #ccc;
+	margin-top: 30px;
+	height: 250px;
+}
+
+.ks-share p {
+	font-size: 18px;
+	line-height: 21px;
+	text-align: center;
+	margin-top: 15px;
+}
+
+.ks-share div:last-child {
+	border-right:none;
+}
+
+/************ KS Media Queries *************/
+
+@media(max-width: 768px){
+	.ks-share div {
+	border-right: none;
+	border-bottom: 1px solid #ccc;
+	}
+
+}
