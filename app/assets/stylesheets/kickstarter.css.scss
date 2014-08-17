@@ -104,47 +104,41 @@ progress[value]::-webkit-progress-value {
 	border-right:none;
 }
 
-.facebook-btn {
-	width: 45%;
-	height: 38px;
-	margin-left: 29%;
-	border-radius: 6px;
-	border: none;
-	background: #3b5998;
-	background-image: url('http://cordis.europa.eu/icons/icon-facebook.png');
-	background-repeat: no-repeat;
-	box-shadow: 3px 6px 0 0 #c8dbdf; 
-	color: #fff;
-	text-align: center;
-	line-height: 38px;
-}
-
-.twitter-btn {
-	width: 45%;
-	height: 38px;
-	margin-left: 29%;
-	border-radius: 6px;
-	border: none;
-	background: #00b2e3;
-	background-image: url('http://the5930.com/Social_Icons/Twitter%20bird%202012%20icon%2038x38.png');
-	background-repeat: no-repeat;
-	box-shadow: 3px 6px 0 0 #c8dbdf; 
-	color: #fff;
-	text-align: center;
-}
-
+.facebook-btn,
+.twitter-btn,
 .video-btn {
 	width: 45%;
 	height: 38px;
 	margin-left: 29%;
 	border-radius: 6px;
-	border: none;
-	background: #cc181e;
-	background-image: url('../images/play_btn_white.png');
-	background-repeat: no-repeat;
+	border: none;	
 	box-shadow: 3px 6px 0 0 #c8dbdf; 
 	color: #fff;
 	text-align: center;
+	line-height: 38px;
+
+	&:hover {
+		box-shadow: 2px 4px 0 0 #c8dbdf; 
+		margin-left: 31%;
+		margin-top: 1%;
+	}
+}
+
+.facebook-btn {
+	background: #3b5998;
+	background-image: url('http://cordis.europa.eu/icons/icon-facebook.png');
+	background-repeat: no-repeat;
+}
+
+.twitter-btn {
+	background: #00b2e3;
+	background-image: url('http://the5930.com/Social_Icons/Twitter%20bird%202012%20icon%2038x38.png');
+	background-repeat: no-repeat;
+}
+
+.video-btn {
+	background: #cc181e;
+	background-image: url('../images/play_btn_white.png');
 }
 
 /************ KS Media Queries *************/
