@@ -1,53 +1,47 @@
+@import 'shared';
+
 #ks-main {
 	background-color: #c8dbdf;
 	padding: 20px 15px;
 }
 
 .ks-title {
-	margin-top: 40px;
-	border-top: 4px solid black;
-	border-bottom: 4px solid black;
-
-}
-
-#kickstarter .stylish-title {
-  margin-top: 10px;
-  font-size: 36px;
-  font-family: Oswald;
-  font-weight: bold;
-  text-align: center;
-
-  padding: 5px;
-  line-height: 36px;
-  text-transform: uppercase;
-  
-  @media (max-width: 768px) {
-    font-size: 23px;
-    line-height: 50px;
-  }
+	@extend .stylish-title;
+	margin-top: 0;
 }
 
 .ks-greeting {
 	width: 100%;
 	height: 100%;
 	border-top: none;
-	margin: 40px 0;
+	margin-bottom: 20px;
 	padding: 10px;
-}
 
-.ks-greeting h4 {
-	font-weight: bold;
-}
+	.names {
+		max-width: 300px;
+		margin-bottom: 20px;
+	}
 
-.ks-greeting p {
-	margin-left: 20px;
+	.first-name {
+		font-style: italic;
+		margin: 0;
+		background: inherit;
+	}
+	
+	h4 {
+		font-weight: bold;
+	}
+
+	p {
+		margin-left: 20px;
+	}
 }
 
 .progress {
-	margin: 0 auto;
-	margin-bottom: 30px;
-	width: 70%;
-	height: 25px;
+	// margin: 0 auto;
+	// margin-bottom: 30px;
+	width: 250px;
+	height: 20px;
 }
 
 .ks-progress-bar {
@@ -57,17 +51,33 @@
 	border-radius: 3px;
 }
 
-.ks-progress-bar::-webkit-progress-bar{
-	background-color: #fff;
-}
+// .ks-progress-bar::-webkit-progress-bar{
+// 	background-color: #fff;
+// }
 
 .ks-progress-bar::-webkit-progress-value{
-	background-color: #808080;
+	background-color: $theme-grey;
 }
 
-.ks-share-title {
-	border-top: 4px solid black;
-	border-bottom: 4px solid black;
+progress[value]::-webkit-progress-value {
+  background-image:
+	   // -webkit-linear-gradient(-45deg, 
+	   //                         transparent 33%, rgba(0, 0, 0, .1) 33%, 
+	   //                         rgba(0,0, 0, .1) 66%, transparent 66%),
+	   -webkit-linear-gradient(top, 
+	                           rgba(255, 255, 255, .25), 
+	                           rgba(0, 0, 0, .25)),
+	   -webkit-linear-gradient(left, $theme-red, $theme-red);
+
+    border-radius: 2px; 
+    background-size: 35px 20px, 100% 100%, 100% 100%;
+}
+
+progress[value]::-webkit-progress-value::before {
+  content: '80%';
+  position: absolute;
+  right: 0;
+  // top: -125%;
 }
 
 .ks-share h4{
@@ -91,7 +101,6 @@
 	margin-top: 15px;
 }
 
-<<<<<<< HEAD
 .ks-share > div {
 	display: block;
 	border-right: 1px solid #ccc;
@@ -99,14 +108,10 @@
 	height: 250px;
 }
 
-=======
->>>>>>> parent of 67db774... adds buttons to kickstarter splash
-
 .ks-share div:last-child {
 	border-right:none;
 }
 
-<<<<<<< HEAD
 .facebook-btn {
 	width: 45%;
 	height: 38px;
@@ -150,8 +155,6 @@
 	text-align: center;
 }
 
-=======
->>>>>>> parent of 67db774... adds buttons to kickstarter splash
 /************ KS Media Queries *************/
 
 @media(max-width: 768px){
