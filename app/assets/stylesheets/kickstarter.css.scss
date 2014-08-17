@@ -8,13 +8,15 @@
 .ks-title {
 	@extend .stylish-title;
 	margin-top: 0;
+	margin-bottom: 0;
+	border-bottom: none;
 }
 
 .ks-greeting {
 	width: 100%;
 	height: 100%;
 	border-top: none;
-	margin-bottom: 20px;
+	margin-bottom: 70px;
 	padding: 10px;
 
 	.names {
@@ -40,8 +42,15 @@
 .progress {
 	// margin: 0 auto;
 	// margin-bottom: 30px;
-	width: 250px;
+	width: 100%;
 	height: 20px;
+	margin-bottom: 20px;
+	.percentage {
+		position: absolute;
+		top: -110%;
+		left: 50%;
+		font-size: 3em;
+	}
 }
 
 .ks-progress-bar {
@@ -51,12 +60,8 @@
 	border-radius: 3px;
 }
 
-// .ks-progress-bar::-webkit-progress-bar{
-// 	background-color: #fff;
-// }
-
-.ks-progress-bar::-webkit-progress-value{
-	background-color: $theme-grey;
+.ks-progress-bar::-webkit-progress-bar{
+	background-color: $theme-white;
 }
 
 progress[value]::-webkit-progress-value {
@@ -67,17 +72,10 @@ progress[value]::-webkit-progress-value {
 	   -webkit-linear-gradient(top, 
 	                           rgba(255, 255, 255, .25), 
 	                           rgba(0, 0, 0, .25)),
-	   -webkit-linear-gradient(left, $theme-red, $theme-red);
+	   -webkit-linear-gradient(left, $theme-black, $theme-black);
 
     border-radius: 2px; 
     background-size: 35px 20px, 100% 100%, 100% 100%;
-}
-
-progress[value]::-webkit-progress-value::before {
-  content: '80%';
-  position: absolute;
-  right: 0;
-  // top: -125%;
 }
 
 .ks-share h4{
@@ -91,7 +89,8 @@ progress[value]::-webkit-progress-value::before {
 .ks-share div {
 	border-right: 1px solid #ccc;
 	margin-top: 30px;
-	height: 250px;
+	height: 150px;
+	margin-bottom: 30px;
 }
 
 .ks-share p {
@@ -99,13 +98,6 @@ progress[value]::-webkit-progress-value::before {
 	line-height: 21px;
 	text-align: center;
 	margin-top: 15px;
-}
-
-.ks-share > div {
-	display: block;
-	border-right: 1px solid #ccc;
-	margin-top: 30px;
-	height: 250px;
 }
 
 .ks-share div:last-child {
