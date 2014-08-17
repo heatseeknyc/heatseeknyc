@@ -1,19 +1,18 @@
+@import "shared";
+
 .tipsy { 
   font-size: 10px; 
   position: absolute; 
   padding: 5px; z-index: 100000; 
 }
 .tipsy-inner { 
-  background-color: #bfbfbf; 
-  color: #000; 
-  font-family: Verdana,Arial; 
-  max-width: 200px; 
-  padding: 5px 8px 4px 8px; 
-  text-align: center; 
-}
-
-/* Rounded corners */
-.tipsy-inner { 
+  background-color: $theme-black;
+  color: $theme-white;
+  font-family: Verdana,Arial;
+  max-width: 200px;
+  padding: 5px 8px 4px 8px;
+  text-align: left;
+  /* Rounded corners */
   // border-radius: 3px;
   // -moz-border-radius: 3px; 
   // -webkit-border-radius: 3px; 
@@ -27,14 +26,14 @@
   width: 0; 
   height: 0; 
   line-height: 0; 
-  border: 5px dashed #000;
+  border: 5px dashed $theme-black;
 }
 
 /* Rules to colour arrows */
-.tipsy-arrow-n { border-bottom-color: #bfbfbf; }
-.tipsy-arrow-s { border-top-color: #bfbfbf; }
-.tipsy-arrow-e { border-left-color: #bfbfbf; }
-.tipsy-arrow-w { border-right-color: #bfbfbf; }
+.tipsy-arrow-n { border-bottom-color: $theme-black; }
+.tipsy-arrow-s { border-top-color: $theme-black; }
+.tipsy-arrow-e { border-left-color: $theme-black; }
+.tipsy-arrow-w { border-right-color: $theme-black; }
 
 .tipsy-n .tipsy-arrow { 
   top: 0px; 

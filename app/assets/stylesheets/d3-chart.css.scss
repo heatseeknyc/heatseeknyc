@@ -1,9 +1,16 @@
+@import "shared";
+
 #d3-chart {
+  margin: 0;
+  background-color: $theme-blue;
+
   .data-line {
-    stroke: steelblue;
-    stroke-width: 2;
+    stroke: $theme-black;
+    stroke-width: 4;
     fill: none;
     stroke-dasharray: 0;
+    stroke-linecap: round;
+    stroke-linejoin: round;
   }
 
   path {
@@ -13,30 +20,33 @@
     fill: none;
   }
 
-  .area {
-    /*fill: lightsteelblue;*/
-  }
-
-  text {
-    font-family: Arial;
-    font-size: 8pt;
-    fill: #787878;
-  }
-
   line {
-    stroke: #CDCDCD;
-    stroke-width: 0.5;
-    /* stroke-dasharray: 3 3; */
+    stroke-width: 6;
     fill: none;
   }
 
   .data-point {
-    stroke: steelblue;
-    stroke-width: 2;
-    fill: #FFF;
+    stroke: $theme-white;
+    stroke-width: 2.5;
+    fill: $theme-white;
   }
-}
 
-#d3-chart {
-  margin: 0;
+  .data-point:hover {
+    stroke: $theme-orange;
+    fill: $theme-orange;
+  }
+
+  g.tick text {
+    visibility: hidden;
+  }
+
+  // .area {
+  //   /*fill: lightsteelblue;*/
+  // }
+
+  // text {
+  //   font-family: Arial;
+  //   font-size: 8pt;
+  //   fill: #787878;
+  // }
 }

@@ -4,8 +4,8 @@ $(document).ready(function(){
       h = 450,
       // Date variables
       days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
-      monthNames = [ "January", "February", "March", "April", "May", "June",
-      "July", "August", "September", "October", "November", "December" ],
+      monthNames = [ "JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
+      "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER" ],
       // d3 variables
       maxDataPointsForDots = 500,
       transitionDuration = 1000,
@@ -17,10 +17,11 @@ $(document).ready(function(){
 
   function draw(response) {
     var data = response;
+    // add usefull properties to the data objects
     data.forEach(function(obj){
       obj.date = new Date(obj.created_at);
+      obj.isDay = obj.date.getHours() >= 6 && obj.date.getHours() <= 22;
     });
-
     var margin = 40;
     var max = d3.max(data, function(d) { return d.temp }) + 10;
     var min = d3.min(data, function(d) { return d.temp }) - 10;
@@ -28,7 +29,7 @@ $(document).ready(function(){
     var x = d3.time.scale().range([0, w - margin * 2]).domain([data[0].date, data[data.length - 1].date]);
     var y = d3.scale.linear().range([h - margin * 2, 0]).domain([min, max]);
 
-    var xAxis = d3.svg.axis().scale(x).tickSize(h - margin * 2).tickPadding(10).ticks(7);
+    var xAxis = d3.svg.axis().scale(x).tickSize(h - margin * 2).tickPadding(10).ticks(data.length);
     var yAxis = d3.svg.axis().scale(y).orient('left').tickSize(-w + margin * 2).tickPadding(10);
     var t = null;
 
@@ -46,13 +47,24 @@ $(document).ready(function(){
     t = svg.transition().duration(transitionDuration);
 
     // y ticks and labels
-    if (!yAxisGroup) {
-      yAxisGroup = svg.append('svg:g')
-        .attr('class', 'yTick')
-        .call(yAxis);
-    }
-    else {
-      t.select('.yTick').call(yAxis);
+    // if (!yAxisGroup) {
+    //   yAxisGroup = svg.append('svg:g')
+    //     .attr('class', 'yTick')
+    //     .call(yAxis);
+    // }
+    // else {
+    //   t.select('.yTick').call(yAxis);
+    // }
+    function addLineStlying(){
+      var $lines = $(".tick line"),
+          length = data.length;
+      for(var i = 0; i < length; i++){
+        if(data[i].isDay === true){
+          $($lines[i]).attr('stroke', '#83A2AA');
+        }else{
+          $($lines[i]).attr('stroke', '#535F62');
+        }
+      }
     }
 
     // x ticks and labels
@@ -60,6 +72,7 @@ $(document).ready(function(){
       xAxisGroup = svg.append('svg:g')
         .attr('class', 'xTick')
         .call(xAxis);
+      addLineStlying();
     }
     else {
       t.select('.xTick').call(xAxis);
@@ -74,7 +87,7 @@ $(document).ready(function(){
 
     var line = d3.svg.line()
       // assign the X function to plot our line as we wish
-      .x(function(d,i) { 
+      .x(function(d,i) {
         // verbose logging to show what's actually being done
         //console.log('Plotting X temp for date: ' + d.date + ' using index: ' + i + ' to be at: ' + x(d.date) + ' using our xScale.');
         // return the X coordinate where we want to plot this datapoint
@@ -158,9 +171,6 @@ $(document).ready(function(){
       dataCirclesGroup = svg.append('svg:g');
     }
 
-// the cricles should be getting created in the following lines
-// however it appears that is not being added to the svg
-
     var circles = dataCirclesGroup.selectAll('.data-point').data(data);
 
     circles.enter()
@@ -201,18 +211,32 @@ $(document).ready(function(){
       .remove();
 
     function legalMinimumFor(reading){
-      if(reading.getHours() >= 6 && reading.getHours() <= 20){
+      if(reading.isDay === true){
         return '68';
       }else{
         return '55';
+      }
+    }
+
+    function getCivilianTime(reading){
+      if (reading.getHours() > 12){
+        return (reading.getHours() - 12) + ":"
+          + (reading.getMinutes() >= 10 ?
+            reading.getMinutes() : "0" + reading.getMinutes()) 
+          + " PM";
+      }else{
+        return reading.getHours() + ":"
+          + (reading.getMinutes() >= 10 ?
+            reading.getMinutes() : "0" + reading.getMinutes()) 
+          + " AM";
       }
     }
     
     $('svg circle').tipsy({ 
       gravity: 's',
       html: true,
-      topOffset: 1.5,
-      leftOffset: 3.75,
+      topOffset: 2.8,
+      leftOffset: 3.8,
       title: function() {
         var d = this.__data__;
         var pDate = d.date;
@@ -220,15 +244,15 @@ $(document).ready(function(){
           + monthNames[pDate.getMonth()] + ' '
           + pDate.getFullYear() + '<br>'
           + days[ pDate.getDay() ] + ' at '
-          // + converted hour + min + AM or PM
-          + '<i>Temperature in violation</i><br>'
+          + getCivilianTime(pDate) + '<br>'
+          + '<i>Temperature in Violation</i><br>'
           + '<br>Temperature in Apt: ' + d.temp + '°'
           + '<br>Temperature Outside: ' + d.outdoor_temp + '°'
-          + '<br>Legal minimum: ' + legalMinimumFor(pDate) + '°';
+          + '<br>Legal minimum: ' + legalMinimumFor(d) + '°';
       }
     });
   }
-
+  console.time("add chart")
   if($("#d3-chart").length > 0){
     $.ajax({
       url: /\/users\/\d+/.exec(document.URL)[0],
@@ -242,5 +266,5 @@ $(document).ready(function(){
       }
     });
   }
-
+  console.timeEnd("add chart")
 });
