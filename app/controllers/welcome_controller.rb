@@ -8,9 +8,9 @@ class WelcomeController < ApplicationController
 
   def blog
     client = Tumblr::Client.new({
-      :consumer_key => ENV['TUMBLR_CONSUMER_KEY',]
-      :consumer_secret => ENV['TUMBLR_CONSUMER_SECRET',]
-      :oauth_token => ENV['TUMBLR_OAUTH_TOKEN',]
+      :consumer_key => ENV['TUMBLR_CONSUMER_KEY'],
+      :consumer_secret => ENV['TUMBLR_CONSUMER_SECRET'],
+      :oauth_token => ENV['TUMBLR_OAUTH_TOKEN'],
       :oauth_token_secret => ENV['TUMBLR_OAUTH_TOKEN_SECRET']
     })
     
