@@ -1,5 +1,18 @@
 @import 'shared';
 
+.ks-banner {
+	margin-top: 60px;
+}
+
+.ks-brand {
+	background-image: image-url('kickstarter-logo.png');
+	background-repeat: no-repeat;
+	background-size: 210px 21px;
+	height: 21px;
+	width: 210px;
+	display: inline-block;
+}
+
 #ks-main {
 	background-color: #c8dbdf;
 	padding: 20px 15px;
@@ -13,8 +26,6 @@
 }
 
 .ks-greeting {
-	width: 100%;
-	height: 100%;
 	border-top: none;
 	margin-bottom: 70px;
 	padding: 10px;
@@ -109,19 +120,12 @@ progress[value]::-webkit-progress-value {
 .video-btn {
 	width: 45%;
 	height: 38px;
-	margin-left: 29%;
+	margin-left: 27%;
 	border-radius: 6px;
 	border: none;	
-	box-shadow: 3px 6px 0 0 #c8dbdf; 
 	color: #fff;
 	text-align: center;
 	line-height: 38px;
-
-	&:hover {
-		box-shadow: 2px 4px 0 0 #c8dbdf; 
-		margin-left: 31%;
-		margin-top: 1%;
-	}
 }
 
 .facebook-btn {
@@ -137,8 +141,10 @@ progress[value]::-webkit-progress-value {
 }
 
 .video-btn {
-	background: #cc181e;
-	background-image: url('../images/play_btn_white.png');
+	background: #2BDE73;
+	background-image: image-url('kickstarter-logo-dark.png');
+	background-repeat: no-repeat;
+	background-position: 7px center; 
 }
 
 /************ KS Media Queries *************/
