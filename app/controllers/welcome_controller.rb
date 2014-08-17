@@ -16,11 +16,11 @@ class WelcomeController < ApplicationController
     
     result = client.posts('heatseeknyc.tumblr.com')['posts']
     result.sort!{|a,b| b['date'] <=> a['date']}
-    
-    @entries = WillPaginate::Collection.create(1, 4, result.count) do |pager|
-      pager.replace(result)
-    end
+    @entries = result
+    # @entries = WillPaginate::Collection.create(1, 4, result.count) do |pager|
+    #   pager.replace(result)
+    # end
 
-    @entries.paginate(:page => params[:page], :per_page => 4)
+    # @entries.paginate(:page => params[:page], :per_page => 4)
   end
 end
