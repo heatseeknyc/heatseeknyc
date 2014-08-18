@@ -4,6 +4,13 @@
   @extend .stylish-title;
 }
 
+.more-button {
+  margin-bottom: 30px;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
 .blog {
   text-align: center;
   
