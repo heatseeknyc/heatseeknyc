@@ -45,6 +45,12 @@
 
       .tumblr_text {
         text-align: left;
+
+        img {
+          margin-left: auto;
+          margin-right: auto;
+          display: block;
+        }
       }
 
       .tumblr_body {
