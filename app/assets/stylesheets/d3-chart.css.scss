@@ -14,14 +14,6 @@
   }
 
   path {
-    stroke: #eee;
-    stroke-width: 2;
-    stroke-dasharray: 0;
-    fill: none;
-  }
-
-  line {
-    stroke-width: 6;
     fill: none;
   }
 
@@ -39,14 +31,4 @@
   g.tick text {
     visibility: hidden;
   }
-
-  // .area {
-  //   /*fill: lightsteelblue;*/
-  // }
-
-  // text {
-  //   font-family: Arial;
-  //   font-size: 8pt;
-  //   fill: #787878;
-  // }
 }

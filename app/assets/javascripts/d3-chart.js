@@ -1,4 +1,12 @@
 $(document).ready(function(){
+  // todos for this file
+  // figure out why the first line is missing from the chart
+  // make it so that if you are a collaborator it still displays data
+  // make it responsive
+  // - make the width responsive to the page
+  // - make the line thickness dependent on the width of the chart
+  // make it OO
+
       // Chart size
   var w = 900,
       h = 450,
@@ -60,9 +68,9 @@ $(document).ready(function(){
           length = data.length;
       for(var i = 0; i < length; i++){
         if(data[i].isDay === true){
-          $($lines[i]).attr('stroke', '#83A2AA');
+          $($lines[i]).attr({'stroke': '#83A2AA', 'stroke-width': 4.5});
         }else{
-          $($lines[i]).attr('stroke', '#535F62');
+          $($lines[i]).attr({'stroke': '#535F62', 'stroke-width': 4.5});
         }
       }
     }
@@ -252,7 +260,7 @@ $(document).ready(function(){
       }
     });
   }
-  console.time("add chart")
+
   if($("#d3-chart").length > 0){
     $.ajax({
       url: /\/users\/\d+/.exec(document.URL)[0],
@@ -266,5 +274,5 @@ $(document).ready(function(){
       }
     });
   }
-  console.timeEnd("add chart")
+
 });
