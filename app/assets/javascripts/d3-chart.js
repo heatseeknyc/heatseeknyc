@@ -36,8 +36,7 @@ $(document).ready(function(){
     var pointRadius = 4;
     var x = d3.time.scale().range([0, w - margin * 2]).domain([data[0].date, data[data.length - 1].date]);
     var y = d3.scale.linear().range([h - margin * 2, 0]).domain([min, max]);
-
-    var xAxis = d3.svg.axis().scale(x).tickSize(h - margin * 2).tickPadding(10).ticks(data.length);
+    var xAxis = d3.svg.axis().scale(x).tickSize(h - margin * 2).tickPadding(0).ticks(data.length);
     var yAxis = d3.svg.axis().scale(y).orient('left').tickSize(-w + margin * 2).tickPadding(10);
     var t = null;
 
@@ -66,11 +65,14 @@ $(document).ready(function(){
     function addLineStlying(){
       var $lines = $(".tick line"),
           length = data.length;
+
       for(var i = 0; i < length; i++){
         if(data[i].isDay === true){
           $($lines[i]).attr({'stroke': '#83A2AA', 'stroke-width': 4.5});
+          if(i === 0){$($lines[i]).attr({'stroke-width': 12});}
         }else{
           $($lines[i]).attr({'stroke': '#535F62', 'stroke-width': 4.5});
+          if(i === 0){$($lines[i]).attr({'stroke-width': 12});}
         }
       }
     }
@@ -262,11 +264,18 @@ $(document).ready(function(){
   }
 
   if($("#d3-chart").length > 0){
+    if(/collaborations/.test(document.URL)){
+      var URL = /\/users\/\d+\/collaborations\/\d+/.exec(document.URL)[0];
+    }else{
+      var URL = /\/users\/\d+/.exec(document.URL)[0];
+    }
     $.ajax({
-      url: /\/users\/\d+/.exec(document.URL)[0],
+      url: URL,
       dataType: "JSON",
       success: function(response){
-        draw(response);
+        if(response.length > 0){
+          draw(response);
+        }
       },
       error: function(response){
         console.log("error");
