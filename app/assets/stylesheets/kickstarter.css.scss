@@ -1,7 +1,20 @@
 @import 'shared';
 
+.ks-btn {
+	color: $theme-white !important;
+	background-color: $theme-black;
+	font-style: bold;
+	font-family: 'Oswald';
+	font-size: 3em;
+	margin-top: 20px;
+}
+
 .ks-banner {
-	margin-top: 60px;
+	margin-top: 30px;
+}
+
+.ks-link {
+	display: block;
 }
 
 .ks-brand {
