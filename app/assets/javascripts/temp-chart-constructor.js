@@ -3,7 +3,7 @@ function UserTempChart(){
   height: 450,
   maxDataPointsForDots: 500,
   transitionDuration: 1000,
-  svg: null,
+  svg: setSvg(),
   yAxisGroup: null,
   xAxisGroup: null,
   dataCirclesGroup: null,
@@ -58,84 +58,86 @@ UserTempChart.prototype.createDataFrom = function(ajaxResponse) {
   return ajaxResponse;
 };
 
+UserTempChart.prototype.setSvg = function() {
+  return d3.select('#d3-chart').select('svg').select('g');
+};
+
+UserTempChart.prototype.addStylingToSvg = function() {
+  if (this.svg.empty()) {
+    this.svg = d3.select('#d3-chart')
+      .append('svg:svg')
+      .attr('width', w)
+      .attr('height', h)
+      .attr('class', 'viz')
+      .append('svg:g')
+      .attr('transform', 'translate(' + this.margin + ',' + this.margin + ')');
+  }
+};
+
+UserTempChart.prototype.setT = function() {
+  return svg.transition().duration(this.transitionDuration);
+};
+// We don't actually use this method for the graph but we might need it later
+UserTempChart.prototype.setYTicksAndLabels = function() {
+  if (!this.yAxisGroup) {
+    this.yAxisGroup = this.svg.append('svg:g')
+      .attr('class', 'yTick')
+      .call(this.yAxis);
+  }
+  else {
+    this.t.select('.yTick').call(this.yAxis);
+  }
+};
+// This method needs to be altered to so that the stroke-width is dynamic
+UserTempChart.prototype.addVerticalLineStlying = function() {
+  var $lines = $(".tick line"),
+      length = data.length;
+
+  for(var i = 0; i < length; i++){
+    if(data[i].isDay === true){
+      $($lines[i]).attr({'stroke': '#83A2AA', 'stroke-width': 4.5});
+      if(i === 0){$($lines[i]).attr({'stroke-width': 12});}
+    }else{
+      $($lines[i]).attr({'stroke': '#535F62', 'stroke-width': 4.5});
+      if(i === 0){$($lines[i]).attr({'stroke-width': 12});}
+    }
+  }
+};
+
+UserTempChart.prototype.setXTicksAndLabels = function() {
+  if (!this.xAxisGroup) {
+    this.xAxisGroup = svg.append('svg:g')
+      .attr('class', 'xTick')
+      .call(this.xAxis);
+    this.addVerticalLineStlying();
+  }
+  else {
+    this.t.select('.xTick').call(this.xAxis);
+  }
+};
+
+UserTempChart.prototype.setDataLinesGroup = function() {
+  if (!this.dataLinesGroup) {
+    this.dataLinesGroup = svg.append('svg:g');
+  }
+};
+
+UserTempChart.prototype.setDataLines = function() {
+  this.dataLines = dataLinesGroup.selectAll('.data-line').data([data]);
+};
+
+UserTempChart.prototype.setLine = function() {
+  this.line = d3.svg.line()
+    .x(function(d,i) {
+      return this.x(d.date); 
+    })
+    .y(function(d) {
+      return this.y(d.temp); 
+    })
+    .interpolate("linear");
+};
 
   function draw(response) {
-
-    svg = d3.select('#d3-chart').select('svg').select('g');
-    if (svg.empty()) {
-      svg = d3.select('#d3-chart')
-        .append('svg:svg')
-        .attr('width', w)
-        .attr('height', h)
-        .attr('class', 'viz')
-        .append('svg:g')
-        .attr('transform', 'translate(' + margin + ',' + margin + ')');
-    }
-
-    t = svg.transition().duration(transitionDuration);
-
-    // y ticks and labels
-    // if (!yAxisGroup) {
-    //   yAxisGroup = svg.append('svg:g')
-    //     .attr('class', 'yTick')
-    //     .call(yAxis);
-    // }
-    // else {
-    //   t.select('.yTick').call(yAxis);
-    // }
-    function addLineStlying(){
-      var $lines = $(".tick line"),
-          length = data.length;
-
-      for(var i = 0; i < length; i++){
-        if(data[i].isDay === true){
-          $($lines[i]).attr({'stroke': '#83A2AA', 'stroke-width': 4.5});
-          if(i === 0){$($lines[i]).attr({'stroke-width': 12});}
-        }else{
-          $($lines[i]).attr({'stroke': '#535F62', 'stroke-width': 4.5});
-          if(i === 0){$($lines[i]).attr({'stroke-width': 12});}
-        }
-      }
-    }
-
-    // x ticks and labels
-    if (!xAxisGroup) {
-      xAxisGroup = svg.append('svg:g')
-        .attr('class', 'xTick')
-        .call(xAxis);
-      addLineStlying();
-    }
-    else {
-      t.select('.xTick').call(xAxis);
-    }
-
-    // Draw the lines
-    if (!dataLinesGroup) {
-      dataLinesGroup = svg.append('svg:g');
-    }
-
-    var dataLines = dataLinesGroup.selectAll('.data-line').data([data]);
-
-    var line = d3.svg.line()
-      .x(function(d,i) {
-        return x(d.date); 
-      })
-      .y(function(d) {
-        return y(d.temp); 
-      })
-      .interpolate("linear");
-
-       /*
-       .attr("d", d3.svg.line()
-       .x(function(d) { return x(d.date); })
-       .y(function(d) { return y(0); }))
-       .transition()
-       .delay(transitionDuration / 2)
-       .duration(transitionDuration)
-       .style('opacity', 1)
-       .attr("transform", function(d) { return "translate(" + x(d.date) + "," + y(d.temp) + ")"; });
-        */
-
     var garea = d3.svg.area()
       .interpolate("linear")
       .x(function(d) { 
@@ -168,7 +170,7 @@ UserTempChart.prototype.createDataFrom = function(ajaxResponse) {
 
   }
 
-UserTempChart.prototype.method_name = function(first_argument) {
+UserTempChart.prototype.addStylingToDataLines = function() {
   this.dataLines.exit()
     .transition()
     .attr("d", line)
