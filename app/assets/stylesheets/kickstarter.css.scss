@@ -1,5 +1,11 @@
 @import 'shared';
 
+#center-content {
+	h3 {
+		margin-top: 10px;
+	}
+}
+
 .ks-btn {
 	color: $theme-white !important;
 	background-color: $theme-black;
@@ -10,7 +16,7 @@
 }
 
 .ks-banner {
-	margin-top: 30px;
+	margin-top: 50px !important;
 }
 
 .ks-link {
