@@ -19,7 +19,8 @@ function UserTempChart(){
   yAxis: setYAxisValues(),
   t: null,
   circles: null,
-  dataCirclesGroup: null
+  dataCirclesGroup: null,
+  garea: null
 }
 
 UserTempChart.prototype.setChartMax = function() {
@@ -137,38 +138,46 @@ UserTempChart.prototype.setLine = function() {
     .interpolate("linear");
 };
 
-  function draw(response) {
-    var garea = d3.svg.area()
-      .interpolate("linear")
-      .x(function(d) { 
-        return x(d.date); 
-      })
-      .y0(h - margin * 2)
-      .y1(function(d) { 
-        return y(d.temp); 
-      });
+UserTempChart.prototype.setGArea = function() {
+  this.garea = d3.svg.area()
+    .interpolate("linear")
+    .x(function(d) { 
+      return this.x(d.date); 
+    })
+    .y0(this.h - this.margin * 2)
+    .y1(function(d) { 
+      return this.y(d.temp); 
+    });
+};
 
-    dataLines
-      .enter()
-      .append('svg:path')
-      .attr("class", "area")
-      .attr("d", garea(data));
+UserTempChart.prototype.addGAreaToDataLines = function() {
+  this.dataLines
+    .enter()
+    .append('svg:path')
+    .attr("class", "area")
+    .attr("d", this.garea(this.data));
+};
 
-    dataLines.enter().append('path')
-      .attr('class', 'data-line')
-      .style('opacity', 0.3)
-      .attr("d", line(data))
-      .transition()
-      .delay(transitionDuration / 2)
-      .duration(transitionDuration)
-      .style('opacity', 1);
-      // .attr('x1', function(d, i) { return (i > 0) ? xScale(data[i - 1].date) : xScale(d.date); })
-      // .attr('y1', function(d, i) { return (i > 0) ? yScale(data[i - 1].temp) : yScale(d.temp); })
-      // .attr('x2', function(d) { return xScale(d.date); })
-      // .attr('y2', function(d) { return yScale(d.temp); });
-      
+UserTempChart.prototype.addStylesAndOpacityToDataLines = function() {
+  this.dataLines.enter().append('path')
+    .attr('class', 'data-line')
+    .style('opacity', 0.3)
+    .attr("d", line(data))
+    .transition()
+    .delay(this.transitionDuration / 2)
+    .duration(this.transitionDuration)
+    .style('opacity', 1);
+    // this adds extra styles we're not using now.
+    // .attr('x1', function(d, i) { return (i > 0) ? this.xScale(this.data[i - 1].date) : this.xScale(d.date); })
+    // .attr('y1', function(d, i) { return (i > 0) ? this.yScale(this.data[i - 1].temp) : this.yScale(d.temp); })
+    // .attr('x2', function(d) { return this.xScale(d.date); })
+    // .attr('y2', function(d) { return this.yScale(d.temp); });
+};
 
-  }
+
+UserTempChart.prototype.drawChart = function() {
+  // this delegates all helpers methods
+};
 
 UserTempChart.prototype.addStylingToDataLines = function() {
   this.dataLines.exit()
