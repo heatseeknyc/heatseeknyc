@@ -1,10 +1,7 @@
 @import 'shared';
 
-.how-it-works-title{
-  @extend .stylish-title;
-}
-
 .how-it-works-title {
+  @extend .stylish-title;
   padding: 5px;
   margin-top: 0px;  
 }
@@ -12,6 +9,8 @@
 .how-it-works {
   background-color: white;
   text-align: center;
+  padding-left: 30px;
+  padding-right: 30px;
 
   h4 {
     text-transform: uppercase;
@@ -20,6 +19,7 @@
 
   div {
     padding-bottom: 5px auto 5px auto;
+
     &:last-child {
       margin-bottom: 80px;
     }
@@ -31,28 +31,6 @@
     top: -51px;
     visibility: hidden;
   }
-}
-
-@media (min-width: 760px){
-  .how-it-works div {
-    padding-left: 80px;
-    padding-right: 80px;
-  }  
-}
-
-
-#connect-icon,
-#analyze-icon,
-#identify-icon,
-#act-icon {
-  height: 126px;
-  width: 126px;
-  padding: 20px;
-  margin: 40px auto 40px auto;
-  -webkit-transition: opacity 0.1s ease-out;  /* Chrome 1-25, Safari 3.2+ */
-  -moz-transition: opacity 0.1s ease-out;  /* Firefox 4-15 */
-  -o-transition: opacity 0.1s ease-out;  /* Opera 10.50â€“12.00 */
-  transition: opacity 0.1s ease-out;  /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
 }
 
 #connect-icon {
@@ -73,4 +51,42 @@
 #act-icon {
   background: image-url("act_icon.png") no-repeat;
   @include image-2x("act_icon_2@2x.png", 100px, 100px);
+}
+
+#connect-icon,
+#analyze-icon,
+#identify-icon,
+#act-icon {
+  height: 100px;
+  width: 100px;
+  padding: 20px;
+  margin: 40px auto 40px auto;
+  -webkit-background-size: 100px 100px;
+  background-size: 100px 100px;
+  -webkit-transition: opacity 0.1s ease-out;  /* Chrome 1-25, Safari 3.2+ */
+  -moz-transition: opacity 0.1s ease-out;  /* Firefox 4-15 */
+  -o-transition: opacity 0.1s ease-out;  /* Opera 10.50â€“12.00 */
+  transition: opacity 0.1s ease-out;  /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+  .how-it-works {
+    h4 {
+      font-size: 23px;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 21px;
+    }
+
+    @media (min-width: 480px) {
+      div {
+        padding-left: 80px;
+        padding-right: 80px;
+      }
+    }
+  }
 }

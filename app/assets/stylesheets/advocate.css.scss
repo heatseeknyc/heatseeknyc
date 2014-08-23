@@ -6,7 +6,7 @@
 	background-color: white;
 	list-style-type: none;
 	margin: 1px 0 0 0;
-	border-bottom: 3px solid #ff9a33;
+	border-bottom: 3px solid $theme-orange;
 }
 
 .sidebar-li .user-link{
@@ -26,19 +26,24 @@
 #q {
 	width: 200px;
 	float: right;
+	color: $theme-black;
 	background-color: $theme-orange;
 	border: solid 3px $theme-black;
 	border-radius: 0;
 	margin-right: 5px;
 	margin-top: 20px;
+
+	&:focus {
+		box-shadow: none;
+	}
 }
 
 #collaborator-h1{
 	font-family: 'Oswald';
 	margin-bottom: 20px;
 	padding: 15px;
-	border-bottom: 4px solid #262729;
-	border-top: 4px solid #262729;
+	border-bottom: 4px solid $theme-black;
+	border-top: 4px solid $theme-black;
 }
 
 .address_zip{
@@ -56,14 +61,14 @@
 	height: 78px;
 	float: right;
 	margin-top: -65px;
-	border-left: 4px solid #ff9a33;
+	border-left: 4px solid $theme-orange;
 }
 
 #edit{
 	height: 78px;
 	float: right;
 	margin-top: -65px;
-	border-left: 4px solid #ff9a33;
+	border-left: 4px solid $theme-orange;
 }
 
 .advocate-layout {
@@ -130,13 +135,13 @@
 	font-family: 'Oswald';
 	padding: 1px 20px 1px 20px;
 }
-@media (max-width: 768px) {
+@media (max-width: $screen-xs-max) {
 	.advocate-button{
 		display: none;
 	}
 }
 
-@media (min-width: 768px) {
+@media (min-width: $screen-xs-max) {
 	#search-button > i{
 		display: none;
 	}
@@ -148,6 +153,7 @@
 
 #permissions-show-div {
 	padding-left: 0;
+	padding-right: 0;
 }
 
 #advocate-bar h3 {
@@ -161,4 +167,8 @@
 #search-results {
 	padding-left: 0;
 	padding-right: 0;
+}
+
+.lawyer {
+	background-color: $theme-orange;
 }

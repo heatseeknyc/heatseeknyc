@@ -7,6 +7,7 @@ set :repository,  "git@github.com:wfjeff/twinenyc.git"
 set :user, "william"
 set :deploy_to, "/home/#{ user }/#{ application }"
 set :use_sudo, false
+set :keep_releases, 4
 
 default_run_options[:pty] = true
 

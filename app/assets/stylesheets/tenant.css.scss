@@ -16,13 +16,26 @@
     text-transform: uppercase;
     font-family: Oswald;
 
+    @media (min-width: 768px) {
+      padding-top: 0;
+      padding-bottom: 30px;
+    }
+
+    .current-temp, .violations {
+      min-width: 260px;
+    }
     
     .stat-num {
-      font-size: 8em;
+      font-size: 133px;
       border-bottom: solid 3px $theme-black;
       &.temp-num{
         padding-left: 22px;
       }
+    }
+
+    .stat-description {
+      font-size: 32px;
+      font-family: 'Source Sans Pro';
     }
 
     .address {
@@ -39,35 +52,48 @@
     }
   }
 
+  .user-info-mobile {
+    @media (min-width: 768px) {
+      display: none;
+    }
+  }
+
+  .user-info-desktop {
+    @media (max-width: 767px) {
+      display: none;
+    }
+  }
+
+  .btn.btn-primary.btn-download {
+    background: inherit;
+    border: solid 3px $theme-black;
+    border-radius: 0;
+    margin: 10px;
+    color: $theme-black;
+    font-family: 'Oswald';
+    margin-top: 30px;
+    margin-bottom: 30px;
+
+    &:hover {
+      color: $theme-white;
+      background-color: $theme-black;
+    }
+    
+    @media (min-width: 768px) {
+      float: right;
+      margin: 20px 0 10px 0;
+    }
+  }
+
   div.upper-bar {
     border-top: solid 3px $theme-black;
     border-bottom: solid 3px $theme-black;
     @media (min-width: 768px) {
       border-top: none;
     }
-
-    .btn.btn-primary.btn-download {
-      background: inherit;
-      border: solid 3px $theme-black;
-      border-radius: 0;
-      margin: 10px;
-      color: $theme-black;
-      font-family: 'Oswald';
-    }
-
-    @media (min-width: 760px) {
-      .btn.btn-primary.btn-download {
-        float: right;
-        margin-top: 20px;
-      }
-
-      .show-top {
-        padding-top: 0;
-        padding-bottom: 30px;
-        
-      }
       
-      .user-info {
+    .user-info {
+      @media (min-width: 768px) {
         float: left;
       }
     }

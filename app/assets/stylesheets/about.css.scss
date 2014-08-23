@@ -9,35 +9,47 @@
     float: none;
   }
 
-  p {
-    font-size: 1.5em;
-  }
-
   .about-bullets {
     font-size: 1.5em;
     line-height: 2em;
     font-weight: bold;
   }
 
+  .about-title {
+    @extend .stylish-title;
+  }
+
+  p {
+    font-size: 1.5em;
+  }
+
+  p,
+  li {
+    text-align: left;
+  }
+
   h3 {
     text-align: center;
     font-family: Oswald;
   }
+
+  h4 {
+    text-align: center;
+  }
+
+  li {
+    font-size: 2em;
+  }
 }
 
-.about-title {
-  @extend .stylish-title;
+/* Mobile */
+
+@media (max-width: $screen-xs-max) {
+  .about {
+    p {
+      font-size: 18px;
+      line-height: 21px;
+    }
+  }
 }
 
-.about p,
-.about li {
-  text-align: left;
-}
-
-.about h4 {
-  text-align: center;
-}
-
-.about li {
-  font-size: 2em;
-}

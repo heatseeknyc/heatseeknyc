@@ -1,11 +1,17 @@
 <div class="show-layout container">
   <div class="row">
     <div class="show-top col-xs-12">
-      <div class="upper-bar clearfix">
-      <div class="user-info">
+      
+      <div class="user-info user-info-mobile">
         <h3><%= "#{user.first_name} #{user.last_name}" %></h3>
         <h4 class="address"><%= "#{user.address}, #{user.zip_code}" %></h4>
       </div>
+
+      <div class="upper-bar clearfix">
+        <div class="user-info user-info-desktop">
+          <h3><%= "#{user.first_name} #{user.last_name}" %></h3>
+          <h4 class="address"><%= "#{user.address}, #{user.zip_code}" %></h4>
+        </div>
         <%= link_to 'Download Report (PDF)', pdf_download_path(user), class: "btn btn-primary btn-download" %>
       </div>
       
@@ -15,7 +21,7 @@
         <h5 class="stat-description">current temperature</h5>
       </div>
       
-      <div class="col-md-2 col-lg-3"></div>
+      <div class="col-md-2"></div>
       <div class="violations col-xs-12 col-sm-6 col-md-3 col-lg-2">
         <h3 class="stat-num"><%= user.violation_count %></h3>
         <h5 class="stat-description">violations</h5>
@@ -24,7 +30,7 @@
 
     </div>
   <div class="row">
-    <div class="show-bottom">
+    <div class="show-bottom col-xs-12">
       <%= render "users/line_graph", :user => user %>
     </div>
   </div>

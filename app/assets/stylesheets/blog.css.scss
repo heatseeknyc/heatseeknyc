@@ -1,5 +1,16 @@
 @import 'shared';
 
+.blog-title{
+  @extend .stylish-title;
+}
+
+.more-button {
+  margin-bottom: 30px;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
 .blog {
   text-align: center;
   
@@ -11,10 +22,10 @@
     iframe {
       width: 100% !important;
     }
-  }
 
-  .blog-title{
-    @extend .stylish-title;
+    @media (max-width: $screen-sm-max) {
+      display: none;
+    }
   }
 
   ol.tumblr_posts {
@@ -25,6 +36,7 @@
     li.tumblr_post {
       margin-bottom: 35px;
       padding: 0 35px 35px 35px;
+      border-bottom: 4px solid $theme-black;
 
       .tumblr_caption {
         line-height: 3em;
@@ -35,28 +47,31 @@
       .tumblr_title {
         font-size: 3em;
         font-family: Oswald;
+        margin-bottom: 35px;
       }
 
-      &:nth-child(3n) {
-        border-bottom: 2px solid $theme-red;
+      .tumblr_text {
+        text-align: left;
 
+        img, video {
+          max-width: 100%;
+          margin-left: auto;
+          margin-right: auto;
+          display: block;
+        }
       }
 
-      &:nth-child(3n+1) {
-        border-bottom: 2px solid $theme-orange;
-      }
-
-      &:nth-child(3n+2) {
-        border-bottom: 2px solid $theme-blue;
-      }
-
-      div.tumblr_body {
+      .tumblr_body {
         font-family: 'Source Sans Pro';
       }
 
-      img.tumblr_photo {
+      .tumblr_photo {
         max-width: 100%;
         height: auto;
+      }
+
+      .tumblr_date {
+        color: $theme-grey;
       }
     }
   }
@@ -70,4 +85,22 @@
 /* To fill the container and nothing else */
 .fb_iframe_widget, .fb_iframe_widget span, .fb_iframe_widget span iframe[style] {
   width: 100% !important;
+}
+
+// mobile
+
+@media (max-width: $screen-sm-max) {
+  .blog {
+    .facebook-embed,
+    .twitter-embed {
+      display: none;
+    }
+
+    ol.tumblr_posts {
+      li.tumblr_post {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+  }
 }

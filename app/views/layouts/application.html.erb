@@ -22,7 +22,7 @@
   </head>
 
 
-  <body class="body">
+  <body class="body <%= yield(:template) %>">
     <header>
       <%= render 'layouts/navbar' %>
     </header>
@@ -31,10 +31,10 @@
       
       <%= yield %>
 
-      <footer>&copy; Heat Seek NYC</footer>
 
     </main>
 
+    <footer class="col-xs-12">&copy; Heat Seek NYC</footer>
     
     
   </body>

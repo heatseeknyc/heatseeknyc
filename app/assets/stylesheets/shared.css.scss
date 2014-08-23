@@ -1,3 +1,16 @@
+$screen-xs-width: auto;
+$screen-sm-width: 750px;
+$screen-md-width: 970px;
+$screen-lg-width: 1170px;
+
+$screen-sm-min: 768px;
+$screen-md-min: 992px;
+$screen-lg-min: 1200px;
+
+$screen-xs-max: 767px;
+$screen-sm-max: 991px;
+$screen-md-max: 1199px;
+
 $theme-red: #FB500B;
 
 $theme-red-darken-1: #D04209;
@@ -74,10 +87,32 @@ $theme-black-blue-3: #AFCDD4;
   border-bottom: 4px solid $theme-black;
   margin-top: 40px;
   margin-bottom: 40px;
-  font-size: 3.2em;
+  font-size: 36px;
   font-family: Oswald;
   text-align: center;
-  padding: 15px;
+  padding: 5px;
   line-height: 50px;
   text-transform: uppercase;
+  
+  @media (max-width: 768px) {
+    font-size: 23px;
+    line-height: 37px;
+  }
+}
+
+html, body {
+  height: 100%;
+}
+
+main {
+  padding-bottom: 51px;
+  overflow: auto;
+  min-height: 100%;
+}
+
+footer {
+  position: relative;
+  margin-top: -51px;
+  height: 51px;
+  clear: both;
 }

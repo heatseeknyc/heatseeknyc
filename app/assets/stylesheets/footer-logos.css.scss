@@ -1,19 +1,9 @@
-.logo-buttons {
-  height: 100px;
-  width: 100px;
-  background-size: 100% !important;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  -webkit-transition: opacity 0.1s ease-out;  /* Chrome 1-25, Safari 3.2+ */
-  -moz-transition: opacity 0.1s ease-out;  /* Firefox 4-15 */
-  -o-transition: opacity 0.1s ease-out;  /* Opera 10.50â€“12.00 */
-  transition: opacity 0.1s ease-out;  /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
-}
+@import 'shared';
 
 .medium {
   background: image-url("medium_logo_normal_100px.png") no-repeat;
 }
+
 .medium:hover {
   background: image-url("medium_logo_hover_100px.png") no-repeat;
 }
@@ -42,34 +32,65 @@
 .pdm {
   background: image-url("pdm_logo_normal_100px.png") no-repeat;
   width: 100px;
-  margin-top: 20px;
 }
 .pdm:hover {
   background: image-url("pdm_logo_hover_100px.png") no-repeat;
 }
 
 .betanyc {
-  background: image-url("betanyc_logo_normal.png") no-repeat;
+  background: image-url("betanyc_logo_normal.jpg") no-repeat;
   width: 100px;
 }
 .betanyc:hover {
-  background: image-url("betanyc_logo_hover.png") no-repeat;
+  background: image-url("betanyc_logo_hover.jpg") no-repeat;
 }
 
-.twitter {
-  background: image-url("twitter_logo_normal_100px.png") no-repeat;
+.sparkfun {
+  background: image-url("sparkfun_logo_normal.jpg") no-repeat;
+  width: 100px;
 }
-.twitter:hover {
-  background: image-url("twitter_logo_hover_100px.png") no-repeat;
+.sparkfun:hover {
+  background: image-url("sparkfun_logo_hover.jpg") no-repeat;
 }
 
-.facebook {
-  background: image-url("fb_logo_normal_100px.png") no-repeat;
+a.fa {
+  &.github, &.twitter, &.facebook {
+    margin-top: 15px;
+    color: $theme-grey;
+  }
+  &.github {
+    padding-top: 15px;
+  }
 }
-.facebook:hover {
-  background: image-url("fb_logo_hover_100px.png") no-repeat;
+
+a.github:hover, 
+a.twitter:hover, 
+a.facebook:hover {
+  color: $theme-blue;
+  text-decoration: none;
+}
+
+#linkGroups .linkGroup .row:last-child {
+  margin-top: 0;
 }
 
 .linkGroup.sponsorLinks {
   display: inherit !important;
+}
+
+.logo-buttons, .logo-buttons:hover {
+  background-position: 50% 50%;
+  height: 100px;
+  width: 100px;
+  background-size: 75%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  -webkit-transition: opacity 0.1s ease-out;  /* Chrome 1-25, Safari 3.2+ */
+  -moz-transition: opacity 0.1s ease-out;  /* Firefox 4-15 */
+  -o-transition: opacity 0.1s ease-out;  /* Opera 10.50â€“12.00 */
+  transition: opacity 0.1s ease-out;  /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
+  @media (min-width: $screen-lg-min) {
+    background-size: 100%;
+  }
 }

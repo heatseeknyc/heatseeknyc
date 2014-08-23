@@ -1,0 +1,177 @@
+@import 'shared';
+
+#center-content {
+	h3 {
+		margin-top: 10px;
+	}
+}
+
+.ks-btn {
+	color: $theme-white !important;
+	background-color: $theme-black;
+	font-style: bold;
+	font-family: 'Oswald';
+	font-size: 3em;
+	margin-top: 20px;
+}
+
+.ks-banner {
+	margin-top: 50px !important;
+}
+
+.ks-link {
+	display: block;
+}
+
+.ks-brand {
+	background-image: image-url('kickstarter-logo.png');
+	background-repeat: no-repeat;
+	background-size: 210px 21px;
+	height: 21px;
+	width: 210px;
+	display: inline-block;
+}
+
+#ks-main {
+	background-color: #c8dbdf;
+	padding: 20px 15px;
+}
+
+.ks-title {
+	@extend .stylish-title;
+	margin-top: 0;
+	margin-bottom: 0;
+	border-bottom: none;
+}
+
+.ks-greeting {
+	border-top: none;
+	margin-bottom: 70px;
+	padding: 10px;
+
+	.names {
+		max-width: 300px;
+		margin-bottom: 20px;
+	}
+
+	.first-name {
+		font-style: italic;
+		margin: 0;
+		background: inherit;
+	}
+	
+	h4 {
+		font-weight: bold;
+	}
+
+	p {
+		margin-left: 20px;
+	}
+}
+
+.progress {
+	// margin: 0 auto;
+	// margin-bottom: 30px;
+	width: 100%;
+	height: 20px;
+	margin-bottom: 20px;
+	.percentage {
+		position: absolute;
+		top: -110%;
+		left: 50%;
+		font-size: 3em;
+	}
+}
+
+.ks-progress-bar {
+	-webkit-progress-value:none;
+	width:100%;
+	height: 100%;
+	border-radius: 3px;
+}
+
+.ks-progress-bar::-webkit-progress-bar{
+	background-color: $theme-white;
+}
+
+progress[value]::-webkit-progress-value {
+  background-image:
+	   // -webkit-linear-gradient(-45deg, 
+	   //                         transparent 33%, rgba(0, 0, 0, .1) 33%, 
+	   //                         rgba(0,0, 0, .1) 66%, transparent 66%),
+	   -webkit-linear-gradient(top, 
+	                           rgba(255, 255, 255, .25), 
+	                           rgba(0, 0, 0, .25)),
+	   -webkit-linear-gradient(left, $theme-black, $theme-black);
+
+    border-radius: 2px; 
+    background-size: 35px 20px, 100% 100%, 100% 100%;
+}
+
+.ks-share h4{
+	font-size: 23px;
+	text-align: center;
+	text-transform: uppercase;
+	font-family: Oswald;
+	font-weight: bold;
+}
+
+.ks-share div {
+	border-right: 1px solid #ccc;
+	margin-top: 30px;
+	height: 150px;
+	margin-bottom: 30px;
+}
+
+.ks-share p {
+	font-size: 18px;
+	line-height: 21px;
+	text-align: center;
+	margin-top: 15px;
+}
+
+.ks-share div:last-child {
+	border-right:none;
+}
+
+.facebook-btn,
+.twitter-btn,
+.video-btn {
+	width: 45%;
+	height: 38px;
+	margin-left: 27%;
+	border-radius: 6px;
+	border: none;	
+	color: #fff;
+	text-align: center;
+	line-height: 38px;
+}
+
+.facebook-btn {
+	background: #3b5998;
+	background-image: url('http://cordis.europa.eu/icons/icon-facebook.png');
+	background-repeat: no-repeat;
+}
+
+.twitter-btn {
+	background: #00b2e3;
+	background-image: url('http://the5930.com/Social_Icons/Twitter%20bird%202012%20icon%2038x38.png');
+	background-repeat: no-repeat;
+}
+
+.video-btn {
+	background: #2BDE73;
+	background-image: image-url('kickstarter-logo-dark.png');
+	background-repeat: no-repeat;
+	background-position: 7px center; 
+}
+
+/************ KS Media Queries *************/
+
+@media(max-width: 768px){
+	.ks-share div {
+	border-right: none;
+	border-bottom: 1px solid #ccc;
+	}
+
+}

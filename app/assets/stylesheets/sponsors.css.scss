@@ -12,12 +12,20 @@
     background: image-url("flatiron_logo_hover_100px.png") no-repeat;
   }
 
+  .sparkfun {
+    background: image-url("sparkfun_logo_hover.jpg") no-repeat;
+  }
+
   .betanyc {
-    background: image-url("betanyc_logo_hover.png") no-repeat;
+    background: image-url("betanyc_logo_hover.jpg") no-repeat;
   }
 
   .pdm {
     background: image-url("pdm_logo_hover_100px.png") no-repeat;
+  }
+
+  .logo-buttons {
+    background-size: 100%;
   }
 }
 
