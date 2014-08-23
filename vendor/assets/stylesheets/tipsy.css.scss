@@ -3,7 +3,8 @@
 .tipsy { 
   font-size: 10px; 
   position: absolute; 
-  padding: 5px; z-index: 100000; 
+  padding: 5px; 
+  z-index: 100000; 
 }
 .tipsy-inner { 
   background-color: $theme-black;

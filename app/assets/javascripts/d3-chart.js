@@ -1,14 +1,10 @@
 $(document).ready(function(){
   // todos for this file
-  // figure out why the first line is missing from the chart
-  // make it so that if you are a collaborator it still displays data
-  // make it responsive
-  // - make the width responsive to the page
-  // - make the line thickness dependent on the width of the chart
   // make it OO
 
+  function draw(response) {
       // Chart size
-  var w = 900,
+  var w = window.innerWidth,
       h = 450,
       // Date variables
       days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
@@ -23,7 +19,6 @@ $(document).ready(function(){
       dataCirclesGroup = null,
       dataLinesGroup = null;
 
-  function draw(response) {
     var data = response;
     // add usefull properties to the data objects
     data.forEach(function(obj){
@@ -62,17 +57,29 @@ $(document).ready(function(){
     // else {
     //   t.select('.yTick').call(yAxis);
     // }
+    function strokeWidth(){
+      return w / data.length;
+    }
+
     function addLineStlying(){
       var $lines = $(".tick line"),
           length = data.length;
 
       for(var i = 0; i < length; i++){
         if(data[i].isDay === true){
-          $($lines[i]).attr({'stroke': '#83A2AA', 'stroke-width': 4.5});
-          if(i === 0){$($lines[i]).attr({'stroke-width': 12});}
+          $($lines[i]).attr(
+            {'stroke': '#83A2AA', 'stroke-width': strokeWidth()}
+          );
+          if(i === 0){
+            $($lines[i]).attr({'stroke-width': strokeWidth() * 2.333 });
+          }
         }else{
-          $($lines[i]).attr({'stroke': '#535F62', 'stroke-width': 4.5});
-          if(i === 0){$($lines[i]).attr({'stroke-width': 12});}
+          $($lines[i]).attr(
+            {'stroke': '#535F62', 'stroke-width': strokeWidth()}
+          );
+          if(i === 0){
+            $($lines[i]).attr({'stroke-width': strokeWidth() * 2.333 });
+          }
         }
       }
     }
@@ -241,12 +248,13 @@ $(document).ready(function(){
           + " AM";
       }
     }
-    
+
     $('svg circle').tipsy({ 
       gravity: 's',
       html: true,
       topOffset: 2.8,
       leftOffset: 3.8,
+      opacity: 1,
       title: function() {
         var d = this.__data__;
         var pDate = d.date;
@@ -263,6 +271,25 @@ $(document).ready(function(){
     });
   }
 
+  function redrawChartOnWindowChange(chartData){
+    if (window.innerWidth < 450) {
+      var quarterReadings = chartData.slice(149, 199);
+      $("#d3-chart").html("")
+      draw(quarterReadings);
+    }else if(window.innerWidth < 720){
+      var halfReadings = chartData.slice(99, 199);
+      $("#d3-chart").html("")
+      draw(halfReadings);
+    }else if(window.innerWidth < 1080){
+      var threeQuarterReadings = chartData.slice(49, 199);
+      $("#d3-chart").html("")
+      draw(threeQuarterReadings);
+    }else{
+      $("#d3-chart").html("")
+      draw(chartData);
+    }
+  }
+
   if($("#d3-chart").length > 0){
     if(/collaborations/.test(document.URL)){
       var URL = /\/users\/\d+\/collaborations\/\d+/.exec(document.URL)[0];
@@ -274,7 +301,16 @@ $(document).ready(function(){
       dataType: "JSON",
       success: function(response){
         if(response.length > 0){
-          draw(response);
+          redrawChartOnWindowChange(response);
+          var resizeTimer;
+          window.onresize = function(){
+            if (resizeTimer){
+              clearTimeout(resizeTimer);
+            } 
+            resizeTimer = setTimeout(function(){
+              redrawChartOnWindowChange(response);
+            }, 50);
+          };
         }
       },
       error: function(response){

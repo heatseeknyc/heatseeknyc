@@ -53,7 +53,8 @@
             case 's':
               tp = {
                 top: pos.top - actualHeight - this.options.offset - this.options.topOffset, 
-                left: pos.left + pos.width / 2 - actualWidth / 2 + this.options.leftOffset              };
+                left: pos.left + pos.width / 2 - actualWidth / 2 + this.options.leftOffset
+              };
               break;
             case 'e':
               tp = {
@@ -201,7 +202,7 @@
       delayOut: 0,
       fade: false,
       fallback: '',
-      gravity: 'n',
+      gravity: 'e',
       html: false,
       live: false,
       offset: 0,
@@ -236,12 +237,7 @@
     $.fn.tipsy.autoWE = function() {
       return $(this).offset().left > ($(document).scrollLeft() + $(window).width() / 2) ? 'e' : 'w';
     };
-    
-// top: 504.552612px;
-// left: 56.361809px;
 
-// top: 497.5526123046875px;
-// left: 48.36180877685547px;
 
     /**
      * yields a closure of the supplied parameters, producing a function that takes

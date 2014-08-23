@@ -1,3 +1,4 @@
+/*
 function UserTempChart(){
   width: 900,
   height: 450,
@@ -286,3 +287,4 @@ UserTempChart.prototype.createTipsyMouseOver = function() {
     }
   });
 };
+*/
