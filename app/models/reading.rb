@@ -8,12 +8,12 @@ class Reading < ActiveRecord::Base
   validates :outdoor_temp, presence: true
 
   before_save :get_outdoor_temp, unless: :outdoor_temp
-  after_save :set_violation_boolean
+  before_save :set_violation_boolean
 
   scope :recent, limit: 200, order: 'id DESC'
 
   def set_violation_boolean
-    self.violation = user.in_violation?(created_at, temp, outdoor_temp)
+    self.violation = user.in_violation?(Time.now, temp, outdoor_temp)
     true # this method must return true
   end
 
