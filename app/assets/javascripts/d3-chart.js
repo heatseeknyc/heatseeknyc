@@ -271,7 +271,7 @@ $(document).ready(function(){
     });
   }
 
-  function redrawChartOnWindowChange(chartData){
+  function drawChartBasedOnScreenSize(chartData){
     if (window.innerWidth < 450) {
       var quarterReadings = chartData.slice(149, 199);
       $("#d3-chart").html("")
@@ -301,14 +301,14 @@ $(document).ready(function(){
       dataType: "JSON",
       success: function(response){
         if(response.length > 0){
-          redrawChartOnWindowChange(response);
-          var resizeTimer;
+          drawChartBasedOnScreenSize(response);
+          var resizeTimer = 0;
           window.onresize = function(){
             if (resizeTimer){
               clearTimeout(resizeTimer);
             } 
             resizeTimer = setTimeout(function(){
-              redrawChartOnWindowChange(response);
+              drawChartBasedOnScreenSize(response);
             }, 50);
           };
         }

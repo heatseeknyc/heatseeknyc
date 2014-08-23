@@ -10,6 +10,8 @@ class Reading < ActiveRecord::Base
   before_save :get_outdoor_temp, unless: :outdoor_temp
   before_save :set_violation_boolean
 
+  scope :recent, limit: 200, order: 'id DESC'
+
   def set_violation_boolean
     self.violation = user.in_violation?(created_at, temp, outdoor_temp)
     true # this method must return true

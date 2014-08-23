@@ -33,13 +33,13 @@ class CollaborationsController < ApplicationController
 
   def show
     if current_user.has_collaboration?(params[:id])
+      @user = User.find(Collaboration.find(params[:id]).collaborator_id)
       respond_to do |f|
         f.html do
-          @user = User.find(Collaboration.find(params[:id]).collaborator_id)
           render "show"
         end
         f.json do
-          @readings = User.find(Collaboration.find(params[:id]).collaborator_id).readings.order("id DESC")
+          @readings = @user.readings.recent
           render json: @readings
         end
       end

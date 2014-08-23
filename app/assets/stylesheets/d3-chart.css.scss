@@ -1,5 +1,10 @@
 @import "shared";
 
+.show-bottom {
+  background-color: $theme-blue;
+  padding: 0px;
+}
+
 #d3-chart {
   margin: 0;
   background-color: $theme-blue;
