@@ -13,7 +13,7 @@ unless User.find_by(email: "jane@heatseeknyc.com")
     :address => "100 Fake St",
     :zip_code => "10004",
     :email => "jane@heatseeknyc.com",
-    :password => '33west26',
+    :password => '33west26'
   )
 
   User.create(
@@ -22,7 +22,7 @@ unless User.find_by(email: "jane@heatseeknyc.com")
     :address => "100 Fake St",
     :zip_code => "10004",
     :email => "john@heatseeknyc.com",
-    :password => '33west26',
+    :password => '33west26'
   )
 
   User.create(
@@ -31,7 +31,7 @@ unless User.find_by(email: "jane@heatseeknyc.com")
     :address => "100 Fake St",
     :zip_code => "10004",
     :email => "demo-user@heatseeknyc.com",
-    :password => '33west26',
+    :password => '33west26'
   )
   User.create(
     :first_name => "Demo Lawyer",
@@ -39,35 +39,36 @@ unless User.find_by(email: "jane@heatseeknyc.com")
     :address => "100 Fake St",
     :zip_code => "10004",
     :email => 'demo-lawyer@heatseeknyc.com',
-    :password => '33west26',
+    :password => '33west26'
   )
 end
 
 jane = User.find_by(email: "jane@heatseeknyc.com")
 john = User.find_by(email: "john@heatseeknyc.com")
 demo = User.find_by(email: "demo-user@heatseeknyc.com")
+lawyer = User.find_by(email: "demo-lawyer@heatseeknyc.com")
 now = Time.now
 current_time = now - (now.to_i % 3600)
-users = [jane, john, demo]
+users = [jane, john, demo, lawyer]
 users.each do |user|
   user.readings.clear
-  current_temp = 65
-  current_outdoor_temp = 40
+  current_temp = 70
+  current_outdoor_temp = 45
   200.times do
-    user.readings << Reading.create(created_at: current_time, temp: current_temp, outdoor_temp: current_outdoor_temp, user: user, twine: user.twine)
     current_time -= 3600
     if user.during_the_day?(current_time)
       current_temp += rand(-3..2)
-      current_outdoor_temp += rand(-3..2)
+      current_outdoor_temp += rand(-1..3)
     else
       current_temp += rand(-2..3)
-      current_outdoor_temp += rand(-2..3)
+      current_outdoor_temp += rand(-1..3)
     end
 
     current_temp -= 2 if current_temp > 68
     current_temp += 2 if current_temp < 52
     current_outdoor_temp -= 2 if current_outdoor_temp > 55
     current_outdoor_temp += 2 if current_outdoor_temp < 25
-    user.save
+
+    user.readings << Reading.new(created_at: current_time, temp: current_temp, outdoor_temp: current_outdoor_temp, user: user, twine: user.twine)
   end
 end
