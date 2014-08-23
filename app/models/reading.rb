@@ -8,7 +8,7 @@ class Reading < ActiveRecord::Base
   validates :outdoor_temp, presence: true
 
   before_save :get_outdoor_temp, unless: :outdoor_temp
-  before_save :set_violation_boolean
+  after_save :set_violation_boolean
 
   scope :recent, limit: 200, order: 'id DESC'
 
