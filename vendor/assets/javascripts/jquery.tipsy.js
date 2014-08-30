@@ -44,8 +44,16 @@
           // will be too close to the edge of the window 
           if ( pos.left <= spaceFromWindow ) {
             gravity = 'w';
+            this.options.topOffset = 4;
+            this.options.leftOffset = 10;
           } else if ( pos.left >= window.innerWidth - spaceFromWindow ) {
             gravity = 'e';
+            this.options.topOffset = 3;
+            this.options.leftOffset = 1.5;
+          } else {
+            gravity = 's';
+            this.options.topOffset = 2.8;
+            this.options.leftOffset = 3.8;
           }
           
           var tp;
@@ -64,8 +72,8 @@
               break;
             case 'e':
               tp = {
-                top: pos.top + pos.height / 2 - actualHeight / 2, 
-                left: pos.left - actualWidth - this.options.offset
+                top: pos.top + pos.height / 2 - actualHeight / 2 + this.options.topOffset, 
+                left: pos.left - actualWidth - this.options.offset - this.options.leftOffset
               };
               break;
             case 'w':
