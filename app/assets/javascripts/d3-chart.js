@@ -139,7 +139,7 @@ $(document).ready(function(){
       .y0(h - margin * 2)
       .y1(function(d) { 
         // verbose logging to show what's actually being done
-        return y(d.temp); 
+        return y(d.outdoor_temp); 
       });
 
     dataLines
