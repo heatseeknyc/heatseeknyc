@@ -33,7 +33,8 @@ $(document).ready(function(){
     var y = d3.scale.linear().range([h - margin * 2, 0]).domain([min, max]);
     var xAxis = d3.svg.axis().scale(x).tickSize(h - margin * 2).tickPadding(0).ticks(data.length);
     var yAxis = d3.svg.axis().scale(y).orient('left').tickSize(-w + margin * 2).tickPadding(10);
-    var t = null;
+    var t = null,
+    strokeWidth = w / data.length;
 
     svg = d3.select('#d3-chart').select('svg').select('g');
     if (svg.empty()) {
@@ -57,30 +58,28 @@ $(document).ready(function(){
     // else {
     //   t.select('.yTick').call(yAxis);
     // }
-    function strokeWidth(){
-      return w / data.length;
-    }
 
     function addLineStlying(){
       var $lines = $(".tick line"),
           length = data.length;
 
       for(var i = 0; i < length; i++){
-        if(data[i].isDay === true){
+        if(data[i].isDay === false){
           $($lines[i]).attr(
-            {'stroke': '#83A2AA', 'stroke-width': strokeWidth()}
+            { 'stroke': '#a8c5cb', 'stroke-width': strokeWidth }
           );
           if(i === 0){
-            $($lines[i]).attr({'stroke-width': strokeWidth() * 2.333 });
-          }
-        }else{
-          $($lines[i]).attr(
-            {'stroke': '#535F62', 'stroke-width': strokeWidth()}
-          );
-          if(i === 0){
-            $($lines[i]).attr({'stroke-width': strokeWidth() * 2.333 });
+            $($lines[i]).attr({ 'stroke-width': strokeWidth * 2.333 });
           }
         }
+        // }else{
+        //   $($lines[i]).attr(
+        //     {'stroke': '#535F62', 'stroke-width': strokeWidth()}
+        //   );
+        //   if(i === 0){
+        //     $($lines[i]).attr({'stroke-width': strokeWidth() * 2.333 });
+        //   }
+        // }
       }
     }
 
@@ -108,7 +107,7 @@ $(document).ready(function(){
         // verbose logging to show what's actually being done
         //console.log('Plotting X temp for date: ' + d.date + ' using index: ' + i + ' to be at: ' + x(d.date) + ' using our xScale.');
         // return the X coordinate where we want to plot this datapoint
-        //return x(i); 
+        //return x(i);
         return x(d.date); 
       })
       .y(function(d) { 

@@ -15,7 +15,7 @@
       }
       return false;
     };
-    
+
     function Tipsy(element, options) {
         this.$element = $(element);
         this.options = options;
@@ -30,17 +30,23 @@
           var $tip = this.tip();
           $tip.find('.tipsy-inner')[this.options.html ? 'html' : 'text'](title);
           $tip[0].className = 'tipsy'; // reset classname in case of dynamic gravity
-          $tip.remove().css({top: 0, left: 0, visibility: 'hidden', display: 'block'}).prependTo(document.body);
-          
-          var pos = $.extend({}, this.$element.offset(), {
+          $tip.remove().css({top: 0, left: 0, visibility: 'hidden', display: 'block'}).prependTo(document.body),
+          pos = $.extend({}, this.$element.offset(), {
             width: this.$element[0].offsetWidth,
             height: this.$element[0].offsetHeight
-          });
-          
-          var actualWidth = $tip[0].offsetWidth,
-            actualHeight = $tip[0].offsetHeight,
-            gravity = maybeCall(this.options.gravity, this.$element[0]);
-          debugger;
+          }),
+          actualWidth = $tip[0].offsetWidth,
+          actualHeight = $tip[0].offsetHeight,
+          gravity = maybeCall(this.options.gravity, this.$element[0]),
+          spaceFromWindow = ( actualWidth / 2 ) + 5;
+
+          // check to see whether or not the div 
+          // will be too close to the edge of the window 
+          if ( pos.left <= spaceFromWindow ) {
+            gravity = 'w';
+          } else if ( pos.left >= window.innerWidth - spaceFromWindow ) {
+            gravity = 'e';
+          }
           
           var tp;
           switch (gravity.charAt(0)) {

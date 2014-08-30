@@ -10,7 +10,7 @@
   background-color: $theme-blue;
 
   .data-line {
-    stroke: $theme-black;
+    stroke: $theme-white;
     stroke-width: 4;
     fill: none;
     stroke-dasharray: 0;
@@ -23,14 +23,9 @@
   }
 
   .data-point {
-    stroke: $theme-white;
+    stroke: $theme-red;
     stroke-width: 2.5;
-    fill: $theme-white;
-  }
-
-  .data-point:hover {
-    stroke: $theme-orange;
-    fill: $theme-orange;
+    fill: $theme-red;
   }
 
   g.tick text {
