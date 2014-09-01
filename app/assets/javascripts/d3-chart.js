@@ -261,15 +261,15 @@ $(document).ready(function(){
 
   function drawChartBasedOnScreenSize(chartData){
     if (window.innerWidth < 450) {
-      var quarterReadings = chartData.slice(149, 199);
+      var quarterReadings = chartData.slice(151, 199);
       $("#d3-chart").html("")
       draw(quarterReadings);
     }else if(window.innerWidth < 720){
-      var halfReadings = chartData.slice(99, 199);
+      var halfReadings = chartData.slice(103, 199);
       $("#d3-chart").html("")
       draw(halfReadings);
     }else if(window.innerWidth < 1080){
-      var threeQuarterReadings = chartData.slice(49, 199);
+      var threeQuarterReadings = chartData.slice(48, 199);
       $("#d3-chart").html("")
       draw(threeQuarterReadings);
     }else{
