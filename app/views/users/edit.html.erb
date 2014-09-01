@@ -1,27 +1,35 @@
-<div class="col-md-4" id="form-id">
-  <h2>Edit <%= @user.first_name %></h2>
+<div id="form-id">
+  <div class="container settings-header">
+    <div class="settings-title">
+      <h1>Hello, <%=@user.first_name  %>! </h1>
+        <h3>My Settings</h3>
+    </div>
+  </div><!--end of settigs title-->
 
   <%= form_for(@user) do |f| %>
-    <dl><%= f.label :first_name %>:
-    <%= f.text_field :first_name, :autofocus => true, class: "form-control" %></dl>
+    <div class="container col-lg-5 col-md-6 col-sm-6 col-xs-12">
+      <dl class="settings-input"><%= f.label :first_name %>
+      <%= f.text_field :first_name, :autofocus => true, class: "form-control" %></dl>
 
-    <dl><%= f.label :last_name %>:
-    <%= f.text_field :last_name, class: "form-control" %></dl>
+      <dl class="settings-input"><%= f.label :last_name %>
+      <%= f.text_field :last_name, class: "form-control" %></dl>
 
-    <dl><%= f.label :address %>:
-    <%= f.text_field :address, class: "form-control" %></dl>
+      <dl class="settings-input"><%= f.label :address %>
+      <%= f.text_field :address, class: "form-control" %></dl>
 
-    <dl><%= f.label :zip_code %>:
-    <%= f.text_field :zip_code, class: "form-control" %></dl>
+      <dl class="settings-input"><%= f.label :zip_code %>
+      <%= f.text_field :zip_code, class: "form-control" %></dl>
 
-    <dl><%= f.label :twine_name %>:
-    <%= f.text_field :twine_name, class: "form-control" %></dl>
-    
-    <% if @user.permissions > 0 && !@user.is_demo_user? %>
-      <dl><%= f.label :permissions %>:
-      <%= f.select :permissions, User::PERMISSIONS, class: "form-control" %></dl>
+      <dl class="settings-input"><%= f.label :twine_name %>
+      <%= f.text_field :twine_name, class: "form-control" %></dl>
+      
+      <% if @user.permissions > 0 && !@user.is_demo_user? %>
+        <dl class="settings-input"><%= f.label :permissions %>
+        <%= f.select :permissions, User::PERMISSIONS, class: "form-control" %></dl>
+      </div><!--end of settings form-->
     <% end %>
-
-    <div><%= f.submit "Update", class: "btn btn-primary" %></div>
+      <div>
+        <%= f.submit "SAVE", class: "btn-save" %>
+      </div>
   <% end %>
 </div>
