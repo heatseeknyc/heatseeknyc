@@ -26,13 +26,13 @@ $(document).ready(function(){
       obj.isDay = obj.date.getHours() >= 6 && obj.date.getHours() <= 22;
     });
     var margin = 40;
-    var max = d3.max(data, function(d) { return d.temp }) + 10;
-    var min = d3.min(data, function(d) { return d.temp }) - 10;
+    var max = d3.max(data, function(d) { return d.temp });
+    var min = d3.min(data, function(d) { return d.outdoor_temp });
     var pointRadius = 4;
     var x = d3.time.scale().range([0, w - margin * 2]).domain([data[0].date, data[data.length - 1].date]);
     var y = d3.scale.linear().range([h - margin * 2, 0]).domain([min, max]);
     var xAxis = d3.svg.axis().scale(x).tickSize(h - margin * 2).tickPadding(0).ticks(data.length);
-    var yAxis = d3.svg.axis().scale(y).orient('left').tickSize(-w + margin * 2).tickPadding(10);
+    var yAxis = d3.svg.axis().scale(y).orient('left').tickSize(-w + margin * 2).tickPadding(0).ticks(5);
     var t = null,
     strokeWidth = w / data.length;
 
@@ -49,15 +49,6 @@ $(document).ready(function(){
 
     t = svg.transition().duration(transitionDuration);
 
-    // y ticks and labels
-    // if (!yAxisGroup) {
-    //   yAxisGroup = svg.append('svg:g')
-    //     .attr('class', 'yTick')
-    //     .call(yAxis);
-    // }
-    // else {
-    //   t.select('.yTick').call(yAxis);
-    // }
 
     function addLineStlying(){
       var $lines = $(".tick line"),
@@ -66,23 +57,16 @@ $(document).ready(function(){
       for(var i = 0; i < length; i++){
         if(data[i].isDay === false){
           $($lines[i]).attr(
-            { 'stroke': '#a8c5cb', 'stroke-width': strokeWidth }
+            { 'stroke-width': strokeWidth, 'stroke': '#a8c5cb' }
           );
           if(i === 0){
             $($lines[i]).attr({ 'stroke-width': strokeWidth * 2.333 });
           }
         }
-        // }else{
-        //   $($lines[i]).attr(
-        //     {'stroke': '#535F62', 'stroke-width': strokeWidth()}
-        //   );
-        //   if(i === 0){
-        //     $($lines[i]).attr({'stroke-width': strokeWidth() * 2.333 });
-        //   }
-        // }
       }
     }
 
+// x ticks and labels gets placed first
     // x ticks and labels
     if (!xAxisGroup) {
       xAxisGroup = svg.append('svg:g')
@@ -94,6 +78,18 @@ $(document).ready(function(){
       t.select('.xTick').call(xAxis);
     }
 
+// y ticks and labels gets placed second
+    // y ticks and labels
+    if (!yAxisGroup) {
+      yAxisGroup = svg.append('svg:g')
+        .attr('class', 'yTick')
+        .call(yAxis);
+    }
+    else {
+      t.select('.yTick').call(yAxis);
+    }
+
+// y ticks and labels gets placed third
     // Draw the lines
     if (!dataLinesGroup) {
       dataLinesGroup = svg.append('svg:g');
@@ -118,17 +114,6 @@ $(document).ready(function(){
         return y(d.temp); 
       })
       .interpolate("linear");
-
-       /*
-       .attr("d", d3.svg.line()
-       .x(function(d) { return x(d.date); })
-       .y(function(d) { return y(0); }))
-       .transition()
-       .delay(transitionDuration / 2)
-       .duration(transitionDuration)
-       .style('opacity', 1)
-       .attr("transform", function(d) { return "translate(" + x(d.date) + "," + y(d.temp) + ")"; });
-        */
 
     var garea = d3.svg.area()
       .interpolate("linear")
