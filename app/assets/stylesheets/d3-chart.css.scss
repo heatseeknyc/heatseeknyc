@@ -1,0 +1,39 @@
+@import "shared";
+
+.show-bottom {
+  background-color: $theme-blue;
+  padding: 0px;
+}
+
+#d3-chart {
+  margin: 0;
+  background-color: $theme-blue;
+
+  .data-line {
+    stroke: $theme-black;
+    stroke-width: 4;
+    fill: none;
+    stroke-dasharray: 0;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  path {
+    fill: none;
+  }
+
+  .data-point {
+    stroke: $theme-white;
+    stroke-width: 2.5;
+    fill: $theme-white;
+  }
+
+  .data-point:hover {
+    stroke: $theme-orange;
+    fill: $theme-orange;
+  }
+
+  g.tick text {
+    visibility: hidden;
+  }
+}

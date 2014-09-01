@@ -7,7 +7,16 @@ class Reading < ActiveRecord::Base
   validates :temp, presence: true
   validates :outdoor_temp, presence: true
 
-  before_save :get_outdoor_temp, unless: :outdoor_temp
+  before_create :get_outdoor_temp, unless: :outdoor_temp
+  before_create :set_violation_boolean
+
+  scope :recent, limit: 200, order: 'id DESC'
+
+  def set_violation_boolean
+    time = created_at || Time.now
+    self.violation = user.in_violation?(time, temp, outdoor_temp)
+    true # this method must return true
+  end
 
   def self.new_from_twine(temp, outdoor_temp, twine, user)
     new.tap do |r|

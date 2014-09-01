@@ -45,15 +45,24 @@ class User < ActiveRecord::Base
   
   define_measureable_methods(METRICS, CYCLES, MEASUREMENTS)
 
+  def self.search(search)
+    search_arr = search.downcase.split
+    if search_arr[1] != nil
+      where(['search_first_name LIKE ? OR search_last_name LIKE ?', "%#{search_arr[0]}%", "%#{search_arr[1]}%"])
+    else
+      where(['search_first_name LIKE ? OR search_last_name LIKE ?', "%#{search_arr[0]}%", "%#{search_arr[0]}%"])
+    end
+  end
+
+  def self.account_demo_user?(user_id)
+    DEMO_ACCOUNT_EMAILS.include?(User.find(user_id).email)
+  end
+
   def twine_name=(twine_name)
     return nil if twine_name == ""
     temp_twine = Twine.find_by(:name => twine_name)
     temp_twine.user(self.id)
     self.update(twine: temp_twine)
-  end
-
-  def self.account_demo_user?(user_id)
-    DEMO_ACCOUNT_EMAILS.include?(User.find(user_id).email)
   end
 
   def is_demo_user?
@@ -85,15 +94,6 @@ class User < ActiveRecord::Base
   def create_search_names
     self.search_first_name = self.first_name.downcase
     self.search_last_name = self.last_name.downcase
-  end
-
-  def self.search(search)
-    search_arr = search.downcase.split
-    if search_arr[1] != nil
-      where(['search_first_name LIKE ? OR search_last_name LIKE ?', "%#{search_arr[0]}%", "%#{search_arr[1]}%"])
-    else
-      where(['search_first_name LIKE ? OR search_last_name LIKE ?', "%#{search_arr[0]}%", "%#{search_arr[0]}%"])
-    end
   end
 
   def most_recent_temp

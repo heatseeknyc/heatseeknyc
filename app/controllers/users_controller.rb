@@ -38,7 +38,13 @@ class UsersController < ApplicationController
   end
 
   def show
-    render "permissions_show" if current_user.permissions <= 50
+    respond_to do |f|
+      f.html { render "permissions_show" if current_user.permissions <= 50 }
+      f.json do
+        @readings = current_user.readings.recent
+        render json: @readings
+      end
+    end
   end
 
   def download_pdf
