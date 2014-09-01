@@ -57,10 +57,10 @@ $(document).ready(function(){
       for(var i = 0; i < length; i++){
         if(data[i].isDay === false){
           $($lines[i]).attr(
-            { 'stroke-width': strokeWidth, 'stroke': '#a8c5cb' }
+            { 'stroke-width': strokeWidth, 'stroke': '#90ABB0' }
           );
           if(i === 0){
-            $($lines[i]).attr({ 'stroke-width': strokeWidth * 2.333 });
+            $($lines[i]).attr({ 'stroke-width': strokeWidth * 1.8 });
           }
         }
       }
@@ -130,8 +130,8 @@ $(document).ready(function(){
     dataLines
       .enter()
       .append('svg:path')
-      .attr("class", "area")
-      .attr("d", garea(data));
+      .attr("class", "area");
+      // .attr("d", garea(data));
 
     dataLines.enter().append('path')
       .attr('class', 'data-line')
@@ -166,6 +166,10 @@ $(document).ready(function(){
     d3.selectAll(".area").transition()
       .duration(transitionDuration)
       .attr("d", garea(data));
+
+    // move the area to the back of the graph
+    var fillArea = $(".area")
+    $("#d3-chart svg > g").prepend(fillArea)
 
     // Draw the points
     if (!dataCirclesGroup) {
