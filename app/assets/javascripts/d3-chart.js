@@ -7,9 +7,11 @@ $(document).ready(function(){
   var w = window.innerWidth,
       h = 450,
       // Date variables
-      days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
+      days = [ 'Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday' ],
       monthNames = [ "JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
-      "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER" ],
+        "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER" ],
+      abbreviatedMonthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ],
       // d3 variables
       maxDataPointsForDots = 500,
       transitionDuration = 1000,
@@ -26,13 +28,13 @@ $(document).ready(function(){
       obj.isDay = obj.date.getHours() >= 6 && obj.date.getHours() <= 22;
     });
     var margin = 40;
-    var max = d3.max(data, function(d) { return d.temp });
-    var min = d3.min(data, function(d) { return d.outdoor_temp });
+    var max = d3.max(data, function(d) { return d.temp }) + 1;
+    var min = d3.min(data, function(d) { return d.outdoor_temp }) - 5;
     var pointRadius = 4;
     var x = d3.time.scale().range([0, w - margin * 2]).domain([data[0].date, data[data.length - 1].date]);
     var y = d3.scale.linear().range([h - margin * 2, 0]).domain([min, max]);
     var xAxis = d3.svg.axis().scale(x).tickSize(h - margin * 2).tickPadding(0).ticks(data.length);
-    var yAxis = d3.svg.axis().scale(y).orient('left').tickSize(-w + margin * 2).tickPadding(0).ticks(5);
+    var yAxis = d3.svg.axis().scale(y).orient('left').tickSize(-w + margin * 2).tickPadding(0).ticks(7);
     var t = null,
     strokeWidth = w / data.length;
 
@@ -49,10 +51,12 @@ $(document).ready(function(){
 
     t = svg.transition().duration(transitionDuration);
 
-
-    function addLineStlying(){
-      var $lines = $(".tick line"),
-          length = data.length;
+    function addLineStlyingToXTicks(){
+      var $lines = $(".xTick .tick line"),
+          length = data.length,
+          date,
+          newText,
+          $textEl;
 
       for(var i = 0; i < length; i++){
         if(data[i].isDay === false){
@@ -60,7 +64,18 @@ $(document).ready(function(){
             { 'stroke-width': strokeWidth, 'stroke': '#90ABB0' }
           );
           if(i === 0){
-            $($lines[i]).attr({ 'stroke-width': strokeWidth * 1.8 });
+            $($lines[i]).attr({ 'stroke-width': strokeWidth * 1.9 });
+          }
+        }
+        else {
+          if (i === 8 || i === 32 || i === 56 || i === 80 || i === 104 || i === 128 || i === 154 ) {
+            date = data[i].date;
+            newText = abbreviatedMonthNames[date.getMonth()] + " " 
+              + (date.getDay() + 1) + ", " + (date.getYear() + 1900);
+            $textEl = $($(".xTick .tick text")[i]);
+            $textEl.text(newText);
+            $textEl.show();
+            $textEl.attr({"x": 20, "y": 380});
           }
         }
       }
@@ -72,7 +87,7 @@ $(document).ready(function(){
       xAxisGroup = svg.append('svg:g')
         .attr('class', 'xTick')
         .call(xAxis);
-      addLineStlying();
+      addLineStlyingToXTicks();
     }
     else {
       t.select('.xTick').call(xAxis);
@@ -88,6 +103,8 @@ $(document).ready(function(){
     else {
       t.select('.yTick').call(yAxis);
     }
+    // fixes x value for text
+    $(".yTick .tick text").attr("x", "-5")
 
 // y ticks and labels gets placed third
     // Draw the lines
@@ -190,9 +207,7 @@ $(document).ready(function(){
       .transition()
       .duration(transitionDuration)
       .style('opacity', 1)
-      .attr('cx', function(d) { 
-        return x(d.date) 
-      })
+      .attr('cx', function(d) { return x(d.date) })
       .attr('cy', function(d) { return y(d.temp) });
 
     // circles

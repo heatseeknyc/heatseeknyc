@@ -36,7 +36,7 @@
   .yTick {
     g.tick {
       line {
-        stroke-width: 0.5; 
+        stroke-width: 1; 
         stroke: #58787f;
       }
     }
@@ -45,10 +45,12 @@
   .xTick {
     g.tick {
       text {
-        visibility: hidden;
+        display: none;
+        font-size: 1.25em;
       }
+
       line {
-        opacity: 0.7;
+        opacity: 0.5;
       }
     }
   }
