@@ -46,12 +46,15 @@
     g.tick {
       text {
         display: none;
-        font-size: 1.25em;
       }
 
       line {
         opacity: 0.5;
       }
     }
+  }
+
+  text {
+    font-size: 1.25em;
   }
 }
