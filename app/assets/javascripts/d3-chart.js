@@ -70,14 +70,15 @@ $(document).ready(function(){
           }
         }
         else {
-          if (i === 8 || i === 32 || i === 56 || i === 80 || i === 104 || i === 128 || i === 154 ) {
+          // add dates to bottom of graph
+          if ( data[i].date.getHours() === 16 ) {
             date = data[i].date;
             newText = abbreviatedMonthNames[date.getMonth()] + " " 
               + date.getDate() + ", " + (date.getYear() + 1900);
             $textEl = $($(".xTick .tick text")[i]);
             $textEl.text(newText);
             $textEl.show();
-            $textEl.attr({"x": 0, "y": 380});
+            $textEl.attr({"x": -15, "y": 380});
           }
         }
       }
@@ -178,7 +179,9 @@ $(document).ready(function(){
       .transition()
       .attr("d", line)
       .duration(transitionDuration)
-      .attr("transform", function(d) { return "translate(" + x(d.date) + "," + y(0) + ")"; })
+      .attr("transform", function(d) {
+       return "translate(" + x(d.date) + "," + y(0) + ")"; 
+      })
       .style('opacity', 1e-6)
       .remove();
 
@@ -190,7 +193,9 @@ $(document).ready(function(){
     var fillArea = $(".area")
     $("#d3-chart svg > g").prepend(fillArea)
 
-    $("#violations span").text($("#violations span").text().replace(/#/, violations));
+    // add number of violations to the legend
+    $("#violations span").text($("#violations span")
+      .text().replace(/\d+/, violations));
 
     // Draw the points
     if (!dataCirclesGroup) {
