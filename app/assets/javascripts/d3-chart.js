@@ -21,11 +21,13 @@ $(document).ready(function(){
       dataCirclesGroup = null,
       dataLinesGroup = null;
 
-    var data = response;
+    var data = response,
+    violations = 0;
     // add usefull properties to the data objects
     data.forEach(function(obj){
       obj.date = new Date(obj.created_at);
       obj.isDay = obj.date.getHours() >= 6 && obj.date.getHours() <= 22;
+      if(obj.violation){ violations += 1; }
     });
     var margin = 40;
     var max = d3.max(data, function(d) { return d.temp }) + 1;
@@ -70,7 +72,6 @@ $(document).ready(function(){
         else {
           if (i === 8 || i === 32 || i === 56 || i === 80 || i === 104 || i === 128 || i === 154 ) {
             date = data[i].date;
-            debugger
             newText = abbreviatedMonthNames[date.getMonth()] + " " 
               + date.getDate() + ", " + (date.getYear() + 1900);
             $textEl = $($(".xTick .tick text")[i]);
@@ -188,6 +189,8 @@ $(document).ready(function(){
     // move the area to the back of the graph
     var fillArea = $(".area")
     $("#d3-chart svg > g").prepend(fillArea)
+
+    $("#violations span").text($("#violations span").text().replace(/#/, violations));
 
     // Draw the points
     if (!dataCirclesGroup) {
