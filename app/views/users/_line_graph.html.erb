@@ -1,6 +1,16 @@
-<div id="d3-chart">
-  <%#= line_chart(user.lines, min: user.range_min, max: user.range_max, :library => {
-  legend: {position: 'bottom'},
-  curveType: 'none'
-  }) %>
+<div id="chart-and-legend">
+  <div id="d3-chart">
+  </div>
+  <span id="legend">
+    <span  class="pull-left">
+      <%= image_tag 'tenantPage_chartKey_actualTemp.svg' %> Indoor Temp
+    </span>
+    <span class="pull-left">
+      <%= image_tag 'tenantPage_chartKey_outsideTemp.svg' %> Outdoor Temp
+    </span>
+    <span class="pull-right" id="violations">
+      <span># Violations</span>
+      <%= image_tag 'tenantPage_chartKey_violationPt.svg' %>
+    </span>
+  </span>
 </div>

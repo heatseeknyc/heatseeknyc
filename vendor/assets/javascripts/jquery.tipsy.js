@@ -15,7 +15,7 @@
       }
       return false;
     };
-    
+
     function Tipsy(element, options) {
         this.$element = $(element);
         this.options = options;
@@ -28,19 +28,33 @@
         var title = this.getTitle();
         if (title && this.enabled) {
           var $tip = this.tip();
-          
           $tip.find('.tipsy-inner')[this.options.html ? 'html' : 'text'](title);
           $tip[0].className = 'tipsy'; // reset classname in case of dynamic gravity
-          $tip.remove().css({top: 0, left: 0, visibility: 'hidden', display: 'block'}).prependTo(document.body);
-          
-          var pos = $.extend({}, this.$element.offset(), {
+          $tip.remove().css({top: 0, left: 0, visibility: 'hidden', display: 'block'}).prependTo(document.body),
+          pos = $.extend({}, this.$element.offset(), {
             width: this.$element[0].offsetWidth,
             height: this.$element[0].offsetHeight
-          });
-          
-          var actualWidth = $tip[0].offsetWidth,
-            actualHeight = $tip[0].offsetHeight,
-            gravity = maybeCall(this.options.gravity, this.$element[0]);
+          }),
+          actualWidth = $tip[0].offsetWidth,
+          actualHeight = $tip[0].offsetHeight,
+          gravity = maybeCall(this.options.gravity, this.$element[0]),
+          spaceFromWindow = ( actualWidth / 2 ) + 5;
+
+          // check to see whether or not the div 
+          // will be too close to the edge of the window 
+          if ( pos.left <= spaceFromWindow ) {
+            gravity = 'w';
+            this.options.topOffset = 4;
+            this.options.leftOffset = 10;
+          } else if ( pos.left >= window.innerWidth - spaceFromWindow ) {
+            gravity = 'e';
+            this.options.topOffset = 3;
+            this.options.leftOffset = 1.5;
+          } else {
+            gravity = 's';
+            this.options.topOffset = 2.8;
+            this.options.leftOffset = 3.8;
+          }
           
           var tp;
           switch (gravity.charAt(0)) {
@@ -58,8 +72,8 @@
               break;
             case 'e':
               tp = {
-                top: pos.top + pos.height / 2 - actualHeight / 2, 
-                left: pos.left - actualWidth - this.options.offset
+                top: pos.top + pos.height / 2 - actualHeight / 2 + this.options.topOffset, 
+                left: pos.left - actualWidth - this.options.offset - this.options.leftOffset
               };
               break;
             case 'w':
