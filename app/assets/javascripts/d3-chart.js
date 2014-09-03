@@ -77,7 +77,7 @@ $(document).ready(function(){
             $textEl = $($(".xTick .tick text")[i]);
             $textEl.text(newText);
             $textEl.show();
-            $textEl.attr({"x": 20, "y": 380});
+            $textEl.attr({"x": 0, "y": 380});
           }
         }
       }
