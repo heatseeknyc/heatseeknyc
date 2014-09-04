@@ -265,7 +265,7 @@ $(document).ready(function(){
       gravity: 's',
       html: true,
       topOffset: 2.8,
-      leftOffset: 3.8,
+      leftOffset: 0.3,
       opacity: 1,
       title: function() {
         var d = this.__data__;
