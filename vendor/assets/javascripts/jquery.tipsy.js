@@ -28,32 +28,43 @@
         var title = this.getTitle();
         if (title && this.enabled) {
           var $tip = this.tip();
+                
           $tip.find('.tipsy-inner')[this.options.html ? 'html' : 'text'](title);
           $tip[0].className = 'tipsy'; // reset classname in case of dynamic gravity
-          $tip.remove().css({top: 0, left: 0, visibility: 'hidden', display: 'block'}).prependTo(document.body),
-          pos = $.extend({}, this.$element.offset(), {
-            width: this.$element[0].offsetWidth,
-            height: this.$element[0].offsetHeight
-          }),
-          actualWidth = $tip[0].offsetWidth,
-          actualHeight = $tip[0].offsetHeight,
-          gravity = maybeCall(this.options.gravity, this.$element[0]),
-          spaceFromWindow = ( actualWidth / 2 ) + 5;
+          $tip.remove().css({top: 0, left: 0, visibility: 'hidden', display: 'block'}).prependTo(document.body);
+                
+          var pos = $.extend({}, this.$element.offset(), {
+              width: this.$element[0].offsetWidth || 0,
+              height: this.$element[0].offsetHeight || 0
+          });
+
+          if (typeof this.$element[0].nearestViewportElement === 'object') {
+            var el = this.$element[0];
+            var rect = el.getBoundingClientRect();
+            pos.width = rect.width;
+            pos.height = rect.height;
+          }
+
+          var actualWidth = $tip[0].offsetWidth,
+              actualHeight = $tip[0].offsetHeight,
+              gravity = maybeCall(this.options.gravity, this.$element[0]);
+          // debugger
+          var spaceFromWindow = ( actualWidth / 2 ) + 5;
 
           // check to see whether or not the div 
           // will be too close to the edge of the window 
           if ( pos.left <= spaceFromWindow ) {
             gravity = 'w';
-            this.options.topOffset = 4;
-            this.options.leftOffset = 10;
+            this.options.topOffset = 2;
+            this.options.leftOffset = 4;
           } else if ( pos.left >= window.innerWidth - spaceFromWindow ) {
             gravity = 'e';
-            this.options.topOffset = 3;
+            this.options.topOffset = 0.5;
             this.options.leftOffset = 1.5;
           } else {
             gravity = 's';
             this.options.topOffset = 2.8;
-            this.options.leftOffset = 3.8;
+            this.options.leftOffset = 0.3;
           }
           
           var tp;
