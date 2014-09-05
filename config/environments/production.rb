@@ -1,4 +1,5 @@
 Twinenyc::Application.configure do
+  config.action_mailer.default_url_options = { :host => 'heatseeknyc.com' }
   GA.tracker = "UA-53209413-1"
   # Settings specified here will take precedence over those in config/application.rb.
 
