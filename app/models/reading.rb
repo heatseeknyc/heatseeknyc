@@ -10,8 +10,6 @@ class Reading < ActiveRecord::Base
   before_create :get_outdoor_temp, unless: :outdoor_temp
   before_create :set_violation_boolean
 
-  scope :recent, limit: 168, order: 'id DESC'
-
   def set_violation_boolean
     time = created_at || Time.now
     self.violation = user.in_violation?(time, temp, outdoor_temp)
