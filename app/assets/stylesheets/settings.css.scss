@@ -17,15 +17,8 @@
 		font-weight: bold;
 		font-family: 'Oswald';
 		font-size: 24px;
-		border-bottom: 4px solid $theme-black;
 		padding-bottom: 10px;
 	}	
-
-	h3 {
-		margin: 10px 0;
-		text-transform: uppercase;
-		font-weight: normal;
-	}
 }
 
 .settings-form-control.form-control {
@@ -46,6 +39,11 @@
 .settings-input label {
 	font-size: 18px;
 	text-transform: uppercase;
+	font-weight: normal;
+}
+
+#edit_user dl label {
+	font-size: 18px;
 	font-weight: normal;
 }
 
@@ -70,8 +68,22 @@ html body.body main div#form-id.col-md-4 form#edit_user.edit_user dl label {
 	color: $theme-grey;
 }
 
+.btn-delete {
+	@extend .btn-save;
+	width: 60% !important;
+}
+
+.save-or-delete {
+	padding: 0;
+	margin: 0;
+}
+
 @media(max-width: 768px){
 	.btn-save {
 		width: 50%;
 	}
+	.save-or-delete {
+		display: block !important;
+	}
+
 }
