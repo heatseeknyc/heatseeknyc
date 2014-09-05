@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-unless User.find_by(email: "jane@heatseeknyc.com")
+unless User.find_by(email: "live-update@heatseeknyc.com")
   User.create(
     :first_name => "Jane",
     :last_name => "Doe",
@@ -33,6 +33,7 @@ unless User.find_by(email: "jane@heatseeknyc.com")
     :email => "demo-user@heatseeknyc.com",
     :password => '33west26'
   )
+
   User.create(
     :first_name => "Demo Lawyer",
     :last_name => "Account",
@@ -41,13 +42,14 @@ unless User.find_by(email: "jane@heatseeknyc.com")
     :email => 'demo-lawyer@heatseeknyc.com',
     :password => '33west26'
   )
+ 
   User.create(
-    :first_name => "Demo Lawyer",
+    :first_name => "Live Update",
     :last_name => "Account",
     :address => "100 Fake St",
     :zip_code => "10004",
-    :email => "demo-lawyer@heatseeknyc.com",
-    :password => '33west26',
+    :email => "live-update@heatseeknyc.com",
+    :password => '33west26'
   )
 end
 
@@ -55,10 +57,14 @@ jane = User.find_by(email: "jane@heatseeknyc.com")
 john = User.find_by(email: "john@heatseeknyc.com")
 demo = User.find_by(email: "demo-user@heatseeknyc.com")
 lawyer = User.find_by(email: "demo-lawyer@heatseeknyc.com")
+lawyer.permissions = 50
+lawyer.save
+live = User.find_by(email: "live-update@heatseeknyc.com")
 now = Time.now
 current_time = now - (now.to_i % 3600)
-users = [jane, john, demo, lawyer]
+users = [jane, john, demo, lawyer, live]
 users.each do |user|
+  binding.pry if !user
   user.readings.clear
   current_temp = 70
   current_outdoor_temp = 45

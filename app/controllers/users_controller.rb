@@ -84,7 +84,10 @@ class UsersController < ApplicationController
 
     respond_to do |f|
       f.html
-      f.js
+      f.json do
+        @readings = current_user.readings.last(168)
+        render json: @readings
+      end
     end
   end
 

@@ -39,6 +39,7 @@ class User < ActiveRecord::Base
   DEMO_ACCOUNT_EMAILS = [
     'demo-user@heatseeknyc.com',
     'demo-lawyer@heatseeknyc.com',
+    'live-update@heatseeknyc.com',
      "jane@heatseeknyc.com",
      "john@heatseeknyc.com"
   ]
