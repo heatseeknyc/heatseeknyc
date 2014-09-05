@@ -33,7 +33,12 @@ function draw(response) {
   });
   var margin = 40;
   var max = d3.max(data, function(d) { return d.temp }) + 1;
-  var min = d3.min(data, function(d) { return d.outdoor_temp }) - 5;
+  // checks whether or not there is an outdoor temp
+  if ( d3.min(data, function(d) { return d.outdoor_temp }) ){
+    var min = d3.min(data, function(d) { return d.outdoor_temp }) - 5;
+  } else {
+    var min = d3.min(data, function(d) { return d.temp }) - 10;
+  }
   var pointRadius = 4;
   var x = d3.time.scale().range([0, w - margin * 2]).domain([data[0].date, data[data.length - 1].date]);
   var y = d3.scale.linear().range([h - margin * 2, 0]).domain([min, max]);
@@ -199,47 +204,50 @@ function draw(response) {
   $("#violations span").text($("#violations span")
     .text().replace(/\d+/, violations));
 
-  // Draw the points
-  if (!dataCirclesGroup) {
-    dataCirclesGroup = svg.append('svg:g');
+
+  if (violations) {
+  // Draw the circles if there are any violations
+    if (!dataCirclesGroup) {
+      dataCirclesGroup = svg.append('svg:g');
+    }
+
+    var circles = dataCirclesGroup.selectAll('.data-point').data(data);
+
+    circles.enter()
+      .append('svg:circle')
+      .attr('class', 'data-point')
+      .style('opacity', 1)
+      .attr('cx', function(d) { return x(d.date) })
+      .attr('cy', function() { return y(0) })
+      .attr('r', function(d) {
+        return d.violation ? pointRadius : 0;
+      })
+      .transition()
+      .duration(transitionDuration)
+      .style('opacity', 1)
+      .attr('cx', function(d) { return x(d.date) })
+      .attr('cy', function(d) { return y(d.temp) });
+
+    // circles
+    //   .transition()
+    //   .duration(transitionDuration)
+    //   .attr('cx', function(d) { return x(d.date) })
+    //   .attr('cy', function(d) { return y(d.temp) })
+    //   .attr('r', function(d) { 
+    //     return d.violation ? pointRadius : null
+    //   })
+    //   .style('opacity', 1);
+
+    circles
+      .exit()
+      .transition()
+      .duration(transitionDuration)
+      // Leave the cx transition off. Allowing the points to fall where they lie is best.
+      //.attr('cx', function(d, i) { return xScale(i) })
+      .attr('cy', function() { return y(0) })
+      .style("opacity", 1e-6)
+      .remove();
   }
-
-  var circles = dataCirclesGroup.selectAll('.data-point').data(data);
-
-  circles.enter()
-    .append('svg:circle')
-    .attr('class', 'data-point')
-    .style('opacity', 1)
-    .attr('cx', function(d) { return x(d.date) })
-    .attr('cy', function() { return y(0) })
-    .attr('r', function(d) {
-      return d.violation ? pointRadius : 0;
-    })
-    .transition()
-    .duration(transitionDuration)
-    .style('opacity', 1)
-    .attr('cx', function(d) { return x(d.date) })
-    .attr('cy', function(d) { return y(d.temp) });
-
-  // circles
-  //   .transition()
-  //   .duration(transitionDuration)
-  //   .attr('cx', function(d) { return x(d.date) })
-  //   .attr('cy', function(d) { return y(d.temp) })
-  //   .attr('r', function(d) { 
-  //     return d.violation ? pointRadius : null
-  //   })
-  //   .style('opacity', 1);
-
-  circles
-    .exit()
-    .transition()
-    .duration(transitionDuration)
-    // Leave the cx transition off. Allowing the points to fall where they lie is best.
-    //.attr('cx', function(d, i) { return xScale(i) })
-    .attr('cy', function() { return y(0) })
-    .style("opacity", 1e-6)
-    .remove();
 
   function legalMinimumFor(reading){
     if(reading.isDay === true){
