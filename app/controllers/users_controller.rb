@@ -41,7 +41,7 @@ class UsersController < ApplicationController
     respond_to do |f|
       f.html { render "permissions_show" if current_user.permissions <= 50 }
       f.json do
-        @readings = current_user.readings.recent
+        @readings = current_user.readings.last(168)
         render json: @readings
       end
     end
