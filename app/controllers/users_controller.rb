@@ -39,7 +39,13 @@ class UsersController < ApplicationController
 
   def show
     respond_to do |f|
-      f.html { render "permissions_show" if current_user.permissions <= 50 }
+      f.html do 
+        if current_user.permissions <= 50 
+          render :permissions_show 
+        else
+          render :show
+        end
+      end
       f.json do
         @readings = current_user.readings.last(168)
         render json: @readings
