@@ -3,7 +3,7 @@ var live_update = function(){
   var update_fragment = document.createDocumentFragment();
   $.get( "live_update.js", function( data ) {
     console.log( data );
-    // $("#live-update-contents").html( eval( data ) );
+    $("#live-update-contents").html( eval( data ) );
   });
 };
 
