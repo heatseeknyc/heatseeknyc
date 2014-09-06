@@ -8,29 +8,38 @@
 #sponsors-page {
   margin-bottom: 70px;
 
-  .flatiron {
-    background: image-url("flatiron_logo_hover_100px.png") no-repeat;
-  }
-
-  .sparkfun {
-    background: image-url("sparkfun_logo_hover.jpg") no-repeat;
-  }
-
   .betanyc {
     background: image-url("betanyc_logo_hover.jpg") no-repeat;
+  }
+
+  .casa {
+    background: image-url("casa_logo_hover.png") no-repeat;
+  }
+
+  .flatiron {
+    background: image-url("flatiron_logo_hover_100px.png") no-repeat;
   }
 
   .pdm {
     background: image-url("pdm_logo_hover_100px.png") no-repeat;
   }
 
+  .sparkfun {
+    background: image-url("sparkfun_logo_hover.jpg") no-repeat;
+  }
+
   .logo-buttons {
     background-size: 100%;
   }
-}
-
-.partner {
-  font-size: 2em;
-  padding-right: 15%;
-  padding-left: 15%;
+  
+  .partner {
+    font-size: 2em;
+    text-align: center;
+    
+    a {
+      @media (max-width: $screen-xs-max) {
+        background-position: center;
+      }
+    }
+  }
 }
