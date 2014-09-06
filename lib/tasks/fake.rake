@@ -16,10 +16,15 @@ namespace :fake do
 			sensor: fake_sensor
 		} 
 
-		fake_reading = Reading.create(options)
-		fake_reading.save
-		puts fake_reading.inspect
-		sleep 1
+		begin
+			fake_reading = Reading.create(options)
+			fake_reading.save
+			puts fake_reading.inspect
+		rescue
+			puts 'failed to fake reading'
+		ensure
+			sleep 1
+		end
 	end
   end
 
