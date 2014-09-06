@@ -119,7 +119,7 @@ class User < ActiveRecord::Base
   end
 
   def get_latest_readings(num)
-    readings.order('id DESC').limit(num)
+    readings.order('id ASC').limit(num)
   end
 
   # def method_missing(name, *args)
