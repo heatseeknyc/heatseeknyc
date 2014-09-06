@@ -23,6 +23,10 @@ function draw(response) {
       dataCirclesGroup = null,
       dataLinesGroup = null;
 
+  if(/live_update/.test(document.URL)){
+    transitionDuration = 0;
+  }
+
   var data = response,
   violations = 0;
   // add usefull properties to the data objects

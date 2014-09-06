@@ -47,7 +47,7 @@ class UsersController < ApplicationController
         end
       end
       f.json do
-        @readings = current_user.get_latest_readings(168)
+        @readings = current_user.readings.last(168)
         render json: @readings
       end
     end
@@ -81,14 +81,16 @@ class UsersController < ApplicationController
     user = User.find_by(first_name: "Live Update")
     # commenting this out so the number of readings doesn't suddenly drop
     # after having run for a minute
-    # user.readings.first.destroy if user.readings.count > 50
-    # user.readings.delete_all if user.readings.count > 60
+    
+    user.readings.first.destroy if user.readings.count > 50
+    user.readings.slice(50..-1).delete_all if user.readings.count > 50
 
     respond_to do |f|
       f.html
       f.json do
-        @readings = current_user.get_latest_readings(50).map do |r|
+        @readings = current_user.readings.last(50).map do |r|
           r.violation = true
+          r
         end
         render json: @readings
       end
