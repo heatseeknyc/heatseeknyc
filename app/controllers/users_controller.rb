@@ -87,7 +87,9 @@ class UsersController < ApplicationController
     respond_to do |f|
       f.html
       f.json do
-        @readings = current_user.get_latest_readings(50)
+        @readings = current_user.get_latest_readings(50).map do |r|
+          r.violation = true
+        end
         render json: @readings
       end
     end
