@@ -88,6 +88,13 @@ class User < ActiveRecord::Base
     else
       User.fuzzy_search(first_term, second_term).except_user_id(self.id)
     end
+    
+    result = User.fuzzy_search(first_term, second_term).except_user_id(self.id).tenants_only
+    result.demo_users if self.is_demo_user?
+  end
+
+  def self.tenants_only
+    where(permissions: 100)
   end
 
   def self.fuzzy_search(first_term, second_term)
