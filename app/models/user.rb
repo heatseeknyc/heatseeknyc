@@ -78,16 +78,32 @@ class User < ActiveRecord::Base
   
   define_measureable_methods(METRICS, CYCLES, MEASUREMENTS)
 
-  def self.search(search)
+  def search(search)
     search_arr = search.downcase.split
-    if search_arr[1] != nil
-      where(['search_first_name LIKE ? OR search_last_name LIKE ?', "%#{search_arr[0]}%", "%#{search_arr[1]}%"])
+    first_term = search_arr[0]
+    second_term = search_arr[1] || search_arr[0]
+    
+    if self.is_demo_user?
+      User.demo_users.fuzzy_search(first_term, second_term).except_user_id(self.id)
     else
-      where(['search_first_name LIKE ? OR search_last_name LIKE ?', "%#{search_arr[0]}%", "%#{search_arr[0]}%"])
+      User.fuzzy_search(first_term, second_term).except_user_id(self.id)
     end
   end
 
-  def self.account_demo_user?(user_id)
+  def self.fuzzy_search(first_term, second_term)
+    where([
+      'search_first_name LIKE ? OR search_last_name LIKE ?', 
+      "%#{first_term}%", 
+      "%#{second_term}%"
+    ])
+  end
+
+  def self.except_user_id(user_id)
+    where.not(id: user_id)
+  end
+
+  #TODO: eliminate this method and use is_demo_user? instance method instead
+  def self.account_demo_user?(user_id) 
     DEMO_ACCOUNT_EMAILS.include?(User.find(user_id).email)
   end
 
@@ -103,9 +119,7 @@ class User < ActiveRecord::Base
   end
 
   def self.demo_users
-    demo_users ||= DEMO_ACCOUNT_EMAILS.map do |email|
-      User.find_by(email: email)
-    end
+    where(email: DEMO_ACCOUNT_EMAILS)
   end
 
   def twine_name

@@ -65,8 +65,8 @@ class UsersController < ApplicationController
 
   def search
     @query = params[:q]
-    @results = User.search(@query).reject {|r| r == current_user}
-    @results = demo_user_filter(@results) if current_user.is_demo_user?
+    @results = current_user.search(@query)
+    
     respond_to do |f|
       f.html do
         if @results.empty?
@@ -111,9 +111,5 @@ class UsersController < ApplicationController
   private
     def user_params
       params.require(:user).permit(:first_name, :last_name, :address, :email, :zip_code, :permissions, :twine_name)
-    end
-
-    def demo_user_filter(users)
-      users & User.demo_users
     end
 end
