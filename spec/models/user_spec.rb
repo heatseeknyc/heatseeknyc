@@ -40,7 +40,7 @@ describe User do
 
 	describe "user permissions" do 
 		it "can be a demo user" do
-			user7 = create(:user, email: 'demo-user@heatseeknyc.com')
+			user7 = create(:user, email: 'demo-lawyer@heatseeknyc.com')
 			expect(user7.is_demo_user?).to be(true)
 		end
 
