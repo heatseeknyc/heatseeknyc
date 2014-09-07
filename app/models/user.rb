@@ -40,8 +40,40 @@ class User < ActiveRecord::Base
     'demo-user@heatseeknyc.com',
     'demo-lawyer@heatseeknyc.com',
     'live-update@heatseeknyc.com',
-     "jane@heatseeknyc.com",
-     "john@heatseeknyc.com"
+    'jane@heatseeknyc.com',
+    'john@heatseeknyc.com',
+    'mbierut@heatseeknyc.com',
+    'bfried@heatseeknyc.com',
+    'dhuttenlocher@heatseeknyc.com',
+    'mkennedy@heatseeknyc.com',
+    'kkimball@heatseeknyc.com',
+    'mwiley@heatseeknyc.com',
+    'dwinshel@heatseeknyc.com',
+    'kjenkins@heatseeknyc.com',
+    'enelson@heatseeknyc.com',
+    'lbailey@heatseeknyc.com',
+    'csanders@heatseeknyc.com',
+    'jperry@heatseeknyc.com',
+    'rwalker@heatseeknyc.com',
+    'jwilliams@heatseeknyc.com',
+    'aanderson@heatseeknyc.com',
+    'bjackson@heatseeknyc.com',
+    'nparker@heatseeknyc.com',
+    'cstewart@heatseeknyc.com',
+    'ahoward@heatseeknyc.com',
+    'fmurphy@heatseeknyc.com',
+    'srodriguez@heatseeknyc.com',
+    'jgriffin@heatseeknyc.com',
+    'sbryant@heatseeknyc.com',
+    'abell@heatseeknyc.com',
+    'cgonzalez@heatseeknyc.com',
+    'rgray@heatseeknyc.com',
+    'speterson@heatseeknyc.com',
+    'sjones@heatseeknyc.com',
+    'jhenderson@heatseeknyc.com',
+    'nlong@heatseeknyc.com',
+    'chernandez@heatseeknyc.com',
+    'dmorgan@heatseeknyc.com'
   ]
   
   define_measureable_methods(METRICS, CYCLES, MEASUREMENTS)
@@ -106,7 +138,7 @@ class User < ActiveRecord::Base
     if last_reading && last_reading.created_at > Time.now - 60 * 60 * 3
       "#{last_reading.temp}°"
     else
-      "51°"  #CHANGE TO - - -°
+      "- -"  #CHANGE TO - - -°
     end
   end
 

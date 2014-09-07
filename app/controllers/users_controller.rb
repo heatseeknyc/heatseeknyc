@@ -83,7 +83,11 @@ class UsersController < ApplicationController
     # after having run for a minute
     
     user.readings.first.destroy if user.readings.count > 50
-    user.readings.slice(50..-1).delete_all if user.readings.count > 50
+    if user.readings.count > 60
+      user.readings.slice(50..-1).each do |r| 
+        r.destroy 
+      end
+    end
 
     respond_to do |f|
       f.html

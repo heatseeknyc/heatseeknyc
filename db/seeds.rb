@@ -6,7 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-unless User.find_by(email: "live-update@heatseeknyc.com")
+unless User.find_by(email: "mbeirut@heatseeknyc.com")
+
   User.create(
     :first_name => "Jane",
     :last_name => "Doe",
