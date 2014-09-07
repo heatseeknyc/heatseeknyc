@@ -37,9 +37,7 @@ class User < ActiveRecord::Base
   CYCLES = [:day, :night]
   MEASUREMENTS = [:temp, :outdoor_temp]
   DEMO_ACCOUNT_EMAILS = [
-    'demo-user@heatseeknyc.com',
     'demo-lawyer@heatseeknyc.com',
-    'live-update@heatseeknyc.com',
     'jane@heatseeknyc.com',
     'john@heatseeknyc.com',
     'mbierut@heatseeknyc.com',
