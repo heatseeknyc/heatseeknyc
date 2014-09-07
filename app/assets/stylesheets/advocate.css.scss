@@ -32,6 +32,7 @@
 	border-radius: 0;
 	margin-right: 5px;
 	margin-top: 20px;
+	margin-bottom: 20px;
 
 	&:focus {
 		box-shadow: none;
@@ -113,12 +114,18 @@
 	border-left: 4px solid $theme-orange;
 }
 
+.search-form {
+	float: right;
+
+}
+
 #search-button {
 	float: right;
 	background-color: $theme-orange;
 	border: solid 3px $theme-black;
 	height: 34px;
 	margin-top: 20px;
+	margin-bottom: 20px;
 }
 
 .collaborators-sidebar {
