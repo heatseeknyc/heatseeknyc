@@ -1,5 +1,5 @@
 namespace :bigapps do
-  desc "TODO"
+  desc "create demo accounts for bigapps judges and fake tenants"
   task create_demo_accts: :environment do
 	  judge_names = [
 		  "Michael Bierut", 

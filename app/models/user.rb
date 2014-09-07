@@ -135,11 +135,13 @@ class User < ActiveRecord::Base
 
   def current_temp
     last_reading = self.readings.last
-    if last_reading && last_reading.created_at > Time.now - 60 * 60 * 3
-      "#{last_reading.temp}°"
-    else
-      "- -"  #CHANGE TO - - -°
-    end
+    "#{last_reading.temp}°"
+    # after bigapps uncomment this
+    # if last_reading && last_reading.created_at > Time.now - 60 * 60 * 3
+    #   "#{last_reading.temp}°"
+    # else
+    #   "- -"
+    # end
   end
 
   def has_readings?
