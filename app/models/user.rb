@@ -102,6 +102,12 @@ class User < ActiveRecord::Base
     DEMO_ACCOUNT_EMAILS.include?(self.email)
   end
 
+  def self.demo_users
+    demo_users ||= DEMO_ACCOUNT_EMAILS.map do |email|
+      User.find_by(email: email)
+    end
+  end
+
   def twine_name
     self.twine.name unless self.twine.nil?
   end
