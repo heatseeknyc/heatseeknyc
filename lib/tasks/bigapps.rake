@@ -12,12 +12,7 @@ namespace :bigapps do
 		]
 
 		tenant_names = [
-			"Katherine Jenkins", 
-		  "Eric Nelson", 
-		  "Larry Bailey", 
-		  "Cheryl Sanders", 
-		  "James Perry", 
-		  "Randy Walker", 
+			"Randy Walker", 
 		  "Jason Williams", 
 		  "Ashley Anderson", 
 		  "Bobby Jackson", 
@@ -137,7 +132,7 @@ namespace :bigapps do
 	  judges.each do |judge|
   		puts "#{judge.email} associating with"
 	  	
-	  	tenants.each do |tenant|
+	  	tenants.sample(5).each do |tenant|
 	  		judge.collaborators << tenant
 	  		puts tenant.email
 	  	end
