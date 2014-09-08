@@ -94,7 +94,7 @@ class User < ActiveRecord::Base
   end
 
   def self.judges
-    demo_users.limit(7)
+    demo_users.order(id: :asc).limit(7)
   end
 
   def self.fuzzy_search(first_term, second_term)
