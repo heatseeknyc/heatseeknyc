@@ -94,7 +94,17 @@ class User < ActiveRecord::Base
   end
 
   def self.judges
-    demo_users.order(id: :asc).limit(7)
+    last_names = [
+      "Bierut", 
+      "Fried", 
+      "Huttenlocher", 
+      "Kennedy", 
+      "Kimball", 
+      "Wiley", 
+      "Winshel"
+    ]
+
+    demo_users.where(last_name: last_names)
   end
 
   def self.fuzzy_search(first_term, second_term)
