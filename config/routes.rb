@@ -21,6 +21,8 @@ Twinenyc::Application.routes.draw do
   get "about" => "welcome#about"
   get "nycbigapps" => "welcome#nycbigapps"
   get "vote-for-us" => "welcome#nycbigapps"
+  get "judges" => "welcome#judges_welcome"
+  get "judges_login/:last_name" => "users#judges_login"
   # get "demo" => "welcome#demo"
   get "press" => "welcome#press"
   get "blog" => "welcome#blog"

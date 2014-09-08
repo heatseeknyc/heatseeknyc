@@ -6,6 +6,10 @@ class WelcomeController < ApplicationController
     # render "current_user_index" if current_user
   end
 
+  def judges_welcome
+    @judges = User.judges
+  end
+
   def blog
     page_size = 4
     page = params[:page] ? params[:page].to_i : 1

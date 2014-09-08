@@ -1,10 +1,9 @@
 class UsersController < ApplicationController
   include UserControllerHelper
-  before_action :authenticate_user!, except: [:demo]
+  before_action :authenticate_user!, except: [:demo, :judges_login]
 
   def edit
     @user = User.find(params[:id])
-    render "demo_edit" if current_user.is_demo_user?
   end
 
   def update
@@ -103,13 +102,28 @@ class UsersController < ApplicationController
   end
 
   def demo
-    demo = User.find_by(email: 'demo-lawyer@heatseeknyc.com')
+    demo = User.demo_lawyer
+
     sign_in(demo)
     redirect_to user_path(demo)
   end
 
+  def judges_login
+    judge = User.find_by(last_name: params[:last_name])
+    sign_in(judge)
+    redirect_to user_path(judge)
+  end
+
   private
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :address, :email, :zip_code, :permissions, :twine_name)
+      params.require(:user).permit([
+        :first_name, 
+        :last_name, 
+        :address,
+        :email,
+        :zip_code,
+        :permissions,
+        :twine_name
+      ])
     end
 end

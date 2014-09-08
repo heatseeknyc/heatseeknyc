@@ -37,9 +37,6 @@ class User < ActiveRecord::Base
   CYCLES = [:day, :night]
   MEASUREMENTS = [:temp, :outdoor_temp]
   DEMO_ACCOUNT_EMAILS = [
-    'demo-lawyer@heatseeknyc.com',
-    'jane@heatseeknyc.com',
-    'john@heatseeknyc.com',
     'mbierut@heatseeknyc.com',
     'bfried@heatseeknyc.com',
     'dhuttenlocher@heatseeknyc.com',
@@ -71,7 +68,8 @@ class User < ActiveRecord::Base
     'jhenderson@heatseeknyc.com',
     'nlong@heatseeknyc.com',
     'chernandez@heatseeknyc.com',
-    'dmorgan@heatseeknyc.com'
+    'dmorgan@heatseeknyc.com',
+    'demo-lawyer@heatseeknyc.com'
   ]
   
   define_measureable_methods(METRICS, CYCLES, MEASUREMENTS)
@@ -95,6 +93,10 @@ class User < ActiveRecord::Base
     where(permissions: 100)
   end
 
+  def self.judges
+    demo_users.limit(7)
+  end
+
   def self.fuzzy_search(first_term, second_term)
     where([
       'search_first_name LIKE ? OR search_last_name LIKE ?', 
@@ -110,6 +112,37 @@ class User < ActiveRecord::Base
   #TODO: eliminate this method and use is_demo_user? instance method instead
   def self.account_demo_user?(user_id) 
     DEMO_ACCOUNT_EMAILS.include?(User.find(user_id).email)
+  end
+
+  def self.create_demo_lawyer
+    demo_lawyer = User.create(
+      :first_name => "Demo Lawyer",
+      :last_name => "Account",
+      :address => "100 Fake St",
+      :zip_code => "10004",
+      :email => 'demo-lawyer@heatseeknyc.com',
+      :password => '33west26',
+      :permissions => 50
+    )
+  end
+
+  def self.assign_demo_tenants_to(demo_lawyer)
+    demo_tenants = demo_users.tenants_only.sample(5)
+
+    demo_tenants.each do |demo_tenant|
+      demo_lawyer.collaborators << demo_tenant
+    end
+  end
+
+  def self.demo_lawyer
+    demo_lawyer ||= find_by(first_name: 'Demo Lawyer') 
+    
+    if demo_lawyer.nil?
+      demo_lawyer = create_demo_lawyer
+      assign_demo_tenants_to(demo_lawyer)
+    end
+    
+    return demo_lawyer
   end
 
   def twine_name=(twine_name)
@@ -180,6 +213,10 @@ class User < ActiveRecord::Base
 
   def get_latest_readings(num)
     readings.order('id ASC').limit(num)
+  end
+
+  def name
+    "#{first_name} #{last_name}"
   end
 
   # def method_missing(name, *args)

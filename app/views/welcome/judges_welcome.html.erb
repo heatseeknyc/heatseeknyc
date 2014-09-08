@@ -1,0 +1,28 @@
+<div id="judges-welcome" class="clearfix">
+<h2 class="stylish-title">Welcome NYCBigApps Judges!</h2>
+	<div class="row">
+		<div class="col-sm-3"></div>
+		<div class="intro col-xs-12 col-sm-6">
+			<p>We’ve created a personalized user account for each of you that will allow you to use the Heat Seek NYC web app the same way the attorneys at the Urban Justice Center do.</p>
+
+			<p>To sign in and view your tenants, simply locate your name below and click the arrow. Alternatively, you may sign in manually by tapping or clicking “SIGN IN” in the top menu and entering your Login: <b>@heatseeknyc.com email address</b> (shown below) and the password “<b>nycbigapps</b>”.</p>
+
+			<p>For privacy reasons, we have restricted access to real tenant accounts containing real temperature data. In their place, we have created simulated tenant accounts for you to administer, with readings based on those collected during our field tests in actual users’ apartments. Changes to your tenants list (adding or removing accounts) will not be saved between page reloads.</p>
+
+			<p>Thank you for reviewing our web app! We look forward to showing you more of our app and hardware at the BigApps Finals on September 16!</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-3"></div>
+		<div class="judges col-xs-12 col-sm-6">
+			<% @judges.each do |judge| %>
+				<div class="judge">
+				<%= link_to '', "/judges_login/#{judge.last_name}", class: 'login_link fa fa-chevron-circle-right' %>
+					<p class="name"><%= judge.name %></p>
+					<p class="login">Login: <%= judge.email %></p>
+					<p class="password">Password: nycbigapps</p>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>

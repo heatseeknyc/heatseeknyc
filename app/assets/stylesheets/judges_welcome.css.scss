@@ -1,5 +1,39 @@
 @import 'shared';
 
-.judges-welcome {
+#judges-welcome {
+	background-color: $theme-blue;
 
+	.intro {
+		margin-bottom: 20px;
+	}
+
+	.judges {
+		margin-bottom: 30px;
+		.judge {
+			display: block;
+			background-color: $theme-white;
+			padding: 15px 5px 5px 15px;
+			margin: 5px;
+
+			.name {
+				font-size: 23px;
+			}
+
+			.login,
+			.password {
+				font-size: 14px;
+			}
+
+			.login_link {
+				float: right;
+				text-transform: uppercase;
+				margin-right: 30px;
+				font-size: 84px;
+				
+				&:hover {
+					text-decoration: none;
+				}
+			}
+		}
+	}
 }
