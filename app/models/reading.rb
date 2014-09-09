@@ -7,7 +7,6 @@ class Reading < ActiveRecord::Base
   validates :temp, presence: true
   validates :outdoor_temp, presence: true
 
-  before_create :get_outdoor_temp, unless: :outdoor_temp
   before_create :set_violation_boolean
 
   def set_violation_boolean
