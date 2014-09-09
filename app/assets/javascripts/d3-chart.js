@@ -298,6 +298,10 @@ function draw(response) {
 }
 
 function drawChartBasedOnScreenSize(chartData){
+  if ( $('#live-update') !== undefined ) {
+    $('.temp-num').html(chartData[chartData.length - 1].temp + '°')
+  }
+
   if (window.innerWidth < 450) {
     var quarterReadings = chartData.slice(119, 167);
     $("#d3-chart").html("")
