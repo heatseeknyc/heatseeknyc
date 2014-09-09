@@ -25,25 +25,14 @@ class Reading < ActiveRecord::Base
     end
   end
 
-  def self.last_outdoor_reading_was_recent?
-    last_reading = Reading.last
-    last_reading && last_reading.outdoor_temp &&
-                    last_reading.created_at < Time.now - 60 * 15
-  end
-
   def self.create_from_params(params)
     sensor = Sensor.find_by(name: params[:sensor_name])
     temp = params[:temp]
     time = Time.at params[:time].to_i
     user = sensor.user
-    last_reading = Reading.last
-    if last_outdoor_reading_was_recent?
-      outdoor_temp = last_reading.outdoor_temp
-    else
-      outdoor_temp = WeatherMan.current_outdoor_temp(user.zip_code)
-    end
-
-    settings = {
+    outdoor_temp = WeatherMan.current_outdoor_temp(user.zip_code)
+  
+    options = {
       sensor: sensor, 
       user: user, 
       temp: temp, 
@@ -51,10 +40,7 @@ class Reading < ActiveRecord::Base
       created_at: time
     }
 
-    if verification_valid? params[:verification]
-      create(settings)
-
-    end
+    self.create(options) if verification_valid? params[:verification]
   end
 
   def self.verification_valid?(code)
