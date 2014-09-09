@@ -201,6 +201,13 @@ class User < ActiveRecord::Base
     self.readings.last.temp
   end
 
+  def live_readings
+    readings.order(created_at: :desc).limit(50).sort_by do |r| 
+      r.violation = true
+      r.created_at
+    end
+  end
+
   def current_temp
     last_reading = self.readings.last
     # bigapps version

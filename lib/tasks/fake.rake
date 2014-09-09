@@ -10,11 +10,14 @@ namespace :fake do
 
 	while true do
 		options = {
-			temp: rand(40..50),
-			outdoor_temp: rand(20..30), 
+			temp: rand(70..80),
+			outdoor_temp: 72, 
 			user: live_account,
-			sensor: fake_sensor
-		} 
+			sensor: fake_sensor,
+			created_at: Time.now - rand(1..3)
+		}
+
+		sleep( rand(500..2000) / 1000 )
 
 		begin
 			fake_reading = Reading.create(options)
@@ -22,8 +25,6 @@ namespace :fake do
 			puts fake_reading.inspect
 		rescue
 			puts 'failed to fake reading'
-		ensure
-			sleep 1
 		end
 	end
   end

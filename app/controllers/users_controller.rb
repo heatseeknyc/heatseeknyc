@@ -81,21 +81,18 @@ class UsersController < ApplicationController
     user = User.find_by(first_name: "Live Update")
     # commenting this out so the number of readings doesn't suddenly drop
     # after having run for a minute
-    
-    user.readings.first.destroy if user.readings.count > 50
-    if user.readings.count > 60
-      user.readings.slice(50..-1).each do |r| 
-        r.destroy 
-      end
-    end
+    # also, code is too slow, need a faster solution
+    # if user.readings.count > 75
+    #   user.readings.slice(0..-50).each do |r| 
+    #     r.destroy 
+    #   end
+    # end
 
     respond_to do |f|
       f.html
       f.json do
-        @readings = current_user.readings.last(50).map do |r|
-          r.violation = true
-          r
-        end
+        @readings = current_user.live_readings
+        
         render json: @readings
       end
     end
