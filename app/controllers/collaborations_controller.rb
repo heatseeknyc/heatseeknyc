@@ -2,10 +2,9 @@ class CollaborationsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    unless current_user.first_name == 'Demo Lawyer'
-      @collaboration = current_user.collaborations
-        .build(:collaborator_id => params[:collaborator_id])
-    end
+    @collaboration = current_user.collaborations
+      .build(:collaborator_id => params[:collaborator_id])
+
     respond_to do |f|
       f.js
       f.html do
