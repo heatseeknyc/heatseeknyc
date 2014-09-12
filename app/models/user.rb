@@ -79,14 +79,9 @@ class User < ActiveRecord::Base
     first_term = search_arr[0]
     second_term = search_arr[1] || search_arr[0]
     
-    if self.is_demo_user?
-      User.demo_users.fuzzy_search(first_term, second_term).except_user_id(self.id)
-    else
-      User.fuzzy_search(first_term, second_term).except_user_id(self.id)
-    end
-    
     result = User.fuzzy_search(first_term, second_term).except_user_id(self.id).tenants_only
-    result.demo_users if self.is_demo_user?
+    
+    self.is_demo_user? ? result.demo_users : result
   end
 
   def self.tenants_only
