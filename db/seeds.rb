@@ -65,7 +65,6 @@ now = Time.now
 current_time = now - (now.to_i % 3600)
 users = [jane, john, demo, lawyer, live]
 users.each do |user|
-  binding.pry if !user
   user.readings.clear
   current_temp = 70
   current_outdoor_temp = 45
