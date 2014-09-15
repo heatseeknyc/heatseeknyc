@@ -1,5 +1,5 @@
 namespace :fake do
-  desc "TODO"
+  desc "simulates live readings for the Live Update account"
   task live_readings: :environment do
 	live_account = User.find_or_create_by(first_name: 'Live Update')
 	fake_sensor = Sensor.find_or_create_by(name: 'Fake Sensor')
@@ -14,10 +14,10 @@ namespace :fake do
 			outdoor_temp: 72, 
 			user: live_account,
 			sensor: fake_sensor,
-			created_at: Time.now - rand(1..3)
+			created_at: Time.now
 		}
 
-		sleep( rand(500..2000) / 1000 )
+		sleep 1
 
 		begin
 			fake_reading = Reading.create(options)

@@ -278,26 +278,29 @@ function draw(response) {
     }
   }
 
-  $('svg circle').tipsy({ 
-    gravity: 's',
-    html: true,
-    topOffset: 2.8,
-    leftOffset: 0.3,
-    opacity: 1,
-    title: function() {
-      var d = this.__data__;
-      var pDate = d.date;
-      return pDate.getDate() + ' '
-        + monthNames[pDate.getMonth()] + ' '
-        + pDate.getFullYear() + '<br>'
-        + days[ pDate.getDay() ] + ' at '
-        + getCivilianTime(pDate) + '<br>'
-        + '<i>Temperature in Violation</i><br>'
-        + '<br>Temperature in Apt: ' + d.temp + '°'
-        + '<br>Temperature Outside: ' + d.outdoor_temp + '°'
-        + '<br>Legal minimum: ' + legalMinimumFor(d) + '°';
-    }
-  });
+  // only add tooltips if it is not a live demo
+  if(!/live_update/.test(document.URL)){
+    $('svg circle').tipsy({ 
+      gravity: 's',
+      html: true,
+      topOffset: 2.8,
+      leftOffset: 0.3,
+      opacity: 1,
+      title: function() {
+        var d = this.__data__;
+        var pDate = d.date;
+        return pDate.getDate() + ' '
+          + monthNames[pDate.getMonth()] + ' '
+          + pDate.getFullYear() + '<br>'
+          + days[ pDate.getDay() ] + ' at '
+          + getCivilianTime(pDate) + '<br>'
+          + '<i>Temperature in Violation</i><br>'
+          + '<br>Temperature in Apt: ' + d.temp + '°'
+          + '<br>Temperature Outside: ' + d.outdoor_temp + '°'
+          + '<br>Legal minimum: ' + legalMinimumFor(d) + '°';
+      }
+    });
+  }
 }
 
 function drawChartBasedOnScreenSize(chartData){
