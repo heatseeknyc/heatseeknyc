@@ -1,5 +1,5 @@
 namespace :bigapps do
-  desc "create demo accounts for bigapps judges and fake tenants"
+  desc "create demo accounts for live accounts"
   task create_live_accts: :environment do
 	  4.times do |i|
 		  User.create({
@@ -13,6 +13,7 @@ namespace :bigapps do
 		end
   end
 
+  desc "create demo accounts for bigapps judges and fake tenants"
   task create_demo_accts: :environment do
 	  judge_names = [
 		  "Michael Bierut", 
