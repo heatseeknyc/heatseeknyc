@@ -39,12 +39,12 @@ function draw(response) {
     if(obj.violation){ violations += 1; }
   });
   var margin = 40;
-  var max = d3.max(data, function(d) { return d.temp }) + 1;
+  var max = d3.max(data, function(d) { return Math.max( d.temp, d.outdoor_temp ) }) + 1;
   // checks whether or not there is an outdoor temp
   if ( d3.min(data, function(d) { return d.outdoor_temp }) ){
-    var min = d3.min(data, function(d) { return d.outdoor_temp }) - 5;
+    var min = d3.min(data, function(d) { return Math.min( d.temp, d.outdoor_temp ) }) - 5;
   } else {
-    var min = d3.min(data, function(d) { return d.temp }) - 10;
+    var min = d3.min(data, function(d) { return Math.min( d.temp, d.outdoor_temp ) }) - 10;
   }
   var pointRadius = 4;
   var x = d3.time.scale().range([0, w - margin * 2]).domain([data[0].date, data[data.length - 1].date]);
