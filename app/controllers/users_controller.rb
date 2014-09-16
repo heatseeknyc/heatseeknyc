@@ -91,8 +91,8 @@ class UsersController < ApplicationController
     respond_to do |f|
       f.html
       f.json do
-        # @readings = current_user.live_readings
-        @readings = current_user.readings.order('id ASC').limit(50)
+        @readings = current_user.live_readings
+        # @readings = current_user.readings.order('id ASC').limit(50)
         render json: @readings
       end
     end
