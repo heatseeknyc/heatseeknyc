@@ -1,7 +1,7 @@
 namespace :bigapps do
   desc "create demo accounts for live accounts"
   task create_live_accts: :environment do
-	  4.times do |i|
+	  5.times do |i|
 		  User.create({
 	  		:first_name => "Live Update",
 	  		:last_name => "Account#{i}",
