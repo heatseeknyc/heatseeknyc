@@ -27,6 +27,15 @@ unless User.find_by(email: "mbeirut@heatseeknyc.com")
   )
 
   User.create(
+    :first_name => "Demo User",
+    :last_name => "Account",
+    :address => "100 Fake St",
+    :zip_code => "10004",
+    :email => 'demo-user@heatseeknyc.com',
+    :password => '33west26'
+  )
+
+  User.create(
     :first_name => "Demo Lawyer",
     :last_name => "Account",
     :address => "100 Fake St",
@@ -56,7 +65,6 @@ now = Time.now
 current_time = now - (now.to_i % 3600)
 users = [jane, john, demo, lawyer, live]
 users.each do |user|
-  binding.pry if !user
   user.readings.clear
   current_temp = 70
   current_outdoor_temp = 45
