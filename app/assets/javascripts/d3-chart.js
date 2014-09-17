@@ -44,7 +44,7 @@ function draw(response) {
   if ( d3.min(data, function(d) { return d.outdoor_temp }) ){
     var min = d3.min(data, function(d) { return Math.min( d.temp, d.outdoor_temp ) }) - 5;
   } else {
-    var min = d3.min(data, function(d) { return Math.min( d.temp, d.outdoor_temp ) }) - 10;
+    var min = d3.min(data, function(d) { return Math.min( d.temp, d.temp ) }) - 10;
   }
   var pointRadius = 4;
   var x = d3.time.scale().range([0, w - margin * 2]).domain([data[0].date, data[data.length - 1].date]);
