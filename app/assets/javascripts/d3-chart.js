@@ -42,7 +42,7 @@ function draw(response) {
   var max = d3.max(data, function(d) { return Math.max( d.temp, d.outdoor_temp ) }) + 1;
   // checks whether or not there is an outdoor temp
   if ( d3.min(data, function(d) { return d.outdoor_temp }) ){
-    var min = d3.min(data, function(d) { return Math.min( d.temp, d.outdoor_temp ) }) - 5;
+    var min = d3.min(data, function(d) { return Math.min( d.temp ) }) - 5;
   } else {
     var min = d3.min(data, function(d) { return Math.min( d.temp, d.outdoor_temp ) }) - 10;
   }
@@ -50,7 +50,7 @@ function draw(response) {
   var x = d3.time.scale().range([0, w - margin * 2]).domain([data[0].date, data[data.length - 1].date]);
   var y = d3.scale.linear().range([h - margin * 2, 0]).domain([min, max]);
   var xAxis = d3.svg.axis().scale(x).tickSize(h - margin * 2).tickPadding(0).ticks(data.length);
-  var yAxis = d3.svg.axis().scale(y).orient('left').tickSize(-w + margin * 2).tickPadding(0).ticks(7);
+  var yAxis = d3.svg.axis().scale(y).orient('left').tickSize(-w + margin * 2).tickPadding(0).ticks(5);
   var t = null,
   strokeWidth = w / data.length;
 
