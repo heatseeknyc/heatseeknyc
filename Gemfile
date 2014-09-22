@@ -21,6 +21,7 @@ gem 'tzinfo'
 gem 'will_paginate'
 gem 'wunderground'
 gem 'zip'
+gem 'rabl'
 
 group :test, :development do
   gem 'better_errors'
