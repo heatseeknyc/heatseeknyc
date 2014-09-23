@@ -22,6 +22,7 @@ gem 'will_paginate'
 gem 'wunderground'
 gem 'zip'
 gem 'rabl'
+gem 'yajl-ruby', :require => 'yajl'
 
 group :test, :development do
   gem 'better_errors'
