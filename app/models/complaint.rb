@@ -6,6 +6,10 @@ class Complaint < ActiveRecord::Base
   WINTER_11_12 = [Date.parse("2011-10-01"), Date.parse("2012-05-31")]
   WINTER_10_11 = [Date.parse("2010-10-01"), Date.parse("2011-05-31")]
 
+  def self.retrieve_all_summed_by_zip_code
+    Complaint.group(:incident_zip).count
+  end
+
   def self.all_coordinates
     pluck(:latitude, :longitude)
   end
