@@ -16,8 +16,15 @@ Complaint.prototype.setZipCodeComplaints = function(){
   });
 };
 
+Complaint.prototype.addComplaintsToGeoJson = function(){
+  debugger;
+};
+
 $(document).ready(function(){
   if(/coldmap/.test(document.URL)){
     var newComplaint = new Complaint();
+    for (var i = 100; i >= 0; i--) {
+    };
+    newComplaint.addComplaintsToGeoJson();
   }
 });
