@@ -128,7 +128,7 @@ ColdMap.prototype.legend.onAdd = function(map) {
 $(document).ready(function(){
   // only draw map if the div exists
   if($("#coldmap").length > 0){
-    newColdMap = new ColdMap();
-    newColdMap.drawColdMap();
+    // newColdMap = new ColdMap();
+    // newColdMap.drawColdMap();
   }
 });
