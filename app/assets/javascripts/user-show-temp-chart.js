@@ -25,7 +25,7 @@ function draw(response) {
       dataLines,
       line,
       garea,
-      fillArea,
+      $fillArea,
       circles;
 
   if(/live_update/.test(document.URL)){
@@ -78,7 +78,7 @@ function draw(response) {
     t = svg.transition().duration(transitionDuration);
   }
 
-  setT()
+  setT();
 
   function addLineStlyingToXTicks(){
     var $lines = $(".xTick .tick line"),
@@ -124,7 +124,7 @@ function draw(response) {
     }
   }
 
-  setXAxisGroup()
+  setXAxisGroup();
   addLineStlyingToXTicks();
 
 // y ticks and labels gets placed second
@@ -142,7 +142,7 @@ function draw(response) {
     }
   }
 
-  setYAxisGroup()
+  setYAxisGroup();
 
 // y ticks and labels gets placed third
   // Draw the lines
@@ -151,11 +151,12 @@ function draw(response) {
       dataLinesGroup = svg.append('svg:g');
     }
   }
-  setDataLinesGroup()
+  setDataLinesGroup();
 
   dataLines = dataLinesGroup.selectAll('.data-line').data([data]);
 
-  line = d3.svg.line()
+  function setLine(){
+    line = d3.svg.line()
     // assign the X function to plot our line as we wish
     .x(function(d,i) {
       return x(d.date); 
@@ -164,41 +165,43 @@ function draw(response) {
       return y(d.temp); 
     })
     .interpolate("linear");
+  }
+  setLine();
 
-  garea = d3.svg.area()
-    .interpolate("linear")
-    .x(function(d) { 
-      // verbose logging to show what's actually being done
-      return x(d.date); 
-    })
-    .y0(h - margin * 2)
-    .y1(function(d) { 
-      // verbose logging to show what's actually being done
-      return y(d.outdoor_temp); 
-    });
+  function setGroupArea(){
+    garea = d3.svg.area()
+      .interpolate("linear")
+      .x(function(d) { return x(d.date); })
+      .y0(h - margin * 2)
+      .y1(function(d) { return y(d.outdoor_temp); });
+  }
+  setGroupArea();
 
-  dataLines
-    .enter()
-    .append('svg:path')
-    .attr("class", "area");
-    // .attr("d", garea(data));
+  function createAreaClassForGroupArea(){
+    dataLines
+      .enter()
+      .append('svg:path')
+      .attr("class", "area");
+  }
+  createAreaClassForGroupArea();
 
-  dataLines.enter().append('path')
-    .attr('class', 'data-line')
-    .style('opacity', 0.3)
-    .attr("d", line(data))
-    .transition()
-    .delay(transitionDuration / 2)
-    .duration(transitionDuration)
-    .style('opacity', 1);
+  function addDataLineWithoutTransitions() {
+    dataLines.enter().append('path')
+      .attr('class', 'data-line')
+      .attr("d", line(data))
+  }
 
-  // dataLines.transition()
-  //   .attr("d", line)
-  //   .duration(transitionDuration)
-  //   .style('opacity', 1)
-  //   .attr("transform", function(d) {
-  //     return "translate(" + x(d.date) + "," + y(d.temp) + ")"; 
-  //   });
+  function addDataLineWithTransitions() {
+    dataLines.enter().append('path')
+      .attr('class', 'data-line')
+      .style('opacity', 0.3)
+      .attr("d", line(data))
+      .transition()
+      .delay(transitionDuration / 2)
+      .duration(transitionDuration)
+      .style('opacity', 1);
+  }
+  addDataLineWithTransitions();
 
   dataLines.exit()
     .transition()
@@ -210,13 +213,12 @@ function draw(response) {
     .style('opacity', 1e-6)
     .remove();
 
-  d3.selectAll(".area").transition()
-    .duration(transitionDuration)
+  d3.selectAll(".area")
     .attr("d", garea(data));
 
   // move the area to the back of the graph
-  fillArea = $(".area")
-  $("#d3-chart svg > g").prepend(fillArea)
+  $fillArea = $(".area");
+  $("#d3-chart svg > g").prepend($fillArea)
 
   // add number of violations to the legend
   $("#violations span").text($("#violations span")
