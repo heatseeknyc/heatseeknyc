@@ -54,18 +54,26 @@ function draw(response) {
   var t = null,
   strokeWidth = w / data.length;
 
-  svg = d3.select('#d3-chart').select('svg').select('g');
-  if (svg.empty()) {
-    svg = d3.select('#d3-chart')
-      .append('svg:svg')
-      .attr('width', w)
-      .attr('height', h)
-      .attr('class', 'viz')
-      .append('svg:g')
-      .attr('transform', 'translate(' + margin + ',' + margin + ')');
+  var svg = d3.select('#d3-chart').select('svg').select('g');
+  function createSvg(){
+    if (svg.empty()) {
+      svg = d3.select('#d3-chart')
+        .append('svg:svg')
+        .attr('width', w)
+        .attr('height', h)
+        .attr('class', 'viz')
+        .append('svg:g')
+        .attr('transform', 'translate(' + margin + ',' + margin + ')');
+    }
   }
 
-  t = svg.transition().duration(transitionDuration);
+  createSvg();
+
+  function setT(){
+    t = svg.transition().duration(transitionDuration);
+  }
+
+  setT()
 
   function addLineStlyingToXTicks(){
     var $lines = $(".xTick .tick line"),
@@ -100,34 +108,45 @@ function draw(response) {
 
 // x ticks and labels gets placed first
   // x ticks and labels
-  if (!xAxisGroup) {
-    xAxisGroup = svg.append('svg:g')
-      .attr('class', 'xTick')
-      .call(xAxis);
-    addLineStlyingToXTicks();
+  function setXAxisGroup(){
+    if (!xAxisGroup) {
+      xAxisGroup = svg.append('svg:g')
+        .attr('class', 'xTick')
+        .call(xAxis);
+    }
+    else {
+      t.select('.xTick').call(xAxis);
+    }
   }
-  else {
-    t.select('.xTick').call(xAxis);
-  }
+
+  setXAxisGroup()
+  addLineStlyingToXTicks();
 
 // y ticks and labels gets placed second
   // y ticks and labels
-  if (!yAxisGroup) {
-    yAxisGroup = svg.append('svg:g')
-      .attr('class', 'yTick')
-      .call(yAxis);
+  function setYAxisGroup() {
+    if (!yAxisGroup) {
+      yAxisGroup = svg.append('svg:g')
+        .attr('class', 'yTick')
+        .call(yAxis);
+      // fixes x value for text
+      $(".yTick .tick text").attr("x", "-5")
+    }
+    else {
+      t.select('.yTick').call(yAxis);
+    }
   }
-  else {
-    t.select('.yTick').call(yAxis);
-  }
-  // fixes x value for text
-  $(".yTick .tick text").attr("x", "-5")
+
+  setYAxisGroup()
 
 // y ticks and labels gets placed third
   // Draw the lines
-  if (!dataLinesGroup) {
-    dataLinesGroup = svg.append('svg:g');
+  function setDataLinesGroup(){
+    if (!dataLinesGroup) {
+      dataLinesGroup = svg.append('svg:g');
+    }
   }
+  setDataLinesGroup()
 
   var dataLines = dataLinesGroup.selectAll('.data-line').data([data]);
 
