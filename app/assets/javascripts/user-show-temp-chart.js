@@ -21,7 +21,12 @@ function draw(response) {
       yAxisGroup = null,
       xAxisGroup = null,
       dataCirclesGroup = null,
-      dataLinesGroup = null;
+      dataLinesGroup = null,
+      dataLines,
+      line,
+      garea,
+      fillArea,
+      circles;
 
   if(/live_update/.test(document.URL)){
     transitionDuration = 0;
@@ -148,27 +153,19 @@ function draw(response) {
   }
   setDataLinesGroup()
 
-  var dataLines = dataLinesGroup.selectAll('.data-line').data([data]);
+  dataLines = dataLinesGroup.selectAll('.data-line').data([data]);
 
-  var line = d3.svg.line()
+  line = d3.svg.line()
     // assign the X function to plot our line as we wish
     .x(function(d,i) {
-      // verbose logging to show what's actually being done
-      //console.log('Plotting X temp for date: ' + d.date + ' using index: ' + i + ' to be at: ' + x(d.date) + ' using our xScale.');
-      // return the X coordinate where we want to plot this datapoint
-      //return x(i);
       return x(d.date); 
     })
-    .y(function(d) { 
-      // verbose logging to show what's actually being done
-      //console.log('Plotting Y temp for data temp: ' + d.temp + ' to be at: ' + y(d.temp) + " using our yScale.");
-      // return the Y coordinate where we want to plot this datapoint
-      //return y(d); 
+    .y(function(d) {
       return y(d.temp); 
     })
     .interpolate("linear");
 
-  var garea = d3.svg.area()
+  garea = d3.svg.area()
     .interpolate("linear")
     .x(function(d) { 
       // verbose logging to show what's actually being done
@@ -194,11 +191,6 @@ function draw(response) {
     .delay(transitionDuration / 2)
     .duration(transitionDuration)
     .style('opacity', 1);
-    // .attr('x1', function(d, i) { return (i > 0) ? xScale(data[i - 1].date) : xScale(d.date); })
-    // .attr('y1', function(d, i) { return (i > 0) ? yScale(data[i - 1].temp) : yScale(d.temp); })
-    // .attr('x2', function(d) { return xScale(d.date); })
-    // .attr('y2', function(d) { return yScale(d.temp); });
-    
 
   // dataLines.transition()
   //   .attr("d", line)
@@ -223,7 +215,7 @@ function draw(response) {
     .attr("d", garea(data));
 
   // move the area to the back of the graph
-  var fillArea = $(".area")
+  fillArea = $(".area")
   $("#d3-chart svg > g").prepend(fillArea)
 
   // add number of violations to the legend
@@ -237,7 +229,7 @@ function draw(response) {
       dataCirclesGroup = svg.append('svg:g');
     }
 
-    var circles = dataCirclesGroup.selectAll('.data-point').data(data);
+    circles = dataCirclesGroup.selectAll('.data-point').data(data);
 
     circles.enter()
       .append('svg:circle')
@@ -268,8 +260,6 @@ function draw(response) {
       .exit()
       .transition()
       .duration(transitionDuration)
-      // Leave the cx transition off. Allowing the points to fall where they lie is best.
-      //.attr('cx', function(d, i) { return xScale(i) })
       .attr('cy', function() { return y(0) })
       .style("opacity", 1e-6)
       .remove();
