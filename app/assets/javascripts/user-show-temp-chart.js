@@ -203,68 +203,52 @@ function draw(response) {
   }
   addDataLineWithTransitions();
 
-  dataLines.exit()
-    .transition()
-    .attr("d", line)
-    .duration(transitionDuration)
-    .attr("transform", function(d) {
-     return "translate(" + x(d.date) + "," + y(0) + ")"; 
-    })
-    .style('opacity', 1e-6)
-    .remove();
+  function addGroupArea(){ 
+    d3.selectAll(".area").attr("d", garea(data));
+    // move the area to the back of the graph
+    $fillArea = $(".area");
+    $("#d3-chart svg > g").prepend($fillArea)
+  }
+  addGroupArea();
 
-  d3.selectAll(".area")
-    .attr("d", garea(data));
-
-  // move the area to the back of the graph
-  $fillArea = $(".area");
-  $("#d3-chart svg > g").prepend($fillArea)
-
-  // add number of violations to the legend
-  $("#violations span").text($("#violations span")
-    .text().replace(/\d+/, violations));
-
+  function addViolationCountToLegend() {
+    $("#violations span").text($("#violations span")
+      .text().replace(/\d+/, violations));
+  }
+  addViolationCountToLegend();
 
   if (violations) {
   // Draw the circles if there are any violations
-    if (!dataCirclesGroup) {
-      dataCirclesGroup = svg.append('svg:g');
+    function setDataCirclesGroup() {
+      if (!dataCirclesGroup) {
+        dataCirclesGroup = svg.append('svg:g');
+      }
     }
+    setDataCirclesGroup();
 
-    circles = dataCirclesGroup.selectAll('.data-point').data(data);
+    function setCircles() {
+      circles = dataCirclesGroup.selectAll('.data-point').data(data);
+    }
+    setCircles();
 
-    circles.enter()
-      .append('svg:circle')
-      .attr('class', 'data-point')
-      .style('opacity', 1)
-      .attr('cx', function(d) { return x(d.date) })
-      .attr('cy', function() { return y(0) })
-      .attr('r', function(d) {
-        return d.violation ? pointRadius : 0;
-      })
-      .transition()
-      .duration(transitionDuration)
-      .style('opacity', 1)
-      .attr('cx', function(d) { return x(d.date) })
-      .attr('cy', function(d) { return y(d.temp) });
-
-    // circles
-    //   .transition()
-    //   .duration(transitionDuration)
-    //   .attr('cx', function(d) { return x(d.date) })
-    //   .attr('cy', function(d) { return y(d.temp) })
-    //   .attr('r', function(d) { 
-    //     return d.violation ? pointRadius : null
-    //   })
-    //   .style('opacity', 1);
-
-    circles
-      .exit()
-      .transition()
-      .duration(transitionDuration)
-      .attr('cy', function() { return y(0) })
-      .style("opacity", 1e-6)
-      .remove();
+    function addCircles(){
+      circles.enter()
+        .append('svg:circle')
+        .attr('class', 'data-point')
+        .style('opacity', 1)
+        .attr('cx', function(d) { return x(d.date) })
+        .attr('cy', function() { return y(0) })
+        .attr('r', function(d) {
+          return d.violation ? pointRadius : 0;
+        })
+        .transition()
+        .duration(transitionDuration)
+        .style('opacity', 1)
+        .attr('cx', function(d) { return x(d.date) })
+        .attr('cy', function(d) { return y(d.temp) });
+    }
+    addCircles();
+    
   }
 
   function legalMinimumFor(reading){
