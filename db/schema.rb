@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140803233230) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "collaborations", force: true do |t|
     t.integer  "user_id"
     t.integer  "collaborator_id"
@@ -20,7 +23,8 @@ ActiveRecord::Schema.define(version: 20140803233230) do
     t.datetime "updated_at"
   end
 
-  create_table "complaints", force: true do |t|
+  create_table "complaints", id: false, force: true do |t|
+    t.integer "id",                                         null: false
     t.date    "created_date"
     t.date    "closed_date"
     t.string  "agency"
@@ -35,6 +39,24 @@ ActiveRecord::Schema.define(version: 20140803233230) do
     t.string  "borough"
     t.decimal "latitude",         precision: 15, scale: 13
     t.decimal "longitude",        precision: 15, scale: 13
+  end
+
+  create_table "new_complaints", id: false, force: true do |t|
+    t.integer "id",                                         default: "nextval('new_complaints_id_seq'::regclass)", null: false
+    t.string  "agency"
+    t.string  "agency_name"
+    t.string  "complaint_type"
+    t.string  "descriptor"
+    t.string  "location_type"
+    t.integer "incident_zip"
+    t.string  "incident_address"
+    t.string  "street_name"
+    t.string  "community_board"
+    t.string  "borough"
+    t.date    "created_date"
+    t.date    "closed_date"
+    t.decimal "longitude",        precision: 15, scale: 13
+    t.decimal "latitude",         precision: 15, scale: 13
   end
 
   create_table "readings", force: true do |t|
@@ -83,6 +105,6 @@ ActiveRecord::Schema.define(version: 20140803233230) do
     t.string   "zip_code"
   end
 
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

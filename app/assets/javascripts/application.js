@@ -18,5 +18,11 @@
 //= require jquery.scrolly.js
 //= require jquery.tipsy.js
 //= require select2
-//= require_tree .
-
+//= require advocate
+//= require coldmap-chloropleth
+//= require collaboration
+//= require complaint
+//= require kickstarter
+//= require live_update
+//= require user-show-temp-chart
+//= require video
