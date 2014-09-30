@@ -16,7 +16,7 @@ function draw(response) {
         "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ],
       // d3 variables
       maxDataPointsForDots = 500,
-      transitionDuration = 1000,
+      transitionDuration = setTransitionDuration(),
       svg = null,
       yAxisGroup = null,
       xAxisGroup = null,
@@ -26,40 +26,46 @@ function draw(response) {
       line,
       garea,
       $fillArea,
-      circles;
+      circles,
+      violations = 0,
+      data = setData(response),
+      margin = 40,
+      max = d3.max(data, function(d) { return Math.max( d.temp, d.outdoor_temp ) }) + 1,
+      min = setMin(),
+      pointRadius = 4,
+      x = d3.time.scale().range([0, w - margin * 2]).domain([data[0].date, data[data.length - 1].date]),
+      y = d3.scale.linear().range([h - margin * 2, 0]).domain([min, max]),
+      xAxis = d3.svg.axis().scale(x).tickSize(h - margin * 2).tickPadding(0).ticks(data.length),
+      yAxis = d3.svg.axis().scale(y).orient('left').tickSize(-w + margin * 2).tickPadding(0).ticks(5),
+      t = null,
+      strokeWidth = w / data.length,
+      svg = d3.select('#d3-chart').select('svg').select('g');
 
-  if(/live_update/.test(document.URL)){
-    transitionDuration = 0;
+
+  function setTransitionDuration() {
+    return /live_update/.test(document.URL) ? 0 : 1000;
   }
 
-  var data = response,
-  violations = 0;
-  // add usefull properties to the data objects
-  data.forEach(function(obj){
-    obj.date = new Date(obj.created_at);
-    obj.isDay = obj.date.getHours() >= 6 && obj.date.getHours() <= 22;
-    if(/live_update/.test(document.URL)){
-      obj.violation = true;
+  function setData(dataArrWithObjs) {
+    dataArrWithObjs.forEach(function(obj){
+      obj.date = new Date(obj.created_at);
+      obj.isDay = obj.date.getHours() >= 6 && obj.date.getHours() <= 22;
+      if(/live_update/.test(document.URL)){
+        obj.violation = true;
+      }
+      if( obj.violation ){ violations += 1; }
+    });
+    return dataArrWithObjs;
+  }
+
+  function setMin() {
+    if ( d3.min(data, function(d) { return d.outdoor_temp }) ){
+      return d3.min(data, function(d) { return Math.min( d.temp ) }) - 5;
+    } else {
+      return d3.min(data, function(d) { return Math.min( d.temp, d.outdoor_temp ) }) - 10;
     }
-    if(obj.violation){ violations += 1; }
-  });
-  var margin = 40;
-  var max = d3.max(data, function(d) { return Math.max( d.temp, d.outdoor_temp ) }) + 1;
-  // checks whether or not there is an outdoor temp
-  if ( d3.min(data, function(d) { return d.outdoor_temp }) ){
-    var min = d3.min(data, function(d) { return Math.min( d.temp ) }) - 5;
-  } else {
-    var min = d3.min(data, function(d) { return Math.min( d.temp, d.outdoor_temp ) }) - 10;
   }
-  var pointRadius = 4;
-  var x = d3.time.scale().range([0, w - margin * 2]).domain([data[0].date, data[data.length - 1].date]);
-  var y = d3.scale.linear().range([h - margin * 2, 0]).domain([min, max]);
-  var xAxis = d3.svg.axis().scale(x).tickSize(h - margin * 2).tickPadding(0).ticks(data.length);
-  var yAxis = d3.svg.axis().scale(y).orient('left').tickSize(-w + margin * 2).tickPadding(0).ticks(5);
-  var t = null,
-  strokeWidth = w / data.length;
 
-  var svg = d3.select('#d3-chart').select('svg').select('g');
   function createSvg(){
     if (svg.empty()) {
       svg = d3.select('#d3-chart')
