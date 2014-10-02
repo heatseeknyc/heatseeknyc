@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140803233230) do
+ActiveRecord::Schema.define(version: 20141002004553) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "articles", force: true do |t|
+    t.string   "title"
+    t.string   "company"
+    t.string   "company_link"
+    t.string   "article_link"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "collaborations", force: true do |t|
     t.integer  "user_id"
@@ -23,8 +33,7 @@ ActiveRecord::Schema.define(version: 20140803233230) do
     t.datetime "updated_at"
   end
 
-  create_table "complaints", id: false, force: true do |t|
-    t.integer "id",                                         null: false
+  create_table "complaints", force: true do |t|
     t.date    "created_date"
     t.date    "closed_date"
     t.string  "agency"
@@ -39,24 +48,6 @@ ActiveRecord::Schema.define(version: 20140803233230) do
     t.string  "borough"
     t.decimal "latitude",         precision: 15, scale: 13
     t.decimal "longitude",        precision: 15, scale: 13
-  end
-
-  create_table "new_complaints", id: false, force: true do |t|
-    t.integer "id",                                         default: "nextval('new_complaints_id_seq'::regclass)", null: false
-    t.string  "agency"
-    t.string  "agency_name"
-    t.string  "complaint_type"
-    t.string  "descriptor"
-    t.string  "location_type"
-    t.integer "incident_zip"
-    t.string  "incident_address"
-    t.string  "street_name"
-    t.string  "community_board"
-    t.string  "borough"
-    t.date    "created_date"
-    t.date    "closed_date"
-    t.decimal "longitude",        precision: 15, scale: 13
-    t.decimal "latitude",         precision: 15, scale: 13
   end
 
   create_table "readings", force: true do |t|

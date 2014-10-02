@@ -1,4 +1,6 @@
 Twinenyc::Application.routes.draw do
+  resources :articles
+
   get "welcome/index"
   devise_for :users
   get 'users/search' => 'users#search', as: :search_user

@@ -1,0 +1,26 @@
+<h1>Listing articles</h1>
+
+<div class="col-xs-4">
+
+<br>
+
+<%= link_to 'New Article', new_article_path %>
+
+<br>
+<br>
+
+  <% @articles.each do |article| %>
+    <div class="row">
+      <div class="col-xs-12"><%= article.title %></div>
+      <div class="col-xs-12"><%= article.company %></div>
+      <div class="col-xs-12"><%= article.company_link %></div>
+      <div class="col-xs-12"><%= article.article_link %></div>
+      <div class="col-xs-12"><%= article.description %></div>
+      <div class="col-xs-12"><%= link_to 'Show', article %></div>
+      <div class="col-xs-12"><%= link_to 'Edit', edit_article_path(article) %></div>
+      <div class="col-xs-12"><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %></div>
+    </div>
+    <br>
+  <% end %>
+</div>
+
