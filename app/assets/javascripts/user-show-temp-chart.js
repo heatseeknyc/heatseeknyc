@@ -17,7 +17,7 @@ function draw(response) {
       // d3 variables
       maxDataPointsForDots = 500,
       transitionDuration = setTransitionDuration(),
-      svg = null,
+      svg = d3.select('#d3-chart').select('svg').select('g'),
       yAxisGroup = null,
       xAxisGroup = null,
       dataCirclesGroup = null,
@@ -38,8 +38,7 @@ function draw(response) {
       xAxis = d3.svg.axis().scale(x).tickSize(h - margin * 2).tickPadding(0).ticks(data.length),
       yAxis = d3.svg.axis().scale(y).orient('left').tickSize(-w + margin * 2).tickPadding(0).ticks(5),
       t = null,
-      strokeWidth = w / data.length,
-      svg = d3.select('#d3-chart').select('svg').select('g');
+      strokeWidth = w / data.length;
 
 
   function setTransitionDuration() {
