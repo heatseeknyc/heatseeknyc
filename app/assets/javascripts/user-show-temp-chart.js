@@ -9,12 +9,6 @@ function draw(response) {
 function ChartSvg(response) {
         this.w = window.innerWidth;
         this.h = 450;
-        // Date variables
-        this.days = [ 'Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday' ];
-        this.monthNames = [ "JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
-          "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER" ];
-        this.abbreviatedMonthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-          "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
         // d3 variables
         this.maxDataPointsForDots = 500;
         this.transitionDuration = 1000;
@@ -22,7 +16,6 @@ function ChartSvg(response) {
         this.margin = 40;
         this.pointRadius = 4;
         this.data = this.setData(response);
-        this.svg = d3.select('#d3-chart').select('svg').select('g');
         this.max = d3.max(this.data, function(d) { return Math.max( d.temp, d.outdoor_temp ) }) + 1;
         this.min = this.setMin();
         this.x = d3.time.scale().range([0, this.w - this.margin * 2]).domain([this.data[0].date, this.data[this.data.length - 1].date]);
@@ -30,6 +23,8 @@ function ChartSvg(response) {
         this.xAxis = d3.svg.axis().scale(this.x).tickSize(this.h - this.margin * 2).tickPadding(0).ticks(this.data.length);
         this.yAxis = d3.svg.axis().scale(this.y).orient('left').tickSize(-this.w + this.margin * 2).tickPadding(0).ticks(5);
         this.strokeWidth = this.w / this.data.length;
+        this.svg = this.setSvg();
+        this.t = this.setT();
         this.yAxisGroup = null;
         this.xAxisGroup = null;
         this.dataCirclesGroup = null;
@@ -39,8 +34,13 @@ function ChartSvg(response) {
         this.garea = null;
         this.$fillArea = null;
         this.circles = null;
-        this.t = null;
       }
+        // Date constants
+  ChartSvg.prototype.DAYS = [ 'Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday' ];
+  ChartSvg.prototype.MONTHS = [ "JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
+    "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER" ];
+  ChartSvg.prototype.ABBREVIATED_MONTHS = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
 
   ChartSvg.prototype.setData = function(dataArrWithObjs) {
     var self = this;
@@ -62,27 +62,22 @@ function ChartSvg(response) {
       return d3.min(this.data, function(d) { return Math.min( d.temp, d.outdoor_temp ) }) - 10;
     }
   }
-  var chartProperties = new ChartProperties(response);
 
-  function createSvg(){
-    if (chartProperties.svg.empty()) {
-      chartProperties.svg = d3.select('#d3-chart')
-        .append('svg:svg')
-        .attr('width', chartProperties.w)
-        .attr('height', chartProperties.h)
-        .attr('class', 'viz')
-        .append('svg:g')
-        .attr('transform', 'translate(' + chartProperties.margin + ',' + chartProperties.margin + ')');
-    }
+  ChartSvg.prototype.setSvg = function(){
+    return d3.select('#d3-chart')
+      .append('svg:svg')
+      .attr('width', this.w)
+      .attr('height', this.h)
+      .attr('class', 'viz')
+      .append('svg:g')
+      .attr('transform', 'translate(' + this.margin + ',' + this.margin + ')');
   }
 
-  createSvg();
-
-  function resetT(){
-    t = chartProperties.svg.transition().duration(chartProperties.transitionDuration);
+  ChartSvg.prototype.setT = function(){
+    return this.svg.transition().duration(this.transitionDuration);
   }
+  var chartProperties = new ChartSvg(response);
 
-  resetT();
 
   function addLineStlyingToXTicks(){
     var $lines = $(".xTick .tick line"),
@@ -104,7 +99,7 @@ function ChartSvg(response) {
         // add dates to bottom of graph
         if ( chartProperties.data[i].date.getHours() === 16 ) {
           date = chartProperties.data[i].date;
-          newText = chartProperties.abbreviatedMonthNames[date.getMonth()] + " "
+          newText = chartProperties.ABBREVIATED_MONTHS[date.getMonth()] + " "
             + date.getDate() + ", " + (date.getYear() + 1900);
           $textEl = $($(".xTick .tick text")[i]);
           $textEl.text(newText);
@@ -289,9 +284,9 @@ function ChartSvg(response) {
         var d = this.__data__;
         var pDate = d.date;
         return pDate.getDate() + ' '
-          + chartProperties.monthNames[pDate.getMonth()] + ' '
+          + chartProperties.MONTHS[pDate.getMonth()] + ' '
           + pDate.getFullYear() + '<br>'
-          + chartProperties.days[ pDate.getDay() ] + ' at '
+          + chartProperties.DAYS[ pDate.getDay() ] + ' at '
           + getCivilianTime(pDate) + '<br>'
           + '<i>Temperature in Violation</i><br>'
           + '<br>Temperature in Apt: ' + d.temp + '°'
