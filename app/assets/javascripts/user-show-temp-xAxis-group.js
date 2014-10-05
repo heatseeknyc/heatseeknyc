@@ -1,6 +1,5 @@
 function UserShowTempChartXAxisGroup(svgObj) {
   this.data = svgObj.data;
-  this.length = svgObj.length;
   this.svg = svgObj.svg;
   this.xAxis = this.setXAxis(svgObj);
   this.strokeWidth = svgObj.w / this.data.length;
