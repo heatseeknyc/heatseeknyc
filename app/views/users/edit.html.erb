@@ -3,7 +3,7 @@
     <div class="settings-title">
       <h1>Edit <%= @user.first_name + " " + @user.last_name %>'s Settings </h1>
     </div>
-  </div><!--end of settigs title-->
+  </div><!--end of settigs title -->
 
   <%= form_for(@user) do |f| %>
     <div class="container col-lg-5 col-md-6 col-sm-6 col-xs-12">
@@ -25,10 +25,11 @@
       <% if @user.permissions > 0 && !@user.is_demo_user? %>
         <dl class="settings-input"><%= f.label :permissions %>
         <%= f.select :permissions, User::PERMISSIONS, class: "settings-form-control form-control" %></dl>
+
+      <dl class="settings-input">
+      <%= f.submit "SAVE", class: "btn-save" %></dl>
+
       </div><!--end of settings form-->
     <% end %>
-      <div>
-        <%= f.submit "SAVE", class: "btn-save" %>
-      </div>
   <% end %>
 </div>
