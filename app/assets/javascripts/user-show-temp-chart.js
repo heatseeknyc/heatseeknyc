@@ -6,106 +6,105 @@ $(document).ready(function(){
 
 function draw(response) {
       // Chart size
-  var w = window.innerWidth,
-      h = 450,
-      // Date variables
-      days = [ 'Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday' ],
-      monthNames = [ "JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
-        "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER" ],
-      abbreviatedMonthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ],
-      // d3 variables
-      maxDataPointsForDots = 500,
-      transitionDuration = setTransitionDuration(),
-      svg = d3.select('#d3-chart').select('svg').select('g'),
-      yAxisGroup = null,
-      xAxisGroup = null,
-      dataCirclesGroup = null,
-      dataLinesGroup = null,
-      dataLines,
-      line,
-      garea,
-      $fillArea,
-      circles,
-      violations = 0,
-      data = setData(response),
-      margin = 40,
-      max = d3.max(data, function(d) { return Math.max( d.temp, d.outdoor_temp ) }) + 1,
-      min = setMin(),
-      pointRadius = 4,
-      x = d3.time.scale().range([0, w - margin * 2]).domain([data[0].date, data[data.length - 1].date]),
-      y = d3.scale.linear().range([h - margin * 2, 0]).domain([min, max]),
-      xAxis = d3.svg.axis().scale(x).tickSize(h - margin * 2).tickPadding(0).ticks(data.length),
-      yAxis = d3.svg.axis().scale(y).orient('left').tickSize(-w + margin * 2).tickPadding(0).ticks(5),
-      t = null,
-      strokeWidth = w / data.length;
+function ChartSvg(response) {
+        this.w = window.innerWidth;
+        this.h = 450;
+        // Date variables
+        this.days = [ 'Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday' ];
+        this.monthNames = [ "JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
+          "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER" ];
+        this.abbreviatedMonthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+          "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
+        // d3 variables
+        this.maxDataPointsForDots = 500;
+        this.transitionDuration = 1000;
+        this.violations = 0;
+        this.margin = 40;
+        this.pointRadius = 4;
+        this.data = this.setData(response);
+        this.svg = d3.select('#d3-chart').select('svg').select('g');
+        this.max = d3.max(this.data, function(d) { return Math.max( d.temp, d.outdoor_temp ) }) + 1;
+        this.min = this.setMin();
+        this.x = d3.time.scale().range([0, this.w - this.margin * 2]).domain([this.data[0].date, this.data[this.data.length - 1].date]);
+        this.y = d3.scale.linear().range([this.h - this.margin * 2, 0]).domain([this.min, this.max]);
+        this.xAxis = d3.svg.axis().scale(this.x).tickSize(this.h - this.margin * 2).tickPadding(0).ticks(this.data.length);
+        this.yAxis = d3.svg.axis().scale(this.y).orient('left').tickSize(-this.w + this.margin * 2).tickPadding(0).ticks(5);
+        this.strokeWidth = this.w / this.data.length;
+        this.yAxisGroup = null;
+        this.xAxisGroup = null;
+        this.dataCirclesGroup = null;
+        this.dataLinesGroup = null;
+        this.dataLines = null;
+        this.line = null;
+        this.garea = null;
+        this.$fillArea = null;
+        this.circles = null;
+        this.t = null;
+      }
 
-
-  function setTransitionDuration() {
-    return /live_update/.test(document.URL) ? 0 : 1000;
-  }
-
-  function setData(dataArrWithObjs) {
+  ChartSvg.prototype.setData = function(dataArrWithObjs) {
+    var self = this;
     dataArrWithObjs.forEach(function(obj){
       obj.date = new Date(obj.created_at);
       obj.isDay = obj.date.getHours() >= 6 && obj.date.getHours() <= 22;
       if(/live_update/.test(document.URL)){
         obj.violation = true;
       }
-      if( obj.violation ){ violations += 1; }
+      if( obj.violation ){ self.violations += 1; }
     });
     return dataArrWithObjs;
   }
 
-  function setMin() {
-    if ( d3.min(data, function(d) { return d.outdoor_temp }) ){
-      return d3.min(data, function(d) { return Math.min( d.temp ) }) - 5;
+  ChartSvg.prototype.setMin = function() {
+    if ( d3.min(this.data, function(d) { return d.outdoor_temp }) ){
+      return d3.min(this.data, function(d) { return Math.min( d.temp ) }) - 5;
     } else {
-      return d3.min(data, function(d) { return Math.min( d.temp, d.outdoor_temp ) }) - 10;
+      return d3.min(this.data, function(d) { return Math.min( d.temp, d.outdoor_temp ) }) - 10;
     }
   }
+  var chartProperties = new ChartProperties(response);
 
   function createSvg(){
-    if (svg.empty()) {
-      svg = d3.select('#d3-chart')
+    if (chartProperties.svg.empty()) {
+      chartProperties.svg = d3.select('#d3-chart')
         .append('svg:svg')
-        .attr('width', w)
-        .attr('height', h)
+        .attr('width', chartProperties.w)
+        .attr('height', chartProperties.h)
         .attr('class', 'viz')
         .append('svg:g')
-        .attr('transform', 'translate(' + margin + ',' + margin + ')');
+        .attr('transform', 'translate(' + chartProperties.margin + ',' + chartProperties.margin + ')');
     }
   }
 
   createSvg();
 
-  function setT(){
-    t = svg.transition().duration(transitionDuration);
+  function resetT(){
+    t = chartProperties.svg.transition().duration(chartProperties.transitionDuration);
   }
 
-  setT();
+  resetT();
 
   function addLineStlyingToXTicks(){
     var $lines = $(".xTick .tick line"),
-        length = data.length,
+        length = chartProperties.data.length,
         date,
         newText,
         $textEl;
 
     for(var i = 0; i < length; i++){
-      if(data[i].isDay === false){
+      if(chartProperties.data[i].isDay === false){
         $($lines[i]).attr(
-          { 'stroke-width': strokeWidth, 'stroke': '#90ABB0' }
+          { 'stroke-width': chartProperties.strokeWidth, 'stroke': '#90ABB0' }
         );
         if(i === 0){
-          $($lines[i]).attr({ 'stroke-width': strokeWidth * 1.9 });
+          $($lines[i]).attr({ 'stroke-width': chartProperties.strokeWidth * 1.9 });
         }
       }
       else {
         // add dates to bottom of graph
-        if ( data[i].date.getHours() === 16 ) {
-          date = data[i].date;
-          newText = abbreviatedMonthNames[date.getMonth()] + " " 
+        if ( chartProperties.data[i].date.getHours() === 16 ) {
+          date = chartProperties.data[i].date;
+          newText = chartProperties.abbreviatedMonthNames[date.getMonth()] + " "
             + date.getDate() + ", " + (date.getYear() + 1900);
           $textEl = $($(".xTick .tick text")[i]);
           $textEl.text(newText);
@@ -119,13 +118,13 @@ function draw(response) {
 // x ticks and labels gets placed first
   // x ticks and labels
   function setXAxisGroup(){
-    if (!xAxisGroup) {
-      xAxisGroup = svg.append('svg:g')
+    if (!chartProperties.xAxisGroup) {
+      chartProperties.xAxisGroup = chartProperties.svg.append('svg:g')
         .attr('class', 'xTick')
-        .call(xAxis);
+        .call(chartProperties.xAxis);
     }
     else {
-      t.select('.xTick').call(xAxis);
+      chartProperties.t.select('.xTick').call(chartProperties.xAxis);
     }
   }
 
@@ -135,15 +134,15 @@ function draw(response) {
 // y ticks and labels gets placed second
   // y ticks and labels
   function setYAxisGroup() {
-    if (!yAxisGroup) {
-      yAxisGroup = svg.append('svg:g')
+    if (!chartProperties.yAxisGroup) {
+      chartProperties.yAxisGroup = chartProperties.svg.append('svg:g')
         .attr('class', 'yTick')
-        .call(yAxis);
+        .call(chartProperties.yAxis);
       // fixes x value for text
       $(".yTick .tick text").attr("x", "-5")
     }
     else {
-      t.select('.yTick').call(yAxis);
+      t.select('.yTick').call(chartProperties.yAxis);
     }
   }
 
@@ -152,38 +151,38 @@ function draw(response) {
 // y ticks and labels gets placed third
   // Draw the lines
   function setDataLinesGroup(){
-    if (!dataLinesGroup) {
-      dataLinesGroup = svg.append('svg:g');
+    if (!chartProperties.dataLinesGroup) {
+      chartProperties.dataLinesGroup = chartProperties.svg.append('svg:g');
     }
   }
   setDataLinesGroup();
 
-  dataLines = dataLinesGroup.selectAll('.data-line').data([data]);
+  chartProperties.dataLines = chartProperties.dataLinesGroup.selectAll('.data-line').data([chartProperties.data]);
 
   function setLine(){
-    line = d3.svg.line()
+    chartProperties.line = d3.svg.line()
     // assign the X function to plot our line as we wish
     .x(function(d,i) {
-      return x(d.date); 
+      return chartProperties.x(d.date);
     })
     .y(function(d) {
-      return y(d.temp); 
+      return chartProperties.y(d.temp);
     })
     .interpolate("linear");
   }
   setLine();
 
   function setGroupArea(){
-    garea = d3.svg.area()
+    chartProperties.garea = d3.svg.area()
       .interpolate("linear")
-      .x(function(d) { return x(d.date); })
-      .y0(h - margin * 2)
-      .y1(function(d) { return y(d.outdoor_temp); });
+      .x(function(d) { return chartProperties.x(d.date); })
+      .y0(chartProperties.h - chartProperties.margin * 2)
+      .y1(function(d) { return chartProperties.y(d.outdoor_temp); });
   }
   setGroupArea();
 
   function createAreaClassForGroupArea(){
-    dataLines
+    chartProperties.dataLines
       .enter()
       .append('svg:path')
       .attr("class", "area");
@@ -191,69 +190,69 @@ function draw(response) {
   createAreaClassForGroupArea();
 
   function addDataLineWithoutTransitions() {
-    dataLines.enter().append('path')
+    chartProperties.dataLines.enter().append('path')
       .attr('class', 'data-line')
-      .attr("d", line(data))
+      .attr("d", chartProperties.line(data))
   }
 
   function addDataLineWithTransitions() {
-    dataLines.enter().append('path')
+    chartProperties.dataLines.enter().append('path')
       .attr('class', 'data-line')
       .style('opacity', 0.3)
-      .attr("d", line(data))
+      .attr("d", chartProperties.line(chartProperties.data))
       .transition()
-      .delay(transitionDuration / 2)
-      .duration(transitionDuration)
+      .delay(chartProperties.transitionDuration / 2)
+      .duration(chartProperties.transitionDuration)
       .style('opacity', 1);
   }
   addDataLineWithTransitions();
 
-  function addGroupArea(){ 
-    d3.selectAll(".area").attr("d", garea(data));
+  function addGroupArea(){
+    d3.selectAll(".area").attr("d", chartProperties.garea(chartProperties.data));
     // move the area to the back of the graph
-    $fillArea = $(".area");
-    $("#d3-chart svg > g").prepend($fillArea)
+    chartProperties.$fillArea = $(".area");
+    $("#d3-chart svg > g").prepend(chartProperties.$fillArea)
   }
   addGroupArea();
 
   function addViolationCountToLegend() {
     $("#violations span").text($("#violations span")
-      .text().replace(/\d+/, violations));
+      .text().replace(/\d+/, chartProperties.violations));
   }
   addViolationCountToLegend();
 
-  if (violations) {
+  if (chartProperties.violations) {
   // Draw the circles if there are any violations
     function setDataCirclesGroup() {
-      if (!dataCirclesGroup) {
-        dataCirclesGroup = svg.append('svg:g');
+      if (!chartProperties.dataCirclesGroup) {
+        chartProperties.dataCirclesGroup = chartProperties.svg.append('svg:g');
       }
     }
     setDataCirclesGroup();
 
     function setCircles() {
-      circles = dataCirclesGroup.selectAll('.data-point').data(data);
+      chartProperties.circles = chartProperties.dataCirclesGroup.selectAll('.data-point').data(chartProperties.data);
     }
     setCircles();
 
     function addCircles(){
-      circles.enter()
+      chartProperties.circles.enter()
         .append('svg:circle')
         .attr('class', 'data-point')
         .style('opacity', 1)
-        .attr('cx', function(d) { return x(d.date) })
-        .attr('cy', function() { return y(0) })
+        .attr('cx', function(d) { return chartProperties.x(d.date) })
+        .attr('cy', function() { return chartProperties.y(0) })
         .attr('r', function(d) {
-          return d.violation ? pointRadius : 0;
+          return d.violation ? chartProperties.pointRadius : 0;
         })
         .transition()
-        .duration(transitionDuration)
+        .duration(chartProperties.transitionDuration)
         .style('opacity', 1)
-        .attr('cx', function(d) { return x(d.date) })
-        .attr('cy', function(d) { return y(d.temp) });
+        .attr('cx', function(d) { return chartProperties.x(d.date) })
+        .attr('cy', function(d) { return chartProperties.y(d.temp) });
     }
     addCircles();
-    
+
   }
 
   function legalMinimumFor(reading){
@@ -268,19 +267,19 @@ function draw(response) {
     if (reading.getHours() > 12){
       return (reading.getHours() - 12) + ":"
         + (reading.getMinutes() >= 10 ?
-          reading.getMinutes() : "0" + reading.getMinutes()) 
+          reading.getMinutes() : "0" + reading.getMinutes())
         + " PM";
     }else{
       return reading.getHours() + ":"
         + (reading.getMinutes() >= 10 ?
-          reading.getMinutes() : "0" + reading.getMinutes()) 
+          reading.getMinutes() : "0" + reading.getMinutes())
         + " AM";
     }
   }
 
   // only add tooltips if it is not a live demo
   if(!/live_update/.test(document.URL)){
-    $('svg circle').tipsy({ 
+    $('svg circle').tipsy({
       gravity: 's',
       html: true,
       topOffset: 2.8,
@@ -290,9 +289,9 @@ function draw(response) {
         var d = this.__data__;
         var pDate = d.date;
         return pDate.getDate() + ' '
-          + monthNames[pDate.getMonth()] + ' '
+          + chartProperties.monthNames[pDate.getMonth()] + ' '
           + pDate.getFullYear() + '<br>'
-          + days[ pDate.getDay() ] + ' at '
+          + chartProperties.days[ pDate.getDay() ] + ' at '
           + getCivilianTime(pDate) + '<br>'
           + '<i>Temperature in Violation</i><br>'
           + '<br>Temperature in Apt: ' + d.temp + '°'
@@ -347,7 +346,7 @@ function drawChartAjaxCall(){
           window.onresize = function(){
             if (resizeTimer){
               clearTimeout(resizeTimer);
-            } 
+            }
             resizeTimer = setTimeout(function(){
               drawChartBasedOnScreenSize(response);
             }, 50);
