@@ -18,13 +18,13 @@ function draw(response) {
         this.min = this.setMin();
         this.x = d3.time.scale().range([0, this.w - this.margin * 2]).domain([this.data[0].date, this.data[this.data.length - 1].date]);
         this.y = d3.scale.linear().range([this.h - this.margin * 2, 0]).domain([this.min, this.max]);
-        this.xAxis = d3.svg.axis().scale(this.x).tickSize(this.h - this.margin * 2).tickPadding(0).ticks(this.data.length);
+        // this.xAxis = d3.svg.axis().scale(this.x).tickSize(this.h - this.margin * 2).tickPadding(0).ticks(this.data.length);
         this.yAxis = d3.svg.axis().scale(this.y).orient('left').tickSize(-this.w + this.margin * 2).tickPadding(0).ticks(5);
-        this.strokeWidth = this.w / this.data.length;
+        // this.strokeWidth = this.w / this.data.length;
         this.svg = this.setSvg();
         this.t = this.setT();
         this.yAxisGroup = null;
-        this.xAxisGroup = null;
+        // this.xAxisGroup = null;
         this.dataCirclesGroup = null;
         this.dataLinesGroup = null;
         this.dataLines = null;
@@ -81,12 +81,18 @@ function draw(response) {
     this.data = svgObj.data;
     this.length = svgObj.length;
     this.svg = svgObj.svg;
-    this.xAxis = svgObj.xAxis;
-    this.strokeWidth = svgObj.strokeWidth;
+    this.xAxis = this.setXAxis(svgObj);
+    this.strokeWidth = svgObj.w / this.data.length;
   }
 
   UserShowTempChartXAxisGroup.prototype.ABBREVIATED_MONTHS = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun",
     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
+
+  UserShowTempChartXAxisGroup.prototype.setXAxis = function(svgObj){
+    return d3.svg.axis().scale(svgObj.x)
+      .tickSize(svgObj.h - svgObj.margin * 2)
+      .tickPadding(0).ticks(this.data.length);
+  }
 
   UserShowTempChartXAxisGroup.prototype.addLineStlyingToXTicks = function(){
     var $lines = $(".xTick .tick line"),
@@ -132,9 +138,13 @@ function draw(response) {
     }
   }
 
+  UserShowTempChartXAxisGroup.prototype.addToChart = function() {
+    this.setXAxisGroup();
+    this.addLineStlyingToXTicks();
+  }
+
   var testXGroup = new UserShowTempChartXAxisGroup(chartProperties);
-  testXGroup.setXAxisGroup();
-  testXGroup.addLineStlyingToXTicks();
+  testXGroup.addToChart();
 
 // y ticks and labels gets placed second
   // y ticks and labels
