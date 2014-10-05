@@ -46,18 +46,11 @@ UserShowTempChartXAxisGroup.prototype.addLineStlyingToXTicks = function(){
   }
 }
 
-UserShowTempChartXAxisGroup.prototype.setXAxisGroup = function(){
-  if (!this.xAxisGroup) {
-    this.xAxisGroup = this.svg.append('svg:g')
-      .attr('class', 'xTick')
-      .call(this.xAxis);
-  }
-  else {
-    chartProperties.t.select('.xTick').call(this.xAxis);
-  }
+UserShowTempChartXAxisGroup.prototype.drawXAxisGroup = function(){
+  this.svg.append('svg:g').attr('class', 'xTick').call(this.xAxis);
 }
 
 UserShowTempChartXAxisGroup.prototype.addToChart = function() {
-  this.setXAxisGroup();
+  this.drawXAxisGroup();
   this.addLineStlyingToXTicks();
 }
