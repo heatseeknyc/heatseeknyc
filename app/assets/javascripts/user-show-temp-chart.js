@@ -38,8 +38,6 @@ function draw(response) {
   UserShowTempChartSvg.prototype.DAYS = [ 'Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday' ];
   UserShowTempChartSvg.prototype.MONTHS = [ "JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
     "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER" ];
-  UserShowTempChartSvg.prototype.ABBREVIATED_MONTHS = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
 
   UserShowTempChartSvg.prototype.setData = function(dataArrWithObjs) {
     var self = this;
@@ -77,30 +75,40 @@ function draw(response) {
   }
   var chartProperties = new UserShowTempChartSvg(response);
 
-  function function_name(argument) {
-    // body...
+
+
+  function UserShowTempChartXAxisGroup(svgObj) {
+    this.data = svgObj.data;
+    this.length = svgObj.length;
+    this.svg = svgObj.svg;
+    this.xAxis = svgObj.xAxis;
+    this.strokeWidth = svgObj.strokeWidth;
   }
-  function addLineStlyingToXTicks(){
+
+  UserShowTempChartXAxisGroup.prototype.ABBREVIATED_MONTHS = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
+
+  UserShowTempChartXAxisGroup.prototype.addLineStlyingToXTicks = function(){
     var $lines = $(".xTick .tick line"),
-        length = chartProperties.data.length,
+        length = this.data.length,
         date,
         newText,
         $textEl;
 
     for(var i = 0; i < length; i++){
-      if(chartProperties.data[i].isDay === false){
+      if(this.data[i].isDay === false){
         $($lines[i]).attr(
-          { 'stroke-width': chartProperties.strokeWidth, 'stroke': '#90ABB0' }
+          { 'stroke-width': this.strokeWidth, 'stroke': '#90ABB0' }
         );
         if(i === 0){
-          $($lines[i]).attr({ 'stroke-width': chartProperties.strokeWidth * 1.9 });
+          $($lines[i]).attr({ 'stroke-width': this.strokeWidth * 1.9 });
         }
       }
       else {
         // add dates to bottom of graph
-        if ( chartProperties.data[i].date.getHours() === 16 ) {
-          date = chartProperties.data[i].date;
-          newText = chartProperties.ABBREVIATED_MONTHS[date.getMonth()] + " "
+        if ( this.data[i].date.getHours() === 16 ) {
+          date = this.data[i].date;
+          newText = this.ABBREVIATED_MONTHS[date.getMonth()] + " "
             + date.getDate() + ", " + (date.getYear() + 1900);
           $textEl = $($(".xTick .tick text")[i]);
           $textEl.text(newText);
@@ -113,19 +121,20 @@ function draw(response) {
 
 // x ticks and labels gets placed first
   // x ticks and labels
-  function setXAxisGroup(){
-    if (!chartProperties.xAxisGroup) {
-      chartProperties.xAxisGroup = chartProperties.svg.append('svg:g')
+  UserShowTempChartXAxisGroup.prototype.setXAxisGroup = function(){
+    if (!this.xAxisGroup) {
+      this.xAxisGroup = this.svg.append('svg:g')
         .attr('class', 'xTick')
-        .call(chartProperties.xAxis);
+        .call(this.xAxis);
     }
     else {
-      chartProperties.t.select('.xTick').call(chartProperties.xAxis);
+      chartProperties.t.select('.xTick').call(this.xAxis);
     }
   }
 
-  setXAxisGroup();
-  addLineStlyingToXTicks();
+  var testXGroup = new UserShowTempChartXAxisGroup(chartProperties);
+  testXGroup.setXAxisGroup();
+  testXGroup.addLineStlyingToXTicks();
 
 // y ticks and labels gets placed second
   // y ticks and labels
@@ -168,15 +177,6 @@ function draw(response) {
   }
   setLine();
 
-  function setGroupArea(){
-    chartProperties.garea = d3.svg.area()
-      .interpolate("linear")
-      .x(function(d) { return chartProperties.x(d.date); })
-      .y0(chartProperties.h - chartProperties.margin * 2)
-      .y1(function(d) { return chartProperties.y(d.outdoor_temp); });
-  }
-  setGroupArea();
-
   function createAreaClassForGroupArea(){
     chartProperties.dataLines
       .enter()
@@ -202,6 +202,15 @@ function draw(response) {
       .style('opacity', 1);
   }
   addDataLineWithTransitions();
+
+  function setGroupArea(){
+    chartProperties.garea = d3.svg.area()
+      .interpolate("linear")
+      .x(function(d) { return chartProperties.x(d.date); })
+      .y0(chartProperties.h - chartProperties.margin * 2)
+      .y1(function(d) { return chartProperties.y(d.outdoor_temp); });
+  }
+  setGroupArea();
 
   function addGroupArea(){
     d3.selectAll(".area").attr("d", chartProperties.garea(chartProperties.data));
