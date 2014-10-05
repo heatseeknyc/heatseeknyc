@@ -24,5 +24,6 @@
 //= require complaint
 //= require kickstarter
 //= require live_update
+//= require user-show-temp-xAxis-group
 //= require user-show-temp-chart
 //= require video
