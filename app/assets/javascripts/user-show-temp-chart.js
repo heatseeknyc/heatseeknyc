@@ -5,11 +5,9 @@ $(document).ready(function(){
 });
 
 function draw(response) {
-      // Chart size
-function ChartSvg(response) {
+  function UserShowTempChartSvg(response) {
         this.w = window.innerWidth;
         this.h = 450;
-        // d3 variables
         this.maxDataPointsForDots = 500;
         this.transitionDuration = 1000;
         this.violations = 0;
@@ -35,14 +33,15 @@ function ChartSvg(response) {
         this.$fillArea = null;
         this.circles = null;
       }
-        // Date constants
-  ChartSvg.prototype.DAYS = [ 'Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday' ];
-  ChartSvg.prototype.MONTHS = [ "JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
+
+  // Date constants
+  UserShowTempChartSvg.prototype.DAYS = [ 'Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday' ];
+  UserShowTempChartSvg.prototype.MONTHS = [ "JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
     "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER" ];
-  ChartSvg.prototype.ABBREVIATED_MONTHS = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  UserShowTempChartSvg.prototype.ABBREVIATED_MONTHS = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun",
     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
 
-  ChartSvg.prototype.setData = function(dataArrWithObjs) {
+  UserShowTempChartSvg.prototype.setData = function(dataArrWithObjs) {
     var self = this;
     dataArrWithObjs.forEach(function(obj){
       obj.date = new Date(obj.created_at);
@@ -55,7 +54,7 @@ function ChartSvg(response) {
     return dataArrWithObjs;
   }
 
-  ChartSvg.prototype.setMin = function() {
+  UserShowTempChartSvg.prototype.setMin = function() {
     if ( d3.min(this.data, function(d) { return d.outdoor_temp }) ){
       return d3.min(this.data, function(d) { return Math.min( d.temp ) }) - 5;
     } else {
@@ -63,7 +62,7 @@ function ChartSvg(response) {
     }
   }
 
-  ChartSvg.prototype.setSvg = function(){
+  UserShowTempChartSvg.prototype.setSvg = function(){
     return d3.select('#d3-chart')
       .append('svg:svg')
       .attr('width', this.w)
@@ -73,12 +72,14 @@ function ChartSvg(response) {
       .attr('transform', 'translate(' + this.margin + ',' + this.margin + ')');
   }
 
-  ChartSvg.prototype.setT = function(){
+  UserShowTempChartSvg.prototype.setT = function(){
     return this.svg.transition().duration(this.transitionDuration);
   }
-  var chartProperties = new ChartSvg(response);
+  var chartProperties = new UserShowTempChartSvg(response);
 
-
+  function function_name(argument) {
+    // body...
+  }
   function addLineStlyingToXTicks(){
     var $lines = $(".xTick .tick line"),
         length = chartProperties.data.length,
