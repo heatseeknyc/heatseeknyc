@@ -26,8 +26,8 @@ function draw(response) {
         // this.yAxisGroup = null;
         // this.xAxisGroup = null;
         this.dataCirclesGroup = null;
-        this.dataLinesGroup = null;
-        this.dataLines = null;
+        this.dataLinesGroup = this.setDataLinesGroup();
+        this.dataLines = this.setDataLines();
         this.line = null;
         this.garea = null;
         this.$fillArea = null;
@@ -73,6 +73,15 @@ function draw(response) {
   UserShowTempChartSvg.prototype.setT = function(){
     return this.svg.transition().duration(this.transitionDuration);
   };
+
+  UserShowTempChartSvg.prototype.setDataLinesGroup = function(){
+    return this.svg.append('svg:g');
+  };
+
+  UserShowTempChartSvg.prototype.setDataLines = function(){
+    return this.dataLinesGroup
+      .selectAll('.data-line').data([this.data]);
+  };
   var chartProperties = new UserShowTempChartSvg(response);
 
 // x ticks and labels gets placed first
@@ -83,57 +92,60 @@ function draw(response) {
 // y ticks and labels gets placed second
 // y ticks and labels
   var testYGroup = new UserShowTempChartYAxisGroup(chartProperties);
-  testYGroup.drawYAxisGroup();
+  testYGroup.addToChart();
 
 // lines and labels gets placed third
   // Draw the lines
 
-  function UserShowTempChartLine(svgObj) {
+  function UserShowTempChartLine(svgObj, optionsObj) {
+    this.data = svgObj.data;
     this.svg = svgObj.svg;
-    this.dataLinesGroup = this.setDataLinesGroup();
-    this.dataLines = this.setDataLines();
+    this.x = svgObj.x;
+    this.y = svgObj.y;
+    this.dataLines = svgObj.setDataLines();
+    this.lineDrawer = this.setLineDrawer();
+    this.transitionDuration = optionsObj.transitionDuration || 1000;
+    this.hasTransitions = optionsObj.hasTransitions || false;
   }
 
-  UserShowTempChartLine.prototype.setDataLinesGroup = function(){
-    return this.svg.append('svg:g');
+  UserShowTempChartLine.prototype.setLineDrawer = function(){
+    var self = this;
+    return d3.svg.line().x(function(d,i) {
+      return self.x(d.date);
+    }).y(function(d) {
+      return self.y(d.temp);
+    }).interpolate("linear");
   };
 
-  UserShowTempChartLine.prototype.setDataLinesGroup = function(){
-    return chartProperties.dataLinesGroup
-      .selectAll('.data-line').data([chartProperties.data]);
-  };
-
-  function setLine(){
-    chartProperties.line = d3.svg.line()
-    // assign the X function to plot our line as we wish
-    .x(function(d,i) {
-      return chartProperties.x(d.date);
-    })
-    .y(function(d) {
-      return chartProperties.y(d.temp);
-    })
-    .interpolate("linear");
-  }
-  setLine();
-
-
-  function addDataLineWithoutTransitions() {
-    chartProperties.dataLines.enter().append('path')
+  UserShowTempChartLine.prototype.drawDataLineWithoutTransitions = function() {
+    this.dataLines.enter().append('path')
       .attr('class', 'data-line')
-      .attr("d", chartProperties.line(data))
-  }
+      .attr("d", this.line(data))
+  };
 
-  function addDataLineWithTransitions() {
-    chartProperties.dataLines.enter().append('path')
+  UserShowTempChartLine.prototype.drawDataLineWithTransitions = function() {
+    this.dataLines.enter().append('path')
       .attr('class', 'data-line')
       .style('opacity', 0.3)
-      .attr("d", chartProperties.line(chartProperties.data))
+      .attr("d", this.lineDrawer(this.data))
       .transition()
-      .delay(chartProperties.transitionDuration / 2)
-      .duration(chartProperties.transitionDuration)
+      .delay(this.transitionDuration / 2)
+      .duration(this.transitionDuration)
       .style('opacity', 1);
-  }
-  addDataLineWithTransitions();
+  };
+
+  UserShowTempChartLine.prototype.addToChart = function(){
+    if ( this.hasTransitions ) {
+      this.drawDataLineWithTransitions();
+    } else {
+      this.drawDataLineWithoutTransitions();
+    }
+  };
+
+  var testDataLinesGroup = new UserShowTempChartLine(chartProperties, { hasTransitions: true });
+  testDataLinesGroup.addToChart();
+
+
 
   function createAreaClassForGroupArea(){
     chartProperties.dataLines

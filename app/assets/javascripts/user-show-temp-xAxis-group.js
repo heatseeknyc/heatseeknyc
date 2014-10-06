@@ -1,4 +1,4 @@
-function UserShowTempChartXAxisGroup(svgObj) {
+function UserShowTempChartXAxisGroup(svgObj, optionsObj) {
   this.data = svgObj.data;
   this.svg = svgObj.svg;
   this.margin = svgObj.margin;
