@@ -15,7 +15,7 @@ UserShowTempChartXAxisGroup.prototype.setXAxis = function(){
   return d3.svg.axis().scale(this.x)
     .tickSize(this.h - this.margin * 2)
     .tickPadding(0).ticks(this.data.length);
-}
+};
 
 UserShowTempChartXAxisGroup.prototype.addLineStlyingToXTicks = function(){
   var $lines = $(".xTick .tick line"),
@@ -46,13 +46,13 @@ UserShowTempChartXAxisGroup.prototype.addLineStlyingToXTicks = function(){
       }
     }
   }
-}
+};
 
 UserShowTempChartXAxisGroup.prototype.drawXAxisGroup = function(){
   this.svg.append('svg:g').attr('class', 'xTick').call(this.xAxis);
-}
+};
 
 UserShowTempChartXAxisGroup.prototype.addToChart = function() {
   this.drawXAxisGroup();
   this.addLineStlyingToXTicks();
-}
+};

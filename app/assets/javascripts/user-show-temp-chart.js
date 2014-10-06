@@ -50,7 +50,7 @@ function draw(response) {
       if( obj.violation ){ self.violations += 1; }
     });
     return dataArrWithObjs;
-  }
+  };
 
   UserShowTempChartSvg.prototype.setMin = function() {
     if ( d3.min(this.data, function(d) { return d.outdoor_temp }) ){
@@ -58,7 +58,7 @@ function draw(response) {
     } else {
       return d3.min(this.data, function(d) { return Math.min( d.temp, d.outdoor_temp ) }) - 10;
     }
-  }
+  };
 
   UserShowTempChartSvg.prototype.setSvg = function(){
     return d3.select('#d3-chart')
@@ -68,11 +68,11 @@ function draw(response) {
       .attr('class', 'viz')
       .append('svg:g')
       .attr('transform', 'translate(' + this.margin + ',' + this.margin + ')');
-  }
+  };
 
   UserShowTempChartSvg.prototype.setT = function(){
     return this.svg.transition().duration(this.transitionDuration);
-  }
+  };
   var chartProperties = new UserShowTempChartSvg(response);
 
 // x ticks and labels gets placed first
@@ -85,16 +85,23 @@ function draw(response) {
   var testYGroup = new UserShowTempChartYAxisGroup(chartProperties);
   testYGroup.drawYAxisGroup();
 
-// y ticks and labels gets placed third
+// lines and labels gets placed third
   // Draw the lines
-  function setDataLinesGroup(){
-    if (!chartProperties.dataLinesGroup) {
-      chartProperties.dataLinesGroup = chartProperties.svg.append('svg:g');
-    }
-  }
-  setDataLinesGroup();
 
-  chartProperties.dataLines = chartProperties.dataLinesGroup.selectAll('.data-line').data([chartProperties.data]);
+  function UserShowTempChartLine(svgObj) {
+    this.svg = svgObj.svg;
+    this.dataLinesGroup = this.setDataLinesGroup();
+    this.dataLines = this.setDataLines();
+  }
+
+  UserShowTempChartLine.prototype.setDataLinesGroup = function(){
+    return this.svg.append('svg:g');
+  };
+
+  UserShowTempChartLine.prototype.setDataLinesGroup = function(){
+    return chartProperties.dataLinesGroup
+      .selectAll('.data-line').data([chartProperties.data]);
+  };
 
   function setLine(){
     chartProperties.line = d3.svg.line()
@@ -109,13 +116,6 @@ function draw(response) {
   }
   setLine();
 
-  function createAreaClassForGroupArea(){
-    chartProperties.dataLines
-      .enter()
-      .append('svg:path')
-      .attr("class", "area");
-  }
-  createAreaClassForGroupArea();
 
   function addDataLineWithoutTransitions() {
     chartProperties.dataLines.enter().append('path')
@@ -134,6 +134,14 @@ function draw(response) {
       .style('opacity', 1);
   }
   addDataLineWithTransitions();
+
+  function createAreaClassForGroupArea(){
+    chartProperties.dataLines
+      .enter()
+      .append('svg:path')
+      .attr("class", "area");
+  }
+  createAreaClassForGroupArea();
 
   function setGroupArea(){
     chartProperties.garea = d3.svg.area()
