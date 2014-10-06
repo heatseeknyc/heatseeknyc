@@ -6,7 +6,7 @@ function UserShowTempChartYAxisGroup(svgObj) {
   this.yAxis = this.setYAxis();
 }
 
-UserShowTempChartYAxisGroup.prototype.drawYAxisGroup = function(){
+UserShowTempChartYAxisGroup.prototype.addToChart = function(){
   this.svg.append('svg:g').attr('class', 'yTick').call(this.yAxis);
   // fixes x value for text
   $(".yTick .tick text").attr("x", "-5")
