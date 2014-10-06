@@ -19,11 +19,11 @@ function draw(response) {
         this.x = d3.time.scale().range([0, this.w - this.margin * 2]).domain([this.data[0].date, this.data[this.data.length - 1].date]);
         this.y = d3.scale.linear().range([this.h - this.margin * 2, 0]).domain([this.min, this.max]);
         // this.xAxis = d3.svg.axis().scale(this.x).tickSize(this.h - this.margin * 2).tickPadding(0).ticks(this.data.length);
-        this.yAxis = d3.svg.axis().scale(this.y).orient('left').tickSize(-this.w + this.margin * 2).tickPadding(0).ticks(5);
+        // this.yAxis = d3.svg.axis().scale(this.y).orient('left').tickSize(-this.w + this.margin * 2).tickPadding(0).ticks(5);
         // this.strokeWidth = this.w / this.data.length;
         this.svg = this.setSvg();
         this.t = this.setT();
-        this.yAxisGroup = null;
+        // this.yAxisGroup = null;
         // this.xAxisGroup = null;
         this.dataCirclesGroup = null;
         this.dataLinesGroup = null;
@@ -82,20 +82,30 @@ function draw(response) {
 
 // y ticks and labels gets placed second
   // y ticks and labels
-  function setYAxisGroup() {
-    if (!chartProperties.yAxisGroup) {
-      chartProperties.yAxisGroup = chartProperties.svg.append('svg:g')
-        .attr('class', 'yTick')
-        .call(chartProperties.yAxis);
-      // fixes x value for text
-      $(".yTick .tick text").attr("x", "-5")
-    }
-    else {
-      t.select('.yTick').call(chartProperties.yAxis);
-    }
+
+  function UserShowTempChartYAxisGroup(svgObj) {
+    this.svg = svgObj.svg;
+    this.margin = svgObj.margin;
+    this.w = svgObj.w;
+    this.y = svgObj.y;
+    this.yAxis = this.setYAxis();
+    this.strokeWidth = this.w / svgObj.data.length;
   }
 
-  setYAxisGroup();
+  UserShowTempChartYAxisGroup.prototype.drawYAxisGroup = function(){
+    this.svg.append('svg:g').attr('class', 'yTick').call(this.yAxis);
+    // fixes x value for text
+    $(".yTick .tick text").attr("x", "-5")
+  }
+
+  UserShowTempChartYAxisGroup.prototype.setYAxis = function(){
+    return d3.svg.axis().scale(this.y)
+      .orient('left').tickSize(-this.w + this.margin * 2)
+      .tickPadding(0).ticks(5);
+  }
+
+  var testYGroup = new UserShowTempChartYAxisGroup(chartProperties);
+  testYGroup.drawYAxisGroup();
 
 // y ticks and labels gets placed third
   // Draw the lines
