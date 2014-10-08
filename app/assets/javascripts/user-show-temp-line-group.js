@@ -41,4 +41,7 @@ UserShowTempChartLine.prototype.addToChart = function(){
   } else {
     this.drawDataLineWithoutTransitions();
   }
+  // temp fix for user line being placed first
+  var $line = $(".data-line");
+  $("svg > g").append($line);
 };
