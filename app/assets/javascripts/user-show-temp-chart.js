@@ -29,7 +29,7 @@ function draw(response) {
         this.dataLinesGroup = this.setDataLinesGroup();
         this.dataLines = this.setDataLines();
         this.line = null;
-        this.garea = null;
+        // this.garea = null;
         this.$fillArea = null;
         this.circles = null;
       }
@@ -101,31 +101,47 @@ function draw(response) {
   testDataLinesGroup.addToChart();
 
 
+  function UserShowTempChartAreaGroup(svgObj, optionsObj){
+    this.x = svgObj.x;
+    this.y = svgObj.y;
+    this.h = svgObj.h;
+    this.margin = svgObj.margin;
+    this.data = svgObj.data;
+    this.dataLines = svgObj.dataLines;
+    this.areaDrawer = this.setAreaDrawer();
+  }
 
-  function createAreaClassForGroupArea(){
-    chartProperties.dataLines
+  UserShowTempChartAreaGroup.prototype.createAreaEl = function(){
+    this.dataLines
       .enter()
       .append('svg:path')
       .attr("class", "area");
-  }
-  createAreaClassForGroupArea();
+  };
 
-  function setGroupArea(){
-    chartProperties.garea = d3.svg.area()
+  UserShowTempChartAreaGroup.prototype.setAreaDrawer = function(){
+    var self = this;
+    return d3.svg.area()
       .interpolate("linear")
-      .x(function(d) { return chartProperties.x(d.date); })
-      .y0(chartProperties.h - chartProperties.margin * 2)
-      .y1(function(d) { return chartProperties.y(d.outdoor_temp); });
-  }
-  setGroupArea();
+      .x(function(d) { return self.x(d.date); })
+      .y0(self.h - self.margin * 2)
+      .y1(function(d) { return self.y(d.outdoor_temp); });
+  };
 
-  function addGroupArea(){
-    d3.selectAll(".area").attr("d", chartProperties.garea(chartProperties.data));
+  UserShowTempChartAreaGroup.prototype.drawGroupArea = function(){
+    d3.selectAll(".area").attr("d", this.areaDrawer(this.data));
     // move the area to the back of the graph
     chartProperties.$fillArea = $(".area");
     $("#d3-chart svg > g").prepend(chartProperties.$fillArea)
-  }
-  addGroupArea();
+  };
+
+  UserShowTempChartAreaGroup.prototype.addToChart = function(){
+    this.createAreaEl();
+    this.drawGroupArea();
+  };
+
+  var testGroupArea = new UserShowTempChartAreaGroup(chartProperties);
+  testGroupArea.addToChart();
+
 
   function addViolationCountToLegend() {
     $("#violations span").text($("#violations span")
