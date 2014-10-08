@@ -26,5 +26,6 @@
 //= require live_update
 //= require user-show-temp-xaxis-group
 //= require user-show-temp-yaxis-group
+//= require user-show-temp-line-group
 //= require user-show-temp-chart
 //= require video
