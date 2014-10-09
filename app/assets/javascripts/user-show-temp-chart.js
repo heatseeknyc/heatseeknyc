@@ -30,7 +30,7 @@ function draw(response) {
         this.dataLines = this.setDataLines();
         this.line = null;
         // this.garea = null;
-        this.$fillArea = null;
+        // this.$fillArea = null;
         this.circles = null;
       }
 
@@ -85,6 +85,10 @@ function draw(response) {
 // creates the svg
   var chartProperties = new UserShowTempChartSvg(response);
 
+// area is placed first behind all other elements
+  var testGroupArea = new UserShowTempChartAreaGroup(chartProperties);
+  testGroupArea.addToChart();
+
 // x ticks and labels gets placed first
 // x ticks and labels
   var testXGroup = new UserShowTempChartXAxisGroup(chartProperties);
@@ -100,8 +104,6 @@ function draw(response) {
   var testDataLinesGroup = new UserShowTempChartLine(chartProperties, { hasTransitions: true });
   testDataLinesGroup.addToChart();
 
-  var testGroupArea = new UserShowTempChartAreaGroup(chartProperties);
-  testGroupArea.addToChart();
 
 
   function addViolationCountToLegend() {

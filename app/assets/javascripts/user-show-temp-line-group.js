@@ -3,8 +3,8 @@ function UserShowTempChartLine(svgObj, optionsObj) {
   this.svg = svgObj.svg;
   this.x = svgObj.x;
   this.y = svgObj.y;
-  this.dataLines = svgObj.setDataLines();
-  this.lineDrawer = this.setLineDrawer();
+  this.dataLinesGroup = this.svg.append('svg:g');
+  this.dataLines = this.dataLinesGroup.selectAll('.data-line').data([this.data]); 
   this.transitionDuration = optionsObj.transitionDuration || 1000;
   this.hasTransitions = optionsObj.hasTransitions || false;
 }
@@ -41,7 +41,4 @@ UserShowTempChartLine.prototype.addToChart = function(){
   } else {
     this.drawDataLineWithoutTransitions();
   }
-  // temp fix for user line being placed first
-  var $line = $(".data-line");
-  $("svg > g").append($line);
 };
