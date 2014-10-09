@@ -3,11 +3,17 @@ function UserShowTempChartLine(svgObj, optionsObj) {
   this.svg = svgObj.svg;
   this.x = svgObj.x;
   this.y = svgObj.y;
-  this.dataLinesGroup = this.svg.append('svg:g');
-  this.dataLines = this.dataLinesGroup.selectAll('.data-line').data([this.data]); 
+  this.dataLineGroup = this.svg.append('svg:g');
+  this.dataLine = this.setDataLine();
   this.transitionDuration = optionsObj.transitionDuration || 1000;
   this.hasTransitions = optionsObj.hasTransitions || false;
+  this.lineDrawer = this.setLineDrawer();
 }
+
+UserShowTempChartLine.prototype.setDataLine = function(){
+  return this.dataLineGroup
+    .selectAll('.data-line').data([this.data]);
+};
 
 UserShowTempChartLine.prototype.setLineDrawer = function(){
   var self = this;
@@ -19,13 +25,13 @@ UserShowTempChartLine.prototype.setLineDrawer = function(){
 };
 
 UserShowTempChartLine.prototype.drawDataLineWithoutTransitions = function() {
-  this.dataLines.enter().append('path')
+  this.dataLine.enter().append('path')
     .attr('class', 'data-line')
     .attr("d", this.lineDrawer(this.data));
 };
 
 UserShowTempChartLine.prototype.drawDataLineWithTransitions = function() {
-  this.dataLines.enter().append('path')
+  this.dataLine.enter().append('path')
     .attr('class', 'data-line')
     .style('opacity', 0.3)
     .attr("d", this.lineDrawer(this.data))

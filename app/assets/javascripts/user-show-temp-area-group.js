@@ -1,13 +1,19 @@
 function UserShowTempChartAreaGroup(svgObj, optionsObj){
+  this.svg = svgObj.svg;
   this.x = svgObj.x;
   this.y = svgObj.y;
   this.h = svgObj.h;
   this.margin = svgObj.margin;
   this.data = svgObj.data;
-  this.dataLines = svgObj.dataLines;
+  this.dataAreaGroup = this.svg.append('svg:g');
+  this.dataLines = this.setDataLines();
   this.areaDrawer = this.setAreaDrawer();
-  // this.$fillArea = $(".area");
 }
+
+UserShowTempChartAreaGroup.prototype.setDataLines = function(){
+  return this.dataAreaGroup
+    .selectAll('.data-line').data([this.data]);
+};
 
 UserShowTempChartAreaGroup.prototype.createAreaEl = function(){
   this.dataLines
@@ -27,9 +33,6 @@ UserShowTempChartAreaGroup.prototype.setAreaDrawer = function(){
 
 UserShowTempChartAreaGroup.prototype.drawGroupArea = function(){
   d3.selectAll(".area").attr("d", this.areaDrawer(this.data));
-  // move the area to the back of the graph
-  // it seems like i dont need this as of right now...
-  // $("#d3-chart svg > g").prepend(this.$fillArea);
 };
 
 UserShowTempChartAreaGroup.prototype.addToChart = function(){

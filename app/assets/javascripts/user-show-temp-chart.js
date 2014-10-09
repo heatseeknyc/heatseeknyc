@@ -26,8 +26,8 @@ function draw(response) {
         // this.yAxisGroup = null;
         // this.xAxisGroup = null;
         this.dataCirclesGroup = null;
-        this.dataLinesGroup = this.setDataLinesGroup();
-        this.dataLines = this.setDataLines();
+        // this.dataLinesGroup = this.setDataLinesGroup();
+        // this.dataLines = this.setDataLines();
         this.line = null;
         // this.garea = null;
         // this.$fillArea = null;
@@ -74,14 +74,6 @@ function draw(response) {
     return this.svg.transition().duration(this.transitionDuration);
   };
 
-  UserShowTempChartSvg.prototype.setDataLinesGroup = function(){
-    return this.svg.append('svg:g');
-  };
-
-  UserShowTempChartSvg.prototype.setDataLines = function(){
-    return this.dataLinesGroup
-      .selectAll('.data-line').data([this.data]);
-  };
 // creates the svg
   var chartProperties = new UserShowTempChartSvg(response);
 
@@ -101,7 +93,9 @@ function draw(response) {
 
 // lines and labels gets placed third
 // Draw the lines
-  var testDataLinesGroup = new UserShowTempChartLine(chartProperties, { hasTransitions: true });
+  var testDataLinesGroup = new UserShowTempChartLine(chartProperties, {
+    hasTransitions: true, transitionDuration: this.transitionDuration 
+  });
   testDataLinesGroup.addToChart();
 
 
