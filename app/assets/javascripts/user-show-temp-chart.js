@@ -12,7 +12,7 @@ function draw(response) {
         this.transitionDuration = 1000;
         this.violations = 0;
         this.margin = 40;
-        this.pointRadius = 4;
+        this.circleRadius = 4;
         this.data = this.setData(response);
         this.max = d3.max(this.data, function(d) { return Math.max( d.temp, d.outdoor_temp ) }) + 1;
         this.min = this.setMin();
@@ -34,10 +34,10 @@ function draw(response) {
         this.circles = null;
       }
 
-  // Date constants
-  UserShowTempChartSvg.prototype.DAYS = [ 'Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday' ];
-  UserShowTempChartSvg.prototype.MONTHS = [ "JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
-    "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER" ];
+  // // Date constants
+  // UserShowTempChartSvg.prototype.DAYS = [ 'Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday' ];
+  // UserShowTempChartSvg.prototype.MONTHS = [ "JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
+  //   "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER" ];
 
   UserShowTempChartSvg.prototype.setData = function(dataArrWithObjs) {
     var self = this;
@@ -100,70 +100,36 @@ function draw(response) {
 
 
 
-  function addViolationCountToLegend() {
-    $("#violations span").text($("#violations span")
-      .text().replace(/\d+/, chartProperties.violations));
-  }
-  addViolationCountToLegend();
 
-  if (chartProperties.violations) {
-  // Draw the circles if there are any violations
-    function setDataCirclesGroup() {
-      if (!chartProperties.dataCirclesGroup) {
-        chartProperties.dataCirclesGroup = chartProperties.svg.append('svg:g');
-      }
-    }
-    setDataCirclesGroup();
+  function UserShowTempChartToolTips(callingObj){}
+  UserShowTempChartToolTips.prototype.DAYS = [ 'Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday' ];
+  UserShowTempChartToolTips.prototype.MONTHS = [ "JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
+    "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER" ];
 
-    function setCircles() {
-      chartProperties.circles = chartProperties.dataCirclesGroup.selectAll('.data-point').data(chartProperties.data);
-    }
-    setCircles();
-
-    function addCircles(){
-      chartProperties.circles.enter()
-        .append('svg:circle')
-        .attr('class', 'data-point')
-        .style('opacity', 1)
-        .attr('cx', function(d) { return chartProperties.x(d.date) })
-        .attr('cy', function() { return chartProperties.y(0) })
-        .attr('r', function(d) {
-          return d.violation ? chartProperties.pointRadius : 0;
-        })
-        .transition()
-        .duration(chartProperties.transitionDuration)
-        .style('opacity', 1)
-        .attr('cx', function(d) { return chartProperties.x(d.date) })
-        .attr('cy', function(d) { return chartProperties.y(d.temp) });
-    }
-    addCircles();
-
-  }
-
-  function legalMinimumFor(reading){
+  UserShowTempChartToolTips.prototype._legalMinimumFor = function(reading){
     if(reading.isDay === true){
       return '68';
-    }else{
+    } else {
       return '55';
     }
-  }
+  };
 
-  function getCivilianTime(reading){
+  UserShowTempChartToolTips.prototype._getCivilianTime = function(reading){
     if (reading.getHours() > 12){
       return (reading.getHours() - 12) + ":"
         + (reading.getMinutes() >= 10 ?
           reading.getMinutes() : "0" + reading.getMinutes())
         + " PM";
-    }else{
+    } else {
       return reading.getHours() + ":"
         + (reading.getMinutes() >= 10 ?
           reading.getMinutes() : "0" + reading.getMinutes())
         + " AM";
     }
-  }
+  };
 
-  // only add tooltips if it is not a live demo
-  if(!/live_update/.test(document.URL)){
+  UserShowTempChartToolTips.prototype.addToChart = function(){
+    var self = this;
     $('svg circle').tipsy({
       gravity: 's',
       html: true,
@@ -171,20 +137,111 @@ function draw(response) {
       leftOffset: 0.3,
       opacity: 1,
       title: function() {
-        var d = this.__data__;
-        var pDate = d.date;
-        return pDate.getDate() + ' '
-          + chartProperties.MONTHS[pDate.getMonth()] + ' '
-          + pDate.getFullYear() + '<br>'
-          + chartProperties.DAYS[ pDate.getDay() ] + ' at '
-          + getCivilianTime(pDate) + '<br>'
+        var circleDatum = this.__data__,
+          circleDate = circleDatum.date;
+        return circleDate.getDate() + ' '
+          + self.MONTHS[circleDate.getMonth()] + ' '
+          + circleDate.getFullYear() + '<br>'
+          + self.DAYS[ circleDate.getDay() ] + ' at '
+          + self._getCivilianTime(circleDate) + '<br>'
           + '<i>Temperature in Violation</i><br>'
-          + '<br>Temperature in Apt: ' + d.temp + '°'
-          + '<br>Temperature Outside: ' + d.outdoor_temp + '°'
-          + '<br>Legal minimum: ' + legalMinimumFor(d) + '°';
+          + '<br>Temperature in Apt: ' + circleDatum.temp + '°'
+          + '<br>Temperature Outside: ' + circleDatum.outdoor_temp + '°'
+          + '<br>Legal minimum: ' + self._legalMinimumFor(circleDatum) + '°';
       }
     });
   }
+
+
+
+  function addViolationCountToLegend() {
+    $("#violations span").text($("#violations span")
+      .text().replace(/\d+/, chartProperties.violations));
+  }
+  addViolationCountToLegend();
+
+  function UserShowTempChartCircles(svgObj, optionsObj){
+    this.data = svgObj.data;
+    this.svg = svgObj.svg;
+    this.x = svgObj.x;
+    this.y = svgObj.y;
+    this.hasViolations = optionsObj.hasViolations || true;
+    this.circleRadius = optionsObj.circleRadius || 4;
+    this.hasTransitions = optionsObj.hasTransitions || false;
+    this.transitionDuration = optionsObj.transitionDuration || 1000;
+    this.hasToolTips = optionsObj.hasToolTips || false;
+    this.dataCirclesGroup = this.setDataCirclesGroup();
+    this.dataCircles = this.setDataCircles();
+  };
+
+  UserShowTempChartCircles.prototype.setDataCirclesGroup = function(){
+    return this.svg.append('svg:g');
+  };
+
+  UserShowTempChartCircles.prototype.setDataCircles = function(){
+    return this.dataCirclesGroup
+      .selectAll('.data-point')
+      .data(this.data);
+  };
+
+  UserShowTempChartCircles.prototype.addCirclesWithTransitions = function(){
+    var self = this;
+    self.dataCircles.enter()
+      .append('svg:circle')
+      .attr('class', 'data-point')
+      .style('opacity', 1)
+      .attr('cx', function(d) { return self.x(d.date) })
+      .attr('cy', function() { return self.y(0) })
+      .attr('r', function(d) {
+        return d.violation ? self.circleRadius : 0;
+      })
+      .transition()
+      .duration(self.transitionDuration)
+      .style('opacity', 1)
+      .attr('cx', function(d) { return self.x(d.date) })
+      .attr('cy', function(d) { return self.y(d.temp) });
+  };
+
+  UserShowTempChartCircles.prototype.addCirclesWithoutTransitions = function(){
+    var self = this;
+    self.dataCircles.enter()
+      .append('svg:circle')
+      .attr('class', 'data-point')
+      .attr('cx', function(d) { return self.x(d.date) })
+      .attr('cy', function(d) { return self.y(d.temp) })
+      .attr('r', function(d) {
+        return d.violation ? self.circleRadius : 0;
+      });
+  };
+
+  UserShowTempChartCircles.prototype.addToolTips = function(){
+    if ( this.hasToolTips ) {
+      var toolTips = new UserShowTempChartToolTips;
+      toolTips.addToChart();
+    }
+  };
+
+  UserShowTempChartCircles.prototype.addToChart = function (){
+    if ( this.hasViolations ) {
+      if ( this.hasTransitions ) {
+        this.addCirclesWithTransitions();
+      } else {
+        this.addCirclesWithoutTransitions();
+      }
+      this.addToolTips();
+    }
+  };
+
+  var testCircles = new UserShowTempChartCircles(chartProperties, {
+    hasViolations: true,
+    circleRadius: 4,
+    transitionDuration: 1000,
+    hasTransitions: true,
+    hasToolTips: true
+  });
+  testCircles.addToChart();
+
+
 }
 
 function drawChartBasedOnScreenSize(chartData){
@@ -204,7 +261,7 @@ function drawChartBasedOnScreenSize(chartData){
     var threeQuarterReadings = chartData.slice(23, 167);
     $("#d3-chart").html("")
     draw(threeQuarterReadings);
-  }else{
+  } else {
     $("#d3-chart").html("")
     draw(chartData);
   }

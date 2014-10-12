@@ -5,6 +5,8 @@ function UserShowTempChartAreaGroup(svgObj, optionsObj){
   this.h = svgObj.h;
   this.margin = svgObj.margin;
   this.data = svgObj.data;
+  // this code is repeated to create a
+  // clean element for the charts
   this.dataAreaGroup = this.svg.append('svg:g');
   this.dataLines = this.setDataLines();
   this.areaDrawer = this.setAreaDrawer();

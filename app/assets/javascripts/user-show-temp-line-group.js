@@ -3,6 +3,8 @@ function UserShowTempChartLine(svgObj, optionsObj) {
   this.svg = svgObj.svg;
   this.x = svgObj.x;
   this.y = svgObj.y;
+  // this code is repeated to create a
+  // clean element for the charts
   this.dataLineGroup = this.svg.append('svg:g');
   this.dataLine = this.setDataLine();
   this.transitionDuration = optionsObj.transitionDuration || 1000;
