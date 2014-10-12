@@ -23,7 +23,7 @@
       <%= f.text_field :twine_name, class: "settings-form-control form-control" %></dl>
       
       <% if @user.permissions > 0 && !@user.is_demo_user? %>
-        <dl class="settings-input"><%= f.label :permissions %>
+        <dl class="settings-input settings-permissions"><%= f.label :permissions %>
         <%= f.select :permissions, User::PERMISSIONS, class: "settings-form-control form-control" %></dl>
 
       <dl class="settings-input">
