@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'airbrake'
+gem 'bootstrap-datepicker-rails'
 gem 'chartkick'
 gem 'coveralls', require: false
 gem 'devise'

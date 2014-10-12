@@ -74,6 +74,6 @@ class ArticlesController < ApplicationController
     end
 
     def authenticate_team_member!
-      redirect_to current_user if current_user.permissions > 10
+      redirect_to current_user if !signed_in? || current_user.permissions > 10
     end
 end
