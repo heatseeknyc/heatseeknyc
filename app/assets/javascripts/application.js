@@ -30,4 +30,5 @@
 //= require user-show-temp-area-group
 //= require user-show-temp-tool-tips
 //= require user-show-temp-chart
+//= require user-show-temp-circles
 //= require video
