@@ -31,4 +31,5 @@
 //= require user-show-temp-tool-tips
 //= require user-show-temp-chart
 //= require user-show-temp-circles
+//= require user-show-temp-svg
 //= require video

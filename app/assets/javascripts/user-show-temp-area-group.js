@@ -1,10 +1,10 @@
 function UserShowTempChartAreaGroup(svgObj, optionsObj){
   this.svg = svgObj.svg;
+  this.data = svgObj.data;
   this.x = svgObj.x;
   this.y = svgObj.y;
-  this.h = svgObj.h;
-  this.margin = svgObj.margin;
-  this.data = svgObj.data;
+  this.height = optionsObj.height;
+  this.margin = optionsObj.margin;
   // this code is repeated to create a
   // clean element for the charts
   this.dataAreaGroup = this.svg.append('svg:g');
@@ -29,7 +29,7 @@ UserShowTempChartAreaGroup.prototype.setAreaDrawer = function(){
   return d3.svg.area()
     .interpolate("linear")
     .x(function(d) { return self.x(d.date); })
-    .y0(self.h - self.margin * 2)
+    .y0(self.height - self.margin * 2)
     .y1(function(d) { return self.y(d.outdoor_temp); });
 };
 

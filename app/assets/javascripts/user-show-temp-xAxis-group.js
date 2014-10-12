@@ -1,11 +1,12 @@
 function UserShowTempChartXAxisGroup(svgObj, optionsObj) {
   this.data = svgObj.data;
   this.svg = svgObj.svg;
-  this.margin = svgObj.margin;
-  this.h = svgObj.h;
+  this.margin = optionsObj.margin;
   this.x = svgObj.x;
+  this.height = optionsObj.height;
   this.xAxis = this.setXAxis();
-  this.strokeWidth = svgObj.w / this.data.length;
+  this.strokeWidth = svgObj.width / this.data.length;
+
 }
 
 UserShowTempChartXAxisGroup.prototype.ABBREVIATED_MONTHS = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -13,7 +14,7 @@ UserShowTempChartXAxisGroup.prototype.ABBREVIATED_MONTHS = [ "Jan", "Feb", "Mar"
 
 UserShowTempChartXAxisGroup.prototype.setXAxis = function(){
   return d3.svg.axis().scale(this.x)
-    .tickSize(this.h - this.margin * 2)
+    .tickSize(this.height - this.margin * 2)
     .tickPadding(0).ticks(this.data.length);
 };
 
