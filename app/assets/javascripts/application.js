@@ -28,5 +28,6 @@
 //= require user-show-temp-yaxis-group
 //= require user-show-temp-line-group
 //= require user-show-temp-area-group
+//= require user-show-temp-tool-tips
 //= require user-show-temp-chart
 //= require video
