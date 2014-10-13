@@ -1,10 +1,10 @@
-function UserShowTempChartSvg(response, optionsObj) {
+function UserShowTempChartSvg(dataObj, violationCount, optionsObj) {
+  this.data = dataObj;
   this.width = window.innerWidth;
   this.height = optionsObj.height;
   this.margin = optionsObj.margin;
   this.optionsObj = optionsObj;
-  this.violations = 0;
-  this.data = this.setData(response);
+  this.violations = violationCount;
   this.max = this.setMax();
   this.min = this.setMin();
   this.x = this.setX();
@@ -33,19 +33,6 @@ UserShowTempChartSvg.prototype.setMax = function(){
     function(d) { 
       return Math.max( d.temp, d.outdoor_temp )
     }) + 1;
-};
-
-UserShowTempChartSvg.prototype.setData = function(dataArrWithObjs) {
-  var self = this;
-  dataArrWithObjs.forEach(function(obj){
-    obj.date = new Date(obj.created_at);
-    obj.isDay = obj.date.getHours() >= 6 && obj.date.getHours() <= 22;
-    if(/live_update/.test(document.URL)){
-      obj.violation = true;
-    }
-    if( obj.violation ){ self.violations += 1; }
-  });
-  return dataArrWithObjs;
 };
 
 UserShowTempChartSvg.prototype.setMin = function() {
