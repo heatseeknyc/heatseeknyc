@@ -10,6 +10,10 @@ class WelcomeController < ApplicationController
     @judges = User.judges
   end
 
+  def press
+    @articles = Article.all
+  end
+
   def blog
     page_size = 4
     page = params[:page] ? params[:page].to_i : 1
