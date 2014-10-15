@@ -3,7 +3,7 @@ function UserShowTempChartCircles(svgObj, optionsObj){
   this.svg = svgObj.svg;
   this.x = svgObj.x;
   this.y = svgObj.y;
-  this.hasViolations = optionsObj.hasViolations || true;
+  this.violations = svgObj.violations;
   this.circleRadius = optionsObj.circleRadius || 4;
   this.hasTransitions = optionsObj.hasTransitions || false;
   this.transitionDuration = optionsObj.transitionDuration || 1000;
@@ -60,7 +60,7 @@ UserShowTempChartCircles.prototype.addToolTips = function(){
 };
 
 UserShowTempChartCircles.prototype.addToChart = function (){
-  if ( this.hasViolations ) {
+  if ( this.violations ) {
     if ( this.hasTransitions ) {
       this.addCirclesWithTransitions();
     } else {
