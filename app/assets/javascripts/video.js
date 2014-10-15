@@ -15,7 +15,7 @@ jQuery(document).ready(function ($) {
 		
 		var videoContainer = $('#video-container');
 		
-		videoContainer.prepend('<iframe src="//player.vimeo.com/video/108735765?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff&amp;autoplay=1" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>');
+		videoContainer.prepend('<iframe src="//player.vimeo.com/video/108858343?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff&amp;autoplay=1" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>');
 		
 		resizeToCover();
 		
