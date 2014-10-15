@@ -4,9 +4,16 @@ function UserShowTempChartDrawer(){
     margin: 40,
     circleRadius: 4,
     transitionDuration: 1000,
-    hasViolations: true,
     hasTransitions: true,
     hasToolTips: true
+  };
+  this.liveUpdateChartOptions = {
+    height: 450,
+    margin: 40,
+    circleRadius: 4,
+    transitionDuration: 0,
+    hasTransitions: false,
+    hasToolTips: false
   };
   this.violations = 0;
   this.url = this.setUrl();
@@ -15,7 +22,7 @@ function UserShowTempChartDrawer(){
 }
 
 UserShowTempChartDrawer.prototype.setUrl = function(){
-  if( /collaborations/.test(document.URL )){
+  if( /collaborations/.test(document.URL) ){
     return /\/users\/\d+\/collaborations\/\d+/.exec(document.URL)[0];
     // returns '/user/13/collaborations/35'
   } else if ( /live_update/.test(document.URL) ){
@@ -58,10 +65,17 @@ UserShowTempChartDrawer.prototype.selectDataBasedOnScreenSize = function(){
 };
 
 UserShowTempChartDrawer.prototype.createAndDrawChartSvg = function(){
-  this.chart = new UserShowTempChartSvg(
-    this.selectDataBasedOnScreenSize(), this.violations, this.chartOptions
-  );
-  this.chart.addChartElements();
+  if ( /live_update/.test(document.URL) ) {
+    this.chart = new UserShowTempChartSvg(
+      this.selectDataBasedOnScreenSize(), this.violations, this.liveUpdateChartOptions
+    );
+    this.chart.addChartElements();
+  } else {
+    this.chart = new UserShowTempChartSvg(
+      this.selectDataBasedOnScreenSize(), this.violations, this.chartOptions
+    );
+    this.chart.addChartElements();
+  }
 };
 
 UserShowTempChartDrawer.prototype.drawChartOnWindowResize = function(){
