@@ -23,7 +23,6 @@
 //= require collaboration
 //= require complaint
 //= require kickstarter
-//= require live_update
 //= require user-show-temp-xaxis-group
 //= require user-show-temp-yaxis-group
 //= require user-show-temp-line-group
@@ -32,4 +31,5 @@
 //= require user-show-temp-chart
 //= require user-show-temp-circles
 //= require user-show-temp-svg
+//= require user-show-temp-document-ready-chart-drawer
 //= require video

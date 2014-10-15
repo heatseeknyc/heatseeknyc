@@ -1,20 +1,5 @@
-function UserShowTempChartDrawer(){
-  this.chartOptions = {
-    height: 450,
-    margin: 40,
-    circleRadius: 4,
-    transitionDuration: 1000,
-    hasTransitions: true,
-    hasToolTips: true
-  };
-  this.liveUpdateChartOptions = {
-    height: 450,
-    margin: 40,
-    circleRadius: 4,
-    transitionDuration: 0,
-    hasTransitions: false,
-    hasToolTips: false
-  };
+function UserShowTempChartDrawer(chartOptions){
+  this.chartOptions = chartOptions;
   this.violations = 0;
   this.url = this.setUrl();
   this.response = null;
@@ -65,17 +50,10 @@ UserShowTempChartDrawer.prototype.selectDataBasedOnScreenSize = function(){
 };
 
 UserShowTempChartDrawer.prototype.createAndDrawChartSvg = function(){
-  if ( /live_update/.test(document.URL) ) {
-    this.chart = new UserShowTempChartSvg(
-      this.selectDataBasedOnScreenSize(), this.violations, this.liveUpdateChartOptions
-    );
-    this.chart.addChartElements();
-  } else {
-    this.chart = new UserShowTempChartSvg(
-      this.selectDataBasedOnScreenSize(), this.violations, this.chartOptions
-    );
-    this.chart.addChartElements();
-  }
+  this.chart = new UserShowTempChartSvg(
+    this.selectDataBasedOnScreenSize(), this.violations, this.chartOptions
+  );
+  this.chart.addChartElements();
 };
 
 UserShowTempChartDrawer.prototype.drawChartOnWindowResize = function(){
@@ -94,9 +72,9 @@ UserShowTempChartDrawer.prototype.drawChartOnWindowResize = function(){
   };
 };
 
-UserShowTempChartDrawer.prototype.updateTempForLiveUpdate = function(){
+UserShowTempChartDrawer.prototype.updateTempForLiveUpdate = function(response){
   if ( $('#live-update').length > 0 ) {
-    $('.temp-num').html(chartData[chartData.length - 1].temp + '°')
+    $('.temp-num').html(response[response.length - 1].temp + '°')
   }
 };
 
@@ -105,14 +83,7 @@ UserShowTempChartDrawer.prototype.drawChart = function() {
   $.getJSON(this.url, function(response){
     self.response = self.fixData(response);
     self.drawChartOnWindowResize();
-    self.updateTempForLiveUpdate();
+    self.updateTempForLiveUpdate(response);
     self.addViolationCountToLegend();
   });
 };
-
-$(document).ready(function(){
-  if($("#d3-chart").length > 0){
-    var chart = new UserShowTempChartDrawer;
-    chart.drawChart();
-  }
-});
