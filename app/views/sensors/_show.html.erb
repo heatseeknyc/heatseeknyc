@@ -1,0 +1,13 @@
+<div class="jumbotron col-xs-12 col-sm-10 col-md-6  col-lg-4" id="sensor-jumbo">
+  <div class="container-fluid">
+    <h1 class="text-center"><%= @sensor.name %></h1>
+
+    <% if @sensor.user %>
+      <div class="responsive-font-wrapper"><p class="responsive-font">status: currently assigned to <%= @sensor.user.email %></p><div>
+      <%= link_to "Assigned User", user_path(@sensor.user) %>
+    <% else %>
+      <div class="responsive-font-wrapper"><p class="text-center responsive-font">status: currently unassigned</p></div>
+    <% end %>
+
+  </div>
+</div>

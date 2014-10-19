@@ -1,0 +1,52 @@
+class SensorsController < ApplicationController
+  before_action :set_sensor, only: [:show, :edit, :update, :destroy]
+  # GET /sensors
+  # GET /sensors.json
+  def index
+    @sensors = Sensor.order(created_at: :desc).all
+  end
+
+  # GET /sensors/1
+  # GET /sensors/1.json
+  def show
+    @sensor = Sensor.find(params[:id])
+  end
+
+  # GET /sensors/new
+  def new
+    @sensor = Sensor.new
+  end
+
+  # GET /sensors/1/edit
+  def edit
+  end
+
+  # POST /sensors
+  # POST /sensors.json
+  def create
+    @sensor = Sensor.find_or_create_from_params(sensor_params)
+    redirect_to sensor_path(@sensor)
+  end
+
+  # DELETE /sensors/1
+  # DELETE /sensors/1.json
+  def destroy
+    @sensor.destroy
+    respond_to do |format|
+      format.html { redirect_to sensors_url }
+      format.json { head :no_content }
+    end
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_sensor
+      @sensor = Sensor.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def sensor_params
+      # TODO: fix this anti-pattern and figure out how to do nested model strong params
+      params.require(:sensor).permit(:name, :email)
+    end
+end

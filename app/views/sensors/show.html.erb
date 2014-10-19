@@ -1,0 +1,6 @@
+<p id="notice"><%= notice %></p>
+
+<%= render partial: "show", locals: {:sensor => @sensor} %>
+
+<%= link_to 'Edit', edit_sensor_path(@sensor) %> |
+<%= link_to 'Back', sensors_path %>

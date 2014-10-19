@@ -8,6 +8,7 @@ Twinenyc::Application.routes.draw do
     resources :collaborations
   end
   resources :twines, only: [:show, :new, :create]
+  resources :sensors
 
   post 'readings' => 'readings#create'
 
