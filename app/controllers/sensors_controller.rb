@@ -1,4 +1,5 @@
 class SensorsController < ApplicationController
+  before_action :authenticate_admin!
   before_action :set_sensor, only: [:show, :edit, :update, :destroy]
   # GET /sensors
   # GET /sensors.json
@@ -48,5 +49,9 @@ class SensorsController < ApplicationController
     def sensor_params
       # TODO: fix this anti-pattern and figure out how to do nested model strong params
       params.require(:sensor).permit(:name, :email)
+    end
+
+    def authenticate_admin!
+      redirect_to current_user if current_user.permissions > 25
     end
 end
