@@ -11,8 +11,8 @@
 
   <% @sensors.each do |sensor| %>
     <div class="row">
-      <div class="col-xs-12"><%= sensor.name %></div>
-      <div class="col-xs-12"><%= sensor.user %></div>
+      <div class="col-xs-12">Sensor: <%= sensor.name %></div>
+      <div class="col-xs-12">User: <%= sensor.user ? sensor.user.email : "unassigned" %></div>
       <div class="col-xs-12"><%= link_to 'Show', sensor %></div>
       <div class="col-xs-12"><%= link_to 'Edit', edit_sensor_path(sensor) %></div>
       <div class="col-xs-12"><%= link_to 'Destroy', sensor, method: :delete, data: { confirm: 'Are you sure?' } %></div>
