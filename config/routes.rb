@@ -21,6 +21,7 @@ Twinenyc::Application.routes.draw do
   get "complaints/" => "complaint#index"
   get "coldmap/" => "complaint#index"
   get "sponsors" => "welcome#sponsors"
+  get "resources" => "welcome#resources"
   get "team" => "welcome#team"
   get "about" => "welcome#about"
   get "nycbigapps" => "welcome#nycbigapps"
