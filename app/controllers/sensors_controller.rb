@@ -52,6 +52,10 @@ class SensorsController < ApplicationController
     end
 
     def authenticate_admin!
-      redirect_to current_user if current_user.permissions > 25
+      if !signed_in?
+        redirect_to welcome_index_path
+      elsif !current_user.admin?
+        redirect_to current_user 
+      end
     end
 end
