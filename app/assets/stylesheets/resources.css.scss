@@ -3,7 +3,6 @@
 .resources {
   background-color: #C8DCE0;
   width: 100%;
-  padding-bottom: 70px;
 
   .container {
     float: none;
@@ -17,81 +16,155 @@
 
   .resources-title {
     @extend .stylish-title;
+    width: 100%;
+    margin: 40px auto 0 auto;
   }
+
+  .resources-top{
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .boroughs {
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 4em;
+    padding: 0;
+    border-bottom: 4px solid #000;
   
+  }
+
+  .boroughs li {
+    display: inline-block;
+    width: 15%;
+    text-align: center;
+    line-height: 3.4em;
+    margin-top: 0;
+  }
+
+  .boroughs li:hover {
+    color: #fff;
+    cursor: pointer;
+  }
+
+  /* every link within links */
+  .resources-links div ul li {
+    list-style-type: none;
+
+    a {
+      width: auto;
+      font-size: 1em;      
+    }
+  }
+
+  .resources-links {
+    min-height: 390px;
+  }
+
+  /* MC form */
+  .validate {
+    width: 100%;
+    margin: 0 auto;
+    background-color: #fff;
+
+    h2 {
+      font-size: 2em;
+    }
+  }
+
+
   #resources-signup {
+    width: 100%;
   	background:#fff; 
   	clear:left; 
   	font:10px Helvetica,Arial,sans-serif;
   	margin-top: 10px;
   	padding-top: 2px;
+
+    h2.resources-title {
+      margin-top: -2px;
+      text-align: center;
+    }
+  }
+
+  .mc-field-group {
+    width: 75%;
+    margin: 0 auto;
+
+    label {
+      font-size: 1.65em;
+      display: block;
+      text-align: center;
+    }
+    input {
+      width: 55%;
+      height: 33px;
+      display: block;
+      margin: 0 auto 25px;
+      border: 4px solid #000;
+    }
+  }
+
+  .input-group {
+    margin: 0 auto;
+    width: 50%;
+    background-color: #d6d6d6;
+    border-radius: 4px;
+
+    ul {
+      margin-left: 26%;
+    }
+  }
+
+  .input-group ul li {
+    list-style-type: none;
+
+
+    input {
+      float: left;
+      margin-left: 5%;
+
+    }
   }
 
   .wo-heat {
-    width: 71%;
-    margin: 0 auto;
-    margin-bottom: 15px;
+    width: 61%;
+    margin: 14px auto 15px auto;
     text-align: center;
     border-bottom: 1px solid #ccc;
   }
 
-  .resources-main {
+  .resources-links a {
     text-align: center;
-
+    display: block;
   }
 
 
+  .resources-manhattan {
+    display:none;  
+  }
+
+  .resources-bronx {
+    display:none;  
+  }
+
+  .resources-queens {
+    display:none;  
+  }
+
+  .resources-statenisland {
+    display:none;  
+  }
 
   /* MailChimp Form Embed Code - Classic - 08/17/2011 */
-#resources-signup form {display:block; position:relative; text-align:left; padding:10px 0 10px 3%}
-#resources-signup h2 {font-weight:bold; padding:0; margin:15px 0; font-size:1.4em;}
-#resources-signup input {border:1px solid #999; -webkit-appearance:none;}
-#resources-signup input[type=checkbox]{-webkit-appearance:checkbox;}
-#resources-signup input[type=radio]{-webkit-appearance:radio;}
-#resources-signup input:focus {border-color:#333;}
-#resources-signup .button {clear:both; background-color: #aaa; border: 0 none; border-radius:4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size:15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding: 0 22px; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: auto;}
-#resources-signup .button:hover {background-color:#777;}
-#resources-signup .small-meta {font-size: 11px;}
-#resources-signup .nowrap {white-space:nowrap;}
-
-#resources-signup .mc-field-group {clear:left; position:relative; width:96%; padding-bottom:3%; min-height:50px;}
-#resources-signup .size1of2 {clear:none; float:left; display:inline-block; width:46%; margin-right:4%;}
-* html #resources-signup .size1of2 {margin-right:2%; /* Fix for IE6 double margins. */}
-#resources-signup .mc-field-group label {display:block; margin-bottom:3px;}
-#resources-signup .mc-field-group input {display:block; width:100%; padding:8px 0; text-indent:2%;}
-#resources-signup .mc-field-group select {display:inline-block; width:99%; padding:5px 0; margin-bottom:2px;}
-
-#resources-signup .datefield, #resources-signup .phonefield-us{padding:5px 0;}
-#resources-signup .datefield input, #resources-signup .phonefield-us input{display:inline; width:60px; margin:0 2px; letter-spacing:1px; text-align:center; padding:5px 0 2px 0;}
-#resources-signup .phonefield-us .phonearea input, #resources-signup .phonefield-us .phonedetail1 input{width:40px;}
-#resources-signup .datefield .monthfield input, #resources-signup .datefield .dayfield input{width:30px;}
-#resources-signup .datefield label, #resources-signup .phonefield-us label{display:none;}
-
-#resources-signup .indicates-required {text-align:right; font-size:11px; margin-right:4%;}
-#resources-signup .asterisk {color:#c60; font-size:200%;}
-#resources-signup .mc-field-group .asterisk {position:absolute; top:25px; right:10px;}        
-#resources-signup .clear {clear:both;}
-
-#resources-signup .mc-field-group.input-group ul {margin:0; padding:5px 0; list-style:none;}
-#resources-signup .mc-field-group.input-group ul li {display:block; padding:3px 0; margin:0;}
-#resources-signup .mc-field-group.input-group label {display:inline;}
-#resources-signup .mc-field-group.input-group input {display:inline; width:auto; border:none;}
-
-#resources-signup div#mce-responses {float:left; top:-1.4em; padding:0em .5em 0em .5em; overflow:hidden; width:90%;margin: 0 5%; clear: both;}
-#resources-signup div.response {margin:1em 0; padding:1em .5em .5em 0; font-weight:bold; float:left; top:-1.5em; z-index:1; width:80%;}
-#resources-signup #mce-error-response {display:none;}
-#resources-signup #mce-success-response {color:#529214; display:none;}
-#resources-signup label.error {display:block; float:none; width:auto; margin-left:1.05em; text-align:left; padding:.5em 0;}
-
-#mc-embedded-subscribe {clear:both; width:auto; display:block; margin:1em 0 1em 5%;}
-#resources-signup #num-subscribers {font-size:1.1em;}
-#resources-signup #num-subscribers span {padding:.5em; border:1px solid #ccc; margin-right:.5em; font-weight:bold;}
-
   p {
     font-size: 1.5em;
+
   }
 
-  p,
+  p {
+    text-align: center;
+  }
   li {
     text-align: left;
   }
@@ -111,7 +184,25 @@
   a {
   	font-size: 14px;
   }
+
+  input.button {
+    width: 200px;
+    display: block;
+    height: 40px;
+    background-color: #517c85;
+    margin: 5% auto;
+    border-radius: 4px;
+    color: #ccc;
+    font-size: 15px;
+    border: none;
+    line-height: 0;
+  }
+  input.button:hover {
+    color: #fff;
+  }
 }
+
+
 
 /* Mobile */
 
