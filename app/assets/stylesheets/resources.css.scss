@@ -200,10 +200,20 @@
   input.button:hover {
     color: #fff;
   }
+  label {
+    padding-left: 10px;
+  }
 }
 
-.iof:hover {
+li a.iot {
+  font-size: 20px;
+  color: #000;
+
+}
+
+li a.iot:hover {
   color: #fff;
+  text-decoration: none;
 }
 
 
