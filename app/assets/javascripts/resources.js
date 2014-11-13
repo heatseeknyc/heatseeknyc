@@ -33,7 +33,7 @@ jQuery(document).ready(function(){
 
 	$('.b-staten').click(function(){
 		ql_current.css("display", "none");
-		ql_current = $('.resources-staten');
+		ql_current = $('.resources-statenisland');
 		ql_current.css("display", "block");
 	});
 
