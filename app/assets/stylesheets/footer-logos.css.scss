@@ -110,3 +110,61 @@ a.facebook:hover {
     background-size: 100%;
   }
 }
+
+/* Interested & Donate button */
+.interested {
+  min-height: 239px;
+  background-color: #F2F2F2;
+
+  .right, .left {
+    height: 239px;
+    display: inline-block;
+    text-align: center;
+  }
+
+  .right {
+  }
+
+  .left {
+  }
+}
+
+.btn-interest {
+  width: 200px;
+  display: block;
+  height: 50px;
+  background-color: #F2F2F2;
+  border: 3px solid #000;
+  margin: 5% auto;
+  font-size: 2.5em;
+  color: #000 !important;
+  line-height: 1.7em;
+  position: absolute;
+  top: 34%;
+  left: 32%;
+
+  &:hover {
+    background-color: #000;
+    color: #fff !important;
+    text-decoration: none;
+  }
+}
+
+
+
+
+
+/* Footer Elements */
+#linkGroups a.footer-links {
+  color: #000;
+  text-decoration: none;
+  &:hover {
+    color: #4d4d4d;
+  }
+}
+
+@media (max-width: 991px) {
+  .interested .left {
+    border-bottom: 4px solid #000;
+  }
+}
