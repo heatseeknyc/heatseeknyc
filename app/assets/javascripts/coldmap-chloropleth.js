@@ -124,11 +124,3 @@ ColdMap.prototype.legend.onAdd = function(map) {
 
   return div;
 };
-
-$(document).ready(function(){
-  // only draw map if the div exists
-  if($("#coldmap").length > 0){
-    // newColdMap = new ColdMap();
-    // newColdMap.drawColdMap();
-  }
-});
