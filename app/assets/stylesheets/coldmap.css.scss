@@ -9,12 +9,19 @@
     font-size: 1.5em;
   } 
 
+  #map, #borough-complaints {
+    width: 100%;
+  }
+  
   #map {
     margin-bottom: 400px;
     height: 500px;
-    width: 100%;
     margin-top: 30px;
     margin-bottom: 70px;
+  }
+
+  #borough-complaints {
+    height: 250px
   }
 }
 
@@ -27,9 +34,11 @@ div.info.leaflet-control h4 {
 }
 
 @media only screen and (min-width: 640px) {
+  #map, #borough-complaints {
+    width: 80%;
+  }
   #map { 
     height: 700px;
-    width: 80%;
     margin: auto;
     margin-top: 25px;
   }
@@ -40,16 +49,9 @@ div.info.leaflet-control h4 {
   div.info.leaflet-control h4 {
     font-size: 18px;
   }
-}
 
-#heat-map-query-box {
-  width: 50%;
-  margin: auto;
-}
-
-#heat-map-search-button {
-  width: 50%;
-  margin-left: 25%;
+  #borough-complaints {
+  }
 }
 
 .info {

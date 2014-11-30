@@ -34,3 +34,4 @@
 //= require user-show-temp-document-ready-chart-drawer
 //= require video
 //= require resources
+//= require borough-complaints

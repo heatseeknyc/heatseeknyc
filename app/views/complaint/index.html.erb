@@ -7,26 +7,7 @@
       :latlng => [40.788, -73.942],
       :zoom => 11
   }) %>
+  <div id="borough-complaints"></div>
 </div>
 
-<!-- <br>
-<div id="heat-map-query-box">
-  <%#= form_tag complaints_query_path, method: :get, remote: true do %> 
-    <dl>
-      <%#= label_tag :borough, "Borough" %>
-      <%#= text_field_tag :borough, "", :class => "form-control", autofocus: true %>
-
-      <%#= label_tag :zip_code, "Zip Code" %>
-      <%#= text_field_tag :zip_code, "", :class => "form-control", autofocus: true %>
-
-      <%#= label_tag :starting_date, "Starting Date" %>
-      <%#= date_field_tag :starting_date, "", :class => "form-control", autofocus: true %>
-
-      <%#= label_tag :ending_date, "Ending Date" %>
-      <%#= date_field_tag :ending_date, "", :class => "form-control", autofocus: true %>
-      <br>
-      <%#= submit_tag "Search", :class => "btn btn-lg btn-primary", id: "heat-map-search-button" %>
-    </dl>
-  <%# end %>
-</div> -->
 <%= render partial: 'layouts/footer_elements' %>

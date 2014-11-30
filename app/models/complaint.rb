@@ -6,9 +6,6 @@ class Complaint < ActiveRecord::Base
   # WINTER_11_12 = [Date.parse("2011-10-01"), Date.parse("2012-05-31")]
   # WINTER_10_11 = [Date.parse("2010-10-01"), Date.parse("2011-05-31")]
 
-  # def self.retrieve_all_summed_by_zip_code
-  #   Complaint.group(:incident_zip).count
-  # end
 
   # def self.all_coordinates
   #   pluck(:latitude, :longitude)
@@ -31,9 +28,15 @@ class Complaint < ActiveRecord::Base
   #   new_hash = {"type" => "FeatureCollection", "features" => hash_with_density}
   # end
 
+  def self.retrieve_all_summed_by_zip_code
+
+    # self.select("DISTINCT incident_address").group(:incident_zip).count
+    self.group(:incident_zip).count
+  end
+
   def self.count_all_complaints_by_borough
     select("borough", "DATE_TRUNC('month', created_date) AS date", "COUNT(DISTINCT incident_address) AS total")
       .group("1, 2")
-        .order("1, 2 DESC")
+        .order("1, 2 ASC")
   end
 end

@@ -23,20 +23,20 @@ UserShowTempChartLine.prototype.setLineDrawer = function(){
     return self.x(d.date);
   }).y(function(d) {
     return self.y(d.temp);
-  }).interpolate("linear");
+  }).interpolate('linear');
 };
 
 UserShowTempChartLine.prototype.drawDataLineWithoutTransitions = function() {
   this.dataLine.enter().append('path')
     .attr('class', 'data-line')
-    .attr("d", this.lineDrawer(this.data));
+    .attr('d', this.lineDrawer(this.data));
 };
 
 UserShowTempChartLine.prototype.drawDataLineWithTransitions = function() {
   this.dataLine.enter().append('path')
     .attr('class', 'data-line')
     .style('opacity', 0.3)
-    .attr("d", this.lineDrawer(this.data))
+    .attr('d', this.lineDrawer(this.data))
     .transition()
     .delay(this.transitionDuration / 2)
     .duration(this.transitionDuration)
