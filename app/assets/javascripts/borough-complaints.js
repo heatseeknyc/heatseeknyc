@@ -10,15 +10,22 @@ function ComplaintsChartByBorough(data){
   // this.minTotal = d3.min(this.data, function(d){ return d.total; });
   this.svg = d3.select('#borough-complaints').append('svg');
   this.dataLineGroup = this.svg.append('svg:g');
-  // this.xScale = this.setXScale();
+  this.xScale = this.setXScale();
   this.yScale = this.setYScale();
 }
+
+ComplaintsChartByBorough.prototype.setLine = function(){
+  var self = this;
+  return d3.svg.line().interpolate('basis')
+    .x(function(d) { return self.xScale(d.date); })
+    .y(function(d) { return self.yScale(d.total); });
+};
 
 ComplaintsChartByBorough.prototype.setXScale = function(){
   return d3.time.scale()
     .range([0, this.width])
     .domain(
-      d3.extent(this.data, function(d){ return d.date; });
+      d3.extent(this.data, function(d){ return d.date; })
     );
 };
 
@@ -26,7 +33,7 @@ ComplaintsChartByBorough.prototype.setYScale = function(){
   return d3.scale.linear()
     .range([0, this.height])
     .domain(
-      d3.extent(this.data, function(d){ return d.total; });
+      d3.extent(this.data, function(d){ return d.total; })
     );
 };
 
