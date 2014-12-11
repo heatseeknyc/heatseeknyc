@@ -141,20 +141,8 @@
   }
 
 
-  .resources-manhattan {
-    display:none;  
-  }
-
-  .resources-bronx {
-    display:none;  
-  }
-
-  .resources-queens {
-    display:none;  
-  }
-
-  .resources-statenisland {
-    display:none;  
+  .resources-manhattan, .resources-bronx, .resources-brooklyn, .resources-queens, .resources-statenisland {
+    display:none;
   }
 
   /* MailChimp Form Embed Code - Classic - 08/17/2011 */
