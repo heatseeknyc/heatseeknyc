@@ -23,6 +23,44 @@
   #borough-complaints {
     height: 250px
   }
+
+  .tick {
+    stroke: $theme-black;
+  }
+
+  g.tick text {
+    text-anchor: inherit !important;
+  }
+
+  path {
+    fill: none;
+  }
+
+  .data-line {
+    fill: none;
+    stroke-width: 4;
+  }
+
+
+  #bronx {
+    stroke: blue;
+  }
+
+  #manhattan {
+    stroke: gray;
+  }
+
+  #queens {
+    stroke: orange;
+  }
+
+  #brooklyn {
+    stroke: purple;
+  }
+
+  #staten-island {
+    stroke: red;
+  }
 }
 
 div.info.legend.leaflet-control {

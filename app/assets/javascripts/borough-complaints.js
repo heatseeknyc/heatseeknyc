@@ -4,14 +4,14 @@ var someData = JSON.parse("[{\"date\":\"2010-01-01T00:00:00Z\",\"borough\":\"BRO
 
 function ComplaintsChartByBorough(data){
   var $chart = $('#borough-complaints');
+  this.margin = 20;
   this.height = $chart.height();
   this.width = $chart.width();
-  this.data = this.normalizeDataAnotherWay(data); 
-  // this.data = this.normalizeData(data);
+  this.data = this.normalizeData(data); 
   this.maxDate = this.setMinOrMax('max', this.data, function(d){ return d.date; });
   this.minDate = this.setMinOrMax('min', this.data, function(d){ return d.date; });
-  this.maxTotal = this.setMinOrMax('max', this.data, function(d){ return d.total; });
-  this.minTotal = this.setMinOrMax('min', this.data, function(d){ return d.total; });
+  this.maxTotal = this.setMinOrMax('max', this.data, function(d){ return d.total + 10; });
+  this.minTotal = this.setMinOrMax('min', this.data, function(d){ return d.total - 10; });
   this.svg = this.setSvg();
   this.dataLineGroup = this.svg.append('svg:g');
   this.dataLine = this.setDataLine();
@@ -19,9 +19,10 @@ function ComplaintsChartByBorough(data){
   this.yScale = this.setYScale();
   this.lineDrawer = this.setLineDrawer();
   this.line = this.setLine();
+  this.yAxis = this.setYAxis();
 }
 
-ComplaintsChartByBorough.prototype.normalizeDataAnotherWay = function(dataObj){
+ComplaintsChartByBorough.prototype.normalizeData = function(dataObj){
   for (var borough in dataObj) {
     if( dataObj.hasOwnProperty( borough ) ) {
       dataObj[borough].forEach(function(obj){
@@ -45,13 +46,6 @@ ComplaintsChartByBorough.prototype.setMinOrMax = function(minOrMax, dataObj, cal
   return d3[minOrMax](arr);
 };
 
-ComplaintsChartByBorough.prototype.normalizeData = function(dataArr){
-  dataArr.forEach(function(obj){
-    obj.date = new Date(obj.date);
-  });
-  return dataArr;
-};
-
 ComplaintsChartByBorough.prototype.setLine = function(){
   var self = this;
   return d3.svg.line().interpolate('basis')
@@ -71,7 +65,7 @@ ComplaintsChartByBorough.prototype.setYScale = function(){
   return d3.scale.linear()
     .range([0, this.height])
     .domain(
-      [this.minTotal, this.maxTotal]
+      [this.maxTotal, this.minTotal]
     );
 };
 
@@ -84,7 +78,6 @@ ComplaintsChartByBorough.prototype.setSvg = function(){
 
 ComplaintsChartByBorough.prototype.setLineDrawer = function(){
   var self = this;
-
   return d3.svg.line().x(function(d) {
     return self.xScale(d.date);
   }).y(function(d) {
@@ -103,7 +96,21 @@ ComplaintsChartByBorough.prototype.drawLine = function() {
       this.dataLine.enter().append('path')
         .attr('class', 'data-line')
         .attr('id', borough.toLocaleLowerCase().replace(" ", "-"))
-        .attr('d', this.line(this.data[borough]));
+        .attr('d', this.lineDrawer(this.data[borough]));
     }
   }
+};
+
+ComplaintsChartByBorough.prototype.drawYAxis = function(){
+  debugger
+  this.svg.append('svg:g').attr('class', 'yTick').call(this.yAxis);
+  // fixes x value for text
+  // $(".yTick .tick text").attr("x", "-5");
+};
+
+ComplaintsChartByBorough.prototype.setYAxis = function(){
+  // debugger
+  return d3.svg.axis().scale(this.yScale)
+    .orient('left').tickSize(-this.width + 30)
+    .tickPadding(0).ticks(10);
 };
