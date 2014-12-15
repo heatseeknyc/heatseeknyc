@@ -20,6 +20,7 @@ function ComplaintsChartByBorough(data){
   this.lineDrawer = this.setLineDrawer();
   this.line = this.setLine();
   this.yAxis = this.setYAxis();
+  this.xAxis = this.setXAxis();
 }
 
 ComplaintsChartByBorough.prototype.normalizeData = function(dataObj){
@@ -63,7 +64,7 @@ ComplaintsChartByBorough.prototype.setXScale = function(){
 
 ComplaintsChartByBorough.prototype.setYScale = function(){
   return d3.scale.linear()
-    .range([0, this.height])
+    .range([0, this.height - this.margin])
     .domain(
       [this.maxTotal, this.minTotal]
     );
@@ -73,7 +74,8 @@ ComplaintsChartByBorough.prototype.setSvg = function(){
   return d3.select('#borough-complaints')
     .append('svg')
     .attr('width', this.width)
-    .attr('height', this.height);
+    .attr('height', this.height)
+    .attr('transform', 'translate(' + this.margin + ',' + -this.height + ')');
 };
 
 ComplaintsChartByBorough.prototype.setLineDrawer = function(){
@@ -102,15 +104,37 @@ ComplaintsChartByBorough.prototype.drawLine = function() {
 };
 
 ComplaintsChartByBorough.prototype.drawYAxis = function(){
-  debugger
-  this.svg.append('svg:g').attr('class', 'yTick').call(this.yAxis);
-  // fixes x value for text
-  // $(".yTick .tick text").attr("x", "-5");
+  this.svg.append('svg:g')
+    .attr('class', 'yTick')
+    .call(this.yAxis)
+    .call(this.positionYText);
+};
+
+ComplaintsChartByBorough.prototype.positionYText = function(g){
+  g.selectAll('text').attr('dy', -4).attr('x', 4);
 };
 
 ComplaintsChartByBorough.prototype.setYAxis = function(){
-  // debugger
-  return d3.svg.axis().scale(this.yScale)
-    .orient('left').tickSize(-this.width + 30)
-    .tickPadding(0).ticks(10);
+  return d3.svg.axis()
+    .scale(this.yScale)
+    .orient('left')
+    .tickSize(-this.width)
+    .tickPadding(0)
+    .ticks(5);
 };
+
+ComplaintsChartByBorough.prototype.setXAxis = function(){
+  return d3.svg.axis()
+    .scale(this.xScale)
+    .ticks(d3.time.years)
+    .tickSize(6, 0)
+    .orient('bottom');
+}
+
+ComplaintsChartByBorough.prototype.drawXAxis = function(){
+  this.svg.append('g')
+    .attr('class', 'xTick')
+    .attr('transform', 'translate(0,' + (this.height - this.margin) + ')')
+    .call(this.xAxis)
+    .attr('transform', 'translate(0,' + (this.height - this.margin) + ')');
+}
