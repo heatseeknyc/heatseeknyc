@@ -4,7 +4,7 @@ var someData = JSON.parse("[{\"date\":\"2010-01-01T00:00:00Z\",\"borough\":\"BRO
 
 function ComplaintsChartByBorough(data){
   var $chart = $('#borough-complaints');
-  this.margin = 20;
+  this.margin = {top: 20, right: 20, bottom: 30, left: 30};
   this.height = $chart.height();
   this.width = $chart.width();
   this.data = this.normalizeData(data); 
@@ -13,7 +13,8 @@ function ComplaintsChartByBorough(data){
   this.maxTotal = this.setMinOrMax('max', this.data, function(d){ return d.total + 10; });
   this.minTotal = this.setMinOrMax('min', this.data, function(d){ return d.total - 10; });
   this.svg = this.setSvg();
-  this.dataLineGroup = this.svg.append('svg:g');
+  this.dataLineGroup = this.svg.append('g').attr('class', 'dataline').attr('transform', 
+              'translate(' + this.margin.left + ',0)');;
   this.dataLine = this.setDataLine();
   this.xScale = this.setXScale();
   this.yScale = this.setYScale();
@@ -47,35 +48,23 @@ ComplaintsChartByBorough.prototype.setMinOrMax = function(minOrMax, dataObj, cal
   return d3[minOrMax](arr);
 };
 
-ComplaintsChartByBorough.prototype.setLine = function(){
-  var self = this;
-  return d3.svg.line().interpolate('basis')
-    .x(function(d) { return self.xScale(d.date); })
-    .y(function(d) { return self.yScale(d.total); });
-};
-
-ComplaintsChartByBorough.prototype.setXScale = function(){
-  return d3.time.scale()
-    .range([0, this.width])
-    .domain(
-      [this.minDate, this.maxDate]
-    );
-};
-
-ComplaintsChartByBorough.prototype.setYScale = function(){
-  return d3.scale.linear()
-    .range([0, this.height - this.margin])
-    .domain(
-      [this.maxTotal, this.minTotal]
-    );
-};
-
+// main svg
 ComplaintsChartByBorough.prototype.setSvg = function(){
   return d3.select('#borough-complaints')
     .append('svg')
     .attr('width', this.width)
     .attr('height', this.height)
-    .attr('transform', 'translate(' + this.margin + ',' + -this.height + ')');
+    .append('g')
+    .attr('class', 'outter-group');
+    // .attr('transform', 'translate(' + this.margin + ',' + -this.height + ')');
+};
+
+// data line
+ComplaintsChartByBorough.prototype.setLine = function(){
+  var self = this;
+  return d3.svg.line().interpolate('basis')
+    .x(function(d) { return self.xScale(d.date); })
+    .y(function(d) { return self.yScale(d.total); });
 };
 
 ComplaintsChartByBorough.prototype.setLineDrawer = function(){
@@ -97,30 +86,19 @@ ComplaintsChartByBorough.prototype.drawLine = function() {
     if( this.data.hasOwnProperty(borough) ) {
       this.dataLine.enter().append('path')
         .attr('class', 'data-line')
-        .attr('id', borough.toLocaleLowerCase().replace(" ", "-"))
+        .attr('id', borough.toLocaleLowerCase().replace(' ', '-'))
         .attr('d', this.lineDrawer(this.data[borough]));
     }
   }
 };
 
-ComplaintsChartByBorough.prototype.drawYAxis = function(){
-  this.svg.append('svg:g')
-    .attr('class', 'yTick')
-    .call(this.yAxis)
-    .call(this.positionYText);
-};
-
-ComplaintsChartByBorough.prototype.positionYText = function(g){
-  g.selectAll('text').attr('dy', -4).attr('x', 4);
-};
-
-ComplaintsChartByBorough.prototype.setYAxis = function(){
-  return d3.svg.axis()
-    .scale(this.yScale)
-    .orient('left')
-    .tickSize(-this.width)
-    .tickPadding(0)
-    .ticks(5);
+// x
+ComplaintsChartByBorough.prototype.setXScale = function(){
+  return d3.time.scale()
+    .range([0, (this.width - this.margin.left)])
+    .domain(
+      [this.minDate, this.maxDate]
+    );
 };
 
 ComplaintsChartByBorough.prototype.setXAxis = function(){
@@ -129,12 +107,43 @@ ComplaintsChartByBorough.prototype.setXAxis = function(){
     .ticks(d3.time.years)
     .tickSize(6, 0)
     .orient('bottom');
-}
+};
 
 ComplaintsChartByBorough.prototype.drawXAxis = function(){
   this.svg.append('g')
-    .attr('class', 'xTick')
-    .attr('transform', 'translate(0,' + (this.height - this.margin) + ')')
+    .attr('class', 'x-ticks')
     .call(this.xAxis)
-    .attr('transform', 'translate(0,' + (this.height - this.margin) + ')');
-}
+    .attr('transform', 
+      'translate(' + this.margin.left + ',' + (this.height - this.margin.top) + ')'
+    );
+};
+
+// y
+ComplaintsChartByBorough.prototype.setYScale = function(){
+  return d3.scale.linear()
+    .range([0, (this.height - this.margin.top)])
+    .domain(
+      [this.maxTotal, this.minTotal]
+    );
+};
+
+ComplaintsChartByBorough.prototype.setYAxis = function(){
+  return d3.svg.axis()
+    .scale(this.yScale)
+    .orient('left')
+    .tickSize(-this.width + this.margin.left)
+    .tickPadding(0)
+    .ticks(5);
+};
+
+ComplaintsChartByBorough.prototype.drawYAxis = function(){
+  this.svg.append('g')
+    .attr('class', 'y-ticks')
+    .call(this.yAxis)
+    .call(this.positionYText)
+    .attr('transform', 'translate('+ this.margin.left + ', 0)');
+};
+
+ComplaintsChartByBorough.prototype.positionYText = function(g){
+  g.selectAll('text').attr('dy', -4).attr('x', -30);
+};

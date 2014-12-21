@@ -21,10 +21,11 @@
   }
 
   #borough-complaints {
-    height: 250px
+    height: 250px;
+    margin-bottom: 70px;
   }
 
-  .tick, .xTick {
+  .tick, .x-ticks, .y-ticks {
     stroke: $theme-black;
   }
 
