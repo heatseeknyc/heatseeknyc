@@ -33,3 +33,4 @@
 //= require user-show-temp-svg
 //= require user-show-temp-document-ready-chart-drawer
 //= require video
+//= require resources
