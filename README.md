@@ -10,7 +10,7 @@ We created Heat Seek NYC to address the need of adequate heating for low income 
 
 We designed Heat Seek NYC to help validate tenants claims against their landlords.  We use the Internet of things to record the temperature of apartments and remotely send them back to us.  Combined with real time measurements of the outside temperature, we create a record of every hour that the user's apartment's temperature is below the legal minimum.  By moving the burden of evidence off a tenant to a third party we hope to remove ambiguity from a court case that can be tinged with speculative evidence.
 
-Heat Seek NYC thanks its three real world users that allowed us to collect data from their apartments for our proof of concept.
+Heat Seek NYC thanks its three real world users that allowed us to collect data from their apartments for our proof of concept. 
 
 ## Screenshots
 
