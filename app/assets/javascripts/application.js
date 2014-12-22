@@ -35,3 +35,4 @@
 //= require video
 //= require resources
 //= require borough-complaints
+//= require borough-complaints-focus-elements
