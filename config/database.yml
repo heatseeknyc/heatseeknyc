@@ -3,6 +3,8 @@
 #
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem 'sqlite3'
+
+
 #   For sqlite3 comment lines below in
 # development:
 #   adapter: sqlite3
@@ -10,7 +12,9 @@
 #   pool: 5
 #   timeout: 5000
 
-# for postgres comment lines below in 
+# for postgres comment lines below in
+# please do NOT delete these lines
+# just comment them out if you need to use sqlite3
 development:
   adapter: postgresql
   database: twinedb
