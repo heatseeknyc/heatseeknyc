@@ -62,6 +62,17 @@
   .staten-island {
     stroke: red;
   }
+
+  line#focus {
+    fill: none;
+    display: none;
+    stroke: blue;
+    stroke-width: 5;
+  }
+
+  rect#mouse-effects {
+    fill: none;
+  }
 }
 
 div.info.legend.leaflet-control {

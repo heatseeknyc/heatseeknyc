@@ -5,11 +5,11 @@ function ComplaintsChartByBorough(data){
   this.margin = {top: 20, right: 20, bottom: 30, left: 30};
   this.height = $chart.height();
   this.width = $chart.width();
-  this.data = this.normalizeData(data); 
-  this.maxDate = this.setMinOrMax('max', this.data, function(d){ return d.date; });
-  this.minDate = this.setMinOrMax('min', this.data, function(d){ return d.date; });
-  this.maxTotal = this.setMinOrMax('max', this.data, function(d){ return d.total + 10; });
-  this.minTotal = this.setMinOrMax('min', this.data, function(d){ return d.total - 10; });
+  this.data = this._normalizeData(data); 
+  this.maxDate = this._setMinOrMax('max', this.data, function(d){ return d.date; });
+  this.minDate = this._setMinOrMax('min', this.data, function(d){ return d.date; });
+  this.maxTotal = this._setMinOrMax('max', this.data, function(d){ return d.total + 10; });
+  this.minTotal = this._setMinOrMax('min', this.data, function(d){ return d.total - 10; });
   this.svg = this.setSvg();
   this.xScale = this.setXScale();
   this.yScale = this.setYScale();
@@ -17,30 +17,6 @@ function ComplaintsChartByBorough(data){
   this.xAxis = this.setXAxis();
   this.lineDrawer = this.setLineDrawer();
 }
-
-ComplaintsChartByBorough.prototype.normalizeData = function(dataObj){
-  for (var borough in dataObj) {
-    if( dataObj.hasOwnProperty( borough ) ) {
-      dataObj[borough].forEach(function(obj){
-        obj.date = new Date(obj.date);
-      });
-    } 
-  }
-
-  return dataObj;
-};
-
-ComplaintsChartByBorough.prototype.setMinOrMax = function(minOrMax, dataObj, callBack){
-  var arr = [];
-  for (var borough in dataObj) {
-    if( dataObj.hasOwnProperty( borough ) ) {
-      dataObj[borough].forEach(function(obj){
-        arr.push( d3[minOrMax](dataObj[borough], callBack) );
-      });
-    } 
-  }
-  return d3[minOrMax](arr);
-};
 
 // main svg
 ComplaintsChartByBorough.prototype.setSvg = function(){
@@ -135,4 +111,86 @@ ComplaintsChartByBorough.prototype.drawYAxis = function(){
 
 ComplaintsChartByBorough.prototype.positionYText = function(g){
   g.selectAll('text').attr('dy', -4).attr('x', -30);
+};
+
+// rectangle for mouse over effects
+ComplaintsChartByBorough.prototype.drawMouseOverRectangle = function(){
+  var self = this;
+  this.drawFocusLine();
+  this.drawFocusCircle();
+  this.svg.append('svg:rect')
+    .attr('id', 'mouse-effects')
+    .attr('width', (this.width - this.margin.left))
+    .attr('height', (this.height - this.margin.top))
+    .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')')
+    .style('pointer-events', 'all')
+    .on('mouseover', function(){ d3.select('line#focus, circle.y').style('display', 'inherit'); })
+    .on('mouseout', function(){ d3.select('line#focus, circle.y').style('display', 'none'); })
+    .on('mousemove', function(){
+      self.mouseMove(this);
+    });
+};
+
+ComplaintsChartByBorough.prototype.mouseMove = function(el){
+  var x0 = this.xScale.invert(d3.mouse(el)[0]),
+    i = this._bisectDate(this.data['BRONX'], x0, 1),
+    d0 = this.data['BRONX'][i - 1],
+    d1 = this.data['BRONX'][i],
+    d = x0 - d0.date > d1.date - x0 ? d1 : d0;
+
+  d3.select('line#focus')
+    .attr('transform',
+      'translate(' + (this.xScale(d.date) + this.margin.left) + ', 0)');
+      
+  d3.select('circle.y')
+    .attr('transform',
+      'translate(' + (this.xScale(d.date) + this.margin.left) + ',' + this.yScale(d.total) + ')');
+};
+
+// focus elements
+ComplaintsChartByBorough.prototype.drawFocusLine = function(){
+  this.svg.append('g')
+    .append('line')
+    .attr('id', 'focus')
+    .attr('y2', (this.height - this.margin.top))
+    .attr('x2', 0)
+    // .attr('transform', 'translate(' + this.margin.left + ', 0)');
+};
+
+ComplaintsChartByBorough.prototype.drawFocusCircle = function(){
+  this.svg.append('circle')
+    .attr('class', 'y')
+    .style('fill', 'none')
+    .style('stroke', 'blue')
+    .attr('r', 4)
+    // .attr('transform', 'translate(' + this.margin.left + ', 0)');
+};
+
+// private methods
+ComplaintsChartByBorough.prototype._bisectDate = d3.bisector(
+  function(d) { return d.date; }
+).left;
+
+ComplaintsChartByBorough.prototype._normalizeData = function(dataObj){
+  for (var borough in dataObj) {
+    if( dataObj.hasOwnProperty( borough ) ) {
+      dataObj[borough].forEach(function(obj){
+        obj.date = new Date(obj.date);
+      });
+    } 
+  }
+
+  return dataObj;
+};
+
+ComplaintsChartByBorough.prototype._setMinOrMax = function(minOrMax, dataObj, callBack){
+  var arr = [];
+  for (var borough in dataObj) {
+    if( dataObj.hasOwnProperty( borough ) ) {
+      dataObj[borough].forEach(function(obj){
+        arr.push( d3[minOrMax](dataObj[borough], callBack) );
+      });
+    } 
+  }
+  return d3[minOrMax](arr);
 };
