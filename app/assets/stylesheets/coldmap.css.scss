@@ -66,8 +66,8 @@
   line#focus {
     fill: none;
     display: none;
-    stroke: blue;
-    stroke-width: 5;
+    stroke: $theme-black-lighten-1;
+    stroke-width: 3;
   }
 
   rect#mouse-effects {

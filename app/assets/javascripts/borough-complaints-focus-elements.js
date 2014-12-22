@@ -23,10 +23,10 @@ ComplaintsChartMouseOverRectangle.prototype.drawRect = function(){
     .attr('id', 'mouse-effects')
     .attr('width', (this.width - this.margin.left))
     .attr('height', (this.height - this.margin.top))
-    .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')')
+    .attr('transform', 'translate(' + this.margin.left + ',0)')
     .style('pointer-events', 'all')
-    .on('mouseover', function(){ d3.select('line#focus').style('display', 'inherit'); })
-    .on('mouseout', function(){ d3.select('line#focus').style('display', 'none'); })
+    .on('mouseover', function(){ self.line.style('display', 'inherit'); })
+    .on('mouseout', function(){ self.line.style('display', 'none'); })
     .on('mousemove', function(){
       self._mouseMove(this);
     });
@@ -65,7 +65,9 @@ ComplaintsChartMouseOverRectangle.prototype._findIndex = function(el){
     leftDatum = this.data['BRONX'][leftIndex],
     rightDaturm = this.data['BRONX'][rightIndex];
 
-  return xPosition - leftDatum.date > rightDaturm.date - xPosition ? rightIndex : leftIndex;
+  return xPosition - leftDatum.date 
+    > rightDaturm.date - xPosition
+    ? rightIndex : leftIndex;
 };
 
 ComplaintsChartMouseOverRectangle.prototype._updateCircles = function(index){
@@ -88,11 +90,16 @@ function ComplaintsChartFocusLine(rectObj){
   this.height = rectObj.height;
   this.xScale = rectObj.xScale;
   this.data = rectObj.data['BRONX'];
-  this.el = this.drawFocusLine();
+  // private properties
+  this._el = this.drawFocusLine();
 }
 
+ComplaintsChartFocusLine.prototype.style = function(prop, value){
+  this._el.style(prop, value);
+};
+
 ComplaintsChartFocusLine.prototype.drawFocusLine = function(){
-  return this.svg.append('g')
+  return this.svg
     .append('line')
     .attr('id', 'focus')
     .attr('y2', (this.height - this.margin.top))
@@ -100,7 +107,7 @@ ComplaintsChartFocusLine.prototype.drawFocusLine = function(){
 };
 
 ComplaintsChartFocusLine.prototype.update = function(index){
-  this.el.attr('transform',
+  this._el.attr('transform',
       'translate(' + this._calcLeftNum(index) + ', 0)');
 };
 
@@ -119,8 +126,13 @@ function ComplaintsChartFocusCircle(rectObj, borough){
   this.yScale = rectObj.yScale;
   this.borough = borough.toLocaleLowerCase().replace(' ', '-');
   this.data = rectObj.data[borough];
-  this.el = this.drawFocusCircle();
+  // private properties
+  this._el = this.drawFocusCircle();
 }
+
+ComplaintsChartFocusCircle.prototype.style = function(prop, value){
+  this._el.style(prop, value);
+};
 
 ComplaintsChartFocusCircle.prototype.drawFocusCircle = function(){
   return this.svg.append('circle')
@@ -132,7 +144,7 @@ ComplaintsChartFocusCircle.prototype.update = function(index){
   var leftNum = this._calcLeftNum(index),
         upNum = this._calcUpNum(index);
 
-  this.el.attr('transform',
+  this._el.attr('transform',
       'translate(' + leftNum + ',' + upNum + ')');
 };
 
