@@ -9,7 +9,20 @@ describe Twine do
     expect(twine1.readings.count).to eq 2
   end
 
-  # describe "#get_reading" do
+  describe "#get_reading" do
+    it "scrapes reading from twine.cc" do
+      expect(Reading.count).to eql 0
+      ENV["WUNDERGROUND_API_KEY"] = 'd48122149ff66bca'
+      twine = Twine.create(user: create(:user), name: 'sandbox', email: 'fake@gmail.com')
+      VCR.use_cassette('wunderground') do
+        reading = twine.get_reading
+      end
+      expect(Reading.count).to eql 1
+      expect(Reading.first.temp).to_not eql nil
+      expect(Reading.first.outdoor_temp).to_not eql nil
+      expect(Reading.first.twine_id).to eql twine.id
+    end
+  end
   #   it "makes a new reading" do
   #     twine_with_reading = create(:twine, email: "wm.jeffries+1@gmail.com")
   #     reading1 = twine_with_reading.get_reading
