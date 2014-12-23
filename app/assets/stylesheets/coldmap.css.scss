@@ -24,6 +24,10 @@
     margin-bottom: 70px;
   }
 
+  #borough-complaints p.row {
+    margin-bottom: 0px;
+  }
+
   .tick, .x-ticks, .y-ticks {
     stroke: $theme-black;
   }
