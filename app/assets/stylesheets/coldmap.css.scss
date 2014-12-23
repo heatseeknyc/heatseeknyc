@@ -14,10 +14,9 @@
   }
   
   #map {
-    margin-bottom: 400px;
     height: 500px;
     margin-top: 30px;
-    margin-bottom: 70px;
+    margin-bottom: 30px;
   }
 
   #borough-complaints {
@@ -42,6 +41,9 @@
     stroke-width: 4;
   }
 
+  circle {
+    fill: $theme-black-lighten-1;
+  }
 
   .bronx {
     stroke: blue;
@@ -63,6 +65,30 @@
     stroke: red;
   }
 
+  .bronx rect {
+    fill: blue;
+  }
+
+  .manhattan rect {
+    fill: gray;
+  }
+
+  .queens rect {
+    fill: orange;
+  }
+
+  .brooklyn rect {
+    fill: purple;
+  }
+
+  .staten-island rect {
+    fill: red;
+  }
+
+  .borough-total {
+    top: 7px;
+  }
+
   line#focus {
     fill: none;
     display: none;
@@ -72,6 +98,10 @@
 
   rect#mouse-effects {
     fill: none;
+  }
+
+  rect#mouse-effects:hover {
+    cursor: none;
   }
 }
 

@@ -7,7 +7,21 @@
       :latlng => [40.788, -73.942],
       :zoom => 11
   }) %>
-  <div id="borough-complaints"></div>
+
+  <div id="borough-complaints">
+    <p class="row">
+      <span class="lead col-md-2">Date: <span id="complaint-date"></span></span>
+      <% Complaint::BOROUGHS.each do |b| %>
+        <span class="col-md-2 borough-total <%= convert_to_lisp_case(b) %>">
+          <svg width="15" height="15">
+            <rect width="15" height="15"/>
+          </svg>
+          <%= titlize(b) %>: <span class="total"></span>
+        </span>
+      <% end %>
+    </p>
+  </div>
+
 </div>
 
 <%= render partial: 'layouts/footer_elements' %>
