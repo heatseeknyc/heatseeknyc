@@ -13,7 +13,10 @@ function ComplaintsChartMouseOverRectangle(svgObj){
 }
 
 ComplaintsChartMouseOverRectangle.prototype.addToChart = function(){
+  var index = this.data['BRONX'].length - 1;
   this._addFocusElements();
+  this.line.update(index);
+  this._updateCircles(index);
   this.drawRect();
 };
 
@@ -112,8 +115,10 @@ ComplaintsChartFocusLine.prototype.drawFocusLine = function(){
 
 ComplaintsChartFocusLine.prototype.update = function(index){
   this._$date.text( this._findDate(index) );
-  this._el.attr('transform',
-      'translate(' + this._calcLeftNum(index) + ', 0)');
+  this._el.attr('transform', 'translate('
+    + this._calcLeftNum(index)
+    + ', ' + this.margin.bottom + ')'
+  );
 };
 
 // private methods
@@ -167,5 +172,5 @@ ComplaintsChartFocusCircle.prototype._calcLeftNum = function(index){
 };
 
 ComplaintsChartFocusCircle.prototype._calcUpNum = function(index){
-  return this.yScale(this.data[index].total);
+  return this.yScale(this.data[index].total) + this.margin.bottom;
 };
