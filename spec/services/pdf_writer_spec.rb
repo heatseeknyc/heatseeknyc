@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pdf_writer'
 
 describe PDFWriter do
   describe "#generate_pdf" do
