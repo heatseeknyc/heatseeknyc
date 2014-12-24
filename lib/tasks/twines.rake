@@ -1,5 +1,3 @@
-require 'reading_scraper'
-
 desc "get temperature from twine"
 task :get_reading => :environment do
   Twine.all.each do |twine|
