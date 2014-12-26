@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-feature "Blog" do
-  scenario "coming from the dashboard" do
+feature "Visiting the blog" do
+  scenario "from the dashboard" do
     pending("needs tumblr api keys")
     
     user = login_as_tenant
