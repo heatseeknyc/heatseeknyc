@@ -20,92 +20,92 @@
   }
 
   #borough-complaints {
-    height: 250px;
-    margin-bottom: 70px;
-  }
+      height: 250px;
+      margin-bottom: 70px;
 
-  #borough-complaints p.row {
-    margin-bottom: 0px;
-  }
+    p.row {
+      margin-bottom: 0px;
+    }
 
-  .tick, .x-ticks, .y-ticks {
-    stroke: $theme-black;
-  }
+    .tick, .x-ticks, .y-ticks {
+      stroke: $theme-black;
+    }
 
-  g.tick text {
-    text-anchor: inherit !important;
-  }
+    g.tick text {
+      text-anchor: inherit !important;
+    }
 
-  path {
-    fill: none;
-  }
+    path {
+      fill: none;
+    }
 
-  .data-line {
-    fill: none;
-    stroke-width: 4;
-  }
+    .data-line {
+      fill: none;
+      stroke-width: 4;
+    }
 
-  circle {
-    fill: $theme-black-lighten-1;
-  }
+    circle {
+      fill: $theme-black-lighten-1;
+    }
 
-  .bronx {
-    stroke: blue;
-  }
+    .bronx {
+      stroke: blue;
+    }
 
-  .manhattan {
-    stroke: gray;
-  }
+    .manhattan {
+      stroke: gray;
+    }
 
-  .queens {
-    stroke: orange;
-  }
+    .queens {
+      stroke: orange;
+    }
 
-  .brooklyn {
-    stroke: purple;
-  }
+    .brooklyn {
+      stroke: purple;
+    }
 
-  .staten-island {
-    stroke: red;
-  }
+    .staten-island {
+      stroke: red;
+    }
 
-  .bronx rect {
-    fill: blue;
-  }
+    .bronx rect {
+      fill: blue;
+    }
 
-  .manhattan rect {
-    fill: gray;
-  }
+    .manhattan rect {
+      fill: gray;
+    }
 
-  .queens rect {
-    fill: orange;
-  }
+    .queens rect {
+      fill: orange;
+    }
 
-  .brooklyn rect {
-    fill: purple;
-  }
+    .brooklyn rect {
+      fill: purple;
+    }
 
-  .staten-island rect {
-    fill: red;
-  }
+    .staten-island rect {
+      fill: red;
+    }
 
-  .borough-total {
-    top: 7px;
-  }
+    .borough-total {
+      top: 7px;
+    }
 
-  line#focus {
-    fill: none;
-    display: none;
-    stroke: $theme-black-lighten-1;
-    stroke-width: 3;
-  }
+    line#focus {
+      fill: none;
+      display: none;
+      stroke: $theme-black-lighten-1;
+      stroke-width: 3;
+    }
 
-  rect#mouse-effects {
-    fill: none;
-  }
+    rect#mouse-effects {
+      fill: none;
+    }
 
-  rect#mouse-effects:hover {
-    cursor: none;
+    rect#mouse-effects:hover {
+      cursor: none;
+    }
   }
 }
 
