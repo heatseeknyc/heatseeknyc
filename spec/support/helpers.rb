@@ -6,3 +6,11 @@ def login_as_tenant
   click_on "Sign in"
   return user
 end
+
+def expect_nav_bar
+  expect(page).to have_link("About")
+  expect(page).to have_link("blog", href: blog_path)    
+  expect(page).to have_link("Cold Map", href: coldmap_path)    
+  expect(page).to have_link("Demo", href: demo_path)
+  expect(page).to have_link("Account") 
+end

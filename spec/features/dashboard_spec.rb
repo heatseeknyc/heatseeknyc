@@ -10,8 +10,10 @@ feature "Dashboard" do
     expect(page).to have_content user.current_temp
     expect(page).to have_content user.violation_count
 
-    expect(page).to have_link("Download Report (PDF)", href: pdf_download_path(user))
+    expect(page).to have_link("Download Report (PDF)", href: pdf_download_path(user))    
 
+    expect_nav_bar
+      
     # Tried testing rendered js chart using the poltergeist driver, but
     # it got painful - spec slowed to 5 secs (from 300ms), and 
     # still barfed a javascript error - https://gist.github.com/oliverbarnes/d1ee777f4e55fb5f912f0, 
