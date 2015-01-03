@@ -22,7 +22,7 @@ ComplaintsChartLineGroup.prototype.createDataLineGroup = function(){
   return this.svg.append('g')
     .attr('class', 'data-line-group')
     .attr('transform', 'translate(' 
-      + this.margin.left + ', ' + this.margin.bottom + ')'
+      + (this.margin.left + this.margin.right) + ', ' + this.margin.heightFix + ')'
     )
     .selectAll('.data-line').data([this.data]);
 };

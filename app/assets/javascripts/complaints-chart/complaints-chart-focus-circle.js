@@ -31,9 +31,10 @@ ComplaintsChartFocusCircle.prototype.update = function(index){
 
 // private methods
 ComplaintsChartFocusCircle.prototype._calcLeftNum = function(index){
-  return this.xScale(this.data[index].date) + this.margin.left;
+  return this.xScale(this.data[index].date) 
+    + this.margin.left + this.margin.right;
 };
 
 ComplaintsChartFocusCircle.prototype._calcUpNum = function(index){
-  return this.yScale(this.data[index].total) + this.margin.bottom;
+  return this.yScale(this.data[index].total) + this.margin.heightFix;
 };

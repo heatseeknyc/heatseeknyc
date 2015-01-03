@@ -28,13 +28,14 @@ ComplaintsChartFocusLine.prototype.update = function(index){
   this._$date.text( this._findDate(index) );
   this._el.attr('transform', 'translate('
     + this._calcLeftNum(index)
-    + ', ' + this.margin.bottom + ')'
+    + ', ' + (this.margin.heightFix - this.margin.bottom) + ')'
   );
 };
 
 // private methods
 ComplaintsChartFocusLine.prototype._calcLeftNum = function(index){
-  return this.xScale(this.data[index].date) + this.margin.left;
+  return this.xScale(this.data[index].date) 
+    + this.margin.left + this.margin.right;
 };
 
 ComplaintsChartFocusLine.prototype._findDate = function(index){

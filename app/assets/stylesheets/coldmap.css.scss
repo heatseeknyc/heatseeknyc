@@ -20,7 +20,7 @@
   }
 
   #borough-complaints {
-      height: 250px;
+      height: 295px;
       margin-bottom: 70px;
 
     p.row {
@@ -33,6 +33,13 @@
 
     g.tick text {
       text-anchor: inherit !important;
+    }
+
+    .labels {
+      text-anchor: middle;
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.4;
     }
 
     path {

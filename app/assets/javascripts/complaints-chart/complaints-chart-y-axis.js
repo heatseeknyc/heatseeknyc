@@ -1,6 +1,7 @@
 function ComplaintsChartYAxis(svgObj){
   this.data = svgObj.data;
   this.width = svgObj.width;
+  this.height = svgObj.height;
   this.margin = svgObj.margin;
   this.svg = svgObj.svg;
   this.yScale = svgObj.yScale;
@@ -13,8 +14,16 @@ ComplaintsChartYAxis.prototype.addToChart = function(){
     .call(this.yAxis)
     .call(this._positionYText)
     .attr('transform', 'translate('
-      + this.margin.left + ', ' + this.margin.bottom + ')'
+      + (this.margin.left + this.margin.right) + ', ' + this.margin.heightFix + ')'
     );
+  
+  // text label for the y axis
+  this.svg.append('text')
+    .attr('transform', 'rotate(-90)')
+    .attr('x', (-this.height / 2) + this.margin.bottom)
+    .attr('y', this.margin.right - 5)
+    .text('Num. of Complaints')
+    .attr('class', 'labels');
 };
 
 // private methods

@@ -24,9 +24,9 @@ ComplaintsChartMouseOverRectangle.prototype.drawRect = function(){
   var self = this;
   this.svg.append('svg:rect')
     .attr('id', 'mouse-effects')
-    .attr('width', (this.width - this.margin.left))
+    .attr('width', (this.width - this.margin.left - this.margin.right))
     .attr('height', (this.height - this.margin.top))
-    .attr('transform', 'translate(' + this.margin.left + ',0)')
+    .attr('transform', 'translate(' + (this.margin.left + this.margin.right)+ ',0)')
     .style('pointer-events', 'all')
     .on('mouseover', function(){ self.line.style('display', 'inherit'); })
     .on('mouseout', function(){ self.line.style('display', 'none'); })

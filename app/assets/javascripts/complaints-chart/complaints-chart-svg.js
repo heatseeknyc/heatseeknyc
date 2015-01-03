@@ -1,7 +1,7 @@
 function ComplaintsChartSvg(data){
   this.data = data;
   var $chart = $('#borough-complaints');
-  this.margin = {top: 20, right: 5, bottom: 5, left: 30};
+  this.margin = {top: 20, right: 20, bottom: 30, left: 30, heightFix: 5};
   this.height = $chart.height();
   this.width = $chart.width();
   this.svg = this._setSvg();
@@ -27,7 +27,7 @@ ComplaintsChartSvg.prototype.addChartElements = function(){
 ComplaintsChartSvg.prototype._setSvg = function(){
   return d3.select('#borough-complaints')
     .append('svg')
-    .attr('width', this.width + this.margin.right)
+    .attr('width', this.width + 5)
     .attr('height', this.height + this.margin.bottom)
     .append('g')
     .attr('class', 'outter-group');
@@ -42,7 +42,7 @@ ComplaintsChartSvg.prototype._setXScale = function(){
     });
 
   return d3.time.scale()
-    .range([0, (this.width - this.margin.left)])
+    .range([0, (this.width - this.margin.left - this.margin.right)])
     .domain(
       [minDate, maxDate]
     );
@@ -57,7 +57,7 @@ ComplaintsChartSvg.prototype._setYScale = function(){
     });
   
   return d3.scale.linear()
-    .range([0, (this.height - this.margin.top)])
+    .range([0, (this.height - this.margin.top - this.margin.bottom)])
     .domain(
       [maxTotal, minTotal]
     );
