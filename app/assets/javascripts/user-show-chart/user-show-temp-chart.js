@@ -59,7 +59,7 @@ UserShowTempChartDrawer.prototype.createAndDrawChartSvg = function(){
 UserShowTempChartDrawer.prototype.drawChartOnWindowResize = function(){
   var resizeTimer = 0,
       self = this;
-  $("#d3-chart").html("");
+  $('#d3-chart').html('');
   this.createAndDrawChartSvg();
   window.onresize = function(){
     if (resizeTimer){

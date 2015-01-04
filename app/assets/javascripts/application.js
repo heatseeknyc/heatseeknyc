@@ -38,7 +38,7 @@
 //= require user-show-chart/user-show-temp-chart
 //= require user-show-chart/user-show-temp-circles
 //= require user-show-chart/user-show-temp-svg
-//= require user-show-chart/user-show-temp-document-ready-chart-drawer
+//= require user-show-chart/user-show-temp-runner
 // 
 // coldmap chart js files
 //= require complaints-chart/complaints-chart-helper
@@ -49,4 +49,5 @@
 //= require complaints-chart/complaints-chart-focus-line
 //= require complaints-chart/complaints-chart-mouse-over-rectangle
 //= require complaints-chart/complaints-chart-svg
+//= require complaints-chart/complaints-chart
 //= require complaints-chart/complaints-chart-runner

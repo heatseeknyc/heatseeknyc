@@ -27,6 +27,7 @@ ComplaintsChartSvg.prototype.addChartElements = function(){
 ComplaintsChartSvg.prototype._setSvg = function(){
   return d3.select('#borough-complaints')
     .append('svg')
+    .attr('id', 'main-svg')
     .attr('width', this.width + 5)
     .attr('height', this.height + this.margin.bottom)
     .append('g')
@@ -38,7 +39,7 @@ ComplaintsChartSvg.prototype._setXScale = function(){
       return d.date; 
     }),
     minDate = ComplaintsChartHelper.setMinOrMax('min', this.data, function(d){
-        return d.date;
+      return d.date;
     });
 
   return d3.time.scale()
