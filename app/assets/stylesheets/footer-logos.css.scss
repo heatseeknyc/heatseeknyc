@@ -150,6 +150,12 @@ a.facebook:hover {
   }
 }
 
+.paypal-btn {
+  width: 200px;
+  height: 50px;
+  margin: 3% auto;
+  opacity: 0;
+}
 
 
 
@@ -161,6 +167,39 @@ a.facebook:hover {
   &:hover {
     color: #4d4d4d;
   }
+}
+
+/* press */
+.index-press {
+  width: 96%;
+  height: 135px;
+  margin: 0 auto 14px;
+  background-color: #e0eaed; 
+
+  p, h6 {
+    text-align: left;
+    margin: 0 7px; 
+  }
+
+  h6 {
+    margin-left: 20px;
+  }
+
+  /* read more */
+  p:last-child {
+    text-align: right;
+    margin: -6px 15px 0 0;
+    font-style: italic;
+  }
+}
+
+.article-top {
+  margin-top: 17px;
+}
+
+.black-back {
+  background-color: #000;
+  color: white !important;
 }
 
 @media (max-width: 991px) {

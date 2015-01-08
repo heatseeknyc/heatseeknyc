@@ -16,3 +16,10 @@ var addUserFunction = function () {
       });
   });
 }
+
+$(document).ready(function() {
+  $('#mc_embed_signup form input.paypal-btn').hover(function() {
+    $('#mc_embed_signup a.donate-btn').toggleClass('black-back');
+  });
+
+});
