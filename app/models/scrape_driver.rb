@@ -6,11 +6,7 @@ class ScrapeDriver < DelegateClass(Capybara::Session)
 
   def initialize()
     Capybara.register_driver :chrome_like do |app|  
-      Capybara::Poltergeist::Driver.new(app, 
-                                        phantomjs_options: ["--proxy=localhost:9999", 
-                                                            "--ignore-ssl-errors=true"],
-                                        timeout: 180,
-                                        js_errors: false).tap do |driver|
+      Capybara::Poltergeist::Driver.new(app).tap do |driver|
         driver.add_header("User-Agent", CHROME_AGENT)
       end
     end

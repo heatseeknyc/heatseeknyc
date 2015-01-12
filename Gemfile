@@ -41,8 +41,6 @@ group :test, :development do
   gem 'spork-rails'
   gem 'sqlite3'
   gem 'travis'
-  gem 'vcr'
-  gem 'webmock'
 end
 
 group :production do 
