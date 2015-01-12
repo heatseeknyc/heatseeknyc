@@ -1,3 +1,5 @@
+require 'scrape_driver'
+
 class ReadingScraper
   attr_reader :twine
 

@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'scrape_driver'
 require 'reading_scraper'
 
 describe ReadingScraper do
