@@ -16,7 +16,7 @@ class Twine < ActiveRecord::Base
   end
 
   def numberize(text_temp)
-      text_temp == "" ? nil : text_temp.to_i
+    text_temp == "" ? nil : text_temp.to_i
   end
 
   def get_html_from_supermechanical_site
@@ -42,7 +42,7 @@ class Twine < ActiveRecord::Base
   end
 
   def get_temp_from_nokogiri_object(noko)
-      noko.css(TEMP_SELECTOR).text
+    noko.css(TEMP_SELECTOR).text
   end
 
   def current_outdoor_temp
