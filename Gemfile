@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'airbrake'
 gem 'chartkick'
 gem 'coveralls', require: false
