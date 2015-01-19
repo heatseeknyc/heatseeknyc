@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'airbrake'
 gem 'chartkick'
 gem 'coveralls', require: false
@@ -42,6 +41,8 @@ group :test, :development do
   gem 'spork-rails'
   gem 'sqlite3'
   gem 'travis'
+  gem 'vcr'
+  gem 'webmock'
 end
 
 group :production do 
