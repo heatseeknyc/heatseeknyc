@@ -23,6 +23,7 @@ gem 'wunderground'
 gem 'zip'
 gem 'rabl'
 gem 'yajl-ruby', :require => 'yajl'
+gem 'stripe'
 
 group :test, :development do
   gem 'better_errors'
