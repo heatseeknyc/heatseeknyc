@@ -148,7 +148,6 @@ GEM
     json (1.8.2)
     launchy (2.4.3)
       addressable (~> 2.3)
-    leaflet-rails (0.7.4)
     listen (2.8.5)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
@@ -398,7 +397,6 @@ DEPENDENCIES
   jquery-rails
   json
   launchy
-  leaflet-rails
   nokogiri
   pg
   poltergeist

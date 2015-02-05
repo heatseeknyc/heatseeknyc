@@ -3,30 +3,10 @@
   <h1>The Cold Map (Beta)</h1>
   <p>The Cold Map (Beta) uses 311 data collected by the City of New York to illustrate the number of heating complaints received during the most recent heating season (10.1.13 through 5.31.14), broken down by zip code.</p>
   <p>Future versions of the Cold Map will incorporate Heat Seek NYC sensor data and will enable tenants, landlords, advocacy groups, and government organizations to dig into the figures that are most relevant to them.</p>
-  <%= map(:center => {
-      :latlng => [40.788, -73.942],
-      :zoom => 11
-  }) %>
+  <div id="map"></div>
 </div>
+<script type="text/javascript">
 
-<!-- <br>
-<div id="heat-map-query-box">
-  <%#= form_tag complaints_query_path, method: :get, remote: true do %> 
-    <dl>
-      <%#= label_tag :borough, "Borough" %>
-      <%#= text_field_tag :borough, "", :class => "form-control", autofocus: true %>
+</script>
 
-      <%#= label_tag :zip_code, "Zip Code" %>
-      <%#= text_field_tag :zip_code, "", :class => "form-control", autofocus: true %>
-
-      <%#= label_tag :starting_date, "Starting Date" %>
-      <%#= date_field_tag :starting_date, "", :class => "form-control", autofocus: true %>
-
-      <%#= label_tag :ending_date, "Ending Date" %>
-      <%#= date_field_tag :ending_date, "", :class => "form-control", autofocus: true %>
-      <br>
-      <%#= submit_tag "Search", :class => "btn btn-lg btn-primary", id: "heat-map-search-button" %>
-    </dl>
-  <%# end %>
-</div> -->
 <%= render partial: 'layouts/footer_elements' %>
