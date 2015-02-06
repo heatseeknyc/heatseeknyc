@@ -19,6 +19,14 @@ Complaint.prototype.drawColdMap = function(){
 
 $(document).ready(function(){
   if(/coldmap/.test(document.URL) || $("#coldmap").length > 0){
+
+    window.map = L.map('map');
+    map.setView([40.788, -73.942], 11);
+    L.tileLayer('http://{s}.tiles.mapbox.com/v3/heatseeknyc.jjl743fc/{z}/{x}/{y}.png', {
+              attribution: 'Map Data © OpenStreetMap contributors, CC-BY-SA, Tile Set © Mapbox, Complaint Data © NYC Open Data',
+              maxZoom: 18
+    }).addTo(map);
+    
     $.ajax({
       url: '/complaints',
       dataType: 'JSON',

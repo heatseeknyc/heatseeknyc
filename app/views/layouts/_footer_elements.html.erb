@@ -8,25 +8,38 @@
   </div>
 </div>
 
+<%= render partial: 'shared/mail_chimp' %>
+
 <!-- Footer links -->
 <div id="linkGroups" class="container">
   <!-- Example row of columns -->
   <div class="row">
     <div class="col-sm-4 linkGroup pressLinks">
-      <h3>Press</h3>
-      <div class="row">
-        <div class="col-xs-2"></div>
-        <div class="col-xs-4"><a class="logo-buttons nytm" href="http://nytm.org/events/meetup/may-6-2014-nytm"></a></div>
-        <div class="col-xs-4"><a class="logo-buttons betabeat" href="http://betabeat.com/2014/06/slumlord-cyber-killers/"></a></div>
+      <h3><a href="press" class="footer-links">Press</a></h3>
+      <div class="index-press article-top">
+        <h4> <a href="http://www.nytimes.com/2014/11/09/nyregion/two-apps-focus-on-public-need-in-new-york.html?_r=0">Keep Warm and Carry On</a></h4>
+
+        <h6><a href="http://www.nytimes.com/">New York Times</a></h6>
+
+        <p>Heatseek NYC, the winner of the fifth annual NYC BigApps competition, which ended in mid-September, would allow tenants an easy way to record and report the temperature in their homes to ensure that landlords do not skimp on the heat...
+        </p>
+
+        <p><a href="http://www.nytimes.com/2014/11/09/nyregion/two-apps-focus-on-public-need-in-new-york.html?_r=0">read more</a></p>
       </div>
-      <div class="row">
-        <div class="col-xs-2"></div>
-        <div class="col-xs-4"></div>
-        <div class="col-xs-4"><a class="logo-buttons medium" href="https://medium.com/@FlatironSchool/heat-seek-nyc-aims-to-keep-the-city-warm-with-code-d1da5d2a2641"></a></div>
-      </div>
-    </div>
+
+      <div class="index-press article-bottom">
+        <h4><a href="http://www.gadgetreview.com/2014/08/heat-seek-nyc/">Heat Seek NYC Wants To Fix New York City’s Heating Crisis</a></h4>
+
+        <h6> <a href="http://www.gadgetreview.com">Gadget Review</a> </h6>
+
+        <p>What makes this thermometer so special is that it connects to the web to help NYC turn the heat on for thousands of tenants that will go with no heat in brutal Big Apple winters...</p>
+
+        <p><a href="http://www.gadgetreview.com/2014/08/heat-seek-nyc/">read more</a></p>
+      </div> 
+    </div> <!-- end .pressLinks -->
+    
     <div class="col-sm-4 linkGroup sponsorLinks">
-      <h3>Sponsors</h3>
+      <h3><a href="sponsors" class="footer-links">Sponsors</a></h3>
       <div class="row">
         <div class="col-xs-1"></div>
         <div class="col-xs-3"><a class="logo-buttons flatiron" href="http://flatironschool.com/"></a></div>
@@ -39,18 +52,30 @@
         <div class="col-xs-3"><a class="logo-buttons betanyc" href="http://betanyc.us/"></a></div>
         <div class="col-xs-3"><a class="logo-buttons bielecki" href="http://rdbf.org/"></a></div>
       </div>
-    </div>
+      <div class="row">
+        <div class="col-xs-9">
+          <a class="logo-buttons microsoft" href="http://www.microsoft.com/"></a>
+        </div>
+      </div>
+    </div> <!-- end .sponsorLinks -->
+    
     <div class="col-sm-4 linkGroup socialLinks">
-      <h3>Follow Us</h3>
+      <h3><a href="blog" class="footer-links">Follow Us</a></h3>
       <div class="row">
         <div class="col-xs-2"></div>
-        <div class="col-xs-4"><a class="fa fa-5x fa-twitter twitter" href="https://twitter.com/heatseeknyc"></a></div>
-        <div class="col-xs-4"><a class="fa fa-5x fa-facebook facebook" href="https://www.facebook.com/heatseeknyc"></a></div>
+        <div class="col-xs-4">
+          <a class="fa fa-5x fa-twitter twitter" href="https://twitter.com/heatseeknyc"></a>
+        </div>
+        <div class="col-xs-4">
+          <a class="fa fa-5x fa-facebook facebook" href="https://www.facebook.com/heatseeknyc"></a>
+        </div>
       </div>
       <div class="row">
         <div class="col-xs-2"></div>
-        <div class="col-xs-4"><a class="fa fa-5x fa-github github" href="https://github.com/heatseeknyc"></a></div>
+        <div class="col-xs-4">
+          <a class="fa fa-5x fa-github github" href="https://github.com/heatseeknyc"></a>
+        </div>
       </div>
-    </div>
+    </div> <!-- end .socialLinks -->
   </div>
 </div>

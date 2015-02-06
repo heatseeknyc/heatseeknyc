@@ -9,7 +9,7 @@ Twinenyc::Application.routes.draw do
   end
   resources :twines, only: [:show, :new, :create]
   resources :sensors
-
+  resources :charges
   post 'readings' => 'readings#create'
 
   get 'users/:id/download' => 'users#download_pdf', as: :pdf_download

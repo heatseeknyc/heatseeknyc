@@ -47,7 +47,6 @@
 
 .sparkfun {
   background: image-url("sparkfun_logo_normal.jpg") no-repeat;
-  width: 100px;
 }
 .sparkfun:hover {
   background: image-url("sparkfun_logo_hover.jpg") no-repeat;
@@ -55,7 +54,6 @@
 
 .bielecki {
   background: image-url("bielecki_logo_normal.png") no-repeat;
-  width: 100px;
 }
 .bielecki:hover {
   background: image-url("bielecki_logo_hover.png") no-repeat;
@@ -63,16 +61,20 @@
 
 .mapbox {
   background: image-url("mapbox_logo_normal.png") no-repeat;
-  width: 100px;
 }
 .mapbox:hover {
   background: image-url("mapbox_logo_hover.png") no-repeat;
 }
 
+.microsoft {
+  background: image-url("microsoft_logo.png") no-repeat;
+  width: 400px !important;
+}
+
 a.fa {
   &.github, &.twitter, &.facebook {
     margin-top: 15px;
-    color: $theme-grey;
+    color: $theme-grey-lighten-1;
   }
   &.github {
     padding-top: 15px;
@@ -108,5 +110,177 @@ a.facebook:hover {
   transition: opacity 0.1s ease-out;  /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
   @media (min-width: $screen-lg-min) {
     background-size: 100%;
+  }
+}
+
+/* Interested & Donate button */
+.interested {
+  min-height: 239px;
+  background-color: $theme-grey-lighten-2;
+
+  .right, .left {
+    height: 239px;
+    display: inline-block;
+    text-align: center;
+  }
+
+  .right {
+  }
+
+  .left {
+  }
+}
+
+.btn-interest {
+  width: 200px;
+  display: block;
+  height: 50px;
+  background-color: $theme-grey-lighten-2;
+  border: 3px solid #000;
+  margin: 5% auto;
+  font-size: 2.5em;
+  color: #000 !important;
+  line-height: 1.7em;
+  position: absolute;
+  top: 34%;
+  left: 32%;
+
+  &:hover {
+    background-color: #000;
+    color: #fff !important;
+    text-decoration: none;
+    cursor: pointer;
+  }
+}
+
+
+/* donate & interested section */
+.paypal-btn {
+  width: 143px;
+  height: 48px;
+  position: absolute;
+  right: 19px;
+  z-index: 1000;
+  opacity: 0;
+
+}
+
+.donate-pop {
+  width: 400px;
+  height: 150px;
+  display: block;
+  margin: 105px auto 0 10%;
+  border: 1px solid #969696;
+  background-color: $theme-blue-lighten-2;
+  border-radius: 4px;
+  box-shadow: 2px 2px 4px #ccc;
+  position: absolute;
+  z-index: 999;
+
+  .opt {
+    width: 40%;
+    display: inline-block;
+    margin: 20px auto;
+    margin-left: 7px;
+  }
+
+  p {
+    padding-top: 10px;
+    font-size: 19px;
+  }
+
+  .opt-paypal {
+    border-right: 1px solid #ccc;
+    height: 107px;
+    margin-left: 22px;
+  }
+
+  .pp-submit-btn {
+    width: 135px;
+    height: 42px;
+    position: absolute;
+    top: 75px;
+    background-color: $theme-grey-lighten-2;
+    border: 2px solid #CCC;
+  }
+
+  .cc-submit-btn {
+    width: 135px;
+    height: 42px;
+    background-color: $theme-grey-lighten-2;
+    border: 2px solid #CCC;
+    position: relative;
+    top: 12px;
+    left: 11px;
+
+    a {
+      color: #000;
+      text-decoration: none;
+    }
+
+    &:hover {
+      background-color: #CCC;
+    }
+  }
+
+  .opt-cc {
+    margin: 0;
+    position: relative;
+    left: 12px;
+    top: 10px;
+  }
+
+  .donate-dismiss {
+    float: right;
+    margin: -8px 13px 0 0;
+    cursor: pointer;
+  }
+}
+
+
+
+
+
+
+/* Footer Elements */
+#linkGroups a.footer-links {
+  color: #000;
+  text-decoration: none;
+  &:hover {
+    color: #4d4d4d;
+  }
+}
+
+/* press */
+.index-press {
+  width: 96%;
+  height: 155px;
+  margin: 0 auto 14px;
+  background-color: #e0eaed; 
+
+  p, h6 {
+    text-align: left;
+    margin: 2px 18px; 
+  }
+
+  h6 {
+    margin-left: 20px;
+  }
+
+  /* read more */
+  p:last-child {
+    text-align: right;
+    margin: -6px 15px 0 0;
+    font-style: italic;
+  }
+}
+
+.article-top {
+  margin-top: 17px;
+}
+
+@media (max-width: 991px) {
+  .interested .left {
+    border-bottom: 4px solid #000;
   }
 }

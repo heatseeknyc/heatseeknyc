@@ -13,7 +13,6 @@
 // external & vendor libraries
 //= require jquery
 //= require jquery_ujs
-//= require leaflet
 //= require bootstrap.min.js
 //= require jquery.fitvids.js
 //= require jquery.scrolly.js

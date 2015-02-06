@@ -9,7 +9,6 @@ gem 'figaro'
 gem 'font-awesome-rails'
 gem 'google-analytics-rails'
 gem 'json'
-gem 'leaflet-rails'
 gem 'nokogiri'
 gem 'pg'
 gem 'poltergeist'
@@ -23,6 +22,7 @@ gem 'wunderground'
 gem 'zip'
 gem 'rabl'
 gem 'yajl-ruby', :require => 'yajl'
+gem 'stripe'
 
 group :test, :development do
   gem 'better_errors'
@@ -41,6 +41,8 @@ group :test, :development do
   gem 'spork-rails'
   gem 'sqlite3'
   gem 'travis'
+  gem 'vcr'
+  gem 'webmock'
 end
 
 group :production do 
