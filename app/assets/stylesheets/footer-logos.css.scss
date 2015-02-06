@@ -47,7 +47,6 @@
 
 .sparkfun {
   background: image-url("sparkfun_logo_normal.jpg") no-repeat;
-  width: 100px;
 }
 .sparkfun:hover {
   background: image-url("sparkfun_logo_hover.jpg") no-repeat;
@@ -55,7 +54,6 @@
 
 .bielecki {
   background: image-url("bielecki_logo_normal.png") no-repeat;
-  width: 100px;
 }
 .bielecki:hover {
   background: image-url("bielecki_logo_hover.png") no-repeat;
@@ -63,10 +61,14 @@
 
 .mapbox {
   background: image-url("mapbox_logo_normal.png") no-repeat;
-  width: 100px;
 }
 .mapbox:hover {
   background: image-url("mapbox_logo_hover.png") no-repeat;
+}
+
+.microsoft {
+  background: image-url("microsoft_logo.png") no-repeat;
+  width: 400px !important;
 }
 
 a.fa {
@@ -252,13 +254,13 @@ a.facebook:hover {
 /* press */
 .index-press {
   width: 96%;
-  height: 135px;
+  height: 155px;
   margin: 0 auto 14px;
   background-color: #e0eaed; 
 
   p, h6 {
     text-align: left;
-    margin: 0 7px; 
+    margin: 2px 18px; 
   }
 
   h6 {
