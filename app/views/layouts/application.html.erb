@@ -4,31 +4,35 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
 
     <%= favicon_link_tag "favicon.ico" %>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script src="//www.google.com/jsapi"></script>
-    
+
     <!-- LeafletJS -->
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
     <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-    
+
     <!-- D3JS -->
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8" type="text/javascript"></script>
 
     <!-- New fonts -->
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic|Oswald:700' rel='stylesheet' type='text/css'>
-    
+
     <title><%= content_for?(:title) ? yield(:title) : "Heat Seek NYC" %></title>
-    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Helping keep the heat on this winter." %>">
+    <meta name="description" content="<%=
+    if content_for?(:description)
+      yield(:description)
+    else
+      "Helping keep the heat on this winter."
+    end
+    %>">
     <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
     <%= csrf_meta_tags %>
-    
+
     <%= analytics_init if Rails.env.production? %>
   </head>
-
 
   <body class="body <%= yield(:template) %>">
     <header>
@@ -36,15 +40,18 @@
     </header>
     <main role="main">
       <%= render 'layouts/messages' %>
-      
-      <%= yield %>
 
+      <%= yield %>
 
     </main>
 
-    <footer class="col-xs-12">&copy; Heat Seek NYC</footer>
-    
-    
+    <footer class="heatseek-footer col-xs-12">
+      <span>&copy; Heat Seek NYC</span>
+      <span class="azure">
+        We trust Microsoft Azure with our most important asset: our user data.
+      </span>
+    </footer>
+
   </body>
 </html>
 

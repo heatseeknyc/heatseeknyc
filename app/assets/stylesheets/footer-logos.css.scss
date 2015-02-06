@@ -72,7 +72,7 @@
 a.fa {
   &.github, &.twitter, &.facebook {
     margin-top: 15px;
-    color: $theme-grey;
+    color: $theme-grey-lighten-1;
   }
   &.github {
     padding-top: 15px;
@@ -114,7 +114,7 @@ a.facebook:hover {
 /* Interested & Donate button */
 .interested {
   min-height: 239px;
-  background-color: #F2F2F2;
+  background-color: $theme-grey-lighten-2;
 
   .right, .left {
     height: 239px;
@@ -133,7 +133,7 @@ a.facebook:hover {
   width: 200px;
   display: block;
   height: 50px;
-  background-color: #F2F2F2;
+  background-color: $theme-grey-lighten-2;
   border: 3px solid #000;
   margin: 5% auto;
   font-size: 2.5em;
@@ -198,14 +198,14 @@ a.facebook:hover {
     height: 42px;
     position: absolute;
     top: 75px;
-    background-color: #F2F2F2;
+    background-color: $theme-grey-lighten-2;
     border: 2px solid #CCC;
   }
 
   .cc-submit-btn {
     width: 135px;
     height: 42px;
-    background-color: #F2F2F2;
+    background-color: $theme-grey-lighten-2;
     border: 2px solid #CCC;
     position: relative;
     top: 12px;

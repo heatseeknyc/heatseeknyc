@@ -93,7 +93,7 @@ $theme-black-blue-3: #AFCDD4;
   padding: 5px;
   line-height: 50px;
   text-transform: uppercase;
-  
+
   @media (max-width: 768px) {
     font-size: 23px;
     line-height: 37px;
@@ -110,10 +110,24 @@ main {
   min-height: 100%;
 }
 
-footer {
-  position: relative;
-  margin-top: -51px;
-  height: 51px;
+.heatseek-footer {
   clear: both;
+  height: 51px;
+  margin-top: -51px;
+  position: relative;
 }
 
+.azure {
+  float: right;
+}
+
+// .azure-footer {
+//   background-color: $theme-blue;
+//   clear: both;
+//   color: $theme-black;
+//   font-size: 20px;
+//   height: 153px;
+//   margin-top: -153px;
+//   position: relative;
+//   text-align: center;
+// }
