@@ -56,43 +56,43 @@
     }
 
     .bronx {
-      stroke: blue;
+      stroke: #4292c6;
     }
 
     .manhattan {
-      stroke: gray;
+      stroke: $theme-blue;
     }
 
     .queens {
-      stroke: orange;
+      stroke: $theme-orange;
     }
 
     .brooklyn {
-      stroke: purple;
+      stroke: #08306b;
     }
 
     .staten-island {
-      stroke: red;
+      stroke: $theme-red;
     }
 
     .bronx rect {
-      fill: blue;
+      fill: #4292c6;
     }
 
     .manhattan rect {
-      fill: gray;
+      fill: $theme-blue;
     }
 
     .queens rect {
-      fill: orange;
+      fill: $theme-orange;
     }
 
     .brooklyn rect {
-      fill: purple;
+      fill: #08306b;
     }
 
     .staten-island rect {
-      fill: red;
+      fill: $theme-red;
     }
 
     .borough-total {
