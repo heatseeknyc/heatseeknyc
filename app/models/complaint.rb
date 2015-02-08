@@ -71,5 +71,23 @@ class Complaint < ActiveRecord::Base
         .group("1, 2")
           .order("1, 2 ASC")
   end
-  
+
+  def self.distinct_complaints_by_month_hash
+    complaints_hash = complaint_setup_hash
+    distinct_complaints_by_month.each do |complaint_count_obj|
+      hash = {}
+      hash["date"] = complaint_count_obj.date
+      hash["total"] = complaint_count_obj.total
+      complaints_hash[complaint_count_obj.borough] << hash
+    end
+    complaints_hash
+  end
+
+  private
+  def self.complaint_setup_hash
+    complaints_hash = {}
+    BOROUGHS.each { |b| complaints_hash[b] = [] }
+    complaints_hash
+  end
+
 end
