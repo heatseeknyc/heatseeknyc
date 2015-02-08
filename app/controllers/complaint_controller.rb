@@ -4,7 +4,7 @@ class ComplaintController < ApplicationController
     respond_to do |f|
       f.html
       f.json do
-        @complaints = Complaint.retrieve_all_summed_by_zip_code
+        @complaints = Complaint.count_summed_by_zip_code
         render json: @complaints
       end
     end

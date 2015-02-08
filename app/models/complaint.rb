@@ -2,43 +2,74 @@ class Complaint < ActiveRecord::Base
 
   BOROUGHS = ["BROOKLYN", "BRONX", "MANHATTAN", "QUEENS", "STATEN ISLAND"]
   
-  # heat season is Oct 1st to May 31st, YYYY-10-01 to YYYY-05-31
-  # hot water is required all year round
-  # WINTER_13_14 = [Date.parse("2013-10-01"), Date.parse("2014-05-31")]
-  # WINTER_12_13 = [Date.parse("2012-10-01"), Date.parse("2013-05-31")]
-  # WINTER_11_12 = [Date.parse("2011-10-01"), Date.parse("2012-05-31")]
-  # WINTER_10_11 = [Date.parse("2010-10-01"), Date.parse("2011-05-31")]
+  BROOKLYN_ZIPCODES = [
+    11209, 11201, 11202, 11203, 11204,
+    11205, 11206, 11207, 11208, 11209, 
+    11210, 11211, 11212, 11213, 11214, 
+    11215, 11216, 11217, 11218, 11219, 
+    11220, 11221, 11222, 11223, 11224, 
+    11225, 11226, 11228, 11229, 11230, 
+    11231, 11232, 11233, 11234, 11235, 
+    11236, 11237, 11238, 11239, 11240, 
+    11241, 11242, 11243, 11244, 11245, 
+    11247, 11248, 11249, 11251, 11252, 
+    11254, 11255, 11256
+  ]
 
-  # def self.all_coordinates
-  #   pluck(:latitude, :longitude)
-  # end
+  BRONX_ZIPCODES = [
+    10453, 10457, 10460, 10458, 10467,
+    10468, 10451, 10452, 10456, 10454,
+    10455, 10459, 10474, 10463, 10471,
+    10466, 10469, 10470, 10475, 10461,
+    10462, 10464, 10465, 10472, 10473
+  ]
 
-  # def self.coordinates_to_present_from(beggining_winter)
-  #   where(["created_date >= ?", beggining_winter[0]]).pluck(:latitude, :longitude)
-  # end
+  MANHATTAN_ZIPCODES = [
+    10026, 10027, 10030, 10037, 10039,
+    10001, 10011, 10018, 10019, 10020,
+    10036, 10029, 10035, 10010, 10016,
+    10017, 10022, 10012, 10013, 10014,
+    10004, 10005, 10006, 10007, 10038,
+    10280, 10002, 10003, 10009, 10021,
+    10028, 10044, 10128, 10023, 10024,
+    10025, 10031, 10032, 10033, 10034, 
+    10040, 10065, 10075, 10282
+  ]
 
-  # def self.coordinates_by_date_range(beggining_winter, ending_winter = beggining_winter)
-  #   where(["created_date >= ? AND closed_date <= ?", beggining_winter[0], ending_winter[1]]).pluck(:latitude, :longitude)
-  # end
+  QUEENS_ZIPCODES = [
+    11361, 11362, 11363, 11364, 11354,
+    11355, 11356, 11357, 11358, 11359,
+    11360, 11365, 11366, 11367, 11412,
+    11423, 11432, 11433, 11434, 11435,
+    11436, 11101, 11102, 11103, 11104,
+    11105, 11106, 11374, 11375, 11379,
+    11385, 11691, 11692, 11693, 11694,
+    11695, 11697, 11004, 11005, 11411,
+    11413, 11422, 11426, 11427, 11428,
+    11429, 11414, 11415, 11416, 11417,
+    11418, 11419, 11420, 11421, 11368,
+    11369, 11370, 11372, 11373, 11377, 
+    11378, 11109, 11001, 11040
+  ]
 
-  # def self.add_density_to_geojson
-  #   json_hash = JSON.parse(File.open("app/assets/javascripts/nyc-zip-code-tabulation-areas-polygons.geojson").read)
-  #   hash_with_density = json_hash["features"].each do |feature|
-  #     total = Complaint.where(zip_code: feature["properties"]["postalCode"]).count
-  #     feature["properties"]["density"] = total
-  #   end
-  #   new_hash = {"type" => "FeatureCollection", "features" => hash_with_density}
-  # end
+  STATEN_ISLAND_ZIPCODES = [
+    10302, 10303, 10310, 10306, 10307,
+    10308, 10309, 10312, 10301, 10304,
+    10305, 10314
+  ]
 
-  def self.retrieve_all_summed_by_zip_code
-
-    # self.select("DISTINCT incident_address").group(:incident_zip).count
-    self.group(:incident_zip).count
+  def self.count_summed_by_zip_code
+    group(:incident_zip).count
   end
 
-  def self.count_all_complaints_by_borough
-    select("borough", "DATE_TRUNC('month', created_date) AS date", "COUNT(DISTINCT incident_address) AS total")
-      .group("1, 2")
-        .order("1, 2 ASC")
+  def self.distinct_complaints_by_month
+    select("BOROUGH", "DATE_TRUNC('month', date) as date", "COUNT(*) AS total")
+      .from(
+        select("DISTINCT DATE_TRUNC('day', created_date) AS date", "incident_address", "borough")
+          .group("1, 2, 3")
+      )
+        .group("1, 2")
+          .order("1, 2 ASC")
   end
+  
 end
