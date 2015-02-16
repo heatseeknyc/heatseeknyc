@@ -6,23 +6,27 @@
 
 
 #   For sqlite3 comment lines below in
-# development:
-#   adapter: sqlite3
-#   database: db/development.sqlite3
-#   pool: 5
-#   timeout: 5000
-
-# for postgres comment lines below in
-# please do NOT delete these lines
-# just comment them out if you need to use sqlite3
+#   This option is better for people who do not
+#   want to set up postgres, which is time consuming
+#   and not necessary for most development work
 development:
-  adapter: postgresql
-  database: twinedb
-  username: root
-  host: localhost
-  port: 5432
+  adapter: sqlite3
+  database: db/development.sqlite3
   pool: 5
   timeout: 5000
+
+# for postgres comment lines below in
+# It is preferable to use postgres because this
+# is what's used in production and it is necessary
+# to work on the coldmap.
+# development:
+#   adapter: postgresql
+#   database: twinedb
+#   username: root
+#   host: localhost
+#   port: 5432
+#   pool: 5
+#   timeout: 5000
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
