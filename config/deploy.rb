@@ -32,13 +32,13 @@ namespace :deploy do
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
   end
 
-  task :symlink, :roles => :app do
+  task :symlink_extra, :roles => :app do
     run "ln -nfs /home/#{user}/#{application}/shared/application.yml #{release_path}/config/application.yml"
     run "ln -nfs /home/#{user}/#{application}/shared/database.yml #{release_path}/config/database.yml"
   end
 end
 
-before "deploy:assets:precompile", "deploy:symlink"
+after "deploy:create_symlink", "deploy:symlink_extra"
 
 require './config/boot'
 require 'airbrake/capistrano'
