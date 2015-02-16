@@ -38,7 +38,7 @@ namespace :deploy do
   end
 end
 
-after "deploy:create_symlink", "deploy:symlink_extra"
+after "deploy:finalize_update", "deploy:symlink_extra"
 
 require './config/boot'
 require 'airbrake/capistrano'
