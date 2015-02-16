@@ -38,7 +38,7 @@ namespace :deploy do
   end
 end
 
-after "deploy:finalize_update", "deploy:symlink"
+before "deploy:assets:precompile", "deploy:symlink"
 
 require './config/boot'
 require 'airbrake/capistrano'
