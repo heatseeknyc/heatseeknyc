@@ -3,7 +3,12 @@ class ReadingsController < ApplicationController
 
   def create
     reading = Reading.create_from_params(strong_params)
-    render json: reading
+
+    if reading[:error]
+      render json: reading, status: 500
+    else
+      render json: reading
+    end
   end
 
   private
