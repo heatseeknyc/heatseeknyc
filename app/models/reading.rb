@@ -26,15 +26,19 @@ class Reading < ActiveRecord::Base
 
   def self.create_from_params(params)
     sensor = Sensor.find_by(name: params[:sensor_name])
+    return {error: 'No sensor by that name found'} if !sensor
+
+    user = sensor.user
+    return {error: 'No user associated with that sensor'} if !user
+
     temp = params[:temp]
     time = Time.at params[:time].to_i
-    user = sensor.user
     outdoor_temp = WeatherMan.current_outdoor_temp(user.zip_code)
-  
+
     options = {
-      sensor: sensor, 
-      user: user, 
-      temp: temp, 
+      sensor: sensor,
+      user: user,
+      temp: temp,
       outdoor_temp: outdoor_temp,
       created_at: time
     }
