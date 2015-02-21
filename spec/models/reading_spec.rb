@@ -25,11 +25,4 @@ describe Reading do
     reading = Reading.create(temp: temp, twine: twine1)
     expect(reading.persisted?).to eq false
   end
-
-  it "cannot be created without a sensor" do
-    temp = 53
-    tom = create(:user)
-    reading = Reading.create(temp: temp, user: tom)
-    expect(reading.persisted?).to eq false
-  end
 end

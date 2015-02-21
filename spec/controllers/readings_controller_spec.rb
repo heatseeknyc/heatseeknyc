@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe ReadingsController do
-  before { allow(WeatherMan).to receive(:current_outdoor_temp).and_return 65 }
+  before { allow(WeatherMan).to receive(:outdoor_temp_for).and_return 65 }
 
   it "creates readings" do
     tahiti = Sensor.find_or_create_by(name: "tahiti")
