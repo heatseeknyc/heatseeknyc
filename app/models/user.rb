@@ -224,7 +224,7 @@ class User < ActiveRecord::Base
   end
 
   def get_latest_readings(num)
-    readings.order('created_at ASC').limit(num)
+    readings.order(created_at: :asc).last(num)
   end
 
   def name
