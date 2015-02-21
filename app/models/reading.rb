@@ -5,7 +5,6 @@ class Reading < ActiveRecord::Base
 
   validates :user_id, presence: true
   validates :temp, presence: true
-  validates :outdoor_temp, presence: true
 
   before_create :set_violation_boolean
 
@@ -33,13 +32,12 @@ class Reading < ActiveRecord::Base
 
     temp = params[:temp]
     time = Time.at params[:time].to_i
-    outdoor_temp = WeatherMan.current_outdoor_temp(user.zip_code)
 
     options = {
       sensor: sensor,
       user: user,
       temp: temp,
-      outdoor_temp: outdoor_temp,
+      outdoor_temp: WeatherMan.outdoor_temp_for(time, user.zip_code),
       created_at: time
     }
 

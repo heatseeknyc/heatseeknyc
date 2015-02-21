@@ -12,7 +12,8 @@ class ReadingsController < ApplicationController
   end
 
   private
-    def strong_params
-      params.require(:reading).permit(:sensor_name, :temp, :time, :verification)
-    end
+
+  def strong_params
+    params.require(:reading).permit(:sensor_name, :temp, :time, :verification)
+  end
 end
