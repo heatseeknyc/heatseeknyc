@@ -24,6 +24,11 @@ gem 'rabl'
 gem 'yajl-ruby', :require => 'yajl'
 gem 'stripe'
 
+group :test do
+  gem 'vcr'
+  gem 'webmock'
+end
+
 group :test, :development do
   gem 'better_errors'
   gem 'binding_of_caller'
@@ -41,11 +46,9 @@ group :test, :development do
   gem 'spork-rails'
   gem 'sqlite3'
   gem 'travis'
-  gem 'vcr'
-  gem 'webmock'
 end
 
-group :production do 
+group :production do
   gem 'rails_12factor'
 end
 
