@@ -7,7 +7,7 @@ class PDFWriter
   FONT = "Times-Roman"
   FONT_OPTIONS = {size: 7, align: :center}
   TABLE_OPTIONS = {width: 90, align: :center, border_width: 0.5}
-  
+
   def initialize(user)
     @user = user
     @content_type = "application/pdf"
@@ -29,6 +29,7 @@ class PDFWriter
 
   def populate_pdf
     image_url = Rails.root.join("app","assets","images","pdf_header.png")
+    pdf.text "Tenant: #{self.user.name}"
     pdf.image image_url, width: 550
     pdf.move_down 5
     pdf.font FONT, FONT_OPTIONS
