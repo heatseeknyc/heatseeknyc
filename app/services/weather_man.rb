@@ -16,7 +16,7 @@ class WeatherMan
       observationHash = @w_api.history_for(time, zip_code)
 
       if observationHash
-        observations = ['history']['observations']
+        observations = observationHash['history']['observations']
         observations.each do |o|
           if o['date']['hour'] == time.hour.to_s
             return o['tempi'].to_i
