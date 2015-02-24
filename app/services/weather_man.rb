@@ -12,11 +12,15 @@ class WeatherMan
   def self.outdoor_temp_for(time, zip_code)
     key = "outdoor_temp_for_#{zip_code}_at_#{time.strftime '%Y-%m-%dT%I'}"
     Rails.cache.fetch(key, :expires_in => 1.day) do
-      sleep 6
-      observations = @w_api.history_for(time, zip_code)['history']['observations']
-      observations.each do |o|
-        if o['date']['hour'] == time.hour.to_s
-          return o['tempi'].to_i
+      sleep 9
+      observationHash = @w_api.history_for(time, zip_code)
+
+      if observationHash
+        observations = ['history']['observations']
+        observations.each do |o|
+          if o['date']['hour'] == time.hour.to_s
+            return o['tempi'].to_i
+          end
         end
       end
     end
