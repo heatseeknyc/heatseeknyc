@@ -5,7 +5,7 @@ class ReadingsController < ApplicationController
     reading = Reading.create_from_params(strong_params)
 
     if reading[:error]
-      render json: reading, status: 500
+      render json: reading, status: 400
     else
       render json: reading
     end
