@@ -3,7 +3,7 @@ class QualityControl
     readings = user.readings
     dupes = []
 
-    (0...readings.length).times do |i|
+    (0...readings.length - 1).each do |i|
       reading1 = readings[i]
       reading2 = readings[i + 1]
       time1 = reading1.created_at.strftime('%Y-%m-%dT%H')
@@ -13,18 +13,15 @@ class QualityControl
       dupes << reading1 if time1 == time2 && temp1 == temp2
     end
 
-    dupes.each_with_index do |d, i|
-      puts "#{i}. #{d.created_at.strftime('%Y-%m-%dT%H')} #{d.outdoor_temp}"
+    dupes.each do |d|
+      d.destroy
     end
   end
 
   def self.truncate_user_until(user, time)
-    user.readings.each_with_index do |r, i|
-      # TODO: remove puts
-      puts i
+    user.readings.each do |r|
       if r.created_at < time
-        # TODO: change to r.destroy
-        puts r.created_at
+        r.destroy
       end
     end
   end
