@@ -1,6 +1,6 @@
 class QualityControl
   def self.dedupe(user)
-    readings = user.readings
+    readings = user.readings.order(created_at: :asc)
     dupes = []
 
     (0...readings.length - 1).each do |i|
