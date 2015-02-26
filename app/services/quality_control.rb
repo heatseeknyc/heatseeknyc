@@ -8,9 +8,7 @@ class QualityControl
       reading2 = readings[i + 1]
       time1 = reading1.created_at.strftime('%Y-%m-%dT%H')
       time2 = reading2.created_at.strftime('%Y-%m-%dT%H')
-      temp1 = reading1.outdoor_temp
-      temp2 = reading2.outdoor_temp
-      dupes << reading1 if time1 == time2 && temp1 == temp2
+      dupes << reading1 if time1 == time2
     end
 
     dupes.each do |d|
