@@ -39,4 +39,19 @@ describe QualityControl do
       expect(@user.readings.count).to eq 24
     end
   end
+
+  describe "#self.update_outdoor_temps_for" do
+    it "updates missing outdoor temps for a user" do
+      10.times do
+        @user.readings.create(temp: 45)
+      end
+
+      partial_readings = @user.readings.where(outdoor_temp: nil)
+      expect(partial_readings.count).to eq 10
+      QualityControl.update_outdoor_temps_for(@user)
+
+      partial_readings = @user.readings.where(outdoor_temp: nil)
+      expect(partial_readings.count).to eq 0
+    end
+  end
 end

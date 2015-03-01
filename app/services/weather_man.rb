@@ -9,10 +9,10 @@ class WeatherMan
     end
   end
 
-  def self.outdoor_temp_for(time, zip_code)
+  def self.outdoor_temp_for(time, zip_code, throttle = 9)
     key = "outdoor_temp_for_#{zip_code}_at_#{time.strftime '%Y-%m-%dT%H'}"
     Rails.cache.fetch(key, :expires_in => 1.day) do
-      sleep 9
+      sleep throttle
       observationHash = @w_api.history_for(time, zip_code)
 
       if observationHash
