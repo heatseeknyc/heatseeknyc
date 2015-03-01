@@ -41,7 +41,7 @@ class Reading < ActiveRecord::Base
       created_at: time
     }
 
-    self.create(options) if verification_valid? params[:verification]
+    self.find_or_create_by(options) if verification_valid? params[:verification]
   end
 
   def self.verification_valid?(code)
