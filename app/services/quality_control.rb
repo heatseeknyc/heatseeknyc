@@ -24,10 +24,10 @@ class QualityControl
     end
   end
 
-  def self.update_outdoor_temps_for(user, throttle = nil)
-    user.readings.each do |r|
-      updated_temp = WeatherMan.outdoor_temp_for(r.created_at, user.zip_code, throttle)
-      if outdoor_temp.is_a? Integer
+  def self.update_outdoor_temps_for(readings, throttle = nil)
+    readings.each do |r|
+      updated_temp = WeatherMan.outdoor_temp_for(r.created_at, r.user.zip_code, throttle)
+      if updated_temp.is_a? Integer
         r.outdoor_temp = updated_temp
         r.save
       else

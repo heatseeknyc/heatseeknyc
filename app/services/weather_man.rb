@@ -10,7 +10,8 @@ class WeatherMan
     end
   end
 
-  def self.outdoor_temp_for(time, zip_code, throttle = 9)
+  def self.outdoor_temp_for(time, zip_code, throttle = nil)
+    throttle ||= 9
     key = "outdoor_temp_for_#{zip_code}_at_#{time.strftime '%Y-%m-%dT%H'}"
     Rails.cache.fetch(key, :expires_in => 1.day) do
       sleep throttle
