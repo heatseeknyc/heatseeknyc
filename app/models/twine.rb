@@ -3,6 +3,6 @@ class Twine < ActiveRecord::Base
   belongs_to :user
 
   def zip_code
-    twine.user ? twine.user.zip_code : nil
+    user ? user.zip_code : nil
   end
 end
