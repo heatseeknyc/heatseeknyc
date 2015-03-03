@@ -2,6 +2,7 @@ class WeatherMan
   @w_api = Wunderground.new(ENV["WUNDERGROUND_API_KEY"])
 
   def self.current_outdoor_temp(zip_code, throttle = 9)
+    return nil if !zip_code
     key = "outdoor_temp_for_#{zip_code}_at_#{Time.now.strftime '%Y-%m-%dT%H'}"
     Rails.cache.fetch(key, :expires_in => 1.hour) do
       sleep throttle
