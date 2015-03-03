@@ -30,8 +30,11 @@ class Reading < ActiveRecord::Base
     user = sensor.user
     return {error: 'No user associated with that sensor'} if !user
 
-    temp = params[:temp]
     time = Time.at params[:time].to_i
+    dupe = Reading.find_by(sensor: sensor, created_at: time)
+    return {error: 'Already a reading for that sensor at that time'} if !user
+
+    temp = params[:temp]
 
     options = {
       sensor: sensor,
@@ -41,7 +44,7 @@ class Reading < ActiveRecord::Base
       created_at: time
     }
 
-    self.find_or_create_by(options) if verification_valid? params[:verification]
+    self.create(options) if verification_valid? params[:verification]
   end
 
   def self.verification_valid?(code)
