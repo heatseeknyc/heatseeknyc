@@ -53,7 +53,7 @@ class ReadingScraper
     end
 
     def current_outdoor_temp
-      WeatherMan.current_outdoor_temp(twine.user.zip_code)
+      WeatherMan.current_outdoor_temp(twine.zip_code)
     end
 
     def make_and_return_reading_from_temp(temp)
