@@ -22,5 +22,5 @@ every 1.hour do
   rake "get_reading",  :environment => :production
 
 every 1.hour do
-  rake "weather:observe" , :environment => :production
+  rake "weather:observe", :environment => :production
 end

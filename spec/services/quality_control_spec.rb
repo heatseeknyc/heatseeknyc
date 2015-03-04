@@ -41,7 +41,7 @@ describe QualityControl do
   end
 
   describe "#self.update_outdoor_temps_for" do
-    it "updates missing outdoor temps for a user" do
+    it "updates missing outdoor temps" do
       VCR.use_cassette('wunderground') do
         sunday_afternoon = DateTime.parse('"2015-03-01T13:00:00-05:00"')
         10.times do
