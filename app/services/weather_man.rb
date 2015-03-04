@@ -12,6 +12,8 @@ class WeatherMan
   end
 
   def self.outdoor_temp_for(time, zip_code, throttle = nil)
+    raise ArgumentError if !zip_code
+
     throttle ||= 9
     key = "outdoor_temp_for_#{zip_code}_at_#{time.strftime '%Y-%m-%dT%H'}"
     Rails.cache.fetch(key, :expires_in => 1.day) do
@@ -21,7 +23,7 @@ class WeatherMan
       if observationHash
         observations = observationHash['history']['observations']
         observations.each do |o|
-          if o['date']['hour'] == time.hour.to_s
+          if o['date']['hour'].to_i == time.hour.to_i
             return o['tempi'].to_i
           end
         end

@@ -30,8 +30,10 @@ class QualityControl
       if updated_temp.is_a? Integer
         r.outdoor_temp = updated_temp
         r.save
+        puts 'save successful'
       else
-        throw 'API not returning valid data'
+        puts 'API not returning valid data'
+        puts updated_temp
       end
     end
   end
