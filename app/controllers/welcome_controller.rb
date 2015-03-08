@@ -38,5 +38,11 @@ class WelcomeController < ApplicationController
     @entries.define_singleton_method(:total_pages){total_pages}
     @entries.define_singleton_method(:current_page){page}
   end
+  
+
+  def thankyou
+    render 'thankyou'
+  end
+
 end
 
