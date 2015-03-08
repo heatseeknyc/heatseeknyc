@@ -1,16 +1,46 @@
 @import 'shared';
 
+.angels {
+	background-color: #ccc;
+}
 
-.column-0,
-.column-1 {
-	width: 40%;
+.thanks-angels {
+	width: 80%;
+	display: block;
+	margin: 0 auto;
+	border-bottom: 4px solid #000;
+}
+
+.column-1,
+.column-2,
+.column-3 {
+	width: 100%;
 	display: inline-block;
 	margin: 0 auto;
 }
 
-.column-0 ul li,
-.column-1 ul li {
+.column-1 ul,
+.column-2 ul,
+.column-3 ul {
+	padding: 0;
+} 
+
+.column-1 ul li,
+.column-2 ul li,
+.column-3 ul li {
 	text-align: center;
 	list-style-type: none;
 	font-size: 1.7em;
+}
+
+.intro {
+	width: 75%;
+	display: block;
+	margin: 0 auto;
+	margin-bottom: 25px; 
+}
+
+.intro p {
+	text-align: center;
+	font-size: 2.25em;
 }
