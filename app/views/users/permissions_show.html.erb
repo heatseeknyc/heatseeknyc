@@ -6,10 +6,12 @@
           <%= form_tag search_user_path, method: :get, id: "search-form", remote: true do %> 
             <div class="clearfix" id="advocate-bar">
               <h3>Hello, <%= current_user.first_name %>!</h3>
-              <div class="search-form">
-                <button id="search-button"><i class="fa fa-search"></i><span class="advocate-button">Search</span></button>
-                <%= text_field_tag :q, "", :class => "form-control", autofocus: true, placeholder: "Find a tenant..." %>
-              </div>
+              <% if (current_user.permissions === 0) %>
+                <div class="search-form">
+                  <button id="search-button"><i class="fa fa-search"></i><span class="advocate-button">Search</span></button>
+                  <%= text_field_tag :q, "", :class => "form-control", autofocus: true, placeholder: "Find a tenant..." %>
+                </div>
+              <% end %>
             </div>
             <% if current_user.is_demo_user? %>
               <p><%= "The Demo Lawyer cannot access data for actual users, and changes are automatically reset." %></p>

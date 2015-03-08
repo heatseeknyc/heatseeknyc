@@ -9,12 +9,110 @@
     font-size: 1.5em;
   } 
 
-  #map {
-    margin-bottom: 400px;
-    height: 500px;
+  #map, #borough-complaints {
     width: 100%;
+  }
+  
+  #map {
+    height: 500px;
     margin-top: 30px;
-    margin-bottom: 70px;
+    margin-bottom: 30px;
+  }
+
+  #borough-complaints {
+      height: 295px;
+      margin-bottom: 70px;
+
+    p.row {
+      margin-bottom: 0px;
+    }
+
+    .tick, .x-ticks, .y-ticks {
+      stroke: $theme-black;
+    }
+
+    g.tick text {
+      text-anchor: inherit !important;
+    }
+
+    .labels {
+      text-anchor: middle;
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.4;
+    }
+
+    path {
+      fill: none;
+    }
+
+    .data-line {
+      fill: none;
+      stroke-width: 4;
+    }
+
+    circle {
+      fill: $theme-black-lighten-1;
+    }
+
+    .bronx {
+      stroke: #4292c6;
+    }
+
+    .manhattan {
+      stroke: $theme-blue;
+    }
+
+    .queens {
+      stroke: $theme-orange;
+    }
+
+    .brooklyn {
+      stroke: #08306b;
+    }
+
+    .staten-island {
+      stroke: $theme-red;
+    }
+
+    .bronx rect {
+      fill: #4292c6;
+    }
+
+    .manhattan rect {
+      fill: $theme-blue;
+    }
+
+    .queens rect {
+      fill: $theme-orange;
+    }
+
+    .brooklyn rect {
+      fill: #08306b;
+    }
+
+    .staten-island rect {
+      fill: $theme-red;
+    }
+
+    .borough-total {
+      top: 7px;
+    }
+
+    line#focus {
+      fill: none;
+      display: none;
+      stroke: $theme-black-lighten-1;
+      stroke-width: 3;
+    }
+
+    rect#mouse-effects {
+      fill: none;
+    }
+
+    rect#mouse-effects:hover {
+      cursor: none;
+    }
   }
 }
 
@@ -27,9 +125,11 @@ div.info.leaflet-control h4 {
 }
 
 @media only screen and (min-width: 640px) {
+  #map, #borough-complaints {
+    width: 80%;
+  }
   #map { 
     height: 700px;
-    width: 80%;
     margin: auto;
     margin-top: 25px;
   }
@@ -40,16 +140,9 @@ div.info.leaflet-control h4 {
   div.info.leaflet-control h4 {
     font-size: 18px;
   }
-}
 
-#heat-map-query-box {
-  width: 50%;
-  margin: auto;
-}
-
-#heat-map-search-button {
-  width: 50%;
-  margin-left: 25%;
+  #borough-complaints {
+  }
 }
 
 .info {

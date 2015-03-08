@@ -31,26 +31,14 @@ namespace :deploy do
   task :restart, :roles => :app, :except => { :no_release => true } do
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
   end
-  task :symlink_keys, :roles => :app do
+
+  task :symlink_extra, :roles => :app do
     run "ln -nfs /home/#{user}/#{application}/shared/application.yml #{release_path}/config/application.yml"
+    run "ln -nfs /home/#{user}/#{application}/shared/database.yml #{release_path}/config/database.yml"
   end
 end
 
-after "deploy:finalize_update", "deploy:symlink_keys"
+after "deploy:finalize_update", "deploy:symlink_extra"
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        require './config/boot'
-        require 'airbrake/capistrano'
+require './config/boot'
+require 'airbrake/capistrano'

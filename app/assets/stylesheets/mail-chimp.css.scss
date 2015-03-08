@@ -1,14 +1,12 @@
 @import 'shared';
 #email-signup-container {
-  background-color:#f2f2f2;
+  background-color: $theme-grey-lighten-3 !important;
 }
 
-#mc_embed_signup
-{
-background:transparent;
-font-family: 'Source Sans Pro', sans-serif;
-font-weight: 400;
-
+#mc_embed_signup {
+  background: transparent;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 400;
 }
 
 #mc_embed_signup div.center-me {
@@ -25,22 +23,22 @@ font-weight: 400;
 #mc_embed_signup input:focus {border-color:#252729;}
 
 #mc_embed_signup .button {
-background-color:transparent;
-border: solid #252729 4px;
-border-radius:0px;
-font-family: 'Oswald', sans-serif;
-font-weight: 700;
-text-transform:uppercase;
-color: $theme-black;
-cursor: pointer;
-display: inline-block;
-font-size:2.1em;
-height: 68px;
-line-height: 32px;
-text-align: center;
-text-decoration: none;
-vertical-align: middle;
-white-space: nowrap;
+  background-color:transparent;
+  border: solid #252729 4px;
+  border-radius:0px;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  text-transform:uppercase;
+  color: $theme-black;
+  cursor: pointer;
+  display: inline-block;
+  font-size:2.1em;
+  height: 68px;
+  line-height: 32px;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  white-space: nowrap;
 }
 
 #mc_embed_signup .button:hover

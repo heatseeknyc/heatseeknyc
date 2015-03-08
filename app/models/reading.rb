@@ -5,7 +5,6 @@ class Reading < ActiveRecord::Base
 
   validates :user_id, presence: true
   validates :temp, presence: true
-  validates :outdoor_temp, presence: true
 
   before_create :set_violation_boolean
 
@@ -26,16 +25,22 @@ class Reading < ActiveRecord::Base
 
   def self.create_from_params(params)
     sensor = Sensor.find_by(name: params[:sensor_name])
-    temp = params[:temp]
-    time = Time.at params[:time].to_i
+    return {error: 'No sensor by that name found'} if !sensor
+
     user = sensor.user
-    outdoor_temp = WeatherMan.current_outdoor_temp(user.zip_code)
-  
+    return {error: 'No user associated with that sensor'} if !user
+
+    time = Time.at params[:time].to_i
+    dupe = Reading.find_by(sensor: sensor, created_at: time)
+    return {error: 'Already a reading for that sensor at that time'} if !user
+
+    temp = params[:temp]
+
     options = {
-      sensor: sensor, 
-      user: user, 
-      temp: temp, 
-      outdoor_temp: outdoor_temp,
+      sensor: sensor,
+      user: user,
+      temp: temp,
+      outdoor_temp: WeatherMan.outdoor_temp_for(time, user.zip_code),
       created_at: time
     }
 

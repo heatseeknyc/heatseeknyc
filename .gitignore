@@ -17,6 +17,7 @@
 /notes
 # Ignore application configuration
 /config/application.yml
+/config/database.yml
 
 coverage
 .DS_Store
