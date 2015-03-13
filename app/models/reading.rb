@@ -32,14 +32,12 @@ class Reading < ActiveRecord::Base
 
     time = Time.at params[:time].to_i
     dupe = Reading.find_by(sensor: sensor, created_at: time)
-    return {error: 'Already a reading for that sensor at that time'} if !user
-
-    temp = params[:temp]
+    return {error: 'Already a reading for that sensor at that time'} if dupe
 
     options = {
       sensor: sensor,
       user: user,
-      temp: temp,
+      temp: params[:temp].to_f.round,
       outdoor_temp: WeatherMan.outdoor_temp_for(time, user.zip_code),
       created_at: time
     }

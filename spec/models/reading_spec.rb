@@ -25,4 +25,24 @@ describe Reading do
     reading = Reading.create(temp: temp, twine: twine1)
     expect(reading.persisted?).to eq false
   end
+
+  context "when created from params" do
+    before do
+      VCR.use_cassette('wunderground') do
+        sensor = FactoryGirl.create(:sensor, "name"=> "0013a20040c17f5a")
+        sensor.user = FactoryGirl.create(:user)
+        sensor.save
+        @reading = Reading.create_from_params({
+          :time =>1426064293.0,
+          :temp => 56.7,
+          :sensor_name => "0013a20040c17f5a",
+          :verification => "c0ffee"
+        })
+      end
+    end
+
+    it "rounds temperature properly" do
+      expect(@reading.temp).to eq 57
+    end
+  end
 end
