@@ -1,14 +1,25 @@
 @import 'shared';
 
-.angels {
-	background-color: #ccc;
+.angels,
+.backers {
+	background-color: #C8DCE0;
 }
 
-.thanks-angels {
-	width: 80%;
+.thanks-angels,
+.thanks-backers {
+	width: 90%;
 	display: block;
 	margin: 0 auto;
+	margin-bottom: 4em;
+	margin-top: 2em;
 	border-bottom: 4px solid #000;
+	border-top: 4px solid #000;
+	text-align: center;
+}
+
+.thanks-angels p,
+.thanks-backers p {
+	font-size: 1.75em;
 }
 
 .column-1,
@@ -23,11 +34,11 @@
 .column-2 ul,
 .column-3 ul {
 	padding: 0;
-} 
+} k
 
 .column-1 ul li,
 .column-2 ul li,
-.column-3 ul li {
+.column-3 ul li {	
 	text-align: center;
 	list-style-type: none;
 	font-size: 1.7em;
@@ -43,4 +54,13 @@
 .intro p {
 	text-align: center;
 	font-size: 2.25em;
+}
+
+.backer-type li {
+	display: inline-block;
+	text-align: center;
+	color: #fb500b;
+	font-size: 2em;
+	width: 49%;
+
 }
