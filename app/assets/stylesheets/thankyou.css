@@ -38,7 +38,8 @@
 
 .column-1 ul li,
 .column-2 ul li,
-.column-3 ul li {	
+.column-3 ul li,
+.mobile-columns ul li {	
 	text-align: center;
 	list-style-type: none;
 	font-size: 1.7em;
@@ -62,5 +63,30 @@
 	color: #fb500b;
 	font-size: 2em;
 	width: 49%;
-
 }
+
+/* Mobile columns */
+.mobile-columns {
+	display: none;
+	width: 100%;
+}
+
+#backers-thankyou .mobile-columns > ul li {
+	font-size: 2.6em;
+}
+
+
+@media (max-width: 767px) {
+	.desktop-columns {
+		display: none;
+	}
+
+	.mobile-columns {
+		display: block;
+	}
+
+	.mobile-columns ul li {
+		font-size: 1.5em;
+	}
+}
+
