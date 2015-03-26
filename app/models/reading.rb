@@ -25,14 +25,14 @@ class Reading < ActiveRecord::Base
 
   def self.create_from_params(params)
     sensor = Sensor.find_by(name: params[:sensor_name])
-    return {error: 'No sensor by that name found'} if !sensor
+    return {code: 404, error: 'No sensor by that name found'} if !sensor
 
     user = sensor.user
-    return {error: 'No user associated with that sensor'} if !user
+    return {code: 404, error: 'No user associated with that sensor'} if !user
 
     time = Time.at params[:time].to_i
     dupe = Reading.find_by(sensor: sensor, created_at: time)
-    return {error: 'Already a reading for that sensor at that time'} if dupe
+    return {code: 400, error: 'Already a reading for that sensor at that time'} if dupe
 
     options = {
       sensor: sensor,
