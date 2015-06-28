@@ -27,13 +27,14 @@
         <li><%= link_to "blog", blog_path %></li>
         <li><%= link_to "Cold Map", coldmap_path %></li>
         <li><%= link_to "Demo", demo_path %></li>
-        
+        <li><a href="http://www.nycharities.org/donate/charitydonate.asp?ID=4081">Donate</a></li>
+
         <% if user_signed_in? %>
           <%= render 'layouts/account_menu' %>
         <% else %>
           <li class="signin"><a href="/users/sign_in">Sign in &rsaquo;</a></li>
         <% end %>
-        
+
       </ul>
     </div><!--/.nav-collapse -->
   </div>
