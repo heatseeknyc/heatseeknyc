@@ -23,6 +23,7 @@ gem 'zip'
 gem 'rabl'
 gem 'yajl-ruby', :require => 'yajl'
 gem 'stripe'
+gem 'psych', '= 2.0.5'
 
 group :test do
   gem 'vcr'
