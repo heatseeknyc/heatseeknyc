@@ -57,8 +57,8 @@ If you'd like to submit a pull request please adhere to the following:
 Your code must be tested. Please TDD your code!
 No single-character variables
 Two-spaces instead of tabs
-Single-quotes instead of double-quotes unless you are using string interpolation or escapes.
-General Rails/Ruby naming conventions for files and classes.
+Single-quotes instead of double-quotes unless you are using string interpolation or escapes
+General Rails/Ruby naming conventions for files and classes
 
 ## Future
 
