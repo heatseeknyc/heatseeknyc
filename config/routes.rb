@@ -25,6 +25,7 @@ Twinenyc::Application.routes.draw do
   get "thankyou" => "welcome#thankyou"
   get "team" => "welcome#team"
   get "about" => "welcome#about"
+  get "how-it-works" => "welcome#how_it_works", as: :how_it_works
   get "nycbigapps" => "welcome#nycbigapps"
   get "vote-for-us" => "welcome#nycbigapps"
   get "judges" => "welcome#judges_welcome"
