@@ -8,12 +8,42 @@
 #sponsors-page {
   margin-bottom: 70px;
 
-  .betanyc {
-    background: image-url("betanyc_logo_hover.jpg") no-repeat;
+  .bbp-logo,
+  .palante-logo,
+  .ujc-logo,
+  .pacc-logo,
+  .casa-logo {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: block;
+    height: 100px;
+    margin: 0 auto;
+    width: 100px;
   }
 
-  .casa {
-    background: image-url("casa_logo_hover.png") no-repeat;
+  .bbp-logo {
+    background-image: image-url("logo-bbp.png");
+  }
+
+  .palante-logo {
+    background-image: image-url("logo-palante.png");
+  }
+
+  .ujc-logo {
+    background-image: image-url("logo-ujc.png");
+  }
+
+  .pacc-logo {
+    background-image: image-url("logo-pacc.png");
+  }
+
+  .casa-logo {
+    background-image: image-url("logo-casa.png");
+  }
+
+  .betanyc {
+    background: image-url("betanyc_logo_hover.jpg");
   }
 
   .flatiron {
