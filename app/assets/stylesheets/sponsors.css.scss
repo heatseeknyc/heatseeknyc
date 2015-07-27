@@ -62,7 +62,7 @@
     background: image-url("bielecki_logo_hover.png") no-repeat;
     background-position-y: 50px;
   }
-  
+
   .mapbox {
     background: image-url("mapbox_logo_hover.png") no-repeat;
   }
@@ -70,11 +70,11 @@
   .logo-buttons {
     background-size: 100%;
   }
-  
+
   .partner {
     font-size: 2em;
     text-align: center;
-    
+
     a {
       @media (max-width: $screen-xs-max) {
         background-position: center;
