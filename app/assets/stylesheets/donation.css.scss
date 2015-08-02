@@ -1,0 +1,99 @@
+@import 'shared';
+
+#donation {
+  h2 {
+    color: $theme-blue-darken-1;
+    text-align: center;
+  }
+
+  span {
+    font-size: 14px;
+  }
+
+  .btn-donate {
+    background-color: $theme-red-darken-1;
+    display: block;
+    font-size: 24px;
+    margin: 0 auto 16px;
+    padding: 2px 30px;
+  }
+
+  .stat {
+    display: inline-block;
+    border-right: solid 2px $theme-white;
+    line-height: 28px;
+    margin: 10px 0;
+    text-align: center;
+    width: 25%;
+    @media (max-width: $screen-xs-max) {
+      border-bottom: solid 2px $theme-white;
+      border-right: none;
+    }
+  }
+
+  .segment {
+    display: inline-block;
+    padding-left: 20px;
+    width: 74%;
+    vertical-align: middle;
+      font-size: 12px;
+    @media (max-width: $screen-xs-max) {
+      display: block;
+      margin: 0 auto;
+      padding-left: 0;
+    }
+  }
+
+  .stat-segment {
+    border: solid 2px $theme-black;
+    color: $theme-white;
+    height: 48px;
+    margin: 6px auto;
+    max-width: 485px;
+    @media (max-width: $screen-xs-max) {
+      height: 96px;
+      text-align: center;
+      max-width: 420px;
+    }
+  }
+
+  .stat-segments div:nth-of-type(1) {
+    background-color: $theme-blue-darken-3;
+  }
+
+  .stat-segments div:nth-of-type(2) {
+    background-color: $theme-blue-darken-1;
+  }
+
+  .stat-segments div:nth-of-type(3) {
+    background-color: $theme-orange-darken-1;
+  }
+
+  .stat-segments div:nth-of-type(4) {
+    background-color: $theme-red-darken-1;
+  }
+
+  aside {
+    background-color: $theme-blue-darken-1;
+
+    h3 {
+      color: $theme-white;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    img {
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%;
+    }
+
+    p {
+      color: $theme-white;
+
+      &:first-of-type {
+        margin-top: 10px;
+      }
+    }
+  }
+}
