@@ -121,13 +121,24 @@ main {
   float: right;
 }
 
-// .azure-footer {
-//   background-color: $theme-blue;
-//   clear: both;
-//   color: $theme-black;
-//   font-size: 20px;
-//   height: 153px;
-//   margin-top: -153px;
-//   position: relative;
-//   text-align: center;
-// }
+.btn-interest {
+  width: 200px;
+  display: block;
+  height: 50px;
+  background-color: $theme-grey-lighten-2;
+  border: 3px solid #000;
+  margin: 5% auto;
+  font-size: 2.5em;
+  color: #000 !important;
+  line-height: 1.7em;
+  position: absolute;
+  top: 34%;
+  left: 32%;
+
+  &:hover {
+    background-color: #000;
+    color: #fff !important;
+    text-decoration: none;
+    cursor: pointer;
+  }
+}

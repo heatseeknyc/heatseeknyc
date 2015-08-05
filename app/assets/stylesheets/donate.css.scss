@@ -16,14 +16,16 @@
 
   .btn-donate {
     background-color: $theme-red;
+    border: 3px solid #000;
     display: block;
-    font-size: 24px;
+    font-size: 2.5em;
     margin: 0 auto 16px;
     padding: 2px 30px;
     transition: background-color 0.1s ease-in-out;
 
     &:hover {
-      background-color: $theme-blue-orange-3;
+      background-color: #000;
+      color: #fff;
     }
   }
 

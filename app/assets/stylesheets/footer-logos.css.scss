@@ -136,29 +136,6 @@ a.facebook:hover {
   }
 }
 
-.btn-interest {
-  width: 200px;
-  display: block;
-  height: 50px;
-  background-color: $theme-grey-lighten-2;
-  border: 3px solid #000;
-  margin: 5% auto;
-  font-size: 2.5em;
-  color: #000 !important;
-  line-height: 1.7em;
-  position: absolute;
-  top: 34%;
-  left: 32%;
-
-  &:hover {
-    background-color: #000;
-    color: #fff !important;
-    text-decoration: none;
-    cursor: pointer;
-  }
-}
-
-
 /* donate & interested section */
 .paypal-btn {
   width: 143px;
