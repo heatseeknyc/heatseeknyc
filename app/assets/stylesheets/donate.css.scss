@@ -17,11 +17,14 @@
   .btn-donate {
     background-color: $theme-red;
     border: 3px solid #000;
+    color: $theme-white;
     display: block;
     font-size: 2.5em;
     margin: 30px auto;
     padding: 2px 30px;
+    text-decoration: none;
     transition: background-color 0.1s ease-in-out;
+    width: 142px;
 
     &:hover {
       background-color: #000;
