@@ -19,7 +19,7 @@
     border: 3px solid #000;
     display: block;
     font-size: 2.5em;
-    margin: 0 auto 16px;
+    margin: 30px auto;
     padding: 2px 30px;
     transition: background-color 0.1s ease-in-out;
 
@@ -72,6 +72,7 @@
 
   .stat-segments div:nth-of-type(1) {
     background-color: $theme-blue-darken-1;
+    margin-top: 30px;
   }
 
   .stat-segments div:nth-of-type(2) {
@@ -84,10 +85,14 @@
 
   .stat-segments div:nth-of-type(4) {
     background-color: $theme-red;
+    margin-bottom: 50px;
   }
 
   aside {
     background-color: $theme-blue-darken-1;
+    margin-bottom: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
 
     h3 {
       color: $theme-white;

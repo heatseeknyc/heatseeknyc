@@ -26,16 +26,19 @@
       <h2>We Can Do More</h2>
       <p>With your support, we can expand the number of Heat Seek sensors helping tenants get the heat they deserve.</p>
       <%= button_to "Donate", {}, :class => "btn-primary btn-donate" %>
-      <p>Interested in purchasing a Heat Seek sensor for your home? Sign up <%= link_to "here", resources_path(anchor: 'signup') %> for a spot on our waitlist.</p>
     </div>
   </div>
-  <div class="col-sm-2"></div>
-  <aside class="col-sm-4 clearfix">
-    <h3>Your donation makes a difference.</h3>
-    <%= image_tag 'malaika.png' %>
-    <p>This summer, while most of us are doing everything we can to fight the heat, Crown Heights resident Malaika won’t complain. In fact, she’ll welcome it.</p>
-    <p>For Malaika, the summer is a respite, the first time in months  she can feel comfortable in her own home. This time of year provides a brief escape from the freezing conditions that her landlord chose to ignore when he failed to provide sufficient heat in her apartment last winter. During the coldest months, Malaika often had to resort to using the stove to heat her home.</p>
-    <p>This seasonal reprieve, however, is no cause for celebration. With winter fast approaching, Malaika – along with thousands of New Yorkers – will soon again be left out in the cold.</p>
-  </aside>
+  <div class="col-sm-1"></div>
+  <div class="col-sm-5">
+    <aside class="clearfix">
+    <!-- <aside class="col&#45;sm&#45;5 clearfix"> -->
+      <h3>Your donation makes a difference.</h3>
+      <%= image_tag 'malaika.png' %>
+      <p>This summer, while most of us are doing everything we can to fight the heat, Crown Heights resident Malaika won’t complain. In fact, she’ll welcome it.</p>
+      <p>For Malaika, the summer is a respite, the first time in months  she can feel comfortable in her own home. This time of year provides a brief escape from the freezing conditions that her landlord chose to ignore when he failed to provide sufficient heat in her apartment last winter. During the coldest months, Malaika often had to resort to using the stove to heat her home.</p>
+      <p>This seasonal reprieve, however, is no cause for celebration. With winter fast approaching, Malaika – along with thousands of New Yorkers – will soon again be left out in the cold.</p>
+    </aside>
+    <p>Interested in purchasing a Heat Seek sensor for your home? Sign up <%= link_to "here", resources_path(anchor: 'signup') %> for a spot on our waitlist.</p>
+  </div>
   <div class="col-sm-1"></div>
 </div>
