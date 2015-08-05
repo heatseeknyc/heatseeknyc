@@ -1,6 +1,6 @@
 <div id="donation">
   <div class="col-sm-1"></div>
-  <div class="col-sm-5">
+  <div class="col-sm-4">
     <h2>Winter Is Coming...</h2>
     <p>And this year we expect to see more heating complaints than ever before. Heat Seek sensors can make a difference.</p>
     <span>Last year:</span>
@@ -26,9 +26,10 @@
       <h2>We Can Do More</h2>
       <p>With your support, we can expand the number of Heat Seek sensors helping tenants get the heat they deserve.</p>
       <%= button_to "Donate", {}, :class => "btn-primary btn-donate" %>
+      <p>Interested in purchasing a Heat Seek sensor for your home? Sign up <%= link_to "here", resources_path(anchor: 'signup') %> for a spot on our waitlist.</p>
     </div>
   </div>
-  <div class="col-sm-1"></div>
+  <div class="col-sm-2"></div>
   <aside class="col-sm-4 clearfix">
     <h3>Your donation makes a difference.</h3>
     <%= image_tag 'malaika.png' %>

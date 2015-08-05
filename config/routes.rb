@@ -25,8 +25,7 @@ Twinenyc::Application.routes.draw do
   get "thankyou" => "welcome#thankyou"
   get "team" => "welcome#team"
   get "about" => "welcome#about"
-  get "donate" => redirect("http://www.nycharities.org/donate/charitydonate.asp?ID=4081")
-  get "donation" => "welcome#donation"
+  get "donate" => "welcome#donate"
   get "how-it-works" => "welcome#how_it_works", as: :how_it_works
   get "nycbigapps" => "welcome#nycbigapps"
   get "vote-for-us" => "welcome#nycbigapps"
