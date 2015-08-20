@@ -113,7 +113,7 @@
   }
 }
 
-.navbar-nav > li.signin > a {
+.navbar-nav > li.nav-highlight > a {
   &:link,
   &:visited
    {
@@ -168,7 +168,7 @@
     }
   }
   
-  .navbar-nav > li.signin
+  .navbar-nav > li.nav-highlight
   {
     border-top:solid $theme-orange 1px;
   }

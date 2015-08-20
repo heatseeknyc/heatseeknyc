@@ -27,12 +27,12 @@
         <li><%= link_to "Cold Map", coldmap_path %></li>
         <li><%= link_to "Blog", blog_path %></li>
         <li><%= link_to "Resources", resources_path %></li>
-        <li><%= link_to "Donate", donate_path %></li>
+        <li class="nav-highlight"><%= link_to "Donate", donate_path %></li>
 
         <% if user_signed_in? %>
           <%= render 'layouts/account_menu' %>
         <% else %>
-          <li class="signin"><a href="/users/sign_in">Sign in &rsaquo;</a></li>
+          <li><a href="/users/sign_in">Sign in &rsaquo;</a></li>
         <% end %>
 
       </ul>
