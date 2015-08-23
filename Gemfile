@@ -29,6 +29,7 @@ gem 'psych', '= 2.0.5'
 group :test do
   gem 'vcr'
   gem 'webmock'
+  gem 'test-unit'
 end
 
 group :test, :development do
@@ -37,6 +38,7 @@ group :test, :development do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
+  gem 'faker'
   gem 'guard-rspec'
   gem 'guard-spork'
   gem 'launchy'
