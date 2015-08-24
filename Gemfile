@@ -29,7 +29,6 @@ gem 'psych', '= 2.0.5'
 group :test do
   gem 'vcr'
   gem 'webmock'
-  gem 'test-unit'
 end
 
 group :test, :development do
