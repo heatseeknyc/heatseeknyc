@@ -14,6 +14,16 @@ FactoryGirl.define do
       permissions 10
     end
 
+    trait :advocate do
+      permissions 50
+    end
+
+    trait :tenant do
+      permissions 100
+    end
+
     factory :admin, traits: [:admin]
+    factory :advocate, traits: [:advocate]
+    factory :tenant, traits: [:tenant]
   end
 end

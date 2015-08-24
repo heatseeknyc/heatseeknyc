@@ -1,4 +1,4 @@
-def login_as(type)
+def login_as_type(type)
   user = create(type)
   visit new_user_session_path
   fill_in :user_email, with: user.email
@@ -7,8 +7,12 @@ def login_as(type)
   return user
 end
 
+def login_as_admin
+  login_as_type(:admin)
+end
+
 def login_as_tenant
-  login_as(:tenant)
+  login_as_type(:tenant)
 end
 
 def expect_nav_bar
