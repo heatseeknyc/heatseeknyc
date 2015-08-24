@@ -5,7 +5,7 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-    @articles = Article.order(created_at: :desc).all
+    @articles = Article.order(published_date: :desc).all
   end
 
   # GET /articles/1
@@ -70,7 +70,14 @@ class ArticlesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      params.require(:article).permit(:title, :company, :company_link, :article_link, :description)
+      params.require(:article).permit([
+        :title,
+        :company,
+        :published_date,
+        :company_link,
+        :article_link,
+        :description
+      ])
     end
 
     def authenticate_team_member!

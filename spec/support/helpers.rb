@@ -1,10 +1,14 @@
-def login_as_tenant
-  user = create(:user)
+def login_as(type)
+  user = create(type)
   visit new_user_session_path
   fill_in :user_email, with: user.email
   fill_in :user_password, with: user.password
   click_on "Sign in"
   return user
+end
+
+def login_as_tenant
+  login_as(:tenant)
 end
 
 def expect_nav_bar
