@@ -8,6 +8,7 @@ set :user, "william"
 set :deploy_to, "/home/#{ user }/#{ application }"
 set :use_sudo, false
 set :keep_releases, 4
+set :rvm_ruby_string, "2.1.3"
 
 default_run_options[:pty] = true
 
