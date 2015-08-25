@@ -21,19 +21,13 @@ ActiveRecord::Schema.define(version: 20150301200703) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.date     "published_date"
   end
 
   create_table "canonical_temperatures", force: true do |t|
     t.integer  "zip_code"
     t.datetime "record_time"
     t.float    "outdoor_temp"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "captains", force: true do |t|
-    t.integer  "organization_id"
-    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -62,12 +56,6 @@ ActiveRecord::Schema.define(version: 20150301200703) do
     t.decimal "longitude",        precision: 15, scale: 13
   end
 
-  create_table "organizations", force: true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "readings", force: true do |t|
     t.integer  "temp"
     t.integer  "twine_id"
@@ -83,25 +71,6 @@ ActiveRecord::Schema.define(version: 20150301200703) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id"
-    t.integer  "organization_id"
-    t.integer  "tenant_id"
-  end
-
-  create_table "tenant_relationships", force: true do |t|
-    t.integer "organization_id"
-    t.integer "user_id"
-  end
-
-  create_table "tenants", force: true do |t|
-    t.string   "name"
-    t.string   "email"
-    t.string   "zip_code"
-    t.string   "address"
-    t.integer  "organization_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "sensor_id"
     t.integer  "user_id"
   end
 
@@ -131,8 +100,6 @@ ActiveRecord::Schema.define(version: 20150301200703) do
     t.string   "search_first_name"
     t.string   "search_last_name"
     t.string   "zip_code"
-    t.integer  "organization_id"
-    t.string   "name"
   end
 
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
