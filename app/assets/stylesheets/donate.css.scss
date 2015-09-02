@@ -24,7 +24,7 @@
     padding: 2px 30px;
     text-decoration: none;
     transition: background-color 0.1s ease-in-out;
-    width: 142px;
+    width: 216px;
 
     &:hover {
       background-color: #000;
@@ -115,6 +115,20 @@
       &:first-of-type {
         margin-top: 10px;
       }
+    }
+  }
+
+  .bold {
+    font-weight: 600;
+  }
+
+  .address {
+    margin-left: 30px;
+    margin-bottom: 10px;
+
+    div {
+      font-size: 14px;
+      margin-bottom: 0px;
     }
   }
 }
