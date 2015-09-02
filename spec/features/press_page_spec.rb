@@ -21,7 +21,7 @@ feature "Press" do
 
     expect(title).to eq article.title
     expect(source).to include article.company
-    expect(source).to include article.published_date.strftime('%Y-%m-%e');
+    expect(source).to include article.published_date.strftime('%Y-%m-%d');
     expect(description).to include article.description
   end
 end
