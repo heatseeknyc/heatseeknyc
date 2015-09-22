@@ -2,7 +2,7 @@
 [![Code Climate](https://codeclimate.com/github/wfjeff/twinenyc.png)](https://codeclimate.com/github/wfjeff/twinenyc)
 [![Coverage Status](https://coveralls.io/repos/wfjeff/twinenyc/badge.png)](https://coveralls.io/r/wfjeff/twinenyc)
 
-#Heat Seek NYC
+# Heat Seek NYC
 
 ## Description
 
