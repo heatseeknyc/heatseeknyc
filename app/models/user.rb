@@ -71,16 +71,16 @@ class User < ActiveRecord::Base
     'dmorgan@heatseeknyc.com',
     'demo-lawyer@heatseeknyc.com'
   ]
-  
+
   define_measureable_methods(METRICS, CYCLES, MEASUREMENTS)
 
   def search(search)
     search_arr = search.downcase.split
     first_term = search_arr[0]
     second_term = search_arr[1] || search_arr[0]
-    
+
     result = User.fuzzy_search(first_term, second_term).except_user_id(self.id).tenants_only
-    
+
     self.is_demo_user? ? result.demo_users : result
   end
 
@@ -90,12 +90,12 @@ class User < ActiveRecord::Base
 
   def self.judges
     last_names = [
-      "Bierut", 
-      "Fried", 
-      "Huttenlocher", 
-      "Kennedy", 
-      "Kimball", 
-      "Wiley", 
+      "Bierut",
+      "Fried",
+      "Huttenlocher",
+      "Kennedy",
+      "Kimball",
+      "Wiley",
       "Winshel"
     ]
 
@@ -104,8 +104,8 @@ class User < ActiveRecord::Base
 
   def self.fuzzy_search(first_term, second_term)
     where([
-      'search_first_name LIKE ? OR search_last_name LIKE ?', 
-      "%#{first_term}%", 
+      'search_first_name LIKE ? OR search_last_name LIKE ?',
+      "%#{first_term}%",
       "%#{second_term}%"
     ])
   end
@@ -115,7 +115,7 @@ class User < ActiveRecord::Base
   end
 
   #TODO: eliminate this method and use is_demo_user? instance method instead
-  def self.account_demo_user?(user_id) 
+  def self.account_demo_user?(user_id)
     DEMO_ACCOUNT_EMAILS.include?(User.find(user_id).email)
   end
 
@@ -140,13 +140,13 @@ class User < ActiveRecord::Base
   end
 
   def self.demo_lawyer
-    demo_lawyer ||= find_by(first_name: 'Demo Lawyer') 
-    
+    demo_lawyer ||= find_by(first_name: 'Demo Lawyer')
+
     if demo_lawyer.nil?
       demo_lawyer = create_demo_lawyer
       assign_demo_tenants_to(demo_lawyer)
     end
-    
+
     return demo_lawyer
   end
 
@@ -197,7 +197,7 @@ class User < ActiveRecord::Base
   end
 
   def live_readings
-    readings.order(created_at: :desc).limit(50).sort_by do |r| 
+    readings.order(created_at: :desc).limit(50).sort_by do |r|
       r.violation = true
       r.created_at
     end
@@ -206,7 +206,7 @@ class User < ActiveRecord::Base
   def current_temp
     last_reading = self.readings.last
     # bigapps version
-    "#{last_reading.temp}°" if last_reading 
+    "#{last_reading.temp}°" if last_reading
     # after bigapps uncomment this
     # if last_reading && last_reading.created_at > Time.now - 60 * 60 * 3
     #   "#{last_reading.temp}°"
