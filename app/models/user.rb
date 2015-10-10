@@ -150,6 +150,18 @@ class User < ActiveRecord::Base
     return demo_lawyer
   end
 
+  def sensor_codes=(nick_names)
+    self.sensors.clear
+    nick_names.upcase.gsub(' ','').split(',').each do |nick_name|
+      sensor = Sensor.find_by(nick_name: nick_name)
+      self.sensors << sensor if sensor
+    end
+  end
+
+  def sensor_codes
+    self.sensors.map(&:nick_name).join(', ')
+  end
+
   def twine_name=(twine_name)
     return nil if twine_name == ""
     temp_twine = Twine.find_by(:name => twine_name)

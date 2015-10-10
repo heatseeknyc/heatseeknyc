@@ -2,7 +2,9 @@ Twinenyc::Application.routes.draw do
   resources :articles
 
   get "welcome/index"
-  devise_for :users
+  devise_for :users, controllers: {
+    registrations: 'user/registrations'
+  }
   get 'users/search' => 'users#search', as: :search_user
   resources :users do
     resources :collaborations

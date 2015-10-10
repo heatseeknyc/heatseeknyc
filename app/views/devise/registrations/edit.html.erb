@@ -1,18 +1,18 @@
-<div id="form-id">
-  <div class="container settings-header">
+<div class="container" id="form-id">
+  <div class="settings-header">
     <div class="settings-title">
       <h1>Edit My Settings</h1>
   <!-- Ethan substituted "Edit [advocate Name]"  for -->
-  <!-- "Edit My Settings" Thought made more sense  -->  
+  <!-- "Edit My Settings" Thought made more sense  -->
   <!--  <h2>Edit <%= resource_name.to_s.humanize %></h2>  -->
     </div>
   </div>
 
-  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => "row" }) do |f| %>
     <%= devise_error_messages! %>
 
-    <div class="container col-lg-5 col-md-6 col-sm-6 col-xs-12">
-      
+    <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
+
       <dl class="settings-input"><%= f.label :first_name %>:
       <%= f.text_field :first_name, :autofocus => true, class: "settings-form-control form-control" %></dl>
 
@@ -24,6 +24,9 @@
 
       <dl><%= f.label :zip_code %>:
       <%= f.text_field :zip_code, class: "settings-form-control form-control" %></dl>
+
+      <dl><%= f.label :sensor_codes %>:
+      <%= f.text_field :sensor_codes, class: "settings-form-control form-control" %></dl>
 
       <dl><%= f.label :email %>:
       <%= f.email_field :email, class: "settings-form-control form-control" %></dl>
@@ -39,12 +42,19 @@
       <%= f.password_field :password_confirmation, class: "settings-form-control form-control" %></dl>
 
       <dl><%= f.label :current_password %>: <i>(we need your current password to confirm your changes)</i>
-      <%= f.password_field :current_password, class: "settings-form-control form-control" %></dl>      
-      
-      <dl><%= f.submit "Update", class: "btn-delete" %>
+      <%= f.password_field :current_password, class: "settings-form-control form-control" %></dl>
 
-  <% end %>  
-          <h4>No longer want to use this service?</h4>
-      <%= button_to "Cancel my account", registration_path(resource_name), class: "btn-delete", :data => { :confirm => "Are you sure?" }, :method => :delete %></dl>
-  </div> <!-- end of form -->
+      <div><%= f.submit "Update", class: "btn-delete" %></div>
+
+    </div> <!-- end of form -->
+  <% end %>
+
+  <div class="row">
+    <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
+      <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+        <h4>No longer want to use this service?</h4>
+        <%= button_to "Cancel my account", registration_path(resource_name), class: "btn-delete", :data => { :confirm => "Are you sure?" }, :method => :delete %></dl>
+      <% end %>
+    </div>
+  </div>
 </div>
