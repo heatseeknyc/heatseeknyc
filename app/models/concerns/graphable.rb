@@ -52,7 +52,7 @@ module Graphable
 
     def build_row(row_cells)
       datetime, indoor_temp, outdoor_temp = *row_cells
-      datetime = adjust_for_time_zone(datetime)
+      # datetime = adjust_for_time_zone(datetime)
       note = notes_text(datetime, indoor_temp, outdoor_temp)
       [pretty_time(datetime), pretty_date(datetime), indoor_temp, outdoor_temp, "", note]
     end
