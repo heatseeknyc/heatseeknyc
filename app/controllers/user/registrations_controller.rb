@@ -13,9 +13,9 @@ class User::RegistrationsController < Devise::RegistrationsController
   end
 
   # GET /resource/edit
-  # def edit
-  #   super
-  # end
+  def edit
+    super
+  end
 
   # PUT /resource
   def update
@@ -49,7 +49,7 @@ class User::RegistrationsController < Devise::RegistrationsController
         :first_name,
         :last_name,
         :address,
-        :sensor_codes,
+        :sensor_codes_string,
         :email,
         :zip_code,
         :permissions,
@@ -65,7 +65,7 @@ class User::RegistrationsController < Devise::RegistrationsController
         :first_name,
         :last_name,
         :address,
-        :sensor_codes,
+        :sensor_codes_string,
         :email,
         :zip_code,
         :permissions,

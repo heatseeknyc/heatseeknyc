@@ -15,9 +15,11 @@ class User < ActiveRecord::Base
 
   validates :first_name, :length => {minimum: 2}
   validates :last_name, :length => {minimum: 2}
+  validate :sensor_codes_string_contains_only_valid_sensors
   validates_presence_of :address, :email, :zip_code
 
   before_save :create_search_names
+  before_validation :associate_sensors
 
   before_destroy :destroy_all_collaborations
 
@@ -150,16 +152,17 @@ class User < ActiveRecord::Base
     return demo_lawyer
   end
 
-  def sensor_codes=(nick_names)
+  def associate_sensors
     self.sensors.clear
-    nick_names.upcase.gsub(' ','').split(',').each do |nick_name|
+    string = self.sensor_codes_string || ''
+    string.upcase.gsub(' ','').split(',').each do |nick_name|
       sensor = Sensor.find_by(nick_name: nick_name)
       self.sensors << sensor if sensor
     end
   end
 
   def sensor_codes
-    self.sensors.map(&:nick_name).join(', ')
+    self.sensors.map(&:nick_name).join(', ').upcase
   end
 
   def twine_name=(twine_name)
@@ -241,6 +244,12 @@ class User < ActiveRecord::Base
 
   def name
     "#{first_name} #{last_name}"
+  end
+
+  def sensor_codes_string_contains_only_valid_sensors
+    if self.sensor_codes != (self.sensor_codes_string || "").upcase
+      self.errors.add :sensor_codes_string, "has an invalid sensor code"
+    end
   end
 
   # def method_missing(name, *args)

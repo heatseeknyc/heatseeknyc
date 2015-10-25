@@ -54,4 +54,19 @@ describe User do
 			expect(user8.lawyer?).to be(false)
 		end
 	end
+
+  describe "sensor_codes_string" do
+    it "allows user save if corresponding sensors exist" do
+      create(:sensor, nick_name: '0000')
+      user = create(:user)
+      user.sensor_codes_string = '0000'
+      expect(user.save).to be_true
+    end
+
+    it "prevents user save if no corresponding sensors exist" do
+      user = create(:user)
+      user.sensor_codes_string = '0000'
+      expect(user.save).to be_false
+    end
+  end
 end
