@@ -30,6 +30,7 @@ gem 'psych', '= 2.0.5'
 group :test do
   gem 'vcr'
   gem 'webmock'
+  gem 'memory_test_fix'
 end
 
 group :test, :development do
@@ -50,6 +51,10 @@ group :test, :development do
   gem 'spork-rails'
   gem 'sqlite3'
   gem 'travis'
+  gem 'spring' # keeps the rails process running for faster init times
+  #gem 'bullet' # detect n+1 errors
+  #gem 'brakeman' # auto security testing
+  #gem 'hakiri' # more automagic security
 end
 
 group :production do
@@ -87,11 +92,8 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.1.2'
-
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
