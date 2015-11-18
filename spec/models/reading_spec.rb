@@ -45,4 +45,29 @@ describe Reading do
       expect(@reading.temp).to eq 57
     end
   end
+
+  describe ".attempt_limit" do
+    specify { expect(Reading.attempt_limit).to eq(48) }
+  end
+
+  describe ".pending_outdoor_temp" do
+    let(:r1) { create(:reading, attempts: 12, outdoor_temp: nil) }
+    let(:r2) { create(:reading, attempts: 52, outdoor_temp: nil) }
+    let(:r3) { create(:reading, attempts: 0, outdoor_temp: 75) }
+    let(:r4) { create(:reading, attempts: 12, outdoor_temp: 75) }
+
+    before { allow(Reading).to receive(:attempt_limit).and_return(48) }
+
+    it 'includes readings without outdoor temps and under attempt limit' do
+      expect(Reading.pending_outdoor_temp).to eq([r1])
+    end
+
+    it 'doesn\'t include readings with outdoor temps' do
+      expect(Reading.pending_outdoor_temp).to_not include(r3, r4)
+    end
+
+    it 'doesn\'t include readings over the limit' do
+      expect(Reading.pending_outdoor_temp).to_not include(r2)
+    end
+  end
 end

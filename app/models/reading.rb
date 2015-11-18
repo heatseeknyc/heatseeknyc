@@ -14,6 +14,10 @@ class Reading < ActiveRecord::Base
     true # this method must return true
   end
 
+  def self.attempt_limit
+    48
+  end
+
   def self.new_from_twine(temp, outdoor_temp, twine, user)
     new.tap do |r|
       r.temp = temp
@@ -38,7 +42,7 @@ class Reading < ActiveRecord::Base
       sensor: sensor,
       user: user,
       temp: params[:temp].to_f.round,
-      outdoor_temp: WeatherMan.outdoor_temp_for(time, user.zip_code),
+      outdoor_temp: WeatherService.outdoor_temp_for(time, user.zip_code),
       created_at: time
     }
 
@@ -47,6 +51,11 @@ class Reading < ActiveRecord::Base
 
   def self.verification_valid?(code)
     true #placeholder for hash algorithm
+  end
+
+  def self.pending_outdoor_temp
+    self.where('attempts <= ?', attempt_limit)
+      .where(outdoor_temp: nil)
   end
 
 end

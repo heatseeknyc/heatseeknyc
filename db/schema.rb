@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151025000952) do
+ActiveRecord::Schema.define(version: 20151113162459) do
 
   create_table "articles", force: true do |t|
     t.string   "title"
@@ -65,6 +65,8 @@ ActiveRecord::Schema.define(version: 20151025000952) do
     t.integer  "outdoor_temp"
     t.integer  "sensor_id"
     t.boolean  "violation"
+    t.integer  "attempts"
+    t.datetime "last_attempt_at"
   end
 
   create_table "sensors", force: true do |t|

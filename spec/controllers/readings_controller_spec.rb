@@ -4,7 +4,7 @@ describe ReadingsController do
   let(:tahiti) {Sensor.find_or_create_by(name: "tahiti")}
 
   before do
-    allow(WeatherMan).to receive(:outdoor_temp_for).and_return 65
+    allow(WeatherService).to receive(:outdoor_temp_for).and_return 65
 
     tahiti.readings.clear
     daniel = create(:user)

@@ -1,4 +1,4 @@
-class WeatherMan
+class WeatherService
   @w_api = Wunderground.new(ENV["WUNDERGROUND_API_KEY"])
 
   def self.current_outdoor_temp(zip_code, throttle = 9)

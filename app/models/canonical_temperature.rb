@@ -7,7 +7,7 @@ class CanonicalTemperature < ActiveRecord::Base
     })
 
     if !canonical_temp
-      temp = WeatherMan.current_outdoor_temp(zip_code)
+      temp = WeatherService.current_outdoor_temp(zip_code)
       canonical_temp = create({
         outdoor_temp: temp,
         record_time: DateTime.now.beginning_of_hour,

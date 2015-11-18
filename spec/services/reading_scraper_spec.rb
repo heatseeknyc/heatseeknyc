@@ -25,7 +25,7 @@ describe ReadingScraper do
       driver = double('driver')
       allow(scraper).to receive(:driver).and_return driver
       allow(driver).to receive(:quit)
-      allow(WeatherMan).to receive(:current_outdoor_temp).
+      allow(WeatherService).to receive(:current_outdoor_temp).
                                        with(twine.user.zip_code).
                                        and_return(outside_temperature)
 
@@ -50,7 +50,7 @@ describe ReadingScraper do
     end
 
     it "fetches outside temperature" do
-      expect(WeatherMan).to receive(:current_outdoor_temp).
+      expect(WeatherService).to receive(:current_outdoor_temp).
                                        with(twine.user.zip_code).
                                        and_return(outside_temperature)
       subject.get_reading
