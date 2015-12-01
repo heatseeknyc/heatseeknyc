@@ -10,7 +10,7 @@ feature "Sensor Codes" do
     fill_in 'Last name', with: 'O\'Connor'
     fill_in 'Address', with: '120 New St'
     fill_in 'Zip code', with: '19382'
-    fill_in 'Sensor code(s)', with: '3e4t'
+    fill_in 'Sensor code', with: '3e4t'
     fill_in 'Email', with: 'maximus@gmail.com'
     fill_in 'Password', with: 'password'
     fill_in 'Password confirmation', with: 'password'
@@ -30,7 +30,7 @@ feature "Sensor Codes" do
     login_as(user)
 
     visit edit_user_registration_path(user)
-    fill_in 'Sensor code(s)', with: '3e4t'
+    fill_in 'Sensor code', with: '3e4t'
     fill_in 'Current password', with: 'password'
     click_button 'Update'
 
@@ -45,7 +45,7 @@ feature "Sensor Codes" do
     login_as(user)
 
     visit edit_user_registration_path(user)
-    fill_in 'Sensor code(s)', with: '0000'
+    fill_in 'Sensor code', with: '0000'
     fill_in 'Current password', with: 'password'
     click_button 'Update'
 
