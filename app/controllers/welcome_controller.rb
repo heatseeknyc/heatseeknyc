@@ -11,7 +11,7 @@ class WelcomeController < ApplicationController
   end
 
   def press
-    @articles = Article.order(created_at: :desc).all
+    @articles = Article.order(created_at: :desc).to_a
   end
 
   def blog
