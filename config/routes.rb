@@ -29,6 +29,7 @@ Twinenyc::Application.routes.draw do
   get "about" => "welcome#about"
   get "donate" => "welcome#donate"
   get "how-it-works" => "welcome#how_it_works", as: :how_it_works
+  get "giving-tuesday" => "welcome#giving_tuesday", as: :giving_tuesday
   get "nycbigapps" => "welcome#nycbigapps"
   get "vote-for-us" => "welcome#nycbigapps"
   get "judges" => "welcome#judges_welcome"
