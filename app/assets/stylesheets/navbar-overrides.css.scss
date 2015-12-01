@@ -16,9 +16,7 @@
 }
 
 .navbar .brand {
-  position: absolute;
   background: image-url("heat_seek-logo-@2x.png") no-repeat top left;
-  left:15px;
   width: 128px;
   height: 43px;
   background-size: 100%;
@@ -27,7 +25,6 @@
   margin: 0;
   margin-top: 4px;
   padding: 0;
-  position: absolute;
   -webkit-transition: opacity 0.1s ease-out;  /* Chrome 1-25, Safari 3.2+ */
   -moz-transition: opacity 0.1s ease-out;  /* Firefox 4-15 */
   -o-transition: opacity 0.1s ease-out;  /* Opera 10.50â€“12.00 */
