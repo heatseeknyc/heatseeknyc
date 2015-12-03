@@ -37,7 +37,7 @@ Twinenyc::Application.routes.draw do
   # get "demo" => "welcome#demo"
   get "press" => "welcome#press"
   get "blog" => "welcome#blog"
-  root 'welcome#giving_tuesday'
+  root 'welcome#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
