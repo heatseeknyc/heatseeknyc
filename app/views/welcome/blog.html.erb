@@ -35,19 +35,19 @@
 
             <% if entry["type"] == "text" %>
               <div class="tumblr_title">
-                <%= entry["title"].html_safe %>
+                <%= (entry["title"] || "").html_safe %>
               </div>
               <div class="tumblr_text">
-                <%= entry["body"].html_safe %>
+                <%= (entry["body"] || "").html_safe %>
               </div>
             <% end %>
 
             <% if entry["type"] == "chat" %>
               <div class="tumblr_title">
-                <%= entry["title"].html_safe %>
+                <%= (entry["title"] || "").html_safe %>
               </div>
               <div class="tumblr_chat">
-                <%= entry["body"].html_safe %>
+                <%= (entry["body"] || "").html_safe %>
               </div>
             <% end %>
 
