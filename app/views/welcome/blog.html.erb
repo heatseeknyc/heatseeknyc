@@ -3,17 +3,17 @@
 <h4 class="blog-title">Heat Seek Blog</h4>
 <div class="blog clearfix">
   <div class="container">
-    
+
     <div class="col-md-3">
       <div class="twitter-embed">
         <%= render 'twitter_embed' %>
       </div>
     </div>
-    
+
     <div class="container col-xs-12 col-md-9">
       <ol class="tumblr_posts">
         <% @entries.each do |entry| %>
-          
+
           <li class="tumblr_post">
             <% if entry['type'] == 'video' %>
               <div class="tumblr_video">
@@ -80,9 +80,9 @@
 
             <p class="tumblr_date"><%= format_tumblr_date(entry['date']) %></p>
 
-          </li>        
+          </li>
         <% end %>
-        
+
       </ol>
 
       <%= will_paginate @entries %>
