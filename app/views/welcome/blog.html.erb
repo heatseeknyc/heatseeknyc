@@ -1,4 +1,4 @@
-<%= render 'facebook_script_tag' %>
+<%= render "facebook_script_tag" %>
 
 <h4 class="blog-title">Heat Seek Blog</h4>
 <div class="blog clearfix">
@@ -6,7 +6,7 @@
 
     <div class="col-md-3">
       <div class="twitter-embed">
-        <%= render 'twitter_embed' %>
+        <%= render "twitter_embed" %>
       </div>
     </div>
 
@@ -15,25 +15,25 @@
         <% @entries.each do |entry| %>
 
           <li class="tumblr_post">
-            <% if entry['type'] == 'video' %>
+            <% if entry["type"] == "video" %>
               <div class="tumblr_video">
-                <%= entry["player"][2]['embed_code'].html_safe %>
+                <%= entry["player"][2]["embed_code"].html_safe %>
               </div>
               <p class="tumblr_caption">
-                <%= entry['caption'].html_safe %>
+                <%= entry["caption"].html_safe %>
               </p>
             <% end %>
 
-            <% if entry['type'] == 'audio' %>
+            <% if entry["type"] == "audio" %>
               <div class="tumblr_audio">
                 <%= entry["player"].html_safe %>
               </div>
               <p class="tumblr_caption">
-                <%= entry['caption'].html_safe %>
+                <%= entry["caption"].html_safe %>
               </p>
             <% end %>
 
-            <% if entry['type'] == 'text' %>
+            <% if entry["type"] == "text" %>
               <div class="tumblr_title">
                 <%= entry["title"].html_safe %>
               </div>
@@ -42,7 +42,7 @@
               </div>
             <% end %>
 
-            <% if entry['type'] == 'chat' %>
+            <% if entry["type"] == "chat" %>
               <div class="tumblr_title">
                 <%= entry["title"].html_safe %>
               </div>
@@ -51,7 +51,7 @@
               </div>
             <% end %>
 
-            <% if entry['type'] == 'link' %>
+            <% if entry["type"] == "link" %>
               <div class="tumblr_title">
                 <%= link_to entry["title"].html_safe, entry["url"] %>
               </div>
@@ -60,7 +60,7 @@
               </div>
             <% end %>
 
-            <% if entry['type'] == 'quote' %>
+            <% if entry["type"] == "quote" %>
               <div class="tumblr_text">
                 <%= entry["text"].html_safe %>
               </div>
@@ -69,16 +69,16 @@
               </div>
             <% end %>
 
-            <% if entry['type'] == 'photo' %>
+            <% if entry["type"] == "photo" %>
               <% entry["photos"].each do |photo| %>
-                <%= image_tag photo["alt_sizes"][0]['url'], class: "tumblr_photo" %>
+                <%= image_tag photo["alt_sizes"][0]["url"], class: "tumblr_photo" %>
                 <p class="tumblr_caption">
-                  <%= entry['caption'].html_safe %>
+                  <%= entry["caption"].html_safe %>
                 </p>
               <% end %>
             <% end %>
 
-            <p class="tumblr_date"><%= format_tumblr_date(entry['date']) %></p>
+            <p class="tumblr_date"><%= format_tumblr_date(entry["date"]) %></p>
 
           </li>
         <% end %>
