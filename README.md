@@ -60,6 +60,28 @@ Two-spaces instead of tabs
 Single-quotes instead of double-quotes unless you are using string interpolation or escapes
 General Rails/Ruby naming conventions for files and classes
 
+## Development Environment
+We use [Vagrant](https://vagrantup.com) to ensure all of our development environments are consistent.
+
+[Find out more about the vagrant virtual machine lifecycle.](https://docs.vagrantup.com/v2/getting-started/index.html)
+
+If you are on a mac:
+```
+git clone https://github.com/heatseeknyc/heatseeknyc.git
+brew install caskroom/cask/brew-cask
+brew cask install virtualbox vagrant
+vagrant plugin install vagrant-hostmanager vagrant-cachier
+cd heatseeknyc
+vagrant up
+vagrant ssh
+```
+
+On a mac, you'll be able to find your development environment by running:
+```
+open http://`whoami`.dev.heatseeknyc.com
+```
+The rails app lives in ```/vagrant/```
+
 ## Future
 
 This technology is currently in use by the [Urban Justice Center](http://www.urbanjustice.org/) who provided us with users for our proof-of-concept. We hope that this project will be used next heating season by advocacy groups like them.
