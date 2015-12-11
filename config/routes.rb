@@ -36,7 +36,7 @@ Twinenyc::Application.routes.draw do
   get "judges_login/:last_name" => "users#judges_login"
   # get "demo" => "welcome#demo"
   get "press" => "welcome#press"
-  get "blog" => "welcome#blog"
+  get "blog" => "posts#index"
   root 'welcome#index'
 
   # The priority is based upon order of creation: first created -> highest priority.

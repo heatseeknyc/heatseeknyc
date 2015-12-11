@@ -1,0 +1,22 @@
+<%= render "facebook_script_tag" %>
+
+<h4 class="blog-title">Heat Seek Blog</h4>
+<div class="blog clearfix">
+  <div class="container">
+
+    <div class="col-md-3">
+      <div class="twitter-embed">
+        <%= render "twitter_embed" %>
+      </div>
+    </div>
+
+    <div class="container col-xs-12 col-md-9">
+      <ol class="tumblr_posts">
+        <%= render partial: 'post', collection: @posts %>
+      </ol>
+
+      <%= will_paginate @posts %>
+      <h3><a href="https://www.tumblr.com/blog/heatseeknyc" class="round-corners button more-button">More</a></h3>
+    </div>
+  </div>
+</div>
