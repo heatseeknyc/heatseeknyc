@@ -1,0 +1,67 @@
+<li class="tumblr_post">
+  <% if post["type"] == "video" %>
+    <div class="tumblr_video">
+      <%= post["player"][2]["embed_code"].html_safe %>
+    </div>
+    <p class="tumblr_caption">
+    <%= post["caption"].html_safe %>
+    </p>
+  <% end %>
+
+  <% if post["type"] == "audio" %>
+    <div class="tumblr_audio">
+      <%= post["player"].html_safe %>
+    </div>
+    <p class="tumblr_caption">
+    <%= post["caption"].html_safe %>
+    </p>
+  <% end %>
+
+  <% if post["type"] == "text" %>
+    <div class="tumblr_title">
+      <%= (post["title"] || "").html_safe %>
+    </div>
+    <div class="tumblr_text">
+      <%= (post["body"] || "").html_safe %>
+    </div>
+  <% end %>
+
+  <% if post["type"] == "chat" %>
+    <div class="tumblr_title">
+      <%= (post["title"] || "").html_safe %>
+    </div>
+    <div class="tumblr_chat">
+      <%= (post["body"] || "").html_safe %>
+    </div>
+  <% end %>
+
+  <% if post["type"] == "link" %>
+    <div class="tumblr_title">
+      <%= link_to post["title"].html_safe, post["url"] %>
+    </div>
+    <div class="tumblr_description">
+      <%= post["description"].html_safe %>
+    </div>
+  <% end %>
+
+  <% if post["type"] == "quote" %>
+    <div class="tumblr_text">
+      <%= post["text"].html_safe %>
+    </div>
+    <div class="tumblr_source">
+      <%= post["source"].html_safe %>
+    </div>
+  <% end %>
+
+  <% if post["type"] == "photo" %>
+    <% post["photos"].each do |photo| %>
+      <%= image_tag photo["alt_sizes"][0]["url"], class: "tumblr_photo" %>
+      <p class="tumblr_caption">
+      <%= post["caption"].html_safe %>
+      </p>
+    <% end %>
+  <% end %>
+
+  <p class="tumblr_date"><%= format_tumblr_date(post["date"]) %></p>
+
+</li>
