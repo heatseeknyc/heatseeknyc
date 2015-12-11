@@ -1,4 +1,4 @@
-[![CodeShip](https://www.codeship.io/projects/13e8e870-b9be-0131-0742-5af5088413f2/status)](https://www.codeship.io/projects/13e8e870-b9be-0131-0742-5af5088413f2/status)
+[![CodeShip](https://www.codeship.io/projects/13e8e870-b9be-0131-0742-5af5088413f2/status)](https://codeship.com/projects/20839)
 [![Code Climate](https://codeclimate.com/github/heatseeknyc/heatseeknyc.png)](https://codeclimate.com/github/heatseeknyc/heatseeknyc)
 [![Coverage Status](https://coveralls.io/repos/wfjeff/twinenyc/badge.png)](https://coveralls.io/r/wfjeff/twinenyc)
 
