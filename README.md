@@ -87,7 +87,7 @@ The rails app lives in ```/vagrant/```
 This technology is currently in use by the [Urban Justice Center](http://www.urbanjustice.org/) who provided us with users for our proof-of-concept. We hope that this project will be used next heating season by advocacy groups like them.
 
 ## Authors
-[William Jeffries](http://www.linkedin.com/in/williamjeffries), and [Tristan Siegel](http://www.linkedin.com/in/tristantsiegel), students at the [Flatiron School](http://flatironschool.com/) in New York.
+[William Jeffries](http://www.linkedin.com/in/williamjeffries) and [Tristan Siegel](http://www.linkedin.com/in/tristantsiegel) in New York, and [Oliver Barnes](http://www.linkedin.com/in/oliverbarnes) in Sao Paulo.
 
 ## License
 This application is MIT Licensed. See [LICENSE](https://github.com/wfjeff/twinenyc/blob/master/LICENSE) for details.
