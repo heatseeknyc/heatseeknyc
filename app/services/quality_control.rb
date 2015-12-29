@@ -21,6 +21,8 @@ class QualityControl
       updated_temp = WeatherMan.outdoor_temp_for(r.created_at, r.user.zip_code, throttle)
       if updated_temp.is_a? Integer
         r.outdoor_temp = updated_temp
+        regulator = Regulator.new(r)
+        r.violation = regulator.has_detected_violation?
         r.save
         puts 'save successful'
       else
