@@ -10,6 +10,8 @@ namespace :weather do
 
   desc "update any readings without outdoor temperatures"
   task update: :environment do
+    # app/tasks/
+    Tasks::UpdateReadingsOutdoorTemp.exec
   end
 
 end
