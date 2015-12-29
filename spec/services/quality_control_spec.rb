@@ -24,25 +24,9 @@ describe QualityControl do
     end
   end
 
-  describe "#self.truncate_user_until" do
-    it "removes readings from a user before a given date" do
-      48.times do |i|
-        FactoryGirl.create(:reading, {
-          user: @user,
-          sensor: @sensor,
-          created_at: i.hours.ago
-        })
-      end
-
-      expect(@user.readings.count).to eq 48
-      QualityControl.truncate_user_until(@user, 1.day.ago)
-      expect(@user.readings.count).to eq 24
-    end
-  end
-
   describe "#self.update_outdoor_temps_for" do
     it "updates missing outdoor temps" do
-      VCR.use_cassette('wunderground') do
+      VCR.use_cassette('wunderground', record: :new_episodes) do
         sunday_afternoon = DateTime.parse('"2015-03-01T13:00:00-05:00"')
         10.times do
           @user.readings.create(temp: 45, created_at: sunday_afternoon)

@@ -16,14 +16,6 @@ class QualityControl
     end
   end
 
-  def self.truncate_user_until(user, time)
-    user.readings.each do |r|
-      if r.created_at < time
-        r.destroy
-      end
-    end
-  end
-
   def self.update_outdoor_temps_for(readings, throttle = nil)
     readings.each do |r|
       updated_temp = WeatherMan.outdoor_temp_for(r.created_at, r.user.zip_code, throttle)
