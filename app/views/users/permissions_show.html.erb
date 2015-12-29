@@ -9,7 +9,7 @@
               <% if (current_user.permissions === 0) %>
                 <div class="search-form">
                   <button id="search-button"><i class="fa fa-search"></i><span class="advocate-button">Search</span></button>
-                  <%= text_field_tag :q, "", :class => "form-control", autofocus: true, placeholder: "Find a tenant..." %>
+                  <%= text_field_tag :q, "", :class => "form-control", placeholder: "Find a tenant..." %>
                 </div>
               <% end %>
             </div>
