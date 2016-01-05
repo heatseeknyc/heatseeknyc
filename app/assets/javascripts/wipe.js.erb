@@ -1,0 +1,45 @@
+$(document).ready(function() {
+  var widthOfContinueButton = $("#overlay-arrow-text").width();
+
+  //----for Chrome on Android ----//
+  var isMobile = window.screen.height <= 700 && window.screen.width <= 400;
+  var isChrome = navigator.appVersion.indexOf("Chrome/") != -1;
+  var bg = $("#overlay");
+  var imageUrl = "<%= asset_path('city-background-mobile.jpg') %>";
+
+  function resizeBackground() {
+    bg.height(jQuery(window).height());
+  }
+  
+  resizeBackground();
+
+  $(window).resize("resizeBackground");
+    
+  if (isChrome && isMobile) {
+    $("#overlay").css({
+      "background": "url(" + imageUrl + ") 0% / 100% 500px no-repeat"
+    })
+  }
+  //----for Chrome on Android ----//
+  
+  $("#overlay-arrow-text").css({
+    "margin-left": -widthOfContinueButton/2
+  })
+  
+  $(".overlay-arrow").click(function() {
+    $("body,html").animate({
+      scrollTop: "240px"
+    }, "3000");
+  });
+
+  $(window).on('scroll', function() {
+    var scroll = $(this).scrollTop() * -.3;
+    var transform = "translate(0%," + scroll + "%) matrix(1, 0, 0, 1, 0, 0)";
+    $("#overlay").css({
+      "-webkit-transform": transform,
+      "transform": transform,
+      "-moz-transform": transform,
+      "-0-transform": transform
+    })
+  });
+});
