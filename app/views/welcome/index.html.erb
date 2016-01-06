@@ -32,26 +32,7 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
-    $(".overlay-arrow").click(function(){
-      $("#overlay").css({
-        "margin-top" : "-100vh"
-      });
-    });
-    $(window).on('scroll', function() {
-      var scroll = $(this).scrollTop();
-      console.log(scroll);
-      var height = window.innerHeight;             
-       if(scroll > 100) {
-  
-        $("#overlay").css({
-          "margin-top" : "-100vh"
-        })
-      }else if(scroll <= 1){
-        $("#overlay").css({
-          "margin-top" : "0vh"
-        })
-      }
-     });
+ 
 
     
 
