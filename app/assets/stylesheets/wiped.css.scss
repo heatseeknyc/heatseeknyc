@@ -81,10 +81,11 @@
    }
    #overlay-email-link{
    	color: $theme-red;
-   	text-transform: uppercase;
-   	text-align: center;
-   	font-size: 12px;
    	cursor: pointer;
+   	text-align: center;
+   }
+   #overlay-email-link:hover{
+   	color: $theme-red;
    }
 
    #overlay-arrow-text{
@@ -97,6 +98,11 @@
    }
    #link-span{
    	border-bottom: $theme-red 3px solid;
+   	text-transform: uppercase;
+   	font-size: 12px;
+   }
+   #link-span:hover{
+   	color: $theme-red;
    }
    #testimonials{
     position: absolute;
