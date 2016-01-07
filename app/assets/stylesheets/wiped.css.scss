@@ -76,11 +76,8 @@
    	background-image: url("city-background.jpg");
    	background-size: cover;
    	background-repeat: no-repeat;
-   	position: absolute;
    	background-position: center;
-   	-moz-transition: 2s ease-out;
-   	-webkit-transition: 2s ease-out;
-   	transition: 2s ease-out;
+   	z-index: 4;
    }
    #overlay-email-link{
    	color: $theme-red;
@@ -102,18 +99,19 @@
    	border-bottom: $theme-red 3px solid;
    }
    #testimonials{
-   	color: #fff;
-    text-transform: uppercase;
     position: absolute;
     left: 78%;
     top: 51%;
-    font-size: 12px;
     cursor: pointer;
    }
    #testimonial-span{
    	border: #fff solid 1px;
 	border-radius: 10px;
-	    padding: 10px;
+	padding: 10px;
+	color: #fff;
+    text-transform: uppercase;
+    font-size: 12px;
+    text-decoration: none;
    }
    #testimonials:after{
    	content: url("line.svg");
@@ -217,3 +215,11 @@
   transform: translateY(5px);
   /* move the element down by 5px (it will stay in place because it's attached to the element that also moves up 5px) */
 }
+
+.panel {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
+
