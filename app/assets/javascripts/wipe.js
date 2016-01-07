@@ -22,16 +22,10 @@ $(document).ready(function(){
 	    .setTween(wipeAnimation)
 	    .addTo(controller);
 
-	var heightOfOverlay = 621;
+	var heightOfOverlay = "621px";
 
 	$(".overlay-arrow").click(function(){
-		$("#overlay").css({
-		    "transform": "translate(0%, -100%)",
-		    "-moz-transition": "1s ease-out",
-			"-webkit-transition": "1s ease-out",
-			"transition": "1s ease-out"
-		});
-		$(window).scrollTop(heightOfOverlay);
+		$("body").animate({scrollTop:heightOfOverlay}, "3000");
 	})
 
 });
