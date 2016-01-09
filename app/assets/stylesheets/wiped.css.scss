@@ -62,65 +62,62 @@
     font-family: 'Oswald', sans-serif;
    }
    #overlay-description{
-   	color: #fff;
-   	max-width: 650px;
-   	margin: 0 auto;
-   	font-size: 18px;
-   	font-weight: 500;
-   	margin-top: 20px;
-   	text-align: center;
+    color: #fff;
+    max-width: 650px;
+    margin: 0 auto;
+    font-size: 18px;
+    font-weight: 500;
+    margin-top: 20px;
+    text-align: center;
    }
    #overlay {
-   	width: 100%;
-   	height: 100vh;
-   	background-image: url("city-background.jpg");
-   	background-size: cover;
-   	background-repeat: no-repeat;
-   	background-position: center;
-   	z-index: 4;
+    width: 100%;
+    height: 100vh;
+    z-index: 5;
+    background-image: url("city-background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    background-position: center;
+/*    -moz-transition: 2s ease-out;
+    -webkit-transition: 2s ease-out;
+    transition: 2s ease-out;*/
    }
    #overlay-email-link{
-   	color: $theme-red;
-   	cursor: pointer;
-   	text-align: center;
-   }
-   #overlay-email-link:hover{
-   	color: $theme-red;
+    color: $theme-red;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 12px;
+    cursor: pointer;
    }
 
    #overlay-arrow-text{
-	margin-top: 140px;
-	text-align: center;
-	color: $theme-red-blue-3;
-	font-size: 12px;
-	text-transform: uppercase;
-	cursor: pointer;
+  margin-top: 120px;
+  text-align: center;
+  color: $theme-red-blue-3;
+  font-size: 12px;
+  text-transform: uppercase;
+  cursor: pointer;
    }
    #link-span{
-   	border-bottom: $theme-red 3px solid;
-   	text-transform: uppercase;
-   	font-size: 12px;
-   }
-   #link-span:hover{
-   	color: $theme-red;
+    border-bottom: $theme-red 3px solid;
    }
    #testimonials{
+    color: #fff;
+    text-transform: uppercase;
     position: absolute;
     left: 78%;
     top: 51%;
+    font-size: 12px;
     cursor: pointer;
    }
    #testimonial-span{
-   	border: #fff solid 1px;
-	border-radius: 10px;
-	padding: 10px;
-	color: #fff;
-    text-transform: uppercase;
-    font-size: 12px;
-    text-decoration: none;
+    border: #fff solid 1px;
+  border-radius: 10px;
+      padding: 10px;
    }
    #testimonials:after{
-   	content: url("line.svg");
+    content: url("line.svg");
     position: absolute;
     left: -77px;
     top: 0px;
@@ -128,51 +125,54 @@
     width: 100px;
    }
    #overlay-down-arrow{
-   	cursor: pointer;
-   	margin: auto;
-   	margin-top: 30px;
-   	width: 40px;
-   	height: 20px;
-   	background-repeat: no-repeat;
-   	background-position: center;
-   	color: $theme-red-blue-3;
-   	text-align: center;
-   	background-image: url("down-arrow.svg");
-   	-moz-animation: bounce 2s infinite;
-  	-webkit-animation: bounce 2s infinite;
-  	animation: bounce 2s infinite;
+    cursor: pointer;
+    margin: auto;
+    margin-top: 30px;
+    width: 40px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: $theme-red-blue-3;
+    text-align: center;
+    background-image: url("down-arrow.svg");
+    -moz-animation: bounce 2s infinite;
+    -webkit-animation: bounce 2s infinite;
+    animation: bounce 2s infinite;
    }
 
    /* Mobile */
 
 @media (max-width: $screen-xs-max) {
-	#overlay-description{
-		font-size: 14px;
-	}
-	#overlay-title{
-		font-size: 26px;
-	}
-	#testimonials {
-    	color: #fff;
-    	text-transform: uppercase;
-    	font-size: 12px;
-    	position: static;
-    	cursor: pointer;
-    	text-align: center;
-   	 	padding-top: 12px;
-	}
-	#testimonials:after{
- 		opacity: 0;
+  #overlay-description{
+    font-size: 14px;
+  }
+  #overlay-title{
+    font-size: 26px;
+  }
+  #testimonials {
+      color: #fff;
+      text-transform: uppercase;
+      font-size: 12px;
+      position: static;
+      cursor: pointer;
+      text-align: center;
+      padding-top: 12px;
+  }
+  #testimonials:after{
+    opacity: 0;
    }
-	#testimonial-span{
-		padding: 5px;
-	}
-	#overlay-down-arrow{
-		margin-top: 20px;
-	}
-	#overlay-arrow-text {
-		margin-top: 40px;
-	}
+  #testimonial-span{
+    padding: 5px;
+  }
+  #overlay-down-arrow{
+    margin-top: 20px;
+  }
+  #overlay-arrow-text {
+    margin-top: 40px;
+  }
+   #overlay{
+    background: url("city-background-mobile.jpg") 0% / 100% 100vh no-repeat;
+  }
 
 }
 
@@ -222,10 +222,12 @@
   /* move the element down by 5px (it will stay in place because it's attached to the element that also moves up 5px) */
 }
 
-.panel {
-    height: 100%;
-    width: 100%;
-    position: absolute;
+#homesplash{
+  margin-top: 195px; 
 }
 
+/*#panel {
+  position: absolute;
+  width: 100%;
 
+}*/
