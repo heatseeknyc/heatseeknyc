@@ -92,7 +92,7 @@
    }
 
    #overlay-arrow-text{
-  margin-top: 120px;
+  margin-top: 290px;
   text-align: center;
   color: $theme-red-blue-3;
   font-size: 12px;
@@ -145,9 +145,11 @@
 @media (max-width: $screen-xs-max) {
   #overlay-description{
     font-size: 14px;
+    padding: 10px;
   }
   #overlay-title{
     font-size: 26px;
+    padding: 10px; 
   }
   #testimonials {
       color: #fff;
@@ -157,6 +159,7 @@
       cursor: pointer;
       text-align: center;
       padding-top: 12px;
+      margin-top: 20px;
   }
   #testimonials:after{
     opacity: 0;
@@ -165,16 +168,14 @@
     padding: 5px;
   }
   #overlay-down-arrow{
-    margin-top: 20px; 
+    margin-top: 20px;
   }
   #overlay-arrow-text {
     margin-top: 40px;
   }
-   #overlay{
-    background: url("city-background-mobile.jpg") 0% / 100% 100vh no-repeat;
-  }
 
 }
+
 
    /* Float Shadow */
 .hvr-float-shadow {
@@ -226,8 +227,3 @@
   margin-top: 195px; 
 }
 
-/*#panel {
-  position: absolute;
-  width: 100%;
-
-}*/
