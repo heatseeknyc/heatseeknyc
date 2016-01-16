@@ -23,7 +23,7 @@
     }
     resizeBackground();
     if (navigator.appVersion.indexOf("Chrome/") != -1) {
-      if(window.screen.height <= 640 && window.screen.width <= 360){
+      if(window.screen.height <= 700 && window.screen.width <= 400){
         $("#overlay").css({
           "background": "url('assets/city-background-mobile.jpg') 0% / 100% 500px no-repeat"
         })

@@ -102,6 +102,10 @@
    #link-span{
     border-bottom: $theme-red 3px solid;
    }
+   #link-span a{
+    color: #fb500b;
+    text-decoration: none;
+   }
    #testimonials{
     color: #fff;
     text-transform: uppercase;
@@ -115,6 +119,11 @@
     border: #fff solid 1px;
   border-radius: 10px;
       padding: 10px;
+   }
+   #testimonial-span a{
+    color: #fb500b;
+    text-decoration: none;
+    border-bottom: $theme-red 3px solid;
    }
    #testimonials:after{
     content: url("line.svg");
@@ -172,6 +181,14 @@
   }
   #overlay-arrow-text {
     margin-top: 40px;
+  }
+  #homesplash{
+    background: #efefee image-url('nyc_snow-edited_crop_small.jpg') no-repeat top center;
+    background-attachment: fixed;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    -moz-background-size: cover;
   }
 
 }
