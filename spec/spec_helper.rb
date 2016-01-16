@@ -10,7 +10,6 @@ SimpleCov.start
 Timecop.travel(DateTime.parse('2015-03-01 00:00:00 -0500'))
 
 ENV["RAILS_ENV"] ||= 'test'
-ENV["WUNDERGROUND_API_KEY"] ||= 'd48122149ff66bca'
 
 Spork.prefork do
   require File.expand_path("../../config/environment", __FILE__)
