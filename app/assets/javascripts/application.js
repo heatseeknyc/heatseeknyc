@@ -19,9 +19,6 @@
 //= require jquery.scrolly.js
 //= require jquery.tipsy.js
 //= require select2
-//= require ScrollMagic
-//= require TweenMax.min.js
-//= require animation.gsap.js
 //= require wipe
 // 
 // top level js files

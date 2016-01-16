@@ -1,0 +1,237 @@
+
+@import 'shared';
+@-moz-keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    -moz-transform : translateY(0);
+    transform      : translateY(0);
+  }
+  40% {
+    -moz-transform : translateY(-20px);
+    transform      : translateY(-20px);
+  }
+  60% {
+    -moz-transform : translateY(-15px);
+    transform      : translateY(-15px);
+  }
+}
+@-webkit-keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    -webkit-transform : translateY(0);
+    transform         : translateY(0);
+  }
+  40% {
+    -webkit-transform : translateY(-20px);
+    transform         : translateY(-20px);
+  }
+  60% {
+    -webkit-transform : translateY(-15px);
+    transform         : translateY(-15px);
+  }
+}
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    -webkit-transform : translateY(0);
+    -moz-transform    : translateY(0);
+    -ms-transform     : translateY(0);
+    transform         : translateY(0);
+  }
+  40% {
+    -webkit-transform : translateY(-20px);
+    -moz-transform    : translateY(-20px);
+    -ms-transform     : translateY(-20px);
+    transform         : translateY(-20px);
+  }
+  60% {
+    -webkit-transform : translateY(-15px);
+    -moz-transform    : translateY(-15px);
+    -ms-transform     : translateY(-15px);
+    transform         : translateY(-15px);
+  }
+}
+#city-background {
+  position : absolute;
+  width    : 100%;
+}
+#overlay-title {
+  z-index        : 5;
+  padding-top    : 40px;
+  font-family    : 'Oswald', sans-serif;
+  color          : #fff;
+  text-align     : center;
+  text-transform : uppercase;
+}
+#overlay-description{
+  max-width   : 650px;
+  margin      : 0 auto;
+  margin-top  : 20px;
+  font-size   : 18px;
+  font-weight : 500;
+  color       : #fff;
+  text-align  : center;
+}
+#overlay {
+  position            : absolute;
+  z-index             : 5;
+  height              : 100vh;
+  width               : 100%;
+  background-image    : url("city-background.jpg");
+  background-position : center;
+  background-repeat   : no-repeat;
+  background-size     : cover;
+}
+#overlay-email-link{
+  cursor         : pointer;
+  font-size      : 12px;
+  color          : $theme-red;
+  text-align     : center;
+  text-transform : uppercase;
+}
+#overlay-arrow-text{
+  position       : absolute;
+  bottom         : 90px;
+  left           : 50%;
+  cursor         : pointer;
+  font-size      : 12px;
+  color          : $theme-red-blue-3;
+  text-align     : center;
+  text-transform : uppercase;
+}
+#link-span{
+  border-bottom : $theme-red 3px solid;
+}
+#link-span a{
+  color           : #fb500b;
+  text-decoration : none;
+}
+#testimonials{
+  position       : absolute;
+  top            : 51%;
+  left           : 78%;
+  cursor         : pointer;
+  font-size      : 12px;
+  color          : #fff;
+  text-transform : uppercase;
+}
+#testimonial-span{
+  padding       : 10px;
+  border        : #fff solid 1px;
+  border-radius : 10px;
+}
+#testimonial-span a{
+  color           : #fb500b;
+  text-decoration : none;
+}
+#testimonials:after{
+  content  : url("line.svg");
+  position : absolute;
+  top      : 0px;
+  left     : -77px;
+  z-index  : 10;
+  width    : 100px;
+}
+#overlay-down-arrow{
+  position            : absolute;
+  bottom              : 60px;
+  left                : 50%;
+  height              : 20px;
+  width               : 40px;
+  margin              : auto;
+  margin-left         : -20px;
+  cursor              : pointer;
+  background-image    : url("down-arrow.svg");
+  background-position : center;
+  background-repeat   : no-repeat;
+  color               : $theme-red-blue-3;
+  text-align          : center;
+  -webkit-animation   : bounce 2s infinite;
+  -moz-animation      : bounce 2s infinite;
+  animation           : bounce 2s infinite;
+}
+   /* Mobile */
+@media (max-width: $screen-xs-max) {
+  #overlay-description{
+    padding   : 10px;
+    font-size : 14px;
+  }
+  #overlay-title{
+    padding   : 10px;
+    font-size : 26px;
+  }
+  #testimonials {
+    position       : static;
+    padding-top    : 12px;
+    cursor         : pointer;
+    font-size      : 12px;
+    color          : #fff;
+    text-align     : center;
+    text-transform : uppercase;
+  }
+  #testimonials:after{
+    opacity : 0;
+  }
+  #testimonial-span{
+    padding : 5px;
+  }
+  #overlay-down-arrow{
+   /* margin-top : 20px;*/
+  }
+  #overlay-arrow-text {
+   /* margin-top : 40px;*/
+  }
+  #homesplash{
+    background              : #efefee image-url('nyc_snow-edited_crop_small.jpg') no-repeat top center;
+    background-attachment   : fixed;
+    background-size         : cover;
+    -webkit-background-size : cover;
+    -o-background-size      : cover;
+    -moz-background-size    : cover;
+  }
+}
+   /* Float Shadow */
+.hvr-float-shadow {
+  position                    : relative;
+  display                     : inline-block;
+  vertical-align              : middle;
+  box-shadow                  : 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-transition-property : transform;
+  transition-property         : transform;
+  -webkit-transition-duration : 0.3s;
+  transition-duration         : 0.3s;
+  -webkit-transform           : translateZ(0);
+  transform                   : translateZ(0);
+  -webkit-backface-visibility : hidden;
+  backface-visibility         : hidden;
+  -moz-osx-font-smoothing     : grayscale;
+}
+.hvr-float-shadow:before {
+  content                     : '';
+  position                    : absolute;
+  top                         : 100%;
+  left                        : 5%;
+  z-index                     : -1;
+  height                      : 10px;
+  width                       : 90%;
+  opacity                     : 0;
+  background                  : -webkit-radial-gradient(center, ellipse, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%);
+  background                  : radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%);
+  -webkit-transition-property : transform, opacity;
+  transition-property         : transform, opacity;
+  /* W3C */
+  -webkit-transition-duration : 0.3s;
+  transition-duration         : 0.3s;
+  pointer-events              : none;
+}
+.hvr-float-shadow:hover, .hvr-float-shadow:focus, .hvr-float-shadow:active {
+  -webkit-transform : translateY(-5px);
+  transform         : translateY(-5px);
+  /* move the element up by 5px */
+}
+.hvr-float-shadow:hover:before, .hvr-float-shadow:focus:before, .hvr-float-shadow:active:before {
+  opacity           : 1;
+  -webkit-transform : translateY(5px);
+  transform         : translateY(5px);
+  /* move the element down by 5px (it will stay in place because it's attached to the element that also moves up 5px) */
+}
+#homesplash{
+  margin-top : 195px;
+}
