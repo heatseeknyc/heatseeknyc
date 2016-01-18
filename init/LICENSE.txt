@@ -1,4 +1,4 @@
-Copyright (c) 2014 Tristan Siegel
+Copyright (c) 2014 Heat Seek, Inc.
 
 MIT License
 
