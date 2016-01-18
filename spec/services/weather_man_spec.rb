@@ -1,6 +1,18 @@
 require 'spec_helper'
 
 describe WeatherMan do
+  describe ".key_for" do
+    it "returns a key for a given zip code and datetime" do
+      key = WeatherMan.key_for(10001, DateTime.parse('January 1, 2016'))
+      expect(key).to eq "outdoor_temp_for_10001_on_2016-01-01"
+    end
+
+    it "includes the hour if datetime is today" do
+      key = WeatherMan.key_for(10001, DateTime.now)
+      expect(key).to include "H#{DateTime.now.hour}"
+    end
+  end
+
   describe ".current_outdoor_temp" do
     it "returns current outdoor temperature from Wunderground API" do
       VCR.use_cassette('wunderground') do
