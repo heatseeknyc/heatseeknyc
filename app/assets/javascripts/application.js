@@ -19,6 +19,7 @@
 //= require jquery.scrolly.js
 //= require jquery.tipsy.js
 //= require select2
+//= require wipe
 // 
 // top level js files
 //= require advocate
