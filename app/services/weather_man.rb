@@ -3,7 +3,7 @@ class WeatherMan
 
   def self.key_for(zip_code, datetime)
     format = '%Y-%m-%d'
-    format += 'H%H' if datetime.today?
+    format += 'H%H' if datetime.to_date == Date.today
 
     "outdoor_temp_for_#{zip_code}_on_#{datetime.strftime(format)}"
   end
