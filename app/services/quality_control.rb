@@ -16,7 +16,7 @@ class QualityControl
     end
   end
 
-  def self.update_outdoor_temps_for(readings, throttle = nil)
+  def self.update_outdoor_temps_for(readings, throttle = nil, silent = nil)
     readings.each do |r|
       updated_temp = WeatherMan.outdoor_temp_for(r.created_at, r.user.zip_code, throttle)
       if updated_temp.is_a? Integer
@@ -24,7 +24,7 @@ class QualityControl
         regulator = Regulator.new(r)
         r.violation = regulator.has_detected_violation?
         r.save
-        puts 'save successful'
+        puts 'save successful' unless silent
       else
         puts 'API not returning valid data'
         puts updated_temp
