@@ -1,14 +1,6 @@
 require 'spec_helper'
 
 describe WeatherMan do
-  before do
-    Timecop.travel('March 1, 2015')
-  end
-
-  after do
-    Timecop.return
-  end
-
   describe ".key_for" do
     it "returns a key for a given zip code and datetime" do
       key = WeatherMan.key_for(10001, DateTime.parse('January 1, 2015'))
