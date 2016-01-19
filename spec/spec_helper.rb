@@ -7,7 +7,7 @@ require 'simplecov'
 require 'timecop'
 
 SimpleCov.start
-Timecop.travel('March 1, 2015')
+Timecop.travel(DateTime.parse('2015-03-01 00:00:00 -0500'))
 
 ENV["RAILS_ENV"] ||= 'test'
 ENV["WUNDERGROUND_API_KEY"] ||= 'd48122149ff66bca'
