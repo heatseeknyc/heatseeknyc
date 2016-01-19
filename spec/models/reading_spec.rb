@@ -29,8 +29,9 @@ describe Reading do
   context "when created from params" do
     before do
       VCR.use_cassette('wunderground') do
-        sensor = FactoryGirl.create(:sensor, "name"=> "0013a20040c17f5a")
-        sensor.user = FactoryGirl.create(:user)
+        time = Time.parse('March 1, 2015 12:00:00')
+        sensor = create(:sensor, "name"=> "0013a20040c17f5a", created_at: time)
+        sensor.user = create(:user)
         sensor.save
         @reading = Reading.create_from_params({
           :time =>1426064293.0,

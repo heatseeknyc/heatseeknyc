@@ -5,7 +5,7 @@ describe WeatherMan do
     it "returns current outdoor temperature from Wunderground API" do
       VCR.use_cassette('wunderground') do
         temperature = WeatherMan.current_outdoor_temp(10004, 0)
-        expect(temperature).to be_a Float
+        expect(temperature).to be_a Numeric
       end
     end
 

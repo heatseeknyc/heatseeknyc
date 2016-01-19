@@ -3,10 +3,11 @@ require 'spec_helper'
 describe UpdateReadingsWithoutOutdoorTemps do
   describe ".exec" do
     before do
-      create(:reading)
-      create(:reading)
-      create(:reading, outdoor_temp: nil)
-      create(:reading, outdoor_temp: nil)
+      time = Time.parse('March 1, 2015 12:00:00')
+      create(:reading, created_at: time)
+      create(:reading, created_at: time)
+      create(:reading, outdoor_temp: nil, created_at: time)
+      create(:reading, outdoor_temp: nil, created_at: time)
     end
 
     it "updates readings without outdoor temps" do
