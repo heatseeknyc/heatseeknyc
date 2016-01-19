@@ -28,9 +28,10 @@ gem 'stripe'
 gem 'psych', '= 2.0.5'
 
 group :test do
+  gem 'memory_test_fix'
+  gem 'timecop'
   gem 'vcr'
   gem 'webmock'
-  gem 'memory_test_fix'
 end
 
 group :test, :development do

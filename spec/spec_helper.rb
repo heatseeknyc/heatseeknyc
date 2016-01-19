@@ -4,8 +4,10 @@ Coveralls.wear!
 require 'rubygems'
 require 'spork'
 require 'simplecov'
+require 'timecop'
 
 SimpleCov.start
+Timecop.travel('March 1, 2015')
 
 ENV["RAILS_ENV"] ||= 'test'
 ENV["WUNDERGROUND_API_KEY"] ||= 'd48122149ff66bca'
