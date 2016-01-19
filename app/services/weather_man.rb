@@ -21,7 +21,7 @@ class WeatherMan
     raise ArgumentError if !zip_code
 
     throttle ||= 9
-    Rails.cache.fetch(key_for(zip_code, datetime), :expires_in => 1.hour) do
+    Rails.cache.fetch(key_for(zip_code, datetime), :expires_in => 1.day) do
       sleep throttle
       observationHash = @w_api.history_for(datetime, zip_code)
 
