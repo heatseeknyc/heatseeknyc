@@ -1,5 +1,5 @@
 class WeatherMan
-  @w_api = Wunderground.new(ENV["WUNDERGROUND_API_KEY"])
+  @w_api = Wunderground.new(ENV["WUNDERGROUND_KEY"])
 
   def self.key_for(zip_code, time)
     format = '%Y-%m-%d'
@@ -17,22 +17,16 @@ class WeatherMan
     end
   end
 
-  def self.outdoor_temp_for(datetime, zip_code, throttle = nil)
-    raise ArgumentError if !zip_code
-
-    throttle ||= 9
-    Rails.cache.fetch(key_for(zip_code, datetime), :expires_in => 1.day) do
+  def self.outdoor_temp_for(time:, zip_code:, throttle: 9)
+    Rails.cache.fetch(key_for(zip_code, time), :expires_in => 1.day) do
       sleep throttle
-      observationHash = @w_api.history_for(datetime, zip_code)
-
-      if observationHash
-        observations = observationHash['history']['observations']
-        observations.each do |o|
-          if o['date']['hour'].to_i == datetime.hour.to_i
-            return o['tempi'].to_i
-          end
-        end
-      end
+      historical_reading = fetch_historical_reading(time, zip_code)
+      historical_reading.temperature
     end
+  end
+
+  def self.fetch_historical_reading(time, zip_code)
+    response = @w_api.history_for(time, zip_code)
+    HistoricalReading.new_from_api(time, response)
   end
 end
