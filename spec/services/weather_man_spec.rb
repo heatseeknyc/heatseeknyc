@@ -15,11 +15,9 @@ describe WeatherMan do
   end
 
   describe ".current_outdoor_temp" do
-    it "returns current outdoor temperature from Wunderground API" do
-      VCR.use_cassette('wunderground') do
-        temperature = WeatherMan.current_outdoor_temp(10004, 0)
-        expect(temperature).to be_a Numeric
-      end
+    it "returns current outdoor temperature from Wunderground API", :vcr do
+      temperature = WeatherMan.current_outdoor_temp(10004, 0)
+      expect(temperature).to be_a Numeric
     end
 
     it "returns nil when not given a zip code" do
@@ -37,16 +35,14 @@ describe WeatherMan do
   end
 
   describe ".outdoor_temp_for" do
-    it "returns historical outdoor temperature from Wunderground API" do
-      VCR.use_cassette('wunderground') do
-        time = Time.zone.parse("Feb 20, 2015 at 8pm")
-        temperature = WeatherMan.outdoor_temp_for({
-          time: time,
-          zip_code: 10004,
-          throttle: 0
-        })
-        expect(temperature).to eq 15
-      end
+    it "returns historical outdoor temperature from Wunderground API", :vcr do
+      time = Time.zone.parse("Feb 20, 2015 at 8pm")
+      temperature = WeatherMan.outdoor_temp_for({
+        time: time,
+        zip_code: 10004,
+        throttle: 30
+      })
+      expect(temperature).to eq 15
     end
   end
 end

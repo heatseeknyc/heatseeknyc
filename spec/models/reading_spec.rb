@@ -26,23 +26,18 @@ describe Reading do
     expect(reading.persisted?).to eq false
   end
 
-  context "when created from params" do
-    before do
-      VCR.use_cassette('wunderground') do
-        time = Time.parse('March 1, 2015 12:00:00')
-        sensor = create(:sensor, "name"=> "0013a20040c17f5a", created_at: time)
-        sensor.user = create(:user)
-        sensor.save
-        @reading = Reading.create_from_params({
-          :time =>1426064293.0,
-          :temp => 56.7,
-          :sensor_name => "0013a20040c17f5a",
-          :verification => "c0ffee"
-        })
-      end
-    end
-
-    it "rounds temperature properly" do
+  describe ".create_from_params" do
+    it "rounds temperature properly", :vcr do
+      time = Time.parse('March 1, 2015 12:00:00')
+      sensor = create(:sensor, "name"=> "0013a20040c17f5a", created_at: time)
+      sensor.user = create(:user)
+      sensor.save
+      @reading = Reading.create_from_params({
+        :time =>1426064293.0,
+        :temp => 56.7,
+        :sensor_name => "0013a20040c17f5a",
+        :verification => "c0ffee"
+      })
       expect(@reading.temp).to eq 57
     end
   end
