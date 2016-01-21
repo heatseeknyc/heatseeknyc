@@ -41,7 +41,7 @@ describe WeatherMan do
         zip_code: 10004,
         throttle: 0
       })
-      expect(temperature).to eq 3
+      expect(temperature).to eq 4
       temperature = WeatherMan.outdoor_temp_for({
         time: Time.zone.parse("Feb 20, 2015 at 2pm"),
         zip_code: 10004,
@@ -61,11 +61,11 @@ describe WeatherMan do
     it "returns different temps throughout the day", :vcr do
       time = Time.zone.parse("Feb 20, 2015 at 8am")
       historical = WeatherMan.fetch_historical_reading(time, 10004, 0)
-      expect(historical.temperature).to eq 3
+      expect(historical.temperature).to eq 3.9
       historical.time = Time.zone.parse("Feb 20, 2015 at 2pm")
-      expect(historical.temperature).to eq 19
+      expect(historical.temperature).to eq 19.0
       historical.time = Time.zone.parse("Feb 20, 2015 at 8pm")
-      expect(historical.temperature).to eq 15
+      expect(historical.temperature).to eq 15.1
     end
   end
 end

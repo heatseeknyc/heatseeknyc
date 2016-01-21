@@ -2,14 +2,14 @@ require 'spec_helper'
 
 describe Regulator do
   describe "#self.in_violation?" do
-    after(:all) do
-      Timecop.travel(Time.zone.parse('March 1, 2015 00:00:00 -0500'))
-    end
-
     context "during the day" do
 
       before(:each) do
-        Timecop.travel(Time.zone.now.change(hour: 6, offset: '-0500'))
+        Timecop.travel(Time.zone.parse('March 1, 2015 12:00:00 -0400'))
+      end
+
+      after(:each) do
+        Timecop.travel(Time.zone.parse('March 1, 2015 00:00:00 -0400'))
       end
 
       it "returns violation status of a single reading" do
@@ -40,7 +40,11 @@ describe Regulator do
     context "during the night" do
 
       before(:each) do
-        Timecop.travel(Time.zone.now.change(hour: 22, offset: '-0500'))
+        Timecop.travel(Time.zone.parse('March 1, 2015 05:00:00 -0400'))
+      end
+
+      after(:each) do
+        Timecop.travel(Time.zone.parse('March 1, 2015 00:00:00 -0400'))
       end
 
       it "returns violation status of a single reading" do
@@ -71,8 +75,13 @@ describe Regulator do
 
   describe "#inspect!" do
     context "when in violation" do
+      before do
+        ActiveRecord::Base.transaction do
+          10.times { create(:reading, :day_time, { temp: 75, outdoor_temp: 50 }) }
+        end
+      end
+
       it "updates violation status to true", :vcr do
-        10.times { create(:reading, :day_time, { temp: 75, outdoor_temp: 50 }) }
         expect(Reading.where(violation: true)).to have(0).items
 
         Reading.first.update(temp: 65)
@@ -82,13 +91,67 @@ describe Regulator do
     end
 
     context "when not in violation" do
+      before do
+        ActiveRecord::Base.transaction do
+          10.times { create(:reading, :day_time, { temp: 65, outdoor_temp: 50 }) }
+        end
+      end
+
       it "updates violation status to false", :vcr do
-        10.times { create(:reading, :day_time, { temp: 65, outdoor_temp: 50 }) }
         expect(Reading.where(violation: true)).to have(10).items
 
         Reading.update_all(outdoor_temp: 60)
         Regulator.new(Reading.all).inspect!
         expect(Reading.where(violation: true)).to be_empty
+      end
+    end
+  end
+
+  describe "#batch_inspect!" do
+    context "with a few records" do
+      before do
+        ActiveRecord::Base.transaction do
+          10.times { create(:reading, :day_time, {temp: 75, outdoor_temp: 50 }) }
+        end
+      end
+
+      it "updates violation status in batches", :vcr do
+        expect(Reading.where(violation: true)).to have(0).items
+
+        Reading.order(created_at: :asc).first.update(temp: 65)
+        Reading.order(created_at: :asc).last.update(temp: 65)
+
+        Regulator.new(Reading.all).batch_inspect!(silent: true)
+        expect(Reading.where(violation: true)).to have(2).items
+      end
+    end
+
+    context "with many records" do
+      # Extract this into a less frequently run test suite
+      # it's too slow to run before each deployment
+      before do
+        i = 0
+        100.times do
+          ActiveRecord::Base.transaction do
+            puts i += 1
+            100.times do
+              create(:reading, :day_time, {
+                temp: 75,
+                outdoor_temp: 50
+              })
+            end
+          end
+        end
+      end
+
+      xit "updates violation status in batches", :vcr do
+        expect(Reading.where(violation: true)).to have(0).items
+
+        Reading.order(created_at: :asc).first.update(temp: 65)
+        Reading.order(created_at: :asc).last.update(temp: 65)
+
+        Regulator.new(Reading.all).batch_inspect!
+        expect(Reading.where(violation: true)).to have(2).items
       end
     end
   end

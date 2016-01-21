@@ -1,12 +1,21 @@
 class ObservationCollection
-  attr_reader :observations
+  attr_accessor :observations
   include Enumerable
 
-  def initialize(array)
-    @observations = array.map { |o| Observation.new(o) }
+  def self.new_from_array(array)
+    new.tap do |o|
+      o.observations = array.map { |hash| Observation.new_from_hash(hash) }
+    end
   end
 
   def each(&block)
     observations.each(&block)
+  end
+
+  def find_by(params)
+    return_observation = observations.find do |observation|
+      params.map { |attr, value| observation.send(attr) == value }.all?
+    end
+    return_observation || MissingObservation.new
   end
 end
