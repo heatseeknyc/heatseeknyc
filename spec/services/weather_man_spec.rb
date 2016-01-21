@@ -35,14 +35,37 @@ describe WeatherMan do
   end
 
   describe ".outdoor_temp_for" do
-    it "returns historical outdoor temperature from Wunderground API", :vcr do
-      time = Time.zone.parse("Feb 20, 2015 at 8pm")
+    it "returns historical outdoor temperature", :vcr do
       temperature = WeatherMan.outdoor_temp_for({
-        time: time,
+        time: Time.zone.parse("Feb 20, 2015 at 8am"),
         zip_code: 10004,
-        throttle: 30
+        throttle: 0
+      })
+      expect(temperature).to eq 3
+      temperature = WeatherMan.outdoor_temp_for({
+        time: Time.zone.parse("Feb 20, 2015 at 2pm"),
+        zip_code: 10004,
+        throttle: 0
+      })
+      expect(temperature).to eq 19
+      temperature = WeatherMan.outdoor_temp_for({
+        time: Time.zone.parse("Feb 20, 2015 at 8pm"),
+        zip_code: 10004,
+        throttle: 0
       })
       expect(temperature).to eq 15
+    end
+  end
+
+  describe ".fetch_historical_reading" do
+    it "returns different temps throughout the day", :vcr do
+      time = Time.zone.parse("Feb 20, 2015 at 8am")
+      historical = WeatherMan.fetch_historical_reading(time, 10004, 0)
+      expect(historical.temperature).to eq 3
+      historical.time = Time.zone.parse("Feb 20, 2015 at 2pm")
+      expect(historical.temperature).to eq 19
+      historical.time = Time.zone.parse("Feb 20, 2015 at 8pm")
+      expect(historical.temperature).to eq 15
     end
   end
 end
