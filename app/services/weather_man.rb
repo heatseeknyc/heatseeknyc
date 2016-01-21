@@ -19,7 +19,7 @@ class WeatherMan
 
   def self.outdoor_temp_for(time:, zip_code:, throttle: 9)
     historical_reading = fetch_historical_reading(time, zip_code, throttle)
-    historical_reading.temperature
+    historical_reading.temperature.round
   end
 
   def self.fetch_historical_reading(time, zip_code, throttle=9)
