@@ -6,7 +6,7 @@ describe QualityControl do
     @sensor = @user.sensors.create(name: '1234abcd')
   end
 
-  describe "#self.dedupe" do
+  describe ".dedupe" do
     it "dedupes a users's readings" do
       10.times do
         Reading.create({
@@ -24,7 +24,7 @@ describe QualityControl do
     end
   end
 
-  describe "#self.update_outdoor_temps_for" do
+  describe ".update_outdoor_temps_for" do
     before(:each) do
       sunday_afternoon = DateTime.parse("2015-08-01T13:00:00-05:00")
       10.times do
@@ -41,7 +41,7 @@ describe QualityControl do
       expect(partial_readings.count).to eq 0
     end
 
-    xit "updates violation status", :vcr do
+    it "updates violation status", :vcr do
       violation_readings = @user.readings.where(violation: true)
       expect(violation_readings.count).to eq 10
 
