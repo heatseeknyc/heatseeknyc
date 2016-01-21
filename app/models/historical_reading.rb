@@ -3,19 +3,15 @@ class HistoricalReading
 
   def self.new_from_api(time, response)
     array = response['history']['observations'] || []
-    hisorical_reading = self.new.tap do |r|
-      r.observations = ObservationCollection.new(array)
+    self.new.tap do |r|
+      r.observations = ObservationCollection.new_from_array(array)
       r.response = response
       r.time = time
     end
   end
 
   def temperature
-    closest_observation = observations.find do |o|
-      o.hour == self.time.hour.to_i
-    end
-
-    closest_observation.temperature
+    observations.find_by('hour' => time.hour).temperature
   end
 end
 
