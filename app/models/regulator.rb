@@ -23,4 +23,15 @@ class Regulator
       r.save
     end
   end
+
+  def batch_inspect!(batch_size:100, silent:false)
+    number_of_batches = (readings.count / batch_size.to_f).ceil
+    puts "#{readings.count} in #{number_of_batches} batches" unless silent
+    (1..number_of_batches).each do |batch_number|
+      place = batch_number * batch_size
+      batch = readings.order(updated_at: :asc).first(place).last(batch_size)
+      Regulator.new(batch).inspect!
+      puts "finished #{batch_number} / #{number_of_batches}" unless silent
+    end
+  end
 end
