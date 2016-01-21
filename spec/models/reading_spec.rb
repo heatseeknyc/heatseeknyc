@@ -27,7 +27,8 @@ describe Reading do
   end
 
   describe ".create_from_params" do
-    it "rounds temperature properly", :vcr do
+    it "rounds temperature properly" do
+      allow(WeatherMan).to receive(:outdoor_temp_for).and_return(45)
       time = Time.parse('March 1, 2015 12:00:00')
       sensor = create(:sensor, "name"=> "0013a20040c17f5a", created_at: time)
       sensor.user = create(:user)
