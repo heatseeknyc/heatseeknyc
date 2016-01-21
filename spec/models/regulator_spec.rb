@@ -67,6 +67,29 @@ describe Regulator do
         expect(regulator).to_not have_detected_violation
       end
     end
+  end
 
+  describe "#inspect!" do
+    context "when in violation" do
+      it "updates violation status to true", :vcr do
+        10.times { create(:reading, :day_time, { temp: 75, outdoor_temp: 50 }) }
+        expect(Reading.where(violation: true)).to have(0).items
+
+        Reading.first.update(temp: 65)
+        Regulator.new(Reading.all).inspect!
+        expect(Reading.where(violation: true)).to have(1).item
+      end
+    end
+
+    context "when not in violation" do
+      it "updates violation status to false", :vcr do
+        10.times { create(:reading, :day_time, { temp: 65, outdoor_temp: 50 }) }
+        expect(Reading.where(violation: true)).to have(10).items
+
+        Reading.update_all(outdoor_temp: 60)
+        Regulator.new(Reading.all).inspect!
+        expect(Reading.where(violation: true)).to be_empty
+      end
+    end
   end
 end

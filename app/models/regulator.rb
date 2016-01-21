@@ -15,4 +15,11 @@ class Regulator
       User.new.in_violation?(r.created_at, r.temp, r.outdoor_temp)
     end
   end
+
+  def inspect!
+    readings.each do |r|
+      r.violation = User.new.in_violation?(r.created_at, r.temp, r.outdoor_temp)
+      r.save
+    end
+  end
 end
