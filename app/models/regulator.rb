@@ -17,8 +17,9 @@ class Regulator
   end
 
   def inspect!
+    user = User.new # get rid of this, the user class does not belong here
     readings.each do |r|
-      r.violation = User.new.in_violation?(r.created_at, r.temp, r.outdoor_temp)
+      r.violation = user.in_violation?(r.created_at, r.temp, r.outdoor_temp)
       r.save
     end
   end
