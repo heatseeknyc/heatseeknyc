@@ -1,22 +1,14 @@
 require 'spec_helper'
 
 describe HistoricalReading do
-  let(:rate_limited_response) { {
-    "response"=>{
-      "version"=>"0.1",
-      "termsofService"=>"http://www.wunderground.com/weather/api/d/terms.html",
-      "features"=>{},
-      "error"=>{
-        "type"=>"invalidfeature",
-        "description"=>"a requested feature is not valid due to exceeding rate plan"
-      }
-    }
-  } }
-
   describe ".new_from_api" do
-    it "raises errors if rate limited" do
+
+    it "raises errors if rate limited", :vcr do
+      wunderground = Wunderground.new(ENV["WUNDERGROUND_KEY"])
+      time = Time.zone.parse('March 1, 2015 00:00:00 -04:00')
+      rate_limited_response = wunderground.history_for(time, 10001)
       expect {
-        HistoricalReading.new_from_api(Time.zone.now, rate_limited_response)
+        HistoricalReading.new_from_api(time, rate_limited_response)
       }.to raise_error(HistoricalReading::RateLimited)
     end
   end
