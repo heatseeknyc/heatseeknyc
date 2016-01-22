@@ -1,11 +1,26 @@
 require 'spec_helper'
 
 describe HistoricalReading do
-  describe ".new_from_api" do
-    xit "" do
-    end
+  let(:rate_limited_response) { {
+    "response"=>{
+      "version"=>"0.1",
+      "termsofService"=>"http://www.wunderground.com/weather/api/d/terms.html",
+      "features"=>{},
+      "error"=>{
+        "type"=>"invalidfeature",
+        "description"=>"a requested feature is not valid due to exceeding rate plan"
+      }
+    }
+  } }
 
+  describe ".new_from_api" do
+    it "raises errors if rate limited" do
+      expect {
+        HistoricalReading.new_from_api(Time.zone.now, rate_limited_response)
+      }.to raise_error(HistoricalReading::RateLimited)
+    end
   end
+
   describe '#temperature' do
     context "when observation for given time is present" do
       it "returns the temperature" do
