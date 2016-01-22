@@ -37,10 +37,21 @@ describe WundergroundHistory, :vcr do
   end
 
   describe "populate_observations!" do
+    it "stores an ObservationCollection object to observations attribute" do
+      wh.time = Time.zone.parse('January 1, 2000 00:00:00 -04:00')
+      wh.response = wunderground.history_for(wh.time, 'knyc')
+      expect(wh.observations).to be_nil
+      wh.populate_observations!
+      expect(wh.observations).to be_a ObservationCollection
+    end
   end
 
   describe ".new_from_api" do
     it "returns a WundergroundHistory object" do
+      time = Time.zone.parse('January 1, 2000 00:00:00 -04:00')
+      response = wunderground.history_for(time, 'knyc')
+      return_object = WundergroundHistory.new_from_api(time,response)
+      expect(return_object).to be_a WundergroundHistory
     end
 
     it "raises errors if data requested prematurely" do
