@@ -1,4 +1,4 @@
-class HistoricalReading
+class WundergroundHistory
   class RateLimited < StandardError; end
   class Premature < StandardError; end
 
