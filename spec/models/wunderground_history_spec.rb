@@ -2,37 +2,37 @@ require 'spec_helper'
 
 describe WundergroundHistory, :vcr do
   let(:wunderground) { Wunderground.new(ENV['WUNDERGROUND_KEY']) }
-  let(:hr) { WundergroundHistory.new }
+  let(:wh) { WundergroundHistory.new }
 
   describe "premature?" do
 
     it "returns true when no data yet available from wunderground" do
-      hr.time = Time.zone.parse('January 1, 3000 00:00:00 -04:00')
-      hr.response = wunderground.history_for(hr.time, 'knyc')
-      expect(hr).to be_premature
+      wh.time = Time.zone.parse('January 1, 3000 00:00:00 -04:00')
+      wh.response = wunderground.history_for(wh.time, 'knyc')
+      expect(wh).to be_premature
     end
 
     it "returns false when data was available at time of creation" do
-      hr.time = Time.zone.parse('January 1, 2000 00:00:00 -04:00')
-      hr.response = wunderground.history_for(hr.time, 'knyc')
-      expect(hr).to_not be_premature
+      wh.time = Time.zone.parse('January 1, 2000 00:00:00 -04:00')
+      wh.response = wunderground.history_for(wh.time, 'knyc')
+      expect(wh).to_not be_premature
     end
   end
 
-  describe "rate_limited?", :vcr do
+  describe "rate_limited?" do
     before(:each) do
     end
 
     it "returns true when rate limited" do
-      hr.time = Time.zone.parse('January 1, 2000 00:00:00 -04:00')
-      hr.response = wunderground.history_for(hr.time, 'knyc')
-      expect(hr).to be_rate_limited
+      wh.time = Time.zone.parse('January 1, 2000 00:00:00 -04:00')
+      wh.response = wunderground.history_for(wh.time, 'knyc')
+      expect(wh).to be_rate_limited
     end
 
     it "returns false when not rate limited" do
-      hr.time = Time.zone.parse('January 1, 2000 00:00:00 -04:00')
-      hr.response = wunderground.history_for(hr.time, 'knyc')
-      expect(hr).to_not be_rate_limited
+      wh.time = Time.zone.parse('January 1, 2000 00:00:00 -04:00')
+      wh.response = wunderground.history_for(wh.time, 'knyc')
+      expect(wh).to_not be_rate_limited
     end
   end
 
@@ -40,7 +40,10 @@ describe WundergroundHistory, :vcr do
   end
 
   describe ".new_from_api" do
-    it "raises errors if data requested prematurely", :vcr do
+    it "returns a WundergroundHistory object" do
+    end
+
+    it "raises errors if data requested prematurely" do
       wunderground = Wunderground.new(ENV["WUNDERGROUND_KEY"])
       time = Time.zone.parse('January 22, 2016 12:00:00 -04:00')
       premature_response = wunderground.history_for(time, 10001)
@@ -49,7 +52,7 @@ describe WundergroundHistory, :vcr do
       }.to raise_error(WundergroundHistory::Premature)
     end
 
-    it "raises errors if rate limited", :vcr do
+    it "raises errors if rate limited" do
       wunderground = Wunderground.new(ENV["WUNDERGROUND_KEY"])
       time = Time.zone.parse('March 1, 2015 00:00:00 -04:00')
       rate_limited_response = wunderground.history_for(time, 10001)
