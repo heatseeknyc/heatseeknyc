@@ -4,8 +4,21 @@ FactoryGirl.define do
   factory :observation_collection do
     observations do |o|
       array = []
-      10.times { array << build(:observation) }
+      5.times { array << build(:observation) }
       array
+    end
+
+    trait :half_day do
+      observations do |o|
+        array = []
+        (0..11).each do |i|
+          array << build(:observation, {
+            hour: i,
+            temperature: i * 3
+          })
+        end
+        array
+      end
     end
 
     trait :full_day do

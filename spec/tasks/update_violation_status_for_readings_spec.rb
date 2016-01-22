@@ -9,9 +9,12 @@ describe UpdateViolationStatusForReadings do
       r1.temp = r2.temp = 67
       r1.save
       r2.save
-      UpdateViolationStatusForReadings.exec(silent: true)
-      expect(Reading.where.not(violation: false).count).to eq 1
-      expect(Reading.where(violation: false).count).to eq 1
+
+      expect {
+        UpdateViolationStatusForReadings.exec(silent: true)
+      }.to change {
+        Reading.where(violation: true).count
+      }.from(0).to 1
     end
   end
 end
