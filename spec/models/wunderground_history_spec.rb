@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe HistoricalReading, :vcr do
+describe WundergroundHistory, :vcr do
   let(:wunderground) { Wunderground.new(ENV['WUNDERGROUND_KEY']) }
-  let(:hr) { HistoricalReading.new }
+  let(:hr) { WundergroundHistory.new }
 
   describe "premature?" do
 
@@ -45,8 +45,8 @@ describe HistoricalReading, :vcr do
       time = Time.zone.parse('January 22, 2016 12:00:00 -04:00')
       premature_response = wunderground.history_for(time, 10001)
       expect {
-        HistoricalReading.new_from_api(time, premature_response)
-      }.to raise_error(HistoricalReading::Premature)
+        WundergroundHistory.new_from_api(time, premature_response)
+      }.to raise_error(WundergroundHistory::Premature)
     end
 
     it "raises errors if rate limited", :vcr do
@@ -54,25 +54,25 @@ describe HistoricalReading, :vcr do
       time = Time.zone.parse('March 1, 2015 00:00:00 -04:00')
       rate_limited_response = wunderground.history_for(time, 10001)
       expect {
-        HistoricalReading.new_from_api(time, rate_limited_response)
-      }.to raise_error(HistoricalReading::RateLimited)
+        WundergroundHistory.new_from_api(time, rate_limited_response)
+      }.to raise_error(WundergroundHistory::RateLimited)
     end
   end
 
   describe '#temperature' do
     context "when observation for given time is present" do
       it "returns the temperature" do
-        historical_reading = build(:historical_reading, :full_day)
-        expect(historical_reading).to be_a HistoricalReading
-        expect(historical_reading.temperature).to eq 39
+        wunderground_history = build(:wunderground_history, :full_day)
+        expect(wunderground_history).to be_a WundergroundHistory
+        expect(wunderground_history.temperature).to eq 39
       end
     end
 
     context "when observation for given time is missing" do
       it "returns nil" do
-        historical_reading = build(:historical_reading)
-        expect(historical_reading).to be_a HistoricalReading
-        expect(historical_reading.temperature).to eq nil
+        wunderground_history = build(:wunderground_history)
+        expect(wunderground_history).to be_a WundergroundHistory
+        expect(wunderground_history.temperature).to eq nil
       end
     end
   end

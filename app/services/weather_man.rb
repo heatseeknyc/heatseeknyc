@@ -18,16 +18,16 @@ class WeatherMan
   end
 
   def self.outdoor_temp_for(time:, zip_code:, throttle: 9)
-    historical_reading = fetch_historical_reading(time, zip_code, throttle)
-    historical_reading.temperature.round
+    wunderground_history = fetch_wunderground_history(time, zip_code, throttle)
+    wunderground_history.temperature.round
   end
 
-  def self.fetch_historical_reading(time, zip_code, throttle=9)
+  def self.fetch_wunderground_history(time, zip_code, throttle=9)
     key = key_for(zip_code, time)
     response = Rails.cache.fetch(key, :expires_in => 1.day) do
       sleep throttle
       @w_api.history_for(time, zip_code)
     end
-    HistoricalReading.new_from_api(time, response)
+    WundergroundHistory.new_from_api(time, response)
   end
 end
