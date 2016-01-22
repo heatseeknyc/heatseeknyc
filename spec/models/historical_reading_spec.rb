@@ -1,19 +1,38 @@
 require 'spec_helper'
 
-describe HistoricalReading do
+describe HistoricalReading, :vcr do
+  let(:wunderground) { Wunderground.new(ENV['WUNDERGROUND_KEY']) }
+  let(:hr) { HistoricalReading.new }
+
   describe "premature?" do
-    it "returns true when data was not yet available at time of creation" do
+
+    it "returns true when no data yet available from wunderground" do
+      hr.time = Time.zone.parse('January 1, 3000 00:00:00 -04:00')
+      hr.response = wunderground.history_for(hr.time, 'knyc')
+      expect(hr).to be_premature
     end
 
     it "returns false when data was available at time of creation" do
+      hr.time = Time.zone.parse('January 1, 2000 00:00:00 -04:00')
+      hr.response = wunderground.history_for(hr.time, 'knyc')
+      expect(hr).to_not be_premature
     end
   end
 
-  describe "rate_limited?" do
+  describe "rate_limited?", :vcr do
+    before(:each) do
+    end
+
     it "returns true when rate limited" do
+      hr.time = Time.zone.parse('January 1, 2000 00:00:00 -04:00')
+      hr.response = wunderground.history_for(hr.time, 'knyc')
+      expect(hr).to be_rate_limited
     end
 
     it "returns false when not rate limited" do
+      hr.time = Time.zone.parse('January 1, 2000 00:00:00 -04:00')
+      hr.response = wunderground.history_for(hr.time, 'knyc')
+      expect(hr).to_not be_rate_limited
     end
   end
 
@@ -26,7 +45,7 @@ describe HistoricalReading do
       time = Time.zone.parse('January 22, 2016 12:00:00 -04:00')
       premature_response = wunderground.history_for(time, 10001)
       expect {
-        r = HistoricalReading.new_from_api(time, premature_response)
+        HistoricalReading.new_from_api(time, premature_response)
       }.to raise_error(HistoricalReading::Premature)
     end
 
