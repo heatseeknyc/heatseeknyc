@@ -1,23 +1,39 @@
 class HistoricalReading
-  class RateLimited < StandardError
-  end
+  class RateLimited < StandardError; end
+  class Premature < StandardError; end
 
   attr_accessor :observations, :response, :time
 
   def self.new_from_api(time, response)
-    check_for_errors!(response)
-    array = response['history']['observations'] || []
-    self.new.tap do |r|
-      r.observations = ObservationCollection.new_from_array(array)
-      r.response = response
-      r.time = time
+    self.new.tap do |hr|
+      hr.response = response
+      hr.time = time
+      hr.check_for_errors!
+      hr.populate_observations!
     end
   end
 
-  def self.check_for_errors!(response)
-    invalid_feature = response.try(:[], 'response')
-      .try(:[], 'error').try(:[], 'type') == 'invalidfeature'
-    raise RateLimited if invalid_feature
+  def populate_observations!
+    self.observations = ObservationCollection.new_from_array(raw_observations)
+  end
+
+  def raw_observations
+    response['history']['observations']
+  end
+
+  def rate_limited?
+    response.try(:[], 'response').try(:[], 'error')
+      .try(:[], 'type') == 'invalidfeature'
+  end
+
+  def premature?
+    hours = raw_observations.map{ |o| o['date']['hour'].to_i }
+    hours.empty? || hours.max < self.time.hour
+  end
+
+  def check_for_errors!
+    raise RateLimited if rate_limited?
+    raise Premature if premature?
   end
 
   def temperature

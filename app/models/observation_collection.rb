@@ -1,3 +1,5 @@
+require 'observation'
+
 class ObservationCollection
   attr_accessor :observations
   include Enumerable

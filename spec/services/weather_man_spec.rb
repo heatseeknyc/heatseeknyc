@@ -1,6 +1,14 @@
 require 'spec_helper'
 
 describe WeatherMan do
+  before(:all) do
+    Timecop.travel(Time.zone.parse('March 1, 2015 at 12am'))
+  end
+
+  after(:all) do
+    Timecop.return
+  end
+
   describe ".key_for" do
     it "returns a key for a given zip code and datetime" do
       key = WeatherMan.key_for(10001, Time.zone.parse('January 1, 2015'))
@@ -8,8 +16,8 @@ describe WeatherMan do
     end
 
     it "includes the hour if datetime is today" do
-      datetime = Time.zone.now
-      key = WeatherMan.key_for(10001, datetime)
+      time = Time.zone.parse('March 1, 2015 at 12am')
+      key = WeatherMan.key_for(10001, time)
       expect(key).to eq "outdoor_temp_for_10001_on_2015-03-01H00"
     end
   end
