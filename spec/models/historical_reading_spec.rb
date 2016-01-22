@@ -1,7 +1,34 @@
 require 'spec_helper'
 
 describe HistoricalReading do
+  describe "premature?" do
+    it "returns true when data was not yet available at time of creation" do
+    end
+
+    it "returns false when data was available at time of creation" do
+    end
+  end
+
+  describe "rate_limited?" do
+    it "returns true when rate limited" do
+    end
+
+    it "returns false when not rate limited" do
+    end
+  end
+
+  describe "populate_observations!" do
+  end
+
   describe ".new_from_api" do
+    it "raises errors if data requested prematurely", :vcr do
+      wunderground = Wunderground.new(ENV["WUNDERGROUND_KEY"])
+      time = Time.zone.parse('January 22, 2016 12:00:00 -04:00')
+      premature_response = wunderground.history_for(time, 10001)
+      expect {
+        r = HistoricalReading.new_from_api(time, premature_response)
+      }.to raise_error(HistoricalReading::Premature)
+    end
 
     it "raises errors if rate limited", :vcr do
       wunderground = Wunderground.new(ENV["WUNDERGROUND_KEY"])
