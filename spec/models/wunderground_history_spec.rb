@@ -2,14 +2,14 @@ require 'spec_helper'
 
 describe WundergroundHistory, :vcr do
   let(:wunderground) { Wunderground.new(ENV['WUNDERGROUND_KEY']) }
+  let(:time) { Time.zone.parse('January 1, 2000 at 12am') }
+  let(:response) { wunderground.history_for(time, 'knyc') }
 
   describe "error handling" do
-    let(:time) { Time.zone.parse('January 1, 2000 at 12am') }
-    let(:response) { wunderground.history_for(time, 'knyc') }
-    let(:out_of_range_time) { Time.zone.parse('January 1, 3000 at 12am') }
 
     describe "validate!" do
       context "when history is empty" do
+        let(:out_of_range_time) { Time.zone.parse('January 1, 3000 at 12am') }
         let(:empty_response) { wunderground.history_for(out_of_range_time, 'knyc') }
         let(:empty_history) do
           build(:wunderground_history, {
@@ -87,13 +87,13 @@ describe WundergroundHistory, :vcr do
     end
   end
 
-  describe "populate_observations!" do
+  describe "populate_observations" do
     it "stores an ObservationCollection object to observations attribute" do
-      wh.time = Time.zone.parse('January 1, 2000 00:00:00 -04:00')
-      wh.response = wunderground.history_for(wh.time, 'knyc')
-      expect(wh.observations).to be_nil
-      wh.populate_observations!
-      expect(wh.observations).to be_a ObservationCollection
+      subject.time = time
+      subject.response = response
+      expect(subject.observations).to be_nil
+      subject.populate_observations
+      expect(subject.observations).to be_a ObservationCollection
     end
   end
 
