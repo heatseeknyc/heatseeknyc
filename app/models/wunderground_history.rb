@@ -1,39 +1,63 @@
 class WundergroundHistory
-  class RateLimited < StandardError; end
-  class Premature < StandardError; end
 
   attr_accessor :observations, :response, :time
+  attr_reader :errors
+
+  def initialize
+    @errors = ActiveModel::Errors.new(self)
+  end
 
   def self.new_from_api(time, response)
     self.new.tap do |hr|
       hr.response = response
       hr.time = time
-      hr.check_for_errors!
-      hr.populate_observations!
+      hr.validate!
+      hr.populate_observations unless hr.response_error
     end
   end
 
-  def populate_observations!
+  def populate_observations
     self.observations = ObservationCollection.new_from_array(raw_observations)
   end
 
   def raw_observations
-    response['history']['observations']
+    response.try(:[], 'history').try(:[], 'observations')
+  end
+
+  def empty?
+    raw_observations.empty?
   end
 
   def rate_limited?
-    response.try(:[], 'response').try(:[], 'error')
-      .try(:[], 'type') == 'invalidfeature'
+    response_error.try(:[], 'type') == 'invalidfeature'
   end
 
-  def premature?
+  def missing_target_hour?
     hours = raw_observations.map{ |o| o['date']['hour'].to_i }
-    hours.empty? || hours.max < self.time.hour
+    !hours.include?(time.hour)
   end
 
-  def check_for_errors!
-    raise RateLimited if rate_limited?
-    raise Premature if premature?
+  def validate!
+    if response_error
+      errors.add(:response, response_error_message)
+    elsif empty?
+      errors.add(:response, 'response is empty')
+    elsif missing_target_hour?
+      errors.add(:response, 'response is missing desired hour')
+    end
+  end
+
+  # suffix code smell on response, looks like we need a WundergroundError class
+  def response_error
+    response.try(:[], 'response').try(:[], 'error')
+  end
+
+  def response_error_type
+    response_error.try(:[], 'type')
+  end
+
+  def response_error_message
+    response_error.try(:[], 'description')
   end
 
   def temperature

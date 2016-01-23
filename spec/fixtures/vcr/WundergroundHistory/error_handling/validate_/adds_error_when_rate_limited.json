@@ -1,0 +1,88 @@
+{
+    "http_interactions": [
+        {
+            "recorded_at": "Sun, 01 Mar 2015 05:00:04 GMT",
+            "request": {
+                "body": {
+                    "encoding": "US-ASCII",
+                    "string": ""
+                },
+                "headers": {
+                    "Accept": [
+                        "*/*"
+                    ],
+                    "Accept-Encoding": [
+                        "gzip;q=1.0,deflate;q=0.6,identity;q=0.3"
+                    ],
+                    "User-Agent": [
+                        "Ruby"
+                    ]
+                },
+                "method": "get",
+                "uri": "http://api.wunderground.com/api/---WUNDERGROUND_KEY---/history_20000101/q/knyc.json"
+            },
+            "response": {
+                "body": {
+                    "encoding": "UTF-8",
+                    "string": "\n{\n  \"response\": {\n  \"version\":\"0.1\",\n  \"termsofService\":\"http://www.wunderground.com/weather/api/d/terms.html\",\n  \"features\": {\n  }\n\t\t,\n\t\"error\": {\n\t\t\"type\": \"invalidfeature\"\n\t\t,\"description\": \"a requested feature is not valid due to exceeding rate plan\"\n\t}\n\t}\n}\n"
+                },
+                "headers": {
+                    "Access-Control-Allow-Credentials": [
+                        "true"
+                    ],
+                    "Access-Control-Allow-Origin": [
+                        "*"
+                    ],
+                    "Cache-Control": [
+                        "max-age=0, no-cache"
+                    ],
+                    "Connection": [
+                        "keep-alive"
+                    ],
+                    "Content-Length": [
+                        "264"
+                    ],
+                    "Content-Type": [
+                        "application/json; charset=UTF-8"
+                    ],
+                    "Date": [
+                        "Fri, 22 Jan 2016 04:25:29 GMT"
+                    ],
+                    "Expires": [
+                        "Fri, 22 Jan 2016 04:25:29 GMT"
+                    ],
+                    "Last-Modified": [
+                        "Fri, 22 Jan 2016 04:25:29 GMT"
+                    ],
+                    "Nncoection": [
+                        "close"
+                    ],
+                    "Pragma": [
+                        "no-cache"
+                    ],
+                    "Server": [
+                        "Apache/2.2.15 (CentOS)"
+                    ],
+                    "Set-Cookie": [
+                        "DT=1453436729:2169:365-y2; path=/; expires=Fri, 01-Jan-2020 00:00:00 GMT; domain=.wunderground.com"
+                    ],
+                    "Vary": [
+                        "Accept-Encoding"
+                    ],
+                    "X-Api-Error": [
+                        "true"
+                    ],
+                    "X-Creationtime": [
+                        "0.026"
+                    ]
+                },
+                "http_version": null,
+                "status": {
+                    "code": 200,
+                    "message": "OK"
+                }
+            }
+        }
+    ],
+    "recorded_with": "VCR 2.9.3"
+}

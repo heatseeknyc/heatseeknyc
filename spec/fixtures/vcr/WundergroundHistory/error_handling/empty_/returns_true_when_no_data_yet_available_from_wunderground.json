@@ -1,0 +1,82 @@
+{
+    "http_interactions": [
+        {
+            "recorded_at": "Sun, 01 Mar 2015 05:00:06 GMT",
+            "request": {
+                "body": {
+                    "encoding": "US-ASCII",
+                    "string": ""
+                },
+                "headers": {
+                    "Accept": [
+                        "*/*"
+                    ],
+                    "Accept-Encoding": [
+                        "gzip;q=1.0,deflate;q=0.6,identity;q=0.3"
+                    ],
+                    "User-Agent": [
+                        "Ruby"
+                    ]
+                },
+                "method": "get",
+                "uri": "http://api.wunderground.com/api/---WUNDERGROUND_KEY---/history_30000101/q/knyc.json"
+            },
+            "response": {
+                "body": {
+                    "encoding": "UTF-8",
+                    "string": "\n{\n  \"response\": {\n  \"version\":\"0.1\",\n  \"termsofService\":\"http://www.wunderground.com/weather/api/d/terms.html\",\n  \"features\": {\n  \"history\": 1\n  }\n\t}\n\t\t,\n\t\"history\": {\n\t\t\"date\": {\n\t\t\"pretty\": \"\",\n\t\t\"year\": \"\",\n\t\t\"mon\": \"\",\n\t\t\"mday\": \"\",\n\t\t\"hour\": \"\",\n\t\t\"min\": \"\",\n\t\t\"tzname\": \"\"\n\t\t},\n\t\t\"utcdate\": {\n\t\t\"pretty\": \"\",\n\t\t\"year\": \"\",\n\t\t\"mon\": \"\",\n\t\t\"mday\": \"\",\n\t\t\"hour\": \"\",\n\t\t\"min\": \"\",\n\t\t\"tzname\": \"\"\n\t\t},\n\t\t\"observations\": [\n\t\t],\n\t\t\"dailysummary\": [\n\t\t]\n\t}\n}\n"
+                },
+                "headers": {
+                    "Access-Control-Allow-Credentials": [
+                        "true"
+                    ],
+                    "Access-Control-Allow-Origin": [
+                        "*"
+                    ],
+                    "Cache-Control": [
+                        "max-age=0, no-cache"
+                    ],
+                    "Connection": [
+                        "keep-alive"
+                    ],
+                    "Content-Length": [
+                        "458"
+                    ],
+                    "Content-Type": [
+                        "application/json; charset=UTF-8"
+                    ],
+                    "Date": [
+                        "Sat, 23 Jan 2016 20:28:50 GMT"
+                    ],
+                    "Expires": [
+                        "Sat, 23 Jan 2016 20:28:50 GMT"
+                    ],
+                    "Last-Modified": [
+                        "Sat, 23 Jan 2016 20:28:48 GMT"
+                    ],
+                    "Pragma": [
+                        "no-cache"
+                    ],
+                    "Server": [
+                        "Apache/2.2.15 (CentOS)"
+                    ],
+                    "Set-Cookie": [
+                        "DT=1453580928:28942:365-v1; path=/; expires=Fri, 01-Jan-2020 00:00:00 GMT; domain=.wunderground.com"
+                    ],
+                    "Vary": [
+                        "Accept-Encoding"
+                    ],
+                    "X-Creationtime": [
+                        "1.332"
+                    ]
+                },
+                "http_version": null,
+                "status": {
+                    "code": 200,
+                    "message": "OK"
+                }
+            }
+        }
+    ],
+    "recorded_with": "VCR 2.9.3"
+}
