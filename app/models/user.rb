@@ -247,9 +247,8 @@ class User < ActiveRecord::Base
   end
 
   def sensor_codes_string_contains_only_valid_sensors
-    if self.sensor_codes != (self.sensor_codes_string || "").upcase
-      self.errors.add :sensor_codes_string, "has an invalid sensor code"
-    end
+    return if self.sensor_codes == (self.sensor_codes_string || "").upcase
+    self.errors.add :sensor_codes_string, "has an invalid sensor code"
   end
 
   # def method_missing(name, *args)
