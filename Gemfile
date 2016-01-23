@@ -47,6 +47,7 @@ group :test, :development do
   gem 'pry-nav'
   gem 'rails_layout'
   gem 'rspec-rails', '~> 2.14.2'
+  gem 'rubocop'
   gem 'selenium-webdriver'
   gem 'simplecov'
   gem 'spork-rails'
