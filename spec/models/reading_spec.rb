@@ -41,5 +41,21 @@ describe Reading do
       })
       expect(@reading.temp).to eq 57
     end
+
+    it "handles nil temperature properly", :vcr do
+      allow(WeatherMan).to receive(:outdoor_temp_for).and_return(nil)
+      user = create(:user, zip_code: '10216')
+      user.sensors.create(name: "abcdefgh")
+      params = ActionController::Parameters.new({
+        "reading" => {
+          "temp"=>67.42,
+          "verification"=>"c0ffee",
+          "time"=>1452241576.0,
+          "sensor_name"=>"abcdefgh"
+        }
+      })
+      reading = Reading.create_from_params(params[:reading])
+      expect(reading.outdoor_temp).to be_nil
+    end
   end
 end

@@ -19,7 +19,7 @@ class WeatherMan
 
   def self.outdoor_temp_for(time:, zip_code:, throttle: 9)
     wunderground_history = fetch_wunderground_history(time, zip_code, throttle)
-    wunderground_history.temperature.round
+    wunderground_history.temperature.try(:round)
   end
 
   def self.fetch_wunderground_history(time, zip_code, throttle=9)
