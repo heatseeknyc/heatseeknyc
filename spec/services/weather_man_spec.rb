@@ -46,19 +46,19 @@ describe WeatherMan do
     it "returns historical outdoor temperature", :vcr do
       temperature = WeatherMan.outdoor_temp_for({
         time: Time.zone.parse("Feb 20, 2015 at 8am"),
-        zip_code: 10004,
+        location: 10004,
         throttle: 0
       })
       expect(temperature).to eq 4
       temperature = WeatherMan.outdoor_temp_for({
         time: Time.zone.parse("Feb 20, 2015 at 2pm"),
-        zip_code: 10004,
+        location: 10004,
         throttle: 0
       })
       expect(temperature).to eq 19
       temperature = WeatherMan.outdoor_temp_for({
         time: Time.zone.parse("Feb 20, 2015 at 8pm"),
-        zip_code: 10004,
+        location: 10004,
         throttle: 0
       })
       expect(temperature).to eq 15

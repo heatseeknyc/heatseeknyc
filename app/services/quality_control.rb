@@ -20,7 +20,7 @@ class QualityControl
     readings.each do |r|
       updated_temp = WeatherMan.outdoor_temp_for({
         time: r.created_at,
-        zip_code: r.user.zip_code,
+        location: r.user.zip_code,
         throttle: throttle
       })
 
