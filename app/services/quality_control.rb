@@ -24,7 +24,7 @@ class QualityControl
         throttle: throttle
       })
 
-      if updated_temp.is_a? Integer
+      if updated_temp.is_a? Numeric
         r.outdoor_temp = updated_temp
         regulator = Regulator.new(r)
         r.violation = regulator.has_detected_violation?
