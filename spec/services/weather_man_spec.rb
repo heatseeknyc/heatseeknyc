@@ -43,6 +43,29 @@ describe WeatherMan do
   end
 
   describe ".outdoor_temp_for" do
+    it "only pulls from the NOAA central park weather station", :vcr do
+      time = Time.zone.parse("Feb 20, 2015 at 8am")
+      response = {
+        "history" => {
+          "observations" => [
+            {
+              "date" => {
+                "hour" => "8"
+              },
+              "tempi" => 30
+            }
+          ]
+        }
+      }
+      expect(WeatherMan.api).to receive(:history_for)
+        .with(time, 'knyc').and_return(response)
+      WeatherMan.outdoor_temp_for({
+        time: time,
+        location: 10004,
+        throttle: 0
+      })
+    end
+
     it "returns historical outdoor temperature", :vcr do
       temperature = WeatherMan.outdoor_temp_for({
         time: Time.zone.parse("Feb 20, 2015 at 8am"),
