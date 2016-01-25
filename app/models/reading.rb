@@ -37,7 +37,7 @@ class Reading < ActiveRecord::Base
     temp = params[:temp].to_f.round
     outdoor_temp = WeatherMan.outdoor_temp_for({
       time: time,
-      zip_code: user.zip_code
+      location: user.zip_code
     })
 
     options = {

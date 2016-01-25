@@ -417,25 +417,11 @@ Style/MutableConstant:
     - 'init/lib/init/version.rb'
     - 'lib/scrape_driver.rb'
 
-# Offense count: 5
-# Cop supports --auto-correct.
-Style/NegatedIf:
-  Exclude:
-    - 'app/helpers/user_controller_helper.rb'
-    - 'app/models/canonical_temperature.rb'
-    - 'app/models/reading.rb'
-    - 'app/services/weather_man.rb'
-
 # Offense count: 2
 # Cop supports --auto-correct.
 Style/NilComparison:
   Exclude:
     - 'app/models/concerns/regulatable.rb'
-
-# Offense count: 14
-# Cop supports --auto-correct.
-Style/NumericLiterals:
-  MinDigits: 15
 
 # Offense count: 2
 # Cop supports --auto-correct.
