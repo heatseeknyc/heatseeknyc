@@ -14,7 +14,8 @@ class WeatherMan
 
   def self.current_outdoor_temp(location, throttle = 9)
     return nil if !location
-    Rails.cache.fetch(key_for(location, Time.zone.now), :expires_in => 1.hour) do
+    key = key_for(location, Time.zone.now)
+    Rails.cache.fetch(key, :expires_in => 1.hour) do
       sleep throttle
       json_object = @api.conditions_for(location)
       json_object["current_observation"]["temp_f"]
@@ -25,12 +26,12 @@ class WeatherMan
   # hobbyists. This is a stopgap because it makes our outdoor temperatures
   # automatically admissible as evidence and we currently are only in one city.
   def self.outdoor_temp_for(time:, location:, throttle: 9)
-    location = 'knyc' # temporarily force all readings to use NOAA central park station
+    location = "knyc" # force all readings to use NOAA central park station
     wunderground_history = fetch_wunderground_history(time, location, throttle)
     wunderground_history.temperature.try(:round)
   end
 
-  def self.fetch_wunderground_history(time, location, throttle=9)
+  def self.fetch_wunderground_history(time, location, throttle = 9)
     key = key_for(location, time)
     response = Rails.cache.fetch(key, :expires_in => 1.day) do
       sleep throttle

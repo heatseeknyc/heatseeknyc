@@ -57,33 +57,35 @@ describe WeatherMan do
           ]
         }
       }
-      expect(WeatherMan.api).to receive(:history_for)
-        .with(time, 'knyc').and_return(response)
-      WeatherMan.outdoor_temp_for({
+
+      expect(WeatherMan.api).to receive(:history_for).
+        with(time, "knyc").and_return(response)
+
+      WeatherMan.outdoor_temp_for(
         time: time,
         location: 10004,
         throttle: 0
-      })
+      )
     end
 
     it "returns historical outdoor temperature", :vcr do
-      temperature = WeatherMan.outdoor_temp_for({
+      temperature = WeatherMan.outdoor_temp_for(
         time: Time.zone.parse("Feb 20, 2015 at 8am"),
         location: 10004,
         throttle: 0
-      })
+      )
       expect(temperature).to eq 4
-      temperature = WeatherMan.outdoor_temp_for({
+      temperature = WeatherMan.outdoor_temp_for(
         time: Time.zone.parse("Feb 20, 2015 at 2pm"),
         location: 10004,
         throttle: 0
-      })
+      )
       expect(temperature).to eq 19
-      temperature = WeatherMan.outdoor_temp_for({
+      temperature = WeatherMan.outdoor_temp_for(
         time: Time.zone.parse("Feb 20, 2015 at 8pm"),
         location: 10004,
         throttle: 0
-      })
+      )
       expect(temperature).to eq 15
     end
   end
