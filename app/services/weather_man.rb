@@ -40,7 +40,7 @@ class WeatherMan
   def self.fetch_history_for(time, location, throttle = 9)
     location = "knyc" # force all readings to use noaa central park station
     key = key_for(time, location)
-    Rails.cache.fetch(key, :expires_in => 1.day) do
+    Rails.cache.fetch(key, expires_in: 1.day) do
       sleep throttle
       @api.history_for(time, location)
     end
