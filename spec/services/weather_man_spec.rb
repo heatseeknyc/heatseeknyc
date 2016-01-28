@@ -1,8 +1,8 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe WeatherMan do
   before(:all) do
-    Timecop.travel(Time.zone.parse('March 1, 2015 at 12am'))
+    Timecop.travel(Time.zone.parse("March 1, 2015 at 12am"))
   end
 
   after(:all) do
@@ -11,20 +11,20 @@ describe WeatherMan do
 
   describe ".key_for" do
     it "returns a key for a given zip code and datetime" do
-      key = WeatherMan.key_for(Time.zone.parse('January 1, 2015'), 'knyc')
+      key = WeatherMan.key_for(Time.zone.parse("January 1, 2015"), "knyc")
       expect(key).to eq "outdoor_temp_for_knyc_on_2015-01-01"
     end
 
     it "includes the hour if datetime is today" do
-      time = Time.zone.parse('March 1, 2015 at 12am')
-      key = WeatherMan.key_for(time, 'knyc')
+      time = Time.zone.parse("March 1, 2015 at 12am")
+      key = WeatherMan.key_for(time, "knyc")
       expect(key).to eq "outdoor_temp_for_knyc_on_2015-03-01H00"
     end
   end
 
   describe ".current_outdoor_temp" do
     it "returns current outdoor temperature from Wunderground API", :vcr do
-      temperature = WeatherMan.current_outdoor_temp('knyc', 0)
+      temperature = WeatherMan.current_outdoor_temp("knyc", 0)
       expect(temperature).to be_a Numeric
     end
 
@@ -37,8 +37,8 @@ describe WeatherMan do
   describe ".cache_key" do
     it "returns string that includes zip code and date" do
       key = WeatherMan.key_for(DateTime.parse("October 1, 2015"), 10000)
-      expect(key).to include '10000'
-      expect(key).to include '2015-10-01'
+      expect(key).to include "10000"
+      expect(key).to include "2015-10-01"
     end
   end
 
@@ -52,7 +52,7 @@ describe WeatherMan do
     let(:two_pm) { Time.zone.parse("Feb 20, 2015 at 2pm") }
     let(:eight_pm) { Time.zone.parse("Feb 20, 2015 at 8pm") }
     let(:time) { Time.zone.parse("March 1, 2015 at 8am") }
-    let(:location) { 'knyc' }
+    let(:location) { "knyc" }
     let(:throttle) { 0 }
 
     it "only pulls from the NOAA central park weather station", :vcr do
@@ -72,21 +72,21 @@ describe WeatherMan do
 
     it "caches responses" do
       allow(WeatherMan.api).to receive(:history_for).and_return(response_at_30)
-      temp = WeatherMan.outdoor_temp_for(time, 'knyc', 0)
+      temp = WeatherMan.outdoor_temp_for(time, "knyc", 0)
       expect(temp).to eq 30
 
       allow(WeatherMan.api).to receive(:history_for).and_return(response_at_45)
-      temp = WeatherMan.outdoor_temp_for(time, 'knyc', 0)
+      temp = WeatherMan.outdoor_temp_for(time, "knyc", 0)
       expect(temp).to eq 30
     end
 
     it "does not cache responses with no observations" do
       allow(WeatherMan.api).to receive(:history_for).and_return(empty_response)
-      temperature = WeatherMan.outdoor_temp_for(time, 'knyc', 0)
+      temperature = WeatherMan.outdoor_temp_for(time, "knyc", 0)
       expect(temperature).to eq nil
 
       allow(WeatherMan.api).to receive(:history_for).and_return(response_at_45)
-      temperature = WeatherMan.outdoor_temp_for(time, 'knyc', 0)
+      temperature = WeatherMan.outdoor_temp_for(time, "knyc", 0)
       expect(temperature).to eq 45
     end
   end
@@ -94,7 +94,7 @@ describe WeatherMan do
   describe ".fetch_history_for" do
     it "returns different temps throughout the day", :vcr do
       time = Time.zone.parse("Feb 20, 2015 at 8am")
-      response = WeatherMan.fetch_history_for(time, 'knyc', 0)
+      response = WeatherMan.fetch_history_for(time, "knyc", 0)
       historical = WundergroundHistory.new_from_api(time, response)
       expect(historical.temperature).to eq 3.9
       historical.time = Time.zone.parse("Feb 20, 2015 at 2pm")

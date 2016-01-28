@@ -8,6 +8,9 @@ Style/NegatedIf:
 Style/NumericLiterals:
   Enabled: false
 
+Style/CaseEquality:
+  Exclude:
+    - 'app/services/weather_man.rb'
 Style/TrivialAccessors:
   Exclude:
     - 'app/services/weather_man.rb'
