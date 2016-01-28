@@ -36,8 +36,8 @@ describe WeatherMan do
 
   describe ".cache_key" do
     it "returns string that includes zip code and date" do
-      key = WeatherMan.key_for(DateTime.parse("October 1, 2015"), 10000)
-      expect(key).to include "10000"
+      key = WeatherMan.key_for(DateTime.parse("October 1, 2015"), "knyc")
+      expect(key).to include "knyc"
       expect(key).to include "2015-10-01"
     end
   end
