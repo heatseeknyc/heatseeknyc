@@ -173,12 +173,6 @@ Style/BracesAroundHashParameters:
     - 'spec/models/wunderground_history_spec.rb'
     - 'spec/services/quality_control_spec.rb'
     - 'spec/services/reading_scraper_spec.rb'
-    - 'spec/services/weather_man_spec.rb'
-
-# Offense count: 1
-Style/CaseEquality:
-  Exclude:
-    - 'app/services/weather_man.rb'
 
 # Offense count: 2
 # Configuration parameters: EnforcedStyle, SupportedStyles.

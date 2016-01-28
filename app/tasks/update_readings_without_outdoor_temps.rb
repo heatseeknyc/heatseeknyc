@@ -2,11 +2,10 @@ class UpdateReadingsWithoutOutdoorTemps
   def self.exec(throttle: 30)
     range = Time.zone.parse('October 1, 2015')..Time.zone.now
     Reading.where(outdoor_temp: nil, created_at: range).each do |r|
-      updated_temp = WeatherMan.outdoor_temp_for({
-        time: r.created_at,
-        location: r.user.zip_code,
-        throttle: throttle
-      })
+      time = r.created_at
+      location = r.user.zip_code
+      throttle = throttle
+      updated_temp = WeatherMan.outdoor_temp_for(time, location, throttle)
 
       if updated_temp
         r.outdoor_temp = updated_temp
