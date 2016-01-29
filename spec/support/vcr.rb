@@ -5,7 +5,7 @@ VCR.configure do |c|
   c.hook_into :webmock
   c.default_cassette_options = {
     serialize_with: :json,
-    record: :all,
+    record: :once,
     allow_unused_http_interactions: false
   }
   c.debug_logger = File.open(Rails.root.join('log', 'vcr.log'), 'a')
