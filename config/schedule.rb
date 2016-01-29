@@ -18,3 +18,7 @@ set :output, "log/cron.log"
 # end
 
 # Learn more: http://github.com/javan/whenever
+#
+# every 4.days do
+#   runner "AnotherModel.prune_old_records"
+# end

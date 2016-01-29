@@ -35,10 +35,7 @@ class Reading < ActiveRecord::Base
     return {code: 400, error: 'Already a reading for that sensor at that time'} if dupe
 
     temp = params[:temp].to_f.round
-    outdoor_temp = WeatherMan.outdoor_temp_for({
-      time: time,
-      location: user.zip_code
-    })
+    outdoor_temp = WeatherMan.outdoor_temp_for(time, user.zip_code)
 
     options = {
       sensor: sensor,
