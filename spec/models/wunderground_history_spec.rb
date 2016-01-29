@@ -1,14 +1,9 @@
 require "spec_helper"
 
 describe WundergroundHistory, :vcr do
-  let(:wunderground) { Wunderground.new(ENV["WUNDERGROUND_KEY"]) }
+  let(:wunderground) { Wunderground.new }
   let(:time) { Time.zone.parse("January 1, 2000 at 12am") }
-  # let(:throttle) { 10 }
   let(:response) { wunderground.history_for(time, "knyc") }
-
-  # before(:each) do
-  #   sleep throttle
-  # end
 
   describe "error handling" do
 

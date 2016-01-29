@@ -1,5 +1,5 @@
 class WeatherMan
-  @api = Wunderground.new(ENV["WUNDERGROUND_KEY"])
+  @api = Wunderground.new
 
   def self.api
     @api
@@ -12,19 +12,23 @@ class WeatherMan
     "outdoor_temp_for_#{location}_on_#{time.strftime(format)}"
   end
 
-  def self.current_outdoor_temp(location, throttle = 9)
+  def self.current_outdoor_temp_for(location)
     return nil if !location
-    key = key_for(Time.zone.now, location)
-    Rails.cache.fetch(key, :expires_in => 1.hour) do
-      sleep throttle
-      json_object = @api.conditions_for(location)
-      json_object["current_observation"]["temperature"]
-    end
+    raw_response = @api.conditions_for(location)
+    raw_response["current_observation"]["temperature"]
   end
 
   def self.outdoor_temp_for(time, location, throttle = 9)
-    response = fetch_history_for(time, location, throttle)
-    history = WundergroundHistory.new_from_api(time, response)
+    if time > Time.zone.now.beginning_of_hour
+      current_outdoor_temp_for(location)
+    else
+      historical_outdoor_temp_for(time, location, throttle)
+    end
+  end
+
+  def self.historical_outdoor_temp_for(time, location, throttle = 9)
+    raw_response = fetch_history_for(time, location, throttle)
+    history = WundergroundHistory.new_from_api(time, raw_response)
     clear_cache_for(time, location) if history.temperature.nil?
     history.temperature.try(:round)
   end
@@ -42,7 +46,7 @@ class WeatherMan
     key = key_for(time, location)
     Rails.cache.fetch(key, expires_in: 1.day) do
       sleep throttle
-      @api.history_for(time, location)
+      @api.history_for(time, location).to_hash
     end
   end
 end
