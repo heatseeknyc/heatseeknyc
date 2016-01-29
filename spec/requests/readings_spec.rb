@@ -20,7 +20,7 @@ describe "readings API" do
       "code" => 404,
       "error" => "No sensor by that name found"
     })
-    expect(response.code).to eq 404
+    expect(response.code).to eq "404"
   end
 
   it "returns 404 and error message for readings with no user" do
@@ -31,7 +31,7 @@ describe "readings API" do
       "code" => 404,
       "error" => "No user associated with that sensor"
     })
-    expect(response.code).to eq 404
+    expect(response.code).to eq "404"
   end
 
   it "returns 400 and error message for duplicate readings" do
@@ -48,16 +48,16 @@ describe "readings API" do
       "code" => 400,
       "error" => "Already a reading for that sensor at that time"
     })
-    expect(response.code).to eq 400
+    expect(response.code).to eq "400"
   end
 
-  it "returns 200 for duplicate readings", :vcr, :focus do
+  it "returns 200 for duplicate readings", :vcr do
     user = create(:user)
     sensor = create(:sensor, name: sensor_name)
     user.sensors << sensor
 
     post "/readings.json", reading_params
-    expect(json).to eq(Reading.first.to_json)
-    expect(response.code).to eq 200
+    expect(response.body).to eq(Reading.first.to_json)
+    expect(response.code).to eq "200"
   end
 end
