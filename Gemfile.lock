@@ -457,6 +457,3 @@ DEPENDENCIES
   will_paginate
   yajl-ruby
   zip
-
-BUNDLED WITH
-   1.10.6
