@@ -2,12 +2,8 @@ require "spec_helper"
 
 describe WeatherMan do
   let(:throttle) { 0 }
-  before(:all) do
+  before(:each) do
     Timecop.travel(Time.zone.parse("March 1, 2015 at 12am"))
-  end
-
-  after(:all) do
-    Timecop.return
   end
 
   describe ".key_for" do
@@ -40,11 +36,7 @@ describe WeatherMan do
 
   describe ".outdoor_temp_for" do
     before(:each) do
-      Timecop.travel("March 1, 2015 at 12pm")
-    end
-
-    after(:each) do
-      Timecop.travel("March 1, 2015 at 12pm")
+      Timecop.travel(Time.zone.parse("March 1, 2015 at 12pm"))
     end
 
     let(:empty_response) { { "history" => { "observations" => [] } } }
