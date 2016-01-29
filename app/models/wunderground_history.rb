@@ -37,7 +37,7 @@ class WundergroundHistory
   end
 
   def missing_target_hour?
-    hours = raw_observations.map{ |o| o["date"]["hour"].to_i }
+    hours = raw_observations.map { |o| o["date"]["hour"].to_i }
     !hours.include?(time.hour)
   end
 
