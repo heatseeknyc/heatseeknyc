@@ -27,7 +27,7 @@ describe QualityControl do
 
   describe ".update_outdoor_temps_for" do
     before(:each) do
-      sunday_afternoon = DateTime.parse("2015-08-01T13:00:00-05:00")
+      sunday_afternoon = DateTime.parse("August 1, 2014 at 12pm")
       10.times do
         @user.readings.create(temp: 45, created_at: sunday_afternoon)
       end
