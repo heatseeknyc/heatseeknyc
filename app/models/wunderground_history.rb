@@ -20,20 +20,24 @@ class WundergroundHistory
     self.observations = ObservationCollection.new_from_array(raw_observations)
   end
 
+  def raw_days
+    response.try(:[], "history").try(:[], "days") || []
+  end
+
   def raw_observations
-    response.try(:[], 'history').try(:[], 'observations')
+    raw_days.try(:[], 0).try(:[], "observations") || []
   end
 
   def empty?
-    raw_observations.empty?
+    raw_days.empty? || raw_observations.empty?
   end
 
   def rate_limited?
-    response_error.try(:[], 'type') == 'invalidfeature'
+    response_error.try(:[], "type") == "invalidfeature"
   end
 
   def missing_target_hour?
-    hours = raw_observations.map{ |o| o['date']['hour'].to_i }
+    hours = raw_observations.map { |o| o["date"]["hour"].to_i }
     !hours.include?(time.hour)
   end
 
@@ -41,27 +45,27 @@ class WundergroundHistory
     if response_error
       errors.add(:response, response_error_message)
     elsif empty?
-      errors.add(:response, 'response is empty')
+      errors.add(:response, "response is empty")
     elsif missing_target_hour?
-      errors.add(:response, 'response is missing desired hour')
+      errors.add(:response, "response is missing desired hour")
     end
   end
 
   # suffix code smell on response, looks like we need a WundergroundError class
   def response_error
-    response.try(:[], 'response').try(:[], 'error')
+    response.try(:[], "response").try(:[], "error")
   end
 
   def response_error_type
-    response_error.try(:[], 'type')
+    response_error.try(:[], "type")
   end
 
   def response_error_message
-    response_error.try(:[], 'description')
+    response_error.try(:[], "description")
   end
 
   def temperature
-    observations.find_by('hour' => time.hour).temperature
+    observations.find_by("hour" => time.hour).temperature
   end
 end
 

@@ -3,14 +3,21 @@ require "spec_helper"
 describe WundergroundHistory, :vcr do
   let(:wunderground) { Wunderground.new(ENV["WUNDERGROUND_KEY"]) }
   let(:time) { Time.zone.parse("January 1, 2000 at 12am") }
+  # let(:throttle) { 10 }
   let(:response) { wunderground.history_for(time, "knyc") }
+
+  # before(:each) do
+  #   sleep throttle
+  # end
 
   describe "error handling" do
 
     describe "validate!" do
       context "when history is empty" do
         let(:out_of_range_time) { Time.zone.parse("January 1, 3000 at 12am") }
-        let(:empty_response) { wunderground.history_for(out_of_range_time, "knyc") }
+        let(:empty_response) do
+          wunderground.history_for(out_of_range_time, "knyc")
+        end
         let(:empty_history) do
           build(:wunderground_history, {
             time: out_of_range_time,
@@ -27,7 +34,7 @@ describe WundergroundHistory, :vcr do
         end
       end
 
-      it "adds error when rate limited" do
+      xit "adds error when rate limited" do
         subject.time = time
         subject.response = response
         subject.validate!
@@ -35,8 +42,8 @@ describe WundergroundHistory, :vcr do
       end
 
       it "adds error when location is invalid" do
-        subject.time = Time.zone.parse("January 1, 2000 at 12am")
-        subject.response = wunderground.history_for(subject.time, "1001101")
+        subject.time = time
+        subject.response = wunderground.history_for(time, "1001101")
         subject.validate!
         expect(subject.response_error_type).to eq "querynotfound"
         expect(subject.errors).to have(1).errors_on(:response)
@@ -45,39 +52,41 @@ describe WundergroundHistory, :vcr do
 
     describe "missing_target_hour?" do
       it "returns true when no data yet available from wunderground" do
-        subject.time = Time.zone.parse("January 1, 3000 at 12am")
-        subject.response = wunderground.history_for(subject.time, "knyc")
+        time = Time.zone.parse("January 1, 3000 at 12am")
+        subject.time = time
+        subject.response = wunderground.history_for(time, "knyc")
         expect(subject).to be_missing_target_hour
       end
 
       it "returns false when data was available at time of creation" do
-        subject.time = Time.zone.parse("January 1, 2000 at 12am")
-        subject.response = wunderground.history_for(subject.time, "knyc")
+        subject.time = time
+        subject.response = wunderground.history_for(time, "knyc")
         expect(subject).to_not be_missing_target_hour
       end
     end
 
     describe "empty?" do
       it "returns true when no data yet available from wunderground" do
-        subject.time = Time.zone.parse("January 1, 3000 at 12am")
-        subject.response = wunderground.history_for(subject.time, "knyc")
+        time = Time.zone.parse("January 1, 3000 at 12am")
+        subject.time = time
+        subject.response = wunderground.history_for(time, "knyc")
         expect(subject).to be_empty
       end
 
       it "returns false when data was available at time of creation" do
-        subject.time = Time.zone.parse("January 1, 2000 at 12am")
-        subject.response = wunderground.history_for(subject.time, "knyc")
+        subject.time = time
+        subject.response = wunderground.history_for(time, "knyc")
         expect(subject).to_not be_empty
       end
     end
 
     describe "rate_limited?" do
       before(:each) do
-        subject.time = Time.zone.parse("January 1, 2000 at 12am")
-        subject.response = wunderground.history_for(subject.time, "knyc")
+        subject.time = time
+        subject.response = wunderground.history_for(time, "knyc")
       end
 
-      it "returns true when rate limited" do
+      xit "returns true when rate limited" do
         expect(subject).to be_rate_limited # only re-record while rate-limited
       end
 
@@ -99,7 +108,6 @@ describe WundergroundHistory, :vcr do
 
   describe ".new_from_api" do
     it "returns a WundergroundHistory object" do
-      time = Time.zone.parse("January 1, 2000 00:00:00 -04:00")
       response = wunderground.history_for(time, "knyc")
       return_object = WundergroundHistory.new_from_api(time,response)
       expect(return_object).to be_a WundergroundHistory
@@ -117,7 +125,7 @@ describe WundergroundHistory, :vcr do
     end
 
     # make this one a Wunderground::Error
-    it "raises errors if rate limited" do
+    xit "raises errors if rate limited" do
       time = Time.zone.parse("March 1, 2015 at 12am")
       rate_limited_response = wunderground.history_for(time, 10001)
       history = WundergroundHistory.new_from_api(time, rate_limited_response)

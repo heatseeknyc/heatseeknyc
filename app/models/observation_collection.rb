@@ -6,12 +6,16 @@ class ObservationCollection
 
   def self.new_from_array(array)
     new.tap do |o|
-      o.observations = array.map { |hash| Observation.new_from_hash(hash) }
+      o.observations = array.map { |hash| Observation.new_from_raw(hash) }
     end
   end
 
   def each(&block)
     observations.each(&block)
+  end
+
+  def [](index)
+    observations[index]
   end
 
   def find_by(params)

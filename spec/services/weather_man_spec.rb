@@ -1,6 +1,7 @@
 require "spec_helper"
 
 describe WeatherMan do
+  let(:throttle) { 0 }
   before(:all) do
     Timecop.travel(Time.zone.parse("March 1, 2015 at 12am"))
   end
@@ -44,21 +45,16 @@ describe WeatherMan do
 
   describe ".outdoor_temp_for" do
     let(:empty_response) { { "history" => { "observations" => [] } } }
-    let(:obs_at_30) { { "date" => { "hour" => "08" }, "tempi" => 30 } }
-    let(:obs_at_45) { { "date" => { "hour" => "08" }, "tempi" => 45 } }
-    let(:response_at_30) { { "history" => { "observations" => [obs_at_30] } } }
-    let(:response_at_45) { { "history" => { "observations" => [obs_at_45] } } }
     let(:eight_am) { Time.zone.parse("Feb 20, 2015 at 8am") }
     let(:two_pm) { Time.zone.parse("Feb 20, 2015 at 2pm") }
     let(:eight_pm) { Time.zone.parse("Feb 20, 2015 at 8pm") }
     let(:time) { Time.zone.parse("March 1, 2015 at 8am") }
     let(:location) { "knyc" }
-    let(:throttle) { 0 }
 
-    it "only pulls from the NOAA central park weather station", :vcr do
+    it "only pulls from the NOAA central park weather station" do
       expect(WeatherMan.api).to receive(:history_for).
-        with(eight_am, "knyc").and_return(response_at_30)
-      WeatherMan.outdoor_temp_for(eight_am, location, throttle)
+        with(eight_am, "knyc").and_return(empty_response)
+      WeatherMan.outdoor_temp_for(eight_am, "wrong_location", throttle)
     end
 
     it "returns historical outdoor temperature", :vcr do
@@ -70,31 +66,42 @@ describe WeatherMan do
       expect(temperature).to eq 15
     end
 
-    it "caches responses" do
-      allow(WeatherMan.api).to receive(:history_for).and_return(response_at_30)
-      temp = WeatherMan.outdoor_temp_for(time, "knyc", 0)
-      expect(temp).to eq 30
+    it "caches responses", :vcr do
+      first_response = WeatherMan.api.history_for(time, "knyc")
+      second_response = first_response.deep_dup
+      observations = second_response["history"]["days"][0]["observations"]
+      observation = observations.find do |o|
+        Time.zone.parse(o['date']['iso8601']).hour == time.hour
+      end
+      observation["temperature"] = 45
 
-      allow(WeatherMan.api).to receive(:history_for).and_return(response_at_45)
-      temp = WeatherMan.outdoor_temp_for(time, "knyc", 0)
-      expect(temp).to eq 30
+      allow(WeatherMan.api).to receive(:history_for).and_return(first_response)
+      temperature = WeatherMan.outdoor_temp_for(eight_am, "knyc", throttle)
+      expect(temperature).to eq 30
+
+      allow(WeatherMan.api).to receive(:history_for).and_return(second_response)
+      temperature = WeatherMan.outdoor_temp_for(eight_am, "knyc", throttle)
+      expect(temperature).to eq 30
     end
 
-    it "does not cache responses with no observations" do
+    it "does not cache responses with no observations", :vcr do
+      full_response = WeatherMan.api.history_for(time, "knyc")
+      empty_response = full_response.deep_dup
+      empty_response["history"]["days"] = []
       allow(WeatherMan.api).to receive(:history_for).and_return(empty_response)
-      temperature = WeatherMan.outdoor_temp_for(time, "knyc", 0)
+      temperature = WeatherMan.outdoor_temp_for(time, "knyc", throttle)
       expect(temperature).to eq nil
 
-      allow(WeatherMan.api).to receive(:history_for).and_return(response_at_45)
-      temperature = WeatherMan.outdoor_temp_for(time, "knyc", 0)
-      expect(temperature).to eq 45
+      allow(WeatherMan.api).to receive(:history_for).and_return(full_response)
+      temperature = WeatherMan.outdoor_temp_for(time, "knyc", throttle)
+      expect(temperature).to eq 30
     end
   end
 
   describe ".fetch_history_for" do
     it "returns different temps throughout the day", :vcr do
       time = Time.zone.parse("Feb 20, 2015 at 8am")
-      response = WeatherMan.fetch_history_for(time, "knyc", 0)
+      response = WeatherMan.fetch_history_for(time, "knyc", throttle)
       historical = WundergroundHistory.new_from_api(time, response)
       expect(historical.temperature).to eq 3.9
       historical.time = Time.zone.parse("Feb 20, 2015 at 2pm")
