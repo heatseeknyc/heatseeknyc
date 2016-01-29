@@ -23,15 +23,10 @@ describe WeatherMan do
     end
   end
 
-  describe ".current_outdoor_temp" do
+  describe ".current_outdoor_temp_for" do
     it "returns current outdoor temperature from Wunderground API", :vcr do
-      temperature = WeatherMan.current_outdoor_temp("knyc", 0)
+      temperature = WeatherMan.current_outdoor_temp_for("knyc")
       expect(temperature).to be_a Numeric
-    end
-
-    it "returns nil when not given a zip code" do
-      temp = WeatherMan.current_outdoor_temp(nil, 0)
-      expect(temp).to eq nil
     end
   end
 
@@ -44,6 +39,14 @@ describe WeatherMan do
   end
 
   describe ".outdoor_temp_for" do
+    before(:each) do
+      Timecop.travel("March 1, 2015 at 12pm")
+    end
+
+    after(:each) do
+      Timecop.travel("March 1, 2015 at 12pm")
+    end
+
     let(:empty_response) { { "history" => { "observations" => [] } } }
     let(:eight_am) { Time.zone.parse("Feb 20, 2015 at 8am") }
     let(:two_pm) { Time.zone.parse("Feb 20, 2015 at 2pm") }
@@ -95,6 +98,38 @@ describe WeatherMan do
       allow(WeatherMan.api).to receive(:history_for).and_return(full_response)
       temperature = WeatherMan.outdoor_temp_for(time, "knyc", throttle)
       expect(temperature).to eq 30
+    end
+
+    context "when reading is within the past hour" do
+      before do
+        Timecop.travel(Time.zone.parse('March 1, 2015 at 12:30pm'))
+      end
+
+      let(:recent_time) { Time.zone.parse('March 1, 2015 at 12:15pm')}
+
+      it "pulls from conditions endpoint", :vcr do
+        raw_response = WeatherMan.api.conditions_for("knyc")
+        expect(raw_response).to have_key("response")
+        expect(WeatherMan.api).to receive(:conditions_for).
+          with("knyc").and_return(raw_response)
+        WeatherMan.outdoor_temp_for(recent_time, "knyc", 0)
+      end
+    end
+
+    context "when reading is not within the past hour" do
+      before do
+        Timecop.travel(Time.zone.parse('March 1, 2015 at 12:30pm'))
+      end
+
+      let(:distant_time) { Time.zone.parse('March 1, 2015 at 7:00am')}
+
+      it "pulls from history endpoint", :vcr do
+        raw_response = WeatherMan.api.history_for(distant_time, "knyc")
+        expect(raw_response).to have_key("response")
+        expect(WeatherMan.api).to receive(:history_for).
+          with(distant_time, "knyc").and_return(raw_response)
+        WeatherMan.outdoor_temp_for(distant_time, "knyc", 0)
+      end
     end
   end
 
