@@ -5,9 +5,9 @@ class ReadingsController < ApplicationController
     reading = Reading.create_from_params(strong_params)
 
     if reading[:error]
-      render json: reading, status: reading[:code]
+      render json: reading.to_json, status: reading[:code]
     else
-      render json: reading
+      render json: reading.to_json
     end
   end
 
