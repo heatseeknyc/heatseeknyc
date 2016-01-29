@@ -18,9 +18,9 @@ class User < ActiveRecord::Base
   validate :sensor_codes_string_contains_only_valid_sensors
   validates_presence_of :address, :email, :zip_code
   validates_format_of :zip_code,
-                  with: /\A\d{5}-\d{4}|\A\d{5}\z/,
-                  message: "should be 12345 or 12345-1234",
-                  allow_blank: true
+                      with: /\A\d{5}-\d{4}|\A\d{5}\z/,
+                      message: "should be 12345 or 12345-1234",
+                      allow_blank: true
 
   before_save :create_search_names
   before_validation :associate_sensors
