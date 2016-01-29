@@ -1,24 +1,16 @@
 require 'spec_helper'
 
 describe ObservationCollection do
+  let(:time) { Time.zone.parse('March 1, 2015 at 12pm') }
+  let(:location) { 'knyc' }
+  let(:response) { WeatherMan.api.history_for(time, location) }
+  let(:raw_observations) { response['history']['days'][0]['observations'] }
+
   describe ".new_from_array" do
-    it "returns new ObservationCollection" do
-      observation_collection = ObservationCollection.new_from_array([
-        {
-          'date' => {
-            'hour' => '07'
-          },
-          'tempi' => '45.8'
-        },
-        {
-          'date' => {
-            'hour' => '08'
-          },
-          'tempi' => '45.2'
-        }
-      ])
-      expect(observation_collection).to be_a Enumerable
-      expect(observation_collection).to respond_to :find_by
+    it "returns new ObservationCollection", :vcr do
+      observations = ObservationCollection.new_from_array(raw_observations)
+      expect(observations).to respond_to :each
+      expect(observations).to respond_to :find_by
     end
   end
 

@@ -18,7 +18,7 @@ class WeatherMan
     Rails.cache.fetch(key, :expires_in => 1.hour) do
       sleep throttle
       json_object = @api.conditions_for(location)
-      json_object["current_observation"]["temp_f"]
+      json_object["current_observation"]["temperature"]
     end
   end
 
