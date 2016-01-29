@@ -18,7 +18,3 @@ set :output, "log/cron.log"
 # end
 
 # Learn more: http://github.com/javan/whenever
-every 1.hour do
-  rake "get_reading",  :environment => :production
-  rake "weather:observe", :environment => :production
-end
