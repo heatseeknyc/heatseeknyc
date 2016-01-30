@@ -25,30 +25,18 @@ class Reading < ActiveRecord::Base
 
   def self.create_from_params(params)
     sensor = Sensor.find_by(name: params[:sensor_name])
-    return {code: 404, error: 'No sensor by that name found'} if !sensor
-
     user = sensor.user
-    return {code: 404, error: 'No user associated with that sensor'} if !user
-
     time = Time.at params[:time].to_i
-    dupe = Reading.find_by(sensor: sensor, created_at: time)
-    return {code: 400, error: 'Already a reading for that sensor at that time'} if dupe
-
     temp = params[:temp].to_f.round
-    outdoor_temp = WeatherMan.outdoor_temp_for({
-      time: time,
-      location: user.zip_code
-    })
+    outdoor_temp = WeatherMan.outdoor_temp_for(time, user.zip_code)
 
-    options = {
+    create(
       sensor: sensor,
       user: user,
       temp: temp,
       outdoor_temp: outdoor_temp,
       created_at: time
-    }
-
-    self.create(options) if verification_valid? params[:verification]
+    )
   end
 
   def self.verification_valid?(code)
