@@ -30,9 +30,10 @@ describe Reading do
     it "rounds temperature properly" do
       allow(WeatherMan).to receive(:outdoor_temp_for).and_return(45)
       time = Time.parse('March 1, 2015 12:00:00')
-      sensor = create(:sensor, "name"=> "0013a20040c17f5a", created_at: time)
-      sensor.user = create(:user)
-      sensor.save
+      sensor = create(:sensor, name: "0013a20040c17f5a", created_at: time)
+      user = create(:user)
+      user.sensors << sensor
+
       @reading = Reading.create_from_params({
         :time =>1426064293.0,
         :temp => 56.7,
@@ -45,7 +46,8 @@ describe Reading do
     it "handles nil temperature properly", :vcr do
       allow(WeatherMan).to receive(:outdoor_temp_for).and_return(nil)
       user = create(:user, zip_code: '10216')
-      user.sensors.create(name: "abcdefgh")
+      sensor = create(:sensor, name: "abcdefgh")
+      user.sensors << sensor
       params = ActionController::Parameters.new({
         "reading" => {
           "temp"=>67.42,

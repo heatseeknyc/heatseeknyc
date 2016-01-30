@@ -17,10 +17,10 @@ describe "readings API" do
     post "/readings.json", reading_params
 
     expect(json).to eq ({
-      "code" => 404,
+      "code" => 400,
       "error" => "No sensor by that name found"
     })
-    expect(response.code).to eq "404"
+    expect(response.code).to eq "400"
   end
 
   it "returns 404 and error message for readings with no user" do
@@ -28,10 +28,10 @@ describe "readings API" do
 
     post "/readings.json", reading_params
     expect(json).to eq({
-      "code" => 404,
+      "code" => 400,
       "error" => "No user associated with that sensor"
     })
-    expect(response.code).to eq "404"
+    expect(response.code).to eq "400"
   end
 
   it "returns 400 and error message for duplicate readings" do
@@ -51,7 +51,7 @@ describe "readings API" do
     expect(response.code).to eq "400"
   end
 
-  it "returns 200 for duplicate readings", :vcr do
+  it "returns 200 for valid readings", :vcr do
     user = create(:user)
     sensor = create(:sensor, name: sensor_name)
     user.sensors << sensor
