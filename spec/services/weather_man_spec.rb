@@ -46,6 +46,11 @@ describe WeatherMan do
     let(:time) { Time.zone.parse("March 1, 2015 at 8am") }
     let(:location) { "knyc" }
 
+    it "returns nil when wunderground returns invalid json", :vcr do
+      temp = WeatherMan.outdoor_temp_for(eight_am, "knyc", throttle)
+      expect(temp).to be_nil
+    end
+
     it "only pulls from the NOAA central park weather station" do
       expect(WeatherMan.api).to receive(:history_for).
         with(eight_am, "knyc").and_return(empty_response)

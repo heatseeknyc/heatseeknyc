@@ -24,6 +24,10 @@ class WeatherMan
     else
       historical_outdoor_temp_for(time, location, throttle)
     end
+  rescue JSON::ParserError => e
+    Rails.logger.error "Invalid JSON from Wunderground"
+    Rails.logger.error e.to_s
+    nil
   end
 
   def self.historical_outdoor_temp_for(time, location, throttle = 9)
