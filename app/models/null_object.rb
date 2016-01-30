@@ -1,5 +1,5 @@
 class NullObject
-  def method_missing(*args, &block)
+  def method_missing(*)
     nil
   end
 

@@ -9,7 +9,7 @@ class Verifier
   end
 
   def passing?
-    good_verification? && has_sensor? && has_user? && !is_dupe?
+    good_verification? && sensor? && user? && !dupe?
   end
 
   def failing?
@@ -33,22 +33,22 @@ class Verifier
     !verification.nil?
   end
 
-  def has_sensor?
+  def sensor?
     !sensor.nil?
   end
 
-  def has_user?
+  def user?
     !sensor.user.nil?
   end
 
-  def is_dupe?
+  def dupe?
     !dupe.nil?
   end
 
   def error_message
     return "Bad verification string" if !good_verification?
-    return "No sensor by that name found" if !has_sensor?
-    return "No user associated with that sensor" if !has_user?
-    return "Already a reading for that sensor at that time" if is_dupe?
+    return "No sensor by that name found" if !sensor?
+    return "No user associated with that sensor" if !user?
+    return "Already a reading for that sensor at that time" if dupe?
   end
 end
