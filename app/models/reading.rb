@@ -30,7 +30,7 @@ class Reading < ActiveRecord::Base
     temp = params[:temp].to_f.round
     outdoor_temp = WeatherMan.outdoor_temp_for(time, user.zip_code)
 
-    self.create(
+    create(
       sensor: sensor,
       user: user,
       temp: temp,

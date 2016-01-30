@@ -1,5 +1,5 @@
 class ReadingsController < ApplicationController
-   protect_from_forgery except: :create
+  protect_from_forgery except: :create
 
   def create
     render_error and return if invalid?
@@ -21,6 +21,6 @@ class ReadingsController < ApplicationController
   end
 
   def render_error
-    render json: {code: 400, error: verifier.error_message}, status: 400
+    render json: { code: 400, error: verifier.error_message }, status: 400
   end
 end
