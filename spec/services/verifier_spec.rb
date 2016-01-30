@@ -1,12 +1,12 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Verifier do
   let(:parameters) do
     {
-      :time => 1426064293.0,
-      :temp => 56.7,
-      :sensor_name => "0013a20040c17f5a",
-      :verification => 'c0ffee'
+      time: 1426064293.0,
+      temp: 56.7,
+      sensor_name: "0013a20040c17f5a",
+      verification: "c0ffee"
     }
   end
   let(:verifier) { Verifier.new(parameters) }
@@ -74,4 +74,3 @@ describe Verifier do
     end
   end
 end
-
