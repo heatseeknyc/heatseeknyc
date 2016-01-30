@@ -1,15 +1,15 @@
 require 'spec_helper'
 
 describe Verifier do
-    let(:parameters) do
-      {
-        :time =>1426064293.0,
-        :temp => 56.7,
-        :sensor_name => "0013a20040c17f5a",
-        :verification => 'c0ffee'
-      }
-    end
-    let(:verifier) { Verifier.new(parameters) }
+  let(:parameters) do
+    {
+      :time => 1426064293.0,
+      :temp => 56.7,
+      :sensor_name => "0013a20040c17f5a",
+      :verification => 'c0ffee'
+    }
+  end
+  let(:verifier) { Verifier.new(parameters) }
 
   context "no sensor" do
     specify "failing" do
@@ -39,10 +39,11 @@ describe Verifier do
     let(:user) { create(:user) }
     let(:sensor) { create(:sensor, name: parameters[:sensor_name]) }
     let(:reading) do
-      create(:reading, {
+      create(
+        :reading,
         temp: parameters[:temp],
         created_at: Time.at(parameters[:time])
-      })
+      )
     end
 
     before(:each) do

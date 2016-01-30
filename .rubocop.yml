@@ -7,6 +7,8 @@ Style/NegatedIf:
   Enabled: false
 Style/NumericLiterals:
   Enabled: false
+Style/AndOr:
+  Enabled: false
 
 Style/CaseEquality:
   Exclude:

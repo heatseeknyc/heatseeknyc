@@ -16,10 +16,10 @@ describe "readings API" do
   it "returns 404 for readings with no sensor" do
     post "/readings.json", reading_params
 
-    expect(json).to eq ({
+    expect(json).to eq(
       "code" => 400,
       "error" => "No sensor by that name found"
-    })
+    )
     expect(response.code).to eq "400"
   end
 
@@ -27,10 +27,10 @@ describe "readings API" do
     create(:sensor, name: sensor_name)
 
     post "/readings.json", reading_params
-    expect(json).to eq({
+    expect(json).to eq(
       "code" => 400,
       "error" => "No user associated with that sensor"
-    })
+    )
     expect(response.code).to eq "400"
   end
 
@@ -44,10 +44,10 @@ describe "readings API" do
     sensor.readings << reading
 
     post "/readings.json", reading_params
-    expect(json).to eq({
+    expect(json).to eq(
       "code" => 400,
       "error" => "Already a reading for that sensor at that time"
-    })
+    )
     expect(response.code).to eq "400"
   end
 
