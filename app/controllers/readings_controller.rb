@@ -2,7 +2,8 @@ class ReadingsController < ApplicationController
   protect_from_forgery except: :create
 
   def create
-    render_error and return if invalid?
+    render_error and return if verifier.failing?
+    handle_dupe and return if verifier.dupe?
     render json: Reading.create_from_params(strong_params)
   end
 
@@ -12,8 +13,8 @@ class ReadingsController < ApplicationController
     params.require(:reading).permit(:sensor_name, :temp, :time, :verification)
   end
 
-  def invalid?
-    verifier.failing?
+  def handle_dupe
+    render json: Reading.find_by_params(strong_params)
   end
 
   def verifier
@@ -21,6 +22,8 @@ class ReadingsController < ApplicationController
   end
 
   def render_error
-    render json: { code: 400, error: verifier.error_message }, status: 400
+    status = verifier.status
+    message = verifier.error_message
+    render json: { code: status, error: message }, status: status
   end
 end

@@ -34,12 +34,12 @@ describe Reading do
       user = create(:user)
       user.sensors << sensor
 
-      @reading = Reading.create_from_params({
+      @reading = Reading.create_from_params(
         :time =>1426064293.0,
         :temp => 56.7,
         :sensor_name => "0013a20040c17f5a",
         :verification => "c0ffee"
-      })
+      )
       expect(@reading.temp).to eq 57
     end
 
@@ -48,14 +48,14 @@ describe Reading do
       user = create(:user, zip_code: '10216')
       sensor = create(:sensor, name: "abcdefgh")
       user.sensors << sensor
-      params = ActionController::Parameters.new({
+      params = ActionController::Parameters.new(
         "reading" => {
           "temp"=>67.42,
           "verification"=>"c0ffee",
           "time"=>1452241576.0,
           "sensor_name"=>"abcdefgh"
         }
-      })
+      )
       reading = Reading.create_from_params(params[:reading])
       expect(reading.outdoor_temp).to be_nil
     end

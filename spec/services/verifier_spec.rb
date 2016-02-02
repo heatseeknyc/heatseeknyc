@@ -52,13 +52,12 @@ describe Verifier do
       sensor.readings << reading
     end
 
-    specify "failing" do
-      expect(verifier).to be_failing
+    specify "passing" do
+      expect(verifier).to be_passing
     end
 
-    specify "correct error_message message" do
-      expect(verifier.error_message).
-        to eq "Already a reading for that sensor at that time"
+    specify "correct status code" do
+      expect(verifier.status).to eq 200
     end
   end
 

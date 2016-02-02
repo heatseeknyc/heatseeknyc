@@ -13,7 +13,7 @@ describe "readings API" do
     }
   end
 
-  it "returns 404 for readings with no sensor" do
+  it "returns 400 for readings with no sensor" do
     post "/readings.json", reading_params
 
     expect(json).to eq(
@@ -23,7 +23,7 @@ describe "readings API" do
     expect(response.code).to eq "400"
   end
 
-  it "returns 404 and error message for readings with no user" do
+  it "returns 400 and error message for readings with no user" do
     create(:sensor, name: sensor_name)
 
     post "/readings.json", reading_params
@@ -34,7 +34,7 @@ describe "readings API" do
     expect(response.code).to eq "400"
   end
 
-  it "returns 400 and error message for duplicate readings" do
+  it "returns 200 for duplicate readings and does not save them", :vcr do
     user = create(:user)
     sensor = create(:sensor, name: sensor_name)
     reading = create(:reading, temp: 108, created_at: Time.at(1453991049.0))
@@ -44,11 +44,13 @@ describe "readings API" do
     sensor.readings << reading
 
     post "/readings.json", reading_params
-    expect(json).to eq(
-      "code" => 400,
-      "error" => "Already a reading for that sensor at that time"
-    )
-    expect(response.code).to eq "400"
+    expect(json["temp"]).to eq(reading.temp)
+    expect(Time.zone.parse(json["created_at"])).to eq(reading.created_at)
+    expect(json["user_id"]).to eq(user.id)
+    expect(json["sensor_id"]).to eq(sensor.id)
+    expect(json["violation"]).to eq(reading.violation)
+    expect(json["outdoor_temp"]).to eq(reading.outdoor_temp)
+    expect(Reading.count).to eq 1
   end
 
   it "returns 200 for valid readings", :vcr do

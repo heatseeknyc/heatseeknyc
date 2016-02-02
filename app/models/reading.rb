@@ -23,6 +23,20 @@ class Reading < ActiveRecord::Base
     end
   end
 
+  def self.find_by_params(params)
+    sensor = Sensor.find_by(name: params[:sensor_name])
+    user = sensor.user
+    time = Time.at params[:time].to_i
+    temp = params[:temp].to_f.round
+
+    find_by(
+      sensor: sensor,
+      user: user,
+      temp: temp,
+      created_at: time
+    )
+  end
+
   def self.create_from_params(params)
     sensor = Sensor.find_by(name: params[:sensor_name])
     user = sensor.user
