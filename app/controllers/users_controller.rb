@@ -118,6 +118,7 @@ class UsersController < ApplicationController
         :last_name, 
         :address,
         :email,
+        :phone_number,
         :zip_code,
         :permissions,
         :twine_name
