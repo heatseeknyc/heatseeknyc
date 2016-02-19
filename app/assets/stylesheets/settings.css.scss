@@ -18,17 +18,31 @@
 		font-family: 'Oswald';
 		font-size: 24px;
 		padding-bottom: 10px;
-	}	
+	}
 }
 
 .settings-form-control.form-control {
-	border: 4px solid $theme-black;	
+	border: 4px solid $theme-black;
+	border-radius: 0;
+	height: 50px;
+}
+
+.settings-form-control.form-control.success,
+.settings-form-control.form-control.success:focus {
+	border: 4px solid $theme-blue;
+	border-radius: 0;
+	height: 50px;
+}
+
+.settings-form-control.form-control.error,
+.settings-form-control.form-control.error:focus {
+	border: 4px solid $theme-red;
 	border-radius: 0;
 	height: 50px;
 }
 
 .settings-form-control.form-control:focus {
-	border: 4px solid $theme-black;	
+	border: 4px solid $theme-black;
 	box-shadow: none;
 }
 

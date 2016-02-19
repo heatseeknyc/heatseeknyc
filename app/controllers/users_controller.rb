@@ -8,9 +8,23 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
+    flash[:success] = {}
+    user_params.each do |key, value|
+      flash[:success][key.to_sym] = "Successfully changed #{key.to_s.gsub(/_/, " ")} to #{value}" if @user.send(key).to_s != value
+    end
+
     @user.update_without_password(user_params)
-    @collaboration = current_user.collaborations.where(collaborator_id: @user.id).first
-    redirect_to "/users/#{current_user.id}/collaborations/#{@collaboration.id}"
+
+    flash[:error] = {}
+    if @user.errors.messages
+      @user.errors.messages.each do |key, value|
+        flash[:success][key.to_sym] = nil
+        flash[:error][key.to_sym] = "Error changing #{key.to_s.gsub(/_/, " ")}: #{value.join("")}"
+      end
+    end
+    # flash[:notice] = "Successfully updated sensor code(s) to be #{@user.sensor_codes_string}"
+    # redirect_to "/users/#{@user.id}/edit"
+    redirect_to edit_user_path(@user)
   end
 
   def index
@@ -38,9 +52,9 @@ class UsersController < ApplicationController
 
   def show
     respond_to do |f|
-      f.html do 
-        if current_user.permissions <= 50 
-          render :permissions_show 
+      f.html do
+        if current_user.permissions <= 50
+          render :permissions_show
         else
           render :show
         end
@@ -65,7 +79,7 @@ class UsersController < ApplicationController
   def search
     @query = params[:q]
     @results = current_user.search(@query)
-    
+
     respond_to do |f|
       f.html do
         if @results.empty?
@@ -83,8 +97,8 @@ class UsersController < ApplicationController
     # after having run for a minute
     # also, code is too slow, need a faster solution
     # if user.readings.count > 75
-    #   user.readings.slice(0..-50).each do |r| 
-    #     r.destroy 
+    #   user.readings.slice(0..-50).each do |r|
+    #     r.destroy
     #   end
     # end
 
@@ -114,13 +128,13 @@ class UsersController < ApplicationController
   private
     def user_params
       params.require(:user).permit([
-        :first_name, 
-        :last_name, 
+        :first_name,
+        :last_name,
         :address,
         :email,
         :zip_code,
         :permissions,
-        :twine_name
+        :sensor_codes_string
       ])
     end
 end
