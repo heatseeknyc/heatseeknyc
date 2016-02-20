@@ -252,6 +252,18 @@ class User < ActiveRecord::Base
 
   def sensor_codes_string_contains_only_valid_sensors
     return if self.sensor_codes == (self.sensor_codes_string || "").upcase
-    self.errors.add :sensor_codes_string, "has an invalid sensor code"
+    #if any in sensor_code_string is not found in sensor_codes
+    invalid_codes = []
+    self.sensor_codes_string.upcase.gsub(' ','').split(',').each do |code|
+      if !sensor_codes.include? code
+        invalid_codes << code
+      end
+    end
+    if invalid_codes.length != 0
+      self.errors.add :sensor_codes_string, "#{invalid_codes.join(", ")} are invalid sensor codes."
+    else
+      self.errors.add :sensor_codes_string, "You must enter valid sensor codes separated by commas."
+    end
+    binding.pry
   end
 end
