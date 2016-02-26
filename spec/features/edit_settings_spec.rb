@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 feature "Signing up for an account" do
   scenario "from the sign up page" do

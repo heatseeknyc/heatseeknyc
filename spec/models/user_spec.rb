@@ -3,14 +3,14 @@ require 'spec_helper'
 describe User do
   it "has apartment" do
     pat = create(:user)
-    pat.apartment = '2H'
-    expect(pat.apartment).to eq '2H'
+    pat.apartment = "2H"
+    expect(pat.apartment).to eq "2H"
   end
 
   it "has telephone" do
     pat = create(:user)
-    pat.phone_number = '555-555-5555'
-    expect(pat.phone_number).to eq '555-555-5555'
+    pat.phone_number = "555-555-5555"
+    expect(pat.phone_number).to eq "555-555-5555"
   end
 
 	describe "has a twine" do
