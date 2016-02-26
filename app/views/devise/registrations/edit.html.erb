@@ -31,6 +31,9 @@
       <dl><%= f.label :email %>:
       <%= f.email_field :email, class: "settings-form-control form-control" %></dl>
 
+      <dl class="settings-input"><%= f.label :phone_number %>
+      <%= f.text_field :phone_number, class: "settings-form-control form-control" %></dl>
+
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
         <dl>Currently waiting confirmation for: <%= resource.unconfirmed_email %></dl>
       <% end %>

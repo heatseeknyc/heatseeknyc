@@ -54,6 +54,7 @@ class User::RegistrationsController < Devise::RegistrationsController
         :zip_code,
         :permissions,
         :twine_name,
+        :phone_number,
         :current_password,
         :password,
         :password_confirmation
@@ -70,6 +71,7 @@ class User::RegistrationsController < Devise::RegistrationsController
         :zip_code,
         :permissions,
         :twine_name,
+        :phone_number,
         :password,
         :password_confirmation
       )
