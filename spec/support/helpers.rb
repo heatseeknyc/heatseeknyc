@@ -1,5 +1,5 @@
-def login_as_type(type)
-  user = create(type)
+def login_as_type(type, options={})
+  user = create(type, options)
   visit new_user_session_path
   fill_in :user_email, with: user.email
   fill_in :user_password, with: user.password
@@ -11,8 +11,8 @@ def login_as_admin
   login_as_type(:admin)
 end
 
-def login_as_tenant
-  login_as_type(:tenant)
+def login_as_tenant(options={})
+  login_as_type(:tenant, options)
 end
 
 def expect_nav_bar
