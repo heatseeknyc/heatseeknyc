@@ -22,6 +22,7 @@ Twinenyc::Application.routes.draw do
   get "complaints/query" => "complaint#query"
   get "complaints/" => "complaint#index"
   get "coldmap/" => "complaint#index"
+  get "pilot" => "welcome#pilot"
   get "sponsors" => "welcome#sponsors"
   get "resources" => "welcome#resources"
   get "thankyou" => "welcome#thankyou"
