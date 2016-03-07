@@ -22,6 +22,7 @@ Twinenyc::Application.routes.draw do
   get "complaints/query" => "complaint#query"
   get "complaints/" => "complaint#index"
   get "coldmap/" => "complaint#index"
+  get "pilot" => "welcome#pilot"
   get "sponsors" => "welcome#sponsors"
   get "resources" => "welcome#resources"
   get "thankyou" => "welcome#thankyou"
@@ -37,6 +38,7 @@ Twinenyc::Application.routes.draw do
   # get "demo" => "welcome#demo"
   get "press" => "welcome#press"
   get "blog" => "posts#index"
+  get "calendar" => "welcome#calendar"
   root 'welcome#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
