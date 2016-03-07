@@ -38,7 +38,6 @@ Twinenyc::Application.routes.draw do
   # get "demo" => "welcome#demo"
   get "press" => "welcome#press"
   get "blog" => "posts#index"
-  get "calendar" => "welcome#calendar"
   root 'welcome#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
