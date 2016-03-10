@@ -45,7 +45,7 @@ def fill_in_new_personal_info(user)
     fill_in "First name", with: "Howling"
     fill_in "Last name", with: "Wolf"
     fill_in "Address", with: "Chicago"
-    fill_in "Zip code", with: "111111"
+    fill_in "Zip code", with: "11111"
     fill_in "Email", with: "wolfster@email.com"
     fill_in "Password", with: "therealking"
     fill_in "Password confirmation", with: "therealking"
