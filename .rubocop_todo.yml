@@ -71,7 +71,6 @@ Lint/UselessAssignment:
     - 'app/controllers/charges_controller.rb'
     - 'app/controllers/users_controller.rb'
     - 'app/models/sensor.rb'
-    - 'app/models/user.rb'
     - 'spec/features/blog_spec.rb'
     - 'spec/features/managing_articles_spec.rb'
     - 'spec/models/twine_spec.rb'
@@ -383,7 +382,6 @@ Style/LeadingCommentSpace:
     - 'Gemfile'
     - 'app/models/collaboration.rb'
     - 'app/models/reading.rb'
-    - 'app/models/user.rb'
 
 # Offense count: 16
 # Cop supports --auto-correct.
@@ -404,7 +402,6 @@ Style/MultilineOperationIndentation:
 Style/MutableConstant:
   Exclude:
     - 'app/models/complaint.rb'
-    - 'app/models/user.rb'
     - 'app/services/pdf_writer.rb'
     - 'app/services/reading_scraper.rb'
     - 'init/lib/init/version.rb'
@@ -476,7 +473,6 @@ Style/SignalException:
 Style/SpaceAfterComma:
   Exclude:
     - 'app/controllers/posts_controller.rb'
-    - 'app/models/user.rb'
     - 'app/services/pdf_writer.rb'
     - 'config/deploy.rb'
     - 'spec/concerns/timeable_spec.rb'

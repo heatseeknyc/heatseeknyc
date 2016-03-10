@@ -1,4 +1,4 @@
-#encoding: utf-8
+# encoding: utf-8
 
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
@@ -37,11 +37,11 @@ class User < ActiveRecord::Base
     admin: 25,
     lawyer: 50,
     user: 100
-  }
+  }.freeze
 
-  METRICS = [:min, :max, :avg]
-  CYCLES = [:day, :night]
-  MEASUREMENTS = [:temp, :outdoor_temp]
+  METRICS = [:min, :max, :avg].freeze
+  CYCLES = [:day, :night].freeze
+  MEASUREMENTS = [:temp, :outdoor_temp].freeze
   DEMO_ACCOUNT_EMAILS = [
     'mbierut@heatseeknyc.com',
     'bfried@heatseeknyc.com',
@@ -76,7 +76,7 @@ class User < ActiveRecord::Base
     'chernandez@heatseeknyc.com',
     'dmorgan@heatseeknyc.com',
     'demo-lawyer@heatseeknyc.com'
-  ]
+  ].freeze
 
   define_measureable_methods(METRICS, CYCLES, MEASUREMENTS)
 
@@ -120,13 +120,13 @@ class User < ActiveRecord::Base
     where.not(id: user_id)
   end
 
-  #TODO: eliminate this method and use is_demo_user? instance method instead
+  # TODO: eliminate this method and use is_demo_user? instance method instead
   def self.account_demo_user?(user_id)
     DEMO_ACCOUNT_EMAILS.include?(User.find(user_id).email)
   end
 
   def self.create_demo_lawyer
-    demo_lawyer = User.create(
+    User.create(
       :first_name => "Demo Lawyer",
       :last_name => "Account",
       :address => "100 Fake St",
@@ -159,7 +159,7 @@ class User < ActiveRecord::Base
   def associate_sensors
     self.sensors.clear
     string = self.sensor_codes_string || ''
-    string.upcase.gsub(' ','').split(',').each do |nick_name|
+    string.upcase.gsub(' ', '').split(',').each do |nick_name|
       sensor = Sensor.find_by(nick_name: nick_name)
       self.sensors << sensor if sensor
     end
@@ -189,9 +189,7 @@ class User < ActiveRecord::Base
   end
 
   def has_collaboration?(collaboration_id)
-    collaboration = find_collaboration(collaboration_id)
     !find_collaboration(collaboration_id).empty?
-    # !collaboration.empty? && collaboration.confirmed
   end
 
   def find_collaboration(collaboration_id)
@@ -248,6 +246,11 @@ class User < ActiveRecord::Base
 
   def name
     "#{first_name} #{last_name}"
+  end
+
+  def self.published_addresses(date_range)
+    joins(:readings).where(permissions: 100, dummy: [nil, false]).
+      where(readings: {created_at: date_range}).pluck(:address, :zip_code)
   end
 
   def sensor_codes_string_contains_only_valid_sensors
