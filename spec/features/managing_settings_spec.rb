@@ -12,7 +12,17 @@ feature "Managing settings" do
     user = login_as_tenant
     click_link "My Settings"
 
-    fill_in_new_personal_info(user)
+    within('form[name="edit-user"]') do
+      fill_in "First name", with: "Howling"
+      fill_in "Last name", with: "Wolf"
+      fill_in "Address", with: "Chicago"
+      fill_in "Zip code", with: "11111"
+      fill_in "Email", with: "wolfster@email.com"
+      fill_in "Password", with: "therealking"
+      fill_in "Password confirmation", with: "therealking"
+      fill_in "Current password", with: user.password
+      click_button "Update"
+    end
 
     expect(page).to have_content "You updated your account successfully"
     expect(page).to have_content "Helping New York City keep the heat on."
