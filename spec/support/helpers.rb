@@ -41,7 +41,7 @@ def expect_pre_filled_settings_for(user)
 end
 
 def fill_in_new_personal_info(user)
-  within("form#edit_user") do
+  within('form[name="edit-user"]') do
     fill_in "First name", with: "Howling"
     fill_in "Last name", with: "Wolf"
     fill_in "Address", with: "Chicago"
