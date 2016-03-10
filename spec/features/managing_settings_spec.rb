@@ -1,17 +1,31 @@
 require 'spec_helper'
 
 feature "Managing settings" do
-  scenario "Viewing settings" do
-    user = login_as_tenant
-    click_link "My Settings"
+  let(:user) { login_as_tenant }
 
-    expect_pre_filled_settings_for(user)
+  before do
+    user
+    click_link "My Settings"
+  end
+
+  scenario "Viewing settings" do
+    expect(page).to have_content "First name"
+    expect(page).to have_selector("input[value='#{user.first_name}']")
+
+    expect(page).to have_content "Last name"
+    expect(page).to have_selector("input[value='#{user.last_name}']")
+
+    expect(page).to have_content "Address"
+    expect(page).to have_selector("input[value='#{user.address}']")
+
+    expect(page).to have_content "Zip code"
+    expect(page).to have_selector("input[value='#{user.zip_code}']")
+
+    expect(page).to have_content "Email"
+    expect(page).to have_selector("input[value='#{user.email}']")
   end
 
   scenario "Updating" do
-    user = login_as_tenant
-    click_link "My Settings"
-
     within('form[name="edit-user"]') do
       fill_in "First name", with: "Howling"
       fill_in "Last name", with: "Wolf"
@@ -24,6 +38,7 @@ feature "Managing settings" do
       click_button "Update"
     end
 
+    expect(current_path).to eq(root_path)
     expect(page).to have_content "You updated your account successfully"
     expect(page).to have_content "Helping New York City keep the heat on."
   end
