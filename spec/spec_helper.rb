@@ -1,24 +1,24 @@
-require 'coveralls'
+require "coveralls"
 Coveralls.wear!
 
-require 'rubygems'
-require 'spork'
-require 'simplecov'
-require 'timecop'
+require "rubygems"
+require "spork"
+require "simplecov"
+require "timecop"
 
 SimpleCov.start
-Timecop.travel(DateTime.parse('2015-03-01 00:00:00 -0500'))
+Timecop.travel(DateTime.parse("2015-03-01 00:00:00 -0500"))
 
-ENV["RAILS_ENV"] ||= 'test'
+ENV["RAILS_ENV"] ||= "test"
 
 Spork.prefork do
   require File.expand_path("../../config/environment", __FILE__)
-  require 'rspec/rails'
-  require 'rspec/autorun'
-  require 'capybara/rails'
+  require "rspec/rails"
+  require "rspec/autorun"
+  require "capybara/rails"
   require "rails/application"
-  require 'rake'
-  require 'rails/tasks'
+  require "rake"
+  require "rails/tasks"
   Rake::Task["tmp:create"].invoke
 
   Spork.trap_method(Rails::Application, :reload_routes!)
