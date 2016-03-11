@@ -17,6 +17,9 @@ Spork.prefork do
   require 'rspec/autorun'
   require 'capybara/rails'
   require "rails/application"
+  require 'rake'
+  require 'rails/tasks'
+  Rake::Task["tmp:create"].invoke
 
   Spork.trap_method(Rails::Application, :reload_routes!)
 
