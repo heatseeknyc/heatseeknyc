@@ -12,7 +12,7 @@
     <%= form_for(resource,
                  as: resource_name,
                  url: registration_path(resource_name),
-                 html: { method: :put, name: 'edit-user' }) do |f| %>
+                 html: { method: :put, name: "edit-user" }) do |f| %>
       <%= devise_error_messages! %>
 
       <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
@@ -54,8 +54,7 @@
         <dl><%= f.label :current_password %>: <i>(we need your current password to confirm your changes)</i>
         <%= f.password_field :current_password, class: "settings-form-control form-control" %></dl>
 
-        <div><%= f.submit "Update", class: "btn-delete" %></div>
-
+        <div><%= f.submit "Update", class: "btn-save" %></div>
       </div> <!-- end of form -->
     <% end %>
   </div>
@@ -65,7 +64,7 @@
       <%= form_for(resource,
                    as: resource_name,
                    url: registration_path(resource_name),
-                   html: { method: :put, name: 'delete-user' }) do |f| %>
+                   html: { method: :put, name: "delete-user" }) do |f| %>
         <h4>No longer want to use this service?</h4>
         <%= button_to "Cancel my account",
                       registration_path(resource_name),

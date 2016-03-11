@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 feature "Managing settings" do
   let(:user) { login_as_tenant }
@@ -26,7 +26,7 @@ feature "Managing settings" do
   end
 
   scenario "Updating" do
-    within('form[name="edit-user"]') do
+    within("form[name='edit-user']") do
       fill_in "First name", with: "Howling"
       fill_in "Last name", with: "Wolf"
       fill_in "Address", with: "Chicago"
