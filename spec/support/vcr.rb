@@ -9,6 +9,6 @@ VCR.configure do |c|
     allow_unused_http_interactions: false
   }
   c.debug_logger = File.open(Rails.root.join('log', 'vcr.log'), 'a')
-  c.filter_sensitive_data('---WUNDERGROUND_KEY---') { ENV['WUNDERGROUND_KEY'] }
+  c.filter_sensitive_data('---WUNDERGROUND_KEY---') { ENV['WUNDERGROUND_KEY'] || 'dummy-key' }
   c.configure_rspec_metadata!
 end
