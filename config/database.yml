@@ -2,7 +2,7 @@
 # It is preferable to use postgres because this
 # is what's used in production and it is necessary
 # to work on the coldmap.
-development:
+development: &development
   adapter: postgresql
   database: dev_database
   username: dave_database_user
