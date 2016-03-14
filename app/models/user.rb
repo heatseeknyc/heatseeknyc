@@ -13,8 +13,8 @@ class User < ActiveRecord::Base
   has_many :collaborations, dependent: :destroy
   has_many :collaborators, through: :collaborations
 
-  validates :first_name, :length => {minimum: 2}
-  validates :last_name, :length => {minimum: 2}
+  validates :first_name, :length => { minimum: 2 }
+  validates :last_name, :length => { minimum: 2 }
   validate :sensor_codes_string_contains_only_valid_sensors
   validates_presence_of :address, :email, :zip_code
   validates_format_of :zip_code,
@@ -250,7 +250,7 @@ class User < ActiveRecord::Base
 
   def self.published_addresses(date_range)
     joins(:readings).where(permissions: 100, dummy: [nil, false]).
-      where(readings: {created_at: date_range}).pluck(:address, :zip_code)
+      where(readings: { created_at: date_range }).pluck(:address, :zip_code)
   end
 
   def sensor_codes_string_contains_only_valid_sensors

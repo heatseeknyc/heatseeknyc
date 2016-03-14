@@ -1,8 +1,8 @@
 require "spec_helper.rb"
 
 describe "users API" do
-  let(:user1) { create(:user, address: "150 Court St", zip_code: 11201) }
-  let(:user2) { create(:user, address: "242 W 30th St", zip_code: 10001) }
+  let(:user1) { create(:user, address: "150 Court St", zip_code: "11201") }
+  let(:user2) { create(:user, address: "242 W 30th St", zip_code: "10001") }
   let(:time) { Time.zone.parse("2016-01-01") }
 
   before(:each) do
@@ -22,7 +22,7 @@ describe "users API" do
   end
 
   it "excludes dummy accounts" do
-    user3 = create(:user, dummy: true, address: '100 Fake st')
+    user3 = create(:user, dummy: true, address: "100 Fake st")
     user3.readings << create(:reading, created_at: time)
     get "addresses.json"
 
@@ -35,7 +35,7 @@ describe "users API" do
   end
 
   it "excludes non-tenant accounts" do
-    user3 = create(:user, permissions: 50, address: '123 Lawyer St')
+    user3 = create(:user, permissions: 50, address: "123 Lawyer St")
     user3.readings << create(:reading, created_at: time)
     get "addresses.json"
 
