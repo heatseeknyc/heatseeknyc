@@ -158,15 +158,15 @@ class User < ActiveRecord::Base
 
   def associate_sensors
     self.sensors.clear
-    string = self.sensor_codes_string || ''
-    string.upcase.gsub(' ', '').split(',').each do |nick_name|
+    string = self.sensor_codes_string || ""
+    string.upcase.delete(" ").split(",").each do |nick_name|
       sensor = Sensor.find_by(nick_name: nick_name)
       self.sensors << sensor if sensor
     end
   end
 
   def sensor_codes
-    self.sensors.map(&:nick_name).join(', ').upcase
+    self.sensors.map(&:nick_name).join(", ").upcase
   end
 
   def twine_name=(twine_name)

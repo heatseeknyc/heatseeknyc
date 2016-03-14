@@ -105,6 +105,8 @@ class UsersController < ApplicationController
     redirect_to user_path(demo)
   end
 
+  # TODO: Extract this into a CSVWriter service to match PDFWriter and
+  # declutter this controller
   def addresses
     pilot_2016 = Time.zone.parse("2015-10-01")..Time.zone.parse("2016-05-31")
     addresses = User.published_addresses(pilot_2016)
@@ -113,8 +115,8 @@ class UsersController < ApplicationController
 
     send_data(
       csv.map { |row| row.join(",") }.join("\n"),
-      :type => "text/csv; charset=utf-8; header=present",
-      :filename => "addresses.csv"
+      type: "text/csv; charset=utf-8; header=present",
+      filename: "addresses.csv"
     )
   end
 

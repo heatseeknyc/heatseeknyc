@@ -94,7 +94,7 @@ Metrics/ClassLength:
 # Configuration parameters: AllowHeredoc, AllowURI, URISchemes.
 # URISchemes: http, https
 Metrics/LineLength:
-  Max: 360
+  Max: 361
 
 # Offense count: 18
 # Configuration parameters: CountComments.
@@ -328,7 +328,7 @@ Style/IdenticalConditionalBranches:
 # Configuration parameters: EnforcedStyle, SupportedStyles, IndentationWidth.
 # SupportedStyles: special_inside_parentheses, consistent, align_brackets
 Style/IndentArray:
-  Enabled: false
+  EnforcedStyle: 'consistent'
 
 # Offense count: 41
 # Cop supports --auto-correct.
