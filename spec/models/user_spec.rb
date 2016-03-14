@@ -8,32 +8,32 @@ describe User do
         first_name: "Rick",
         last_name: "Sanchez",
         email: "rick@rickandmorty.com",
-        phone_number: "555-666-7777"
+        phone_number: nil
       )
     end
 
     it "excludes identifying information when in anonymized mode" do
-      expect(rick.inspect).to include rick.first_name
-      expect(rick.inspect).to include rick.search_first_name
-      expect(rick.inspect).to include rick.last_name
-      expect(rick.inspect).to include rick.search_last_name
-      expect(rick.inspect).to include rick.apartment
-      expect(rick.inspect).to include rick.email
-      expect(rick.inspect).to include rick.phone_number
+      expect(rick.inspect).to include "first_name: \"#{rick.first_name}\""
+      expect(rick.inspect).to include "search_first_name: \"#{rick.search_first_name}\""
+      expect(rick.inspect).to include "last_name: \"#{rick.last_name}\""
+      expect(rick.inspect).to include "search_last_name: \"#{rick.search_last_name}\""
+      expect(rick.inspect).to include "apartment: \"#{rick.apartment}\""
+      expect(rick.inspect).to include "email: \"#{rick.email}\""
+      expect(rick.inspect).to include "phone_number: nil"
       ENV["ANONYMIZED_FOR_LIVESTREAM"] = "TRUE"
-      expect(rick.inspect).to_not include rick.first_name
-      expect(rick.inspect).to_not include rick.search_first_name
-      expect(rick.inspect).to_not include rick.last_name
-      expect(rick.inspect).to_not include rick.search_last_name
-      expect(rick.inspect).to_not include rick.apartment
-      expect(rick.inspect).to_not include rick.email
-      expect(rick.inspect).to_not include rick.phone_number
+      expect(rick.inspect).to_not include "first_name: \"#{rick.first_name}\""
+      expect(rick.inspect).to_not include "search_first_name: \"#{rick.search_first_name}\""
+      expect(rick.inspect).to_not include "last_name: \"#{rick.last_name}\""
+      expect(rick.inspect).to_not include "search_last_name: \"#{rick.search_last_name}\""
+      expect(rick.inspect).to_not include "apartment: \"#{rick.apartment}\""
+      expect(rick.inspect).to_not include "email: \"#{rick.email}\""
+      expect(rick.inspect).to_not include "phone_number: nil"
     end
 
     it "includes non-identifying information" do
-      expect(rick.inspect).to include rick.id.to_s
-      expect(rick.inspect).to include rick.address
-      expect(rick.inspect).to include rick.permissions.to_s
+      expect(rick.inspect).to include "id: #{rick.id}"
+      expect(rick.inspect).to include "address: \"#{rick.address}\""
+      expect(rick.inspect).to include "permissions: #{rick.permissions}"
     end
   end
 
