@@ -1,6 +1,42 @@
 require 'spec_helper'
 
 describe User do
+  describe "#inspect" do
+    let(:rick) do
+      create(
+        :user,
+        first_name: "Rick",
+        last_name: "Sanchez",
+        email: "rick@rickandmorty.com",
+        phone_number: "555-666-7777"
+      )
+    end
+
+    it "excludes identifying information when in anonymized mode" do
+      expect(rick.inspect).to include rick.first_name
+      expect(rick.inspect).to include rick.search_first_name
+      expect(rick.inspect).to include rick.last_name
+      expect(rick.inspect).to include rick.search_last_name
+      expect(rick.inspect).to include rick.apartment
+      expect(rick.inspect).to include rick.email
+      expect(rick.inspect).to include rick.phone_number
+      ENV["ANONYMIZED_FOR_LIVESTREAM"] = "TRUE"
+      expect(rick.inspect).to_not include rick.first_name
+      expect(rick.inspect).to_not include rick.search_first_name
+      expect(rick.inspect).to_not include rick.last_name
+      expect(rick.inspect).to_not include rick.search_last_name
+      expect(rick.inspect).to_not include rick.apartment
+      expect(rick.inspect).to_not include rick.email
+      expect(rick.inspect).to_not include rick.phone_number
+    end
+
+    it "includes non-identifying information" do
+      expect(rick.inspect).to include rick.id.to_s
+      expect(rick.inspect).to include rick.address
+      expect(rick.inspect).to include rick.permissions.to_s
+    end
+  end
+
   it "has apartment" do
     pat = create(:user)
     pat.apartment = "2H"

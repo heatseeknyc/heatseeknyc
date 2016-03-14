@@ -254,4 +254,16 @@ class User < ActiveRecord::Base
     return if self.sensor_codes == (self.sensor_codes_string || "").upcase
     self.errors.add :sensor_codes_string, "has an invalid sensor code"
   end
+
+  def inspect
+    return super unless ENV["ANONYMIZED_FOR_LIVESTREAM"]
+    super
+      .gsub(first_name, 'xxx')
+      .gsub(last_name, 'xxx')
+      .gsub(search_first_name, 'xxx')
+      .gsub(search_last_name, 'xxx')
+      .gsub(email, 'xxx')
+      .gsub(apartment, 'xxx')
+      .gsub(phone_number, 'xxx')
+  end
 end
