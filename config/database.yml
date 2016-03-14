@@ -5,7 +5,7 @@
 development: &development
   adapter: postgresql
   database: dev_database
-  username: dave_database_user
+  username: dev_database_user
   password: <%= ENV['DATABASE_PASSWORD'] || 'password' %>
   host: localhost
   port: 5432
@@ -22,8 +22,15 @@ test: &test
   pool: 5
   timeout: 5000
 
-production:
-  <<: *development
-
 cucumber:
   <<: *test
+
+production:
+  adapter: postgresql
+  encoding: utf8
+  database: twinedb
+  username: heatseekroot
+  password: ENV['DATABASE_PASSWORD']
+  host: localhost
+  port: 5432
+  pool: 10
