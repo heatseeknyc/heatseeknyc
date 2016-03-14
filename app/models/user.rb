@@ -261,13 +261,22 @@ class User < ActiveRecord::Base
 
   def inspect
     return super unless ENV["ANONYMIZED_FOR_LIVESTREAM"]
-    super
-      .gsub(first_name, 'xxx')
-      .gsub(last_name, 'xxx')
-      .gsub(search_first_name, 'xxx')
-      .gsub(search_last_name, 'xxx')
-      .gsub(email, 'xxx')
-      .gsub(apartment, 'xxx')
-      .gsub(phone_number, 'xxx')
+    return_val = super.
+      gsub(", first_name: \"#{ first_name }\"", "").
+      gsub(", first_name: nil", "").
+      gsub(", last_name: \"#{ last_name }\"", "").
+      gsub(", last_name: nil", "").
+      gsub(", search_first_name: \"#{ search_first_name }\"", "").
+      gsub(", search_first_name: nil", "").
+      gsub(", search_last_name: \"#{ search_last_name }\"", "").
+      gsub(", search_last_name: nil", "").
+      gsub(", email: \"#{ email }\"", "").
+      gsub(", email: nil", "").
+      gsub(", apartment: \"#{ apartment }\"", "").
+      gsub(", apartment: nil", "").
+      gsub(", phone_number: \"#{ phone_number }\"", "").
+      gsub(", phone_number: nil", "")
+
+    # require 'pry'; binding.pry if ENV["ANONYMIZED_FOR_LIVESTREAM"]
   end
 end
