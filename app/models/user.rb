@@ -250,7 +250,8 @@ class User < ActiveRecord::Base
 
   def self.published_addresses(date_range)
     joins(:readings).where(permissions: 100, dummy: [nil, false]).
-      where(readings: { created_at: date_range }).pluck(:address, :zip_code)
+      order(address: :asc).where(readings: { created_at: date_range }).
+      pluck(:address, :zip_code).uniq
   end
 
   def sensor_codes_string_contains_only_valid_sensors
