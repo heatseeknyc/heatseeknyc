@@ -4,8 +4,8 @@
 # to work on the coldmap.
 development: &development
   adapter: postgresql
-  database: dev_database
-  username: dev_database_user
+  database: twinedb_development
+  username: twinedb_development_user
   password: <%= ENV['DATABASE_PASSWORD'] || 'password' %>
   host: localhost
   port: 5432
