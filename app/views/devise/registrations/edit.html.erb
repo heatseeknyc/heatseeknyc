@@ -33,9 +33,6 @@
         <dl><%= f.label :zip_code %>:
         <%= f.text_field :zip_code, class: "form-control short-field" %></dl>
 
-        <dl><label for="user_sensor_codes_string">Sensor code</label>: <i class="label-tip">(tenants only)</i>
-        <%= f.text_field :sensor_codes_string, class: "form-control" %></dl>
-
         <dl><%= f.label :email %>:
         <%= f.email_field :email, class: "form-control" %></dl>
 
@@ -45,6 +42,9 @@
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
           <dl>Currently waiting confirmation for: <%= resource.unconfirmed_email %></dl>
         <% end %>
+
+        <dl><label for="user_sensor_codes_string">Sensor code</label>: <i class="label-tip">(tenants only)</i>
+        <%= f.text_field :sensor_codes_string, class: "form-control" %></dl>
 
         <dl><%= f.label :password %>: <i class="label-tip">(leave blank if you don't want to change it)</i>
         <%= f.password_field :password, :autocomplete => "off", class: "form-control" %></dl>
