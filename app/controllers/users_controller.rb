@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   include UserControllerHelper
-  before_action :authenticate_user!, except: [:demo, :judges_login]
+  before_action :authenticate_user!, except: [:demo, :addresses]
 
   def edit
     @user = User.find(params[:id])
@@ -32,15 +32,15 @@ class UsersController < ApplicationController
       redirect_to "/users"
     else
       @user
-      render action: 'new'
+      render action: "new"
     end
   end
 
   def show
     respond_to do |f|
-      f.html do 
-        if current_user.permissions <= 50 
-          render :permissions_show 
+      f.html do
+        if current_user.permissions <= 50
+          render :permissions_show
         else
           render :show
         end
@@ -65,7 +65,7 @@ class UsersController < ApplicationController
   def search
     @query = params[:q]
     @results = current_user.search(@query)
-    
+
     respond_to do |f|
       f.html do
         if @results.empty?
@@ -83,8 +83,8 @@ class UsersController < ApplicationController
     # after having run for a minute
     # also, code is too slow, need a faster solution
     # if user.readings.count > 75
-    #   user.readings.slice(0..-50).each do |r| 
-    #     r.destroy 
+    #   user.readings.slice(0..-50).each do |r|
+    #     r.destroy
     #   end
     # end
 
@@ -105,17 +105,26 @@ class UsersController < ApplicationController
     redirect_to user_path(demo)
   end
 
-  def judges_login
-    judge = User.find_by(last_name: params[:last_name])
-    sign_in(judge)
-    redirect_to user_path(judge)
+  # TODO: Extract this into a CSVWriter service to match PDFWriter and
+  # declutter this controller
+  def addresses
+    pilot_2016 = Time.zone.parse("2015-10-01")..Time.zone.parse("2016-05-31")
+    addresses = User.published_addresses(pilot_2016)
+    header_row = ["address", "zip_code"]
+    csv = addresses.clone.unshift(header_row)
+
+    send_data(
+      csv.map { |row| row.join(",") }.join("\n"),
+      type: "text/csv; charset=utf-8; header=present",
+      filename: "addresses.csv"
+    )
   end
 
   private
     def user_params
       params.require(:user).permit([
-        :first_name, 
-        :last_name, 
+        :first_name,
+        :last_name,
         :address,
         :email,
         :phone_number,

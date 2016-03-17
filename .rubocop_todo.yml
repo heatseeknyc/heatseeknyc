@@ -71,7 +71,6 @@ Lint/UselessAssignment:
     - 'app/controllers/charges_controller.rb'
     - 'app/controllers/users_controller.rb'
     - 'app/models/sensor.rb'
-    - 'app/models/user.rb'
     - 'spec/features/blog_spec.rb'
     - 'spec/features/managing_articles_spec.rb'
     - 'spec/models/twine_spec.rb'
@@ -95,7 +94,7 @@ Metrics/ClassLength:
 # Configuration parameters: AllowHeredoc, AllowURI, URISchemes.
 # URISchemes: http, https
 Metrics/LineLength:
-  Max: 360
+  Max: 361
 
 # Offense count: 18
 # Configuration parameters: CountComments.
@@ -329,7 +328,7 @@ Style/IdenticalConditionalBranches:
 # Configuration parameters: EnforcedStyle, SupportedStyles, IndentationWidth.
 # SupportedStyles: special_inside_parentheses, consistent, align_brackets
 Style/IndentArray:
-  Enabled: false
+  EnforcedStyle: 'consistent'
 
 # Offense count: 41
 # Cop supports --auto-correct.
@@ -383,7 +382,6 @@ Style/LeadingCommentSpace:
     - 'Gemfile'
     - 'app/models/collaboration.rb'
     - 'app/models/reading.rb'
-    - 'app/models/user.rb'
 
 # Offense count: 16
 # Cop supports --auto-correct.
@@ -404,7 +402,6 @@ Style/MultilineOperationIndentation:
 Style/MutableConstant:
   Exclude:
     - 'app/models/complaint.rb'
-    - 'app/models/user.rb'
     - 'app/services/pdf_writer.rb'
     - 'app/services/reading_scraper.rb'
     - 'init/lib/init/version.rb'
@@ -476,7 +473,6 @@ Style/SignalException:
 Style/SpaceAfterComma:
   Exclude:
     - 'app/controllers/posts_controller.rb'
-    - 'app/models/user.rb'
     - 'app/services/pdf_writer.rb'
     - 'config/deploy.rb'
     - 'spec/concerns/timeable_spec.rb'
@@ -537,7 +533,14 @@ Style/SpaceInsideBrackets:
 # Configuration parameters: EnforcedStyle, EnforcedStyleForEmptyBraces, SupportedStyles.
 # SupportedStyles: space, no_space
 Style/SpaceInsideHashLiteralBraces:
-  Enabled: false
+  Exclude:
+    - 'Vagrantfile'
+    - 'app/models/collaboration.rb'
+    - 'app/models/concerns/graphable.rb'
+    - 'app/services/pdf_writer.rb'
+    - 'spec/models/regulator_spec.rb'
+    - 'spec/models/wunderground_history_spec.rb'
+    - 'spec/services/reading_scraper_spec.rb'
 
 # Offense count: 2
 # Cop supports --auto-correct.

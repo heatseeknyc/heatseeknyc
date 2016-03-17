@@ -17,6 +17,7 @@ Twinenyc::Application.routes.draw do
   get 'users/:id/download' => 'users#download_pdf', as: :pdf_download
   get 'users/:id/live_update' => 'users#live_update'
   get 'users/:user_id/collaborations/:id/download' => 'users#download_pdf'
+  get 'addresses' => 'users#addresses'
   get "demo" => "users#demo"
 
   get "complaints/query" => "complaint#query"
@@ -38,7 +39,7 @@ Twinenyc::Application.routes.draw do
   # get "demo" => "welcome#demo"
   get "press" => "welcome#press"
   get "blog" => "posts#index"
-  root 'welcome#index'
+  root "welcome#index"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
