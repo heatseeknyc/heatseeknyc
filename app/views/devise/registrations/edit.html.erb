@@ -18,22 +18,22 @@
 
       <div class="settings-form-fields col-lg-5 col-md-6 col-sm-6 col-xs-12">
 
-        <dl class="settings-input"><%= f.label :first_name %>:
+        <dl class="settings-input"><%= f.label :first_name %>
         <%= f.text_field :first_name, :autofocus => true, class: "form-control" %></dl>
 
-        <dl class="settings-input"><%= f.label :last_name %>:
+        <dl class="settings-input"><%= f.label :last_name %>
         <%= f.text_field :last_name, class: "form-control" %></dl>
 
-        <dl class="settings-input"><%= f.label :address %>:
+        <dl class="settings-input"><%= f.label :address %>
         <%= f.text_field :address, class: "form-control" %></dl>
 
-        <dl><%= f.label :apartment %>:
+        <dl><%= f.label :apartment %>
           <%= f.text_field :apartment, class: "form-control short-field" %></dl>
 
-        <dl><%= f.label :zip_code %>:
+        <dl><%= f.label :zip_code %>
         <%= f.text_field :zip_code, class: "form-control short-field" %></dl>
 
-        <dl><%= f.label :email %>:
+        <dl><%= f.label :email %>
         <%= f.email_field :email, class: "form-control" %></dl>
 
         <dl class="settings-input"><%= f.label :phone_number %>
@@ -43,16 +43,16 @@
           <dl>Currently waiting confirmation for: <%= resource.unconfirmed_email %></dl>
         <% end %>
 
-        <dl><label for="user_sensor_codes_string">Sensor code</label>: <i class="label-tip">(tenants only)</i>
+        <dl><label for="user_sensor_codes_string">Sensor code</label> <i class="label-tip">(tenants only)</i>
         <%= f.text_field :sensor_codes_string, class: "form-control" %></dl>
 
-        <dl><%= f.label :password %>: <i class="label-tip">(leave blank if you don't want to change it)</i>
+        <dl><%= f.label :password %> <i class="label-tip">(leave blank if you don't want to change it)</i>
         <%= f.password_field :password, :autocomplete => "off", class: "form-control" %></dl>
 
-        <dl><%= f.label :password_confirmation %>:
+        <dl><%= f.label :password_confirmation %>
         <%= f.password_field :password_confirmation, class: "form-control" %></dl>
 
-        <dl><%= f.label :current_password %>: <i class="label-tip">(required to confirm changes)</i>
+        <dl><%= f.label :current_password %> <i class="label-tip">(required to confirm changes)</i>
         <%= f.password_field :current_password, class: "form-control" %></dl>
 
         <div><%= f.submit "Update", class: "btn-delete" %></div>
