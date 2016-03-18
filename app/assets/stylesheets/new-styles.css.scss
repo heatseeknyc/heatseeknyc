@@ -287,11 +287,13 @@ footer {
   font-size: 1.6em;
 }
 
+.vimeo-container {
+  padding: 0 40px;
+}
+
 .sixteen-nine {
   position: relative;
   padding-bottom: 56.25%; /* 16:9 */
-  padding-top: 25px;
-  margin: 0 40px 40px;
   height: 0;
 }
 
