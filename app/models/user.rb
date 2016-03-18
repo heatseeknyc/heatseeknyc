@@ -85,9 +85,9 @@ class User < ActiveRecord::Base
     first_term = search_arr[0]
     second_term = search_arr[1] || search_arr[0]
 
-    result = User.fuzzy_search(first_term, second_term).except_user_id(self.id).tenants_only
+    result = User.fuzzy_search(first_term, second_term).except_user_id(id).tenants_only
 
-    self.is_demo_user? ? result.demo_users : result
+    is_demo_user? ? result.demo_users : result
   end
 
   def self.tenants_only
@@ -157,27 +157,27 @@ class User < ActiveRecord::Base
   end
 
   def associate_sensors
-    self.sensors.clear
-    string = self.sensor_codes_string || ""
+    sensors.clear
+    string = sensor_codes_string || ""
     string.upcase.delete(" ").split(",").each do |nick_name|
       sensor = Sensor.find_by(nick_name: nick_name)
-      self.sensors << sensor if sensor
+      sensors << sensor if sensor
     end
   end
 
   def sensor_codes
-    self.sensors.map(&:nick_name).join(", ").upcase
+    sensors.map(&:nick_name).join(", ").upcase
   end
 
   def twine_name=(twine_name)
     return nil if twine_name == ""
     temp_twine = Twine.find_by(:name => twine_name)
-    temp_twine.user(self.id)
-    self.update(twine: temp_twine)
+    temp_twine.user(id)
+    update(twine: temp_twine)
   end
 
   def is_demo_user?
-    DEMO_ACCOUNT_EMAILS.include?(self.email)
+    DEMO_ACCOUNT_EMAILS.include?(email)
   end
 
   def self.demo_users
@@ -185,7 +185,7 @@ class User < ActiveRecord::Base
   end
 
   def twine_name
-    self.twine.name unless self.twine.nil?
+    twine.name unless twine.nil?
   end
 
   def has_collaboration?(collaboration_id)
@@ -193,24 +193,24 @@ class User < ActiveRecord::Base
   end
 
   def find_collaboration(collaboration_id)
-    self.collaborations.where(id: collaboration_id)
+    collaborations.where(id: collaboration_id)
   end
 
   def admin?
-    self.permissions <= 25
+    permissions <= 25
   end
 
   def lawyer?
-    self.permissions <= 50
+    permissions <= 50
   end
 
   def create_search_names
-    self.search_first_name = self.first_name.downcase
-    self.search_last_name = self.last_name.downcase
+    self.search_first_name = first_name.downcase
+    self.search_last_name = last_name.downcase
   end
 
   def most_recent_temp
-    self.readings.last.temp
+    readings.last.temp
   end
 
   def live_readings
@@ -221,7 +221,7 @@ class User < ActiveRecord::Base
   end
 
   def current_temp
-    last_reading = self.readings.last
+    last_reading = readings.last
     # bigapps version
     "#{last_reading.temp}°" if last_reading
     # after bigapps uncomment this
@@ -233,11 +233,11 @@ class User < ActiveRecord::Base
   end
 
   def has_readings?
-    !self.readings.empty?
+    !readings.empty?
   end
 
   def destroy_all_collaborations
-    Collaboration.where("user_id = ? OR collaborator_id = ?", self.id, self.id).destroy_all
+    Collaboration.where("user_id = ? OR collaborator_id = ?", id, id).destroy_all
   end
 
   def get_latest_readings(num)
@@ -255,28 +255,26 @@ class User < ActiveRecord::Base
   end
 
   def sensor_codes_string_contains_only_valid_sensors
-    return if self.sensor_codes == (self.sensor_codes_string || "").upcase
-    self.errors.add :sensor_codes_string, "has an invalid sensor code"
+    return if sensor_codes == (sensor_codes_string || "").upcase
+    errors.add :sensor_codes_string, "has an invalid sensor code"
   end
 
   def inspect
     return super unless ENV["ANONYMIZED_FOR_LIVESTREAM"]
-    return_val = super.
-      gsub(", first_name: \"#{ first_name }\"", "").
+    super.
+      gsub(", first_name: \"#{first_name}\"", "").
       gsub(", first_name: nil", "").
-      gsub(", last_name: \"#{ last_name }\"", "").
+      gsub(", last_name: \"#{last_name}\"", "").
       gsub(", last_name: nil", "").
-      gsub(", search_first_name: \"#{ search_first_name }\"", "").
+      gsub(", search_first_name: \"#{search_first_name}\"", "").
       gsub(", search_first_name: nil", "").
-      gsub(", search_last_name: \"#{ search_last_name }\"", "").
+      gsub(", search_last_name: \"#{search_last_name}\"", "").
       gsub(", search_last_name: nil", "").
-      gsub(", email: \"#{ email }\"", "").
+      gsub(", email: \"#{email}\"", "").
       gsub(", email: nil", "").
-      gsub(", apartment: \"#{ apartment }\"", "").
+      gsub(", apartment: \"#{apartment}\"", "").
       gsub(", apartment: nil", "").
-      gsub(", phone_number: \"#{ phone_number }\"", "").
+      gsub(", phone_number: \"#{phone_number}\"", "").
       gsub(", phone_number: nil", "")
-
-    # require 'pry'; binding.pry if ENV["ANONYMIZED_FOR_LIVESTREAM"]
   end
 end

@@ -7,7 +7,6 @@ class Concerns::ComplaintAjaxHelper
       zipcode_query_array_from(query_hash) if query_hash[:zip_code] != ""
     custom_query_hash[:created_date] = 
       date_query_array_from(query_hash) if query_hash[:starting_date] != ""
-    binding.pry
     Complaint.where(custom_query_hash)
   end
 
