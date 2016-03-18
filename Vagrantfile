@@ -95,7 +95,7 @@ Vagrant.configure(2) do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  config.vm.provision "shell", privileged: false, inline: <<-SHELL
+  config.vm.provision "shell", privileged: false, inline: %[
     sudo apt-get update
     sudo apt-get install -y \
       postgresql-9.3 \
@@ -106,25 +106,27 @@ Vagrant.configure(2) do |config|
       nodejs
 
     sudo -u postgres psql -c "create role root with createdb login password 'password';"
+    ]
 
-    echo 'export PATH="$HOME/.rbenv/bin:/vagrant/bin/:$PATH"' >> /home/vagrant/.profile
-    echo 'eval "$(rbenv init -)"' >> /home/vagrant/.profile
-
-
-    if [ ! -d /home/vagrant/.rbenv ]; then
-      git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
-      git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
-    else
-      cd ~/.rbenv && git pull;
-      cd ~/.rbenv/plugins/ruby-build && git pull;
-    fi
-    cd ~
+    config.vm.provision :shell, privileged: false, inline:  %[
+    # rvm install is idempotent
+    gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+    curl -sSL https://get.rvm.io | bash -s stable --auto-dotfiles
     source ~/.profile
+  ]
 
-    rbenv install 2.1.3
+  config.vm.provision :shell, privileged: false, inline: %[
+    # cleanup and install the appropriate ruby version
+    source ~/.profile
+    rvm reload
+    rvm use --default install `cat /vagrant/.ruby-version`
+    rvm cleanup all
+  ]
 
+  config.vm.provision :shell, privileged: false, inline: %[
+    source ~/.profile
     cd /vagrant/
     gem install bundler
     bundle install
-  SHELL
+  ]
 end
