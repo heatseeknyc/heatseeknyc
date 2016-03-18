@@ -1,7 +1,6 @@
 Twinenyc::Application.routes.draw do
-
   root "welcome#index"
-  # get "welcome/index"
+
   devise_for :users, controllers: {
     registrations: 'user/registrations'
   }
@@ -42,6 +41,7 @@ Twinenyc::Application.routes.draw do
   get "sponsors" => "welcome#sponsors"
   get "team" => "welcome#team"
   get "thankyou" => "welcome#thankyou"
+  get "video" => "welcome#video"
   get "vote-for-us" => "welcome#nycbigapps"
 
   # The priority is based upon order of creation: first created -> highest priority.

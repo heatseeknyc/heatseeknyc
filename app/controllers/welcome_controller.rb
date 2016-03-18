@@ -1,8 +1,6 @@
 class WelcomeController < ApplicationController
 
   def index
-    # redirect_to current_user if current_user
-    # render "current_user_index" if current_user
   end
 
   def judges_welcome
@@ -15,6 +13,9 @@ class WelcomeController < ApplicationController
 
   def thankyou
     render 'thankyou'
+  end
+
+  def video
   end
 
 end
