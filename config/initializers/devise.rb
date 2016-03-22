@@ -5,7 +5,7 @@ Devise.setup do |config|
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
 
-  if Rails.env.match /development|test/
+  if Rails.env.match(/development|test/)
     config.secret_key = 'x' * 128
   else
     config.secret_key = ENV["DEVISE_SECRET_KEY"]
