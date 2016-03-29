@@ -7,38 +7,6 @@
 # versions of RuboCop, may require this file to be generated again.
 
 # Offense count: 2
-Lint/AmbiguousRegexpLiteral:
-  Exclude:
-    - 'config/initializers/devise.rb'
-    - 'config/initializers/secret_token.rb'
-
-# Offense count: 2
-# Cop supports --auto-correct.
-Lint/BlockAlignment:
-  Exclude:
-    - 'lib/tasks/articles.rake'
-    - 'lib/tasks/bigapps.rake'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Lint/Debugger:
-  Exclude:
-    - 'app/controllers/concerns/complaint_ajax_helper.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: AlignWith, SupportedStyles, AutoCorrect.
-# SupportedStyles: start_of_line, def
-Lint/DefEndAlignment:
-  Enabled: false
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Lint/DeprecatedClassMethods:
-  Exclude:
-    - 'config/boot.rb'
-
-# Offense count: 2
 Lint/HandleExceptions:
   Exclude:
     - 'bin/rails'
@@ -449,7 +417,6 @@ Style/RedundantSelf:
     - 'app/models/concerns/graphable.rb'
     - 'app/models/concerns/measurable.rb'
     - 'app/models/reading.rb'
-    - 'app/models/user.rb'
     - 'app/models/wunderground_history.rb'
     - 'app/services/pdf_writer.rb'
 
