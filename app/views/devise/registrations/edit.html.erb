@@ -13,49 +13,66 @@
                  as: resource_name,
                  url: registration_path(resource_name),
                  html: { method: :put, name: "edit-user" }) do |f| %>
+
       <%= devise_error_messages! %>
 
-      <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
+      <div class="settings-form-fields col-lg-5 col-md-6 col-sm-6 col-xs-12">
 
-        <dl class="settings-input"><%= f.label :first_name %>:
-        <%= f.text_field :first_name, :autofocus => true, class: "settings-form-control form-control" %></dl>
+        <dl>
+          <%= f.label :first_name %>
+          <%= f.text_field :first_name, :autofocus => true, class: "form-control" %>
+        </dl>
 
-        <dl class="settings-input"><%= f.label :last_name %>:
-        <%= f.text_field :last_name, class: "settings-form-control form-control" %></dl>
+        <dl>
+          <%= f.label :last_name %>
+          <%= f.text_field :last_name, class: "form-control" %>
+        </dl>
 
-        <dl class="settings-input"><%= f.label :address %>:
-        <%= f.text_field :address, class: "settings-form-control form-control" %></dl>
+        <dl>
+          <%= f.label :address %>
+          <%= f.text_field :address, class: "form-control" %>
+        </dl>
 
-        <dl><%= f.label :apartment %>:
-          <%= f.text_field :apartment, class: "settings-form-control form-control" %></dl>
+        <dl>
+          <%= f.label :apartment %>
+          <%= f.text_field :apartment, class: "form-control short-field" %>
+        </dl>
 
-        <dl><%= f.label :zip_code %>:
-        <%= f.text_field :zip_code, class: "settings-form-control form-control" %></dl>
+        <dl>
+          <%= f.label :zip_code %>
+          <%= f.text_field :zip_code, class: "form-control short-field" %>
+        </dl>
 
-        <dl><label for="user_sensor_codes_string">Sensor code (tenants only)</label>:
-        <%= f.text_field :sensor_codes_string, class: "settings-form-control form-control" %></dl>
+        <dl>
+          <%= f.label :email %>
+          <%= f.email_field :email, class: "form-control" %>
+        </dl>
 
-        <dl><%= f.label :email %>:
-        <%= f.email_field :email, class: "settings-form-control form-control" %></dl>
-
-        <dl class="settings-input"><%= f.label :phone_number %>
-        <%= f.text_field :phone_number, class: "settings-form-control form-control" %></dl>
+        <dl>
+          <%= f.label :phone_number %>
+          <%= f.text_field :phone_number, class: "form-control short-field" %>
+        </dl>
 
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-          <dl>Currently waiting confirmation for: <%= resource.unconfirmed_email %></dl>
+          <dl>
+            Currently waiting confirmation for: <%= resource.unconfirmed_email %>
+          </dl>
         <% end %>
 
-        <dl><%= f.label :password %>: <i>(leave blank if you don't want to change it)</i>
-        <%= f.password_field :password, :autocomplete => "off", class: "settings-form-control form-control" %></dl>
+        <dl>
+          <label for="user_sensor_codes_string">Sensor code</label> <i class="label-tip">(tenants only)</i>
+          <%= f.text_field :sensor_codes_string, class: "form-control" %>
+        </dl>
 
-        <dl><%= f.label :password_confirmation %>:
-        <%= f.password_field :password_confirmation, class: "settings-form-control form-control" %></dl>
+        <dl>
+          <%= f.label :current_password %> <i class="label-tip">(required to confirm changes)</i>
+          <%= f.password_field :current_password, class: "form-control" %>
+        </dl>
 
-        <dl><%= f.label :current_password %>: <i>(we need your current password to confirm your changes)</i>
-        <%= f.password_field :current_password, class: "settings-form-control form-control" %></dl>
-
-        <div><%= f.submit "Update", class: "btn-save" %></div>
-      </div> <!-- end of form -->
+        <div>
+          <%= f.submit "Update", class: "btn-delete" %>
+        </div>
+      </div>
     <% end %>
   </div>
 
