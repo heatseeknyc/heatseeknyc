@@ -10,6 +10,10 @@ Twinenyc::Application.routes.draw do
   resources :twines, only: [:show, :new, :create]
   resources :users do
     resources :collaborations
+    collection do
+      get "edit_password"
+      patch "update_password"
+    end
   end
 
   post 'readings' => 'readings#create'

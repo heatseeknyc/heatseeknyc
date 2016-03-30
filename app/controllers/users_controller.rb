@@ -52,6 +52,21 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit_password
+    @user = current_user
+  end
+
+  def update_password
+    @user = User.find(current_user.id)
+    if @user.update_with_password(password_params)
+      sign_in @user, bypass: true
+      flash[:notice] = "Password changed."
+      redirect_to root_path
+    else
+      render "edit_password", status: 401
+    end
+  end
+
   def download_pdf
     writer = PDFWriter.new_from_user_id(params[:id])
 
@@ -132,5 +147,11 @@ class UsersController < ApplicationController
         :permissions,
         :twine_name
       ])
+    end
+
+    def password_params
+      params.require(:user).permit(:current_password,
+                                   :password,
+                                   :password_confirmation)
     end
 end
