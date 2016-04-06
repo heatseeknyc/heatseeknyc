@@ -1,13 +1,20 @@
 <div class="col-md-4" id="form-id">
   <h2>Forgot your password?</h2>
 
-  <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
+  <%= form_for(resource,
+               as: resource_name,
+               url: password_path(resource_name),
+               html: { method: :post, class: "settings-form-fields" }) do |f| %>
     <%= devise_error_messages! %>
 
-    <dl><%= f.label :email %>:
-    <%= f.email_field :email, :autofocus => true, class: "form-control" %></dl>
+    <dl>
+      <%= f.label :email %>:
+      <%= f.email_field :email, autofocus: true, class: "form-control" %>
+     </dl>
 
-    <div><%= f.submit "Reset My Password", class: "btn btn-primary" %></div>
+    <div>
+      <%= f.submit "Reset Password", class: "btn btn-save" %>
+    </div>
   <% end %>
   <br/>
 </div>
