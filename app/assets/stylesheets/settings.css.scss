@@ -33,7 +33,7 @@
 	}
 
 	.form-control {
-		border: 4px solid $theme-black;
+		border: 3px solid $theme-black;
 		border-radius: 0;
 		height: 50px;
 
@@ -56,6 +56,10 @@
 	font-weight: normal;
 }
 
+.auxiliary-form {
+	margin-top: 40px;
+}
+
 html body.body main div#form-id.col-md-4 form#edit_user.edit_user dl label {
 	font-size: 18px;
 	text-transform: uppercase;
@@ -65,16 +69,16 @@ html body.body main div#form-id.col-md-4 form#edit_user.edit_user dl label {
 .btn-save {
 	height: 50px;
 	width: 40%;
-	margin: 10px 0 50px 0;
+	margin: 10px 0 10px 0;
 	border-radius: none;
-	border: 4px solid $theme-black;
+	border: 3px solid $theme-black;
 	font-size: 14px;
 	background-color: white;
 }
 
 .btn-save:hover {
 	background-color: $theme-black;
-	color: $theme-grey;
+	color: $theme-white;
 }
 
 .btn-delete {

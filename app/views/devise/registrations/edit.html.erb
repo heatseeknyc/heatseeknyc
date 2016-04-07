@@ -12,7 +12,7 @@
     <%= form_for(resource,
                  as: resource_name,
                  url: registration_path(resource_name),
-                 html: { method: :put, name: "edit-user" }) do |f| %>
+                 html: { method: :put, name: "edit-user"}) do |f| %>
 
       <%= devise_error_messages! %>
 
@@ -91,7 +91,7 @@
       <%= form_for(resource,
                    as: resource_name,
                    url: registration_path(resource_name),
-                   html: { method: :put, name: "delete-user" }) do |f| %>
+                   html: { method: :put, name: "delete-user", class: "auxiliary-form" }) do |f| %>
         <h4>No longer want to use this service?</h4>
         <%= button_to "Cancel my account",
                       registration_path(resource_name),
