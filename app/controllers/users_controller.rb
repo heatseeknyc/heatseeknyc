@@ -1,11 +1,8 @@
 class UsersController < ApplicationController
   include UserControllerHelper
   before_action :authenticate_user!, except: [:demo, :addresses]
+  before_action :authenticate_admin_user!, only: [:edit, :update]
   before_action :load_user, only: [:edit, :update]
-  before_action :validate_admin!, only: [:edit, :update]
-
-  def edit
-  end
 
   def update
     @user.update_without_password(user_params)
@@ -134,10 +131,9 @@ class UsersController < ApplicationController
       ])
     end
 
-    def validate_admin!
-      unless current_user.permissions <= User::PERMISSIONS[:admin]
-        redirect_to root_path
-      end
+    def authenticate_admin_user!
+      return if current_user.permissions == User::PERMISSIONS[:admin]
+      redirect_to root_path
     end
 
     def load_user
