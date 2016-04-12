@@ -1,20 +1,17 @@
 class UsersController < ApplicationController
   include UserControllerHelper
   before_action :authenticate_user!, except: [:demo, :addresses]
-
-  def edit
-    @user = User.find(params[:id])
-  end
+  before_action :authenticate_admin_user!, only: [:edit, :update]
+  before_action :load_user, only: [:edit, :update]
 
   def update
-    @user = User.find(params[:id])
     @user.update_without_password(user_params)
     @collaboration = current_user.collaborations.where(collaborator_id: @user.id).first
     redirect_to "/users/#{current_user.id}/collaborations/#{@collaboration.id}"
   end
 
   def index
-    if current_user.permissions <= 50
+    if current_user.permissions <= User::PERMISSIONS[:lawyer]
       @users = User.all
     else
       redirect_to current_user
@@ -39,7 +36,7 @@ class UsersController < ApplicationController
   def show
     respond_to do |f|
       f.html do
-        if current_user.permissions <= 50
+        if current_user.permissions <= User::PERMISSIONS[:lawyer]
           render :permissions_show
         else
           render :show
@@ -132,5 +129,14 @@ class UsersController < ApplicationController
         :permissions,
         :twine_name
       ])
+    end
+
+    def authenticate_admin_user!
+      return if current_user.permissions == User::PERMISSIONS[:admin]
+      redirect_to root_path
+    end
+
+    def load_user
+      @user = User.find(params[:id])
     end
 end
