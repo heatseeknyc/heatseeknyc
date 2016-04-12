@@ -32,15 +32,21 @@ feature "Managing settings" do
       fill_in "Address", with: "Chicago"
       fill_in "Zip code", with: "11111"
       fill_in "Email", with: "wolfster@email.com"
-      fill_in "Password", with: "therealking"
-      fill_in "Password confirmation", with: "therealking"
-      fill_in "Current password", with: user.password
-      click_button "Update"
     end
 
+    fill_in "Current password", with: user.password
+    click_button "Update"
+
+    expect(user.reload.first_name).to eq "Howling"
     expect(current_path).to eq(root_path)
     expect(page).to have_content "You updated your account successfully"
     expect(page).to have_content "Helping New York City keep the heat on."
+  end
+
+  scenario "Updating without entering current password" do
+    click_button "Update"
+    expect(user.reload.first_name).to_not eq "Howling"
+    expect(page).to have_content "Current password can't be blank"
   end
 
   scenario "Cancel account" do
