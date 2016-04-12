@@ -13,10 +13,23 @@
 }
 
 #login-form {
+  font-size: 14px;
   margin: 30px auto 30px auto;
-  border-radius: 2%;
-  .btn {
-    background-color: $theme-red;   
-    border-color: $theme-orange;   
+
+  .btn-login {
+    background-color: $theme-white;
+    border-color: $theme-black;
+    color: $theme-black;
+    height: 50px;
+    width: 40%;
+
+    &:hover {
+      background-color: $theme-black;
+      color: $theme-white;
+    }
+  }
+
+  [type=checkbox] {
+    font-size: 16px;
   }
 }

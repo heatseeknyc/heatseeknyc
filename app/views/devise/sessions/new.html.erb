@@ -3,18 +3,27 @@
   <div class="jumbotron col-xs-10 col-sm-4" id="login-form">
     <h2>Sign in</h2>
 
-    <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-      <dl><%= f.label :email %>:
-      <%= f.email_field :email, :autofocus => true, class: "form-control"  %></dl>
+    <%= form_for(resource,
+                 as: resource_name,
+                 url: session_path(resource_name),
+                 html: { class: "settings-form-fields" }) do |f| %>
+      <dl>
+        <%= f.label :email %>
+        <%= f.email_field :email, autofocus: true, class: "form-control"  %>
+      </dl>
 
-      <dl><%= f.label :password %>:
-      <%= f.password_field :password, class: "form-control"  %></dl>
+      <dl>
+        <%= f.label :password %>
+        <%= f.password_field :password, class: "form-control"  %>
+      </dl>
 
       <% if devise_mapping.rememberable? -%>
-        <dl><%= f.check_box :remember_me %> <%= f.label :remember_me %></dl>
+        <dl>
+          <%= f.check_box :remember_me %> <%= f.label :remember_me %>
+        </dl>
       <% end -%>
 
-      <div><%= f.submit "Sign in", class: "btn btn-primary" %></div>
+      <div><%= f.submit "Sign in", class: "btn-login" %></div>
     <% end %>
     <%= render "devise/shared/links" %>
   </div>  

@@ -1,9 +1,5 @@
 @import 'shared';
 
-.settings-form {
-	background: $theme-grey;
-}
-
 .settings-header {
 	width: 100%;
 }
@@ -21,30 +17,47 @@
 	}	
 }
 
-.settings-form-control.form-control {
-	border: 4px solid $theme-black;	
-	border-radius: 0;
-	height: 50px;
-}
+.settings-form-fields {
+	dl {
+		margin-bottom: 10px;
 
-.settings-form-control.form-control:focus {
-	border: 4px solid $theme-black;	
-	box-shadow: none;
-}
+		&:first-child {
+			margin-top: 30px;
+		}
+	}
 
-.settings-input:first-child {
-	margin-top: 30px;
-}
+	label {
+		font-size: 18px;
+		text-transform: uppercase;
+		font-weight: normal;
+	}
 
-.settings-input label {
-	font-size: 18px;
-	text-transform: uppercase;
-	font-weight: normal;
+	.form-control {
+		border: 3px solid $theme-black;
+		border-radius: 0;
+		height: 50px;
+
+		&.short-field {
+			width: 40%;
+		}
+
+		&:focus {
+			box-shadow: none;
+		}
+	}
+
+	.label-tip {
+		font-size: 1.4em
+	}
 }
 
 #edit_user dl label {
 	font-size: 18px;
 	font-weight: normal;
+}
+
+.auxiliary-form {
+	margin-top: 40px;
 }
 
 html body.body main div#form-id.col-md-4 form#edit_user.edit_user dl label {
@@ -56,16 +69,16 @@ html body.body main div#form-id.col-md-4 form#edit_user.edit_user dl label {
 .btn-save {
 	height: 50px;
 	width: 40%;
-	margin: 10px 0 50px 0;
+	margin: 10px 0 10px 0;
 	border-radius: none;
-	border: 4px solid $theme-black;
+	border: 3px solid $theme-black;
 	font-size: 14px;
 	background-color: white;
 }
 
 .btn-save:hover {
 	background-color: $theme-black;
-	color: $theme-grey;
+	color: $theme-white;
 }
 
 .btn-delete {
