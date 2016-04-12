@@ -8,6 +8,8 @@ Twinenyc::Application.routes.draw do
   resources :articles
   resources :sensors
   resources :twines, only: [:show, :new, :create]
+
+  get 'users/search' => 'users#search', as: :search_user
   resources :users do
     resources :collaborations
   end
@@ -18,7 +20,6 @@ Twinenyc::Application.routes.draw do
   get 'users/:id/download' => 'users#download_pdf', as: :pdf_download
   get 'users/:id/live_update' => 'users#live_update'
   get 'users/:user_id/collaborations/:id/download' => 'users#download_pdf'
-  get 'users/search' => 'users#search', as: :search_user
 
   get "demo" => "users#demo"
   get "judges_login/:last_name" => "users#judges_login"
