@@ -35,7 +35,7 @@ Twinenyc::Application.routes.draw do
   get "blog" => "posts#index"
 
   get "about" => "welcome#about"
-  get "donate" => "welcome#giving_tuesday"
+  get "donate" => "welcome#donate"
   get "giving-tuesday" => "welcome#giving_tuesday", as: :giving_tuesday
   get "how-it-works" => "welcome#how_it_works", as: :how_it_works
   get "judges" => "welcome#judges_welcome"
