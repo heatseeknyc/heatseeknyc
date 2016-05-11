@@ -38,9 +38,8 @@ feature "Managing settings" do
     click_button "Update"
 
     expect(user.reload.first_name).to eq "Howling"
-    expect(current_path).to eq(root_path)
     expect(page).to have_content "You updated your account successfully"
-    expect(page).to have_content "Helping New York City keep the heat on."
+    expect(page).to have_content user.name
   end
 
   scenario "Updating without entering current password" do
@@ -51,7 +50,6 @@ feature "Managing settings" do
 
   scenario "Cancel account" do
     expect { click_button "Cancel my account" }.to change { User.count }.by(-1)
-    expect(current_path).to eq(root_path)
     expect(page).to have_content "Your account was successfully cancelled."
   end
 end

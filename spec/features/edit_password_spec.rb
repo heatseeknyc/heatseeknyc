@@ -14,7 +14,6 @@ feature "Changing my password" do
     fill_in "Password confirmation", with: new_password
     click_button "Update"
 
-    expect(current_path).to eq(root_path)
     expect(page).to have_content "Password changed."
   end
 

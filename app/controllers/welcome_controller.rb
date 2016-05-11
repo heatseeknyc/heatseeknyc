@@ -3,6 +3,11 @@ class WelcomeController < ApplicationController
   BLOG_PAGE_SIZE = 4
 
   def index
+    if current_user
+      redirect_to user_path(current_user)
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   def judges_welcome
