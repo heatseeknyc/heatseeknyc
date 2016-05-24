@@ -18,6 +18,9 @@ describe ReadingsExporter do
     exporter = ReadingsExporter.new
     csv = exporter.to_csv
     expect(csv.lines.count).to eq(4)
+    expect(CSV.parse(csv, headers: true).first.to_s.chomp).to eq(
+      "2015-02-22,00:00:03,-0500,50,40,false,,11 Broadway,10004"
+    )
   end
 
   describe "building a collection of readings" do
