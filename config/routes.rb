@@ -18,7 +18,7 @@ Twinenyc::Application.routes.draw do
     end
   end
 
-  post 'readings' => 'readings#create'
+  resources :readings, only: [:index, :create]
 
   get 'addresses' => 'users#addresses'
   get 'users/:id/download' => 'users#download_pdf', as: :pdf_download
