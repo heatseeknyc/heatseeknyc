@@ -1,15 +1,17 @@
 require "spec_helper"
 
 describe ReadingsExporter do
-  let(:user) { create(:user) }
+  let(:user_1) { create(:user) }
+  let(:user_2) { create(:user) }
+  let(:user_3) { create(:user) }
   let!(:reading_1) do
-    create(:reading, temp: 50, created_at: 1.week.ago, user: user)
+    create(:reading, temp: 50, created_at: 1.week.ago, user: user_1)
   end
   let!(:reading_2) do
-    create(:reading, temp: 55, created_at: 3.days.ago, user: user)
+    create(:reading, temp: 55, created_at: 3.days.ago, user: user_2)
   end
   let!(:reading_3) do
-    create(:reading, temp: 60, created_at: 1.day.ago, user: user)
+    create(:reading, temp: 60, created_at: 1.day.ago, user: user_3)
   end
 
   it "transforms readings into a csv format" do
@@ -19,10 +21,16 @@ describe ReadingsExporter do
   end
 
   describe "building a collection of readings" do
-    it "filters by Reading attributes" do
-      exporter = ReadingsExporter.new(filter: { user_id: user.id,
+    it "filters by multiple attributes on the Reading model" do
+      exporter = ReadingsExporter.new(filter: { user_id: user_1.id,
                                                 temp: reading_1.temp })
       expect(exporter.collection).to eq([reading_1])
+    end
+
+    it "filters by a collection of user ids" do
+      exporter = ReadingsExporter.new(filter: { user_id: [user_1.id,
+                                                          user_2.id] })
+      expect(exporter.collection).to eq([reading_1, reading_2])
     end
 
     it "filters by a start time" do
