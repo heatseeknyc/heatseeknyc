@@ -22,7 +22,7 @@ class ReadingsExporter
   def to_csv
     CSV.generate(headers: true) do |csv|
       csv << HEADERS
-      collection.each { |reading| csv << row_values(reading) }
+      collection.each { |reading| csv << format_values(reading) }
     end
   end
 
@@ -35,22 +35,28 @@ class ReadingsExporter
       readings = readings.where("readings.created_at < ?", @end_time)
     end
     readings = readings.where(@filter) if @filter
-    readings.joins(:user).order(:created_at)
+    readings.includes(:user).order(:created_at)
   end
 
   private
 
-  def row_values(reading)
-    [
-      reading.created_at.strftime("%Y-%m-%d"),
-      reading.created_at.strftime("%H:%M:%S"),
-      reading.created_at.strftime("%z"),
-      reading.temp,
-      reading.outdoor_temp,
-      reading.violation,
-      reading.sensor_id,
-      reading.user.address,
-      reading.user.zip_code
-    ]
+  def format_values(reading)
+    [].tap do |values|
+      values.push(
+        reading.created_at.strftime("%Y-%m-%d"),
+        reading.created_at.strftime("%H:%M:%S"),
+        reading.created_at.strftime("%z"),
+        reading.temp,
+        reading.outdoor_temp,
+        reading.violation,
+        reading.sensor_id,
+      )
+
+      if reading.user
+        values.push(reading.user.address, reading.user.zip_code)
+      else
+        values.push(nil, nil)
+      end
+    end
   end
 end
