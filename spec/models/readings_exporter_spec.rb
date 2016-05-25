@@ -19,7 +19,16 @@ describe ReadingsExporter do
     csv = exporter.to_csv
     expect(csv.lines.count).to eq(4)
     expect(CSV.parse(csv, headers: true).first.to_s.chomp).to eq(
-      "2015-02-22,00:00:03,-0500,50,40,false,,11 Broadway,10004"
+      [reading_1.created_at.strftime("%Y-%m-%d"),
+       reading_1.created_at.strftime("%H:%M:%S"),
+       reading_1.created_at.strftime("%z"),
+       reading_1.temp,
+       reading_1.outdoor_temp,
+       reading_1.violation,
+       reading_1.sensor_id,
+       reading_1.user.address,
+       reading_1.user.zip_code
+      ].join(",")
     )
   end
 
