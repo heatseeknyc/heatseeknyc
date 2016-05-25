@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160310201839) do
+ActiveRecord::Schema.define(version: 20160525052314) do
 
   create_table "articles", force: true do |t|
     t.string   "title"
@@ -22,6 +22,17 @@ ActiveRecord::Schema.define(version: 20160310201839) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date     "published_date"
+  end
+
+  create_table "buildings", force: true do |t|
+    t.string   "property_name"
+    t.text     "description"
+    t.string   "street_address"
+    t.string   "zip_code"
+    t.integer  "bin"
+    t.string   "bbl"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "canonical_temperatures", force: true do |t|
@@ -105,8 +116,10 @@ ActiveRecord::Schema.define(version: 20160310201839) do
     t.string   "phone_number"
     t.string   "apartment"
     t.boolean  "dummy"
+    t.integer  "building_id"
   end
 
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["building_id"], name: "index_users_on_building_id", using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
