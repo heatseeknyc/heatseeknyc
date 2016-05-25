@@ -1,17 +1,17 @@
 require "csv"
 
 class ReadingsExporter
-  HEADERS = %w{
-    date
-    time
-    time_zone
-    temp_inside
-    temp_outside
-    in_violation
-    sensor_id
-    address
-    zip_code
-  }
+  HEADERS = [
+    "date",
+    "time",
+    "time_zone",
+    "temp_inside",
+    "temp_outside",
+    "in_violation",
+    "sensor_id",
+    "address",
+    "zip_code"
+  ].freeze
 
   def initialize(params = {})
     @filter = params[:filter]
@@ -28,12 +28,8 @@ class ReadingsExporter
 
   def collection
     readings = Reading
-    if @start_time
-      readings = readings.where("readings.created_at >= ?", @start_time)
-    end
-    if @end_time
-      readings = readings.where("readings.created_at < ?", @end_time)
-    end
+    readings = readings.where("readings.created_at >= ?", @start_time) if @start_time
+    readings = readings.where("readings.created_at < ?", @end_time) if @end_time
     readings = readings.where(@filter) if @filter
     readings.includes(:user).order(:created_at)
   end
@@ -49,7 +45,7 @@ class ReadingsExporter
         reading.temp,
         reading.outdoor_temp,
         reading.violation,
-        reading.sensor_id,
+        reading.sensor_id
       )
 
       if reading.user

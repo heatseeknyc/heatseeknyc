@@ -25,7 +25,7 @@ describe ReadingsController do
     it "instantiates a ReadingsExporter using the provided query parameters" do
       expect(ReadingsExporter)
         .to receive(:new)
-        .with({ "filter" => { "user_id" => 1 } })
+        .with("filter" => { "user_id" => 1 })
         .and_return { exporter }
       get :index, format: :csv, readings: { filter: { user_id: 1 } }
     end

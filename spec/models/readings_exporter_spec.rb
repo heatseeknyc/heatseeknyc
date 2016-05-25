@@ -35,7 +35,7 @@ describe ReadingsExporter do
   it "can export invalid readings without an associated user" do
     reading = create(:reading)
     reading.update_column(:user_id, nil)
-    exporter = ReadingsExporter.new(filter: { user_id: nil} )
+    exporter = ReadingsExporter.new(filter: { user_id: nil })
     expect(exporter.to_csv.lines.count).to eq(2)
   end
 
