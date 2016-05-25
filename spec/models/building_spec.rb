@@ -6,7 +6,6 @@ describe Building do
   it "has tenants" do
     2.times { building.tenants << create(:user) }
     expect(building.tenants.count).to eq(2)
-    binding.pry
   end
 
   describe "address validations" do
@@ -45,6 +44,5 @@ describe Building do
       expect(building).to_not be_valid
       expect(building.errors[:zip_code]).to eq(zip_code_error)
     end
-
   end
 end
