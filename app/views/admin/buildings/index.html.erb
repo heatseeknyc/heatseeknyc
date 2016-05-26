@@ -1,0 +1,12 @@
+<br>
+<div class="col-xs-6 container">
+  <h1 id="collaborator-h1" class="text-center">Buildings</h1>
+  <% @buildings.each do |b| %>
+    <hr class="underline-user text-center">
+    <li class="sidebar-li">
+	    <a href="<%= edit_admin_building_path(b.id) %>" class="user-link">
+        <%= b.property_name %> <%= b.street_address %>
+      </a>
+    </li>
+  <% end %>
+</div>

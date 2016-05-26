@@ -1,0 +1,48 @@
+<div id="form-id">
+  <div class="container settings-header">
+    <div class="settings-title">
+      <h1>
+        Edit <%= [@building.property_name, @building.street_address, @building.zip_code].compact.join(" - ") %>
+      </h1>
+    </div>
+  </div>
+
+  <%= form_for(@building, url: admin_building_path(@building)) do |f| %>
+    <div class="container settings-form-fields col-lg-5 col-md-6 col-sm-6 col-xs-12">
+      <dl class="settings-input">
+        <%= f.label :property_name %>
+        <%= f.text_field :property_name, :autofocus => true, class: "form-control" %>
+      </dl>
+
+      <dl class="settings-input">
+        <%= f.label :description %>
+        <%= f.text_area :description, class: "form-control" %>
+      </dl>
+
+      <dl class="settings-input">
+        <%= f.label :street_address %>
+        <%= f.text_field :street_address, class: "form-control" %>
+      </dl>
+
+      <dl class="settings-input">
+        <%= f.label :zip_code %>
+        <%= f.text_field :zip_code, class: "form-control short-field" %>
+      </dl>
+
+      <dl class="settings-input">
+        <%= f.label :bin %>
+        <%= f.text_field :bin, class: "form-control short-field" %>
+      </dl>
+
+      <dl class="settings-input">
+        <%= f.label :bbl %>
+        <%= f.text_field :bbl, class: "form-control short-field" %>
+      </dl>
+
+      <dl class="settings-input">
+        <%= f.submit "SAVE", class: "btn-save" %>
+      </dl>
+
+    </div>
+  <% end %>
+</div>
