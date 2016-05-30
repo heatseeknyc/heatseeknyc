@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20160525052314) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "articles", force: true do |t|
     t.string   "title"
     t.string   "company"
@@ -98,16 +101,16 @@ ActiveRecord::Schema.define(version: 20160525052314) do
     t.string   "address"
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "encrypted_password",     default: "",  null: false
+    t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,   null: false
+    t.integer  "sign_in_count",          default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.string   "email",                  default: "",  null: false
+    t.string   "email",                  default: "",    null: false
     t.integer  "permissions",            default: 100
     t.string   "search_first_name"
     t.string   "search_last_name"
@@ -115,7 +118,7 @@ ActiveRecord::Schema.define(version: 20160525052314) do
     t.string   "sensor_codes_string"
     t.string   "phone_number"
     t.string   "apartment"
-    t.boolean  "dummy"
+    t.boolean  "dummy",                  default: false, null: false
     t.integer  "building_id"
   end
 
