@@ -2,12 +2,12 @@
   <div class="container form-header">
     <div class="form-title">
       <h1>
-        Edit <%= [@building.property_name, @building.street_address, @building.zip_code].compact.join(" - ") %>
+        Create Building
       </h1>
     </div>
   </div>
 
-  <%= semantic_form_for(@building, url: admin_building_path(@building)) do |f| %>
+  <%= semantic_form_for(Building.new, url: admin_buildings_path) do |f| %>
     <div class="container form-fields col-lg-5 col-md-6 col-sm-6 col-xs-12">
     <%= f.inputs do %>
       <%= f.input :property_name %>
@@ -18,7 +18,7 @@
       <%= f.input :bbl %>
     <% end %>
     <%= f.actions do %>
-      <% f.action :submit, label: "UPDATE", button_html: { class: "btn-save" } %>
+      <% f.action :submit, label: "CREATE", button_html: { class: "btn-save" } %>
     <% end %>
     </div>
   <% end %>

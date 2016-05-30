@@ -7,11 +7,20 @@ module Admin
     end
 
     def create
+      @building = Building.new(building_params)
+      if @building.save
+        flash[:notice] = "Successfully created."
+        redirect_to admin_buildings_path
+      else
+        errors = @building.errors.full_messages.to_sentence
+        flash[:error] = "Update failed due to: #{errors}"
+        render action: "new"
+      end
     end
 
     def update
       if @building.update_attributes(building_params)
-        flash[:notice] = "Page was successfully updated."
+        flash[:notice] = "Successfully updated."
         redirect_to(action: "edit", id: @building)
       else
         errors = @building.errors.full_messages.to_sentence

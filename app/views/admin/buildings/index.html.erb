@@ -5,7 +5,7 @@
     <hr class="underline-user text-center">
     <li class="sidebar-li">
 	    <a href="<%= edit_admin_building_path(b.id) %>" class="user-link">
-        <%= b.property_name %> <%= b.street_address %>
+        <%= [b.street_address, b.zip_code, b.property_name].join(" | ") %>
       </a>
     </li>
   <% end %>
