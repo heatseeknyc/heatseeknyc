@@ -1,6 +1,6 @@
 <div id="form-id">
-  <div class="container settings-header">
-    <div class="settings-title">
+  <div class="container form-header">
+    <div class="form-title">
       <h1>
         Edit <%= [@building.property_name, @building.street_address, @building.zip_code].compact.join(" - ") %>
       </h1>
@@ -8,7 +8,7 @@
   </div>
 
   <%= semantic_form_for(@building, url: admin_building_path(@building)) do |f| %>
-    <div class="container settings-form-fields col-lg-5 col-md-6 col-sm-6 col-xs-12">
+    <div class="container form-fields col-lg-5 col-md-6 col-sm-6 col-xs-12">
     <%= f.inputs do %>
       <%= f.input :property_name %>
       <%= f.input :description %>
