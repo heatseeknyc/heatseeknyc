@@ -7,42 +7,19 @@
     </div>
   </div>
 
-  <%= form_for(@building, url: admin_building_path(@building)) do |f| %>
+  <%= semantic_form_for(@building, url: admin_building_path(@building)) do |f| %>
     <div class="container settings-form-fields col-lg-5 col-md-6 col-sm-6 col-xs-12">
-      <dl class="settings-input">
-        <%= f.label :property_name %>
-        <%= f.text_field :property_name, :autofocus => true, class: "form-control" %>
-      </dl>
-
-      <dl class="settings-input">
-        <%= f.label :description %>
-        <%= f.text_area :description, class: "form-control" %>
-      </dl>
-
-      <dl class="settings-input">
-        <%= f.label :street_address %>
-        <%= f.text_field :street_address, class: "form-control" %>
-      </dl>
-
-      <dl class="settings-input">
-        <%= f.label :zip_code %>
-        <%= f.text_field :zip_code, class: "form-control short-field" %>
-      </dl>
-
-      <dl class="settings-input">
-        <%= f.label :bin %>
-        <%= f.text_field :bin, class: "form-control short-field" %>
-      </dl>
-
-      <dl class="settings-input">
-        <%= f.label :bbl %>
-        <%= f.text_field :bbl, class: "form-control short-field" %>
-      </dl>
-
-      <dl class="settings-input">
-        <%= f.submit "SAVE", class: "btn-save" %>
-      </dl>
-
+    <%= f.inputs do %>
+      <%= f.input :property_name %>
+      <%= f.input :description %>
+      <%= f.input :street_address %>
+      <%= f.input :zip_code, input_html: { class: "short-field"} %>
+      <%= f.input :bin %>
+      <%= f.input :bbl %>
+    <% end %>
+    <%= f.actions do %>
+      <% f.action :submit, label: "SAVE", button_html: { class: "btn-save" } %>
+    <% end %>
     </div>
   <% end %>
 </div>
