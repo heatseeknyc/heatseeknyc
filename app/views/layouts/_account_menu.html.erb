@@ -4,9 +4,6 @@
     <li><%= link_to "My Page", user_path(current_user) %></li>
     <li><%= link_to "My Settings", edit_user_registration_path(current_user) %></li>
     <li><%= link_to "Change My Password", edit_password_users_path %></li>
-    <% if current_user.admin? %>
-      <li><%= link_to "Articles", articles_path %></li>
-    <% end %>
     <li><%= link_to 'Sign out', destroy_user_session_path, :method => :delete %></li>
   </ul>
 </li>

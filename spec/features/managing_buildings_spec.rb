@@ -22,14 +22,18 @@ feature "Building management" do
     building
     building_2 = create(:building, street_address: "100 Another Street")
 
-    visit "/admin/buildings"
+    visit "/"
+    click_link "Buildings"
 
     expect(page).to have_content(building.street_address)
     expect(page).to have_content(building_2.street_address)
   end
 
   scenario "Creating a new building" do
-    visit "/admin/buildings/new"
+    visit "/"
+    click_link "Buildings"
+    click_button "Add Building"
+
     fill_in "Property name", with: "New apartment"
     fill_in "Street address", with: "123 New St"
     fill_in "Zip code", with: "99999-1234"

@@ -1,6 +1,7 @@
-<br>
 <div class="col-xs-6 container">
   <h1 id="collaborator-h1" class="text-center">Buildings</h1>
+  <%= button_to "Add Building", new_admin_building_path, method: :get, class: "btn-save" %>
+
   <% @buildings.each do |b| %>
     <hr class="underline-user text-center">
     <li class="sidebar-li">
