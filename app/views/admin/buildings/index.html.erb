@@ -1,7 +1,6 @@
 <div class="col-xs-6 container">
   <h1 id="collaborator-h1" class="text-center">Buildings</h1>
-  <%= link_to "Add Building", new_admin_building_path, class: "btn btn-save" %>
-
+  <%= link_to "Add Building", new_admin_building_path %>
   <% @buildings.each do |b| %>
     <hr class="underline-user text-center">
     <li class="sidebar-li">
