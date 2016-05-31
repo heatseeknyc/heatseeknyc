@@ -8,12 +8,12 @@ module Admin
 
     def create
       @building = Building.new(building_params)
+
       if @building.save
         flash[:notice] = "Successfully created."
         redirect_to admin_buildings_path
       else
-        errors = @building.errors.full_messages.to_sentence
-        flash[:error] = "Update failed due to: #{errors}"
+        error_flash
         render action: "new"
       end
     end
@@ -23,8 +23,7 @@ module Admin
         flash[:notice] = "Successfully updated."
         redirect_to(action: "edit", id: @building)
       else
-        errors = @building.errors.full_messages.to_sentence
-        flash[:error] = "Update failed due to: #{errors}"
+        error_flash
         render action: "edit"
       end
     end
@@ -42,6 +41,10 @@ module Admin
 
     def load_building
       @building = Building.find(params[:id])
+    end
+
+    def error_flash
+      flash[:error] = "Save failed due to errors."
     end
   end
 end

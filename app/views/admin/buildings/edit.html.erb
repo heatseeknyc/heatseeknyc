@@ -2,6 +2,6 @@
            locals: {
              title: "Edit #{[@building.property_name, @building.street_address, @building.zip_code].compact.join(" - ")}",
              resource: @building,
-             url: admin_buildings_path(@building),
+             url: admin_building_path(@building),
              action_label: "UPDATE"
            } %>
