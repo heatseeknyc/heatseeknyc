@@ -44,7 +44,7 @@ module Admin
     end
 
     def error_flash
-      flash[:error] = "Save failed due to errors."
+      flash.now[:error] = "Save failed due to errors."
     end
   end
 end
