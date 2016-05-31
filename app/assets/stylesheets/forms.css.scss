@@ -50,18 +50,3 @@
     font-size: 1.4em
   }
 }
-
-.btn-save {
-  height: 50px;
-  width: 40%;
-  margin: 10px 0 10px 0;
-  border-radius: none;
-  border: 3px solid $theme-black;
-  font-size: 14px;
-  background-color: white;
-}
-
-.btn-save:hover {
-  background-color: $theme-black;
-  color: $theme-white;
-}
