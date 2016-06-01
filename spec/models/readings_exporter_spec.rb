@@ -19,9 +19,7 @@ describe ReadingsExporter do
     csv = exporter.to_csv
     expect(csv.lines.count).to eq(4)
     expect(CSV.parse(csv, headers: true).first.to_s.chomp).to eq(
-      [reading_1.created_at.strftime("%Y-%m-%d"),
-       reading_1.created_at.strftime("%H:%M:%S"),
-       reading_1.created_at.strftime("%z"),
+      [reading_1.created_at,
        reading_1.temp,
        reading_1.outdoor_temp,
        reading_1.violation,

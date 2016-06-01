@@ -2,9 +2,7 @@ require "csv"
 
 class ReadingsExporter
   HEADERS = [
-    "date",
-    "time",
-    "time_zone",
+    "timestamp",
     "temp_inside",
     "temp_outside",
     "in_violation",
@@ -39,9 +37,7 @@ class ReadingsExporter
   def format_values(reading)
     [].tap do |values|
       values.push(
-        reading.created_at.strftime("%Y-%m-%d"),
-        reading.created_at.strftime("%H:%M:%S"),
-        reading.created_at.strftime("%z"),
+        reading.created_at,
         reading.temp,
         reading.outdoor_temp,
         reading.violation,
