@@ -45,4 +45,26 @@ describe Building do
       expect(building.errors[:zip_code]).to eq(zip_code_error)
     end
   end
+
+  describe "address uniqueness" do
+    it "converts street_address to lower case before saving" do
+      building.street_address = "123 New Street"
+      building.save
+      expect(building.reload.street_address).to eq("123 new street")
+    end
+
+    it "validates uniqueness in a case-insensitive manner" do
+      building_dupe = Building.new(street_address: building.street_address.upcase,
+                                   zip_code: building.zip_code)
+      expect(building_dupe).to_not be_valid
+      expect(building_dupe.errors[:street_address])
+        .to eq(["has already been taken"])
+    end
+
+    it "permits the same street address with different zip codes" do
+      building_2 = Building.new(street_address: building.street_address,
+                                zip_code: "99999")
+      expect(building_2).to be_valid
+    end
+  end
 end
