@@ -2,7 +2,7 @@ class ReadingsController < ApplicationController
   protect_from_forgery except: :create
 
   def index
-    if current_user && current_user.permissions == User::PERMISSIONS[:admin]
+    if current_user && current_user.permissions <= User::PERMISSIONS[:team_member]
       respond_to do |format|
         format.csv do
           filter_params = params[:readings] || {}

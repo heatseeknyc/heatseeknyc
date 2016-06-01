@@ -147,7 +147,7 @@ class UsersController < ApplicationController
     end
 
     def authenticate_admin_user!
-      return if current_user.permissions == User::PERMISSIONS[:admin]
+      return if current_user.permissions <= User::PERMISSIONS[:admin]
       redirect_to root_path
     end
 
