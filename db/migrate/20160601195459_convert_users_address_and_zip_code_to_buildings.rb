@@ -9,7 +9,7 @@ class ConvertUsersAddressAndZipCodeToBuildings < ActiveRecord::Migration
       else
         building = Building.create(street_address: user.address.downcase,
                                    zip_code: user.zip_code)
-        user.update_attributes!(building_id: building)
+        user.update_attributes!(building_id: building.id)
       end
     end
   end
