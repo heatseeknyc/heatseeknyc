@@ -7,6 +7,10 @@ def login_as_type(type, options = {})
   return user
 end
 
+def login_as_team_member
+  login_as_type(:team_member)
+end
+
 def login_as_admin
   login_as_type(:admin)
 end
