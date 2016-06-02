@@ -5,9 +5,20 @@ class UsersController < ApplicationController
   before_action :load_user, only: [:edit, :update]
 
   def update
-    @user.update_without_password(user_params)
-    @collaboration = current_user.collaborations.where(collaborator_id: @user.id).first
-    redirect_to "/users/#{current_user.id}/collaborations/#{@collaboration.id}"
+    if user_params[:permissions] &&
+       user_params[:permissions].to_i < current_user.permissions
+       render text: "Unauthorized", status: :unauthorized
+    else
+      @user.update_without_password(user_params)
+      @collaboration = current_user.collaborations
+                                   .where(collaborator_id: @user.id)
+                                   .first
+      if @collaboration
+        redirect_to user_collaboration_path(current_user, @collaboration)
+      else
+        redirect_to user_path(current_user)
+      end
+    end
   end
 
   def index

@@ -78,6 +78,24 @@ describe UsersController do
 
       expect(response).to redirect_to(root_path)
     end
+
+    describe "setting permission level" do
+      it "restricts setting permission level higher than the admin user's own" do
+        sign_in admin
+        params[:user][:permissions] = User::PERMISSIONS[:team_member]
+        put :update, params
+        expect(response.status).to eq(401)
+        expect(response.body).to eq("Unauthorized")
+      end
+
+      it "permits setting the same permission level as the admin user's" do
+        sign_in admin
+        params[:user][:permissions] = User::PERMISSIONS[:admin]
+        put :update, params
+        expect(response.status).to eq(302)
+        expect(tenant.reload.permissions).to eq(User::PERMISSIONS[:admin])
+      end
+    end
   end
 
   describe "GET /users/edit_password" do
