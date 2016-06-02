@@ -12,8 +12,12 @@ FactoryGirl.define do
     password_confirmation { |u| u.password }
     email { |u| "#{u.first_name}@example.com" }
 
-    trait :admin do
+    trait :team_member do
       permissions 10
+    end
+
+    trait :admin do
+      permissions 25
     end
 
     trait :advocate do
@@ -24,6 +28,7 @@ FactoryGirl.define do
       permissions 100
     end
 
+    factory :team_member, traits: [:team_member]
     factory :admin, traits: [:admin]
     factory :advocate, traits: [:advocate]
     factory :tenant, traits: [:tenant]

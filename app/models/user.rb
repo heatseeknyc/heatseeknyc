@@ -34,6 +34,8 @@ class User < ActiveRecord::Base
   include Regulatable::InstanceMethods
 
   PERMISSIONS = {
+    super_user: 0,
+    team_member: 10,
     admin: 25,
     lawyer: 50,
     user: 100
