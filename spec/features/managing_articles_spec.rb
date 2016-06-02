@@ -8,14 +8,14 @@ feature "Managing articles" do
     article2 = FactoryGirl.create(:article, published_date: 2.days.ago)
     article3 = FactoryGirl.create(:article, published_date: 1.day.ago)
 
-    login_as_admin
+    login_as_team_member
     click_link "Articles"
 
     expect(page).to have_content "Listing articles"
   end
 
   scenario "Creating" do
-    login_as_admin
+    login_as_team_member
     click_link "Articles"
     click_link "New Article"
 
