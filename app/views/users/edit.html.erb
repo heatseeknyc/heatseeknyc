@@ -30,7 +30,10 @@
       
       <% if @user.permissions > 0 && !@user.is_demo_user? %>
         <dl class="settings-input settings-permissions"><%= f.label :permissions %>
-        <%= f.select :permissions, User::PERMISSIONS, class: "form-control" %></dl>
+          <%= f.select :permissions,
+                       current_user.list_permission_level_and_lower,
+                       class: "form-control" %>
+        </dl>
 
       <dl class="settings-input">
       <%= f.submit "SAVE", class: "btn-save" %></dl>

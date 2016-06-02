@@ -210,6 +210,10 @@ class User < ActiveRecord::Base
     permissions <= PERMISSIONS[:lawyer]
   end
 
+  def list_permission_level_and_lower
+    PERMISSIONS.select { |_k, v| v >= permissions }
+  end
+
   def create_search_names
     self.search_first_name = first_name.downcase
     self.search_last_name = last_name.downcase

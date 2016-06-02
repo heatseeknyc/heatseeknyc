@@ -7,12 +7,12 @@ class UsersController < ApplicationController
   def update
     if user_params[:permissions] &&
        user_params[:permissions].to_i < current_user.permissions
-       render text: "Unauthorized", status: :unauthorized
+      render text: "Unauthorized", status: :unauthorized
     else
       @user.update_without_password(user_params)
       @collaboration = current_user.collaborations
-                                   .where(collaborator_id: @user.id)
-                                   .first
+                                  .where(collaborator_id: @user.id)
+                                  .first
       if @collaboration
         redirect_to user_collaboration_path(current_user, @collaboration)
       else

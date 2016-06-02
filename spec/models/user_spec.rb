@@ -117,4 +117,22 @@ describe User do
       expect(user.save).to be_false
     end
   end
+
+  describe "#list_permission_level_and_lower" do
+    it "returns permission levels that are less than or equal to the user" do
+      user = create(:admin)
+      expect(user.list_permission_level_and_lower).to eq(
+        admin: 25,
+        lawyer: 50,
+        user: 100
+      )
+    end
+
+    it "should not include permission levels that are higher" do
+      user = create(:admin)
+      permissions_hash = user.list_permission_level_and_lower
+      expect(permissions_hash[:super_user]).to be_nil
+      expect(permissions_hash[:team_member]).to be_nil
+    end
+  end
 end
