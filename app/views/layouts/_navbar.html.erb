@@ -30,7 +30,7 @@
         <li><%= link_to "Blog", blog_path %></li>
         <li class="nav-highlight"><%= link_to "Donate", "https://www.nycharities.org/give/donate.aspx?cc=4081" %></li>
         <% if user_signed_in? %>
-          <% if current_user.admin? %>
+          <% if current_user.team_member? %>
             <%= render "layouts/admin_menu" %>
           <% end %>
           <%= render "layouts/account_menu" %>

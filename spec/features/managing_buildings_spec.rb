@@ -16,7 +16,7 @@ end
 feature "Building management" do
   let(:building) { create(:building) }
 
-  before { login_as_admin }
+  before { login_as_team_member }
 
   scenario "Viewing index" do
     building
