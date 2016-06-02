@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160525052314) do
+ActiveRecord::Schema.define(version: 20160601190251) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,8 @@ ActiveRecord::Schema.define(version: 20160525052314) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "buildings", ["street_address", "zip_code"], name: "index_buildings_on_street_address_and_zip_code", unique: true, using: :btree
 
   create_table "canonical_temperatures", force: true do |t|
     t.integer  "zip_code"
