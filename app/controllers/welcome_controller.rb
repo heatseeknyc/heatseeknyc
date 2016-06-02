@@ -37,12 +37,10 @@ class WelcomeController < ApplicationController
     # Cache Tumblr data hourly, on the hour.
     Rails.cache.fetch("blog_page_#{page}_#{Time.now.strftime('%Y%m%d%H')}") do
       Rails.logger.info("\n FETCHING FROM TUMBLR \n")
-      client = Tumblr::Client.new({
-                                    :consumer_key => ENV['TUMBLR_CONSUMER_KEY'],
-                                    :consumer_secret => ENV['TUMBLR_CONSUMER_SECRET'],
-                                    :oauth_token => ENV['TUMBLR_OAUTH_TOKEN'],
-                                    :oauth_token_secret => ENV['TUMBLR_OAUTH_TOKEN_SECRET']
-                                  })
+      client = Tumblr::Client.new(:consumer_key => ENV['TUMBLR_CONSUMER_KEY'],
+                                  :consumer_secret => ENV['TUMBLR_CONSUMER_SECRET'],
+                                  :oauth_token => ENV['TUMBLR_OAUTH_TOKEN'],
+                                  :oauth_token_secret => ENV['TUMBLR_OAUTH_TOKEN_SECRET'])
 
       result = client.posts(
         'heatseeknyc.tumblr.com',
@@ -51,7 +49,7 @@ class WelcomeController < ApplicationController
       )
 
       {
-        :posts => result['posts'].sort{|a,b| b['date'] <=> a['date']},
+        :posts => result['posts'].sort{|a, b| b['date'] <=> a['date']},
         :total_pages => result["total_posts"].fdiv(BLOG_PAGE_SIZE).ceil
       }
     end
