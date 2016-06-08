@@ -135,4 +135,21 @@ describe User do
       expect(permissions_hash[:team_member]).to be_nil
     end
   end
+
+  describe "unit and building associations" do
+    let(:user) { create(:user) }
+
+    it "has a unit association" do
+      unit = create(:unit)
+      unit.tenants << user
+      expect(user.unit).to eq(unit)
+    end
+
+    it "delegates building to the associated unit" do
+      building = create(:building)
+      unit = create(:unit, building: building)
+      unit.tenants << user
+      expect(user.building).to eq(building)
+    end
+  end
 end

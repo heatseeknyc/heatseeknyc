@@ -14,6 +14,9 @@ class User < ActiveRecord::Base
   has_many :collaborations, dependent: :destroy
   has_many :collaborators, through: :collaborations
 
+  belongs_to :unit
+  delegate :building, to: :unit, allow_nil: true
+
   validates :first_name, :length => { minimum: 2 }
   validates :last_name, :length => { minimum: 2 }
   validate :sensor_codes_string_contains_only_valid_sensors
