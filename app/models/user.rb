@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_many :readings
   has_one :twine
   has_many :sensors
+  belongs_to :building
 
   has_many :collaborations, dependent: :destroy
   has_many :collaborators, through: :collaborations
