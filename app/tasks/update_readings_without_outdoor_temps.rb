@@ -4,7 +4,6 @@ class UpdateReadingsWithoutOutdoorTemps
     Reading.where(outdoor_temp: nil, created_at: range).each do |r|
       time = r.created_at
       location = r.user.zip_code
-      throttle = throttle
       updated_temp = WeatherMan.outdoor_temp_for(time, location, throttle)
 
       if updated_temp
