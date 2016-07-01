@@ -3,9 +3,25 @@ require "spec_helper"
 describe Building do
   let(:building) { create(:building) }
 
-  it "has tenants" do
-    2.times { building.tenants << create(:user) }
-    expect(building.tenants.count).to eq(2)
+  describe "associations" do
+    it "has many units" do
+      new_unit = create(:unit, building: building)
+      another_unit = create(:unit, building: building)
+      building.units << new_unit
+      building.units << another_unit
+      expect(building.units).to eq([new_unit, another_unit])
+    end
+
+    it "has tenants through the Unit model" do
+      user_1 = create(:user)
+      user_2 = create(:user)
+      unit_1 = create(:unit, building: building)
+      unit_2 = create(:unit, building: building)
+      unit_1.tenants << user_1
+      unit_2.tenants << user_2
+
+      expect(building.tenants).to eq([user_1, user_2])
+    end
   end
 
   describe "address validations" do

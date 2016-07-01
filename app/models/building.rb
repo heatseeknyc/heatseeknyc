@@ -1,5 +1,6 @@
 class Building < ActiveRecord::Base
-  has_many :tenants, class_name: User.name
+  has_many :units
+  has_many :tenants, through: :units, class_name: User.name
 
   validates_presence_of :street_address, :zip_code
   validates_format_of :zip_code,
