@@ -199,12 +199,20 @@ class User < ActiveRecord::Base
     collaborations.where(id: collaboration_id)
   end
 
+  def team_member?
+    permissions <= PERMISSIONS[:team_member]
+  end
+
   def admin?
-    permissions <= 25
+    permissions <= PERMISSIONS[:admin]
   end
 
   def lawyer?
-    permissions <= 50
+    permissions <= PERMISSIONS[:lawyer]
+  end
+
+  def list_permission_level_and_lower
+    PERMISSIONS.select { |_k, v| v >= permissions }
   end
 
   def create_search_names

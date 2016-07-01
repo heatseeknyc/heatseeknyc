@@ -29,9 +29,11 @@
         <li><%= link_to "Video", "video" %></li>
         <li><%= link_to "Blog", blog_path %></li>
         <li class="nav-highlight"><%= link_to "Donate", "https://www.nycharities.org/give/donate.aspx?cc=4081" %></li>
-
         <% if user_signed_in? %>
-          <%= render 'layouts/account_menu' %>
+          <% if current_user.team_member? %>
+            <%= render "layouts/admin_menu" %>
+          <% end %>
+          <%= render "layouts/account_menu" %>
         <% else %>
           <li><a href="/users/sign_in">Sign in &rsaquo;</a></li>
         <% end %>

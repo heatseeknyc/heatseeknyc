@@ -110,6 +110,10 @@ GEM
     font-awesome-rails (4.2.0.0)
       railties (>= 3.2, < 5.0)
     formatador (0.2.5)
+    formtastic (3.1.3)
+      actionpack (>= 3.2.13)
+    formtastic-bootstrap (3.1.1)
+      formtastic (>= 3.0)
     gh (0.13.2)
       addressable
       backports
@@ -415,6 +419,8 @@ DEPENDENCIES
   ffi (= 1.9.0)
   figaro
   font-awesome-rails
+  formtastic
+  formtastic-bootstrap
   google-analytics-rails
   guard-rspec
   guard-spork
@@ -457,3 +463,6 @@ DEPENDENCIES
   will_paginate
   yajl-ruby
   zip
+
+BUNDLED WITH
+   1.11.2

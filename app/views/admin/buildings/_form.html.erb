@@ -1,0 +1,24 @@
+<div id="form-id">
+  <div class="container form-header">
+    <div class="form-title">
+      <h1><%= title %></h1>
+    </div>
+  </div>
+
+  <%= semantic_form_for(resource, url: url) do |f| %>
+    <div class="container form-fields col-lg-5 col-md-6 col-sm-6 col-xs-12">
+      <%= f.semantic_errors %>
+      <%= f.inputs do %>
+        <%= f.input :property_name %>
+        <%= f.input :description %>
+        <%= f.input :street_address %>
+        <%= f.input :zip_code, input_html: { class: "short-field"} %>
+        <%= f.input :bin %>
+        <%= f.input :bbl %>
+      <% end %>
+      <%= f.actions do %>
+        <% f.action :submit, label: action_label, button_html: { class: "btn-save" } %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,52 @@
+@import 'shared';
+
+.form-header {
+  width: 100%;
+}
+
+.form-title {
+  border-bottom: 4px solid $theme-black;
+  padding-left: 0;
+  padding-right: 0;
+  h1 {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: 'Oswald';
+    font-size: 24px;
+    padding-bottom: 10px;
+  }   
+}
+
+.form-fields {
+  .form-group {
+    margin-bottom: 10px;
+
+    &:first-child {
+      margin-top: 30px;
+    }
+  }
+
+  label {
+      font-size: 18px;
+      text-transform: uppercase;
+      font-weight: normal;
+  }
+
+  .form-control {
+    border: 3px solid $theme-black;
+    border-radius: 0;
+    height: 50px;
+
+    &.short-field {
+      width: 40%;
+    }
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+
+  .label-tip {
+    font-size: 1.4em
+  }
+}

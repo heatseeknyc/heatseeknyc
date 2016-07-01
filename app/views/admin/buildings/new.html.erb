@@ -1,0 +1,7 @@
+<%= render partial: "form",
+           locals: {
+             title: "Create Building",
+             resource: @building || Building.new,
+             url: admin_buildings_path,
+             action_label: "CREATE"
+           } %>

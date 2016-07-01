@@ -9,6 +9,8 @@ gem 'devise'
 gem 'ffi', "= 1.9.0"
 gem 'figaro'
 gem 'font-awesome-rails'
+gem 'formtastic'
+gem 'formtastic-bootstrap'
 gem 'google-analytics-rails'
 gem 'httparty'
 gem 'json'
