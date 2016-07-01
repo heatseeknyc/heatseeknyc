@@ -10,7 +10,7 @@ Twinenyc::Application.configure do
     enable_starttls_auto: true
   }
 
-  config.action_mailer.default_url_options = { :host => 'heatseeknyc.com' }
+  config.action_mailer.default_url_options = { :host => 'app.heatseek.org' }
   GA.tracker = "UA-53209413-1"
   # Settings specified here will take precedence over those in config/application.rb.
 
