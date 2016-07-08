@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160525052314) do
+ActiveRecord::Schema.define(version: 20160708220032) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "articles", force: true do |t|
     t.string   "title"
@@ -33,6 +36,8 @@ ActiveRecord::Schema.define(version: 20160525052314) do
     t.string   "bbl"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "longitude"
+    t.decimal  "latitude"
   end
 
   create_table "canonical_temperatures", force: true do |t|
