@@ -13,8 +13,8 @@ feature "Unit management is restricted to admin users" do
     visit "/admin/buildings/#{building.id}/units/new"
     expect(current_path).to eq(root_path)
 
-    # visit "/admin/buildings/#{building.id}/units/#{unit.id}/edit"
-    # expect(current_path).to eq(root_path)
+    visit "/admin/buildings/#{building.id}/units/#{unit.id}/edit"
+    expect(current_path).to eq(root_path)
   end
 end
 
@@ -45,5 +45,16 @@ feature "Unit management" do
     expect(current_path).to eq(admin_building_units_path(building))
     expect(page).to have_content("Successfully created.")
     expect(page).to have_content(building.units.last.name.upcase)
+  end
+
+  scenario "Creating a new unit displays validation errors" do
+    visit building_units_path
+    click_link "Create New Unit"
+
+    fill_in "Floor", with: 1
+    click_button "CREATE"
+
+    expect(page).to have_content("Save failed due to errors.")
+    expect(page).to have_content("can't be blank")
   end
 end
