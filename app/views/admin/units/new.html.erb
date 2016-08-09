@@ -2,6 +2,6 @@
            locals: {
              title: "Create Unit in #{@building.address_and_name}",
              resource: @unit || Unit.new,
-             url: new_admin_building_unit_path(@building),
+             url: admin_building_units_path(@building),
              action_label: "CREATE"
            } %>

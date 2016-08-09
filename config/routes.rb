@@ -50,7 +50,9 @@ Twinenyc::Application.routes.draw do
   get "vote-for-us" => "welcome#nycbigapps"
 
   namespace :admin do
-    resources :buildings
+    resources :buildings do
+      resources :units
+    end
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

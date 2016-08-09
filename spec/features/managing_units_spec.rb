@@ -28,13 +28,13 @@ feature "Unit management" do
     unit = building.units.create(name: "1A", floor: 1)
     visit building_units_path
 
-    expect(page).to have_content(unit.name)
+    expect(page).to have_content(unit.name.upcase)
     expect(page).to have_content(unit.floor)
   end
 
   scenario "Creating a new unit" do
     visit building_units_path
-    click_button "CREATE NEW UNIT"
+    click_link "Create New Unit"
 
     fill_in "Name", with: "2A"
     fill_in "Floor", with: 2
@@ -42,8 +42,8 @@ feature "Unit management" do
 
     click_button "CREATE"
 
-    expect(current_path).to eq(admin_building_unit_path(building))
+    expect(current_path).to eq(admin_building_units_path(building))
     expect(page).to have_content("Successfully created.")
-    expect(page).to have_content(building.units.last.name)
+    expect(page).to have_content(building.units.last.name.upcase)
   end
 end

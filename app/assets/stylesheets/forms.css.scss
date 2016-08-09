@@ -41,6 +41,10 @@
       width: 40%;
     }
 
+    &.uppercase-field {
+      text-transform: uppercase;
+    }
+
     &:focus {
       box-shadow: none;
     }

@@ -1,17 +1,31 @@
-<div id="form-id">
-  <div class="container form-header">
-    <div class="form-title">
-      <h1>Units in <%= @building.address_and_name %></h1>
+<div class="advocate-layout clearfix">
+  <div class="container">
+    <div class="col-xs-12 container" id="permissions-show-div">
+      <div>
+        <h1 id="collaborator-h1" class="text-center">
+          Units in <%= @building.address_and_name %>
+        </h1>
+      </div>
 
-      <% @units.each do |u| %>
-        <hr class="underline-user text-center">
-        <li class="sidebar-li">
-          <!-- Path to nested building/:id/units/ resource -->
-          <a href="<%= edit_admin_building_unit_path(@building.id, u.id) %>" class="user-link">
-            <%= u.name %>
-          </a>
-        </li>
-      <% end %>
+      <a class="btn" href="<%= new_admin_building_unit_path(@building) %>">
+        Create New Unit
+      </a>
+
+      <ul id="collaborator-ul">
+        <% @units.each do |unit| %>
+          <div>
+            <li class="sidebar-li">
+              <div class="collaborator-link-div">
+                <%= link_to(unit.name.upcase,
+                            edit_admin_building_unit_path(@building, unit),
+                            method: :get,
+                            class: "user-link") %>
+                <p><%= unit.description %></p>
+              </div>
+            </li>
+          </div>
+        <% end %>
+      </ul>
     </div>
   </div>
 </div>
