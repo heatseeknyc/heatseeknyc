@@ -1,6 +1,6 @@
 <%= render partial: "form",
            locals: {
-             title: "Edit #{[@building.property_name, @building.street_address, @building.zip_code].compact.join(" - ")}",
+             title: "Edit #{@building.address_and_name}",
              resource: @building,
              url: admin_building_path(@building),
              action_label: "UPDATE"

@@ -1,11 +1,13 @@
 <div class="col-xs-6 container">
   <h1 id="collaborator-h1" class="text-center">Buildings</h1>
   <%= link_to "Add Building", new_admin_building_path %>
-  <% @buildings.each do |b| %>
+
+  <% @buildings.each do |building| %>
     <hr class="underline-user text-center">
     <li class="sidebar-li">
-      <a href="<%= edit_admin_building_path(b.id) %>" class="user-link">
-        <%= [b.street_address, b.zip_code, b.property_name].join(" | ") %>
+      <!-- TODO: Add a link/button to path for building/:id/units/ -->
+      <a href="<%= edit_admin_building_path(building) %>" class="user-link">
+        <%= building.address_and_name %>
       </a>
     </li>
   <% end %>

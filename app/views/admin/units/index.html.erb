@@ -1,0 +1,17 @@
+<div id="form-id">
+  <div class="container form-header">
+    <div class="form-title">
+      <h1>Units in <%= @building.address_and_name %></h1>
+
+      <% @units.each do |u| %>
+        <hr class="underline-user text-center">
+        <li class="sidebar-li">
+          <!-- Path to nested building/:id/units/ resource -->
+          <a href="<%= edit_admin_building_unit_path(@building.id, u.id) %>" class="user-link">
+            <%= u.name %>
+          </a>
+        </li>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -9,4 +9,8 @@ class Building < ActiveRecord::Base
   validates :street_address, uniqueness: { scope: :zip_code, case_sensitive: false }
 
   before_save { |building| building.street_address = building.street_address.downcase }
+
+  def address_and_name
+    [street_address, zip_code, property_name].join(" | ")
+  end
 end
