@@ -32,7 +32,7 @@ feature "Building management" do
   scenario "Creating a new building" do
     visit "/"
     click_link "Buildings"
-    click_link "Add Building"
+    click_link "Create Building"
 
     fill_in "Property name", with: "New apartment"
     fill_in "Street address", with: "123 New St"
