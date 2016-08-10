@@ -3,7 +3,7 @@ require "spec_helper"
 feature "Unit management is restricted to admin users" do
   scenario "Denies access to a non-admin user" do
     building = create(:building)
-    unit = building.units.create(name: "1A", floor: 1)
+    unit = create(:unit, building: building)
 
     login_as_tenant
 
@@ -20,20 +20,20 @@ end
 
 feature "Unit management" do
   let(:building) { create(:building) }
-  let(:building_units_path) { "/admin/buildings/#{building.id}/units/" }
+  let(:existing_unit) { create(:unit, building: building) }
 
   before { login_as_team_member }
 
   scenario "Viewing index" do
-    unit = building.units.create(name: "1A", floor: 1)
-    visit building_units_path
+    existing_unit
+    visit admin_building_units_path(building)
 
-    expect(page).to have_content(unit.name.upcase)
-    expect(page).to have_content(unit.floor)
+    expect(page).to have_content(existing_unit.name.upcase)
+    expect(page).to have_content(existing_unit.floor)
   end
 
   scenario "Creating a new unit" do
-    visit building_units_path
+    visit admin_building_units_path(building)
     click_link "Create New Unit"
 
     fill_in "Name", with: "2A"
@@ -48,7 +48,7 @@ feature "Unit management" do
   end
 
   scenario "Creating a new unit displays validation errors" do
-    visit building_units_path
+    visit admin_building_units_path(building)
     click_link "Create New Unit"
 
     fill_in "Floor", with: 1
@@ -57,4 +57,38 @@ feature "Unit management" do
     expect(page).to have_content("Save failed due to errors.")
     expect(page).to have_content("can't be blank")
   end
+
+  scenario "Updating an existing unit" do
+    visit edit_admin_building_unit_path(building, existing_unit)
+
+    expect(find_field("Name").value).to eq(existing_unit.name)
+    expect(find_field("Floor").value).to eq(existing_unit.floor)
+    expect(find_field("Description").value).to eq(existing_unit.description.to_s)
+
+    fill_in "Name", with: "5B"
+    fill_in "Floor", with: 4
+    fill_in "Description", with: "This is different"
+
+    click_button "UPDATE"
+
+    expect(current_path).to eq(edit_admin_building_unit_path(building, existing_unit))
+    expect(page).to have_content("Successfully updated.")
+    # expect(page).to have_content("5B") currently fails even though the value
+    # is rendered in uppercase with the CSS class so we use lowercase comparison
+    expect(find_field("Name").value).to eq("5b")
+    expect(find_field("Floor").value).to eq("4")
+    expect(find_field("Description").value).to eq("This is different")
+  end
+
+  scenario "Updating a unit displays validation errors" do
+    visit edit_admin_building_unit_path(building, existing_unit)
+
+    fill_in "Name", with: ""
+
+    click_button "UPDATE"
+    expect(page).to have_content("Save failed due to errors.")
+    expect(page).to have_content("can't be blank")
+    expect(existing_unit.reload.name).to_not be_blank
+  end
+
 end

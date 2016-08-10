@@ -1,6 +1,6 @@
 module Admin
   class UnitsController < AdminController
-    before_action :load_building, only: [:index, :new, :create]
+    before_action :load_building
     before_action :load_unit, only: [:edit, :update]
 
     def index
