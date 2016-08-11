@@ -71,13 +71,11 @@ feature "Unit management" do
 
     click_button "UPDATE"
 
-    expect(current_path).to eq(edit_admin_building_unit_path(building, existing_unit))
+    expect(current_path).to eq(admin_building_units_path(building))
     expect(page).to have_content("Successfully updated.")
-    # expect(page).to have_content("5B") currently fails even though the value
-    # is rendered in uppercase with the CSS class so we use lowercase comparison
-    expect(find_field("Name").value).to eq("5b")
-    expect(find_field("Floor").value).to eq("4")
-    expect(find_field("Description").value).to eq("This is different")
+    expect(page).to have_content("5B")
+    expect(page).to have_content("4")
+    expect(page).to have_content("This is different")
   end
 
   scenario "Updating a unit displays validation errors" do
@@ -86,9 +84,9 @@ feature "Unit management" do
     fill_in "Name", with: ""
 
     click_button "UPDATE"
+
+    expect(current_path).to eq(admin_building_unit_path(building, existing_unit))
     expect(page).to have_content("Save failed due to errors.")
     expect(page).to have_content("can't be blank")
-    expect(existing_unit.reload.name).to_not be_blank
   end
-
 end

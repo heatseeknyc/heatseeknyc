@@ -23,7 +23,7 @@ module Admin
     def update
       if @unit.update_attributes(unit_params)
         flash[:notice] = "Successfully updated."
-        redirect_to(action: "edit", id: @unit)
+        redirect_to admin_building_units_path(@building)
       else
         error_flash
         render action: "edit"
@@ -42,7 +42,6 @@ module Admin
     def load_building
       @building = Building.find(params[:building_id])
     end
-
 
     def load_unit
       @unit = Unit.find(params[:id])
