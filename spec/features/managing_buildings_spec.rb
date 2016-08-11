@@ -18,7 +18,7 @@ feature "Building management" do
 
   before { login_as_team_member }
 
-  scenario "Viewing index" do
+  scenario "Viewing index of all buildings" do
     building
     building_2 = create(:building, street_address: "100 Another Street")
 
@@ -27,6 +27,13 @@ feature "Building management" do
 
     expect(page).to have_content(building.street_address)
     expect(page).to have_content(building_2.street_address)
+  end
+
+  scenario "Viewing all units associated with a building" do
+    building
+    visit admin_buildings_path(building)
+    click_link building.address_and_name
+    expect(current_path).to eq(admin_building_units_path(building))
   end
 
   scenario "Creating a new building" do

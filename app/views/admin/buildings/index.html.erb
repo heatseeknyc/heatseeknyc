@@ -1,14 +1,41 @@
-<div class="col-xs-6 container">
-  <h1 id="collaborator-h1" class="text-center">Buildings</h1>
-  <%= link_to "Create Building", new_admin_building_path %>
+<div class="advocate-layout clearfix">
+  <div class="container">
+    <div class="col-xs-12 container" id="permissions-show-div">
+      <div>
+        <h1 id="collaborator-h1" class="text-center">Buildings</h1>
+      </div>
 
-  <% @buildings.each do |building| %>
-    <hr class="underline-user text-center">
-    <li class="sidebar-li">
-      <!-- TODO: Add a link/button to path for building/:id/units/ -->
-      <a href="<%= edit_admin_building_path(building) %>" class="user-link">
-        <%= building.address_and_name %>
-      </a>
-    </li>
-  <% end %>
+      <%= link_to "Create Building", new_admin_building_path %>
+
+      <ul id="collaborator-ul">
+        <% @buildings.each do |building| %>
+          <li class="sidebar-li">
+            <div class="collaborator-link-div">
+              <%= link_to(building.street_and_zip,
+                          admin_building_units_path(building),
+                          method: :get,
+                          class: "user-link") %>
+              <p class="address_zip">
+                Property Name: <%= building.property_name %>
+              </p>
+            </div>
+
+            <%= link_to("",
+                        admin_building_path(building),
+                        method: :delete,
+                        class: "fa fa-times remove-user-link",
+                        id: "edit",
+                        data: { confirm: "Are you sure?" },
+                        data: { remote: true }) %>
+
+            <%= link_to("",
+                        edit_admin_building_path(building),
+                        class: "fa fa-wrench user-settings-link",
+                        id: "wrench") %>
+            <br>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
 </div>
