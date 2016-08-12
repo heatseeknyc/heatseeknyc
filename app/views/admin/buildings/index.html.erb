@@ -20,12 +20,14 @@
               </p>
             </div>
 
-            <%= link_to("",
-                        admin_building_path(building),
-                        method: :delete,
-                        class: "fa fa-times remove-user-link",
-                        id: "edit",
-                        data: { confirm: "Do you want to delete this building?" })%>
+            <% if building.can_destroy? %>
+              <%= link_to("",
+                          admin_building_path(building),
+                          method: :delete,
+                          class: "fa fa-times remove-user-link",
+                          id: "edit",
+                          data: { confirm: "Do you want to delete this building?" })%>
+            <% end %>
 
             <%= link_to("",
                         edit_admin_building_path(building),
