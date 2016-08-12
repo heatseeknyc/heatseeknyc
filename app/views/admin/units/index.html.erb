@@ -13,7 +13,7 @@
 
       <ul id="collaborator-ul">
         <% @units.each do |unit| %>
-          <li class="sidebar-li">
+          <li id="unit-<%= unit.id %>" class="sidebar-li">
             <div class="collaborator-link-div">
               <%= link_to(unit.name.upcase,
                           admin_building_unit_path(@building, unit),
@@ -27,8 +27,7 @@
                         method: :delete,
                         class: "fa fa-times remove-user-link",
                         id: "edit",
-                        data: { confirm: "Are you sure?" },
-                        data: { remote: true }) %>
+                        data: { confirm: "Do you want to delete this unit?" }) %>
 
             <%= link_to("",
                         edit_admin_building_unit_path(@building, unit),

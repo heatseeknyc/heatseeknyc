@@ -1,6 +1,6 @@
 module Admin
   class BuildingsController < AdminController
-    before_action :load_building, only: [:edit, :update]
+    before_action :load_building, only: [:destroy, :edit, :update]
 
     def index
       @buildings = Building.all
@@ -26,6 +26,17 @@ module Admin
         error_flash
         render action: "edit"
       end
+    end
+
+    def destroy
+      flash[:alert] =
+        if @building.destroy
+          "Building deleted."
+        else
+          "Delete failed: #{@building.errors.full_messages}"
+        end
+
+      redirect_to action: "index"
     end
 
     private

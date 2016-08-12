@@ -90,4 +90,17 @@ feature "Building management" do
     expect(page).to have_content("can't be blank")
     expect(building.reload.street_address).to_not be_blank
   end
+
+  scenario "Deleting a building" do
+    building
+    visit admin_buildings_path
+
+    within(:css, "li#building-#{building.id}") do
+      find("a.remove-user-link").click
+    end
+
+    expect(current_path).to eq(admin_buildings_path)
+    expect(page).to have_content("Building deleted.")
+    expect { building.reload }.to raise_error { ActiveRecord::RecordNotFound }
+  end
 end

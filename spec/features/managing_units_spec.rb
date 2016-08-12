@@ -89,4 +89,16 @@ feature "Unit management" do
     expect(page).to have_content("Save failed due to errors.")
     expect(page).to have_content("can't be blank")
   end
+
+  scenario "Deleting a unit" do
+    visit admin_building_units_path(existing_unit.building)
+
+    within(:css, "li#unit-#{existing_unit.id}") do
+      find("a.remove-user-link").click
+    end
+
+    expect(current_path).to eq(admin_building_units_path(building))
+    expect(page).to have_content("Unit deleted.")
+    expect { existing_unit.reload }.to raise_error { ActiveRecord::RecordNotFound }
+  end
 end

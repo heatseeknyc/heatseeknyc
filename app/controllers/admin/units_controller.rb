@@ -1,7 +1,7 @@
 module Admin
   class UnitsController < AdminController
     before_action :load_building
-    before_action :load_unit, only: [:edit, :update]
+    before_action :load_unit, only: [:edit, :update, :destroy]
 
     def index
       @units = @building.units
@@ -28,6 +28,17 @@ module Admin
         error_flash
         render action: "edit"
       end
+    end
+
+    def destroy
+      flash[:alert] =
+        if @unit.destroy
+          "Unit deleted."
+        else
+          "Delete failed: #{@unit.errors.full_messages}"
+        end
+
+      redirect_to action: "index"
     end
 
     private
