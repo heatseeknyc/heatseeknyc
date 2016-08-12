@@ -1,5 +1,5 @@
 class Building < ActiveRecord::Base
-  has_many :units
+  has_many :units, dependent: :restrict
   has_many :tenants, through: :units, class_name: User.name
 
   validates_presence_of :street_address, :zip_code
@@ -16,5 +16,9 @@ class Building < ActiveRecord::Base
 
   def street_and_zip
     [street_address, zip_code].join(" | ")
+  end
+
+  def can_destroy?
+    units.empty?
   end
 end

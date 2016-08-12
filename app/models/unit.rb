@@ -1,9 +1,13 @@
 class Unit < ActiveRecord::Base
   belongs_to :building
-  has_many :tenants, class_name: User.name
+  has_many :tenants, class_name: User.name, dependent: :restrict
 
   validates_presence_of :building, :name
   validates :name, uniqueness: { scope: :building, case_sensitive: false }
 
   before_save { |unit| unit.name = unit.name.downcase }
+
+  def can_destroy?
+    tenants.empty?
+  end
 end

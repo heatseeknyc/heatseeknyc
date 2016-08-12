@@ -83,4 +83,19 @@ describe Building do
       expect(building_2).to be_valid
     end
   end
+
+  describe "destroy restrictions" do
+    before { create(:unit, building: building) }
+
+    it "raises an error if there are associated units" do
+      expect { building.destroy }
+        .to raise_error(ActiveRecord::DeleteRestrictionError)
+    end
+
+    it "has a method to check if it can be destroyed" do
+      expect(building.can_destroy?).to eq(false)
+      building.units.destroy_all
+      expect(building.can_destroy?).to eq(true)
+    end
+  end
 end

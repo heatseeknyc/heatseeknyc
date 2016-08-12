@@ -32,4 +32,19 @@ describe Unit do
       expect(unit.tenants.count).to eq(2)
     end
   end
+
+  describe "destroy restrictions" do
+    before { create(:user, unit: unit) }
+
+    it "raises an error if there are associated tenants" do
+      expect { unit.destroy }
+        .to raise_error(ActiveRecord::DeleteRestrictionError)
+    end
+
+    it "has a method to check if it can be destroyed" do
+      expect(unit.can_destroy?).to eq(false)
+      unit.tenants.destroy_all
+      expect(unit.can_destroy?).to eq(true)
+    end
+  end
 end
