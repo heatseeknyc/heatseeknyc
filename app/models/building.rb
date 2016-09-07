@@ -1,5 +1,5 @@
 class Building < ActiveRecord::Base
-  has_many :units, dependent: :restrict
+  has_many :units, dependent: :restrict_with_exception
   has_many :tenants, through: :units, class_name: User.name
 
   validates_presence_of :street_address, :zip_code
@@ -15,10 +15,18 @@ class Building < ActiveRecord::Base
   end
 
   def street_and_zip
-    [street_address, zip_code].join(" | ")
+    [street_address.titlecase, zip_code].join(" | ")
   end
 
   def can_destroy?
     units.empty?
+  end
+
+  def self.options_for_select
+    {}.tap do |options|
+      all.each do |building|
+        options[building.street_and_zip] = building.id
+      end
+    end
   end
 end
