@@ -60,6 +60,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+    @unit_options = @user.unit ? @user.unit.options_for_select_in_building : []
+  end
+
   def edit_password
     @user = current_user
   end
@@ -153,7 +157,9 @@ class UsersController < ApplicationController
         :phone_number,
         :zip_code,
         :permissions,
-        :twine_name
+        :twine_name,
+        :building_id,
+        :unit_id
       ])
     end
 

@@ -27,6 +27,7 @@
 //= require collaboration
 //= require complaint
 //= require kickstarter
+//= require user-forms
 //= require video
 //= require resources
 // 

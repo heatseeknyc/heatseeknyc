@@ -10,4 +10,12 @@ class Unit < ActiveRecord::Base
   def can_destroy?
     tenants.empty?
   end
+
+  def options_for_select_in_building
+    {}.tap do |options|
+      building.units.each do |unit|
+        options[unit.name.upcase] = unit.id
+      end
+    end
+  end
 end

@@ -1,44 +1,40 @@
 <div id="form-id">
   <div class="container settings-header">
     <div class="settings-title">
-      <h1>Edit <%= "#{@user.first_name} #{@user.last_name}" %>'s Settings </h1>
+      <h1>Edit <%= "#{@user.first_name} #{@user.last_name}" %>'s Settings</h1>
     </div>
-  </div><!--end of settigs title -->
+  </div>
 
-  <%= form_for(@user) do |f| %>
-    <div class="container settings-form-fields col-lg-5 col-md-6 col-sm-6 col-xs-12">
-      <dl class="settings-input"><%= f.label :first_name %>
-      <%= f.text_field :first_name, :autofocus => true, class: "form-control" %></dl>
-
-      <dl class="settings-input"><%= f.label :last_name %>
-      <%= f.text_field :last_name, class: "form-control" %></dl>
-
-      <dl class="settings-input"><%= f.label :apartment %>
-      <%= f.text_field :apartment, class: "form-control short-field" %></dl>
-
-      <dl class="settings-input"><%= f.label :address %>
-      <%= f.text_field :address, class: "form-control" %></dl>
-
-      <dl class="settings-input"><%= f.label :zip_code %>
-      <%= f.text_field :zip_code, class: "form-control short-field" %></dl>
-
-      <dl class="settings-input"><%= f.label :phone_number %>
-      <%= f.text_field :phone_number, class: "form-control short-field" %></dl>
-
-      <dl class="settings-input"><%= f.label :twine_name %>
-      <%= f.text_field :twine_name, class: "form-control" %></dl>
-      
-      <% if @user.permissions > 0 && !@user.is_demo_user? %>
-        <dl class="settings-input settings-permissions"><%= f.label :permissions %>
-          <%= f.select :permissions,
-                       current_user.list_permission_level_and_lower,
-                       class: "form-control" %>
-        </dl>
-
-      <dl class="settings-input">
-      <%= f.submit "SAVE", class: "btn-save" %></dl>
-
-      </div><!--end of settings form-->
-    <% end %>
+  <%= semantic_form_for(@user) do |f| %>
+    <div class="container user-settings settings-form-fields col-lg-5 col-md-6 col-sm-6 col-xs-12">
+      <%= f.semantic_errors %>
+      <%= f.inputs do %>
+        <%= f.input :first_name %>
+        <%= f.input :last_name %>
+        <%= f.input :apartment, input_html: { class: "short-field" } %>
+        <%= f.input :address %>
+        <%= f.input :zip_code, input_html: { class: "short-field" } %>
+        <%= f.input :phone_number, input_html: { class: "short-field" } %>
+        <%= f.input :twine_name %>
+        <%= f.input :building_id,
+                    as: :select,
+                    collection: Building.options_for_select,
+                    include_blank: true %>
+        <%= f.input :unit_id,
+                    as: :select,
+                    collection: @unit_options,
+                    include_blank: true %>
+        <% if @user.permissions > 0 && !@user.is_demo_user? %>
+          <%= f.input :permissions,
+                      as: :select,
+                      collection: current_user.list_permission_level_and_lower,
+                      include_blank: true,
+                      input_html: { class: "short-field" } %>
+        <% end %>
+      <% end %>
+      <%= f.actions do %>
+        <% f.action :submit, label: "SAVE", button_html: { class: "btn-save" } %>
+      <% end %>
+    </div>
   <% end %>
 </div>

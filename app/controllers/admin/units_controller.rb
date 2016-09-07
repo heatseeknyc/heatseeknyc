@@ -1,10 +1,17 @@
 module Admin
   class UnitsController < AdminController
     before_action :load_building
-    before_action :load_unit, only: [:edit, :update, :destroy]
+    before_action :load_unit, only: [:edit, :update, :destroy, :show]
 
     def index
-      @units = @building.units
+      respond_to do |format|
+        format.html { @units = @building.units }
+        format.json do
+          render json: {
+            results: @building.units.as_json(only: [:id, :name])
+          }
+        end
+      end
     end
 
     def create
