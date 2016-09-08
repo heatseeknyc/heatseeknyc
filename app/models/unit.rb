@@ -1,6 +1,6 @@
 class Unit < ActiveRecord::Base
   belongs_to :building
-  has_many :tenants, class_name: User.name, dependent: :restrict
+  has_many :tenants, class_name: User.name, dependent: :restrict_with_exception
 
   validates_presence_of :building, :name
   validates :name, uniqueness: { scope: :building, case_sensitive: false }
