@@ -11,4 +11,5 @@ VCR.configure do |c|
   c.debug_logger = File.open(Rails.root.join('log', 'vcr.log'), 'a')
   c.filter_sensitive_data('---WUNDERGROUND_KEY---') { ENV['WUNDERGROUND_KEY'] }
   c.configure_rspec_metadata!
+  c.ignore_localhost = true
 end
