@@ -25,14 +25,14 @@ feature "Building management" do
     visit "/"
     click_link "Buildings"
 
-    expect(page).to have_content(building.street_address)
-    expect(page).to have_content(building_2.street_address)
+    expect(page).to have_content(building.street_and_zip)
+    expect(page).to have_content(building_2.street_and_zip)
   end
 
   scenario "Viewing all units associated with a building" do
     building
     visit admin_buildings_path(building)
-    click_link building.address_and_name
+    click_link building.street_and_zip
     expect(current_path).to eq(admin_building_units_path(building))
   end
 

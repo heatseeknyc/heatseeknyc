@@ -11,7 +11,7 @@ class Building < ActiveRecord::Base
   before_save { |building| building.street_address = building.street_address.downcase }
 
   def address_and_name
-    [street_address, zip_code, property_name].compact.join(" | ")
+    [street_address.titlecase, zip_code, property_name].compact.join(" | ")
   end
 
   def street_and_zip
