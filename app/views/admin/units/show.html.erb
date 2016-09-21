@@ -1,5 +1,24 @@
-<div>
-<!-- Maybe this should not be under /admin namespace so all Admin can see it -->
-<!-- Name, Floor, Description -->
-<!-- List of tenants -->
+<div class="advocate-layout clearfix">
+  <div class="container">
+    <div class="col-xs-12 container" id="permissions-show-div">
+      <div>
+        <h1 id="collaborator-h1" class="text-center">Unit Information</h1>
+      </div>
+
+      <div><%= @building.address_and_name %></div>
+      <div><%= @unit.name %></div>
+      <div><%= @unit.floor %></div>
+      <div>Tenants
+        <ul>
+        <% @unit.tenants.each do |tenant| %>
+          <li>
+            <%= tenant.first_name %>
+            <%= tenant.last_name %>
+            <!-- TODO: Include the rest of the Tenant data to display -->
+          </li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
