@@ -16,7 +16,11 @@ feature "Assigning buildings and units to users" do
     visit edit_user_path(tenant)
 
     find("#user_building_id").select(building.street_and_zip)
-
     find("#user_unit_id").select(unit.name.upcase)
+
+    click_button("SAVE")
+
+    expect(tenant.building_id).to eq(building.id)
+    expect(tenant.unit_id).to eq(unit.id)
   end
 end
