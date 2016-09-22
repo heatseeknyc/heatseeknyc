@@ -9,7 +9,7 @@ describe Building do
       another_unit = create(:unit, building: building)
       building.units << new_unit
       building.units << another_unit
-      expect(building.units).to eq([new_unit, another_unit])
+      expect(building.units).to match_array([new_unit, another_unit])
     end
 
     it "has tenants through the Unit model" do
@@ -20,7 +20,7 @@ describe Building do
       unit_1.tenants << user_1
       unit_2.tenants << user_2
 
-      expect(building.tenants).to eq([user_1, user_2])
+      expect(building.tenants).to match_array([user_1, user_2])
     end
   end
 
