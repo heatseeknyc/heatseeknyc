@@ -14,7 +14,6 @@ feature "Assigning buildings and units to users" do
 
   scenario "Setting a building and unit from the user edit form", js: true do
     visit edit_user_path(tenant)
-    binding.pry
 
     find("#user_building_id").select(building.street_and_zip)
 
