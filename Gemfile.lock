@@ -217,6 +217,7 @@ GEM
     rack (1.5.5)
     rack-test (0.6.3)
       rack (>= 1.0)
+    rack-timeout (0.4.2)
     rails (4.1.16)
       actionmailer (= 4.1.16)
       actionpack (= 4.1.16)
@@ -414,6 +415,7 @@ DEPENDENCIES
   puma
   quiet_assets
   rabl
+  rack-timeout
   rails (= 4.1.16)
   rails_12factor
   rails_layout
