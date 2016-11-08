@@ -23,3 +23,5 @@ coverage
 
 #ignore the .vagrant file
 .vagrant
+
+vendor/bundle

@@ -5,7 +5,7 @@
 development: &development
   adapter: postgresql
   database: twinedb_development
-  username: twinedb_development_user
+  username: <%= ENV['DATABASE_UESRNAME'] || 'twinedb_development_user' %>
   password: <%= ENV['DATABASE_PASSWORD'] || 'password' %>
   host: localhost
   port: 5432
@@ -21,9 +21,6 @@ test: &test
   database: ":memory:"
   pool: 5
   timeout: 5000
-
-cucumber:
-  <<: *test
 
 production:
   adapter: postgresql
