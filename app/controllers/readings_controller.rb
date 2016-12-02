@@ -1,5 +1,6 @@
 class ReadingsController < ApplicationController
   protect_from_forgery except: :create
+  skip_before_filter :site_authenticate
 
   def index
     if current_user && current_user.permissions <= User::PERMISSIONS[:team_member]
