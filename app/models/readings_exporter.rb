@@ -20,7 +20,7 @@ class ReadingsExporter
   def to_csv
     CSV.generate(headers: true) do |csv|
       csv << HEADERS
-      collection.each { |reading| csv << format_values(reading) }
+      collection.find_each { |reading| csv << format_values(reading) }
     end
   end
 
