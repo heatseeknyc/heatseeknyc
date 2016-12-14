@@ -1,6 +1,7 @@
 class ReadingsController < ApplicationController
   protect_from_forgery except: :create
   skip_before_filter :site_authenticate
+  before_filter :check_if_accepting_readings
 
   def index
     if current_user && current_user.permissions <= User::PERMISSIONS[:team_member]
@@ -44,5 +45,11 @@ class ReadingsController < ApplicationController
     status = verifier.status
     message = verifier.error_message
     render json: { code: status, error: message }, status: status
+  end
+
+  def check_if_accepting_readings
+    if Rails.env.production? && ENV["READING_CREATION_ENDPOINT_ENABLED"].blank?
+      render nothing: true, status: :service_unavailable
+    end
   end
 end
