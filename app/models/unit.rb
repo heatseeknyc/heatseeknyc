@@ -28,6 +28,6 @@ class Unit < ActiveRecord::Base
       all.each do |unit|
         options[unit.display_name_with_building] = unit.id
       end
-    end.sort(&:k)
+    end.sort
   end
 end
