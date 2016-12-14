@@ -11,11 +11,23 @@ class Unit < ActiveRecord::Base
     tenants.empty?
   end
 
+  def display_name_with_building
+    "#{building.street_and_zip} - #{name.upcase}"
+  end
+
   def options_for_select_in_building
     {}.tap do |options|
       building.units.each do |unit|
         options[unit.name.upcase] = unit.id
       end
     end
+  end
+
+  def self.options_for_select
+    {}.tap do |options|
+      all.each do |unit|
+        options[unit.display_name_with_building] = unit.id
+      end
+    end.sort_by { |k| k }
   end
 end

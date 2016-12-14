@@ -9,6 +9,8 @@ class UsersController < ApplicationController
        user_params[:permissions].to_i < current_user.permissions
       render text: "Unauthorized", status: :unauthorized
     else
+      unit = Unit.find(user_params[:unit_id])
+      user_params[:building_id] ||= unit.building_id
       @user.update_without_password(user_params)
       @collaboration = current_user.collaborations
                                   .where(collaborator_id: @user.id)
@@ -58,10 +60,6 @@ class UsersController < ApplicationController
         render json: @readings
       end
     end
-  end
-
-  def edit
-    @unit_options = @user.unit ? @user.unit.options_for_select_in_building : []
   end
 
   def edit_password

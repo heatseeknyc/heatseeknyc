@@ -47,4 +47,19 @@ describe Unit do
       expect(unit.can_destroy?).to eq(true)
     end
   end
+
+  describe "options for select" do
+    let(:building) { create(:building) }
+    let!(:unit_2) { create(:unit, name: "1B", building: building) }
+
+    before do
+      unit.update_attributes!(name: "4B", building: building)
+    end
+
+    it "creates an alphabetically sorted by name list of all units with building name" do
+      options = Unit.options_for_select
+      expect(options.first.first).to eq(unit_2.display_name_with_building)
+      expect(options.last.first).to eq(unit.display_name_with_building)
+    end
+  end
 end
