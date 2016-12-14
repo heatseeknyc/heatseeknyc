@@ -3,5 +3,6 @@
 FactoryGirl.define do
   factory :sensor do
     name "MyString"
+    user
   end
 end

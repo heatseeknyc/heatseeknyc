@@ -1,0 +1,34 @@
+<div class="container standard-font-size">
+  <h2>Assigned Sensors which are not reporting</h2>
+
+  <br>
+
+  The following are sensors which meet the these criteria:
+
+  <ul>
+    <li>Have not reported in the past 6 hours</li>
+    <li>Have not reported at least once in the past 6 months</li>
+    <li>Have an associated user</li>
+  </ul>
+
+  <br>
+
+  <table class="table">
+    <tr>
+      <th>Sensor ID</th>
+      <th>Sensor Short Code</th>
+      <th>Sensor User</th>
+      <th>Last reported</th>
+    </tr>
+
+    <% @sensors.each do |sensor| %>
+      <tr>
+        <td><%= sensor.name %></td>
+        <td><%= sensor.nick_name %></td>
+        <td><%= sensor.user ? sensor.user.name : "unassigned" %></td>
+        <td><%= sensor.last_reading_date.in_time_zone("Eastern Time (US & Canada)") %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+

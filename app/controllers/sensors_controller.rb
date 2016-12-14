@@ -39,6 +39,16 @@ class SensorsController < ApplicationController
     end
   end
 
+  def not_reporting
+    @sensors = Sensor.joins(:user)
+                .joins(:readings)
+                .group("sensors.id")
+                .select("sensors.*, MAX(readings.created_at) AS last_reading_date")
+                .having("MAX(readings.created_at) > ?", 6.months.ago)
+                .having("MAX(readings.created_at) <= ?", 6.hours.ago)
+                .order("MAX(readings.created_at) desc")
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_sensor

@@ -6,7 +6,9 @@ Twinenyc::Application.routes.draw do
   }
 
   resources :articles
-  resources :sensors
+  resources :sensors do
+    get :not_reporting, on: :collection
+  end
   resources :twines, only: [:show, :new, :create]
 
   get 'users/search' => 'users#search', as: :search_user
