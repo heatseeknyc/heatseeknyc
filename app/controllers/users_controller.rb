@@ -9,8 +9,6 @@ class UsersController < ApplicationController
        user_params[:permissions].to_i < current_user.permissions
       render text: "Unauthorized", status: :unauthorized
     else
-      unit = Unit.find(user_params[:unit_id])
-      user_params[:building_id] ||= unit.building_id
       @user.update_without_password(user_params)
       @collaboration = current_user.collaborations
                                   .where(collaborator_id: @user.id)
@@ -156,7 +154,6 @@ class UsersController < ApplicationController
         :zip_code,
         :permissions,
         :twine_name,
-        :building_id,
         :unit_id
       ])
     end
