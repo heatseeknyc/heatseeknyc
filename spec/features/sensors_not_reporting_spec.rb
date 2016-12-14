@@ -35,7 +35,7 @@ describe "sensors not reporting spec" do
   end
 
   def create_sensor(nick_name, time)
-    sensor = FactoryGirl.create(:sensor, nick_name: nick_name)
+    sensor = FactoryGirl.create(:sensor, :with_user, nick_name: nick_name)
     sensor.readings << FactoryGirl.create(:reading, created_at: time)
     sensor
   end

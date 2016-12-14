@@ -3,6 +3,9 @@
 FactoryGirl.define do
   factory :sensor do
     name "MyString"
-    user
+
+    trait(:with_user) do
+      user
+    end
   end
 end
