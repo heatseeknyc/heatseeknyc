@@ -14,8 +14,6 @@ describe "Violations report" do
     FactoryGirl.create(:collaboration, user: admin, collaborator: user_with_recent_violations2)
     FactoryGirl.create(:collaboration, user: admin, collaborator: user_with_old_violations)
 
-    FactoryGirl.create(:reading, user: user_with_old_violations)
-
     create_violation(user_with_old_violations, 5.days.ago)
 
     create_violation(user_with_recent_violations1, 5.days.ago)
@@ -26,7 +24,7 @@ describe "Violations report" do
     create_violation(user_with_recent_violations2, 2.days.ago)
   end
 
-  it "It shows users who have had violations in the last 3 days" do
+  it "shows users who have had violations in the last 3 days" do
     visit user_path(admin)
 
     expect(page).to have_text user_with_no_violations.name
@@ -41,6 +39,16 @@ describe "Violations report" do
       expect(page).to_not have_text user_with_no_violations.name
       expect(page).to_not have_text user_with_old_violations.name
     end
+  end
+
+  it "only shows users you collaborate with" do
+    other_user = FactoryGirl.create(:user)
+    create_violation(other_user, 2.days.ago)
+    create_violation(other_user, 1.days.ago)
+
+    visit user_path(admin)
+
+    expect(page).to_not have_text other_user.name
   end
 
   def create_violation(user, time)
