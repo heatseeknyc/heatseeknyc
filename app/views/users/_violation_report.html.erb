@@ -1,0 +1,21 @@
+<% collaborations_with_violations = current_user.collaborations_with_violations %>
+
+<% if collaborations_with_violations.any? %>
+  <h1 id="collaborator-h1" class="text-center">Violations In The Last 3 Days</h1>
+
+  <table class="table bg-white violations-report">
+    <tr>
+      <th>Name</th>
+      <th>Number of Violations</th>
+    </tr>
+
+    <% collaborations_with_violations.each do |collaboration| %>
+      <% user = collaboration.collaborator %>
+
+      <tr>
+        <td><%= link_to user.name, [current_user, collaboration] %></td>
+        <td><%= collaboration.violations_count %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
