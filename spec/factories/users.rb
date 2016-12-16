@@ -6,11 +6,11 @@ FactoryGirl.define do
     apartment "A1"
     zip_code "10004"
     phone_number "555-555-5555"
-    sequence(:first_name) { |n| "Bob#{n}" }
-    last_name "Smith"
+    sequence(:first_name) { Faker::Name.first_name }
+    last_name { Faker::Name.last_name }
     password "secretpassword"
     password_confirmation { |u| u.password }
-    email { |u| "#{u.first_name}@example.com" }
+    email { Faker::Internet.email }
 
     trait :team_member do
       permissions 10

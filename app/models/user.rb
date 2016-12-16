@@ -291,4 +291,17 @@ class User < ActiveRecord::Base
       gsub(", phone_number: \"#{phone_number}\"", "").
       gsub(", phone_number: nil", "")
   end
+
+  def collaborations_with_violations
+    @collaborations_with_violations ||= begin
+      collaborations
+        .joins("INNER JOIN users ON users.id = collaborations.collaborator_id")
+        .joins("INNER JOIN readings ON readings.user_id = users.id")
+        .where(readings: { violation: true })
+        .where("readings.created_at > ?", 3.days.ago)
+        .group("collaborations.id")
+        .select("collaborations.*, COUNT(readings.id) AS violations_count")
+        .includes(:collaborator)
+    end
+  end
 end
