@@ -36,7 +36,6 @@ gem 'lograge'
 gem 'jquery-ui-rails'
 
 group :test do
-  gem 'memory_test_fix'
   gem 'timecop'
   gem 'vcr'
   gem 'webmock'
