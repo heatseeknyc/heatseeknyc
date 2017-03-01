@@ -2,6 +2,8 @@ class Sensor < ActiveRecord::Base
   belongs_to :user
   has_many :readings
 
+  validates :name, uniqueness: true, presence: true
+
   def self.find_from_params(params)
   	find_by name: params[:name]
   end
