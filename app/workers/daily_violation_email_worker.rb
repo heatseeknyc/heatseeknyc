@@ -23,7 +23,7 @@ class DailyViolationEmailWorker
       if Rails.env.test? ||
           ENV["FEATURE_VIOLATIONS_REPORT"] ||
           ENV["FEATURE_VIOLATIONS_REPORT_IDS"].split(" ").map(&:to_i).include?(advocate.id)
-        UserMailer.violations_report(recipient: advocate, violations: violations)
+        UserMailer.violations_report(recipient: advocate, violations: violations).deliver
       end
     end
   end
