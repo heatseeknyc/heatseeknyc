@@ -31,6 +31,7 @@ gem 'yajl-ruby', :require => 'yajl'
 gem 'stripe'
 gem 'psych', '= 2.0.5'
 gem 'quiet_assets'
+gem 'lograge'
 
 group :test do
   gem 'memory_test_fix'
