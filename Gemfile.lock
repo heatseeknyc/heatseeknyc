@@ -327,7 +327,6 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
-    sqlite3 (1.3.10)
     stripe (1.18.0)
       json (~> 1.8.1)
       mime-types (>= 1.25, < 3.0)
@@ -437,7 +436,6 @@ DEPENDENCIES
   spork-rails
   spring
   spring-commands-rspec
-  sqlite3
   stripe
   timecop
   travis

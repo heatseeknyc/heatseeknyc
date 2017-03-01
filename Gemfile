@@ -64,7 +64,7 @@ group :test, :development do
   gem 'travis'
   gem 'spring' # keeps the rails process running for faster init times
   gem 'spring-commands-rspec'
-  gem 'sqlite3'
+  # gem 'sqlite3'
   #gem 'bullet' # detect n+1 errors
   #gem 'brakeman' # auto security testing
   #gem 'hakiri' # more automagic security
