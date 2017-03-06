@@ -58,6 +58,12 @@ describe WundergroundHistory, :vcr do
         subject.response = wunderground.history_for(time, "knyc")
         expect(subject).to_not be_missing_target_hour
       end
+
+      it "returns works when a time with a different timezone is passed in" do
+        subject.time = time.utc
+        subject.response = wunderground.history_for(time, "knyc")
+        expect(subject).to_not be_missing_target_hour
+      end
     end
 
     describe "empty?" do

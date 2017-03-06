@@ -16,6 +16,10 @@ class WundergroundHistory
     end
   end
 
+  def time=(time)
+    @time = Time.zone.at(time)
+  end
+
   def populate_observations
     self.observations = ObservationCollection.new_from_array(raw_observations)
   end
