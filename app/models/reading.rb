@@ -42,7 +42,7 @@ class Reading < ActiveRecord::Base
     user = sensor.user
     time = Time.at params[:time].to_i
     temp = params[:temp].to_f.round
-    outdoor_temp = WeatherMan.outdoor_temp_for(time, user.zip_code, throttle: 0.1)
+    outdoor_temp = WeatherMan.outdoor_temp_for(time, user.zip_code, 0.1)
 
     create!(
       sensor: sensor,
