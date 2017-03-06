@@ -19,7 +19,9 @@ class WeatherMan
   end
 
   def self.outdoor_temp_for(time, location, throttle = 9)
-    if time > Time.zone.now.beginning_of_hour
+    time = Time.zone.at(time)
+
+    if time > Time.now.beginning_of_hour
       current_outdoor_temp_for(location)
     else
       historical_outdoor_temp_for(time, location, throttle)

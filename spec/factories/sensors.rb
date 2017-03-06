@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :sensor do
-    name "MyString"
+    sequence(:name) { |i| "MyString#{i}" }
 
     trait(:with_user) do
       user
