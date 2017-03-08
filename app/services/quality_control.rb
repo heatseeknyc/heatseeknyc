@@ -17,7 +17,7 @@ class QualityControl
   end
 
   def self.update_outdoor_temps_for(readings, throttle = nil, silent = nil)
-    readings.each do |r|
+    readings.find_each do |r|
       time = r.created_at
       location = r.user.zip_code
       throttle = throttle

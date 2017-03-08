@@ -10,8 +10,7 @@ namespace :weather do
 
   desc "update any readings without outdoor temperatures"
   task update: :environment do
-    # app/tasks/
-    UpdateReadingsWithoutOutdoorTemps.exec
+    readings = Reading.where(outdoor_temp: nil).where("created_at > ?", 1.week.ago)
+    QualityControl.update_outdoor_temps_for(readings, 5)
   end
-
 end
