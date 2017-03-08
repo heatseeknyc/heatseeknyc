@@ -35,6 +35,8 @@ class CollaborationsController < ApplicationController
   def show
     if current_user.has_collaboration?(params[:id])
       @user = User.find(Collaboration.find(params[:id]).collaborator_id)
+      @analytics_page = "Viewed user page for #{@user.name}"
+
       respond_to do |f|
         f.html do
           render "show"

@@ -48,8 +48,10 @@ class UsersController < ApplicationController
     respond_to do |f|
       f.html do
         if current_user.permissions <= User::PERMISSIONS[:lawyer]
+          @analytics_page = "Advocate Dashboard"
           render :permissions_show
         else
+          @analytics_page = "User Dashboard"
           render :show
         end
       end
