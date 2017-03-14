@@ -52,18 +52,34 @@ unless User.find_by(email: "mbeirut@heatseeknyc.com")
     :email => "live-update@heatseeknyc.com",
     :password => '33west26'
   )
+
+  User.create(
+    :first_name => "Team Member",
+    :last_name => "Heatseek",
+    :address => "100 Fake St",
+    :zip_code => "10004",
+    :email => "team-member@heatseeknyc.com",
+    :password => '33west26'
+  )
 end
 
 jane = User.find_by(email: "jane@heatseeknyc.com")
 john = User.find_by(email: "john@heatseeknyc.com")
 demo = User.find_by(email: "demo-user@heatseeknyc.com")
+live = User.find_by(email: "live-update@heatseeknyc.com")
+users = [jane, john, demo, live]
+
 lawyer = User.find_by(email: "demo-lawyer@heatseeknyc.com")
 lawyer.permissions = 50
 lawyer.save
-live = User.find_by(email: "live-update@heatseeknyc.com")
+
+team_member = User.find_by(email: "team-member@heatseeknyc.com")
+team_member.permissions = 10
+team_member.collaborators = users
+team_member.save
+
 now = Time.now
 current_time = now - (now.to_i % 3600)
-users = [jane, john, demo, lawyer, live]
 users.each do |user|
   user.readings.clear
   current_temp = 70
