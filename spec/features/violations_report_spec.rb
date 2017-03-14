@@ -20,8 +20,10 @@ describe "Violations report" do
     create_violation(user_with_recent_violations1, 2.days.ago)
     create_violation(user_with_recent_violations1, 2.days.ago)
     create_violation(user_with_recent_violations1, 1.days.ago)
+    create_reading(user_with_recent_violations1, 77)
 
     create_violation(user_with_recent_violations2, 2.days.ago)
+    create_reading(user_with_recent_violations2, 78)
   end
 
   it "shows users who have had violations in the last 3 days" do
@@ -33,8 +35,8 @@ describe "Violations report" do
     expect(page).to have_text user_with_old_violations.name
 
     within ".violations-report" do
-      expect(page).to have_text "#{user_with_recent_violations1.name} 3"
-      expect(page).to have_text "#{user_with_recent_violations2.name} 1"
+      expect(page).to have_text "#{user_with_recent_violations1.name} 77° 3"
+      expect(page).to have_text "#{user_with_recent_violations2.name} 78° 1"
 
       expect(page).to_not have_text user_with_no_violations.name
       expect(page).to_not have_text user_with_old_violations.name
@@ -65,5 +67,9 @@ describe "Violations report" do
 
   def create_violation(user, time)
     FactoryGirl.create(:reading, user: user, created_at: time, outdoor_temp: 30, temp: 30)
+  end
+
+  def create_reading(user, temp)
+    FactoryGirl.create(:reading, user: user, created_at: 1.hour.ago, outdoor_temp: 32, temp: temp)
   end
 end
