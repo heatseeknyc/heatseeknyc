@@ -6,6 +6,7 @@
   <table class="table bg-white violations-report">
     <tr>
       <th>Name</th>
+      <th>Building Address</th>
       <th>Number of Violations</th>
     </tr>
 
@@ -14,6 +15,7 @@
 
       <tr>
         <td><%= link_to user.name, [current_user, collaboration] %></td>
+        <td><%= "#{user.address}, #{user.zip_code}" %></td>
         <td><%= collaboration.violations_count %></td>
       </tr>
     <% end %>

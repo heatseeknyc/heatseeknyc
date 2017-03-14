@@ -41,6 +41,18 @@ describe "Violations report" do
     end
   end
 
+  it "shows users' addresses" do
+    visit user_path(admin)
+
+    within ".violations-report" do
+      expect(page).to have_text "#{user_with_recent_violations1.name} #{user_with_recent_violations1.address}, #{user_with_recent_violations1.zip_code}"
+      expect(page).to have_text "#{user_with_recent_violations2.name} #{user_with_recent_violations2.address}, #{user_with_recent_violations2.zip_code}"
+
+      expect(page).to_not have_text user_with_no_violations.name
+      expect(page).to_not have_text user_with_old_violations.name
+    end
+  end
+
   it "only shows users you collaborate with" do
     other_user = FactoryGirl.create(:user)
     create_violation(other_user, 2.days.ago)
