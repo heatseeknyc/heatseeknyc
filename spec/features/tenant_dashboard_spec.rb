@@ -1,6 +1,6 @@
-require 'spec_helper'
+require "spec_helper"
 
-describe "Violations report" do
+describe "Tenant Dashboard" do
   let!(:admin) { login_as_admin }
 
   let(:user_with_no_violations) { FactoryGirl.create(:user) }
@@ -26,31 +26,41 @@ describe "Violations report" do
     create_reading(user_with_recent_violations2, 78)
   end
 
-  it "shows users who have had violations in the last 3 days" do
-    visit user_path(admin)
+  context "tenant list" do
+    it "shows user information for all associated tenants" do
+      visit user_path(admin)
 
-    expect(page).to have_text user_with_no_violations.name
-    expect(page).to have_text user_with_recent_violations1.name
-    expect(page).to have_text user_with_recent_violations2.name
-    expect(page).to have_text user_with_old_violations.name
+      within "#collaborator-ul" do
+        expect(page).to have_text user_with_no_violations.name
+        expect(page).to have_text user_with_recent_violations1.name
+        expect(page).to have_text user_with_recent_violations2.name
+        expect(page).to have_text user_with_old_violations.name
+      end
+    end
 
-    within ".violations-report" do
-      expect(page).to have_text "#{user_with_recent_violations1.name} #{user_with_recent_violations1.address}, #{user_with_recent_violations1.zip_code} 77° 3"
-      expect(page).to have_text "#{user_with_recent_violations2.name} #{user_with_recent_violations2.address}, #{user_with_recent_violations2.zip_code} 78° 1"
+    it "does not show users you are not associated with" do
+      other_user = FactoryGirl.create(:user)
+      create_violation(other_user, 2.days.ago)
+      create_violation(other_user, 1.days.ago)
 
-      expect(page).to_not have_text user_with_no_violations.name
-      expect(page).to_not have_text user_with_old_violations.name
+      visit user_path(admin)
+
+      expect(page).to_not have_text other_user.name
     end
   end
 
-  it "only shows users you collaborate with" do
-    other_user = FactoryGirl.create(:user)
-    create_violation(other_user, 2.days.ago)
-    create_violation(other_user, 1.days.ago)
+  context "violations report" do
+    it "shows users who have had violations in the last 3 days" do
+      visit user_path(admin)
 
-    visit user_path(admin)
+      within ".violations-report" do
+        expect(page).to have_text expected_text_for(user_with_recent_violations1, 3)
+        expect(page).to have_text expected_text_for(user_with_recent_violations2, 1)
 
-    expect(page).to_not have_text other_user.name
+        expect(page).to_not have_text user_with_no_violations.name
+        expect(page).to_not have_text user_with_old_violations.name
+      end
+    end
   end
 
   def create_violation(user, time)
@@ -59,5 +69,9 @@ describe "Violations report" do
 
   def create_reading(user, temp)
     FactoryGirl.create(:reading, user: user, created_at: 1.hour.ago, outdoor_temp: 32, temp: temp)
+  end
+
+  def expected_text_for(user, violations_count)
+    return "#{user.name} #{user.address}, #{user.zip_code} #{user.current_temp} #{violations_count}"
   end
 end
