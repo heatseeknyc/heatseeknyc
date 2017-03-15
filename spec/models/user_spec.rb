@@ -107,10 +107,15 @@ describe User do
     end
 
     it "includes violation_count" do
-      collabs = lawyer.collaborations_with_violations
-      expect(collabs.find_by(collaborator: tenant_with_no_violations).violations_count).to be 0
-      expect(collabs.find_by(collaborator: tenant_with_violations).violations_count).to be 1
-      expect(collabs.find_by(collaborator: tenant_with_old_violations).violations_count).to be 0
+      collaborations = lawyer.collaborations_with_violations
+      expect(collaborations.find_by(collaborator: tenant_with_no_violations).violations_count).to be 0
+      expect(collaborations.find_by(collaborator: tenant_with_violations).violations_count).to be 1
+      expect(collaborations.find_by(collaborator: tenant_with_old_violations).violations_count).to be 0
+    end
+
+    it "orders collaborations by violation count" do
+      violations_counts = lawyer.collaborations_with_violations.to_ary.map(&:violations_count)
+      expect(violations_counts.sort.reverse).to eq violations_counts
     end
   end
 

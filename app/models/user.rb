@@ -305,6 +305,7 @@ class User < ActiveRecord::Base
       collaborations
         .joins("INNER JOIN (#{users_with_recent_violations}) users ON users.id = collaborations.collaborator_id")
         .select("collaborations.*, users.violations_count AS violations_count")
+        .order("violations_count desc")
         .includes(:collaborator)
     end
   end
