@@ -72,6 +72,6 @@ describe "Tenant Dashboard" do
   end
 
   def expected_text_for(user, violations_count)
-    return "#{user.name} #{user.address}, #{user.zip_code} #{user.current_temp} #{violations_count}"
+    return "#{user.name} #{user.address}, #{user.zip_code} #{violations_count} #{user.current_temp}"
   end
 end
