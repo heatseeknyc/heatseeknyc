@@ -14,5 +14,10 @@ FactoryGirl.define do
     trait :night_time do
       sequence(:created_at) { |n| Time.new(2014,03,01,23,40,n % 60,'-04:00') }
     end
+
+    trait :violation do
+      outdoor_temp 30
+      temp 30
+    end
   end
 end

@@ -54,11 +54,11 @@ describe "Tenant Dashboard" do
       visit user_path(admin)
 
       within ".violations-report" do
+        expect(page.all("tbody tr").length).to be 4
         expect(page).to have_text expected_text_for(user_with_recent_violations1, 3)
         expect(page).to have_text expected_text_for(user_with_recent_violations2, 1)
-
-        expect(page).to_not have_text user_with_no_violations.name
-        expect(page).to_not have_text user_with_old_violations.name
+        expect(page).to have_text expected_text_for(user_with_no_violations, 0)
+        expect(page).to have_text expected_text_for(user_with_old_violations, 0)
       end
     end
   end

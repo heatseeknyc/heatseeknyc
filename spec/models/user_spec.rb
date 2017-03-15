@@ -84,7 +84,35 @@ describe User do
 			user6.destroy_all_collaborations
 			expect(user6.has_collaboration?(collaboration.id)).to be(false)
 		end
-	end
+  end
+
+  describe "collaborations_with_violations" do
+    let(:lawyer) { create(:user, permissions: 50) }
+    let(:tenant_with_violations) { create(:user, permissions: 100) }
+    let(:tenant_with_no_violations) { create(:user, permissions: 100) }
+    let(:tenant_with_old_violations) { create(:user, permissions: 100) }
+
+    before(:each) do
+      create(:collaboration, :user_id => lawyer.id, :collaborator_id => tenant_with_no_violations.id)
+
+      create(:collaboration, :user_id => lawyer.id, :collaborator_id => tenant_with_violations.id)
+      create(:reading, :violation, user: tenant_with_violations)
+
+      create(:collaboration, :user_id => lawyer.id, :collaborator_id => tenant_with_old_violations.id)
+      create(:reading, :violation, user: tenant_with_old_violations, created_at: 5.days.ago)
+    end
+
+    it "finds all collaborations" do
+      expect(lawyer.collaborations_with_violations.length).to be 3
+    end
+
+    it "includes violation_count" do
+      collabs = lawyer.collaborations_with_violations
+      expect(collabs.find_by(collaborator: tenant_with_no_violations).violations_count).to be 0
+      expect(collabs.find_by(collaborator: tenant_with_violations).violations_count).to be 1
+      expect(collabs.find_by(collaborator: tenant_with_old_violations).violations_count).to be 0
+    end
+  end
 
 	describe "user permissions" do 
 		it "can be a demo user" do
