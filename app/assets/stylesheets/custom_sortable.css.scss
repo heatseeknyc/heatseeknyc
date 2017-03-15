@@ -1,0 +1,27 @@
+table[data-sortable].sortable-theme-bootstrap {
+  i {
+    vertical-align: inherit;
+    margin-top: 3px;
+    float: right;
+
+    &:before {
+      content: "\f0dc";
+    }
+  }
+
+  th:after {
+    border: none;
+  }
+
+  th:not([data-sorted]) i, th[data-sorted="false"] i {
+    color: #c8c8c8;
+  }
+
+  th[data-sorted="true"][data-sorted-direction="descending"] i:before {
+    content: "\f0dd";
+  }
+
+  th[data-sorted="true"][data-sorted-direction="ascending"] i:before {
+    content: "\f0de";
+  }
+}

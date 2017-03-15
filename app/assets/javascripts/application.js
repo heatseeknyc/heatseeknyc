@@ -20,7 +20,8 @@
 //= require jquery.tipsy.js
 //= require select2
 //= require wipe
-// 
+//= require sortable.min.js
+//
 // top level js files
 //= require advocate
 //= require coldmap-chloropleth
