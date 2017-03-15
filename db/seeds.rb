@@ -20,8 +20,8 @@ unless User.find_by(email: "mbeirut@heatseeknyc.com")
   User.create(
     :first_name => "John",
     :last_name => "Doe",
-    :address => "100 Fake St",
-    :zip_code => "10004",
+    :address => "200 Bogus Lane",
+    :zip_code => "10321",
     :email => "john@heatseeknyc.com",
     :password => '33west26'
   )
@@ -47,8 +47,8 @@ unless User.find_by(email: "mbeirut@heatseeknyc.com")
   User.create(
     :first_name => "Live Update",
     :last_name => "Account",
-    :address => "100 Fake St",
-    :zip_code => "10004",
+    :address => "200 Bogus Lane",
+    :zip_code => "10321",
     :email => "live-update@heatseeknyc.com",
     :password => '33west26'
   )
@@ -79,10 +79,10 @@ team_member.collaborators = users
 team_member.save
 
 now = Time.now
-current_time = now - (now.to_i % 3600)
 users.each do |user|
+  current_time = now - (now.to_i % 3600)
   user.readings.clear
-  current_temp = 70
+  current_temp = 68
   current_outdoor_temp = 45
   200.times do
     current_time -= 3600
