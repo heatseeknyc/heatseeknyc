@@ -1,3 +1,7 @@
+general:
+  branches:
+    only:
+     - master
 deployment:
   staging:
     branch: master
