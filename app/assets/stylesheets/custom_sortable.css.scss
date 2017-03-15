@@ -1,15 +1,22 @@
 table[data-sortable].sortable-theme-bootstrap {
   i {
-    vertical-align: inherit;
-    margin-top: 3px;
-    float: right;
+    margin-left: 3px;
 
     &:before {
       content: "\f0dc";
     }
   }
 
+  th, td {
+    padding: 12px 26px 12px 12px;
+  }
+
+  th {
+    font-size: 16px;
+  }
+
   th:after {
+    display: none;
     border: none;
   }
 
@@ -24,4 +31,11 @@ table[data-sortable].sortable-theme-bootstrap {
   th[data-sorted="true"][data-sorted-direction="ascending"] i:before {
     content: "\f0de";
   }
+}
+table[data-sortable].sortable-theme-bootstrap {
+  font-family: 'Source Sans Pro', 'sans-serif';
+}
+
+.violations-report .numeric {
+  text-align: right;
 }
