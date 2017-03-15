@@ -99,6 +99,10 @@ users.each do |user|
     current_outdoor_temp -= 2 if current_outdoor_temp > 55
     current_outdoor_temp += 2 if current_outdoor_temp < 25
 
-    user.readings << Reading.new(created_at: current_time, temp: current_temp, outdoor_temp: current_outdoor_temp, user: user, twine: user.twine)
+    if user == demo
+      user.readings << Reading.new(created_at: current_time, temp: 68, outdoor_temp: current_outdoor_temp, user: user, twine: user.twine)
+    else
+      user.readings << Reading.new(created_at: current_time, temp: current_temp, outdoor_temp: current_outdoor_temp, user: user, twine: user.twine)
+    end
   end
 end
