@@ -17,7 +17,7 @@
       <% user = collaboration.collaborator %>
 
       <tr>
-        <td><%= link_to user.name, [current_user, collaboration] %></td>
+        <td><%= link_to user.name, [current_user, collaboration], method: :get %></td>
         <td><%= "#{user.address}, #{user.zip_code}" %></td>
         <td class="numeric"><%= collaboration.violations_count %></td>
         <td class="numeric"><%= user.current_temp %></td>
