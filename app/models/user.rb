@@ -15,7 +15,6 @@ class User < ActiveRecord::Base
   has_many :collaborators, through: :collaborations
 
   belongs_to :unit
-  delegate :building, to: :unit, allow_nil: true
 
   validates :first_name, :length => { minimum: 2 }
   validates :last_name, :length => { minimum: 2 }

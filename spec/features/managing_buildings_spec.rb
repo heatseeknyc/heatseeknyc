@@ -44,7 +44,7 @@ feature "Building management" do
 
     new_building = Building.last
     expect(new_building.property_name).to eq("New apartment")
-    expect(new_building.street_address).to eq("123 new st")
+    expect(new_building.street_address).to eq("123 New St")
     expect(current_path).to eq(admin_buildings_path)
     expect(page).to have_content("Successfully created.")
   end

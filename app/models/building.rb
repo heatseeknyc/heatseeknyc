@@ -1,6 +1,6 @@
 class Building < ActiveRecord::Base
   has_many :units
-  has_many :tenants, through: :units, class_name: User.name
+  has_many :tenants, class_name: User.name
 
   validates_presence_of :street_address, :zip_code
   validates_format_of :zip_code,
@@ -8,5 +8,8 @@ class Building < ActiveRecord::Base
                       message: "should be 12345 or 12345-1234"
   validates :street_address, uniqueness: { scope: :zip_code, case_sensitive: false }
 
-  before_save { |building| building.street_address = building.street_address.downcase }
+
+  def self.for_tenant(tenant)
+    Building.where("street_address ILIKE '%#{tenant.address}%'").first
+  end
 end

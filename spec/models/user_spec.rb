@@ -177,12 +177,5 @@ describe User do
       unit.tenants << user
       expect(user.unit).to eq(unit)
     end
-
-    it "delegates building to the associated unit" do
-      building = create(:building)
-      unit = create(:unit, building: building)
-      unit.tenants << user
-      expect(user.building).to eq(building)
-    end
   end
 end

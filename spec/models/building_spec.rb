@@ -11,17 +11,6 @@ describe Building do
       building.units << another_unit
       expect(building.units).to match_array([new_unit, another_unit])
     end
-
-    it "has tenants through the Unit model" do
-      user_1 = create(:user)
-      user_2 = create(:user)
-      unit_1 = create(:unit, building: building)
-      unit_2 = create(:unit, building: building)
-      unit_1.tenants << user_1
-      unit_2.tenants << user_2
-
-      expect(building.tenants).to match_array([user_1, user_2])
-    end
   end
 
   describe "address validations" do
@@ -63,12 +52,6 @@ describe Building do
   end
 
   describe "address uniqueness" do
-    it "converts street_address to lower case before saving" do
-      building.street_address = "123 New Street"
-      building.save
-      expect(building.reload.street_address).to eq("123 new street")
-    end
-
     it "validates uniqueness in a case-insensitive manner" do
       building_dupe = Building.new(street_address: building.street_address.upcase,
                                    zip_code: building.zip_code)
