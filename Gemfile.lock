@@ -108,6 +108,7 @@ GEM
       actionpack (>= 3.2.13)
     formtastic-bootstrap (3.1.1)
       formtastic (>= 3.0)
+    geocoder (1.4.3)
     gh (0.13.2)
       addressable
       backports
@@ -380,6 +381,7 @@ DEPENDENCIES
   font-awesome-rails
   formtastic
   formtastic-bootstrap
+  geocoder
   google-analytics-rails
   guard-rspec
   guard-spork
@@ -428,4 +430,4 @@ RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.13.6
+   1.14.3

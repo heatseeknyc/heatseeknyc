@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe User do
+describe User, :vcr do
   describe "#inspect" do
     let(:rick) do
       create(

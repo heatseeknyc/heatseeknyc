@@ -1,6 +1,6 @@
 require "spec_helper"
 
-feature "Building management is restricted to admin users" do
+feature "Building management is restricted to admin users", :vcr do
   scenario "Denies access to a non-admin user" do
     login_as_tenant
 
@@ -18,7 +18,7 @@ feature "Building management" do
 
   before { login_as_team_member }
 
-  scenario "Viewing index" do
+  scenario "Viewing index", :vcr do
     building
     building_2 = create(:building, street_address: "100 Another Street")
 
@@ -29,7 +29,7 @@ feature "Building management" do
     expect(page).to have_content(building_2.street_address)
   end
 
-  scenario "Creating a new building" do
+  scenario "Creating a new building", :vcr do
     visit "/"
     click_link "Buildings"
     click_link "Add Building"
@@ -49,7 +49,7 @@ feature "Building management" do
     expect(page).to have_content("Successfully created.")
   end
 
-  scenario "Creating a building displays validation errors" do
+  scenario "Creating a building displays validation errors", :vcr do
     visit "/admin/buildings/new"
     click_button "CREATE"
 
@@ -58,7 +58,7 @@ feature "Building management" do
     expect(page).to have_content("can't be blank and should be 12345 or 12345-1234")
   end
 
-  scenario "Updating an existing building" do
+  scenario "Updating an existing building", :vcr do
     visit "/admin/buildings/#{building.id}/edit"
     fill_in "Property name", with: "Cold apartment"
     fill_in "Description", with: "This place is cold"
@@ -74,7 +74,7 @@ feature "Building management" do
     expect(page).to have_content("Successfully updated.")
   end
 
-  scenario "Updating a building displays validation errors" do
+  scenario "Updating a building displays validation errors", :vcr do
     visit "/admin/buildings/#{building.id}/edit"
     fill_in "Street address", with: ""
 

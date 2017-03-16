@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Building do
+describe Building, :vcr do
   let(:building) { create(:building) }
 
   describe "associations" do
