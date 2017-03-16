@@ -42,7 +42,7 @@ class CollaborationsController < ApplicationController
           render "show"
         end
         f.json do
-          @readings = @user.get_latest_readings(168)
+          @readings = @user.last_weeks_readings
           render json: @readings
         end
       end

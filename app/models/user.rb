@@ -258,6 +258,10 @@ class User < ActiveRecord::Base
     readings.order(created_at: :asc).last(num)
   end
 
+  def last_weeks_readings
+    readings.where("created_at > ?", 7.days.ago).order(created_at: :asc)
+  end
+
   def name
     "#{first_name} #{last_name}"
   end
