@@ -14,7 +14,9 @@ unless User.find_by(email: "mbeirut@heatseeknyc.com")
     :address => "100 Fake St",
     :zip_code => "10004",
     :email => "jane@heatseeknyc.com",
-    :password => '33west26'
+    :password => '33west26',
+    :apartment => '4C',
+    :phone_number => '333-333-3333'
   )
 
   User.create(
@@ -23,7 +25,27 @@ unless User.find_by(email: "mbeirut@heatseeknyc.com")
     :address => "200 Bogus Lane",
     :zip_code => "10321",
     :email => "john@heatseeknyc.com",
-    :password => '33west26'
+    :password => '33west26',
+    :phone_number => '333-343-3333'
+  )
+
+  User.create(
+      :first_name => "Jamie",
+      :last_name => "Dough",
+      :address => "800 Fakeity Lane",
+      :zip_code => "11238",
+      :email => "jamie@heatseeknyc.com",
+      :apartment => '6E',
+      :password => '33west26'
+  )
+
+  User.create(
+      :first_name => "Jake",
+      :last_name => "Deaux",
+      :address => "200 DoesntExist Lane",
+      :zip_code => "80226",
+      :email => "jake@heatseeknyc.com",
+      :password => '33west26'
   )
 
   User.create(
@@ -65,9 +87,11 @@ end
 
 jane = User.find_by(email: "jane@heatseeknyc.com")
 john = User.find_by(email: "john@heatseeknyc.com")
+jamie = User.find_by(email: "jamie@heatseeknyc.com")
+jake = User.find_by(email: "jake@heatseeknyc.com")
 demo = User.find_by(email: "demo-user@heatseeknyc.com")
 live = User.find_by(email: "live-update@heatseeknyc.com")
-users = [jane, john, demo, live]
+users = [jane, john, jamie, jake, demo, live]
 
 lawyer = User.find_by(email: "demo-lawyer@heatseeknyc.com")
 lawyer.permissions = 50
