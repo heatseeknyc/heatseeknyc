@@ -15,9 +15,6 @@
             <% if user.apartment.present? %>
                 <h4>Apt. <%= user.apartment %></h4>
             <% end %>
-            <% if user.phone_number.present? %>
-              <h4><%= user.phone_number %></h4>
-            <% end %>
           </div>
         </div>
         <%= link_to 'Download Report (PDF)', pdf_download_path(user), class: "btn btn-primary btn-download" %>
