@@ -101,7 +101,7 @@ users.each do |user|
 
     if user == demo
       user.readings << Reading.new(created_at: current_time, temp: 68, outdoor_temp: current_outdoor_temp, user: user, twine: user.twine)
-    elsif user == jane && 100 < count < 124
+    elsif user == jane && 100 < count && count < 124
       next
     else
       user.readings << Reading.new(created_at: current_time, temp: current_temp, outdoor_temp: current_outdoor_temp, user: user, twine: user.twine)
