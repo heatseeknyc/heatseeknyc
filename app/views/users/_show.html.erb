@@ -3,18 +3,38 @@
     <div class="show-top col-xs-12">
       
       <div class="user-info user-info-mobile">
-        <h3><%= "#{user.first_name} #{user.last_name}" %></h3>
-        <h4 class="address"><%= "#{user.address}, #{user.zip_code}" %></h4>
+        <div class="row">
+          <div class="col-xs-2 back-button">
+            <% if current_user.permissions <= 50 %>
+              <%= link_to "", :back, :class => "fa fa-chevron-left" %>
+            <% end %>
+          </div>
+          <div class="col-xs-8">
+            <h3><%= "#{user.first_name} #{user.last_name}" %></h3>
+            <h4 class="address"><%= "#{user.address}, #{user.zip_code}" %></h4>
+            <% if user.apartment.present? %>
+              <h4>Apt. <%= user.apartment %></h4>
+            <% end %>
+          </div>
+          <div class="col-xs-2"></div>
+        </div>
       </div>
 
       <div class="upper-bar clearfix">
         <div class="user-info user-info-desktop">
-          <h3><%= "#{user.first_name} #{user.last_name}" %></h3>
-          <div class="contant-info">
-            <h4><%= "#{user.address}, #{user.zip_code}" %></h4>
-            <% if user.apartment.present? %>
+          <% if current_user.permissions <= 50 %>
+            <div class="back-button">
+              <%= link_to "", :back, :class => "fa fa-chevron-left" %>
+            </div>
+          <% end %>
+          <div class="tenant-info">
+            <h3><%= "#{user.first_name} #{user.last_name}" %></h3>
+            <div class="contact-info">
+              <h4><%= "#{user.address}, #{user.zip_code}" %></h4>
+              <% if user.apartment.present? %>
                 <h4>Apt. <%= user.apartment %></h4>
-            <% end %>
+              <% end %>
+            </div>
           </div>
         </div>
         <%= link_to 'Download Report (PDF)', pdf_download_path(user), class: "btn btn-primary btn-download" %>

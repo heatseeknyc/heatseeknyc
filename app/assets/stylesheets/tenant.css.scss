@@ -38,7 +38,7 @@
       font-family: 'Source Sans Pro';
     }
 
-    .contant-info {
+    .contact-info {
       margin-top: 10px;
 
       h4 {
@@ -60,6 +60,15 @@
   .user-info-mobile {
     @media (min-width: 768px) {
       display: none;
+    }
+
+    .back-button {
+      font-size: 4em;
+      padding-top: 20px;
+
+      a:hover, a:active {
+        text-decoration: none;
+      }
     }
   }
 
@@ -100,6 +109,27 @@
     .user-info {
       @media (min-width: 768px) {
         float: left;
+        display: table;
+      }
+    }
+
+    .back-button {
+      display: table-cell;
+      font-size: 3.5em;
+      vertical-align: middle;
+      padding-right: 7px;
+
+      a:hover, a:active {
+        text-decoration: none;
+      }
+    }
+
+    .tenant-info {
+      display: table-cell;
+      vertical-align: middle;
+
+      h3 {
+        margin-top: 10px;
       }
     }
   }
