@@ -84,7 +84,8 @@ users.each do |user|
   user.readings.clear
   current_temp = 68
   current_outdoor_temp = 45
-  200.times do
+  reading_count = user == jane ? 120 : 200
+  reading_count.times do
     current_time -= 3600
     if user.during_the_day?(current_time)
       current_temp += rand(-3..2)
