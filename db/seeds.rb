@@ -84,8 +84,7 @@ users.each do |user|
   user.readings.clear
   current_temp = 68
   current_outdoor_temp = 45
-  reading_count = user == jane ? 120 : 200
-  reading_count.times do
+  200.times do |count|
     current_time -= 3600
     if user.during_the_day?(current_time)
       current_temp += rand(-3..2)
@@ -102,6 +101,8 @@ users.each do |user|
 
     if user == demo
       user.readings << Reading.new(created_at: current_time, temp: 68, outdoor_temp: current_outdoor_temp, user: user, twine: user.twine)
+    elsif user == jane && 100 < count < 124
+      next
     else
       user.readings << Reading.new(created_at: current_time, temp: current_temp, outdoor_temp: current_outdoor_temp, user: user, twine: user.twine)
     end
