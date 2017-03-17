@@ -38,12 +38,17 @@
       font-family: 'Source Sans Pro';
     }
 
-    .address {
-      font-size: 1em;
-      font-family: 'Source Sans Pro';
-      text-align: left;
-      @media (max-width: 768px) {
-        text-align: center;
+    .contant-info {
+      margin-top: 10px;
+
+      h4 {
+        font-size: 1em;
+        font-family: 'Source Sans Pro';
+        line-height: 0.5;
+        text-align: left;
+        @media (max-width: 768px) {
+          text-align: center;
+        }
       }
     }
 
