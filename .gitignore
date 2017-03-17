@@ -27,3 +27,6 @@ coverage
 vendor/bundle
 
 .idea/*
+
+# dotenv
+.env.*.local

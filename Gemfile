@@ -46,6 +46,7 @@ group :test, :development do
   gem 'binding_of_caller'
   gem 'capybara'
   gem 'database_cleaner'
+  gem 'dotenv-rails'
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'guard-rspec'

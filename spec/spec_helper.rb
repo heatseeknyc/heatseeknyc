@@ -21,8 +21,6 @@ Spork.prefork do
   require "rails/tasks"
   Rake::Task["tmp:create"].invoke
 
-  ENV["WUNDERGROUND_KEY"] ||= "dummy-key"
-
   Spork.trap_method(Rails::Application, :reload_routes!)
 
   Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
