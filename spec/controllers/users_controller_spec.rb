@@ -5,7 +5,7 @@ describe UsersController do
   let(:lawyer) { create(:user, permissions: User::PERMISSIONS[:lawyer]) }
   let(:admin) { create(:user, permissions: User::PERMISSIONS[:admin]) }
 
-  describe "GET /users/:id/download" do
+  describe "GET /users/:id/download/pdf" do
     let(:pdf_writer) { double('pdf_writer') }
     let(:file) { double('file') }
 
@@ -30,6 +30,36 @@ describe UsersController do
                               with(file, filename: pdf_writer.filename, type: pdf_writer.content_type).
                               and_return{controller.render :nothing => true}
       get :download_pdf, id: 1                            
+    end
+  end
+
+  describe "GET /users/:id/download/csv" do
+    let(:csv_writer) { double('csv_writer') }
+    let(:file) { double('file') }
+    let(:filename) { "filename" }
+    let(:content_type) { "csv" }
+
+    before do
+      allow(controller).to receive(:authenticate_user!)
+      allow(CSVWriter).to receive(:new).with("1").and_return csv_writer
+      allow(csv_writer).to receive(:generate_csv).and_return file
+      allow(csv_writer).to receive(:filename)
+      allow(controller).to receive(:send_data).
+          with(file, filename: csv_writer.filename, type: "text/csv").
+          and_return{controller.render :nothing => true}
+    end
+
+    it "instantiates a csv writer" do
+      expect(CSVWriter).to receive(:new).with("1").and_return csv_writer
+      get :download_csv, id: 1
+    end
+
+    it "sends the data" do
+      expect(csv_writer).to receive(:filename).and_return filename
+      expect(controller).to receive(:send_data).
+          with(file, filename: filename, type: "text/csv").
+          and_return{controller.render :nothing => true}
+      get :download_csv, id: 1
     end
   end
 

@@ -23,7 +23,8 @@ Twinenyc::Application.routes.draw do
   resources :readings, only: [:index, :create]
 
   get 'addresses' => 'users#addresses'
-  get 'users/:id/download' => 'users#download_pdf', as: :pdf_download
+  get 'users/:id/download/pdf' => 'users#download_pdf', as: :pdf_download
+  get 'users/:id/download/csv' => 'users#download_csv', as: :csv_download
   get 'users/:id/live_update' => 'users#live_update'
   get 'users/:user_id/collaborations/:id/download' => 'users#download_pdf'
 

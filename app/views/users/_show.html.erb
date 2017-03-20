@@ -43,9 +43,17 @@
             </div>
           </div>
         </div>
-        <%= link_to 'Download Report (PDF)', pdf_download_path(user), class: "btn btn-primary btn-download" %>
+        <div class="download-container">
+          <div class="download-label">
+            Download Report
+          </div>
+          <div class="download-buttons">
+            <%= link_to 'CSV', csv_download_path(user), class: "btn btn-primary btn-download" %>
+            <%= link_to 'PDF', pdf_download_path(user), class: "btn btn-primary btn-download" %>
+          </div>
+        </div>
       </div>
-      
+
       <div class="col-md-2 col-lg-3"></div>
       <div class="current-temp col-xs-12 col-sm-6 col-md-3 col-lg-2">
         <h3 class="stat-num temp-num"><%= user.current_temp || "N/A" %></h3>

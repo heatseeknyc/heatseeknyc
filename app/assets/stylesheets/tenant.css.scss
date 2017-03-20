@@ -83,24 +83,33 @@
     }
   }
 
-  .btn.btn-primary.btn-download {
-    background: inherit;
-    border: solid 3px $theme-black;
-    border-radius: 0;
-    margin: 10px;
-    color: $theme-black;
-    font-family: 'Oswald';
-    margin-top: 30px;
-    margin-bottom: 30px;
-
-    &:hover {
-      color: $theme-white;
-      background-color: $theme-black;
-    }
-    
+  .download-container {
     @media (min-width: 768px) {
       float: right;
-      margin: 20px 0 10px 0;
+    }
+
+    @media (max-width: 767px) {
+      display: block;
+    }
+
+    .download-label {
+      font-family: 'Oswald';
+      font-size: 1.4em;
+      margin: 10px 0 0 0;
+    }
+
+    .btn-download {
+      background: inherit;
+      border: solid 3px $theme-black;
+      border-radius: 0;
+      color: $theme-black;
+      font-family: 'Oswald';
+      margin: 5px;
+
+      &:hover {
+        color: $theme-white;
+        background-color: $theme-black;
+      }
     }
   }
 
