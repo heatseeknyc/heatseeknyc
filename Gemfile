@@ -39,6 +39,7 @@ group :test do
   gem 'timecop'
   gem 'vcr'
   gem 'webmock'
+  gem 'pdf-inspector', require: 'pdf/inspector'
 end
 
 group :test, :development do

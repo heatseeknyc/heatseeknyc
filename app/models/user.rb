@@ -313,9 +313,15 @@ class User < ActiveRecord::Base
     end
   end
 
-  def get_oldest_reading_date
+  def get_oldest_reading_date(format)
     if last_reading = self.readings.order(:created_at, :id).limit(1).first
-      last_reading.created_at.strftime("(since %m/%d/%y)")
+      last_reading.created_at.strftime(format)
+    end
+  end
+
+  def get_newest_reading_date(format)
+    if newest_reading = self.readings.order(:created_at => :desc, :id => :desc).limit(1).first
+      newest_reading.created_at.strftime(format)
     end
   end
 end

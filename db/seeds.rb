@@ -91,7 +91,7 @@ jamie = User.find_by(email: "jamie@heatseeknyc.com")
 jake = User.find_by(email: "jake@heatseeknyc.com")
 demo = User.find_by(email: "demo-user@heatseeknyc.com")
 live = User.find_by(email: "live-update@heatseeknyc.com")
-users = [jane, john, jamie, jake, demo, live]
+users = [jane, john, jake, demo, live]
 
 lawyer = User.find_by(email: "demo-lawyer@heatseeknyc.com")
 lawyer.permissions = 50
@@ -99,7 +99,7 @@ lawyer.save
 
 team_member = User.find_by(email: "team-member@heatseeknyc.com")
 team_member.permissions = 10
-team_member.collaborators = users
+team_member.collaborators = users + [jamie]
 team_member.save
 
 now = Time.now

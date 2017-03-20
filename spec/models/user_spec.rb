@@ -184,16 +184,32 @@ describe User, :vcr do
 
     it "returns the date of the first reading associated with the user" do
       oldest_date = Date.parse("2013-10-29")
-      expect(oldest_date < 3.days.ago).to eq(true)
 
       create(:reading, :user_id => user.id, :created_at => oldest_date)
-      create(:reading, :user_id => user.id, :created_at => 3.days.ago)
+      create(:reading, :user_id => user.id, :created_at => oldest_date + 3.days)
 
-      expect(user.get_oldest_reading_date).to eq("(since 10/29/13)")
+      expect(user.get_oldest_reading_date("(since %m/%d/%y)")).to eq("(since 10/29/13)")
     end
 
     it "returns nil when the user has no readings" do
-      expect(user.get_oldest_reading_date).to eq(nil)
+      expect(user.get_oldest_reading_date("(since %m/%d/%y)")).to eq(nil)
+    end
+  end
+
+  describe "#get_newest_reading_date" do
+    let(:user) { create(:user) }
+
+    it "returns the date of the first reading associated with the user" do
+      newest_date = Date.parse("2013-10-29")
+
+      create(:reading, :user_id => user.id, :created_at => newest_date)
+      create(:reading, :user_id => user.id, :created_at => newest_date - 3.days)
+
+      expect(user.get_newest_reading_date("(since %m/%d/%y)")).to eq("(since 10/29/13)")
+    end
+
+    it "returns nil when the user has no readings" do
+      expect(user.get_newest_reading_date("(since %m/%d/%y)")).to eq(nil)
     end
   end
 end
