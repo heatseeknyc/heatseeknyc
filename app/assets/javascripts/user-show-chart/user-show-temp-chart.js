@@ -23,7 +23,7 @@ UserShowTempChartDrawer.prototype.fixData = function(dataArrWithObjs) {
   var self = this;
   dataArrWithObjs.forEach(function(obj){
     obj.date = new Date(obj.created_at);
-    obj.isDay = obj.date.getHours() >= 6 && obj.date.getHours() <= 22;
+    obj.isDay = obj.date.getHours() >= 6 && obj.date.getHours() <= 21;
     if(/live_update/.test(document.URL)){
       obj.violation = true;
     }
