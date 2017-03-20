@@ -178,4 +178,22 @@ describe User, :vcr do
       expect(user.unit).to eq(unit)
     end
   end
+
+  describe "#get_oldest_reading_date" do
+    let(:user) { create(:user) }
+
+    it "returns the date of the first reading associated with the user" do
+      oldest_date = Date.parse("2013-10-29")
+      expect(oldest_date < 3.days.ago).to eq(true)
+
+      create(:reading, :user_id => user.id, :created_at => oldest_date)
+      create(:reading, :user_id => user.id, :created_at => 3.days.ago)
+
+      expect(user.get_oldest_reading_date).to eq("(since 10/29/13)")
+    end
+
+    it "returns nil when the user has no readings" do
+      expect(user.get_oldest_reading_date).to eq(nil)
+    end
+  end
 end

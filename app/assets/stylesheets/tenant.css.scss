@@ -33,9 +33,14 @@
       }
     }
 
+
     .stat-description {
       font-size: 32px;
       font-family: 'Source Sans Pro';
+
+      &.violation-label {
+        line-height: 0.4em;
+      }
     }
 
     .contact-info {

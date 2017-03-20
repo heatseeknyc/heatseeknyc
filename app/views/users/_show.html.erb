@@ -50,6 +50,7 @@
       <div class="violations col-xs-12 col-sm-6 col-md-3 col-lg-2">
         <h3 class="stat-num"><%= user.violation_count %></h3>
         <h5 class="stat-description">violations</h5>
+        <h5 class="stat-description violation-label"><%= user.get_oldest_reading_date %></h5>
       </div>
     </div>
 

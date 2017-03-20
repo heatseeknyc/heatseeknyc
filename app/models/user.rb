@@ -312,4 +312,10 @@ class User < ActiveRecord::Base
         .includes(:collaborator)
     end
   end
+
+  def get_oldest_reading_date
+    if last_reading = self.readings.order(:created_at, :id).limit(1).first
+      last_reading.created_at.strftime("(since %m/%d/%y)")
+    end
+  end
 end
