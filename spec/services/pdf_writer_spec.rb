@@ -17,12 +17,11 @@ describe PDFWriter do
     end
 
     it "generates a cover page" do
-      begin_date = DateTime.now.change(hour: 13) - 5.days
-      end_date = begin_date + 5.days
-      create(:reading, :violation, user: user, created_at: begin_date)
+      begin_date = DateTime.now.change(hour: 15) - 5.days
+      first_reading = create(:reading, :violation, user: user, created_at: begin_date)
       create(:reading, :violation, user: user, created_at: begin_date + 1.day)
       create(:reading, user: user, created_at: begin_date + 3.days)
-      create(:reading, user: user, created_at: end_date)
+      last_reading = create(:reading, user: user, created_at: begin_date + 5.days)
 
       writer = PDFWriter.new_from_user_id(user.id)
       rendered_pdf = writer.generate_pdf
@@ -31,8 +30,8 @@ describe PDFWriter do
       expect(pdf_analysis.strings).to include("Tenant: #{user.name}")
       expect(pdf_analysis.strings).to include("Address: #{user.address}, Unit #{user.apartment}, #{user.zip_code}")
       expect(pdf_analysis.strings).to include("Phone Number: #{user.phone_number}")
-      expect(pdf_analysis.strings).to include("Begin: #{begin_date.strftime("%b %d, %Y%l:%M %p")}")
-      expect(pdf_analysis.strings).to include("End: #{end_date.strftime("%b %d, %Y%l:%M %p")}")
+      expect(pdf_analysis.strings).to include("Begin: #{first_reading.created_at.strftime("%b %d, %Y%l:%M %p")}")
+      expect(pdf_analysis.strings).to include("End: #{last_reading.created_at.strftime("%b %d, %Y%l:%M %p")}")
       expect(pdf_analysis.strings).to include("Total Temperature Readings: 4")
       expect(pdf_analysis.strings).to include("Total Violations: 2")
       expect(pdf_analysis.strings).to include("Percentage: 50.0%")
