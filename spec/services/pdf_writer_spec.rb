@@ -17,7 +17,7 @@ describe PDFWriter do
     end
 
     it "generates a cover page" do
-      begin_date = DateTime.parse("2015-02-20 13:00:00 #{Time.now.getlocal.zone}")
+      begin_date = DateTime.now.change(hour: 13) - 5.days
       end_date = begin_date + 5.days
       create(:reading, :violation, user: user, created_at: begin_date)
       create(:reading, :violation, user: user, created_at: begin_date + 1.day)
@@ -31,8 +31,8 @@ describe PDFWriter do
       expect(pdf_analysis.strings).to include("Tenant: #{user.name}")
       expect(pdf_analysis.strings).to include("Address: #{user.address}, Unit #{user.apartment}, #{user.zip_code}")
       expect(pdf_analysis.strings).to include("Phone Number: #{user.phone_number}")
-      expect(pdf_analysis.strings).to include("Begin: Feb 20, 2015 1:00 PM")
-      expect(pdf_analysis.strings).to include("End: Feb 25, 2015 1:00 PM")
+      expect(pdf_analysis.strings).to include("Begin: #{begin_date.strftime("%b %d, %Y%l:%M %p")}")
+      expect(pdf_analysis.strings).to include("End: #{end_date.strftime("%b %d, %Y%l:%M %p")}")
       expect(pdf_analysis.strings).to include("Total Temperature Readings: 4")
       expect(pdf_analysis.strings).to include("Total Violations: 2")
       expect(pdf_analysis.strings).to include("Percentage: 50.0%")
