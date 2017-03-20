@@ -33,6 +33,9 @@ UserShowTempChartCircles.prototype.addCirclesWithTransitions = function(){
     .attr('r', function(d) {
       return d.violation ? self.circleRadius : 0;
     })
+    .attr('class', function(d) {
+      return d.violation ? "violation" : ""
+    })
     .transition()
     .duration(self.transitionDuration)
     .style('opacity', 1)

@@ -28,7 +28,7 @@ UserShowTempChartToolTips.prototype._getCivilianTime = function(reading){
 
 UserShowTempChartToolTips.prototype.addToChart = function(){
   var self = this;
-  $('svg circle').tipsy({
+  $('svg circle.violation').tipsy({
     gravity: 's',
     html: true,
     topOffset: 2.8,
@@ -48,4 +48,4 @@ UserShowTempChartToolTips.prototype.addToChart = function(){
         + '<br>Legal minimum: ' + self._legalMinimumFor(circleDatum) + '°';
     }
   });
-}
+};
