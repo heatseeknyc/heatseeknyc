@@ -15,6 +15,9 @@
             <% if user.apartment.present? %>
               <h4>Apt. <%= user.apartment %></h4>
             <% end %>
+            <% if user.phone_number.present? %>
+              <h4><%= user.phone_number %></h4>
+            <% end %>
           </div>
           <div class="col-xs-2"></div>
         </div>
@@ -33,6 +36,9 @@
               <h4><%= "#{user.address}, #{user.zip_code}" %></h4>
               <% if user.apartment.present? %>
                 <h4>Apt. <%= user.apartment %></h4>
+              <% end %>
+              <% if user.phone_number.present? %>
+                <h4><%= user.phone_number %></h4>
               <% end %>
             </div>
           </div>
