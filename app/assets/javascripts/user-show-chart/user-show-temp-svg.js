@@ -5,8 +5,6 @@ function UserShowTempChartSvg(dataObj, violationCount, optionsObj) {
   this.margin = optionsObj.margin;
   this.optionsObj = optionsObj;
   this.violations = violationCount;
-  this.max = this.setMax();
-  this.min = this.setMin();
   this.x = this.setX();
   this.y = this.setY();
   this.svg = this.setSvg();
@@ -24,31 +22,7 @@ UserShowTempChartSvg.prototype.setX = function(){
 UserShowTempChartSvg.prototype.setY = function(){
   return d3.scale.linear()
     .range([this.height - this.margin * 2, 0])
-    .domain([this.min, this.max]);
-};
-
-UserShowTempChartSvg.prototype.setMax = function(){
-  return d3.max(
-    this.data, 
-    function(d) { 
-      return Math.max( d.temp, d.outdoor_temp )
-    }) + 1;
-};
-
-UserShowTempChartSvg.prototype.setMin = function() {
-  if ( d3.min(this.data, function(d) { return d.outdoor_temp }) ){
-    return d3.min(
-      this.data, 
-      function(d) { 
-        return Math.min( d.temp )
-      }) - 5;
-  } else {
-    return d3.min(
-      this.data,
-      function(d) { 
-        return Math.min( d.temp, d.outdoor_temp ) 
-      }) - 10;
-  }
+    .domain([0, 80]);
 };
 
 UserShowTempChartSvg.prototype.setSvg = function(){
