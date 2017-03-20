@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "2.3.1"
+ruby '2.3.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.16'
@@ -9,7 +9,7 @@ gem 'bootstrap-datepicker-rails'
 gem 'chartkick'
 gem 'coveralls', require: false
 gem 'devise'
-gem 'ffi', "= 1.9.0"
+gem 'ffi', '= 1.9.0'
 gem 'figaro'
 gem 'font-awesome-rails'
 gem 'formtastic'
