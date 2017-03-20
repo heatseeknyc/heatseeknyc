@@ -15,7 +15,7 @@
           <% if current_user.admin? %>
             <%= link_to "", edit_user_path(c.collaborator_id), :class => "fa fa-wrench user-settings-link", :id => "wrench" %>
           <% end %>
-          <%= link_to "", [current_user, c], method: :delete, :class => "fa fa-times remove-user-link", :id => "edit", data: { confirm: "Are you sure?" }, data: {remote: true} %>
+          <%= link_to "", [current_user, c], method: :delete, :class => "fa fa-times remove-user-link", :id => "edit", data: { confirm: "Are you sure?", remote: true} %>
           <br>
         </li>
       </div>
