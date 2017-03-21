@@ -1,7 +1,7 @@
 @import 'shared';
 
 @mixin member-pic($member) {
-  background: image-url("#{$member}.jpg") no-repeat;
+  background: image-url("team/#{$member}.jpg") no-repeat;
   overflow: hidden;
   background-size: 100%;
   width: 225px;

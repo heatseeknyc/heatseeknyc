@@ -76,12 +76,21 @@ unless User.find_by(email: "mbeirut@heatseeknyc.com")
   )
 
   User.create(
-    :first_name => "Team Member",
-    :last_name => "Heatseek",
+    :first_name => "Team",
+    :last_name => "Member",
     :address => "100 Fake St",
     :zip_code => "10004",
     :email => "team-member@heatseeknyc.com",
     :password => '33west26'
+  )
+
+  User.create(
+      :first_name => "Super",
+      :last_name => "User",
+      :address => "100 Fake St",
+      :zip_code => "10004",
+      :email => "super-user@heatseeknyc.com",
+      :password => '33west26'
   )
 end
 
@@ -101,6 +110,11 @@ team_member = User.find_by(email: "team-member@heatseeknyc.com")
 team_member.permissions = 10
 team_member.collaborators = users + [jamie]
 team_member.save
+
+super_user = User.find_by(email: "super-user@heatseeknyc.com")
+super_user.permissions = 0
+super_user.collaborators = users + [jamie]
+super_user.save
 
 now = Time.now
 users.each do |user|
