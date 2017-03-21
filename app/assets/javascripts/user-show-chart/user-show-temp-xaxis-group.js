@@ -26,7 +26,6 @@ UserShowTempChartXAxisGroup.prototype.addLineStylingToXTicks = function(){
   for(var i = 1; i <= 168; i++){
     date = moment(this.startDate).add(i, 'hours');
     if(date.hours() < 7 || date.hours() > 21){
-      console.log(date);
       $($lines[i]).attr(
         { 'stroke-width': this.strokeWidth, 'stroke': '#90ABB0' }
       );
