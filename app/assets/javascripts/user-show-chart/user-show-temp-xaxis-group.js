@@ -3,45 +3,39 @@ function UserShowTempChartXAxisGroup(svgObj, optionsObj) {
   this.svg = svgObj.svg;
   this.margin = optionsObj.margin;
   this.x = svgObj.x;
+  this.startDate = svgObj.startDate;
+  this.endDate = svgObj.endDate;
   this.height = optionsObj.height;
   this.xAxis = this.setXAxis();
-  this.strokeWidth = svgObj.width / this.data.length;
-
+  this.strokeWidth = svgObj.width / 168;
 }
-
-UserShowTempChartXAxisGroup.prototype.ABBREVIATED_MONTHS = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
 
 UserShowTempChartXAxisGroup.prototype.setXAxis = function(){
   return d3.svg.axis().scale(this.x)
     .tickSize(this.height - this.margin * 2)
-    .tickPadding(0).ticks(this.data.length);
+    .tickPadding(0)
+    .ticks(moment.duration(1, 'week').asHours());
 };
 
-UserShowTempChartXAxisGroup.prototype.addLineStlyingToXTicks = function(){
+UserShowTempChartXAxisGroup.prototype.addLineStylingToXTicks = function(){
   var $lines = $(".xTick .tick line"),
-      length = this.data.length,
       date,
-      newText,
       $textEl;
+  $($lines[0]).attr({ 'stroke-width': this.strokeWidth * 1.9 });
 
-  for(var i = 0; i < length; i++){
-    if(this.data[i].isDay === false){
+  for(var i = 1; i <= 168; i++){
+    date = moment(this.startDate).add(i, 'hours');
+    if(date.hours() < 7 || date.hours() > 21){
+      console.log(date);
       $($lines[i]).attr(
         { 'stroke-width': this.strokeWidth, 'stroke': '#90ABB0' }
       );
-      if(i === 0){
-        $($lines[i]).attr({ 'stroke-width': this.strokeWidth * 1.9 });
-      }
     }
     else {
       // add dates to bottom of graph
-      if ( this.data[i].date.getHours() === 16 ) {
-        date = this.data[i].date;
-        newText = this.ABBREVIATED_MONTHS[date.getMonth()] + " "
-          + date.getDate() + ", " + (date.getYear() + 1900);
+      if (date.hours() === 16) {
         $textEl = $($(".xTick .tick text")[i]);
-        $textEl.text(newText);
+        $textEl.text(date.format("MMM D, YYYY"));
         $textEl.show();
         $textEl.attr({"x": -15, "y": 380});
       }
@@ -55,5 +49,5 @@ UserShowTempChartXAxisGroup.prototype.drawXAxisGroup = function(){
 
 UserShowTempChartXAxisGroup.prototype.addToChart = function() {
   this.drawXAxisGroup();
-  this.addLineStlyingToXTicks();
+  this.addLineStylingToXTicks();
 };

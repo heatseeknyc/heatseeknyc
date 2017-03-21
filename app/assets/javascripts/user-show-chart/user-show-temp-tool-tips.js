@@ -12,18 +12,15 @@ UserShowTempChartToolTips.prototype._legalMinimumFor = function(reading){
   }
 };
 
-UserShowTempChartToolTips.prototype._getCivilianTime = function(reading){
-  if (reading.getHours() > 12){
-    return (reading.getHours() - 12) + ":"
-      + (reading.getMinutes() >= 10 ?
-        reading.getMinutes() : "0" + reading.getMinutes())
-      + " PM";
-  } else {
-    return reading.getHours() + ":"
-      + (reading.getMinutes() >= 10 ?
-        reading.getMinutes() : "0" + reading.getMinutes())
-      + " AM";
+UserShowTempChartToolTips.prototype._formatDate = function(date) {
+  var momentDate = moment(date);
+
+  if (momentDate.minutes <= 10) {
+    momentDate.startOf('hour');
   }
+
+  return momentDate.format("D MMMM YYYY").toUpperCase() + '<br>'
+    + momentDate.format("dddd") + ' at ' + momentDate.format("h:mm A") + '<br>';
 };
 
 UserShowTempChartToolTips.prototype.addToChart = function(){
@@ -37,11 +34,7 @@ UserShowTempChartToolTips.prototype.addToChart = function(){
     title: function() {
       var circleDatum = this.__data__,
         circleDate = circleDatum.date;
-      return circleDate.getDate() + ' '
-        + self.MONTHS[circleDate.getMonth()] + ' '
-        + circleDate.getFullYear() + '<br>'
-        + self.DAYS[ circleDate.getDay() ] + ' at '
-        + self._getCivilianTime(circleDate) + '<br>'
+      return self._formatDate(circleDate) + ' '
         + '<i>Temperature in Violation</i><br>'
         + '<br>Temperature in Apt: ' + circleDatum.temp + '°'
         + '<br>Temperature Outside: ' + circleDatum.outdoor_temp + '°'

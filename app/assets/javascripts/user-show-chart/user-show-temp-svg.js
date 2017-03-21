@@ -11,11 +11,14 @@ function UserShowTempChartSvg(dataObj, violationCount, optionsObj) {
 }
 
 UserShowTempChartSvg.prototype.setX = function(){
+  this.endDate = moment().startOf('hour');
+  this.startDate = moment(this.endDate).subtract(1, 'week');
+
   return d3.time.scale()
     .range([0, this.width - this.margin * 2])
     .domain([
-      this.data[0].date, 
-      this.data[this.data.length - 1].date
+      this.startDate.toDate(),
+      this.endDate.toDate()
     ]);
 };
 
