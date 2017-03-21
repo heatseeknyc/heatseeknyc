@@ -73,6 +73,8 @@ describe DailyViolationEmailWorker do
       expect(violations[1].data["duration"]).to eq "03:00:00"
       expect(violations[2].user).to eq user2
       expect(violations[2].data["duration"]).to eq "03:00:00"
+
+      double(deliver: true)
     end
 
     expect(UserMailer).to receive(:violations_report).with(hash_including(recipient: advocate2)) do |args|
@@ -81,6 +83,8 @@ describe DailyViolationEmailWorker do
 
       expect(violations[0].user).to eq user1
       expect(violations[0].data["duration"]).to eq "04:00:00"
+
+      double(deliver: true)
     end
 
     worker.perform
