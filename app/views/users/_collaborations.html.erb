@@ -4,18 +4,17 @@
   </div>
   <ul id="collaborator-ul">
     <% current_user.collaborations.each do |c| %>
-      
       <div>
         <li class="sidebar-li">
           <div class="collaborator-link-div">
-            <%= link_to "#{c.collaborator.first_name} #{c.collaborator.last_name}", [current_user, c], method: :get, :class => "user-link" %>
+            <%= link_to "#{c.collaborator.first_name} #{c.collaborator.last_name}", user_collaboration_path(current_user, c), :class => "user-link" %>
             <p class="address_zip"><%= "#{c.collaborator.address}, #{c.collaborator.zip_code}" %></p>
           </div>
             
           <% if current_user.admin? %>
             <%= link_to "", edit_user_path(c.collaborator_id), :class => "fa fa-wrench user-settings-link", :id => "wrench" %>
           <% end %>
-          <%= link_to "", [current_user, c], method: :delete, :class => "fa fa-times remove-user-link", :id => "edit", data: { confirm: "Are you sure?", remote: true} %>
+          <%= link_to "", user_collaboration_path(current_user, c), method: :delete, :class => "fa fa-times remove-user-link", :id => "edit", data: { confirm: "Are you sure?", remote: true} %>
           <br>
         </li>
       </div>
