@@ -136,7 +136,7 @@
   font-weight: bolder;
   padding: 8px 15px;
 
-  &:hover, &:visited {
+  &:hover, &:visited, &:link {
     color: $theme-black;
     text-decoration: none;
   }
