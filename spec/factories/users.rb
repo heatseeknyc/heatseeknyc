@@ -12,6 +12,10 @@ FactoryGirl.define do
     password_confirmation { |u| u.password }
     email { Faker::Internet.email }
 
+    trait :super_user do
+      permissions 0
+    end
+
     trait :team_member do
       permissions 10
     end
@@ -28,6 +32,7 @@ FactoryGirl.define do
       permissions 100
     end
 
+    factory :super_user, traits: [:super_user]
     factory :team_member, traits: [:team_member]
     factory :admin, traits: [:admin]
     factory :advocate, traits: [:advocate]

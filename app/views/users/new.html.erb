@@ -16,7 +16,7 @@
 
         <dl>
           <%= f.label :address %>:
-          <%= f.text_field :address, class: "form-control" %>
+          <%= f.text_field :address, data: { autocomplete_source: admin_buildings_path }, class: "form-control" %>
         </dl>
 
         <dl>

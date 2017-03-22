@@ -4,6 +4,10 @@ module Admin
 
     def index
       @buildings = Building.all
+      respond_to do |format|
+        format.html { @buildings }
+        format.json { render json: @buildings.where("street_address like ?", "%#{params[:term]}%").map(&:street_address) }
+      end
     end
 
     def create

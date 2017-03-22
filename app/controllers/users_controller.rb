@@ -37,6 +37,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.valid?
+      @user.building = Building.find_or_create_by(street_address: @user.address, zip_code: @user.zip_code)
       @user.save
       redirect_to "/users"
     else

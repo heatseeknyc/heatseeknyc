@@ -16,8 +16,8 @@ describe UsersController do
       allow(pdf_writer).to receive(:filename)
       allow(pdf_writer).to receive(:content_type)
       allow(controller).to receive(:send_data).
-                              with(file, filename: pdf_writer.filename, type: pdf_writer.content_type).
-                              and_return{controller.render :nothing => true}
+        with(file, filename: pdf_writer.filename, type: pdf_writer.content_type).
+        and_return { controller.render :nothing => true }
     end
 
     it "instantiates a pdf writer" do
@@ -27,9 +27,9 @@ describe UsersController do
 
     it "sends the data" do
       expect(controller).to receive(:send_data).
-                              with(file, filename: pdf_writer.filename, type: pdf_writer.content_type).
-                              and_return{controller.render :nothing => true}
-      get :download_pdf, id: 1                            
+        with(file, filename: pdf_writer.filename, type: pdf_writer.content_type).
+        and_return { controller.render :nothing => true }
+      get :download_pdf, id: 1
     end
   end
 
@@ -45,8 +45,8 @@ describe UsersController do
       allow(csv_writer).to receive(:generate_csv).and_return file
       allow(csv_writer).to receive(:filename)
       allow(controller).to receive(:send_data).
-          with(file, filename: csv_writer.filename, type: "text/csv").
-          and_return{controller.render :nothing => true}
+        with(file, filename: csv_writer.filename, type: "text/csv").
+        and_return { controller.render :nothing => true }
     end
 
     it "instantiates a csv writer" do
@@ -57,8 +57,8 @@ describe UsersController do
     it "sends the data" do
       expect(csv_writer).to receive(:filename).and_return filename
       expect(controller).to receive(:send_data).
-          with(file, filename: filename, type: "text/csv").
-          and_return{controller.render :nothing => true}
+        with(file, filename: filename, type: "text/csv").
+        and_return { controller.render :nothing => true }
       get :download_csv, id: 1
     end
   end
@@ -86,7 +86,7 @@ describe UsersController do
   end
 
   describe "GET /users/:id/edit" do
-    let(:params) { { id: tenant, user: { first_name: "Updated" } } }
+    let(:params) { {id: tenant, user: {first_name: "Updated"}} }
 
     it "should update the resource if the request comes from an admin user" do
       admin.collaborations.create(collaborator: tenant)
@@ -152,9 +152,9 @@ describe UsersController do
       let(:user) { create(:user) }
       let(:new_pass) { "new_password" }
       let(:password_params) do
-        { current_password: user.password,
+        {current_password: user.password,
           password: new_pass,
-          password_confirmation: new_pass }
+          password_confirmation: new_pass}
       end
 
       before { sign_in user }
@@ -177,6 +177,42 @@ describe UsersController do
         patch :update_password
         expect(response).to redirect_to(new_user_session_path)
       end
+    end
+  end
+
+  describe "POST /users/create" do
+    let(:super_user) { create(:super_user) }
+
+    before { sign_in super_user }
+
+    it "redirects to users index on create success", :vcr do
+      new_user = build(:user)
+      post :create, user: new_user.attributes.merge(password: 'password', password_confirmation: 'password')
+
+      expect(response).to redirect_to(users_path)
+    end
+
+    it "creates user and associates with existing building", :vcr do
+      building = create(:building)
+      new_user = build(:user, address: building.street_address, zip_code: building.zip_code)
+      post :create, user: new_user.attributes.merge(password: 'password', password_confirmation: 'password')
+
+      user = User.last
+      expect(user.first_name).to eq(new_user.first_name)
+      expect(user.last_name).to eq(new_user.last_name)
+      expect(user.building).to eq(building)
+    end
+
+    it "creates user and associates with a new building", :vcr do
+      new_user = build(:user)
+      post :create, user: new_user.attributes.merge(password: 'password', password_confirmation: 'password')
+
+      user = User.last
+      building = Building.last
+      expect(user.first_name).to eq(new_user.first_name)
+      expect(user.last_name).to eq(new_user.last_name)
+      expect(building.street_address).to eq(new_user.address)
+      expect(building.zip_code).to eq(new_user.zip_code)
     end
   end
 end
