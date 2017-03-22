@@ -19,6 +19,7 @@ class PDFWriter
   end
 
   def generate_pdf
+    populate_cover_page
     populate_pdf
     pdf.render
   end
@@ -27,13 +28,31 @@ class PDFWriter
     "#{user.last_name}.pdf"
   end
 
+  def populate_cover_page
+    readings_count = user.readings.count
+    violation_count = user.violation_count
+
+    pdf.move_down 250
+    pdf.text "Tenant: #{user.name}"
+    pdf.text "Address: #{user.address}, Unit #{user.apartment}, #{user.zip_code}"
+    pdf.text "Phone Number: #{user.phone_number}"
+    pdf.text "Begin: #{user.get_oldest_reading_date("%b %d, %Y%l:%M %p")}"
+    pdf.text "End: #{user.get_newest_reading_date("%b %d, %Y%l:%M %p")}"
+    pdf.text "Total Temperature Readings: #{readings_count}"
+    pdf.text "Total Violations: #{violation_count}"
+    pdf.text "Percentage: #{(violation_count.to_f / readings_count.to_f * 100.0).round(1)}%"
+    pdf.move_down 350
+  end
+
   def populate_pdf
     image_url = Rails.root.join("app","assets","images","pdf_header.png")
     pdf.text "Tenant: #{self.user.name}"
     pdf.image image_url, width: 550
     pdf.move_down 5
     pdf.font FONT, FONT_OPTIONS
-    pdf.table [HEADERS], cell_style: HEADER_OPTIONS
-    pdf.table self.user.table_array, cell_style: TABLE_OPTIONS
+    if user.readings.count > 0
+      pdf.table [HEADERS], cell_style: HEADER_OPTIONS
+      pdf.table self.user.table_array, cell_style: TABLE_OPTIONS
+    end
   end
 end

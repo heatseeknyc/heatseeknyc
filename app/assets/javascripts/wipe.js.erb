@@ -13,7 +13,7 @@ $(document).ready(function() {
   
   resizeBackground();
 
-  $(window).resize("resizeBackground");
+  $(window).resize(resizeBackground);
     
   if (isChrome && isMobile) {
     $("#overlay").css({

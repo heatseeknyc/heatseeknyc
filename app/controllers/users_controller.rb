@@ -87,6 +87,13 @@ class UsersController < ApplicationController
     send_data(file, filename: filename, type: type)
   end
 
+  def download_csv
+    writer = CSVWriter.new(params[:id])
+
+    file = writer.generate_csv
+    send_data(file, filename: writer.filename, type: "text/csv")
+  end
+
   def search
     @query = params[:q]
     @results = current_user.search(@query)

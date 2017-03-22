@@ -6,6 +6,10 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
+if Rails.env.test? || Rails.env.development?
+  Dotenv::Railtie.load
+end
+
 module Twinenyc
   class Application < Rails::Application
     config.assets.paths << "#{Rails.root}/app/assets/videos"

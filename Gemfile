@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "2.3.1"
+ruby '2.3.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.16'
@@ -9,11 +9,12 @@ gem 'bootstrap-datepicker-rails'
 gem 'chartkick'
 gem 'coveralls', require: false
 gem 'devise'
-gem 'ffi', "= 1.9.0"
+gem 'ffi', '= 1.9.0'
 gem 'figaro'
 gem 'font-awesome-rails'
 gem 'formtastic'
 gem 'formtastic-bootstrap'
+gem 'geocoder'
 gem 'google-analytics-rails'
 gem 'httparty'
 gem 'json'
@@ -38,6 +39,7 @@ group :test do
   gem 'timecop'
   gem 'vcr'
   gem 'webmock'
+  gem 'pdf-inspector', require: 'pdf/inspector'
 end
 
 group :test, :development do
@@ -45,6 +47,7 @@ group :test, :development do
   gem 'binding_of_caller'
   gem 'capybara'
   gem 'database_cleaner'
+  gem 'dotenv-rails'
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'guard-rspec'

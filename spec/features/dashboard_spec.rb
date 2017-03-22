@@ -10,7 +10,8 @@ feature "Dashboard" do
     expect(page).to have_content user.current_temp
     expect(page).to have_content user.violation_count
 
-    expect(page).to have_link("Download Report (PDF)", href: pdf_download_path(user))
+    expect(page).to have_link("PDF", href: pdf_download_path(user))
+    expect(page).to have_link("CSV", href: csv_download_path(user))
 
     # Tried testing rendered js chart using the poltergeist driver, but
     # it got painful - spec slowed to 5 secs (from 300ms), and

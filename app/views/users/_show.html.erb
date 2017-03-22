@@ -3,32 +3,77 @@
     <div class="show-top col-xs-12">
       
       <div class="user-info user-info-mobile">
-        <h3><%= "#{user.first_name} #{user.last_name}" %></h3>
-        <h4 class="address"><%= "#{user.address}, #{user.zip_code}" %></h4>
+        <div class="row">
+          <div class="col-xs-2 back-button">
+            <% if current_user.permissions <= 50 %>
+              <%= link_to "", :back, :class => "fa fa-chevron-left" %>
+            <% end %>
+          </div>
+          <div class="col-xs-8">
+            <h3><%= "#{user.first_name} #{user.last_name}" %></h3>
+            <h4 class="address"><%= "#{user.address}, #{user.zip_code}" %></h4>
+            <% if user.apartment.present? %>
+              <h4>Apt. <%= user.apartment %></h4>
+            <% end %>
+            <% if user.phone_number.present? %>
+              <h4><%= user.phone_number %></h4>
+            <% end %>
+          </div>
+          <div class="col-xs-2"></div>
+        </div>
       </div>
 
       <div class="upper-bar clearfix">
         <div class="user-info user-info-desktop">
-          <h3><%= "#{user.first_name} #{user.last_name}" %></h3>
-          <h4 class="address"><%= "#{user.address}, #{user.zip_code}" %></h4>
+          <% if current_user.permissions <= 50 %>
+            <div class="back-button">
+              <%= link_to "", :back, :class => "fa fa-chevron-left" %>
+            </div>
+          <% end %>
+          <div class="tenant-info">
+            <h3><%= "#{user.first_name} #{user.last_name}" %></h3>
+            <div class="contact-info">
+              <h4><%= "#{user.address}, #{user.zip_code}" %></h4>
+              <% if user.apartment.present? %>
+                <h4>Apt. <%= user.apartment %></h4>
+              <% end %>
+              <% if user.phone_number.present? %>
+                <h4><%= user.phone_number %></h4>
+              <% end %>
+            </div>
+          </div>
         </div>
-        <%= link_to 'Download Report (PDF)', pdf_download_path(user), class: "btn btn-primary btn-download" %>
+        <div class="download-container">
+          <div class="download-label">
+            Download Report
+          </div>
+          <div class="download-buttons">
+            <%= link_to 'CSV', csv_download_path(user), class: "btn btn-primary btn-download" %>
+            <%= link_to 'PDF', pdf_download_path(user), class: "btn btn-primary btn-download" %>
+          </div>
+        </div>
       </div>
-      
+
       <div class="col-md-2 col-lg-3"></div>
       <div class="current-temp col-xs-12 col-sm-6 col-md-3 col-lg-2">
         <h3 class="stat-num temp-num"><%= user.current_temp || "N/A" %></h3>
-        <h5 class="stat-description">current temperature</h5>
+        <h5 class="stat-description">indoor temperature</h5>
       </div>
       
       <div class="col-md-2"></div>
       <div class="violations col-xs-12 col-sm-6 col-md-3 col-lg-2">
         <h3 class="stat-num"><%= user.violation_count %></h3>
         <h5 class="stat-description">violations</h5>
+        <h5 class="stat-description violation-label"><%= user.get_oldest_reading_date("(since %m/%d/%y)") %></h5>
       </div>
     </div>
 
-    </div>
+  </div>
+
+  <div class="row show-bottom chart-title">
+    <h3 class="text-center text-uppercase">Indoor and Outdoor Temperatures (Last 7 Days)</h3>
+  </div>
+
   <div class="row">
     <div class="show-bottom col-xs-12">
       <%= render "users/line_graph", :user => user %>

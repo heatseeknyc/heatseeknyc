@@ -15,7 +15,6 @@ class User < ActiveRecord::Base
   has_many :collaborators, through: :collaborations
 
   belongs_to :unit
-  delegate :building, to: :unit, allow_nil: true
 
   validates :first_name, :length => { minimum: 2 }
   validates :last_name, :length => { minimum: 2 }
@@ -258,6 +257,10 @@ class User < ActiveRecord::Base
     readings.order(created_at: :asc).last(num)
   end
 
+  def last_weeks_readings
+    readings.where("created_at > ?", 7.days.ago).order(created_at: :asc)
+  end
+
   def name
     "#{first_name} #{last_name}"
   end
@@ -293,15 +296,32 @@ class User < ActiveRecord::Base
   end
 
   def collaborations_with_violations
+    recent_violations = Reading
+                       .where("readings.created_at > ?", 3.days.ago)
+                       .where(violation: true).to_sql
+
+    users_with_recent_violations = User.select("users.id, COUNT(readings.id) as violations_count")
+                    .joins("LEFT OUTER JOIN (#{recent_violations}) AS readings ON readings.user_id = users.id")
+                    .group("users.id").to_sql
+
     @collaborations_with_violations ||= begin
       collaborations
-        .joins("INNER JOIN users ON users.id = collaborations.collaborator_id")
-        .joins("INNER JOIN readings ON readings.user_id = users.id")
-        .where(readings: { violation: true })
-        .where("readings.created_at > ?", 3.days.ago)
-        .group("collaborations.id")
-        .select("collaborations.*, COUNT(readings.id) AS violations_count")
+        .joins("INNER JOIN (#{users_with_recent_violations}) users ON users.id = collaborations.collaborator_id")
+        .select("collaborations.*, users.violations_count AS violations_count")
+        .order("violations_count desc")
         .includes(:collaborator)
+    end
+  end
+
+  def get_oldest_reading_date(format)
+    if last_reading = self.readings.order(:created_at, :id).limit(1).first
+      last_reading.created_at.strftime(format)
+    end
+  end
+
+  def get_newest_reading_date(format)
+    if newest_reading = self.readings.order(:created_at => :desc, :id => :desc).limit(1).first
+      newest_reading.created_at.strftime(format)
     end
   end
 end

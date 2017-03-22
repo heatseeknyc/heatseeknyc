@@ -10,5 +10,7 @@ VCR.configure do |c|
   }
   c.debug_logger = File.open(Rails.root.join('log', 'vcr.log'), 'a')
   c.filter_sensitive_data('---WUNDERGROUND_KEY---') { ENV['WUNDERGROUND_KEY'] }
+  c.filter_sensitive_data('---GEOCODE_API_KEY---') { ENV['GEOCODE_API_KEY'] }
+  c.default_cassette_options = { match_requests_on: [:method, :host, :path, :query] }
   c.configure_rspec_metadata!
 end

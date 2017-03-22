@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Unit do
+describe Unit, :vcr do
   let(:unit) { create(:unit) }
 
   describe "validations" do

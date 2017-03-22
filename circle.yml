@@ -1,0 +1,12 @@
+general:
+  branches:
+    only:
+     - master
+deployment:
+  staging:
+    branch: master
+    heroku:
+      appname: heatseek-dev
+notify:
+  webhooks:
+    - url: https://hooks.slack.com/services/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

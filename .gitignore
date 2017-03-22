@@ -21,7 +21,10 @@
 coverage
 .DS_Store
 
-#ignore the .vagrant file
-.vagrant
 
 vendor/bundle
+
+.idea/*
+
+# dotenv
+.env.*.local

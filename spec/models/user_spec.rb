@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe User do
+describe User, :vcr do
   describe "#inspect" do
     let(:rick) do
       create(
@@ -84,7 +84,40 @@ describe User do
 			user6.destroy_all_collaborations
 			expect(user6.has_collaboration?(collaboration.id)).to be(false)
 		end
-	end
+  end
+
+  describe "collaborations_with_violations" do
+    let(:lawyer) { create(:user, permissions: 50) }
+    let(:tenant_with_violations) { create(:user, permissions: 100) }
+    let(:tenant_with_no_violations) { create(:user, permissions: 100) }
+    let(:tenant_with_old_violations) { create(:user, permissions: 100) }
+
+    before(:each) do
+      create(:collaboration, :user_id => lawyer.id, :collaborator_id => tenant_with_no_violations.id)
+
+      create(:collaboration, :user_id => lawyer.id, :collaborator_id => tenant_with_violations.id)
+      create(:reading, :violation, user: tenant_with_violations)
+
+      create(:collaboration, :user_id => lawyer.id, :collaborator_id => tenant_with_old_violations.id)
+      create(:reading, :violation, user: tenant_with_old_violations, created_at: 5.days.ago)
+    end
+
+    it "finds all collaborations" do
+      expect(lawyer.collaborations_with_violations.length).to be 3
+    end
+
+    it "includes violation_count" do
+      collaborations = lawyer.collaborations_with_violations
+      expect(collaborations.find_by(collaborator: tenant_with_no_violations).violations_count).to be 0
+      expect(collaborations.find_by(collaborator: tenant_with_violations).violations_count).to be 1
+      expect(collaborations.find_by(collaborator: tenant_with_old_violations).violations_count).to be 0
+    end
+
+    it "orders collaborations by violation count" do
+      violations_counts = lawyer.collaborations_with_violations.to_ary.map(&:violations_count)
+      expect(violations_counts.sort.reverse).to eq violations_counts
+    end
+  end
 
 	describe "user permissions" do 
 		it "can be a demo user" do
@@ -144,12 +177,39 @@ describe User do
       unit.tenants << user
       expect(user.unit).to eq(unit)
     end
+  end
 
-    it "delegates building to the associated unit" do
-      building = create(:building)
-      unit = create(:unit, building: building)
-      unit.tenants << user
-      expect(user.building).to eq(building)
+  describe "#get_oldest_reading_date" do
+    let(:user) { create(:user) }
+
+    it "returns the date of the first reading associated with the user" do
+      oldest_date = Date.parse("2013-10-29")
+
+      create(:reading, :user_id => user.id, :created_at => oldest_date)
+      create(:reading, :user_id => user.id, :created_at => oldest_date + 3.days)
+
+      expect(user.get_oldest_reading_date("(since %m/%d/%y)")).to eq("(since 10/29/13)")
+    end
+
+    it "returns nil when the user has no readings" do
+      expect(user.get_oldest_reading_date("(since %m/%d/%y)")).to eq(nil)
+    end
+  end
+
+  describe "#get_newest_reading_date" do
+    let(:user) { create(:user) }
+
+    it "returns the date of the first reading associated with the user" do
+      newest_date = Date.parse("2013-10-29")
+
+      create(:reading, :user_id => user.id, :created_at => newest_date)
+      create(:reading, :user_id => user.id, :created_at => newest_date - 3.days)
+
+      expect(user.get_newest_reading_date("(since %m/%d/%y)")).to eq("(since 10/29/13)")
+    end
+
+    it "returns nil when the user has no readings" do
+      expect(user.get_newest_reading_date("(since %m/%d/%y)")).to eq(nil)
     end
   end
 end

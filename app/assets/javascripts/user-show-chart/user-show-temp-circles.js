@@ -26,7 +26,9 @@ UserShowTempChartCircles.prototype.addCirclesWithTransitions = function(){
   var self = this;
   self.dataCircles.enter()
     .append('svg:circle')
-    .attr('class', 'data-point')
+    .attr('class', function(d) {
+      return d.violation ? "data-point violation" : "data-point";
+    })
     .style('opacity', 1)
     .attr('cx', function(d) { return self.x(d.date) })
     .attr('cy', function() { return self.y(0) })

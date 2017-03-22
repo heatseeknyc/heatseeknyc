@@ -23,7 +23,7 @@ UserShowTempChartDrawer.prototype.fixData = function(dataArrWithObjs) {
   var self = this;
   dataArrWithObjs.forEach(function(obj){
     obj.date = new Date(obj.created_at);
-    obj.isDay = obj.date.getHours() >= 6 && obj.date.getHours() <= 22;
+    obj.isDay = obj.date.getHours() >= 6 && obj.date.getHours() <= 21;
     if(/live_update/.test(document.URL)){
       obj.violation = true;
     }
@@ -38,12 +38,12 @@ UserShowTempChartDrawer.prototype.addViolationCountToLegend = function() {
 };
 
 UserShowTempChartDrawer.prototype.selectDataBasedOnScreenSize = function(){
-  if (window.innerWidth < 450) {
-    return this.response.slice(119, 167);
-  }else if(window.innerWidth < 720){
-    return this.response.slice(71, 167);
-  }else if(window.innerWidth < 1080){
-    return this.response.slice(23, 167);
+  if (window.innerWidth < 450 && this.response.length > 45) {
+    return this.response.slice(this.response.length - 46);
+  }else if(window.innerWidth < 720 && this.response.length > 90){
+    return this.response.slice(this.response.length - 91);
+  }else if(window.innerWidth < 1080 && this.response.length > 135){
+    return this.response.slice(this.response.length - 136);
   } else {
     return this.response;
   }

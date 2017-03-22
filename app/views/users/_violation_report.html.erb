@@ -3,19 +3,26 @@
 <% if collaborations_with_violations.any? %>
   <h1 id="collaborator-h1" class="text-center">Violations In The Last 3 Days</h1>
 
-  <table class="table bg-white violations-report">
-    <tr>
-      <th>Name</th>
-      <th>Number of Violations</th>
-    </tr>
-
+  <table class="table bg-white violations-report sortable-theme-bootstrap" data-sortable>
+    <thead>
+      <tr>
+        <th>Name <i class="fa"></i></th>
+        <th>Building <i class="fa"></i></th>
+        <th class="numeric">Number of Violations <i class="fa"></i></th>
+        <th class="numeric">Current Temperature (°F)<i class="fa"></i></th>
+      </tr>
+    </thead>
+    <tbody>
     <% collaborations_with_violations.each do |collaboration| %>
       <% user = collaboration.collaborator %>
 
       <tr>
-        <td><%= link_to user.name, [current_user, collaboration] %></td>
-        <td><%= collaboration.violations_count %></td>
+        <td><%= link_to user.name, user_collaboration_path(current_user, collaboration) %></td>
+        <td><%= "#{user.address}, #{user.zip_code}" %></td>
+        <td class="numeric"><%= collaboration.violations_count %></td>
+        <td class="numeric"><%= user.current_temp %></td>
       </tr>
     <% end %>
+    </tbody>
   </table>
 <% end %>
