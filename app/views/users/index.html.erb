@@ -1,12 +1,18 @@
 <br>
 <div class="col-xs-6 container">
   <h1 id="collaborator-h1" class="text-center">Users</h1>
-  <% @users.each do |u| %>
-    <hr class="underline-user text-center">
-    <li class="sidebar-li">
-    <a href="/users/<%= u.id %>" class="user-link"><%= u.first_name %> <%= u.last_name %> </a>
-    <%= link_to "", user_collaborations_path(current_user, collaborator_id: u), method: :post, :class => "glyphicon glyphicon-plus add-user-link" %>
-    <br>
-    </li>
-  <% end %>
+  <table class="table">
+    <tbody>
+    <% @users.each do |u| %>
+      <tr class="user-row">
+        <td class="user-name">
+          <%= "#{u.first_name} #{u.last_name}" %>
+        </td>
+        <td class="add-user">
+          <%= link_to "", user_collaborations_path(current_user, collaborator_id: u.id), method: :post, class: "fa fa-plus fa-2x add-user-link" %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
 </div>

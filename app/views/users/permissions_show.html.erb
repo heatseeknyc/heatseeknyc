@@ -3,12 +3,21 @@
   <div class="container">
     <div class="col-xs-12 container" id="permissions-show-div">
       <h3>Hello, <%= current_user.first_name %>!</h3>
-      <% if (current_user.permissions === 0) %>
+      <% if (current_user.permissions <= User::PERMISSIONS[:super_user]) %>
+        <div class="admin-button-container">
+          <%= link_to "All Users", users_path, class: "admin-button" %>
+        </div>
+      <% end %>
+      <% if (current_user.permissions <= User::PERMISSIONS[:super_user]) %>
+        <div class="admin-button-container">
+          <%= link_to "Create New User", new_user_path, class: "admin-button" %>
+        </div>
+
         <div class="search-box clearfix">
           <%= form_tag search_user_path, method: :get, id: "search-form", remote: true do %>
             <div class="clearfix" id="advocate-bar">
               <div class="search-form">
-                <button id="search-button"><i class="fa fa-search"></i><span class="advocate-button">Search</span></button>
+                <button class="admin-button" id="search-button"><i class="fa fa-search"></i><span class="advocate-button">Search</span></button>
                 <%= text_field_tag :q, "", :class => "form-control", placeholder: "Find a tenant..." %>
               </div>
             </div>

@@ -85,7 +85,7 @@ describe UsersController do
     end
   end
 
-  describe "GET /users/:id/update" do
+  describe "GET /users/:id/edit" do
     let(:params) { { id: tenant, user: { first_name: "Updated" } } }
 
     it "should update the resource if the request comes from an admin user" do
@@ -110,7 +110,7 @@ describe UsersController do
     end
 
     describe "setting permission level" do
-      it "restricts setting permission level higher than the admin user's own" do
+      it "restricts setting permissions level higher than ones own" do
         sign_in admin
         params[:user][:permissions] = User::PERMISSIONS[:team_member]
         put :update, params

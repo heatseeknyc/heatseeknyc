@@ -1,29 +1,69 @@
-<div class="settings-form-fields col-md-4" id="form-id">
-  <%= form_for @user do |f| %>
-    <dl><%= f.label :first_name %>:
-    <%= f.text_field :first_name, class: "form-control" %></dl>
+<div class="col-md-10">
+  <h2>Register a New User</h2>
+  <div class="settings-form-fields col-md-4" id="form-id">
+    <%= form_for @user, url: create_user_path do |f| %>
+        <%= devise_error_messages! %>
 
-    <dl><%= f.label :last_name %>:
-    <%= f.text_field :last_name, class: "form-control" %></dl>
+        <dl>
+          <%= f.label :first_name %>:
+          <%= f.text_field :first_name, class: "form-control" %>
+        </dl>
 
-    <dl><%= f.label :address %>:
-    <%= f.text_field :address, class: "form-control" %></dl>
+        <dl>
+          <%= f.label :last_name %>:
+          <%= f.text_field :last_name, class: "form-control" %>
+        </dl>
 
-    <dl><%= f.label :apartment %>:
-    <%= f.text_field :apartment, class: "form-control short-field" %></dl>
+        <dl>
+          <%= f.label :address %>:
+          <%= f.text_field :address, class: "form-control" %>
+        </dl>
 
-    <dl><%= f.label :zip_code %>:
-    <%= f.text_field :zip_code, class: "form-control short-field" %></dl>
+        <dl>
+          <%= f.label :apartment %>:
+          <%= f.text_field :apartment, class: "form-control short-field" %>
+        </dl>
 
-    <dl><%= f.label :email %>:
-    <%= f.email_field :email, class: "form-control" %></dl>
+        <dl>
+          <%= f.label :zip_code %>:
+          <%= f.text_field :zip_code, class: "form-control short-field" %>
+        </dl>
 
-    <dl><%= f.label :phone_number %>:
-    <%= f.text_field :phone_number, class: "form-control short-field" %></dl>
+        <dl>
+          <%= f.label :email %>:
+          <%= f.email_field :email, class: "form-control" %>
+        </dl>
 
-    <dl><%= f.label :twine_name %>:
-    <%= f.text_field :twine_name, name: "twine name", class: "form-control" %></dl>
+        <dl>
+          <%= f.label :phone_number %>:
+          <%= f.text_field :phone_number, class: "form-control short-field" %>
+        </dl>
 
-    <%= f.submit class: "btn-save" %>
-  <% end %>
-<div>
+        <dl>
+          <%= f.label :permissions, "Permissions Level" %>:
+          <%= f.select :permissions, options_for_select(
+                User::PERMISSIONS.collect { |k, v| [k, v] }.sort { |p1, p2| p2[1] <=> p1[1] },
+                @user.permissions ? @user.permissions : User::PERMISSIONS[:user]
+              ),  {}, { class: "form-control" }
+          %>
+        </dl>
+
+        <dl>
+          <%= f.label :sensor_codes_string, "Sensor Code" %>:
+          <%= f.text_field :sensor_codes_string, class: "form-control short-field" %>
+        </dl>
+
+        <dl>
+          <%= f.label :password %>:
+          <%= f.password_field :password, class: "form-control" %>
+        </dl>
+
+        <dl>
+          <%= f.label :password_confirmation %>:
+          <%= f.password_field :password_confirmation, class: "form-control" %>
+        </dl>
+
+        <%= f.submit class: "btn-save" %>
+    <% end %>
+  </div>
+</div>

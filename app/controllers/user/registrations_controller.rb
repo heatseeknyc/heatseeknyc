@@ -57,7 +57,8 @@ class User::RegistrationsController < Devise::RegistrationsController
         :phone_number,
         :current_password,
         :password,
-        :password_confirmation
+        :password_confirmation,
+        :apartment
       )
     end
 
@@ -73,9 +74,16 @@ class User::RegistrationsController < Devise::RegistrationsController
         :twine_name,
         :phone_number,
         :password,
-        :password_confirmation
+        :password_confirmation,
+        :apartment
       )
     end
+  end
+
+  protected
+
+  def after_update_path_for(resource)
+    user_path(resource)
   end
 
   # You can put the params you want to permit in the empty array.

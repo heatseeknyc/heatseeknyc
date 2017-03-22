@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   include UserControllerHelper
   before_action :authenticate_user!, except: [:demo, :addresses]
   before_action :authenticate_admin_user!, only: [:edit, :update]
+  before_action :authenticate_super_user!, only: [:new, :create]
   before_action :load_user, only: [:edit, :update]
 
   def update
@@ -162,12 +163,22 @@ class UsersController < ApplicationController
         :phone_number,
         :zip_code,
         :permissions,
-        :twine_name
+        :twine_name,
+        :apartment,
+        :password,
+        :password_confirmation,
+        :permissions,
+        :sensor_codes_string
       ])
     end
 
     def authenticate_admin_user!
       return if current_user.permissions <= User::PERMISSIONS[:admin]
+      redirect_to root_path
+    end
+
+    def authenticate_super_user!
+      return if current_user.permissions <= User::PERMISSIONS[:super_user]
       redirect_to root_path
     end
 

@@ -6,7 +6,7 @@
       <li class="sidebar-li">
         <hr class="underline-user text-center">
         <a href="/users/<%= r.id %>" class="user-link"><%= r.first_name %> <%= r.last_name %></a>
-        <%= link_to "", user_collaborations_path(current_user, collaborator_id: r), method: :post, :class => "glyphicon glyphicon-plus add-user-link" %>
+        <%= link_to "", user_collaborations_path(current_user, collaborator_id: r), method: :post, :class => "fa fa-plus add-user-link" %>
         <br>
       </li>
     <% end %>
