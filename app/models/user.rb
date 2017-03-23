@@ -222,10 +222,6 @@ class User < ActiveRecord::Base
     self.search_last_name = last_name.downcase
   end
 
-  def most_recent_temp
-    readings.last.temp
-  end
-
   def live_readings
     readings.order(created_at: :desc).limit(50).sort_by do |r|
       r.violation = true
@@ -234,15 +230,18 @@ class User < ActiveRecord::Base
   end
 
   def current_temp
-    last_reading = readings.last
+    @current_temp ||= readings.last.try :temp
     # bigapps version
-    "#{last_reading.temp}°" if last_reading
     # after bigapps uncomment this
     # if last_reading && last_reading.created_at > Time.now - 60 * 60 * 3
     #   "#{last_reading.temp}°"
     # else
     #   "- -"
     # end
+  end
+
+  def current_temp_string
+    @current_temp ? "#{@current_temp}°" : "N/A"
   end
 
   def has_readings?

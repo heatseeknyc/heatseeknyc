@@ -63,7 +63,7 @@ describe User, :vcr do
 			reading1 = create(:reading, twine: twine, :user_id => user2.id)
 			reading2 = create(:reading, twine: twine, :user_id => user2.id)
 			last_reading = create(:reading, twine: twine, :user_id => user2.id)
-			expect(user2.most_recent_temp).to eq(last_reading.temp)
+			expect(user2.current_temp).to eq(last_reading.temp)
 			expect(user2.has_readings?).to be(true)
 		end
 	end
@@ -210,6 +210,24 @@ describe User, :vcr do
 
     it "returns nil when the user has no readings" do
       expect(user.get_newest_reading_date("(since %m/%d/%y)")).to eq(nil)
+    end
+  end
+
+  describe "#current_temp" do
+    let(:user) { create(:user) }
+
+    context "when user has readings" do
+      let!(:reading) { create(:reading, user: user, temp: 64) }
+
+      it "returns the last reading's temperature" do
+        expect(user.current_temp).to eq(reading.temp)
+      end
+    end
+
+    context "when user has no readings" do
+      it "returns nil" do
+        expect(user.current_temp).to be_nil
+      end
     end
   end
 end

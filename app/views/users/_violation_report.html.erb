@@ -20,7 +20,7 @@
         <td><%= link_to user.name, user_collaboration_path(current_user, collaboration) %></td>
         <td><%= "#{user.address}, #{user.zip_code}" %></td>
         <td class="numeric"><%= collaboration.violations_count %></td>
-        <td class="numeric"><%= user.current_temp %></td>
+        <td class="numeric" data-value="<%= user.current_temp %>"><%= user.current_temp_string %></td>
       </tr>
     <% end %>
     </tbody>
