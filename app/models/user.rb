@@ -226,7 +226,7 @@ class User < ActiveRecord::Base
   end
 
   def current_temp_string
-    @current_temp ? "#{@current_temp}°" : "N/A"
+    current_temp ? "#{current_temp}°" : "N/A"
   end
 
   def has_readings?
