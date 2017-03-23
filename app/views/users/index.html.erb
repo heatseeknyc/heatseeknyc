@@ -4,14 +4,27 @@
   <table class="table">
     <tbody>
     <% @users.each do |u| %>
-      <tr class="user-row">
-        <td class="user-name">
-          <%= "#{u.first_name} #{u.last_name}" %>
-        </td>
-        <td class="add-user">
-          <%= link_to "", user_collaborations_path(current_user, collaborator_id: u.id), method: :post, class: "fa fa-plus fa-2x add-user-link" %>
-        </td>
-      </tr>
+      <% if current_user.super_user? %>
+        <tr class="user-row">
+          <td class="user-name">
+            <%= link_to u.name, user_path(u) %>
+          </td>
+          <td class="user-name">
+            <%= u.permissions_level %>
+          </td>
+        </tr>
+      <% else %>
+        <tr class="user-row">
+          <td class="user-name">
+            <%= u.name %>
+          </td>
+          <td class="add-user">
+            <% if u.tenant? %>
+              <%= link_to "", user_collaborations_path(current_user, collaborator_id: u.id), method: :post, class: "fa fa-plus fa-2x add-user-link" %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
     <% end %>
     </tbody>
   </table>

@@ -50,6 +50,15 @@ unless User.find_by(email: 'mbeirut@heatseeknyc.com')
   )
 
   User.create(
+    :first_name => 'June',
+    :last_name => "D'oh",
+    :address => '200 Doesntexist Ln',
+    :zip_code => '10451',
+    :email => 'tenant_for_lawyer@heatseeknyc.com',
+    :password => '33west26'
+  )
+
+  User.create(
     :first_name => 'Demo User',
     :last_name => 'Account',
     :address => '101 Fake Ave',
@@ -95,16 +104,19 @@ unless User.find_by(email: 'mbeirut@heatseeknyc.com')
   )
 end
 
+
 jane = User.find_by(email: 'jane@heatseeknyc.com')
 john = User.find_by(email: 'john@heatseeknyc.com')
 jamie = User.find_by(email: 'jamie@heatseeknyc.com')
 jake = User.find_by(email: 'jake@heatseeknyc.com')
 demo = User.find_by(email: 'demo-user@heatseeknyc.com')
 live = User.find_by(email: 'live-update@heatseeknyc.com')
+june = User.find_by(email: 'tenant_for_lawyer@heatseeknyc.com')
 users = [jane, john, jake, demo, live]
 
 lawyer = User.find_by(email: 'demo-lawyer@heatseeknyc.com')
 lawyer.permissions = 50
+lawyer.collaborators = [june]
 lawyer.save
 
 team_member = User.find_by(email: 'team-member@heatseeknyc.com')
@@ -118,6 +130,7 @@ super_user.collaborators = users + [jamie]
 super_user.save
 
 now = Time.now
+users << june
 users.each do |user|
   current_time = now - (now.to_i % 3600)
   user.readings.clear

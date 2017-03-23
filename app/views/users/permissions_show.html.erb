@@ -2,17 +2,14 @@
 <div class="advocate-layout clearfix">
   <div class="container">
     <div class="col-xs-12 container" id="permissions-show-div">
-      <h3>Hello, <%= current_user.first_name %>!</h3>
-      <% if (current_user.permissions <= User::PERMISSIONS[:super_user]) %>
+      <h3>Hello, <%= @user.first_name %>!</h3>
+      <% if @user.super_user? %>
         <div class="admin-button-container">
           <%= link_to "All Users", users_path, class: "admin-button" %>
         </div>
-      <% end %>
-      <% if (current_user.permissions <= User::PERMISSIONS[:super_user]) %>
         <div class="admin-button-container">
           <%= link_to "Create New User", new_user_path, class: "admin-button" %>
         </div>
-
         <div class="search-box clearfix">
           <%= form_tag search_user_path, method: :get, id: "search-form", remote: true do %>
             <div class="clearfix" id="advocate-bar">
@@ -32,7 +29,7 @@
 
     <%= render "violation_report" %>
 
-    <%= render_collaborators_for(current_user) %>
+    <%= render_collaborators_for(@user) %>
 
     </div>
   </div>

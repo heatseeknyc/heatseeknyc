@@ -2,24 +2,25 @@
   <% if @sensor.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@sensor.errors.count, "error") %> prohibited this sensor from being saved:</h2>
-
       <ul>
-      <% @sensor.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
+        <% @sensor.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="field">
-    <label for="sensor_name">Sensor Serial Number</label><br>
-    <input id="sensor_name" name="sensor[name]" type="text">
-  </div>
-  <div class="field">
-    <label for="sensor_email">User Email</label><br>
-    <input id="sensor_email" name="sensor[email]" type="text">
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-fields">
+    <div>
+      <label for="sensor_name">Sensor Serial Number</label><br>
+      <input id="sensor_name" name="sensor[name]" type="text" class="form-control">
+    </div>
+    <div>
+      <label for="sensor_email">User Email</label><br>
+      <input id="sensor_email" name="sensor[email]" type="text" class="form-control">
+    </div>
+    <div class="actions">
+      <%= f.submit "Create Sensor", { class: "btn-save" } %>
+    </div>
   </div>
 <% end %>

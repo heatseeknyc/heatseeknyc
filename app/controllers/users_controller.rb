@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!, except: [:demo, :addresses]
   before_action :authenticate_admin_user!, only: [:edit, :update]
   before_action :authenticate_super_user!, only: [:new, :create]
-  before_action :load_user, only: [:edit, :update]
+  before_action :load_user, only: [:edit, :update, :show]
 
   def update
     if user_params[:permissions] &&
@@ -23,7 +23,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    if current_user.permissions <= User::PERMISSIONS[:lawyer]
+    if current_user.team_member_or_more_powerful?
       @users = User.all
     else
       redirect_to current_user
@@ -39,7 +39,7 @@ class UsersController < ApplicationController
     if @user.valid?
       @user.building = Building.find_or_create_by(street_address: @user.address, zip_code: @user.zip_code)
       @user.save
-      redirect_to "/users"
+      redirect_to users_path
     else
       @user
       render action: "new"
@@ -49,12 +49,15 @@ class UsersController < ApplicationController
   def show
     respond_to do |f|
       f.html do
-        if current_user.permissions <= User::PERMISSIONS[:lawyer]
+        if @user.tenant? && current_user.able_to_see_tenant(@user)
+          @analytics_page = "User Dashboard"
+          render :show
+        elsif @user.lawyer_or_more_powerful? && current_user.able_to_see_non_tenant(@user)
           @analytics_page = "Advocate Dashboard"
           render :permissions_show
         else
-          @analytics_page = "User Dashboard"
-          render :show
+          flash[:error] = "You are not authorized to see that user's page."
+          redirect_to user_path(current_user)
         end
       end
       f.json do
@@ -174,12 +177,12 @@ class UsersController < ApplicationController
     end
 
     def authenticate_admin_user!
-      return if current_user.permissions <= User::PERMISSIONS[:admin]
+      return if current_user.admin_or_more_powerful?
       redirect_to root_path
     end
 
     def authenticate_super_user!
-      return if current_user.permissions <= User::PERMISSIONS[:super_user]
+      return if current_user.super_user?
       redirect_to root_path
     end
 

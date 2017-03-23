@@ -2,8 +2,178 @@ require 'spec_helper'
 
 describe UsersController do
   let(:tenant) { create(:user) }
+  let(:stranger) { create(:user) }
   let(:lawyer) { create(:user, permissions: User::PERMISSIONS[:lawyer]) }
   let(:admin) { create(:user, permissions: User::PERMISSIONS[:admin]) }
+  let(:team_member) { create(:user, permissions: User::PERMISSIONS[:team_member]) }
+  let(:super_user) { create(:user, permissions: User::PERMISSIONS[:super_user]) }
+  let(:stranger_admin) { create(:user, permissions: User::PERMISSIONS[:admin]) }
+
+  describe "GET /users/:id" do
+    context "when current user is a tenant" do
+
+      before :each do
+        sign_in tenant
+      end
+
+      context "and they visit their own page" do
+        it "shows their graph page" do
+          get :show, id: tenant.id
+          expect(response.status).to eq(200)
+        end
+      end
+
+      context "and they visit another user" do
+        it "shows their graph page" do
+          get :show, id: stranger.id
+          expect(response).to redirect_to(user_path(tenant))
+        end
+      end
+    end
+
+    context "when current user is a lawyer" do
+      before :each do
+        lawyer.collaborators << tenant
+        lawyer.save
+        sign_in lawyer
+      end
+
+      context "and they visit a tenant with whom they collaborate" do
+        it "shows the tenant's show page" do
+          get :show, id: tenant.id
+          expect(response.status).to eq(200)
+          expect(response).to render_template "show"
+        end
+      end
+
+      context "and they visit a tenant with whom they do not collaborate" do
+        it "redirects to their own page" do
+          get :show, id: stranger.id
+          expect(response).to redirect_to(user_path(lawyer))
+        end
+      end
+    end
+
+    context "when current user is an admin" do
+      before :each do
+        sign_in admin
+      end
+
+      context "and they visit their page" do
+        it "shows their page" do
+          get :show, id: admin.id
+          expect(response.status).to eq(200)
+          expect(response).to render_template "permissions_show"
+        end
+      end
+
+      context "and they visit a tenant's page" do
+        it "shows the tenant's show page" do
+          get :show, id: tenant.id
+          expect(response.status).to eq(200)
+          expect(response).to render_template "show"
+        end
+      end
+
+      context "and they visit a lawyer's page" do
+        it "shows the lawyer page" do
+          get :show, id: lawyer.id
+          expect(response.status).to eq(200)
+          expect(response).to render_template "permissions_show"
+        end
+      end
+
+      context "and they visit an admin's page" do
+        it "redirects to the original admin's page" do
+          get :show, id: stranger_admin.id
+          expect(response).to redirect_to(user_path(admin))
+        end
+      end
+    end
+
+    context "when current user is a team member" do
+      before :each do
+        sign_in team_member
+      end
+
+      context "and they visit their page" do
+        it "shows their page" do
+          get :show, id: team_member.id
+          expect(response.status).to eq(200)
+          expect(response).to render_template "permissions_show"
+        end
+      end
+
+      context "and they visit a tenant's page" do
+        it "shows the tenant's show page" do
+          get :show, id: tenant.id
+          expect(response.status).to eq(200)
+          expect(response).to render_template "show"
+        end
+      end
+
+      context "and they visit a lawyer's page" do
+        it "shows the lawyer page" do
+          get :show, id: lawyer.id
+          expect(response.status).to eq(200)
+          expect(response).to render_template "permissions_show"
+        end
+      end
+
+      context "and they visit an admin's page" do
+        it "redirects to their page" do
+          get :show, id: admin.id
+          expect(response).to redirect_to(user_path(team_member))
+        end
+      end
+    end
+
+    context "when current user is a super user" do
+      before :each do
+        sign_in super_user
+      end
+
+      context "and they visit their page" do
+        it "shows their page" do
+          get :show, id: super_user.id
+          expect(response.status).to eq(200)
+          expect(response).to render_template "permissions_show"
+        end
+      end
+
+      context "and they visit a tenant's page" do
+        it "shows the tenant's show page" do
+          get :show, id: tenant.id
+          expect(response.status).to eq(200)
+          expect(response).to render_template "show"
+        end
+      end
+
+      context "and they visit a lawyer's page" do
+        it "shows the lawyer's page" do
+          get :show, id: lawyer.id
+          expect(response.status).to eq(200)
+          expect(response).to render_template "permissions_show"
+        end
+      end
+
+      context "and they visit an admin's page" do
+        it "shows the admin's page" do
+          get :show, id: admin.id
+          expect(response.status).to eq(200)
+          expect(response).to render_template "permissions_show"
+        end
+      end
+
+      context "and they visit an team members's page" do
+        it "shows the admin's page" do
+          get :show, id: team_member.id
+          expect(response.status).to eq(200)
+          expect(response).to render_template "permissions_show"
+        end
+      end
+    end
+  end
 
   describe "GET /users/:id/download/pdf" do
     let(:pdf_writer) { double('pdf_writer') }

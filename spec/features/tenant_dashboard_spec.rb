@@ -1,77 +1,26 @@
-require "spec_helper"
+require 'spec_helper'
 
-describe "Tenant Dashboard" do
-  let!(:admin) { login_as_admin }
+feature "Tenant Dashboard" do
+  scenario "viewing after successful login" do
+    user = login_as_tenant
 
-  let(:user_with_no_violations) { FactoryGirl.create(:user) }
-  let(:user_with_recent_violations1) { FactoryGirl.create(:user) }
-  let(:user_with_recent_violations2) { FactoryGirl.create(:user) }
-  let(:user_with_old_violations) { FactoryGirl.create(:user) }
+    expect(page).to have_content user.name
+    expect(page).to have_content user.address
+    expect(page).to have_content user.zip_code
+    expect(page).to have_content user.current_temp
+    expect(page).to have_content user.violation_count
 
-  before do
-    FactoryGirl.create(:collaboration, user: admin, collaborator: user_with_no_violations)
-    FactoryGirl.create(:collaboration, user: admin, collaborator: user_with_recent_violations1)
-    FactoryGirl.create(:collaboration, user: admin, collaborator: user_with_recent_violations2)
-    FactoryGirl.create(:collaboration, user: admin, collaborator: user_with_old_violations)
+    expect(page).to have_link("PDF", href: pdf_download_path(user))
+    expect(page).to have_link("CSV", href: csv_download_path(user))
 
-    create_violation(user_with_old_violations, 5.days.ago)
-
-    create_violation(user_with_recent_violations1, 5.days.ago)
-    create_violation(user_with_recent_violations1, 2.days.ago)
-    create_violation(user_with_recent_violations1, 2.days.ago)
-    create_violation(user_with_recent_violations1, 1.days.ago)
-    create_reading(user_with_recent_violations1, 77)
-
-    create_violation(user_with_recent_violations2, 2.days.ago)
-    create_reading(user_with_recent_violations2, 78)
-  end
-
-  context "tenant list" do
-    it "shows user information for all associated tenants" do
-      visit user_path(admin)
-
-      within "#collaborator-ul" do
-        expect(page).to have_text user_with_no_violations.name
-        expect(page).to have_text user_with_recent_violations1.name
-        expect(page).to have_text user_with_recent_violations2.name
-        expect(page).to have_text user_with_old_violations.name
-      end
-    end
-
-    it "does not show users you are not associated with" do
-      other_user = FactoryGirl.create(:user)
-      create_violation(other_user, 2.days.ago)
-      create_violation(other_user, 1.days.ago)
-
-      visit user_path(admin)
-
-      expect(page).to_not have_text other_user.name
-    end
-  end
-
-  context "violations report" do
-    it "shows users who have had violations in the last 3 days" do
-      visit user_path(admin)
-
-      within ".violations-report" do
-        expect(page.all("tbody tr").length).to be 4
-        expect(page).to have_text expected_text_for(user_with_recent_violations1, 3)
-        expect(page).to have_text expected_text_for(user_with_recent_violations2, 1)
-        expect(page).to have_text expected_text_for(user_with_no_violations, 0)
-        expect(page).to have_text expected_text_for(user_with_old_violations, 0)
-      end
-    end
-  end
-
-  def create_violation(user, time)
-    FactoryGirl.create(:reading, user: user, created_at: time, outdoor_temp: 30, temp: 30)
-  end
-
-  def create_reading(user, temp)
-    FactoryGirl.create(:reading, user: user, created_at: 1.hour.ago, outdoor_temp: 32, temp: temp)
-  end
-
-  def expected_text_for(user, violations_count)
-    return "#{user.name} #{user.address}, #{user.zip_code} #{violations_count} #{user.current_temp}"
+    # Tried testing rendered js chart using the poltergeist driver, but
+    # it got painful - spec slowed to 5 secs (from 300ms), and
+    # still barfed a javascript error - https://gist.github.com/oliverbarnes/d1ee777f4e55fb5f912f0,
+    # thought the feature works when testing manually. Could be a rabbit hole to debug.
+    #
+    # Thinking it might be worth going with native js unit tests (mocha or jasmine)
+    # for the graph instead, though we'd loose full integration testing of the dash.
+    # Good enough?
+    expect(page).to have_css("div#d3-chart")
   end
 end

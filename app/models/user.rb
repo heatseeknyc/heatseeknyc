@@ -35,6 +35,7 @@ class User < ActiveRecord::Base
   extend Measurable::ClassMethods
   include Graphable::InstanceMethods
   include Regulatable::InstanceMethods
+  include Permissionable::InstanceMethods
 
   PERMISSIONS = {
     super_user: 0,
@@ -199,22 +200,6 @@ class User < ActiveRecord::Base
 
   def find_collaboration(collaboration_id)
     collaborations.where(id: collaboration_id)
-  end
-
-  def team_member?
-    permissions <= PERMISSIONS[:team_member]
-  end
-
-  def admin?
-    permissions <= PERMISSIONS[:admin]
-  end
-
-  def lawyer?
-    permissions <= PERMISSIONS[:lawyer]
-  end
-
-  def list_permission_level_and_lower
-    PERMISSIONS.select { |_k, v| v >= permissions }
   end
 
   def create_search_names

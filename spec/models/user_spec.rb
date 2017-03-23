@@ -129,9 +129,9 @@ describe User, :vcr do
 			admin = create(:user, permissions: 25)
 			lawyer = create(:user, permissions: 50)
 			user8 = create(:user)
-			expect(admin.admin?).to be(true)
+			expect(admin.admin_or_more_powerful?).to be(true)
 			expect(lawyer.lawyer?).to be(true)
-			expect(user8.admin?).to be(false)
+			expect(user8.admin_or_more_powerful?).to be(false)
 			expect(user8.lawyer?).to be(false)
 		end
 	end

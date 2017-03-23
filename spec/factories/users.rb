@@ -32,10 +32,10 @@ FactoryGirl.define do
       permissions 100
     end
 
-    factory :super_user, traits: [:super_user]
     factory :team_member, traits: [:team_member]
     factory :admin, traits: [:admin]
     factory :advocate, traits: [:advocate]
     factory :tenant, traits: [:tenant]
+    factory :super_user, traits: [:super_user]
   end
 end
