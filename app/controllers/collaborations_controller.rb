@@ -11,10 +11,10 @@ class CollaborationsController < ApplicationController
       f.html do
         if @collaboration.save
           flash[:notice] = "Added collaborator."
-          redirect_to root_url
+          redirect_to user_path(current_user)
         else
           flash[:error] = "Unable to add collaborator."
-          redirect_to root_url
+          redirect_to user_path(current_user)
         end
       end
     end

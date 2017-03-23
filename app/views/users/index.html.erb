@@ -19,7 +19,7 @@
             <%= u.name %>
           </td>
           <td class="add-user">
-            <% if u.tenant? %>
+            <% if u.tenant? && !current_user.collaborators.include?(u) %>
               <%= link_to "", user_collaborations_path(current_user, collaborator_id: u.id), method: :post, class: "fa fa-plus fa-2x add-user-link" %>
             <% end %>
           </td>

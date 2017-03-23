@@ -89,8 +89,7 @@
 	}
 }
 
-.user-settings-link,
-.remove-user-link {
+.user-settings-link, .remove-user-link, .add-user-link-from-search {
 	padding-top: 30px;
 	text-align: center;
 	width: 40px;
@@ -104,6 +103,13 @@
 	@media (min-width: 480px) {
 		width: 83px;
 	}
+}
+
+.add-user-link-from-search {
+  height: 78px;
+  float: right;
+  margin-top: -65px;
+  border-left: 4px solid $theme-orange;
 }
 
 .table a {
