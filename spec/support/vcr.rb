@@ -12,5 +12,8 @@ VCR.configure do |c|
   c.filter_sensitive_data('---WUNDERGROUND_KEY---') { ENV['WUNDERGROUND_KEY'] }
   c.filter_sensitive_data('---GEOCODE_API_KEY---') { ENV['GEOCODE_API_KEY'] }
   c.default_cassette_options = { match_requests_on: [:method, :host, :path, :query] }
+  c.ignore_request do |r|
+    r.uri.match(/api\.cityofnewyork\.us/) || r.uri.match(/maps\.googleapis\.com/)
+  end
   c.configure_rspec_metadata!
 end

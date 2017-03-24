@@ -7,6 +7,7 @@ require "rubygems"
 require "spork"
 require "simplecov"
 require "timecop"
+require "webmock/rspec"
 
 SimpleCov.start
 Timecop.travel(DateTime.parse("2015-03-01 00:00:00 -0500"))
@@ -48,8 +49,19 @@ Spork.prefork do
 
     config.before(:each) do
       Rails.cache.clear
+      WebMock.stub_request(:get, /maps\.googleapis\.com/)
+          .to_return(body: geocode_response)
     end
   end
+end
+
+
+def geocode_response
+  File.read(File.expand_path('spec/fixtures/fake_geocode_api_response.json'))
+end
+
+def geoclient_response
+  {address: {bbl: Faker::Number.number(10)}}
 end
 
 Spork.each_run do

@@ -152,11 +152,13 @@ users.each do |user|
     current_outdoor_temp += 2 if current_outdoor_temp < 25
 
     if user == demo
-      user.readings << Reading.new(created_at: current_time, temp: 68, outdoor_temp: current_outdoor_temp, user: user, twine: user.twine)
+      Reading.create(created_at: current_time, temp: 68, outdoor_temp: current_outdoor_temp, user: user)
     elsif user == jane && 100 < count && count < 124
       next
     else
-      user.readings << Reading.new(created_at: current_time, temp: current_temp, outdoor_temp: current_outdoor_temp, user: user, twine: user.twine)
+      Reading.create(created_at: current_time, temp: current_temp, outdoor_temp: current_outdoor_temp, user: user)
     end
   end
 end
+
+Reading.create(temp: 115, outdoor_temp: 37, user: jake, twine: jake.twine)
