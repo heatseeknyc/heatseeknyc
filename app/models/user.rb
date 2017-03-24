@@ -215,14 +215,7 @@ class User < ActiveRecord::Base
   end
 
   def current_temp
-    @current_temp ||= readings.order('created_at').last.try :temp
-    # bigapps version
-    # after bigapps uncomment this
-    # if last_reading && last_reading.created_at > Time.now - 60 * 60 * 3
-    #   "#{last_reading.temp}°"
-    # else
-    #   "- -"
-    # end
+    @current_temp ||= self.readings.order(:created_at => :desc, :id => :desc).limit(1).first.try :temp
   end
 
   def current_temp_string
