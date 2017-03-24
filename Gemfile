@@ -33,6 +33,7 @@ gem 'stripe'
 gem 'psych', '= 2.0.5'
 gem 'quiet_assets'
 gem 'lograge'
+gem 'jquery-ui-rails'
 
 group :test do
   gem 'memory_test_fix'

@@ -64,7 +64,7 @@ class SensorsController < ApplicationController
     def authenticate_admin!
       if !signed_in?
         redirect_to welcome_index_path
-      elsif !current_user.admin?
+      elsif !current_user.admin_or_more_powerful?
         redirect_to current_user 
       end
     end

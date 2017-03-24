@@ -12,7 +12,8 @@ Twinenyc::Application.routes.draw do
   resources :twines, only: [:show, :new, :create]
 
   get 'users/search' => 'users#search', as: :search_user
-  resources :users do
+  post "users/create" => "users#create", as: :create_user
+  resources :users, except: [:create] do
     resources :collaborations
     collection do
       get "edit_password"

@@ -1,12 +1,31 @@
 <br>
 <div class="col-xs-6 container">
   <h1 id="collaborator-h1" class="text-center">Users</h1>
-  <% @users.each do |u| %>
-    <hr class="underline-user text-center">
-    <li class="sidebar-li">
-    <a href="/users/<%= u.id %>" class="user-link"><%= u.first_name %> <%= u.last_name %> </a>
-    <%= link_to "", user_collaborations_path(current_user, collaborator_id: u), method: :post, :class => "glyphicon glyphicon-plus add-user-link" %>
-    <br>
-    </li>
-  <% end %>
+  <table class="table">
+    <tbody>
+    <% @users.each do |u| %>
+      <% if current_user.super_user? %>
+        <tr class="user-row">
+          <td class="user-name">
+            <%= link_to u.name, user_path(u) %>
+          </td>
+          <td class="user-name">
+            <%= u.permissions_level %>
+          </td>
+        </tr>
+      <% else %>
+        <tr class="user-row">
+          <td class="user-name">
+            <%= u.name %>
+          </td>
+          <td class="add-user">
+            <% if u.tenant? && !current_user.collaborators.include?(u) %>
+              <%= link_to "", user_collaborations_path(current_user, collaborator_id: u.id), method: :post, class: "fa fa-plus fa-2x add-user-link" %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+    </tbody>
+  </table>
 </div>

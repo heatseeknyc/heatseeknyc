@@ -12,6 +12,7 @@
 // 
 // external & vendor libraries
 //= require jquery
+//= require jquery-ui
 //= require jquery_ujs
 //= require bootstrap.min.js
 //= require bootstrap-datepicker
@@ -32,6 +33,7 @@
 //= require kickstarter
 //= require video
 //= require resources
+//= require address-auto-complete
 // 
 // user show page chart js files
 //= require user-show-chart/user-show-temp-xaxis-group

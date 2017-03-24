@@ -1,8 +1,9 @@
 class CollaborationsController < ApplicationController
   before_action :authenticate_user!
+  before_action :load_user, only: [:create, :destroy]
 
   def create
-    @collaboration = current_user.collaborations
+    @collaboration = @user.collaborations
       .build(:collaborator_id => params[:collaborator_id])
 
     respond_to do |f|
@@ -10,10 +11,10 @@ class CollaborationsController < ApplicationController
       f.html do
         if @collaboration.save
           flash[:notice] = "Added collaborator."
-          redirect_to root_url
+          redirect_to user_path(current_user)
         else
           flash[:error] = "Unable to add collaborator."
-          redirect_to root_url
+          redirect_to user_path(current_user)
         end
       end
     end
@@ -51,5 +52,11 @@ class CollaborationsController < ApplicationController
       redirect_to current_user
     end
   end
+
+  private
+
+    def load_user
+      @user = User.find(params[:user_id])
+    end
 
 end

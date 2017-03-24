@@ -38,9 +38,10 @@ feature "Managing settings" do
     click_button "Update"
 
     expect(user.reload.first_name).to eq "Howling"
-    expect(current_path).to eq(root_path)
+    expect(current_path).to eq("/users/#{user.id}")
     expect(page).to have_content "You updated your account successfully"
-    expect(page).to have_content "Helping New York City keep the heat on."
+    expect(page).to have_content "Howling Wolf"
+    expect(page).to have_content "Download Report"
   end
 
   scenario "Updating without entering current password" do

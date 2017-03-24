@@ -89,16 +89,14 @@
 	}
 }
 
-.user-settings-link,
-.add-user-link,
-.remove-user-link {
+.user-settings-link, .remove-user-link, .add-user-link-from-search {
 	padding-top: 30px;
 	text-align: center;
 	width: 40px;
 
 	&:hover {
-		color: $theme-red;
-		background-color: $theme-black;
+		color: $theme-white;
+		background-color: $theme-orange;
 		text-decoration: none;
 	}
 
@@ -107,24 +105,58 @@
 	}
 }
 
-.add-user-link {
-	height: 78px;
-	float: right;
-	margin-top: -65px;
-	border-left: 4px solid $theme-orange;
+.add-user-link-from-search {
+  height: 78px;
+  float: right;
+  margin-top: -65px;
+  border-left: 4px solid $theme-orange;
+}
+
+.table a {
+  &:hover, &:visited, &:link, &:active {
+    text-decoration: none;
+  }
+}
+
+.user-name {
+  font-size: 2em;
+}
+
+.add-user {
+  text-align: center;
+  a {
+    margin-top: 5px;
+  }
 }
 
 .search-form {
 	float: left;
 }
 
-#search-button {
-	float: right;
+.admin-button {
 	background-color: $theme-orange;
 	border: solid 3px $theme-black;
 	height: 34px;
-	margin-top: 20px;
-	margin-bottom: 20px;
+	margin: 20px 0;
+  color: $theme-black;
+  font-weight: bolder;
+  padding: 8px 15px;
+
+  &:hover, &:visited, &:link {
+    color: $theme-black;
+    text-decoration: none;
+  }
+}
+
+#search-button {
+	float: right;
+  font-size: 1em;
+  padding: 5px;
+}
+
+.admin-button-container {
+  display: inline-block;
+  margin: 25px 5px 12px 0;
 }
 
 .collaborators-sidebar {

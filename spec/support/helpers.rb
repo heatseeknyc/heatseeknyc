@@ -19,6 +19,10 @@ def login_as_tenant(options = {})
   login_as_type(:tenant, options)
 end
 
+def login_as_super_user(options = {})
+  login_as_type(:super_user, options)
+end
+
 def expect_nav_bar
   expect(page).to have_link("About")
   expect(page).to have_link("blog", href: blog_path)

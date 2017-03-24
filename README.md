@@ -58,6 +58,29 @@ email: jane@heatseeknyc.com
 password: 33west26
 ```
 
+## Rake Tasks
+
+There are a couple rake tasks that require API tokens.
+
+The data scrubber task requires a Google Geocode API token, which can be generated [here](https://developers.google.com/maps/documentation/geocoding/get-api-key).
+
+```
+rake data:scrub_data
+```
+
+The weather update task requires a Wunderground API token, which can be generated [here](https://www.wunderground.com/weather/api).
+
+```
+rake weather:update
+```
+
+This project uses the [Dotenv](https://github.com/bkeepers/dotenv) gem to store environment variables so add a `.env.development.local` file to the root of this project with the following:
+
+```
+GEOCODE_API_KEY=<token>
+WUNDERGROUND_KEY=<token>
+```
+
 ## License
 
 This application is MIT Licensed. See [LICENSE](LICENSE.txt) for details.

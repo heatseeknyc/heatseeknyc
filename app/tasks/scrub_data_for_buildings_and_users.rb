@@ -22,6 +22,7 @@ class ScrubDataForBuildingsAndUsers
 
   def self.scrub_building_addresses
     Building.all.each do |building|
+      sleep 1
       if update_address(building)
         p "Building at #{building.street_address} updated!"
       else
@@ -32,6 +33,7 @@ class ScrubDataForBuildingsAndUsers
 
   def self.scrub_user_data
     User.all.each do |user|
+      sleep 1
       if update_user(user)
         p "User at #{user.address} updated!"
       else

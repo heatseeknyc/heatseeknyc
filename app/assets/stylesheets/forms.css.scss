@@ -50,3 +50,27 @@
     font-size: 1.4em
   }
 }
+
+.ui-autocomplete {
+  position: absolute;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: solid 1px #999;
+  cursor: default;
+
+  li {
+    background-color: #FFF;
+    border-top: solid 1px #DDD;
+    margin: 0;
+    padding: 0;
+    z-index: 5;
+    height: 22px;
+    font-size: 18px;
+
+    .ui-state-hover, .ui-state-active {
+      background-color: #FFFCB2;
+    }
+  }
+}
+
