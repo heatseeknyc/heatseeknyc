@@ -32,9 +32,10 @@ class PDFWriter
     readings_count = user.readings.count
     violation_count = user.violation_count
 
+    unit = user.apartment ? ", Unit #{user.apartment}" : ""
     pdf.move_down 250
     pdf.text "Tenant: #{user.name}"
-    pdf.text "Address: #{user.address}, Unit #{user.apartment}, #{user.zip_code}"
+    pdf.text "Address: #{user.address}#{unit}, #{user.zip_code}"
     pdf.text "Phone Number: #{user.phone_number}"
     pdf.text "Begin: #{user.get_oldest_reading_date("%b %d, %Y%l:%M %p")}"
     pdf.text "End: #{user.get_newest_reading_date("%b %d, %Y%l:%M %p")}"
