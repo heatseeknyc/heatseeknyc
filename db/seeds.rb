@@ -11,8 +11,8 @@ unless User.find_by(email: 'mbeirut@heatseeknyc.com')
   User.create(
     :first_name => 'Jane',
     :last_name => 'Doe',
-    :address => '100 Fake St',
-    :zip_code => '11216',
+    :address => '625 6th Ave',
+    :zip_code => '10011',
     :email => 'jane@heatseeknyc.com',
     :password => '33west26',
     :apartment => '4C',
@@ -22,8 +22,8 @@ unless User.find_by(email: 'mbeirut@heatseeknyc.com')
   User.create(
     :first_name => 'John',
     :last_name => 'Doe',
-    :address => '100 Fake St',
-    :zip_code => '11216',
+    :address => '625 6th Ave',
+    :zip_code => '10011',
     :apartment => '4D',
     :email => 'john@heatseeknyc.com',
     :password => '33west26',
@@ -33,8 +33,8 @@ unless User.find_by(email: 'mbeirut@heatseeknyc.com')
   User.create(
       :first_name => 'Jamie',
       :last_name => 'Dough',
-      :address => '800 S Notreal Ave',
-      :zip_code => '11238',
+      :address => '636 6th Ave',
+      :zip_code => '10011',
       :email => 'jamie@heatseeknyc.com',
       :apartment => '6E',
       :password => '33west26'
@@ -43,8 +43,8 @@ unless User.find_by(email: 'mbeirut@heatseeknyc.com')
   User.create(
       :first_name => 'Jake',
       :last_name => 'Deaux',
-      :address => '200 Doesntexist Ln',
-      :zip_code => '10451',
+      :address => '636 6th Ave',
+      :zip_code => '10011',
       :email => 'jake@heatseeknyc.com',
       :password => '33west26'
   )
