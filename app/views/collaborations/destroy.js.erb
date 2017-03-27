@@ -1,6 +1,6 @@
 <% if !@collaboration.persisted? %>
   $(".collaborators-sidebar").remove();
-  $("div#append-collaborations").append('<%= j render_collaborators_for(current_user) %>');
+  $("div#append-violations").html('<%= j render "users/violation_report" %>');
 <% else %>
   $(".alert").remove();
   $(".show-layout").prepend('<%= j render "delete_collaboration_failure_message" %>');

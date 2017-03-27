@@ -26,11 +26,11 @@ describe "Lawyer's Tenant Dashboard", type: :feature do
     create_reading(user_with_recent_violations2, 78)
   end
 
-  context "tenant list" do
+  context "violation table" do
     it "shows user information for all associated tenants" do
       visit user_path(admin)
 
-      within "#collaborator-ul" do
+      within "#append-violations" do
         expect(page).to have_text user_with_no_violations.name
         expect(page).to have_text user_with_recent_violations1.name
         expect(page).to have_text user_with_recent_violations2.name
