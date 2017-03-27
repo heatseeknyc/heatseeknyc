@@ -1,28 +1,57 @@
 class ScrubDataForBuildingsAndUsers
 
-  ADDRESS_RULES = {
-    "east" => "E",
-    "e." => "E",
-    "west"=> "W",
-    "w."=> "W",
-    "north"=> "N",
-    "n."=> "N",
-    "south"=> "S",
-    "s."=> "S",
-    "avenue"=> "Ave",
-    "ave."=> "Ave",
-    "street"=> "St",
-    "st."=> "St"
+  STREET_RULES = {
+      "east"   => "E",
+      "e."     => "E",
+      "west"   => "W",
+      "w."     => "W",
+      "north"  => "N",
+      "n."     => "N",
+      "south"  => "S",
+      "s."     => "S",
+      "avenue" => "Ave",
+      "ave."   => "Ave",
+      "street" => "St",
+      "st."    => "St",
+      "apt."   => "Apt",
+      "place"  => "Pl",
+      "road"   => "Rd"
   }
 
-  def self.exec
-    scrub_building_addresses
-    scrub_user_data
+  AROUND_UNIT_RULES = {
+      /(apt\s\S+)/   => ', \1,',
+      /(apt\.\s\S+)/ => ', \1,',
+      /(suite\s\S+)/ => ', \1,',
+      /(\S+\sfloor)/ => ', \1,'
+  }
+
+  BEFORE_UNIT_RULES = {
+      /\s(Apt\s\S+)/        => ', \1',
+      /\s(Suite\s\S+)/      => ', \1',
+      /(\s{1,1}\S+\sFloor)/ => ',\1',
+      /(\s{1,1}#\d+)/       => ',\1'
+  }
+
+  STATES = [
+      'ny',
+      'new york',
+      'pa',
+      'pennsylvania'
+  ]
+
+  BEFORE_STATE_RULES = STATES.inject({}) do |hash, state|
+    hash[/[a-zA-Z\d](\s#{state}$)/] = ', \1'
+    hash
   end
 
-  def self.scrub_building_addresses
+  def self.exec(timeout)
+    scrub_building_addresses(timeout)
+    scrub_user_data(timeout)
+  end
+
+  def self.scrub_building_addresses(timeout)
     Building.all.each do |building|
-      sleep 1
+      sleep timeout
       if update_address(building)
         p "Building at #{building.street_address} updated!"
       else
@@ -31,9 +60,9 @@ class ScrubDataForBuildingsAndUsers
     end
   end
 
-  def self.scrub_user_data
+  def self.scrub_user_data(timeout)
     User.all.each do |user|
-      sleep 1
+      sleep timeout
       if update_user(user)
         p "User at #{user.address} updated!"
       else
@@ -43,17 +72,18 @@ class ScrubDataForBuildingsAndUsers
   end
 
   def self.update_user(user)
+    scrubbed_address = address_scrubber(user.address)
     user.update(
-      address: address_scrubber(user.address),
-      first_name: user.first_name.strip,
-      last_name: user.last_name.strip,
-      building_id: find_or_create_building_for(user).id
+        address:    scrubbed_address,
+        first_name: user.first_name.strip,
+        last_name:  user.last_name.strip,
+        building:   Building.find_or_create_by(street_address: scrubbed_address, zip_code: user.zip_code)
     )
   end
 
   def self.update_address(building)
     building.update(
-      street_address: address_scrubber(building.street_address)
+        street_address: address_scrubber(building.street_address)
     )
   end
 
@@ -65,18 +95,55 @@ class ScrubDataForBuildingsAndUsers
   end
 
   def self.address_scrubber(address)
-    words = tokenize(address)
+    zip_removed_string = remove_zip(downcase_and_strip(address))
 
-    to_ordinal(words)
-      .map{ |word| ADDRESS_RULES[word] || word.capitalize }
-      .join(' ')
+    no_city_and_state_words = remove_city_and_state(add_comma_before_state(add_commas_around_units(zip_removed_string)))
+
+    no_commas = to_ordinal(no_city_and_state_words.join(' ').split(/\s+/))
+                    .map { |word| STREET_RULES[word.gsub(',', '')] || word.gsub(',', '').capitalize }
+                    .join(' ')
+
+    add_commas_before_units(no_commas)
   end
 
-  def self.tokenize(address)
+  def self.downcase_and_strip(address)
     address
-      .strip
-      .downcase
-      .split(/\s+/)
+        .strip
+        .downcase
+  end
+
+  def self.remove_zip(address)
+    address = address[0...-5].strip if address.match(/\s\d{5,5}\z/)
+    address
+  end
+
+  def self.add_commas_around_units(address)
+    AROUND_UNIT_RULES.each do |regex, replacement|
+      address.gsub!(regex, replacement)
+    end
+
+    address
+  end
+
+  def self.add_comma_before_state(address)
+    BEFORE_STATE_RULES.each do |regex, replacement|
+      address.gsub!(regex, replacement)
+    end
+
+    address
+  end
+
+  def self.add_commas_before_units(address)
+    BEFORE_UNIT_RULES.each do |regex, replacement|
+      address.gsub!(regex, replacement)
+    end
+    address
+  end
+
+  def self.remove_city_and_state(address)
+    address_sections = address.split(',').map(&:strip)
+    address_sections = address_sections[0...-2] if STATES.include?(address_sections.last)
+    address_sections
   end
 
   def self.to_ordinal(words)
@@ -88,10 +155,5 @@ class ScrubDataForBuildingsAndUsers
         word.to_i.ordinalize
       end
     end
-  end
-
-  def self.find_or_create_building_for(user)
-    Building.where("street_address ILIKE '%#{user.address}%'").first ||
-      Building.create(street_address: user.address, zip_code: user.zip_code)
   end
 end

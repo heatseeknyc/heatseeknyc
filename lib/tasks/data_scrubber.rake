@@ -6,6 +6,11 @@ namespace :data do
       3) associating each user with a building
   HEREDOC
   task scrub_data: :environment do
-    ScrubDataForBuildingsAndUsers.exec
+    ScrubDataForBuildingsAndUsers.exec(1)
+  end
+
+  desc "This task adds BBL numbers to buildings by querying the Geoclient API"
+  task backfill_bbl: :environment do
+    AddBBLDataToBuildings.exec(1)
   end
 end
