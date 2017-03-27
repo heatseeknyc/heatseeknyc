@@ -50,15 +50,24 @@ describe "Lawyer's Tenant Dashboard" do
   end
 
   context "violations report" do
-    it "shows users who have had violations in the last 3 days" do
+    it "shows all collaborators" do
       visit user_path(admin)
 
       within ".violations-report" do
         expect(page.all("tbody tr").length).to be 4
+        expect(page.all("tbody tr td a.fa-times").length).to be 4
+        expect(page.all("tbody tr td a.fa-wrench").length).to be 4
         expect(page).to have_text expected_text_for(user_with_recent_violations1, 3)
         expect(page).to have_text expected_text_for(user_with_recent_violations2, 1)
         expect(page).to have_text expected_text_for(user_with_no_violations, 0)
         expect(page).to have_text expected_text_for(user_with_old_violations, 0)
+      end
+
+      admin.update(permissions: User::PERMISSIONS[:lawyer])
+      visit user_path(admin)
+      within ".violations-report" do
+        expect(page.all("tbody tr td a.fa-times").length).to be 4
+        expect(page.all("tbody tr td a.fa-wrench").length).to be 0
       end
     end
   end

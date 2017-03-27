@@ -10,6 +10,7 @@
         <th>Building <i class="fa"></i></th>
         <th class="numeric">Number of Violations <i class="fa"></i></th>
         <th class="numeric">Current Temperature (°F)<i class="fa"></i></th>
+        <th>Manage</th>
       </tr>
     </thead>
     <tbody>
@@ -21,6 +22,12 @@
         <td><%= "#{user.address}, #{user.zip_code}" %></td>
         <td class="numeric"><%= collaboration.violations_count %></td>
         <td class="numeric" data-value="<%= user.current_temp %>"><%= user.current_temp_string %></td>
+        <td>
+          <% if @user.admin_or_more_powerful? %>
+            <%= link_to "", edit_user_path(user), :class => "fa fa-wrench" %>
+          <% end %>
+          <%= link_to "", user_collaboration_path(@user, collaboration), method: :delete, :class => "fa fa-times", data: { confirm: "Are you sure?", remote: true} %>
+        </td>
       </tr>
     <% end %>
     </tbody>
