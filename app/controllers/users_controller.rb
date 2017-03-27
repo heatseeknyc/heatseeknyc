@@ -15,7 +15,7 @@ class UsersController < ApplicationController
                                   .where(collaborator_id: @user.id)
                                   .first
       if @collaboration
-        redirect_to user_collaboration_path(current_user, @collaboration)
+        redirect_to user_path(@collaboration.collaborator)
       else
         redirect_to user_path(current_user)
       end

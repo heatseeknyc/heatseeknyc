@@ -7,7 +7,7 @@
       <div>
         <li class="sidebar-li">
           <div class="collaborator-link-div">
-            <%= link_to "#{c.collaborator.first_name} #{c.collaborator.last_name}", user_collaboration_path(current_user, c), :class => "user-link" %>
+            <%= link_to "#{c.collaborator.first_name} #{c.collaborator.last_name}", user_path(c.collaborator_id), :class => "user-link" %>
             <p class="address_zip"><%= "#{c.collaborator.address}, #{c.collaborator.zip_code}" %></p>
           </div>
             
