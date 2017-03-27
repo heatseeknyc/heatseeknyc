@@ -1,6 +1,6 @@
 require "spec_helper.rb"
 
-describe "users API" do
+describe "users API", type: :request do
   let(:user1) { create(:user, address: "150 Court St", zip_code: "11201") }
   let(:user2) { create(:user, address: "242 W 30th St", zip_code: "10001") }
   let(:time) { Time.zone.parse("2016-01-01") }

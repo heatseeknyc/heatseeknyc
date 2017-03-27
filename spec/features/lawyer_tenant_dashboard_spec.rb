@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "Lawyer's Tenant Dashboard" do
+describe "Lawyer's Tenant Dashboard", type: :feature do
   let!(:admin) { login_as_admin }
 
   let(:user_with_no_violations) { FactoryGirl.create(:user) }

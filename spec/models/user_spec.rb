@@ -143,7 +143,7 @@ describe User, :vcr do
       create(:sensor, nick_name: '0000')
       user = create(:user)
       user.sensor_codes_string = '0000'
-      expect(user.save).to be_true
+      expect(user.save).to be true
     end
 
     it "prevents user save if no corresponding sensors exist" do
@@ -151,7 +151,7 @@ describe User, :vcr do
 
       user = create(:user)
       user.sensor_codes_string = '0000'
-      expect(user.save).to be_false
+      expect(user.save).to be false
     end
   end
 

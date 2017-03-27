@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "viewing other pages" do
+describe "viewing other pages", type: :feature do
 
   before(:each) do
     @user = create(:user, first_name: "Walter")

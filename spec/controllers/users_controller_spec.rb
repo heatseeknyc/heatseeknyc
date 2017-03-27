@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe UsersController do
+describe UsersController, type: :controller do
   let(:tenant) { create(:user) }
   let(:stranger) { create(:user) }
   let(:lawyer) { create(:user, permissions: User::PERMISSIONS[:lawyer]) }
@@ -186,8 +186,7 @@ describe UsersController do
       allow(pdf_writer).to receive(:filename)
       allow(pdf_writer).to receive(:content_type)
       allow(controller).to receive(:send_data).
-        with(file, filename: pdf_writer.filename, type: pdf_writer.content_type).
-        and_return { controller.render :nothing => true }
+        with(file, filename: pdf_writer.filename, type: pdf_writer.content_type) { controller.render :nothing => true }
     end
 
     it "instantiates a pdf writer" do
@@ -197,8 +196,7 @@ describe UsersController do
 
     it "sends the data" do
       expect(controller).to receive(:send_data).
-        with(file, filename: pdf_writer.filename, type: pdf_writer.content_type).
-        and_return { controller.render :nothing => true }
+        with(file, filename: pdf_writer.filename, type: pdf_writer.content_type) { controller.render :nothing => true }
       get :download_pdf, id: 1
     end
   end
@@ -215,8 +213,7 @@ describe UsersController do
       allow(csv_writer).to receive(:generate_csv).and_return file
       allow(csv_writer).to receive(:filename)
       allow(controller).to receive(:send_data).
-        with(file, filename: csv_writer.filename, type: "text/csv").
-        and_return { controller.render :nothing => true }
+        with(file, filename: csv_writer.filename, type: "text/csv") { controller.render :nothing => true }
     end
 
     it "instantiates a csv writer" do
@@ -227,8 +224,7 @@ describe UsersController do
     it "sends the data" do
       expect(csv_writer).to receive(:filename).and_return filename
       expect(controller).to receive(:send_data).
-        with(file, filename: filename, type: "text/csv").
-        and_return { controller.render :nothing => true }
+        with(file, filename: filename, type: "text/csv") { controller.render :nothing => true }
       get :download_csv, id: 1
     end
   end

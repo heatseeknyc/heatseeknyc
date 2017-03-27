@@ -2,7 +2,8 @@ require 'spec_helper'
 
 feature "Visiting the blog" do
   scenario "from the dashboard" do
-    pending("needs tumblr api keys")
+    # needs tumblr api keys
+    skip
     user = login_as_tenant
 
     click_link "blog"

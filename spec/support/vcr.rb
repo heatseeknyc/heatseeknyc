@@ -15,5 +15,6 @@ VCR.configure do |c|
   c.ignore_request do |r|
     r.uri.match(/api\.cityofnewyork\.us/) || r.uri.match(/maps\.googleapis\.com/)
   end
+  c.ignore_localhost = true
   c.configure_rspec_metadata!
 end

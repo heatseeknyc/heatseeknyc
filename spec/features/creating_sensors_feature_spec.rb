@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "creating a sensor" do
+describe "creating a sensor", type: :feature do
   before(:each) do
     @admin = create(:user, {
       first_name: "Jason", 

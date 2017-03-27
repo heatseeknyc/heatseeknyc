@@ -24,7 +24,7 @@ describe WundergroundHistory, :vcr do
           invalid_time_message = {response: ["response is empty"]}
           empty_history.validate!
 
-          expect(empty_history.errors).to have(1).errors_on(:response)
+          expect(empty_history.errors.get(:response).size).to eq(1)
           expect(empty_history.errors.messages).to eq(invalid_time_message)
         end
       end
@@ -41,7 +41,7 @@ describe WundergroundHistory, :vcr do
         subject.response = wunderground.history_for(time, "1001101")
         subject.validate!
         expect(subject.response_error_type).to eq "querynotfound"
-        expect(subject.errors).to have(1).errors_on(:response)
+        expect(subject.errors.get(:response).size).to eq(1)
       end
     end
 
@@ -121,7 +121,7 @@ describe WundergroundHistory, :vcr do
       history = WundergroundHistory.new_from_api(time, premature_response)
 
       expected_message = "response is missing desired hour"
-      expect(history.errors).to have(1).error_on(:response)
+      expect(history.errors.get(:response).size).to eq(1)
       expect(history.errors.messages[:response]).to include(expected_message)
     end
 
@@ -131,7 +131,7 @@ describe WundergroundHistory, :vcr do
       rate_limited_response = wunderground.history_for(time, 10001)
       history = WundergroundHistory.new_from_api(time, rate_limited_response)
 
-      expect(history.errors).to have(1).error_on(:response)
+      expect(history.error_on(:response).size).to eq(1)
       expect(history.response_error_type).to eq "invalidfeature"
     end
   end
