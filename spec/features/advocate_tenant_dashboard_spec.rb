@@ -14,16 +14,17 @@ describe "Advocate's Tenant Dashboard", type: :feature do
     FactoryGirl.create(:collaboration, user: admin, collaborator: user_with_recent_violations2)
     FactoryGirl.create(:collaboration, user: admin, collaborator: user_with_old_violations)
 
-    create_violation(user_with_old_violations, 5.days.ago)
+    FactoryGirl.create(:reading, :violation, user: user_with_old_violations, created_at: 5.days.ago)
 
-    create_violation(user_with_recent_violations1, 5.days.ago)
-    create_violation(user_with_recent_violations1, 2.days.ago)
-    create_violation(user_with_recent_violations1, 2.days.ago)
-    create_violation(user_with_recent_violations1, 1.days.ago)
-    create_reading(user_with_recent_violations1, 77)
+    FactoryGirl.create(:reading, :violation, user: user_with_recent_violations1, created_at: 5.days.ago)
+    FactoryGirl.create(:reading, :violation, user: user_with_recent_violations1, created_at: 2.days.ago)
+    FactoryGirl.create(:reading, :violation, user: user_with_recent_violations1, created_at: 2.days.ago)
+    FactoryGirl.create(:reading, :violation, user: user_with_recent_violations1, created_at: 1.days.ago)
 
-    create_violation(user_with_recent_violations2, 2.days.ago)
-    create_reading(user_with_recent_violations2, 78)
+    FactoryGirl.create(:reading, user: user_with_recent_violations1, temp: 77)
+
+    FactoryGirl.create(:reading, :violation, user: user_with_recent_violations2, created_at: 2.days.ago)
+    FactoryGirl.create(:reading, user: user_with_recent_violations2, temp: 78)
   end
 
   context "violation table" do
@@ -40,8 +41,8 @@ describe "Advocate's Tenant Dashboard", type: :feature do
 
     it "does not show users you are not associated with" do
       other_user = FactoryGirl.create(:user)
-      create_violation(other_user, 2.days.ago)
-      create_violation(other_user, 1.days.ago)
+      FactoryGirl.create(:reading, :violation, user: other_user, created_at: 2.days.ago)
+      FactoryGirl.create(:reading, :violation, user: other_user, created_at: 1.days.ago)
 
       visit user_path(admin)
 
@@ -70,14 +71,6 @@ describe "Advocate's Tenant Dashboard", type: :feature do
         expect(page.all("tbody tr td a.fa-wrench").length).to be 0
       end
     end
-  end
-
-  def create_violation(user, time)
-    FactoryGirl.create(:reading, user: user, created_at: time, outdoor_temp: 30, temp: 30)
-  end
-
-  def create_reading(user, temp)
-    FactoryGirl.create(:reading, user: user, created_at: 1.hour.ago, outdoor_temp: 32, temp: temp)
   end
 
   def expected_text_for(user, violations_count)
