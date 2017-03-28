@@ -35,7 +35,12 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
+    stripped_params = user_params.inject({}) do |params, (key, value)|
+      params[key] = value.try(:strip)
+      params
+    end
+
+    @user = User.new(stripped_params)
     if @user.valid?
       @user.building = Building.find_or_create_by(street_address: @user.address, zip_code: @user.zip_code)
       @user.save

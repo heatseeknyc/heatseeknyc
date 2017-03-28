@@ -369,6 +369,16 @@ describe UsersController, type: :controller do
       expect(user.building).to eq(building)
     end
 
+    it "creates user and trims whitespace from user input" do
+      new_user = build(:user, address: " 123 Fake St ", first_name: "Kevin  ", last_name: "Tenant  ")
+      post :create, user: new_user.attributes.merge(password: 'password', password_confirmation: 'password')
+
+      user = User.last
+      expect(user.first_name).to eq("Kevin")
+      expect(user.last_name).to eq("Tenant")
+      expect(user.address).to eq("123 Fake St")
+    end
+
     it "creates user and associates with a new building", :vcr do
       new_user = build(:user)
       post :create, user: new_user.attributes.merge(password: 'password', password_confirmation: 'password')
