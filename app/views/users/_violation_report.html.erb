@@ -30,16 +30,19 @@
           <td class="numeric <%= 'severe-temp' if user.current_temp_is_severe %>" data-value="<%= user.current_temp %>"><%= user.current_temp_string %></td>
           <td>
             <%= link_to "",
-                user_collaboration_path(@user, collaboration),
-                method: :delete,
-                :class => "fa fa-times fa-lg",
-                data: {
-                    confirm: "You are removing this tenant from your list of tenants. Are you sure you want to do this? This action cannot be undone.",
-                    remote: true
-                }
+              user_collaboration_path(@user, collaboration),
+              method: :delete,
+              :class => "fa fa-times fa-lg",
+              data: {
+                  confirm: "You are removing this tenant from your list of tenants. Are you sure you want to do this? This action cannot be undone.",
+                  remote: true
+              },
+              title: "Remove Tenant"
             %>
             <% if @user.admin_or_more_powerful? %>
-              <%= link_to "", edit_user_path(user), :class => "fa fa-wrench fa-lg" %>
+              <%= link_to "", edit_user_path(user),
+                  class: "fa fa-wrench fa-lg",
+                  title: "Edit" %>
             <% end %>
           </td>
         </tr>

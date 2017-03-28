@@ -5,7 +5,12 @@
       <li class="sidebar-li">
         <a href="/users/<%= r.id %>" class="user-link"><%= r.first_name %> <%= r.last_name %></a>
         <p class="address_zip"><%= "#{r.address}, #{r.zip_code}" %></p>
-        <%= link_to "", user_collaborations_path(current_user, collaborator_id: r), method: :post, :class => "fa fa-plus add-user-link add-user-link-from-search" %>
+        <%= link_to "",
+          user_collaborations_path(current_user, collaborator_id: r),
+          method: :post,
+          class: "fa fa-plus add-user-link add-user-link-from-search",
+          title: "Add Tenant"
+        %>
         <br>
       </li>
     <% end %>
