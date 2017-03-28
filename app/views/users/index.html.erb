@@ -1,31 +1,52 @@
-<br>
-<div class="col-xs-6 container">
-  <h1 id="collaborator-h1" class="text-center">Users</h1>
-  <table class="table">
-    <tbody>
-    <% @users.each do |u| %>
-      <% if current_user.super_user? %>
-        <tr class="user-row">
-          <td class="user-name">
-            <%= link_to u.name, user_path(u) %>
-          </td>
-          <td class="user-name">
-            <%= u.permissions_level %>
-          </td>
-        </tr>
-      <% else %>
-        <tr class="user-row">
-          <td class="user-name">
-            <%= u.name %>
-          </td>
-          <td class="add-user">
-            <% if u.tenant? && !current_user.collaborators.include?(u) %>
-              <%= link_to "", user_collaborations_path(current_user, collaborator_id: u.id), method: :post, class: "fa fa-plus fa-2x add-user-link" %>
-            <% end %>
-          </td>
-        </tr>
+<div class="bg-blue">
+  <div class="container user-index-container">
+    <div class="row back-button">
+      <% if current_user.permissions <= 50 %>
+          <i class="fa fa-long-arrow-left"></i>
+          <%= link_to " Back", :back %>
       <% end %>
-    <% end %>
-    </tbody>
-  </table>
+    </div>
+    <div class="row">
+      <h1 id="collaborator-h1">Users</h1>
+      <div class="table-container">
+        <table class="table bg-white">
+          <thead>
+            <th>Name</th>
+            <th><%= current_user.super_user? ? "User type" : "Add tenant" %></th>
+            <% if current_user.super_user? %>
+              <th>Manage<th>
+            <% end %>
+          </thead>
+          <tbody>
+          <% @users.each do |u| %>
+            <% if current_user.super_user? %>
+              <tr class="user-row">
+                <td class="user-name">
+                  <%= link_to u.name, user_path(u) %>
+                </td>
+                <td class="user-name">
+                  <%= u.permissions_level %>
+                </td>
+                <td>
+                  <%= link_to "", edit_user_path(u), :class => "fa fa-wrench fa-2x" %>
+                </td>
+              </tr>
+            <% else %>
+              <tr class="user-row">
+                <td class="user-name">
+                  <%= u.name %>
+                </td>
+                <td class="add-user">
+                  <% if u.tenant? && !current_user.collaborators.include?(u) %>
+                    <%= link_to "", user_collaborations_path(current_user, collaborator_id: u.id), method: :post, class: "fa fa-plus fa-2x add-user-link" %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>

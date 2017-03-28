@@ -1,0 +1,17 @@
+@import 'shared';
+
+.user-index-container {
+  h1 {
+    margin-bottom: 20px ;
+  }
+  thead th {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  .table-container {
+    padding: 40px;
+  }
+  .fa {
+    color: $theme-orange;
+  }
+}

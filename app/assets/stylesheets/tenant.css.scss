@@ -4,6 +4,16 @@
   background-color: $theme-blue;
 }
 
+.back-button {
+  color: $theme-red;
+  padding: 15px 0px 0px 15px;
+  font-size: 14px;
+
+  a:hover {
+    color: $theme-red;
+  }
+}
+
 .user-info-desktop {
   font-family: "Source Sans Pro";
   @media (max-width: 767px) {
@@ -18,15 +28,6 @@
   h2 {
     font-size: 20px;
     margin: 0;
-  }
-  .back-button {
-    color: $theme-red;
-    padding: 15px 0px 0px 15px;
-    font-size: 14px;
-
-    a:hover {
-      color: $theme-red;
-    }
   }
 }
 

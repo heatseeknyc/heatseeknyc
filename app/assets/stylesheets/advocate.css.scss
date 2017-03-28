@@ -24,12 +24,12 @@
 }
 
 #q {
-	color: $theme-black;
-	background-color: $theme-white;
-	border: solid 1px #789ca4;
-	border-radius: 0;
-	margin: 20px 0;
-	display: inline-block;
+  color: $theme-black;
+  background-color: $theme-white;
+  border: solid 1px #789ca4;
+  border-radius: 0;
+  margin: 20px 0;
+  display: inline-block;
 
   &:focus {
     box-shadow: none;
@@ -167,7 +167,6 @@ table.violations-report {
 }
 
 .add-user {
-  text-align: center;
   a {
     margin-top: 5px;
   }
@@ -187,12 +186,12 @@ table.violations-report {
 }
 
 .admin-button {
-	background-color: $theme-blue;
-	border: solid 3px $theme-black;
-	font-size: 1.8em;
+  background-color: $theme-blue;
+  border: solid 3px $theme-black;
+  font-size: 1.8em;
   font-family: Oswald;
   font-weight: 400;
-	margin: 20px 0;
+  margin: 20px 0;
   color: $theme-black;
   padding-left: 12px;
   display: inline-block;
