@@ -2,7 +2,12 @@
 <div class="advocate-layout clearfix">
   <div class="container">
     <div class="col-xs-12 container" id="permissions-show-div">
-      <h3>Hello, <%= @user.first_name %>!</h3>
+      <div class="row">
+        <div class="col-xs-12">
+          <h1 id="collaborator-h1">My Tenants</h1>
+        </div>
+      </div>
+
       <% if @user.super_user? %>
         <div class="row">
           <div class="col-xs-5 search-box search-form">
@@ -35,7 +40,6 @@
       <% if current_user.is_demo_user? %>
         <p><%= "The Demo Lawyer cannot access data for actual users, and changes are automatically reset." %></p>
       <% end %>
-      <br>
       <div id="append-violations">
         <%= render "violation_report" %>
       </div>
