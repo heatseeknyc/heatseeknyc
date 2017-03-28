@@ -37,6 +37,9 @@
 }
 
 .download-container {
+  text-transform: uppercase;
+  font-weight: bold;
+
   @media (min-width: 768px) {
     float: right;
   }
@@ -58,6 +61,7 @@
     color: $theme-black;
     font-family: 'Oswald';
     margin: 5px;
+    font-weight: bold;
 
     &:hover {
       color: $theme-white;
