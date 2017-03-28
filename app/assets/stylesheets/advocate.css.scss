@@ -6,7 +6,7 @@
   background-color: white;
   list-style-type: none;
   margin: 1px 0 0 0;
-  border-bottom: 3px solid $theme-orange;
+  border-bottom: 3px solid $theme-blue;
 }
 
 .sidebar-li .user-link {
@@ -24,18 +24,36 @@
 }
 
 #q {
-  width: 200px;
-  float: right;
-  color: $theme-black;
-  background-color: $theme-orange;
-  border: solid 3px $theme-black;
-  border-radius: 0;
-  margin-right: 5px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+	color: $theme-black;
+	background-color: $theme-white;
+	border: solid 1px #789ca4;
+	border-radius: 0;
+	margin: 20px 0;
+	display: inline-block;
 
   &:focus {
     box-shadow: none;
+  }
+}
+
+.search-input-container {
+  position: relative;
+
+  .form-control {
+    height: auto;
+    font-size: 20px;
+  }
+
+  .search-icon {
+    position: absolute;
+    top: 38%;
+    right: 7px;
+    border: none;
+    background-color: transparent;
+
+    .fa-search {
+      font-size: 1.6em;
+    }
   }
 }
 
@@ -84,22 +102,30 @@
   text-align: center;
   width: 40px;
 
-  &:hover {
+  &:link {
+    color: $theme-blue;
+  }
+
+	&:hover {
     color: $theme-white;
-    background-color: $theme-orange;
+    background-color: $theme-blue;
+    text-decoration: none;
+  }
+
+	&:visited {
     text-decoration: none;
   }
 
   @media (min-width: 480px) {
-    width: 83px;
-  }
+		width: 83px;
+	}
 }
 
 .add-user-link-from-search {
   height: 78px;
   float: right;
   margin-top: -65px;
-  border-left: 4px solid $theme-orange;
+  border-left: 4px solid $theme-blue;
 }
 
 .table a {
@@ -158,14 +184,33 @@ table.violations-report {
   float: left;
 }
 
+.admin-button-container {
+  margin-right: 1.6em;
+}
+
 .admin-button {
-  background-color: $theme-orange;
-  border: solid 3px $theme-black;
-  height: 34px;
-  margin: 20px 0;
+	background-color: $theme-blue;
+	border: solid 3px $theme-black;
+	font-size: 1.8em;
+  font-family: Oswald;
+  font-weight: 400;
+	margin: 20px 0;
   color: $theme-black;
-  font-weight: bolder;
-  padding: 8px 15px;
+  padding-left: 12px;
+  display: inline-block;
+  line-height: 2em;
+
+  .admin-button-icon {
+    display: inline-block;
+    background: $theme-black;
+    color: $theme-white;
+    margin: 0 -1px 0 12px;
+    padding: 0 9px;
+    width: 42px;
+    text-align: center;
+    font-size: 1.3em;
+    font-family: SourceSansPro;
+  }
 
   &:hover, &:visited, &:link {
     color: $theme-black;
@@ -177,11 +222,6 @@ table.violations-report {
   float: right;
   font-size: 1em;
   padding: 5px;
-}
-
-.admin-button-container {
-  display: inline-block;
-  margin: 25px 5px 12px 0;
 }
 
 .collaborators-sidebar {

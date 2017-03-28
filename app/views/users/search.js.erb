@@ -5,11 +5,11 @@
 <% elsif current_user.is_demo_user? %>
   $(".alert").remove();
   $("#search-results").remove();
-  $(".search-box").append('<%= j render "demo_search_results" %>');
+  $(".search-results-container").html('<%= j render "demo_search_results" %>');
     addUserFunction();
 <% else %>
   $(".alert").remove();
   $("#search-results").remove();
-  $(".search-box").append('<%= j render "search_results" %>');
+  $(".search-results-container").html('<%= j render "search_results" %>');
     addUserFunction();
 <% end %>
