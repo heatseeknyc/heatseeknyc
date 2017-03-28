@@ -34,6 +34,7 @@ $theme-orange-darken-3: #7F6040;
 $theme-orange-lighten-1: #FDB873;
 $theme-orange-lighten-2: #FBD7B2;
 $theme-orange-lighten-3: #F9F5F2;
+$theme-orange-lighten-4: #C30016;
 
 $theme-orange-red-1: #FE8126;
 $theme-orange-red-2: #FC6918;
@@ -48,6 +49,7 @@ $theme-blue-darken-3: #2C4D55;
 $theme-blue-lighten-1: #C8DCE0;
 $theme-blue-lighten-2: #E0EAED;
 $theme-blue-lighten-3: #F9F9F9;
+$theme-blue-lighten-4: #43A2E1;
 
 $theme-blue-orange-1: #CABC9E;
 $theme-blue-orange-2: #E4AB69;
@@ -60,12 +62,15 @@ $theme-black-lighten-2: #616364;
 $theme-black-lighten-1: #434547;
 
 $theme-grey: #9D9E9F;
+$theme-grey-dark: #333333;
 
 $theme-grey-lighten-1: #BBBCBC;
 $theme-grey-lighten-2: #D9D9DA;
 $theme-grey-lighten-3: #F7F7F7;
+$theme-gray-lighten-4: #E0E0E0;
 
 $theme-white: #F7F7F7;
+$theme-true-white: #FFFFFF;
 
 $theme-black-blue-1: #535F62;
 $theme-black-blue-2: #81969B;
@@ -140,7 +145,7 @@ main {
 
   &:hover {
     background-color: #000;
-    color: #fff !important;
+    color: $theme-true-white !important;
     text-decoration: none;
     cursor: pointer;
   }
@@ -151,5 +156,5 @@ main {
 }
 
 .bg-white {
-  background-color: #FFF;
+  background-color: $theme-true-white;
 }

@@ -7,12 +7,14 @@ table[data-sortable].sortable-theme-bootstrap {
     }
   }
 
-  th, td {
-    padding: 12px 26px 12px 12px;
+  td, th {
+    padding: 20px;
+    font-size: 18px;
   }
 
   th {
-    font-size: 16px;
+    vertical-align: top;
+    padding-bottom: 5px;
   }
 
   th:after {
@@ -32,10 +34,8 @@ table[data-sortable].sortable-theme-bootstrap {
     content: "\f0de";
   }
 }
+
 table[data-sortable].sortable-theme-bootstrap {
   font-family: 'Source Sans Pro', 'sans-serif';
 }
 
-.violations-report .numeric {
-  text-align: right;
-}

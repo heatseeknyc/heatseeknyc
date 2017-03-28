@@ -222,6 +222,10 @@ class User < ActiveRecord::Base
     current_temp ? "#{current_temp}°" : "N/A"
   end
 
+  def current_temp_is_severe
+    current_temp ? current_temp <= 60 : false
+  end
+
   def has_readings?
     !readings.empty?
   end

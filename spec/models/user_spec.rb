@@ -228,9 +228,28 @@ describe User, :vcr do
       end
     end
 
+    context "when user's last reading was not severe" do
+      let!(:reading) { create(:reading, user: user, temp: 65) }
+
+      it "current temp is not too severe" do
+        expect(user.current_temp_is_severe).to eq(false)
+      end
+    end
+
+    context "when user's last reading was severe" do
+      let!(:reading) { create(:reading, user: user, temp: 60) }
+
+      it "current temp is not too severe" do
+        expect(user.current_temp_is_severe).to eq(true)
+      end
+    end
+
     context "when user has no readings" do
       it "returns nil" do
         expect(user.current_temp).to be_nil
+      end
+      it "current temp is not too severe" do
+        expect(user.current_temp_is_severe).to eq(false)
       end
     end
   end
