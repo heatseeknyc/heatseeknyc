@@ -305,4 +305,8 @@ class User < ActiveRecord::Base
       newest_reading.created_at.strftime(format)
     end
   end
+
+  def get_collaboration_with_user(user)
+    self.collaborations.find_by(collaborator: user)
+  end
 end

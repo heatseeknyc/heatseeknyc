@@ -12,42 +12,40 @@
         <table class="table bg-white">
           <thead>
             <th>Name</th>
-            <th><%= current_user.super_user? ? "User type" : "Add tenant" %></th>
-            <% if current_user.super_user? %>
-              <th>Manage<th>
-            <% end %>
+            <th>User type</th>
+            <th>Manage<th>
           </thead>
           <tbody>
           <% @users.each do |u| %>
-            <% if current_user.super_user? %>
-              <tr class="user-row">
-                <td class="user-name">
-                  <%= link_to u.name, user_path(u) %>
-                </td>
-                <td class="user-name">
-                  <%= u.permissions_level %>
-                </td>
-                <td>
-                  <%= link_to "", edit_user_path(u), :class => "fa fa-wrench fa-2x" %>
-                </td>
-              </tr>
-            <% else %>
-              <tr class="user-row">
-                <td class="user-name">
-                  <%= u.name %>
-                </td>
-                <td class="add-user">
-                  <% if u.tenant? && !current_user.collaborators.include?(u) %>
-                    <%= link_to "",
-                      user_collaborations_path(current_user, collaborator_id: u.id),
-                      method: :post,
-                      class: "fa fa-plus fa-2x add-user-link",
-                      title: "Add Tenant"
-                    %>
-                  <% end %>
-                </td>
-              </tr>
-            <% end %>
+            <tr class="user-row">
+              <td class="user-name">
+                <%= link_to u.name, user_path(u) %>
+              </td>
+              <td class="user-name">
+                <%= u.permissions_level %>
+              </td>
+              <td>
+                <%= link_to "", edit_user_path(u), class: "fa fa-wrench fa-2x", title: "Edit" %>
+                <% if u.tenant? && current_user.collaborators.include?(u) %>
+                  <%= link_to "",
+                    user_collaboration_path(current_user, current_user.get_collaboration_with_user(u)),
+                    method: :delete,
+                    :class => "fa fa-times fa-2x red",
+                    data: {
+                        confirm: "You are removing this tenant from your list of tenants. Are you sure you want to do this? This action cannot be undone.",
+                    },
+                    title: "Remove Tenant"
+                  %>
+                <% elsif u.tenant? %>
+                  <%= link_to "",
+                    user_collaborations_path(current_user, collaborator_id: u.id),
+                    method: :post,
+                    class: "fa fa-plus fa-2x",
+                    title: "Add Tenant"
+                  %>
+                <% end %>
+              </td>
+            </tr>
           <% end %>
           </tbody>
         </table>

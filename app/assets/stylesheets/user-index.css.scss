@@ -11,7 +11,11 @@
   .table-container {
     padding: 40px;
   }
-  .fa {
+  table .fa {
     color: $theme-orange;
+    padding-right: 5px;
+  }
+  table .red {
+    color: $theme-red;
   }
 }

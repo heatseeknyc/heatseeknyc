@@ -253,4 +253,23 @@ describe User, :vcr do
       end
     end
   end
+
+  describe "#get_collaboration_with_user" do
+    context "when there is a collaboration with the user" do
+      it "returns the collaboration" do
+        user1 = create(:user)
+        user2 = create(:user)
+        collaboration = Collaboration.create(user: user1, collaborator: user2)
+        expect(user1.get_collaboration_with_user(user2)).to eq(collaboration)
+      end
+    end
+
+    context "when there is no collaboration with the user" do
+      it "returns no collaboration" do
+        user1 = create(:user)
+        user2 = create(:user)
+        expect(user1.get_collaboration_with_user(user2)).to eq(nil)
+      end
+    end
+  end
 end
