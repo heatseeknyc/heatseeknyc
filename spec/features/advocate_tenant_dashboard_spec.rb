@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "Lawyer's Tenant Dashboard", type: :feature do
+describe "Advocate's Tenant Dashboard", type: :feature do
   let!(:admin) { login_as_admin }
 
   let(:user_with_no_violations) { FactoryGirl.create(:user) }
@@ -63,7 +63,7 @@ describe "Lawyer's Tenant Dashboard", type: :feature do
         expect(page).to have_text expected_text_for(user_with_old_violations, 0)
       end
 
-      admin.update(permissions: User::PERMISSIONS[:lawyer])
+      admin.update(permissions: User::PERMISSIONS[:advocate])
       visit user_path(admin)
       within ".violations-report" do
         expect(page.all("tbody tr td a.fa-times").length).to be 4

@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
     super_user: 0,
     team_member: 10,
     admin: 25,
-    lawyer: 50,
+    advocate: 50,
     user: 100
   }.freeze
 

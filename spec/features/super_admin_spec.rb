@@ -2,12 +2,12 @@ require "spec_helper"
 
 feature "Super User" do
   let(:tenant) { create(:tenant) }
-  let(:lawyer) { create(:advocate) }
 
   context "after successful login" do
     before(:each) do
       login_as_super_user
     end
+
     scenario "goes to any tenant show page" do
       visit user_path(tenant)
 

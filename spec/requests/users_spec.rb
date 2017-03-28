@@ -35,7 +35,7 @@ describe "users API", type: :request do
   end
 
   it "excludes non-tenant accounts" do
-    user3 = create(:user, permissions: 50, address: "123 Lawyer St")
+    user3 = create(:user, permissions: 50, address: "123 Advocate St")
     user3.readings << create(:reading, created_at: time)
     get "addresses.json"
 

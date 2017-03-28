@@ -57,7 +57,7 @@ class UsersController < ApplicationController
         if @user.tenant? && current_user.able_to_see_tenant(@user)
           @analytics_page = "User Dashboard"
           render :show
-        elsif @user.lawyer_or_more_powerful? && current_user.able_to_see_non_tenant(@user)
+        elsif @user.advocate_or_more_powerful? && current_user.able_to_see_non_tenant(@user)
           @analytics_page = "Advocate Dashboard"
           render :permissions_show
         else

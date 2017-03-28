@@ -111,13 +111,13 @@ jamie = User.find_by(email: 'jamie@heatseeknyc.com')
 jake = User.find_by(email: 'jake@heatseeknyc.com')
 demo = User.find_by(email: 'demo-user@heatseeknyc.com')
 live = User.find_by(email: 'live-update@heatseeknyc.com')
-june = User.find_by(email: 'tenant_for_lawyer@heatseeknyc.com')
+june = User.find_by(email: 'tenant_for_advocate@heatseeknyc.com')
 users = [jane, john, jake, demo, live]
 
-lawyer = User.find_by(email: 'demo-lawyer@heatseeknyc.com')
-lawyer.permissions = 50
-lawyer.collaborators = [june]
-lawyer.save
+demo_lawyer = User.find_by(email: 'demo-lawyer@heatseeknyc.com')
+demo_lawyer.permissions = 50
+demo_lawyer.collaborators = [june]
+demo_lawyer.save
 
 team_member = User.find_by(email: 'team-member@heatseeknyc.com')
 team_member.permissions = 10

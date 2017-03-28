@@ -3,7 +3,7 @@ require 'spec_helper'
 describe UsersController, type: :controller do
   let(:tenant) { create(:user) }
   let(:stranger) { create(:user) }
-  let(:lawyer) { create(:user, permissions: User::PERMISSIONS[:lawyer]) }
+  let(:advocate) { create(:user, permissions: User::PERMISSIONS[:advocate]) }
   let(:admin) { create(:user, permissions: User::PERMISSIONS[:admin]) }
   let(:team_member) { create(:user, permissions: User::PERMISSIONS[:team_member]) }
   let(:super_user) { create(:user, permissions: User::PERMISSIONS[:super_user]) }
@@ -31,11 +31,11 @@ describe UsersController, type: :controller do
       end
     end
 
-    context "when current user is a lawyer" do
+    context "when current user is an advocate" do
       before :each do
-        lawyer.collaborators << tenant
-        lawyer.save
-        sign_in lawyer
+        advocate.collaborators << tenant
+        advocate.save
+        sign_in advocate
       end
 
       context "and they visit a tenant with whom they collaborate" do
@@ -49,7 +49,7 @@ describe UsersController, type: :controller do
       context "and they visit a tenant with whom they do not collaborate" do
         it "redirects to their own page" do
           get :show, id: stranger.id
-          expect(response).to redirect_to(user_path(lawyer))
+          expect(response).to redirect_to(user_path(advocate))
         end
       end
     end
@@ -75,9 +75,9 @@ describe UsersController, type: :controller do
         end
       end
 
-      context "and they visit a lawyer's page" do
-        it "shows the lawyer page" do
-          get :show, id: lawyer.id
+      context "and they visit an advocate's page" do
+        it "shows the advocate page" do
+          get :show, id: advocate.id
           expect(response.status).to eq(200)
           expect(response).to render_template "permissions_show"
         end
@@ -112,9 +112,9 @@ describe UsersController, type: :controller do
         end
       end
 
-      context "and they visit a lawyer's page" do
-        it "shows the lawyer page" do
-          get :show, id: lawyer.id
+      context "and they visit an advocate's page" do
+        it "shows the advocate page" do
+          get :show, id: advocate.id
           expect(response.status).to eq(200)
           expect(response).to render_template "permissions_show"
         end
@@ -149,9 +149,9 @@ describe UsersController, type: :controller do
         end
       end
 
-      context "and they visit a lawyer's page" do
-        it "shows the lawyer's page" do
-          get :show, id: lawyer.id
+      context "and they visit an advocate's page" do
+        it "shows the advocate's page" do
+          get :show, id: advocate.id
           expect(response.status).to eq(200)
           expect(response).to render_template "permissions_show"
         end
@@ -244,7 +244,7 @@ describe UsersController, type: :controller do
 
       expect(response).to redirect_to(root_path)
 
-      sign_in lawyer
+      sign_in advocate
       get :edit, id: tenant
 
       expect(response).to redirect_to(root_path)
@@ -269,7 +269,7 @@ describe UsersController, type: :controller do
 
       expect(response).to redirect_to(root_path)
 
-      sign_in lawyer
+      sign_in advocate
       put :update, params
 
       expect(response).to redirect_to(root_path)

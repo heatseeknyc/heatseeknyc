@@ -87,34 +87,34 @@ describe User, :vcr do
   end
 
   describe "collaborations_with_violations" do
-    let(:lawyer) { create(:user, permissions: 50) }
-    let(:tenant_with_violations) { create(:user, permissions: 100) }
-    let(:tenant_with_no_violations) { create(:user, permissions: 100) }
-    let(:tenant_with_old_violations) { create(:user, permissions: 100) }
+    let(:advocate) { create(:user, :advocate) }
+    let(:tenant_with_violations) { create(:user, :tenant) }
+    let(:tenant_with_no_violations) { create(:user, :tenant) }
+    let(:tenant_with_old_violations) { create(:user, :tenant) }
 
     before(:each) do
-      create(:collaboration, :user_id => lawyer.id, :collaborator_id => tenant_with_no_violations.id)
+      create(:collaboration, :user_id => advocate.id, :collaborator_id => tenant_with_no_violations.id)
 
-      create(:collaboration, :user_id => lawyer.id, :collaborator_id => tenant_with_violations.id)
+      create(:collaboration, :user_id => advocate.id, :collaborator_id => tenant_with_violations.id)
       create(:reading, :violation, user: tenant_with_violations)
 
-      create(:collaboration, :user_id => lawyer.id, :collaborator_id => tenant_with_old_violations.id)
+      create(:collaboration, :user_id => advocate.id, :collaborator_id => tenant_with_old_violations.id)
       create(:reading, :violation, user: tenant_with_old_violations, created_at: 5.days.ago)
     end
 
     it "finds all collaborations" do
-      expect(lawyer.collaborations_with_violations.length).to be 3
+      expect(advocate.collaborations_with_violations.length).to be 3
     end
 
     it "includes violation_count" do
-      collaborations = lawyer.collaborations_with_violations
+      collaborations = advocate.collaborations_with_violations
       expect(collaborations.find_by(collaborator: tenant_with_no_violations).violations_count).to be 0
       expect(collaborations.find_by(collaborator: tenant_with_violations).violations_count).to be 1
       expect(collaborations.find_by(collaborator: tenant_with_old_violations).violations_count).to be 0
     end
 
     it "orders collaborations by violation count" do
-      violations_counts = lawyer.collaborations_with_violations.to_ary.map(&:violations_count)
+      violations_counts = advocate.collaborations_with_violations.to_ary.map(&:violations_count)
       expect(violations_counts.sort.reverse).to eq violations_counts
     end
   end
@@ -127,12 +127,12 @@ describe User, :vcr do
 
 		it "understands permissions" do
 			admin = create(:user, permissions: 25)
-			lawyer = create(:user, permissions: 50)
+			advocate = create(:user, permissions: 50)
 			user8 = create(:user)
 			expect(admin.admin_or_more_powerful?).to be(true)
-			expect(lawyer.lawyer?).to be(true)
+			expect(advocate.advocate?).to be(true)
 			expect(user8.admin_or_more_powerful?).to be(false)
-			expect(user8.lawyer?).to be(false)
+			expect(user8.advocate?).to be(false)
 		end
 	end
 
@@ -160,7 +160,7 @@ describe User, :vcr do
       user = create(:admin)
       expect(user.list_permission_level_and_lower).to eq(
         admin: 25,
-        lawyer: 50,
+        advocate: 50,
         user: 100
       )
     end

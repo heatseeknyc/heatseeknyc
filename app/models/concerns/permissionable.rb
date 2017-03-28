@@ -4,17 +4,17 @@ module Permissionable
       self.id == tenant.id ||
       self.super_user? ||
       self.admin_or_more_powerful? ||
-      self.lawyer_or_more_powerful? && self.collaborators.include?(tenant)
+      self.advocate_or_more_powerful? && self.collaborators.include?(tenant)
     end
 
     def able_to_see_non_tenant(non_tenant)
       self.id == non_tenant.id ||
       self.super_user? ||
-      non_tenant.lawyer? && self.admin_or_more_powerful?
+      non_tenant.advocate? && self.admin_or_more_powerful?
     end
 
-    def lawyer_or_more_powerful?
-      permissions_at_or_more_powerful_than(:lawyer)
+    def advocate_or_more_powerful?
+      permissions_at_or_more_powerful_than(:advocate)
     end
 
     def admin_or_more_powerful?
@@ -29,8 +29,8 @@ module Permissionable
       has_permissions_for(:user)
     end
 
-    def lawyer?
-      has_permissions_for(:lawyer)
+    def advocate?
+      has_permissions_for(:advocate)
     end
 
     def admin?
