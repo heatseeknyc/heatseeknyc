@@ -15,11 +15,5 @@ feature "Super User" do
       expect(page).to have_link("PDF", href: pdf_download_path(tenant))
       expect(page).to have_link("CSV", href: csv_download_path(tenant))
     end
-
-    scenario "goes to a lawyer's page" do
-      visit user_path(lawyer)
-
-      expect(page).to have_content "Hello, #{lawyer.first_name}!"
-    end
   end
 end
