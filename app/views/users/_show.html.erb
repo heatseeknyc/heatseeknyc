@@ -4,8 +4,9 @@
   <div class="container user-info-desktop">
     <div class="row back-button">
       <% if current_user.permissions <= 50 %>
-          <i class="fa fa-long-arrow-left"></i>
-          <%= link_to " Back", :back %>
+        <%= link_to :back do %>
+          <i class="fa fa-long-arrow-left"></i> Back
+        <% end %>
       <% end %>
     </div>
     <div class="row">
