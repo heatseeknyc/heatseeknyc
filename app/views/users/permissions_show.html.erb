@@ -9,10 +9,11 @@
           </div>
         </div>
 
-        <% if @user.super_user? %>
+        <% if current_user.super_user? && @user.advocate_or_more_powerful? %>
             <div class="row">
               <div class="col-xs-5 search-box search-form">
                 <%= form_tag search_user_path, method: :get, id: "search-form", remote: true do %>
+                    <%= hidden_field_tag :search_user_id, @user.id %>
                     <div class="search-input-container">
                       <%= text_field_tag :q, "", :class => "form-control", placeholder: "Find user..." %>
                       <button class="search-icon"><i class="fa fa-search"></i></button>

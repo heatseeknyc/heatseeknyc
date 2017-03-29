@@ -106,6 +106,7 @@ class UsersController < ApplicationController
 
   def search
     @query = params[:q]
+    @user = User.find(params[:search_user_id])
     @results = current_user.search(@query)
 
     respond_to do |f|
