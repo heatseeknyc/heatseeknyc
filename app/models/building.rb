@@ -9,7 +9,6 @@ class Building < ActiveRecord::Base
   validates :street_address, uniqueness: { scope: :zip_code, case_sensitive: false }
 
   geocoded_by :zip_code
-  after_validation :geocode
 
   reverse_geocoded_by :latitude, :longitude do |building, results|
     if geo = results.first
@@ -17,7 +16,13 @@ class Building < ActiveRecord::Base
       building.state = geo.state
     end
   end
-  after_validation :reverse_geocode
+
+  def set_location_data(params = {})
+    if zip_code != params[:zip_code]
+      geocode
+      reverse_geocode
+    end
+  end
 
   def self.for_tenant(tenant)
     Building.where("street_address ILIKE '%#{tenant.address}%'").first
