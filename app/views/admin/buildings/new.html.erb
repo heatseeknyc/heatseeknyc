@@ -1,7 +1,15 @@
-<%= render partial: "form",
-           locals: {
-             title: "Create Building",
-             resource: @building || Building.new,
-             url: admin_buildings_path,
-             action_label: "CREATE"
-           } %>
+<div class="container">
+  <div class="col-md-6">
+    <div class="row back-button">
+      <i class="fa fa-long-arrow-left"></i>
+      <%= link_to " Back", :back %>
+    </div>
+    <%= render partial: "form",
+               locals: {
+                 title: "Create Building",
+                 resource: @building || Building.new,
+                 url: admin_buildings_path,
+                 action_label: "CREATE"
+               } %>
+  </div>
+</div>
