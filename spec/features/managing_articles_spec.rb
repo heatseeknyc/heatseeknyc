@@ -11,7 +11,11 @@ feature "Managing articles" do
     login_as_team_member
     click_link "Articles"
 
-    expect(page).to have_content "Listing articles"
+    expect(page).to have_content "Articles"
+    [article1, article2, article3].each do |article|
+      expect(page).to have_content article.title
+      expect(page).to have_content article.description
+    end
   end
 
   scenario "Creating" do

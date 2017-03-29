@@ -54,7 +54,7 @@ describe "Advocate's Tenant Dashboard", type: :feature do
     it "shows all collaborators" do
       visit user_path(admin)
 
-      within ".violations-report" do
+      within ".styled-table" do
         expect(page.all("tbody tr").length).to be 4
         expect(page.all("tbody tr td a.fa-times").length).to be 4
         expect(page.all("tbody tr td a.fa-wrench").length).to be 4
@@ -66,7 +66,7 @@ describe "Advocate's Tenant Dashboard", type: :feature do
 
       admin.update(permissions: User::PERMISSIONS[:advocate])
       visit user_path(admin)
-      within ".violations-report" do
+      within ".styled-table" do
         expect(page.all("tbody tr td a.fa-times").length).to be 4
         expect(page.all("tbody tr td a.fa-wrench").length).to be 0
       end

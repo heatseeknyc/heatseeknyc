@@ -40,7 +40,7 @@ feature "Building management" do
     fill_in "Bin", with: "123456789"
     fill_in "Bbl", with: "123-4-5678"
 
-    click_button "CREATE"
+    click_button "Create Building"
 
     new_building = Building.last
     expect(new_building.property_name).to eq("New apartment")
@@ -51,7 +51,7 @@ feature "Building management" do
 
   scenario "Creating a building displays validation errors", :vcr do
     visit "/admin/buildings/new"
-    click_button "CREATE"
+    click_button "Create Building"
 
     expect(page).to have_content("Save failed due to errors.")
     expect(page).to have_content("can't be blank")
@@ -67,7 +67,7 @@ feature "Building management" do
     fill_in "Bin", with: "123456789"
     fill_in "Bbl", with: "123-4-5678"
 
-    click_button "UPDATE"
+    click_button "Update Building"
 
     expect(building.reload.property_name).to eq("Cold apartment")
     expect(current_path).to eq(edit_admin_building_path(building))
@@ -78,7 +78,7 @@ feature "Building management" do
     visit "/admin/buildings/#{building.id}/edit"
     fill_in "Street address", with: ""
 
-    click_button "UPDATE"
+    click_button "Update Building"
     expect(page).to have_content("Save failed due to errors.")
     expect(page).to have_content("can't be blank")
     expect(building.reload.street_address).to_not be_blank
