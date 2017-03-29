@@ -61,12 +61,6 @@
   }
 }
 
-h1.styled-header {
-  font-family: "Oswald";
-  font-size: 36px;
-  font-weight: 700;
-}
-
 .address_zip {
   font-size: 14px;
   font-family: 'Source Sans Pro', 'sans-serif';
@@ -90,44 +84,28 @@ h1.styled-header {
   float: right;
   margin-top: -65px;
   border-left: 4px solid $theme-blue-lighten-2;
+  padding-top: 30px;
+  text-align: center;
+  width: 40px;
+
+  &:link, &:visited {
+    color: $theme-blue;
+    text-decoration: none;
+  }
+
+  &:hover {
+    color: $theme-white;
+    background-color: $theme-blue;
+    text-decoration: none;
+  }
+
+  @media (min-width: 480px) {
+    width: 83px;
+  }
 }
 
 .search-form {
   float: left;
-}
-
-.admin-button-container {
-  margin-right: 1.6em;
-}
-
-.admin-button {
-  background-color: $theme-blue-lighten-2;
-  border: solid 3px $theme-black;
-  font-size: 1.8em;
-  font-family: Oswald;
-  font-weight: 400;
-  margin: 20px 0;
-  color: $theme-black;
-  padding-left: 12px;
-  display: inline-block;
-  line-height: 2em;
-
-  .admin-button-icon {
-    display: inline-block;
-    background: $theme-black;
-    color: $theme-white;
-    margin: 0 -1px 0 12px;
-    padding: 0 9px;
-    width: 42px;
-    text-align: center;
-    font-size: 1.3em;
-    font-family: SourceSansPro;
-  }
-
-  &:hover, &:visited, &:link {
-    color: $theme-black;
-    text-decoration: none;
-  }
 }
 
 #search-button {
