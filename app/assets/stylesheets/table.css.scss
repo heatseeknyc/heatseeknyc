@@ -72,34 +72,10 @@
       }
     }
 
-    .red {
-      color: $theme-red;
-    }
-
-    .severe-temp {
+    .red, .severe-temp {
       color: $theme-red-darken-1;
       font-weight: bold;
     }
   }
 }
 
-.user-settings-link, .remove-user-link, .add-user-link-from-search {
-  padding-top: 30px;
-  text-align: center;
-  width: 40px;
-
-  &:link, &:visited {
-    color: $theme-blue;
-    text-decoration: none;
-  }
-
-  &:hover {
-    color: $theme-white;
-    background-color: $theme-blue;
-    text-decoration: none;
-  }
-
-  @media (min-width: 480px) {
-    width: 83px;
-  }
-}
