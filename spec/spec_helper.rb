@@ -49,15 +49,6 @@ Spork.prefork do
       WebMock.stub_request(:get, /maps\.googleapis\.com/)
           .to_return(body: geocode_response)
     end
-
-    original_stdout = $stdout
-    config.before(:all) do
-      $stdout = File.open(File::NULL, "w")
-    end
-
-    config.after(:all) do
-      $stdout = original_stdout
-    end
   end
 end
 

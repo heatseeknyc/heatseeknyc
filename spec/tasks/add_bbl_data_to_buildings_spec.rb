@@ -10,8 +10,16 @@ describe AddBBLDataToBuildings do
   let!(:building1) { FactoryGirl.build(:building, {street_address: "212-13 N 52nd St", zip_code: 10001}) }
   let!(:building2) { FactoryGirl.build(:building, {street_address: "12 St John's Pl", zip_code: 10001}) }
 
-  before :each do
+  before :all do
+    @original_stdout = $stdout
+    $stdout = File.open(File::NULL, "w")
+  end
 
+  after :all do
+    $stdout = @original_stdout
+  end
+
+  before :each do
     building1.save
     building2.save
   end
@@ -23,7 +31,6 @@ describe AddBBLDataToBuildings do
                                                              bbl:            "1234567890"}) }
 
     before :each do
-
       WebMock.stub_request(:get, GEOCLIENT_MATCHER)
           .to_return(body: bbl1.to_json).then
           .to_return(body: bbl2.to_json)
