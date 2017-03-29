@@ -33,15 +33,24 @@ UserShowTempChartLine.prototype.drawDataLineWithoutTransitions = function() {
 };
 
 UserShowTempChartLine.prototype.drawDataLineWithTransitions = function() {
-  this.dataLine.enter().append('path')
-    .attr('class', 'data-line')
-    .style('opacity', 0.3)
-    .attr('d', this.lineDrawer(this.data))
-    .transition()
-    .delay(this.transitionDuration / 2)
-    .duration(this.transitionDuration)
-    .style('opacity', 1);
+  this.data.forEach(function(currentDataPoint, i) {
+    if(i < this.data.length - 1) {
+      var nextDataPoint = this.data[i + 1];
+      var line = this.dataLine.enter().append('path')
+        .attr('class', 'data-line')
+        .style('opacity', 0.3)
+        .attr('d', this.lineDrawer([currentDataPoint, nextDataPoint]))
+        .transition()
+        .delay(this.transitionDuration / 2)
+        .duration(this.transitionDuration)
+        .style('opacity', 1);
+      if (nextDataPoint.date - currentDataPoint.date > 3600000) {
+        line.style('stroke', 'gray');
+      }
+    }
+  }.bind(this));
 };
+
 
 UserShowTempChartLine.prototype.addToChart = function(){
   if ( this.hasTransitions ) {
@@ -49,4 +58,12 @@ UserShowTempChartLine.prototype.addToChart = function(){
   } else {
     this.drawDataLineWithoutTransitions();
   }
+};
+
+
+// Array Remove - By John Resig (MIT Licensed)
+Array.prototype.remove = function(from, to) {
+  var rest = this.slice((to || from) + 1 || this.length);
+  this.length = from < 0 ? this.length + from : from;
+  return this.push.apply(this, rest);
 };
