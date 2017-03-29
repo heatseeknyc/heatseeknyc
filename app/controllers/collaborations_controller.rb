@@ -21,7 +21,8 @@ class CollaborationsController < ApplicationController
   end
 
   def destroy
-    @collaboration = current_user.collaborations.find(params[:id])
+    load_user
+    @collaboration = @user.collaborations.find(params[:id])
     @collaboration.destroy
 
     respond_to do |f|
