@@ -1,48 +1,55 @@
 <% content_for :template, 'advocate' %>
+<div class="<%= "super-user-panel" if current_user.super_user? %>">
+  <div class="advocate-layout clearfix">
+    <div class="container">
+      <div id="permissions-show-div">
+        <div class="row">
+          <div class="col-xs-12">
+            <h1 id="collaborator-h1"><%= @user.first_name %>'s Tenants</h1>
+          </div>
+        </div>
+
+        <% if @user.super_user? %>
+            <div class="row">
+              <div class="col-xs-5 search-box search-form">
+                <%= form_tag search_user_path, method: :get, id: "search-form", remote: true do %>
+                    <div class="search-input-container">
+                      <%= text_field_tag :q, "", :class => "form-control", placeholder: "Find user..." %>
+                      <button class="search-icon"><i class="fa fa-search"></i></button>
+                    </div>
+                <% end %>
+              </div>
+              <div class="col-xs2 pull-right">
+                <div class="admin-button-container">
+                  <%= link_to new_user_path, class: "admin-button" do %>
+                      Add new user
+                      <div class="admin-button-icon">+</div>
+                  <% end %>
+                </div>
+              </div>
+              <div class="col-xs2 pull-right">
+                <div class="admin-button-container">
+                  <%= link_to users_path, class: "admin-button" do %>
+                      View all users
+                      <div class="admin-button-icon"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <div class="search-results-container clearfix"></div>
+        <% end %>
+        <% if current_user.is_demo_user? %>
+            <p><%= "The Demo Lawyer cannot access data for actual users, and changes are automatically reset." %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="advocate-layout clearfix">
   <div class="container">
-    <div class="col-xs-12 container" id="permissions-show-div">
-      <div class="row">
-        <div class="col-xs-12">
-          <h1 id="collaborator-h1"><%= @user.first_name %>'s Tenants</h1>
-        </div>
-      </div>
-
-      <% if @user.super_user? %>
-        <div class="row">
-          <div class="col-xs-5 search-box search-form">
-            <%= form_tag search_user_path, method: :get, id: "search-form", remote: true do %>
-              <div class="search-input-container">
-                <%= text_field_tag :q, "", :class => "form-control", placeholder: "Find user..." %>
-                <button class="search-icon"><i class="fa fa-search"></i></button>
-              </div>
-            <% end %>
-          </div>
-          <div class="col-xs2 pull-right">
-            <div class="admin-button-container">
-              <%= link_to new_user_path, class: "admin-button" do %>
-                Add new user
-                <div class="admin-button-icon">+</div>
-              <% end %>
-            </div>
-          </div>
-          <div class="col-xs2 pull-right">
-            <div class="admin-button-container">
-              <%= link_to users_path, class: "admin-button" do %>
-                View all users
-                <div class="admin-button-icon"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></div>
-              <% end %>
-            </div>
-          </div>
-        </div>
-        <div class="search-results-container clearfix"></div>
-      <% end %>
-      <% if current_user.is_demo_user? %>
-        <p><%= "The Demo Lawyer cannot access data for actual users, and changes are automatically reset." %></p>
-      <% end %>
-      <div id="append-violations">
-        <%= render "violation_report" %>
-      </div>
+    <div id="append-violations">
+      <%= render "violation_report" %>
     </div>
   </div>
 </div>

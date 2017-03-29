@@ -1,12 +1,16 @@
 @import "shared";
 
+.super-user-panel {
+  background-color: $theme-blue-lighten-2;
+}
+
 #collaborator-ul .sidebar-li {
   height: 80px;
   font-size: 23px;
   background-color: white;
   list-style-type: none;
   margin: 1px 0 0 0;
-  border-bottom: 3px solid $theme-blue;
+  border-bottom: 3px solid $theme-blue-lighten-2;
 }
 
 .sidebar-li .user-link {
@@ -100,17 +104,14 @@
   text-align: center;
   width: 40px;
 
-  &:link {
+  &:link, &:visited {
     color: $theme-blue;
-  }
-
-	&:hover {
-    color: $theme-white;
-    background-color: $theme-blue;
     text-decoration: none;
   }
 
-	&:visited {
+  &:hover {
+    color: $theme-white;
+    background-color: $theme-blue;
     text-decoration: none;
   }
 
@@ -123,7 +124,7 @@
   height: 78px;
   float: right;
   margin-top: -65px;
-  border-left: 4px solid $theme-blue;
+  border-left: 4px solid $theme-blue-lighten-2;
 }
 
 .table a {
@@ -149,7 +150,7 @@ table.violations-report {
 .table-container {
   background-color: $theme-true-white;
   padding-bottom: 40px;
-  margin-bottom: 50px;
+  margin: 35px 0 50px 0;
 }
 
 .tenant-name {
@@ -186,7 +187,7 @@ table.violations-report {
 }
 
 .admin-button {
-  background-color: $theme-blue;
+  background-color: $theme-blue-lighten-2;
   border: solid 3px $theme-black;
   font-size: 1.8em;
   font-family: Oswald;
