@@ -19,6 +19,11 @@
 $members: 'harold', 'daniel', 'tristan', 'doyun', 'william', 'tom', 'noelle',
 'jesse', 'rachel', 'emily', 'brendan', 'bryan';
 
+.container .core-team-member > div {
+  height: 239px;
+  width: 239px;
+}
+
 .core-team-member {
   margin-bottom: 20px;
   height: 570px;

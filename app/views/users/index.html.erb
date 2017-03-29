@@ -1,5 +1,5 @@
 <div class="bg-blue">
-  <div class="container user-index-container">
+  <div class="container">
     <div class="row back-button">
       <% if current_user.permissions <= 50 %>
           <i class="fa fa-long-arrow-left"></i>
@@ -7,13 +7,15 @@
       <% end %>
     </div>
     <div class="row">
-      <h1 id="collaborator-h1">Users</h1>
+      <h1 class="styled-header">Users</h1>
       <div class="table-container">
-        <table class="table bg-white">
+        <table class="table styled-table">
           <thead>
-            <th>Name</th>
-            <th>User type</th>
-            <th>Manage<th>
+            <tr>
+              <th>Name</th>
+              <th>User type</th>
+              <th>Manage</th>
+            </tr>
           </thead>
           <tbody>
           <% @users.each do |u| %>
@@ -21,16 +23,16 @@
               <td class="user-name">
                 <%= link_to u.name, user_path(u) %>
               </td>
-              <td class="user-name">
+              <td>
                 <%= u.permissions_level %>
               </td>
               <td>
-                <%= link_to "", edit_user_path(u), class: "fa fa-wrench fa-2x", title: "Edit" %>
+                <%= link_to "", edit_user_path(u), class: "fa fa-wrench fa-lg", title: "Edit" %>
                 <% if u.tenant? && current_user.collaborators.include?(u) %>
                   <%= link_to "",
                     user_collaboration_path(current_user, current_user.get_collaboration_with_user(u)),
                     method: :delete,
-                    :class => "fa fa-times fa-2x red",
+                    :class => "fa fa-times fa-lg red",
                     data: {
                         confirm: "You are removing this tenant from your list of tenants. Are you sure you want to do this? This action cannot be undone.",
                     },
@@ -40,7 +42,7 @@
                   <%= link_to "",
                     user_collaborations_path(current_user, collaborator_id: u.id),
                     method: :post,
-                    class: "fa fa-plus fa-2x",
+                    class: "fa fa-plus fa-lg",
                     title: "Add Tenant"
                   %>
                 <% end %>

@@ -61,7 +61,7 @@
   }
 }
 
-#collaborator-h1 {
+h1.styled-header {
   font-family: "Oswald";
   font-size: 36px;
   font-weight: 700;
@@ -78,20 +78,6 @@
   padding: 0;
 }
 
-#wrench {
-  height: 78px;
-  float: right;
-  margin-top: -65px;
-  border-left: 4px solid $theme-orange;
-}
-
-#edit {
-  height: 78px;
-  float: right;
-  margin-top: -65px;
-  border-left: 4px solid $theme-orange;
-}
-
 .advocate-layout {
   h3 {
     font-family: Oswald;
@@ -99,83 +85,11 @@
   }
 }
 
-.user-settings-link, .remove-user-link, .add-user-link-from-search {
-  padding-top: 30px;
-  text-align: center;
-  width: 40px;
-
-  &:link, &:visited {
-    color: $theme-blue;
-    text-decoration: none;
-  }
-
-  &:hover {
-    color: $theme-white;
-    background-color: $theme-blue;
-    text-decoration: none;
-  }
-
-  @media (min-width: 480px) {
-		width: 83px;
-	}
-}
-
 .add-user-link-from-search {
   height: 78px;
   float: right;
   margin-top: -65px;
   border-left: 4px solid $theme-blue-lighten-2;
-}
-
-.table a {
-  &:hover, &:visited, &:link, &:active {
-    text-decoration: none;
-  }
-}
-
-table.violations-report {
-  .fa {
-    color: $theme-orange;
-    padding: 5px;
-  }
-  .column-subheading {
-    font-size: 14px;
-  }
-  tr:last-child td {
-    border-bottom: 1px solid $theme-gray-lighten-4;
-    margin-bottom: 20px;
-  }
-}
-
-.table-container {
-  background-color: $theme-true-white;
-  padding-bottom: 40px;
-  margin: 35px 0 50px 0;
-}
-
-.tenant-name {
-  font-weight: bold;
-  font-family: "Source Sans Pro";
-  color: $theme-blue-lighten-4;
-
-  &:hover, &:visited, &:link, &:active {
-    color: $theme-blue-lighten-4;
-  }
-}
-
-.user-name {
-  font-size: 2em;
-}
-
-.add-user {
-  a {
-    margin-top: 5px;
-  }
-}
-
-.severe-temp {
-  color: $theme-red-darken-1;
-  font-weight: bold;
 }
 
 .search-form {
@@ -222,16 +136,6 @@ table.violations-report {
   padding: 5px;
 }
 
-.collaborators-sidebar {
-  padding-right: 15px;
-  padding-left: 15px;
-}
-
-.container .core-team-member > div {
-  height: 239px;
-  width: 239px;
-}
-
 .advocate-button {
   font-family: 'Oswald';
   padding: 1px 20px 1px 20px;
@@ -249,7 +153,7 @@ table.violations-report {
   }
 }
 
-.advocate-layout .collaborators-sidebar {
+.advocate-layout {
   padding-right: 0;
 }
 
@@ -260,10 +164,6 @@ table.violations-report {
 
 #advocate-bar h3 {
   float: left;
-}
-
-.collaborators-sidebar {
-  padding-left: 0;
 }
 
 #search-results {

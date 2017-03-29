@@ -2,7 +2,7 @@
 
 <% if collaborations_with_violations.any? %>
   <div class="table-container">
-    <table class="table violations-report sortable-theme-bootstrap" data-sortable>
+    <table class="table styled-table sortable-theme-bootstrap" data-sortable>
       <thead>
         <tr>
           <th>Name <i class="fa"></i></th>
@@ -24,7 +24,7 @@
         <% user = collaboration.collaborator %>
 
         <tr>
-          <td><%= link_to user.name, user_path(user), class: "tenant-name" %></td>
+          <td><%= link_to user.name, user_path(user), class: "user-name" %></td>
           <td><%= "#{user.address}, #{user.zip_code}" %></td>
           <td class="numeric"><%= collaboration.violations_count %></td>
           <td class="numeric <%= 'severe-temp' if user.current_temp_is_severe %>" data-value="<%= user.current_temp %>"><%= user.current_temp_string %></td>

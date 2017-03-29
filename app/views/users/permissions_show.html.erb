@@ -1,11 +1,11 @@
 <% content_for :template, 'advocate' %>
-<div class="<%= "super-user-panel" if current_user.super_user? %>">
+<div class="<%= "super-user-panel" if @user.super_user? %>">
   <div class="advocate-layout clearfix">
     <div class="container">
       <div id="permissions-show-div">
         <div class="row">
           <div class="col-xs-12">
-            <h1 id="collaborator-h1"><%= @user.first_name %>'s Tenants</h1>
+            <h1 class="styled-header"><%= @user.first_name %>'s Tenants</h1>
           </div>
         </div>
 
