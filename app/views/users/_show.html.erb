@@ -1,3 +1,5 @@
+<% content_for :template, "tenant" %>
+
 <div class="tenant-show-container">
   <div class="container user-info-desktop">
     <div class="row back-button">
@@ -78,13 +80,19 @@
         </div>
       </div>
     </div>
-    <div class="row show-bottom chart-title">
-      <h3 class="text-center">Indoor and outdoor temperatures (last 7 days)</h3>
-    </div>
-    <div class="row">
-      <div class="show-bottom col-xs-12">
-        <%= render "users/line_graph", :user => user %>
+    <% if user.last_weeks_readings.any? %>
+      <div class="row show-bottom chart-title">
+        <h3 class="text-center">Indoor and outdoor temperatures (last 7 days)</h3>
       </div>
-    </div>
+      <div class="row">
+        <div class="show-bottom col-xs-12">
+          <%= render "users/line_graph", :user => user %>
+        </div>
+      </div>
+    <% else %>
+      <div class="row show-bottom chart-title">
+        <h3 class="text-center">No Indoor Temperature Readings</h3>
+      </div>
+    <% end %>
   </div>
 </div>

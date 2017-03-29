@@ -75,7 +75,7 @@ unless User.find_by(email: 'mbeirut@heatseeknyc.com')
     :email => 'demo-lawyer@heatseeknyc.com',
     :password => '33west26'
   )
- 
+
   User.create(
     :first_name => 'Live Update',
     :last_name => 'Account',
@@ -111,7 +111,7 @@ jamie = User.find_by(email: 'jamie@heatseeknyc.com')
 jake = User.find_by(email: 'jake@heatseeknyc.com')
 demo = User.find_by(email: 'demo-user@heatseeknyc.com')
 live = User.find_by(email: 'live-update@heatseeknyc.com')
-june = User.find_by(email: 'tenant_for_advocate@heatseeknyc.com')
+june = User.find_by(email: 'tenant_for_lawyer@heatseeknyc.com')
 users = [jane, john, jake, demo, live]
 
 demo_lawyer = User.find_by(email: 'demo-lawyer@heatseeknyc.com')
