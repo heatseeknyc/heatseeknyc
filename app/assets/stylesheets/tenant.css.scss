@@ -1,9 +1,5 @@
 @import 'shared';
 
-.tenant-show-container{
-  background-color: $theme-blue;
-}
-
 body.tenant {
   background-color: $theme-blue;
 }
@@ -20,6 +16,7 @@ body.tenant {
 
 .user-info-desktop {
   font-family: "Source Sans Pro";
+  padding-bottom: 30px;
   @media (max-width: 767px) {
     display: none;
   }

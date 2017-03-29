@@ -1,5 +1,5 @@
 <% content_for :template, 'advocate' %>
-<div class="<%= "super-user-panel" if @user.super_user? %>">
+<div class="header-container">
   <div class="advocate-layout clearfix">
     <div class="container">
       <div id="permissions-show-div">
@@ -20,15 +20,15 @@
                     </div>
                 <% end %>
               </div>
-              <div class="col-xs2 pull-right">
+              <div class="pull-right">
                 <div class="admin-button-container">
                   <%= link_to new_user_path, class: "admin-button" do %>
-                      Add new user
+                      Create new user
                       <div class="admin-button-icon">+</div>
                   <% end %>
                 </div>
               </div>
-              <div class="col-xs2 pull-right">
+              <div class="pull-right">
                 <div class="admin-button-container">
                   <%= link_to users_path, class: "admin-button" do %>
                       View all users

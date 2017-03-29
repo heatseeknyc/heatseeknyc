@@ -1,12 +1,28 @@
-<div class="bg-blue">
+<div class="header-container">
   <div class="container">
     <div class="row back-button">
       <i class="fa fa-long-arrow-left"></i>
       <%= link_to " Back", :back %>
     </div>
     <div class="row">
+      <div class="col-xs-5">
+        <h1 class="styled-header">All Users</h1>
+      </div>
+      <div class="pull-right">
+        <div class="admin-button-container">
+          <%= link_to new_user_path, class: "admin-button" do %>
+              Create new user
+              <div class="admin-button-icon">+</div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="bg-blue">
+  <div class="container">
+    <div class="row">
       <div class="col-xs-12">
-        <h1 class="styled-header">Users</h1>
         <div class="table-container">
           <table class="table styled-table">
             <thead>

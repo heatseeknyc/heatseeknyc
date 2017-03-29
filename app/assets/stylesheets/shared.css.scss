@@ -203,6 +203,15 @@ main {
   }
 }
 
+.header-container {
+  background-color: $theme-blue-lighten-2;
+  padding-bottom: 30px;
+}
+
+.bg-blue {
+  background-color: $theme-blue;
+}
+
 h1.styled-header {
   font-family: "Oswald";
   font-size: 36px;
