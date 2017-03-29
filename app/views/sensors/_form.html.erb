@@ -9,18 +9,17 @@
       </ul>
     </div>
   <% end %>
-
   <div class="form-fields">
-    <div>
-      <label for="sensor_name">Sensor Serial Number</label><br>
-      <input id="sensor_name" name="sensor[name]" type="text" class="form-control">
+    <div class="field">
+      <%= f.label :name, "Sensor Serial Number" %><br>
+      <%= f.text_field :name, class: "form-control" %>
     </div>
-    <div>
+    <div class="field">
       <label for="sensor_email">User Email</label><br>
-      <input id="sensor_email" name="sensor[email]" type="text" class="form-control">
+      <input id="sensor_email" name="sensor[email]" type="text" class="form-control" value="<%= @email if @email %>">
     </div>
     <div class="actions">
-      <%= f.submit "Create Sensor", { class: "btn-save" } %>
+      <%= f.submit action_label, class: "btn-save" %>
     </div>
   </div>
 <% end %>

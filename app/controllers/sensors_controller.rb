@@ -20,6 +20,8 @@ class SensorsController < ApplicationController
 
   # GET /sensors/1/edit
   def edit
+    @sensor = Sensor.find(params[:id])
+    @email = @sensor.user.try(:email)
   end
 
   # POST /sensors
