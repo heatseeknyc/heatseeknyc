@@ -5,50 +5,52 @@
       <%= link_to " Back", :back %>
     </div>
     <div class="row">
-      <h1 class="styled-header">Users</h1>
-      <div class="table-container">
-        <table class="table styled-table">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>User type</th>
-              <th>Manage</th>
-            </tr>
-          </thead>
-          <tbody>
-          <% @users.each do |u| %>
-            <tr class="user-row">
-              <td class="user-name">
-                <%= link_to u.name, user_path(u) %>
-              </td>
-              <td>
-                <%= u.permissions_level %>
-              </td>
-              <td>
-                <%= link_to "", edit_user_path(u), class: "fa fa-wrench fa-lg", title: "Edit" %>
-                <% if u.tenant? && current_user.collaborators.include?(u) %>
-                  <%= link_to "",
-                    user_collaboration_path(current_user, current_user.get_collaboration_with_user(u)),
-                    method: :delete,
-                    :class => "fa fa-times fa-lg red",
-                    data: {
-                        confirm: "You are removing this tenant from your list of tenants. Are you sure you want to do this? This action cannot be undone.",
-                    },
-                    title: "Remove Tenant"
-                  %>
-                <% elsif u.tenant? %>
-                  <%= link_to "",
-                    user_collaborations_path(current_user, collaborator_id: u.id),
-                    method: :post,
-                    class: "fa fa-plus fa-lg",
-                    title: "Add Tenant"
-                  %>
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
-          </tbody>
-        </table>
+      <div class="col-xs-12">
+        <h1 class="styled-header">Users</h1>
+        <div class="table-container">
+          <table class="table styled-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>User type</th>
+                <th>Manage</th>
+              </tr>
+            </thead>
+            <tbody>
+            <% @users.each do |u| %>
+              <tr class="user-row">
+                <td class="user-name">
+                  <%= link_to u.name, user_path(u) %>
+                </td>
+                <td>
+                  <%= u.permissions_level %>
+                </td>
+                <td>
+                  <%= link_to "", edit_user_path(u), class: "fa fa-wrench fa-lg", title: "Edit" %>
+                  <% if u.tenant? && current_user.collaborators.include?(u) %>
+                    <%= link_to "",
+                      user_collaboration_path(current_user, current_user.get_collaboration_with_user(u)),
+                      method: :delete,
+                      :class => "fa fa-times fa-lg red",
+                      data: {
+                          confirm: "You are removing this tenant from your list of tenants. Are you sure you want to do this? This action cannot be undone.",
+                      },
+                      title: "Remove Tenant"
+                    %>
+                  <% elsif u.tenant? %>
+                    <%= link_to "",
+                      user_collaborations_path(current_user, collaborator_id: u.id),
+                      method: :post,
+                      class: "fa fa-plus fa-lg",
+                      title: "Add Tenant"
+                    %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
