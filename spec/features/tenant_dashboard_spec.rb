@@ -21,6 +21,5 @@ feature "Tenant Dashboard" do
     # Thinking it might be worth going with native js unit tests (mocha or jasmine)
     # for the graph instead, though we'd loose full integration testing of the dash.
     # Good enough?
-    expect(page).to have_css("div#d3-chart")
   end
 end
