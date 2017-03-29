@@ -1,34 +1,46 @@
-<div class="container standard-font-size">
-  <h2>Assigned Sensors which are not reporting</h2>
-
-  <br>
-
-  The following are sensors which meet the these criteria:
-
-  <ul>
-    <li>Have not reported in the past 6 hours</li>
-    <li>Has reported at least once in the past 6 months</li>
-    <li>Have an associated user</li>
-  </ul>
-
-  <br>
-
-  <table class="table">
-    <tr>
-      <th>Sensor ID</th>
-      <th>Sensor Short Code</th>
-      <th>Sensor User</th>
-      <th>Last reported</th>
-    </tr>
-
-    <% @sensors.each do |sensor| %>
-      <tr>
-        <td><%= sensor.name %></td>
-        <td><%= sensor.nick_name %></td>
-        <td><%= sensor.user ? sensor.user.name : "unassigned" %></td>
-        <td><%= sensor.last_reading_date.in_time_zone("Eastern Time (US & Canada)") %></td>
-      </tr>
-    <% end %>
-  </table>
+<div class="bg-blue">
+  <div class="container">
+    <div class="row">
+      <h1 class="styled-header col-md-12">Assigned Sensors That Are Not Reporting</h1>
+    </div>
+    <div class="row">
+      <div class="col-md-6 standard-font-size">
+        <br>
+        The following are sensors which meet the these criteria:
+        <ul>
+          <li>Have not reported in the past 6 hours</li>
+          <li>Has reported at least once in the past 6 months</li>
+          <li>Have an associated user</li>
+        </ul>
+      </div>
+    </div>
+    <div class="table-container">
+      <table class="table styled-table">
+        <thead>
+        <tr>
+          <th>Sensor ID</th>
+          <th>Sensor Short Code</th>
+          <th>Sensor User</th>
+          <th>Last reported</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @sensors.each do |sensor| %>
+            <tr>
+              <td><%= link_to sensor.name, sensor %></td>
+              <td><%= sensor.nick_name %></td>
+              <td>
+                <% if sensor.user %>
+                    <%= link_to sensor.user.name, sensor.user %>
+                <% else %>
+                    unassigned
+                <% end %>
+              </td>
+              <td><%= sensor.last_reading_date.in_time_zone("Eastern Time (US & Canada)") %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
-

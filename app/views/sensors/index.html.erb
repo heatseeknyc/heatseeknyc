@@ -1,24 +1,52 @@
-<h1 class="styled-header">Listing sensors</h1>
-
-<div class="col-xs-4">
-
-
-<div class="admin-button-container">
-  <%= link_to new_sensor_path, class: "admin-button" do %>
-      New Sensor
-      <div class="admin-button-icon">+</div>
-  <% end %>
-</div>
-
-  <% @sensors.each do |sensor| %>
+<div class="bg-blue">
+  <div class="container">
     <div class="row">
-      <div class="col-xs-12">Sensor: <%= sensor.name %></div>
-      <div class="col-xs-12">User: <%= sensor.user ? sensor.user.email : "unassigned" %></div>
-      <div class="col-xs-12"><%= link_to 'Show', sensor %></div>
-      <div class="col-xs-12"><%= link_to 'Edit', edit_sensor_path(sensor) %></div>
-      <div class="col-xs-12"><%= link_to 'Destroy', sensor, method: :delete, data: { confirm: 'Are you sure?' } %></div>
+      <h1 class="styled-header col-md-6">Sensors</h1>
+      <div class="admin-button-container pull-right">
+        <%= link_to new_sensor_path, class: "admin-button" do %>
+            Add Sensor
+            <div class="admin-button-icon">+</div>
+        <% end %>
+      </div>
     </div>
-    <br>
-  <% end %>
+    <div class="table-container">
+      <table class="table styled-table">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>User</th>
+          <th>Manage</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @sensors.each do |s| %>
+            <tr>
+              <td><%= link_to s.name, s %></td>
+              <td>
+                <% if s.user %>
+                    <%= link_to s.user.email, s.user %>
+                <% else %>
+                  unassigned
+                <% end %>
+              </td>
+              <td>
+                <%= link_to "", edit_sensor_path(s),
+                  class: "fa fa-wrench fa-lg",
+                  title: "Edit" %>
+                <%= link_to "",
+                  s,
+                  method: :delete,
+                  :class => "fa fa-times fa-lg red",
+                  data: {
+                      confirm: "You are deleting this sensor from the database. Are you sure you want to do this? This action cannot be undone.",
+                  },
+                  title: "Delete Sensor"
+                %>
+              </td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
-

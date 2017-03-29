@@ -1,10 +1,8 @@
 <div class="bg-blue">
   <div class="container">
     <div class="row back-button">
-      <% if current_user.advocate_or_more_powerful? %>
-          <i class="fa fa-long-arrow-left"></i>
-          <%= link_to " Back", :back %>
-      <% end %>
+      <i class="fa fa-long-arrow-left"></i>
+      <%= link_to " Back", :back %>
     </div>
     <div class="row">
       <h1 class="styled-header">Users</h1>
