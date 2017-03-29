@@ -1,6 +1,13 @@
-<h1>Editing sensor</h1>
+<div class='container'>
+  <div class="col-md-6">
+    <div class="row back-button">
+      <i class="fa fa-long-arrow-left"></i>
+      <%= link_to " Back", :back %>
+    </div>
+    <h1 class="styled-header">Editing sensor</h1>
 
-<%= render 'form' %>
+    <%= render partial: "form", locals: { action_label: "Update Sensor" } %>
 
-<%= link_to 'Show', @sensor %> |
-<%= link_to 'Back', sensor_path %>
+    <%= link_to 'Show', @sensor %>
+  </div>
+</div>

@@ -1,6 +1,11 @@
-<h1>Editing article</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @article %> |
-<%= link_to 'Back', articles_path %>
+<div class='container'>
+  <div class="col-md-6">
+    <div class="row back-button">
+      <i class="fa fa-long-arrow-left"></i>
+      <%= link_to " Back", :back %>
+    </div>
+    <h1 class="styled-header">Editing article</h1>
+    <%= render partial: "form", locals: { action_label: "Update Article" } %>
+    <%= link_to 'Show', @article %>
+  </div>
+</div>

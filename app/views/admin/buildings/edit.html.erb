@@ -1,7 +1,15 @@
-<%= render partial: "form",
-           locals: {
-             title: "Edit #{[@building.property_name, @building.street_address, @building.zip_code].compact.join(" - ")}",
-             resource: @building,
-             url: admin_building_path(@building),
-             action_label: "UPDATE"
-           } %>
+<div class="container">
+  <div class="col-md-6">
+    <div class="row back-button">
+      <i class="fa fa-long-arrow-left"></i>
+      <%= link_to " Back", :back %>
+    </div>
+    <%= render partial: "form",
+               locals: {
+                   title: "Edit #{[@building.property_name, @building.street_address, @building.zip_code].compact.join(" - ")}",
+                   resource: @building,
+                   url: admin_building_path(@building),
+                   action_label: "Update Building"
+               } %>
+  </div>
+</div>
