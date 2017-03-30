@@ -26,9 +26,7 @@
 
 //
 // top level js files
-//= require advocate
 //= require coldmap-chloropleth
-//= require collaboration
 //= require complaint
 //= require kickstarter
 //= require video
