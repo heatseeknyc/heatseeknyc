@@ -174,3 +174,10 @@
 .navbar-default .navbar-nav .account-dropdown {
   color: $theme-orange;
 }
+
+.nav > li > a {
+  @media (max-width: 991px) {
+    padding-left: 11px;
+    padding-right: 11px;
+  }
+}
