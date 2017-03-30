@@ -10,9 +10,9 @@
   margin: 0px -15px;
 }
 
-.navbar-default .navbar-collapse,
-.navbar-default .navbar-form {
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
   border:0;
+  max-height: none;
 }
 
 .navbar .brand {
@@ -96,7 +96,7 @@
       background-color: transparent;
     }
   }
-} 
+}
 
 .darktheme .dropdown-menu > li > a {
   &:link,
@@ -124,55 +124,76 @@
   }
 }
 
+.navbar-default .navbar-nav .account-dropdown {
+  color: $theme-orange;
+}
 
 @media (max-width: 767px) {
 
-  .navbar-default .navbar-nav{
+  .navbar-default .navbar-nav {
     background-color:$theme-black;
     border:0;
     border-radius:0px;
-    
-    & > li > a{
-      color: $theme-white;
 
-      &:hover,
-      &:focus {
-        background-color: $theme-red;
+    .account-dropdown {
+      color: $theme-blue-lighten-4;
+    }
+
+    li.nav-highlight > a {
+      &:link, &:visited {
+        color: $theme-blue-lighten-4;
+      }
+
+      &:hover, &:focus
+      {
+        color: $theme-white;
       }
     }
-    
-    & .open .dropdown-menu {
-      & > li > a {
-        line-height: 2;
-        
-        &:hover,
-        &:focus {
-          background-color: $theme-red;
-        }
+
+    & > li > a {
+      color: $theme-white;
+
+      &:hover, &:focus:hover {
+        color: $theme-true-white;
+        background-color: $theme-blue-lighten-4;
       }
-      
-      & > .active > a,
-      & > .active > a:hover,
-      & > .active > a:focus {
-        background-color: $theme-red;
+      &:focus {
+        color: $theme-blue-lighten-4;
+      }
+    }
+
+    & .open {
+      > a, > a:hover, > a:focus {
+        color: $theme-blue-lighten-4;
       }
 
-      & > .disabled > a,
-      & > .disabled > a:hover,
-      & > .disabled > a:focus {
-        background-color: $theme-red;
+      .dropdown-menu {
+        & > li > a {
+          line-height: 2;
+
+          &:hover,
+          &:focus {
+            background-color: $theme-blue-lighten-4;
+          }
+        }
+
+        & > .active > a,
+        & > .active > a:hover {
+          background-color: $theme-blue-lighten-4;
+        }
+
+        & > .disabled > a,
+        & > .disabled > a:hover,
+        & > .disabled > a:focus {
+          background-color: $theme-blue-lighten-4;
+        }
       }
     }
   }
   
-  .navbar-nav > li.nav-highlight
-  {
-    border-top:solid $theme-orange 1px;
+  .navbar-nav > li.nav-highlight {
+    border-top:solid $theme-grey 1px;
   }
-}
-
-.navbar-default .navbar-nav .account-dropdown {
-  color: $theme-orange;
 }
 
 .nav > li > a {
