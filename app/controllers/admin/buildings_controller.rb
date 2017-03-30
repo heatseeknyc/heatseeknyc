@@ -28,7 +28,7 @@ module Admin
 
       if @building.update_attributes(building_params)
         flash[:notice] = "Successfully updated."
-        redirect_to(action: "edit", id: @building)
+        redirect_to admin_buildings_path
       else
         error_flash
         render action: "edit"

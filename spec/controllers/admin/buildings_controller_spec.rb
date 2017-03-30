@@ -16,6 +16,12 @@ describe Admin::BuildingsController, type: :controller do
 
       expect(WebMock).to have_requested(:get, /maps\.googleapis\.com/).twice
     end
+
+    it "redirects to buildings index" do
+      post :create, { building: building.attributes }
+
+      expect(response).to redirect_to(admin_buildings_path)
+    end
   end
 
   describe "#update" do
@@ -31,6 +37,12 @@ describe Admin::BuildingsController, type: :controller do
       put :update, { id: building.id, building: building.attributes }
 
       expect(WebMock).to_not have_requested(:get, /maps\.googleapis\.com/)
+    end
+
+    it "redirects to buildings index" do
+      put :update, { id: building.id, building: building.attributes.merge(zip_code: "10001") }
+
+      expect(response).to redirect_to(admin_buildings_path)
     end
   end
 end

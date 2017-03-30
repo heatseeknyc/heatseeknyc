@@ -70,7 +70,7 @@ feature "Building management" do
     click_button "Update Building"
 
     expect(building.reload.property_name).to eq("Cold apartment")
-    expect(current_path).to eq(edit_admin_building_path(building))
+    expect(current_path).to eq(admin_buildings_path)
     expect(page).to have_content("Successfully updated.")
   end
 
