@@ -327,7 +327,7 @@ describe UsersController, type: :controller do
 
       it "redirects to users path on update success" do
         patch :update_password, user: password_params
-        expect(response).to redirect_to(users_path)
+        expect(response).to redirect_to root_path
       end
 
       it "re-renders the edit form on update failure" do
