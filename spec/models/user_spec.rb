@@ -255,10 +255,11 @@ describe User, :vcr do
   end
 
   describe "#get_collaboration_with_user" do
+    let(:user1) { create(:user) }
+    let(:user2) { create(:user) }
+
     context "when there is a collaboration with the user" do
       it "returns the collaboration" do
-        user1 = create(:user)
-        user2 = create(:user)
         collaboration = Collaboration.create(user: user1, collaborator: user2)
         expect(user1.get_collaboration_with_user(user2)).to eq(collaboration)
       end
@@ -266,9 +267,24 @@ describe User, :vcr do
 
     context "when there is no collaboration with the user" do
       it "returns no collaboration" do
-        user1 = create(:user)
-        user2 = create(:user)
         expect(user1.get_collaboration_with_user(user2)).to eq(nil)
+      end
+    end
+  end
+
+  describe "#get_possessive" do
+    let(:user1) { create(:user) }
+    let(:user2) { create(:user) }
+
+    context "when the user matches" do
+      it "uses the 'your' possessive" do
+        expect(user1.get_possessive(user1)).to eq('your')
+      end
+    end
+
+    context "when the user does not match" do
+      it "uses the user's first name" do
+        expect(user1.get_possessive(user2)).to eq("#{user2.first_name}'s")
       end
     end
   end

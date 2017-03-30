@@ -36,6 +36,7 @@ class User < ActiveRecord::Base
   include Graphable::InstanceMethods
   include Regulatable::InstanceMethods
   include Permissionable::InstanceMethods
+  include Messageable::InstanceMethods
 
   PERMISSIONS = {
     super_user: 0,
