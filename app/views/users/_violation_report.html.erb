@@ -38,7 +38,7 @@
               },
               title: "Remove Tenant"
             %>
-            <% if @user.admin_or_more_powerful? %>
+            <% if current_user.admin_or_more_powerful? %>
               <%= link_to "", edit_user_path(user),
                 class: "fa fa-wrench fa-lg",
                 title: "Edit"
