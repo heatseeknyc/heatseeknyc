@@ -183,7 +183,7 @@ main {
   color: $theme-black;
   padding-left: 12px;
   display: inline-block;
-  line-height: 2em;
+  line-height: 1.7em;
 
   .admin-button-icon {
     display: inline-block;
@@ -194,6 +194,7 @@ main {
     width: 42px;
     text-align: center;
     font-size: 1.3em;
+    line-height: 1.7em;
     font-family: SourceSansPro;
   }
 
