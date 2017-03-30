@@ -259,7 +259,7 @@ describe UsersController, type: :controller do
       sign_in admin
       put :update, params
 
-      expect(response.status).to eq(302)
+      expect(response).to redirect_to user_path(id: tenant.id)
       expect(tenant.reload.first_name).to eq("Updated")
     end
 
@@ -288,7 +288,7 @@ describe UsersController, type: :controller do
         sign_in admin
         params[:user][:permissions] = User::PERMISSIONS[:admin]
         put :update, params
-        expect(response.status).to eq(302)
+        expect(response).to redirect_to user_path(tenant)
         expect(tenant.reload.permissions).to eq(User::PERMISSIONS[:admin])
       end
     end
