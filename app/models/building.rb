@@ -26,17 +26,16 @@ class Building < ActiveRecord::Base
     end
   end
 
-  def set_location_data(params = {})
-    zip_code_updated = zip_code.present? && zip_code != params[:zip_code]
-    street_address_updated = street_address.present? && street_address != params[:street_address]
-
-    if zip_code_updated
+  def set_location_data
+    if zip_code.present?
       geocode
       reverse_geocode
     end
 
-    if (zip_code_updated || street_address_updated) && NYC_BOROUGHS.include?(city)
+    if street_address.present? && zip_code.present? && NYC_BOROUGHS.include?(city)
       get_bbl
+    elsif street_address.present? && zip_code.present?
+      self.bbl = ""
     end
   end
 

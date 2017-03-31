@@ -33,12 +33,6 @@ describe Admin::BuildingsController, type: :controller do
       expect(WebMock).to have_requested(:get, /maps\.googleapis\.com/).twice
     end
 
-    it "does not update geocode if relevant fields not changed" do
-      put :update, { id: building.id, building: building.attributes }
-
-      expect(WebMock).to_not have_requested(:get, /maps\.googleapis\.com/)
-    end
-
     it "redirects to buildings index" do
       put :update, { id: building.id, building: building.attributes.merge(zip_code: "10001") }
 
