@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "Lawyer's Tenant Dashboard" do
+describe "Advocate's Tenant Dashboard", type: :feature do
   let!(:admin) { login_as_admin }
 
   let(:user_with_no_violations) { FactoryGirl.create(:user) }
@@ -14,23 +14,24 @@ describe "Lawyer's Tenant Dashboard" do
     FactoryGirl.create(:collaboration, user: admin, collaborator: user_with_recent_violations2)
     FactoryGirl.create(:collaboration, user: admin, collaborator: user_with_old_violations)
 
-    create_violation(user_with_old_violations, 5.days.ago)
+    FactoryGirl.create(:reading, :violation, user: user_with_old_violations, created_at: 5.days.ago)
 
-    create_violation(user_with_recent_violations1, 5.days.ago)
-    create_violation(user_with_recent_violations1, 2.days.ago)
-    create_violation(user_with_recent_violations1, 2.days.ago)
-    create_violation(user_with_recent_violations1, 1.days.ago)
-    create_reading(user_with_recent_violations1, 77)
+    FactoryGirl.create(:reading, :violation, user: user_with_recent_violations1, created_at: 5.days.ago)
+    FactoryGirl.create(:reading, :violation, user: user_with_recent_violations1, created_at: 2.days.ago)
+    FactoryGirl.create(:reading, :violation, user: user_with_recent_violations1, created_at: 2.days.ago)
+    FactoryGirl.create(:reading, :violation, user: user_with_recent_violations1, created_at: 1.days.ago)
 
-    create_violation(user_with_recent_violations2, 2.days.ago)
-    create_reading(user_with_recent_violations2, 78)
+    FactoryGirl.create(:reading, user: user_with_recent_violations1, temp: 77)
+
+    FactoryGirl.create(:reading, :violation, user: user_with_recent_violations2, created_at: 2.days.ago)
+    FactoryGirl.create(:reading, user: user_with_recent_violations2, temp: 78)
   end
 
-  context "tenant list" do
+  context "violation table" do
     it "shows user information for all associated tenants" do
       visit user_path(admin)
 
-      within "#collaborator-ul" do
+      within "#append-violations" do
         expect(page).to have_text user_with_no_violations.name
         expect(page).to have_text user_with_recent_violations1.name
         expect(page).to have_text user_with_recent_violations2.name
@@ -40,8 +41,8 @@ describe "Lawyer's Tenant Dashboard" do
 
     it "does not show users you are not associated with" do
       other_user = FactoryGirl.create(:user)
-      create_violation(other_user, 2.days.ago)
-      create_violation(other_user, 1.days.ago)
+      FactoryGirl.create(:reading, :violation, user: other_user, created_at: 2.days.ago)
+      FactoryGirl.create(:reading, :violation, user: other_user, created_at: 1.days.ago)
 
       visit user_path(admin)
 
@@ -50,25 +51,26 @@ describe "Lawyer's Tenant Dashboard" do
   end
 
   context "violations report" do
-    it "shows users who have had violations in the last 3 days" do
+    it "shows all collaborators" do
       visit user_path(admin)
 
-      within ".violations-report" do
+      within ".styled-table" do
         expect(page.all("tbody tr").length).to be 4
+        expect(page.all("tbody tr td a.fa-times").length).to be 4
+        expect(page.all("tbody tr td a.fa-wrench").length).to be 4
         expect(page).to have_text expected_text_for(user_with_recent_violations1, 3)
         expect(page).to have_text expected_text_for(user_with_recent_violations2, 1)
         expect(page).to have_text expected_text_for(user_with_no_violations, 0)
         expect(page).to have_text expected_text_for(user_with_old_violations, 0)
       end
+
+      admin.update(permissions: User::PERMISSIONS[:advocate])
+      visit user_path(admin)
+      within ".styled-table" do
+        expect(page.all("tbody tr td a.fa-times").length).to be 4
+        expect(page.all("tbody tr td a.fa-wrench").length).to be 0
+      end
     end
-  end
-
-  def create_violation(user, time)
-    FactoryGirl.create(:reading, user: user, created_at: time, outdoor_temp: 30, temp: 30)
-  end
-
-  def create_reading(user, temp)
-    FactoryGirl.create(:reading, user: user, created_at: 1.hour.ago, outdoor_temp: 32, temp: temp)
   end
 
   def expected_text_for(user, violations_count)

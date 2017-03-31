@@ -12,6 +12,7 @@ module Admin
 
     def create
       @building = Building.new(building_params)
+      @building.set_location_data
 
       if @building.save
         flash[:notice] = "Successfully created."
@@ -24,8 +25,10 @@ module Admin
 
     def update
       if @building.update_attributes(building_params)
+        @building.set_location_data
+        @building.save
         flash[:notice] = "Successfully updated."
-        redirect_to(action: "edit", id: @building)
+        redirect_to admin_buildings_path
       else
         error_flash
         render action: "edit"

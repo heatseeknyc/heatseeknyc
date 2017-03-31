@@ -8,8 +8,16 @@ class Building < ActiveRecord::Base
                       message: "should be 12345 or 12345-1234"
   validates :street_address, uniqueness: { scope: :zip_code, case_sensitive: false }
 
+  NYC_BOROUGHS = [
+      "Brooklyn",
+      "Bronx",
+      "Manhattan",
+      "Staten Island",
+      "Queens",
+      "New York"
+  ]
+
   geocoded_by :zip_code
-  after_validation :geocode
 
   reverse_geocoded_by :latitude, :longitude do |building, results|
     if geo = results.first
@@ -17,9 +25,49 @@ class Building < ActiveRecord::Base
       building.state = geo.state
     end
   end
-  after_validation :reverse_geocode
 
-  def self.for_tenant(tenant)
-    Building.where("street_address ILIKE '%#{tenant.address}%'").first
+  def set_location_data
+    if zip_code.present?
+      geocode
+      reverse_geocode
+    end
+
+    if street_address.present? && zip_code.present? && NYC_BOROUGHS.include?(city)
+      get_bbl
+    elsif street_address.present? && zip_code.present?
+      self.bbl = nil
+    end
   end
+
+  def get_bbl
+    response = HTTParty.get(
+        "https://api.cityofnewyork.us/geoclient/v1/address.json",
+        { query: query_params.merge(access_params) }
+    )
+    begin
+      payload = JSON.parse(response.body)["address"]
+
+      self.bbl = payload["bbl"].gsub(/\D/, '')
+    rescue
+    end
+  end
+
+  private
+
+    def query_params
+      address = street_address.split(',')[0].split
+      {
+          houseNumber: address.shift,
+          street: address.join(" "),
+          zip: self.zip_code
+      }
+    end
+
+    def access_params
+      { app_id: ENV["GEOCLIENT_APP_ID"], app_key: ENV["GEOCLIENT_APP_KEY"] }
+    end
+
+    def self.for_tenant(tenant)
+      Building.where("street_address ILIKE '%#{tenant.address}%'").first
+    end
 end

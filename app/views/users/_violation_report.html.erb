@@ -1,28 +1,53 @@
 <% collaborations_with_violations = @user.collaborations_with_violations %>
 
 <% if collaborations_with_violations.any? %>
-  <h1 id="collaborator-h1" class="text-center">Violations In The Last 3 Days</h1>
+  <div class="table-container">
+    <table class="table styled-table sortable-theme-bootstrap" data-sortable>
+      <thead>
+        <tr>
+          <th>Name <i class="fa"></i></th>
+          <th>Building <i class="fa"></i></th>
+          <th class="numeric">
+            <div>
+              Violations <i class="fa"></i>
+            </div>
+            <div class="column-subheading">
+              (last 3 days)
+            </div>
+          </th>
+          <th class="numeric">Current Temperature<i class="fa"></i></th>
+          <th data-sortable="false">Manage</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% collaborations_with_violations.each do |collaboration| %>
+        <% user = collaboration.collaborator %>
 
-  <table class="table bg-white violations-report sortable-theme-bootstrap" data-sortable>
-    <thead>
-      <tr>
-        <th>Name <i class="fa"></i></th>
-        <th>Building <i class="fa"></i></th>
-        <th class="numeric">Number of Violations <i class="fa"></i></th>
-        <th class="numeric">Current Temperature (°F)<i class="fa"></i></th>
-      </tr>
-    </thead>
-    <tbody>
-    <% collaborations_with_violations.each do |collaboration| %>
-      <% user = collaboration.collaborator %>
-
-      <tr>
-        <td><%= link_to user.name, user_collaboration_path(@user, collaboration) %></td>
-        <td><%= "#{user.address}, #{user.zip_code}" %></td>
-        <td class="numeric"><%= collaboration.violations_count %></td>
-        <td class="numeric" data-value="<%= user.current_temp %>"><%= user.current_temp_string %></td>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
+        <tr>
+          <td><%= link_to user.name, user_path(user), class: "user-name" %></td>
+          <td><%= "#{user.address}, #{user.zip_code}" %></td>
+          <td class="numeric"><%= collaboration.violations_count %></td>
+          <td class="numeric <%= 'severe-temp' if user.current_temp_is_severe %>" data-value="<%= user.current_temp %>"><%= user.current_temp_string %></td>
+          <td>
+            <%= link_to "",
+              user_collaboration_path(@user, collaboration),
+              method: :delete,
+              class: "fa fa-times fa-lg",
+              data: {
+                  confirm: "You are removing this tenant from #{current_user.get_possessive(@user)} list of tenants. Are you sure you want to do this? This action cannot be undone."
+              },
+              title: "Remove Tenant"
+            %>
+            <% if current_user.admin_or_more_powerful? %>
+              <%= link_to "", edit_user_path(user),
+                class: "fa fa-wrench fa-lg",
+                title: "Edit"
+              %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
 <% end %>

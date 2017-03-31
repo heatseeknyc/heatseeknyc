@@ -15,7 +15,6 @@ Timecop.travel(DateTime.parse("2015-03-01 00:00:00 -0500"))
 Spork.prefork do
   require File.expand_path("../../config/environment", __FILE__)
   require "rspec/rails"
-  require "rspec/autorun"
   require "capybara/rails"
   require "rails/application"
   require "rake"
@@ -30,12 +29,10 @@ Spork.prefork do
 
   RSpec.configure do |config|
     config.include FactoryGirl::Syntax::Methods
-    config.include Devise::TestHelpers, :type => :controller
+    config.include Devise::TestHelpers, type: :controller
     config.include Requests::JsonHelpers, type: :request
 
-    config.treat_symbols_as_metadata_keys_with_true_values = true
-
-    config.filter_run :focus => true
+    config.filter_run focus: true
 
     config.run_all_when_everything_filtered = true
 
@@ -51,6 +48,9 @@ Spork.prefork do
       Rails.cache.clear
       WebMock.stub_request(:get, /maps\.googleapis\.com/)
           .to_return(body: geocode_response)
+
+      WebMock.stub_request(:get, /api\.cityofnewyork\.us/)
+          .to_return(body: geoclient_response)
     end
   end
 end
@@ -61,7 +61,7 @@ def geocode_response
 end
 
 def geoclient_response
-  {address: {bbl: Faker::Number.number(10)}}
+  {address: {bbl: Faker::Number.number(10)}}.to_json
 end
 
 Spork.each_run do

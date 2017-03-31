@@ -11,24 +11,25 @@ class CollaborationsController < ApplicationController
       f.html do
         if @collaboration.save
           flash[:notice] = "Added collaborator."
-          redirect_to user_path(current_user)
+          redirect_to user_path(@user)
         else
           flash[:error] = "Unable to add collaborator."
-          redirect_to user_path(current_user)
+          redirect_to user_path(@user)
         end
       end
     end
   end
 
   def destroy
-    @collaboration = current_user.collaborations.find(params[:id])
+    load_user
+    @collaboration = @user.collaborations.find(params[:id])
     @collaboration.destroy
 
     respond_to do |f|
       f.js
       f.html do 
         flash[:error] = "Ended Collaboration."
-        redirect_to current_user
+        redirect_to @user
       end
     end
   end

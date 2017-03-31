@@ -1,15 +1,9 @@
-<% if @results.empty? %>
+<% if current_user.is_demo_user? %>
   $(".alert").remove();
   $("#search-results").remove();
-  $(".show-layout").prepend('<%= j render "search_failure" %>');
-<% elsif current_user.is_demo_user? %>
-  $(".alert").remove();
-  $("#search-results").remove();
-  $(".search-box").append('<%= j render "demo_search_results" %>');
-    addUserFunction();
+  $(".search-results-container").html('<%= j render "demo_search_results" %>');
 <% else %>
   $(".alert").remove();
   $("#search-results").remove();
-  $(".search-box").append('<%= j render "search_results" %>');
-    addUserFunction();
+  $(".search-results-container").html('<%= j render "search_results" %>');
 <% end %>

@@ -1,6 +1,56 @@
 require 'spec_helper'
 
 describe User, :vcr do
+  describe ".new_with_building" do
+    let(:params) {
+      {
+        first_name: "Jane",
+        last_name: "Doe",
+        password: "password",
+        email: "jane@heatseeknyc.com"
+      }
+    }
+    context "when the building exists" do
+      let(:building) { create(:building) }
+
+      it "associates the user with the building" do
+        params[:address] = building.street_address
+        params[:zip_code] = building.zip_code
+
+        expect(User.new_with_building(params).building).to eq(building)
+      end
+    end
+
+    context "when the building doesn't exist" do
+      before(:each) do
+        params[:address] = "40 Broad St"
+        params[:zip_code] = "10004"
+      end
+
+      context "and the method should set location data" do
+        it "creates a new building with a city and state" do
+          params[:set_location_data] = "true"
+          building = User.new_with_building(params).building
+
+          expect(building.street_address).to eq("40 Broad St")
+          expect(building.zip_code).to eq("10004")
+          expect(building.city).to eq("New York")
+          expect(building.state).to eq("New York")
+        end
+      end
+      context "and the method should not set location data" do
+        it "creates a new building without a city and state" do
+          building = User.new_with_building(params).building
+
+          expect(building.street_address).to eq("40 Broad St")
+          expect(building.zip_code).to eq("10004")
+          expect(building.city).to eq(nil)
+          expect(building.state).to eq(nil)
+        end
+      end
+    end
+  end
+
   describe "#inspect" do
     let(:rick) do
       create(
@@ -87,34 +137,34 @@ describe User, :vcr do
   end
 
   describe "collaborations_with_violations" do
-    let(:lawyer) { create(:user, permissions: 50) }
-    let(:tenant_with_violations) { create(:user, permissions: 100) }
-    let(:tenant_with_no_violations) { create(:user, permissions: 100) }
-    let(:tenant_with_old_violations) { create(:user, permissions: 100) }
+    let(:advocate) { create(:user, :advocate) }
+    let(:tenant_with_violations) { create(:user, :tenant) }
+    let(:tenant_with_no_violations) { create(:user, :tenant) }
+    let(:tenant_with_old_violations) { create(:user, :tenant) }
 
     before(:each) do
-      create(:collaboration, :user_id => lawyer.id, :collaborator_id => tenant_with_no_violations.id)
+      create(:collaboration, :user_id => advocate.id, :collaborator_id => tenant_with_no_violations.id)
 
-      create(:collaboration, :user_id => lawyer.id, :collaborator_id => tenant_with_violations.id)
+      create(:collaboration, :user_id => advocate.id, :collaborator_id => tenant_with_violations.id)
       create(:reading, :violation, user: tenant_with_violations)
 
-      create(:collaboration, :user_id => lawyer.id, :collaborator_id => tenant_with_old_violations.id)
+      create(:collaboration, :user_id => advocate.id, :collaborator_id => tenant_with_old_violations.id)
       create(:reading, :violation, user: tenant_with_old_violations, created_at: 5.days.ago)
     end
 
     it "finds all collaborations" do
-      expect(lawyer.collaborations_with_violations.length).to be 3
+      expect(advocate.collaborations_with_violations.length).to be 3
     end
 
     it "includes violation_count" do
-      collaborations = lawyer.collaborations_with_violations
+      collaborations = advocate.collaborations_with_violations
       expect(collaborations.find_by(collaborator: tenant_with_no_violations).violations_count).to be 0
       expect(collaborations.find_by(collaborator: tenant_with_violations).violations_count).to be 1
       expect(collaborations.find_by(collaborator: tenant_with_old_violations).violations_count).to be 0
     end
 
     it "orders collaborations by violation count" do
-      violations_counts = lawyer.collaborations_with_violations.to_ary.map(&:violations_count)
+      violations_counts = advocate.collaborations_with_violations.to_ary.map(&:violations_count)
       expect(violations_counts.sort.reverse).to eq violations_counts
     end
   end
@@ -127,31 +177,31 @@ describe User, :vcr do
 
 		it "understands permissions" do
 			admin = create(:user, permissions: 25)
-			lawyer = create(:user, permissions: 50)
+			advocate = create(:user, permissions: 50)
 			user8 = create(:user)
 			expect(admin.admin_or_more_powerful?).to be(true)
-			expect(lawyer.lawyer?).to be(true)
+			expect(advocate.advocate?).to be(true)
 			expect(user8.admin_or_more_powerful?).to be(false)
-			expect(user8.lawyer?).to be(false)
+			expect(user8.advocate?).to be(false)
 		end
 	end
 
   describe "sensor_codes_string" do
     it "allows user save if corresponding sensors exist" do
-      pending
+      skip
 
       create(:sensor, nick_name: '0000')
       user = create(:user)
       user.sensor_codes_string = '0000'
-      expect(user.save).to be_true
+      expect(user.save).to be true
     end
 
     it "prevents user save if no corresponding sensors exist" do
-      pending
+      skip
 
       user = create(:user)
       user.sensor_codes_string = '0000'
-      expect(user.save).to be_false
+      expect(user.save).to be false
     end
   end
 
@@ -160,7 +210,7 @@ describe User, :vcr do
       user = create(:admin)
       expect(user.list_permission_level_and_lower).to eq(
         admin: 25,
-        lawyer: 50,
+        advocate: 50,
         user: 100
       )
     end
@@ -228,9 +278,63 @@ describe User, :vcr do
       end
     end
 
+    context "when user's last reading was not severe" do
+      let!(:reading) { create(:reading, user: user, temp: 65) }
+
+      it "current temp is not too severe" do
+        expect(user.current_temp_is_severe).to eq(false)
+      end
+    end
+
+    context "when user's last reading was severe" do
+      let!(:reading) { create(:reading, user: user, temp: 60) }
+
+      it "current temp is not too severe" do
+        expect(user.current_temp_is_severe).to eq(true)
+      end
+    end
+
     context "when user has no readings" do
       it "returns nil" do
         expect(user.current_temp).to be_nil
+      end
+      it "current temp is not too severe" do
+        expect(user.current_temp_is_severe).to eq(false)
+      end
+    end
+  end
+
+  describe "#get_collaboration_with_user" do
+    let(:user1) { create(:user) }
+    let(:user2) { create(:user) }
+
+    context "when there is a collaboration with the user" do
+      it "returns the collaboration" do
+        collaboration = Collaboration.create(user: user1, collaborator: user2)
+        expect(user1.get_collaboration_with_user(user2)).to eq(collaboration)
+      end
+    end
+
+    context "when there is no collaboration with the user" do
+      it "returns no collaboration" do
+        expect(user1.get_collaboration_with_user(user2)).to eq(nil)
+      end
+    end
+  end
+
+  describe "#get_possessive" do
+    let(:user1) { create(:user) }
+    let(:user2) { create(:user) }
+
+    context "when the user matches" do
+      it "uses the 'your' possessive" do
+        expect(user1.get_possessive(user1)).to eq('your')
+      end
+    end
+
+    context "when the user does not match" do
+      it "uses the user's first name" do
+        expect(user1.get_possessive(user2)).to eq("#{user2.first_name}'s")
       end
     end
   end

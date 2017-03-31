@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ReadingsController do
+describe ReadingsController, type: :controller do
   describe "GET /readings/index" do
     let(:exporter) { double("readings_exporter") }
 
@@ -22,16 +22,14 @@ describe ReadingsController do
           .to receive(:send_data)
           .with("#{ReadingsExporter::HEADERS.join(',')}\n",
                 filename: "sensor_readings.csv",
-                type: "text/csv; charset=utf-8; header=present")
-          .and_return { controller.render nothing: true }
+                type: "text/csv; charset=utf-8; header=present") { controller.render nothing: true }
         get :index, format: :csv
       end
 
       it "instantiates a ReadingsExporter using the provided query parameters" do
         expect(ReadingsExporter)
           .to receive(:new)
-          .with("filter" => { "user_id" => 1 })
-          .and_return { exporter }
+          .with("filter" => { "user_id" => 1 }) { exporter }
         get :index, format: :csv, readings: { filter: { user_id: 1 } }
       end
     end

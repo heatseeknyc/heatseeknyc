@@ -1,6 +1,15 @@
 require 'spec_helper'
 
 describe ScrubDataForBuildingsAndUsers do
+  before :all do
+    @original_stdout = $stdout
+    $stdout = File.open(File::NULL, "w")
+  end
+
+  after :all do
+    $stdout = @original_stdout
+  end
+
   describe "address_scrubber" do
     it "standardizes common abbreviations" do
       address_one = "North Something Avenue"

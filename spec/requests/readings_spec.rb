@@ -1,6 +1,6 @@
 require "spec_helper.rb"
 
-describe "readings API" do
+describe "readings API", type: :request do
   let(:sensor_name) {  "0013a20040c17f44" }
   let(:reading_params) do
     {

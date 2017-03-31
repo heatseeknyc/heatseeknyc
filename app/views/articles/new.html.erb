@@ -1,5 +1,12 @@
-<h1>New article</h1>
+<div class="container">
+  <div class="col-md-6">
+    <div class="row back-button">
+      <%= link_to :back do %>
+        <i class="fa fa-long-arrow-left"></i> Back
+      <% end %>
+    </div>
 
-<%= render 'form' %>
-
-<%= link_to 'Back', articles_path %>
+    <h1 class="styled-header">New article</h1>
+    <%= render partial: "form", locals: { action_label: "Create Article" } %>
+  </div>
+</div>

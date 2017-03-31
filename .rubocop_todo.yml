@@ -250,7 +250,6 @@ Style/EmptyLinesAroundMethodBody:
 # SupportedStyles: empty_lines, no_empty_lines
 Style/EmptyLinesAroundModuleBody:
   Exclude:
-    - 'app/helpers/collaboration_helper.rb'
     - 'app/models/concerns/graphable.rb'
     - 'app/models/concerns/measurable.rb'
 

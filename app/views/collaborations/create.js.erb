@@ -1,6 +1,6 @@
 <% if @collaboration.save %>
   $(".collaborators-sidebar").remove();
-  $("#append-collaborations").append('<%= j render "users/collaborations" %>');
+  $("#append-violations").html('<%= j render "users/violation_report" %>');
 <% else %>
   $(".alert").remove();
   $(".show-layout").prepend('<%= j render "create_collaboration_failure_message" %>');

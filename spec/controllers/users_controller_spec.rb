@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe UsersController do
+describe UsersController, type: :controller do
   let(:tenant) { create(:user) }
   let(:stranger) { create(:user) }
-  let(:lawyer) { create(:user, permissions: User::PERMISSIONS[:lawyer]) }
+  let(:advocate) { create(:user, permissions: User::PERMISSIONS[:advocate]) }
   let(:admin) { create(:user, permissions: User::PERMISSIONS[:admin]) }
   let(:team_member) { create(:user, permissions: User::PERMISSIONS[:team_member]) }
   let(:super_user) { create(:user, permissions: User::PERMISSIONS[:super_user]) }
@@ -31,11 +31,11 @@ describe UsersController do
       end
     end
 
-    context "when current user is a lawyer" do
+    context "when current user is an advocate" do
       before :each do
-        lawyer.collaborators << tenant
-        lawyer.save
-        sign_in lawyer
+        advocate.collaborators << tenant
+        advocate.save
+        sign_in advocate
       end
 
       context "and they visit a tenant with whom they collaborate" do
@@ -49,7 +49,7 @@ describe UsersController do
       context "and they visit a tenant with whom they do not collaborate" do
         it "redirects to their own page" do
           get :show, id: stranger.id
-          expect(response).to redirect_to(user_path(lawyer))
+          expect(response).to redirect_to(user_path(advocate))
         end
       end
     end
@@ -75,9 +75,9 @@ describe UsersController do
         end
       end
 
-      context "and they visit a lawyer's page" do
-        it "shows the lawyer page" do
-          get :show, id: lawyer.id
+      context "and they visit an advocate's page" do
+        it "shows the advocate page" do
+          get :show, id: advocate.id
           expect(response.status).to eq(200)
           expect(response).to render_template "permissions_show"
         end
@@ -112,9 +112,9 @@ describe UsersController do
         end
       end
 
-      context "and they visit a lawyer's page" do
-        it "shows the lawyer page" do
-          get :show, id: lawyer.id
+      context "and they visit an advocate's page" do
+        it "shows the advocate page" do
+          get :show, id: advocate.id
           expect(response.status).to eq(200)
           expect(response).to render_template "permissions_show"
         end
@@ -149,9 +149,9 @@ describe UsersController do
         end
       end
 
-      context "and they visit a lawyer's page" do
-        it "shows the lawyer's page" do
-          get :show, id: lawyer.id
+      context "and they visit an advocate's page" do
+        it "shows the advocate's page" do
+          get :show, id: advocate.id
           expect(response.status).to eq(200)
           expect(response).to render_template "permissions_show"
         end
@@ -186,8 +186,7 @@ describe UsersController do
       allow(pdf_writer).to receive(:filename)
       allow(pdf_writer).to receive(:content_type)
       allow(controller).to receive(:send_data).
-        with(file, filename: pdf_writer.filename, type: pdf_writer.content_type).
-        and_return { controller.render :nothing => true }
+        with(file, filename: pdf_writer.filename, type: pdf_writer.content_type) { controller.render :nothing => true }
     end
 
     it "instantiates a pdf writer" do
@@ -197,8 +196,7 @@ describe UsersController do
 
     it "sends the data" do
       expect(controller).to receive(:send_data).
-        with(file, filename: pdf_writer.filename, type: pdf_writer.content_type).
-        and_return { controller.render :nothing => true }
+        with(file, filename: pdf_writer.filename, type: pdf_writer.content_type) { controller.render :nothing => true }
       get :download_pdf, id: 1
     end
   end
@@ -215,8 +213,7 @@ describe UsersController do
       allow(csv_writer).to receive(:generate_csv).and_return file
       allow(csv_writer).to receive(:filename)
       allow(controller).to receive(:send_data).
-        with(file, filename: csv_writer.filename, type: "text/csv").
-        and_return { controller.render :nothing => true }
+        with(file, filename: csv_writer.filename, type: "text/csv") { controller.render :nothing => true }
     end
 
     it "instantiates a csv writer" do
@@ -227,8 +224,7 @@ describe UsersController do
     it "sends the data" do
       expect(csv_writer).to receive(:filename).and_return filename
       expect(controller).to receive(:send_data).
-        with(file, filename: filename, type: "text/csv").
-        and_return { controller.render :nothing => true }
+        with(file, filename: filename, type: "text/csv") { controller.render :nothing => true }
       get :download_csv, id: 1
     end
   end
@@ -248,7 +244,7 @@ describe UsersController do
 
       expect(response).to redirect_to(root_path)
 
-      sign_in lawyer
+      sign_in advocate
       get :edit, id: tenant
 
       expect(response).to redirect_to(root_path)
@@ -263,7 +259,7 @@ describe UsersController do
       sign_in admin
       put :update, params
 
-      expect(response.status).to eq(302)
+      expect(response).to redirect_to user_path(id: tenant.id)
       expect(tenant.reload.first_name).to eq("Updated")
     end
 
@@ -273,7 +269,7 @@ describe UsersController do
 
       expect(response).to redirect_to(root_path)
 
-      sign_in lawyer
+      sign_in advocate
       put :update, params
 
       expect(response).to redirect_to(root_path)
@@ -292,7 +288,7 @@ describe UsersController do
         sign_in admin
         params[:user][:permissions] = User::PERMISSIONS[:admin]
         put :update, params
-        expect(response.status).to eq(302)
+        expect(response).to redirect_to user_path(tenant)
         expect(tenant.reload.permissions).to eq(User::PERMISSIONS[:admin])
       end
     end
@@ -329,9 +325,9 @@ describe UsersController do
 
       before { sign_in user }
 
-      it "redirects to root on update success" do
+      it "redirects to users path on update success" do
         patch :update_password, user: password_params
-        expect(response).to redirect_to(root_path)
+        expect(response).to redirect_to root_path
       end
 
       it "re-renders the edit form on update failure" do
@@ -373,16 +369,56 @@ describe UsersController do
       expect(user.building).to eq(building)
     end
 
-    it "creates user and associates with a new building", :vcr do
-      new_user = build(:user)
+    it "creates user and trims whitespace from user input" do
+      new_user = build(:user, address: " 123 Fake St ", first_name: "Kevin  ", last_name: "Tenant  ")
       post :create, user: new_user.attributes.merge(password: 'password', password_confirmation: 'password')
 
       user = User.last
-      building = Building.last
-      expect(user.first_name).to eq(new_user.first_name)
-      expect(user.last_name).to eq(new_user.last_name)
-      expect(building.street_address).to eq(new_user.address)
-      expect(building.zip_code).to eq(new_user.zip_code)
+      expect(user.first_name).to eq("Kevin")
+      expect(user.last_name).to eq("Tenant")
+      expect(user.address).to eq("123 Fake St")
+    end
+
+    context "creates user and associates with a new building" do
+      context "set_location_data param is missing or false" do
+        it "associates the user with a new building but does not geolocate", :vcr do
+          new_user = build(:user)
+          post :create, user: new_user.attributes.merge(
+              password: 'password',
+              password_confirmation: 'password'
+          )
+
+          user = User.last
+          expect(user.first_name).to eq(new_user.first_name)
+          expect(user.last_name).to eq(new_user.last_name)
+          expect(user.building.street_address).to eq(new_user.address)
+          expect(user.building.zip_code).to eq(new_user.zip_code)
+          expect(user.building.city).to eq(nil)
+        end
+      end
+
+      context "set_location_data param is true" do
+        it "associates the user with a new building but does not geolocate", :vcr do
+          post :create, user: {
+            first_name: 'Jane',
+            last_name: 'Doe',
+            email: 'jane@heatseeknyc.com',
+            password: 'password',
+            password_confirmation: 'password',
+            address: '40 Broad St',
+            zip_code: '10004',
+            set_location_data: 'true'
+          }
+
+          user = User.last
+          expect(user.first_name).to eq('Jane')
+          expect(user.last_name).to eq('Doe')
+          expect(user.building.street_address).to eq('40 Broad St')
+          expect(user.building.zip_code).to eq('10004')
+          expect(user.building.city).to eq('New York')
+          expect(user.building.state).to eq('New York')
+        end
+      end
     end
   end
 end

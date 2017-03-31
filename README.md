@@ -30,7 +30,7 @@ Heat Seek staff and volunteers install the temperature sensors at the beginning 
 
 ## Development/Contribution
 
-If you'd like to contribute to the code base, please submit a pull request.
+If you'd like to contribute to the code base, please submit a pull request. See our [Contribution Guide](CONTRIBUTING.md).
 
 ## Development Environment Setup
 
@@ -63,6 +63,7 @@ password: 33west26
 There are a couple rake tasks that require API tokens.
 
 The data scrubber task requires a Google Geocode API token, which can be generated [here](https://developers.google.com/maps/documentation/geocoding/get-api-key).
+It also requires a Geoclient App id and token, which can be generated [here](https://developer.cityofnewyork.us/api/geoclient-api).
 
 ```
 rake data:scrub_data
@@ -74,12 +75,6 @@ The weather update task requires a Wunderground API token, which can be generate
 rake weather:update
 ```
 
-The BBL backfill task requires a Geoclient App id and token, which can be generated [here](https://developer.cityofnewyork.us/api/geoclient-api).
-
-```
-rake data:backfill_bbl
-```
-
 This project uses the [Dotenv](https://github.com/bkeepers/dotenv) gem to store environment variables so add a `.env.development.local` file to the root of this project with the following:
 
 ```
@@ -88,8 +83,6 @@ WUNDERGROUND_KEY=<token>
 GEOCLIENT_APP_ID=<token>
 GEOCLIENT_APP_KEY=<token>
 ```
-
-
 
 ## License
 

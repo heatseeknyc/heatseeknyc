@@ -14,8 +14,8 @@ class UsersController < ApplicationController
       @collaboration = current_user.collaborations
                                   .where(collaborator_id: @user.id)
                                   .first
-      if @collaboration
-        redirect_to user_collaboration_path(current_user, @collaboration)
+      if @collaboration || current_user.admin_or_more_powerful?
+        redirect_to user_path(@user)
       else
         redirect_to user_path(current_user)
       end
@@ -35,9 +35,14 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
+    stripped_params = user_params.inject({}) do |params, (key, value)|
+      params[key.try(:to_sym) || key] = value.try(:strip) || value
+      params
+    end
+
+    @user = User.new_with_building(stripped_params)
+
     if @user.valid?
-      @user.building = Building.find_or_create_by(street_address: @user.address, zip_code: @user.zip_code)
       @user.save
       redirect_to users_path
     else
@@ -52,7 +57,7 @@ class UsersController < ApplicationController
         if @user.tenant? && current_user.able_to_see_tenant(@user)
           @analytics_page = "User Dashboard"
           render :show
-        elsif @user.lawyer_or_more_powerful? && current_user.able_to_see_non_tenant(@user)
+        elsif @user.advocate_or_more_powerful? && current_user.able_to_see_non_tenant(@user)
           @analytics_page = "Advocate Dashboard"
           render :permissions_show
         else
@@ -101,7 +106,8 @@ class UsersController < ApplicationController
 
   def search
     @query = params[:q]
-    @results = current_user.search(@query)
+    @user = User.find(params[:search_user_id])
+    @results = @user.search(@query)
 
     respond_to do |f|
       f.html do
@@ -172,7 +178,8 @@ class UsersController < ApplicationController
         :password,
         :password_confirmation,
         :permissions,
-        :sensor_codes_string
+        :sensor_codes_string,
+        :set_location_data
       ])
     end
 

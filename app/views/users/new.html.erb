@@ -1,64 +1,98 @@
-<div class="col-md-10">
-  <h2>Register a New User</h2>
-  <div class="settings-form-fields col-md-4" id="form-id">
-    <%= form_for @user, url: create_user_path do |f| %>
-        <%= devise_error_messages! %>
+<% content_for :template, "tenant" %>
+<div class="header-container">
+  <div class="container">
+    <div class="row back-button">
+      <a href="javascript:history.back()">
+        <i class="fa fa-long-arrow-left"></i> Back
+      </a>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <h1 class="styled-header">Register a New User</h1>
+      </div>
+    </div>
+  </div>
+</div>
 
-        <dl>
-          <%= f.label :first_name %>:
-          <%= f.text_field :first_name, class: "form-control" %>
-        </dl>
+<div class="bg-blue">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="settings-form-fields" id="form-id">
+          <br/>
+          <%= form_for @user, url: create_user_path do |f| %>
+              <%= devise_error_messages! %>
 
-        <dl>
-          <%= f.label :last_name %>:
-          <%= f.text_field :last_name, class: "form-control" %>
-        </dl>
+              <dl>
+                <%= f.label :first_name %>:
+                <%= f.text_field :first_name, class: "form-control" %>
+              </dl>
 
-        <dl>
-          <%= f.label :address %>:
-          <%= f.text_field :address, data: { autocomplete_source: admin_buildings_path }, class: "form-control" %>
-        </dl>
+              <dl>
+                <%= f.label :last_name %>:
+                <%= f.text_field :last_name, class: "form-control" %>
+              </dl>
 
-        <dl>
-          <%= f.label :apartment %>:
-          <%= f.text_field :apartment, class: "form-control short-field" %>
-        </dl>
+              <div>
+                <p>Street Address Style Guide:</p>
+                <ul>
+                  <li>Use abbreviations with no punctuation.</li>
+                  <li>For example 123 South Waverley Place should be 123 S Waverley Pl</li>
+                  <li>Don't include apartment number, city, or state in the address field</li>
+                </ul>
+              </div>
 
-        <dl>
-          <%= f.label :zip_code %>:
-          <%= f.text_field :zip_code, class: "form-control short-field" %>
-        </dl>
+              <dl>
+                <%= f.label :address %>:
+                <%= f.text_field :address, data: { autocomplete_source: admin_buildings_path }, class: "form-control" %>
+              </dl>
 
-        <dl>
-          <%= f.label :email %>:
-          <%= f.email_field :email, class: "form-control" %>
-        </dl>
+              <dl>
+                <%= f.label :apartment %>:
+                <%= f.text_field :apartment, class: "form-control short-field" %>
+              </dl>
 
-        <dl>
-          <%= f.label :phone_number %>:
-          <%= f.text_field :phone_number, class: "form-control short-field" %>
-        </dl>
+              <dl>
+                <%= f.label :zip_code %>:
+                <%= f.text_field :zip_code, class: "form-control short-field" %>
+              </dl>
 
-        <dl>
-          <%= f.label :permissions, "Permissions Level" %>:
-          <%= f.select :permissions, options_for_select(
-                User::PERMISSIONS.collect { |k, v| [k, v] }.sort { |p1, p2| p2[1] <=> p1[1] },
-                @user.permissions ? @user.permissions : User::PERMISSIONS[:user]
-              ),  {}, { class: "form-control" }
-          %>
-        </dl>
+              <dl>
+                <%= f.label :email %>:
+                <%= f.email_field :email, class: "form-control" %>
+              </dl>
 
-        <dl>
-          <%= f.label :password %>:
-          <%= f.password_field :password, class: "form-control" %>
-        </dl>
+              <dl>
+                <%= f.label :phone_number %>:
+                <%= f.text_field :phone_number, class: "form-control short-field" %>
+              </dl>
 
-        <dl>
-          <%= f.label :password_confirmation %>:
-          <%= f.password_field :password_confirmation, class: "form-control" %>
-        </dl>
+              <dl>
+                <%= f.label :permissions, "Permissions Level" %>:
+                <%= f.select :permissions, options_for_select(
+                      User::PERMISSIONS.collect { |k, v| [k, v] }.sort { |p1, p2| p2[1] <=> p1[1] },
+                      @user.permissions ? @user.permissions : User::PERMISSIONS[:user]
+                    ),  {}, { class: "form-control" }
+                %>
+              </dl>
 
-        <%= f.submit class: "btn-save" %>
-    <% end %>
+              <dl>
+                <%= f.label :password %>:
+                <%= f.password_field :password, class: "form-control" %>
+              </dl>
+
+              <dl>
+                <%= f.label :password_confirmation %>:
+                <%= f.password_field :password_confirmation, class: "form-control" %>
+              </dl>
+
+              <%= hidden_field_tag "user[set_location_data]", true %>
+
+              <%= f.submit class: "btn-save" %>
+
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

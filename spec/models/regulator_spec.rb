@@ -82,11 +82,11 @@ describe Regulator do
       end
 
       it "updates violation status to true", :vcr do
-        expect(Reading.where(violation: true)).to have(0).items
+        expect(Reading.where(violation: true).size).to eq(0)
 
         Reading.first.update(temp: 65)
         Regulator.new(Reading.all).inspect!
-        expect(Reading.where(violation: true)).to have(1).item
+        expect(Reading.where(violation: true).size).to eq(1)
       end
     end
 
@@ -98,7 +98,7 @@ describe Regulator do
       end
 
       it "updates violation status to false", :vcr do
-        expect(Reading.where(violation: true)).to have(10).items
+        expect(Reading.where(violation: true).size).to eq(10)
 
         Reading.update_all(outdoor_temp: 60)
         Regulator.new(Reading.all).inspect!
@@ -116,13 +116,13 @@ describe Regulator do
       end
 
       it "updates violation status in batches", :vcr do
-        expect(Reading.where(violation: true)).to have(0).items
+        expect(Reading.where(violation: true).size).to eq(0)
 
         Reading.order(created_at: :asc).first.update(temp: 65)
         Reading.order(created_at: :asc).last.update(temp: 65)
 
         Regulator.new(Reading.all).batch_inspect!(silent: true)
-        expect(Reading.where(violation: true)).to have(2).items
+        expect(Reading.where(violation: true).size).to eq(2)
       end
     end
 
@@ -145,13 +145,13 @@ describe Regulator do
       end
 
       xit "updates violation status in batches", :vcr do
-        expect(Reading.where(violation: true)).to have(0).items
+        expect(Reading.where(violation: true).size).to eq(0)
 
         Reading.order(created_at: :asc).first.update(temp: 65)
         Reading.order(created_at: :asc).last.update(temp: 65)
 
         Regulator.new(Reading.all).batch_inspect!
-        expect(Reading.where(violation: true)).to have(2).items
+        expect(Reading.where(violation: true).size).to eq(2)
       end
     end
   end

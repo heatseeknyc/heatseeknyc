@@ -36,12 +36,13 @@ class User < ActiveRecord::Base
   include Graphable::InstanceMethods
   include Regulatable::InstanceMethods
   include Permissionable::InstanceMethods
+  include Messageable::InstanceMethods
 
   PERMISSIONS = {
     super_user: 0,
     team_member: 10,
     admin: 25,
-    lawyer: 50,
+    advocate: 50,
     user: 100
   }.freeze
 
@@ -86,12 +87,27 @@ class User < ActiveRecord::Base
 
   define_measureable_methods(METRICS, CYCLES, MEASUREMENTS)
 
+  def self.new_with_building(params)
+    set_location = params.delete(:set_location_data)
+    user = self.new params
+    building_params = { street_address: user.address, zip_code: user.zip_code }
+    building = Building.find_by building_params
+
+    unless building
+      building = Building.new building_params
+      building.set_location_data if set_location == 'true'
+    end
+
+    user.building = building
+    user
+  end
+
   def search(search)
     search_arr = search.downcase.split
     first_term = search_arr[0]
     second_term = search_arr[1] || search_arr[0]
 
-    result = User.fuzzy_search(first_term, second_term).except_user_id(id).tenants_only
+    result = User.fuzzy_search(first_term, second_term).except_user_id(id).tenants_only.where.not(id:  collaborators.pluck(:id))
 
     is_demo_user? ? result.demo_users : result
   end
@@ -222,6 +238,10 @@ class User < ActiveRecord::Base
     current_temp ? "#{current_temp}°" : "N/A"
   end
 
+  def current_temp_is_severe
+    current_temp ? current_temp <= 60 : false
+  end
+
   def has_readings?
     !readings.empty?
   end
@@ -300,5 +320,9 @@ class User < ActiveRecord::Base
     if newest_reading = self.readings.order(:created_at => :desc, :id => :desc).limit(1).first
       newest_reading.created_at.strftime(format)
     end
+  end
+
+  def get_collaboration_with_user(user)
+    self.collaborations.find_by(collaborator: user)
   end
 end

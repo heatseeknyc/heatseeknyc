@@ -1,12 +1,45 @@
-<div class="col-xs-6 container">
-  <h1 id="collaborator-h1" class="text-center">Buildings</h1>
-  <%= link_to "Add Building", new_admin_building_path, class: "admin-button" %>
-  <% @buildings.each do |b| %>
-    <hr class="underline-user text-center">
-    <li class="sidebar-li">
-      <a href="<%= edit_admin_building_path(b.id) %>" class="user-link">
-        <%= " | " + [[b.street_address, b.city, b.state, b.zip_code].join(" , "), b.property_name ].join(" | ") %>
-      </a>
-    </li>
-  <% end %>
+<div class="bg-blue">
+  <div class="container">
+    <div class="row">
+      <h1 class="styled-header col-md-6">Buildings</h1>
+      <div class="admin-button-container pull-right">
+        <%= link_to new_admin_building_path, class: "admin-button" do %>
+            Add Building
+            <div class="admin-button-icon">+</div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="table-container">
+      <table class="table styled-table">
+        <thead>
+          <tr>
+            <th>Address</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Zip</th>
+            <th>BBL</th>
+            <th>Manage</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @buildings.each do |b| %>
+        <tr>
+          <td><%= [b.property_name, b.street_address].join(" ") %></td>
+          <td><%= b.city %></td>
+          <td><%= b.state %></td>
+          <td><%= b.zip_code %></td>
+          <td><%= b.bbl %></td>
+          <td>
+            <%= link_to "", edit_admin_building_path(b),
+                        class: "fa fa-wrench fa-lg",
+                        title: "Edit" %>
+          </td>
+        </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
 </div>

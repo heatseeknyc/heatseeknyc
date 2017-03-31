@@ -80,7 +80,7 @@ UserShowTempChartDrawer.prototype.updateTempForLiveUpdate = function(response){
 
 UserShowTempChartDrawer.prototype.drawChart = function() {
   var self = this;
-  $.getJSON(this.url, function(response){
+  $.getJSON(this.url + ".json", function(response){
     self.response = self.fixData(response);
     self.drawChartOnWindowResize();
     self.updateTempForLiveUpdate(response);

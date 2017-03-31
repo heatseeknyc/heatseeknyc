@@ -11,11 +11,10 @@ unless User.find_by(email: 'mbeirut@heatseeknyc.com')
   User.create(
     :first_name => 'Jane',
     :last_name => 'Doe',
-    :address => '625 6th Ave',
+    :address => '625 6th Ave, Apt 4C',
     :zip_code => '10011',
     :email => 'jane@heatseeknyc.com',
     :password => '33west26',
-    :apartment => '4C',
     :phone_number => '333-333-3333'
   )
 
@@ -31,29 +30,29 @@ unless User.find_by(email: 'mbeirut@heatseeknyc.com')
   )
 
   User.create(
-      :first_name => 'Jamie',
-      :last_name => 'Dough',
-      :address => '636 6th Ave',
-      :zip_code => '10011',
-      :email => 'jamie@heatseeknyc.com',
-      :apartment => '6E',
-      :password => '33west26'
+    :first_name => 'Jamie',
+    :last_name => 'Dough',
+    :address => '636 6th Ave',
+    :zip_code => '10011',
+    :email => 'jamie@heatseeknyc.com',
+    :apartment => '6E',
+    :password => '33west26'
   )
 
   User.create(
-      :first_name => 'Jake',
-      :last_name => 'Deaux',
-      :address => '636 6th Ave',
-      :zip_code => '10011',
-      :email => 'jake@heatseeknyc.com',
-      :password => '33west26'
+    :first_name => 'Jake',
+    :last_name => 'Deaux',
+    :address => '636 6th Ave',
+    :zip_code => '10011',
+    :email => 'jake@heatseeknyc.com',
+    :password => '33west26'
   )
 
   User.create(
     :first_name => 'June',
     :last_name => "D'oh",
-    :address => '200 Doesntexist Ln',
-    :zip_code => '10451',
+    :address => '310 E Kingsbridge Rd',
+    :zip_code => '10458',
     :email => 'tenant_for_lawyer@heatseeknyc.com',
     :password => '33west26'
   )
@@ -61,8 +60,8 @@ unless User.find_by(email: 'mbeirut@heatseeknyc.com')
   User.create(
     :first_name => 'Demo User',
     :last_name => 'Account',
-    :address => '101 Fake Ave',
-    :zip_code => '10474',
+    :address => '1265 43rd St',
+    :zip_code => '11219',
     :email => 'demo-user@heatseeknyc.com',
     :password => '33west26'
   )
@@ -70,17 +69,17 @@ unless User.find_by(email: 'mbeirut@heatseeknyc.com')
   User.create(
     :first_name => 'Demo Lawyer',
     :last_name => 'Account',
-    :address => '300 Madeup St',
-    :zip_code => '10005',
+    :address => '107 Norman Ave',
+    :zip_code => '11222',
     :email => 'demo-lawyer@heatseeknyc.com',
     :password => '33west26'
   )
- 
+
   User.create(
     :first_name => 'Live Update',
     :last_name => 'Account',
-    :address => '439 Bogus Lane',
-    :zip_code => '10128',
+    :address => '21-45 31st St',
+    :zip_code => '11105',
     :email => 'live-update@heatseeknyc.com',
     :password => '33west26'
   )
@@ -88,19 +87,28 @@ unless User.find_by(email: 'mbeirut@heatseeknyc.com')
   User.create(
     :first_name => 'Team',
     :last_name => 'Member',
-    :address => '100 Fake St',
-    :zip_code => '10004',
+    :address => '5 Central Ave',
+    :zip_code => '10301',
     :email => 'team-member@heatseeknyc.com',
     :password => '33west26'
   )
 
   User.create(
-      :first_name => 'Super',
-      :last_name => 'User',
-      :address => '100 Fake St',
-      :zip_code => '10004',
-      :email => 'super-user@heatseeknyc.com',
-      :password => '33west26'
+    :first_name => 'Super',
+    :last_name => 'User',
+    :address => '503 W 145th St',
+    :zip_code => '10031',
+    :email => 'super-user@heatseeknyc.com',
+    :password => '33west26'
+  )
+
+  User.create(
+    :first_name => 'Annalise',
+    :last_name => 'Keating',
+    :address => '455 5th Ave',
+    :zip_code => '10016',
+    :email => 'akeating@heatseeknyc.com',
+    :password => '33west26'
   )
 end
 
@@ -114,10 +122,15 @@ live = User.find_by(email: 'live-update@heatseeknyc.com')
 june = User.find_by(email: 'tenant_for_lawyer@heatseeknyc.com')
 users = [jane, john, jake, demo, live]
 
-lawyer = User.find_by(email: 'demo-lawyer@heatseeknyc.com')
-lawyer.permissions = 50
-lawyer.collaborators = [june]
-lawyer.save
+demo_lawyer = User.find_by(email: 'demo-lawyer@heatseeknyc.com')
+demo_lawyer.permissions = 50
+demo_lawyer.collaborators = [june]
+demo_lawyer.save
+
+other_lawyer = User.find_by(email: 'akeating@heatseeknyc.com')
+other_lawyer.permissions = 50
+other_lawyer.collaborators = [june, jake]
+other_lawyer.save
 
 team_member = User.find_by(email: 'team-member@heatseeknyc.com')
 team_member.permissions = 10
@@ -162,3 +175,4 @@ users.each do |user|
 end
 
 Reading.create(temp: 115, outdoor_temp: 37, user: jake, twine: jake.twine)
+Reading.create(temp: 60, outdoor_temp: 37, user: jane, twine: jane.twine)

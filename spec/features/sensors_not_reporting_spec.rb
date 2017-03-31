@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "sensors not reporting spec" do
+describe "sensors not reporting spec", type: :feature do
   let!(:user) { login_as_admin }
 
   before do

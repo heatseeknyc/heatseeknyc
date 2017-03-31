@@ -1,217 +1,155 @@
 @import "shared";
 
 #collaborator-ul .sidebar-li {
-	height: 80px;
-	font-size: 23px;
-	background-color: white;
-	list-style-type: none;
-	margin: 1px 0 0 0;
-	border-bottom: 3px solid $theme-orange;
+  height: 80px;
+  font-size: 23px;
+  background-color: white;
+  list-style-type: none;
+  margin: 1px 0 0 0;
+  border-bottom: 3px solid $theme-blue-lighten-2;
 }
 
-.sidebar-li .user-link{
-	color: #262729;
-	text-decoration: none;
-	font-family: 'Source Sans Pro', 'sans-serif';
+.sidebar-li .user-link {
+  color: #262729;
+  text-decoration: none;
+  font-family: 'Source Sans Pro', 'sans-serif';
 }
 
-.sidebar-li{
-	padding: 7px 0 7px 7px;
+.sidebar-li {
+  padding: 7px 0 7px 7px;
 }
 
 .collaborators-sidebar .sidebar-li {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 #q {
-	width: 200px;
-	float: right;
-	color: $theme-black;
-	background-color: $theme-orange;
-	border: solid 3px $theme-black;
-	border-radius: 0;
-	margin-right: 5px;
-	margin-top: 20px;
-	margin-bottom: 20px;
+  color: $theme-black;
+  background-color: $theme-white;
+  border: solid 1px #789ca4;
+  border-radius: 0;
+  margin: 20px 0;
+  display: inline-block;
 
-	&:focus {
-		box-shadow: none;
-	}
+  &:focus {
+    box-shadow: none;
+  }
 }
 
-#collaborator-h1{
-	font-family: 'Oswald';
-	margin-bottom: 20px;
-	padding: 15px;
-	border-bottom: 4px solid $theme-black;
-	border-top: 4px solid $theme-black;
+.search-input-container {
+  position: relative;
+
+  .form-control {
+    height: auto;
+    font-size: 20px;
+  }
+
+  .search-icon {
+    position: absolute;
+    top: 38%;
+    right: 7px;
+    border: none;
+    background-color: transparent;
+
+    .fa-search {
+      font-size: 1.6em;
+    }
+  }
 }
 
-.address_zip{
-	font-size: 14px;
-	font-family: 'Source Sans Pro', 'sans-serif';
-	display: block;
-	padding-top: 4px;
+.address_zip {
+  font-size: 14px;
+  font-family: 'Source Sans Pro', 'sans-serif';
+  display: block;
+  padding-top: 4px;
 }
 
-#collaborator-ul{
-	padding: 0;
-}
-
-#wrench{
-	height: 78px;
-	float: right;
-	margin-top: -65px;
-	border-left: 4px solid $theme-orange;
-}
-
-#edit{
-	height: 78px;
-	float: right;
-	margin-top: -65px;
-	border-left: 4px solid $theme-orange;
+#collaborator-ul {
+  padding: 0;
 }
 
 .advocate-layout {
-	background: $theme-orange;
-
-	h3 {
-		font-family: Oswald;
-		text-transform: uppercase;
-	}
-
-	#collaborator-h1 {
-		text-transform: uppercase;
-		font-family: "Source Sans Pro";
-		font-size: 2.4em;
-		text-align: left;
-		padding-left: 0;
-	}
-}
-
-.user-settings-link, .remove-user-link, .add-user-link-from-search {
-	padding-top: 30px;
-	text-align: center;
-	width: 40px;
-
-	&:hover {
-		color: $theme-white;
-		background-color: $theme-orange;
-		text-decoration: none;
-	}
-
-	@media (min-width: 480px) {
-		width: 83px;
-	}
+  h3 {
+    font-family: Oswald;
+    text-transform: uppercase;
+  }
 }
 
 .add-user-link-from-search {
   height: 78px;
   float: right;
   margin-top: -65px;
-  border-left: 4px solid $theme-orange;
-}
+  border-left: 4px solid $theme-blue-lighten-2;
+  padding-top: 30px;
+  text-align: center;
+  width: 40px;
 
-.table a {
-  &:hover, &:visited, &:link, &:active {
+  &:link, &:visited {
+    color: $theme-blue;
     text-decoration: none;
   }
-}
 
-.user-name {
-  font-size: 2em;
-}
+  &:hover {
+    color: $theme-white;
+    background-color: $theme-blue;
+    text-decoration: none;
+  }
 
-.add-user {
-  text-align: center;
-  a {
-    margin-top: 5px;
+  @media (min-width: 480px) {
+    width: 83px;
   }
 }
 
 .search-form {
-	float: left;
-}
-
-.admin-button {
-	background-color: $theme-orange;
-	border: solid 3px $theme-black;
-	height: 34px;
-	margin: 20px 0;
-  color: $theme-black;
-  font-weight: bolder;
-  padding: 8px 15px;
-
-  &:hover, &:visited, &:link {
-    color: $theme-black;
-    text-decoration: none;
-  }
+  float: left;
 }
 
 #search-button {
-	float: right;
+  float: right;
   font-size: 1em;
   padding: 5px;
 }
 
-.admin-button-container {
-  display: inline-block;
-  margin: 25px 5px 12px 0;
+.advocate-button {
+  font-family: 'Oswald';
+  padding: 1px 20px 1px 20px;
 }
 
-.collaborators-sidebar {
-	padding-right: 15px;
-	padding-left: 15px;
-}
-
-.container .core-team-member > div {
-	height: 239px;
-	width: 239px;
-}
-
-.advocate-button{
-	font-family: 'Oswald';
-	padding: 1px 20px 1px 20px;
-}
 @media (max-width: $screen-xs-max) {
-	.advocate-button{
-		display: none;
-	}
+  .advocate-button {
+    display: none;
+  }
 }
 
 @media (min-width: $screen-xs-max) {
-	#search-button > i{
-		display: none;
-	}
+  #search-button > i {
+    display: none;
+  }
 }
 
-.advocate-layout .collaborators-sidebar{
-	padding-right: 0;
+.advocate-layout {
+  padding-right: 0;
 }
 
 #permissions-show-div {
-	padding-left: 0;
-	padding-right: 0;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 #advocate-bar h3 {
-	float: left;
-}
-
-.collaborators-sidebar{
-	padding-left: 0;
+  float: left;
 }
 
 #search-results {
-	padding-left: 0;
-	padding-right: 0;
+  padding-left: 0;
+  padding-right: 0;
 
-	a.user-link {
-		pointer-events: none;
-		cursor: default;
-	}
+  a.user-link {
+    pointer-events: none;
+    cursor: default;
+  }
 }
 
-.lawyer {
-	background-color: $theme-orange;
+.advocate {
+  background-color: $theme-blue;
 }
