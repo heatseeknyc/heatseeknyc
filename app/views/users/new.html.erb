@@ -33,6 +33,15 @@
                 <%= f.text_field :last_name, class: "form-control" %>
               </dl>
 
+              <div>
+                <p>Street Address Style Guide:</p>
+                <ul>
+                  <li>Use abbreviations with no punctuation.</li>
+                  <li>For example 123 South Waverley Place should be 123 S Waverley Pl</li>
+                  <li>Don't include apartment number, city, or state in the address field</li>
+                </ul>
+              </div>
+
               <dl>
                 <%= f.label :address %>:
                 <%= f.text_field :address, data: { autocomplete_source: admin_buildings_path }, class: "form-control" %>
