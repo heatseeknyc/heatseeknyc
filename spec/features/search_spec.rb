@@ -7,16 +7,20 @@ describe "viewing advocate page as super user", type: :feature do
   let!(:super_user) { login_as_super_user }
 
   before(:each) do
-    @advocate = create(:user, permissions: User::PERMISSIONS[:advocate])
-    create(:user, first_name: "User1")
-    create(:user, first_name: "User2")
-    create(:user, first_name: "User3")
-    create(:user, first_name: "User4")
+    @advocate = create(:user, :advocate)
+    @user1 = create(:user)
   end
 
   it "will show search results" do
-    visit "/users/#{@advocate.id}"
+    visit user_path(@advocate)
     find(:css, ".search-icon").click
-    expect(page).to have_selector("#search-results .sidebar-li", count: 4)
+    expect(page).to have_selector("#search-results .sidebar-li", count: 1)
+  end
+
+  it "will not show tenants who are already collaborators" do
+    create(:collaboration, user: @advocate, collaborator: @user1)
+    visit user_path(@advocate)
+    find(:css, ".search-icon").click
+    expect(page).not_to have_selector("#search-results .sidebar-li")
   end
 end

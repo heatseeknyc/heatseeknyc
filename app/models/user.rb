@@ -107,7 +107,7 @@ class User < ActiveRecord::Base
     first_term = search_arr[0]
     second_term = search_arr[1] || search_arr[0]
 
-    result = User.fuzzy_search(first_term, second_term).except_user_id(id).tenants_only
+    result = User.fuzzy_search(first_term, second_term).except_user_id(id).tenants_only.where.not(id:  collaborators.pluck(:id))
 
     is_demo_user? ? result.demo_users : result
   end
