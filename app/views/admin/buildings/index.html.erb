@@ -25,7 +25,7 @@
         <tbody>
         <% @buildings.each do |b| %>
         <tr>
-          <td><%= [b.property_name, b.street_address].join(" - ") %></td>
+          <td><%= [b.property_name, b.street_address].join(" ") %></td>
           <td><%= b.city %></td>
           <td><%= b.state %></td>
           <td><%= b.zip_code %></td>
