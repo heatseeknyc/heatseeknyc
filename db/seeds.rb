@@ -51,8 +51,8 @@ unless User.find_by(email: 'mbeirut@heatseeknyc.com')
   User.create(
     :first_name => 'June',
     :last_name => "D'oh",
-    :address => '200 Doesntexist Ln',
-    :zip_code => '10451',
+    :address => '310 E Kingsbridge Rd',
+    :zip_code => '10458',
     :email => 'tenant_for_lawyer@heatseeknyc.com',
     :password => '33west26'
   )
@@ -60,8 +60,8 @@ unless User.find_by(email: 'mbeirut@heatseeknyc.com')
   User.create(
     :first_name => 'Demo User',
     :last_name => 'Account',
-    :address => '101 Fake Ave',
-    :zip_code => '10474',
+    :address => '1265 43rd St',
+    :zip_code => '11219',
     :email => 'demo-user@heatseeknyc.com',
     :password => '33west26'
   )
@@ -69,8 +69,8 @@ unless User.find_by(email: 'mbeirut@heatseeknyc.com')
   User.create(
     :first_name => 'Demo Lawyer',
     :last_name => 'Account',
-    :address => '300 Madeup St',
-    :zip_code => '10005',
+    :address => '107 Norman Ave',
+    :zip_code => '11222',
     :email => 'demo-lawyer@heatseeknyc.com',
     :password => '33west26'
   )
@@ -78,8 +78,8 @@ unless User.find_by(email: 'mbeirut@heatseeknyc.com')
   User.create(
     :first_name => 'Live Update',
     :last_name => 'Account',
-    :address => '439 Bogus Lane',
-    :zip_code => '10128',
+    :address => '21-45 31st St',
+    :zip_code => '11105',
     :email => 'live-update@heatseeknyc.com',
     :password => '33west26'
   )
@@ -87,8 +87,8 @@ unless User.find_by(email: 'mbeirut@heatseeknyc.com')
   User.create(
     :first_name => 'Team',
     :last_name => 'Member',
-    :address => '100 Fake St',
-    :zip_code => '10004',
+    :address => '5 Central Ave',
+    :zip_code => '10301',
     :email => 'team-member@heatseeknyc.com',
     :password => '33west26'
   )
@@ -96,8 +96,8 @@ unless User.find_by(email: 'mbeirut@heatseeknyc.com')
   User.create(
       :first_name => 'Super',
       :last_name => 'User',
-      :address => '100 Fake St',
-      :zip_code => '10004',
+      :address => '503 W 145th St',
+      :zip_code => '10031',
       :email => 'super-user@heatseeknyc.com',
       :password => '33west26'
   )
