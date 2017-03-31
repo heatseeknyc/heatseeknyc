@@ -35,7 +35,7 @@ class Building < ActiveRecord::Base
     if street_address.present? && zip_code.present? && NYC_BOROUGHS.include?(city)
       get_bbl
     elsif street_address.present? && zip_code.present?
-      self.bbl = ""
+      self.bbl = nil
     end
   end
 
