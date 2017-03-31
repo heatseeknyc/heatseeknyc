@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
 
   validates :first_name, :length => { minimum: 2 }
   validates :last_name, :length => { minimum: 2 }
-  validate :sensor_codes_string_contains_only_valid_sensors
+  #validate :sensor_codes_string_contains_only_valid_sensors
   validates_presence_of :address, :email, :zip_code
   validates_format_of :zip_code,
                       with: /\A\d{5}-\d{4}|\A\d{5}\z/,
@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
                       allow_blank: true
 
   before_save :create_search_names
-  before_validation :associate_sensors
+  # before_validation :associate_sensors
 
   before_destroy :destroy_all_collaborations
 
