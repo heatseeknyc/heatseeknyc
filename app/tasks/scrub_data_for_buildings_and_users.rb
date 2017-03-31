@@ -73,17 +73,34 @@ class ScrubDataForBuildingsAndUsers
 
   def self.update_user(user)
     scrubbed_address = address_scrubber(user.address)
+    abbreviated_address = address_up_until_comma(scrubbed_address)
+    building_params = { street_address: abbreviated_address, zip_code: user.zip_code }
+
+    building = Building.find_by building_params
+    unless building
+      building = Building.new building_params
+      building.set_location_data
+      building.save
+    end
+
     user.update(
         address:    scrubbed_address,
         first_name: user.first_name.strip,
         last_name:  user.last_name.strip,
-        building:   Building.find_or_create_by(street_address: scrubbed_address, zip_code: user.zip_code)
+        building: building
     )
   end
 
+  def self.address_up_until_comma(address)
+    address.split(',')[0]
+  end
+
   def self.update_address(building)
+    scrubbed_address = address_scrubber(building.street_address)
+    abbreviated_address = address_up_until_comma(scrubbed_address)
+
     building.update(
-        street_address: address_scrubber(building.street_address)
+        street_address: abbreviated_address
     )
   end
 

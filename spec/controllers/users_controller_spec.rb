@@ -379,16 +379,46 @@ describe UsersController, type: :controller do
       expect(user.address).to eq("123 Fake St")
     end
 
-    it "creates user and associates with a new building", :vcr do
-      new_user = build(:user)
-      post :create, user: new_user.attributes.merge(password: 'password', password_confirmation: 'password')
+    context "creates user and associates with a new building" do
+      context "set_location_data param is missing or false" do
+        it "associates the user with a new building but does not geolocate", :vcr do
+          new_user = build(:user)
+          post :create, user: new_user.attributes.merge(
+              password: 'password',
+              password_confirmation: 'password'
+          )
 
-      user = User.last
-      building = Building.last
-      expect(user.first_name).to eq(new_user.first_name)
-      expect(user.last_name).to eq(new_user.last_name)
-      expect(building.street_address).to eq(new_user.address)
-      expect(building.zip_code).to eq(new_user.zip_code)
+          user = User.last
+          expect(user.first_name).to eq(new_user.first_name)
+          expect(user.last_name).to eq(new_user.last_name)
+          expect(user.building.street_address).to eq(new_user.address)
+          expect(user.building.zip_code).to eq(new_user.zip_code)
+          expect(user.building.city).to eq(nil)
+        end
+      end
+
+      context "set_location_data param is true" do
+        it "associates the user with a new building but does not geolocate", :vcr do
+          post :create, user: {
+            first_name: 'Jane',
+            last_name: 'Doe',
+            email: 'jane@heatseeknyc.com',
+            password: 'password',
+            password_confirmation: 'password',
+            address: '40 Broad St',
+            zip_code: '10004',
+            set_location_data: 'true'
+          }
+
+          user = User.last
+          expect(user.first_name).to eq('Jane')
+          expect(user.last_name).to eq('Doe')
+          expect(user.building.street_address).to eq('40 Broad St')
+          expect(user.building.zip_code).to eq('10004')
+          expect(user.building.city).to eq('Mountain View')
+          expect(user.building.state).to eq('New York')
+        end
+      end
     end
   end
 end

@@ -1,6 +1,56 @@
 require 'spec_helper'
 
 describe User, :vcr do
+  describe ".new_with_building" do
+    let(:params) {
+      {
+        first_name: "Jane",
+        last_name: "Doe",
+        password: "password",
+        email: "jane@heatseeknyc.com"
+      }
+    }
+    context "when the building exists" do
+      let(:building) { create(:building) }
+
+      it "associates the user with the building" do
+        params[:address] = building.street_address
+        params[:zip_code] = building.zip_code
+
+        expect(User.new_with_building(params).building).to eq(building)
+      end
+    end
+
+    context "when the building doesn't exist" do
+      before(:each) do
+        params[:address] = "40 Broad St"
+        params[:zip_code] = "10004"
+      end
+
+      context "and the method should set location data" do
+        it "creates a new building with a city and state" do
+          params[:set_location_data] = "true"
+          building = User.new_with_building(params).building
+
+          expect(building.street_address).to eq("40 Broad St")
+          expect(building.zip_code).to eq("10004")
+          expect(building.city).to eq("Mountain View")
+          expect(building.state).to eq("New York")
+        end
+      end
+      context "and the method should not set location data" do
+        it "creates a new building without a city and state" do
+          building = User.new_with_building(params).building
+
+          expect(building.street_address).to eq("40 Broad St")
+          expect(building.zip_code).to eq("10004")
+          expect(building.city).to eq(nil)
+          expect(building.state).to eq(nil)
+        end
+      end
+    end
+  end
+
   describe "#inspect" do
     let(:rick) do
       create(

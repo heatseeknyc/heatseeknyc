@@ -20,6 +20,7 @@ describe AddBBLDataToBuildings do
   end
 
   before :each do
+    [building1, building2].each { |b| b.state = "New York" }
     building1.save
     building2.save
   end

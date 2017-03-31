@@ -10,7 +10,8 @@
                    title: "Edit #{[@building.property_name, @building.street_address, @building.zip_code].compact.join(" - ")}",
                    resource: @building,
                    url: admin_building_path(@building),
-                   action_label: "Update Building"
+                   action_label: "Update Building",
+                   display_city_and_state: true
                } %>
   </div>
 </div>

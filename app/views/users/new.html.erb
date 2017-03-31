@@ -70,6 +70,8 @@
                 <%= f.password_field :password_confirmation, class: "form-control" %>
               </dl>
 
+              <%= hidden_field_tag "user[set_location_data]", true %>
+
               <%= f.submit class: "btn-save" %>
           <% end %>
         </div>

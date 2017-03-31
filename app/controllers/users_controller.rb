@@ -36,13 +36,13 @@ class UsersController < ApplicationController
 
   def create
     stripped_params = user_params.inject({}) do |params, (key, value)|
-      params[key] = value.try(:strip)
+      params[key.try(:to_sym) || key] = value.try(:strip) || value
       params
     end
 
-    @user = User.new(stripped_params)
+    @user = User.new_with_building(stripped_params)
+
     if @user.valid?
-      @user.building = Building.find_or_create_by(street_address: @user.address, zip_code: @user.zip_code)
       @user.save
       redirect_to users_path
     else
@@ -178,7 +178,8 @@ class UsersController < ApplicationController
         :password,
         :password_confirmation,
         :permissions,
-        :sensor_codes_string
+        :sensor_codes_string,
+        :set_location_data
       ])
     end
 

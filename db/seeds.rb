@@ -11,11 +11,10 @@ unless User.find_by(email: 'mbeirut@heatseeknyc.com')
   User.create(
     :first_name => 'Jane',
     :last_name => 'Doe',
-    :address => '625 6th Ave',
+    :address => '625 6th Ave, Apt 4C',
     :zip_code => '10011',
     :email => 'jane@heatseeknyc.com',
     :password => '33west26',
-    :apartment => '4C',
     :phone_number => '333-333-3333'
   )
 
@@ -162,3 +161,4 @@ users.each do |user|
 end
 
 Reading.create(temp: 115, outdoor_temp: 37, user: jake, twine: jake.twine)
+Reading.create(temp: 60, outdoor_temp: 37, user: jane, twine: jane.twine)

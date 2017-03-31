@@ -35,8 +35,8 @@ feature "Building management" do
     click_link "Add Building"
 
     fill_in "Property name", with: "New apartment"
-    fill_in "Street address", with: "123 New St"
-    fill_in "Zip code", with: "99999-1234"
+    fill_in "Street address", with: "625 6th Ave"
+    fill_in "Zip code", with: "10011"
     fill_in "Bin", with: "123456789"
     fill_in "Bbl", with: "123-4-5678"
 
@@ -44,7 +44,7 @@ feature "Building management" do
 
     new_building = Building.last
     expect(new_building.property_name).to eq("New apartment")
-    expect(new_building.street_address).to eq("123 New St")
+    expect(new_building.street_address).to eq("625 6th Ave")
     expect(current_path).to eq(admin_buildings_path)
     expect(page).to have_content("Successfully created.")
   end
@@ -62,8 +62,8 @@ feature "Building management" do
     visit "/admin/buildings/#{building.id}/edit"
     fill_in "Property name", with: "Cold apartment"
     fill_in "Description", with: "This place is cold"
-    fill_in "Street address", with: "900 Some Street"
-    fill_in "Zip code", with: "99999-1234"
+    fill_in "Street address", with: "625 6th Ave"
+    fill_in "Zip code", with: "10011"
     fill_in "Bin", with: "123456789"
     fill_in "Bbl", with: "123-4-5678"
 

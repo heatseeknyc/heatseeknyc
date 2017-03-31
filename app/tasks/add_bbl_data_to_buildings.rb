@@ -34,16 +34,16 @@ class AddBBLDataToBuildings
 
   private
 
-  def self.query_params(building)
-    address = building.street_address.split(',')[0].split
-    {
-      houseNumber: address.shift,
-      street: address.join(" "),
-      zip: building.zip_code
-    }
-  end
+    def self.query_params(building)
+      address = building.street_address.split(',')[0].split
+      {
+        houseNumber: address.shift,
+        street: address.join(" "),
+        zip: building.zip_code
+      }
+    end
 
-  def self.access_params
-    { app_id: ENV["GEOCLIENT_APP_ID"], app_key: ENV["GEOCLIENT_APP_KEY"] }
-  end
+    def self.access_params
+      { app_id: ENV["GEOCLIENT_APP_ID"], app_key: ENV["GEOCLIENT_APP_KEY"] }
+    end
 end

@@ -18,13 +18,9 @@ class Building < ActiveRecord::Base
   end
 
   def set_location_data(params = {})
-    if zip_code != params[:zip_code]
+    if zip_code.present? && zip_code != params[:zip_code]
       geocode
       reverse_geocode
     end
-  end
-
-  def self.for_tenant(tenant)
-    Building.where("street_address ILIKE '%#{tenant.address}%'").first
   end
 end
