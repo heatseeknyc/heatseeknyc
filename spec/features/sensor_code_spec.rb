@@ -3,6 +3,8 @@ require 'spec_helper'
 feature "Sensor Codes" do
 
   scenario "creating a new user account with a sensor code" do
+    pending
+
     sensor = create(:sensor, name: 'abcdefghijklmnop', nick_name: '3E4T')
 
     visit '/users/sign_up'
@@ -25,6 +27,8 @@ feature "Sensor Codes" do
   end
 
   scenario "editing an old user account to change a sensor code" do
+    pending
+
     sensor = create(:sensor, name: 'abcdefghijklmnop', nick_name: '3E4T')
     user = create(:user, password: 'password')
     login_as(user)
@@ -41,6 +45,8 @@ feature "Sensor Codes" do
   end
 
   scenario "typing an invalid sensor returns a validation error" do
+    pending
+
     user = create(:user, password: 'password')
     login_as(user)
 
