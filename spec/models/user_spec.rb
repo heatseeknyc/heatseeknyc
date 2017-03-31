@@ -188,7 +188,7 @@ describe User, :vcr do
 
   describe "sensor_codes_string" do
     it "allows user save if corresponding sensors exist" do
-      pending
+      skip
 
       create(:sensor, nick_name: '0000')
       user = create(:user)
@@ -197,7 +197,7 @@ describe User, :vcr do
     end
 
     it "prevents user save if no corresponding sensors exist" do
-      pending
+      skip
 
       user = create(:user)
       user.sensor_codes_string = '0000'
