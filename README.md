@@ -30,7 +30,7 @@ Heat Seek staff and volunteers install the temperature sensors at the beginning 
 
 ## Development/Contribution
 
-If you'd like to contribute to the code base, please submit a pull request.
+If you'd like to contribute to the code base, please submit a pull request. See our [Contribution Guide](CONTRIBUTING.md).
 
 ## Development Environment Setup
 
