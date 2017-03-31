@@ -1,42 +1,42 @@
 class ScrubDataForBuildingsAndUsers
 
   STREET_RULES = {
-      "east"   => "E",
-      "e."     => "E",
-      "west"   => "W",
-      "w."     => "W",
-      "north"  => "N",
-      "n."     => "N",
-      "south"  => "S",
-      "s."     => "S",
-      "avenue" => "Ave",
-      "ave."   => "Ave",
-      "street" => "St",
-      "st."    => "St",
-      "apt."   => "Apt",
-      "place"  => "Pl",
-      "road"   => "Rd"
+    "east"   => "E",
+    "e."     => "E",
+    "west"   => "W",
+    "w."     => "W",
+    "north"  => "N",
+    "n."     => "N",
+    "south"  => "S",
+    "s."     => "S",
+    "avenue" => "Ave",
+    "ave."   => "Ave",
+    "street" => "St",
+    "st."    => "St",
+    "apt."   => "Apt",
+    "place"  => "Pl",
+    "road"   => "Rd"
   }
 
   AROUND_UNIT_RULES = {
-      /(apt\s\S+)/   => ', \1,',
-      /(apt\.\s\S+)/ => ', \1,',
-      /(suite\s\S+)/ => ', \1,',
-      /(\S+\sfloor)/ => ', \1,'
+    /(apt\s\S+)/   => ', \1,',
+    /(apt\.\s\S+)/ => ', \1,',
+    /(suite\s\S+)/ => ', \1,',
+    /(\S+\sfloor)/ => ', \1,'
   }
 
   BEFORE_UNIT_RULES = {
-      /\s(Apt\s\S+)/        => ', \1',
-      /\s(Suite\s\S+)/      => ', \1',
-      /(\s{1,1}\S+\sFloor)/ => ',\1',
-      /(\s{1,1}#\d+)/       => ',\1'
+    /\s(Apt\s\S+)/        => ', \1',
+    /\s(Suite\s\S+)/      => ', \1',
+    /(\s{1,1}\S+\sFloor)/ => ',\1',
+    /(\s{1,1}#\d+)/       => ',\1'
   }
 
   STATES = [
-      'ny',
-      'new york',
-      'pa',
-      'pennsylvania'
+    'ny',
+    'new york',
+    'pa',
+    'pennsylvania'
   ]
 
   BEFORE_STATE_RULES = STATES.inject({}) do |hash, state|
@@ -79,15 +79,15 @@ class ScrubDataForBuildingsAndUsers
     building = Building.find_by building_params
     unless building
       building = Building.new building_params
-      building.set_location_data
-      building.save
     end
+    building.set_location_data
+    building.save
 
     user.update(
-        address:    scrubbed_address,
-        first_name: user.first_name.strip,
-        last_name:  user.last_name.strip,
-        building: building
+      address: scrubbed_address,
+      first_name: user.first_name.strip,
+      last_name: user.last_name.strip,
+      building: building
     )
   end
 
@@ -100,8 +100,11 @@ class ScrubDataForBuildingsAndUsers
     abbreviated_address = address_up_until_comma(scrubbed_address)
 
     building.update(
-        street_address: abbreviated_address
+      street_address: abbreviated_address
     )
+
+    building.set_location_data
+    building.save
   end
 
   def self.delete_if_duplicate(building)
@@ -117,16 +120,16 @@ class ScrubDataForBuildingsAndUsers
     no_city_and_state_words = remove_city_and_state(add_comma_before_state(add_commas_around_units(zip_removed_string)))
 
     no_commas = to_ordinal(no_city_and_state_words.join(' ').split(/\s+/))
-                    .map { |word| STREET_RULES[word.gsub(',', '')] || word.gsub(',', '').capitalize }
-                    .join(' ')
+      .map { |word| STREET_RULES[word.gsub(',', '')] || word.gsub(',', '').capitalize }
+      .join(' ')
 
     add_commas_before_units(no_commas)
   end
 
   def self.downcase_and_strip(address)
     address
-        .strip
-        .downcase
+      .strip
+      .downcase
   end
 
   def self.remove_zip(address)

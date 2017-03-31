@@ -38,7 +38,6 @@ feature "Building management" do
     fill_in "Street address", with: "625 6th Ave"
     fill_in "Zip code", with: "10011"
     fill_in "Bin", with: "123456789"
-    fill_in "Bbl", with: "123-4-5678"
 
     click_button "Create Building"
 
@@ -65,7 +64,6 @@ feature "Building management" do
     fill_in "Street address", with: "625 6th Ave"
     fill_in "Zip code", with: "10011"
     fill_in "Bin", with: "123456789"
-    fill_in "Bbl", with: "123-4-5678"
 
     click_button "Update Building"
 

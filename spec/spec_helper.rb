@@ -48,6 +48,9 @@ Spork.prefork do
       Rails.cache.clear
       WebMock.stub_request(:get, /maps\.googleapis\.com/)
           .to_return(body: geocode_response)
+
+      WebMock.stub_request(:get, /api\.cityofnewyork\.us/)
+          .to_return(body: geoclient_response)
     end
   end
 end
@@ -58,7 +61,7 @@ def geocode_response
 end
 
 def geoclient_response
-  {address: {bbl: Faker::Number.number(10)}}
+  {address: {bbl: Faker::Number.number(10)}}.to_json
 end
 
 Spork.each_run do

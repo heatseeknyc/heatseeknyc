@@ -13,8 +13,8 @@
           "types" : [ "route" ]
         },
         {
-          "long_name" : "Mountain View",
-          "short_name" : "Mountain View",
+          "long_name" : "New York",
+          "short_name" : "New York",
           "types" : [ "locality", "political" ]
         },
         {

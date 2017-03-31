@@ -415,7 +415,7 @@ describe UsersController, type: :controller do
           expect(user.last_name).to eq('Doe')
           expect(user.building.street_address).to eq('40 Broad St')
           expect(user.building.zip_code).to eq('10004')
-          expect(user.building.city).to eq('Mountain View')
+          expect(user.building.city).to eq('New York')
           expect(user.building.state).to eq('New York')
         end
       end

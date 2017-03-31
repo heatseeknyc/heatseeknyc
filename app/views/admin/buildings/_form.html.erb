@@ -11,8 +11,8 @@
         <%= f.input :description %>
         <%= f.input :street_address %>
         <%= f.input :zip_code, input_html: { class: "short-field"} %>
-        <%= f.input :bbl %>
-        <% if display_city_and_state %>
+        <% if display_city_and_state_and_bbl %>
+          <%= f.input :bbl %>
           <%= f.input :city %>
           <%= f.input :state %>
         <% end %>

@@ -34,7 +34,7 @@ describe User, :vcr do
 
           expect(building.street_address).to eq("40 Broad St")
           expect(building.zip_code).to eq("10004")
-          expect(building.city).to eq("Mountain View")
+          expect(building.city).to eq("New York")
           expect(building.state).to eq("New York")
         end
       end

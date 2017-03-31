@@ -30,22 +30,22 @@ unless User.find_by(email: 'mbeirut@heatseeknyc.com')
   )
 
   User.create(
-      :first_name => 'Jamie',
-      :last_name => 'Dough',
-      :address => '636 6th Ave',
-      :zip_code => '10011',
-      :email => 'jamie@heatseeknyc.com',
-      :apartment => '6E',
-      :password => '33west26'
+    :first_name => 'Jamie',
+    :last_name => 'Dough',
+    :address => '636 6th Ave',
+    :zip_code => '10011',
+    :email => 'jamie@heatseeknyc.com',
+    :apartment => '6E',
+    :password => '33west26'
   )
 
   User.create(
-      :first_name => 'Jake',
-      :last_name => 'Deaux',
-      :address => '636 6th Ave',
-      :zip_code => '10011',
-      :email => 'jake@heatseeknyc.com',
-      :password => '33west26'
+    :first_name => 'Jake',
+    :last_name => 'Deaux',
+    :address => '636 6th Ave',
+    :zip_code => '10011',
+    :email => 'jake@heatseeknyc.com',
+    :password => '33west26'
   )
 
   User.create(
@@ -94,12 +94,21 @@ unless User.find_by(email: 'mbeirut@heatseeknyc.com')
   )
 
   User.create(
-      :first_name => 'Super',
-      :last_name => 'User',
-      :address => '503 W 145th St',
-      :zip_code => '10031',
-      :email => 'super-user@heatseeknyc.com',
-      :password => '33west26'
+    :first_name => 'Super',
+    :last_name => 'User',
+    :address => '503 W 145th St',
+    :zip_code => '10031',
+    :email => 'super-user@heatseeknyc.com',
+    :password => '33west26'
+  )
+
+  User.create(
+    :first_name => 'Annalise',
+    :last_name => 'Keating',
+    :address => '455 5th Ave',
+    :zip_code => '10016',
+    :email => 'akeating@heatseeknyc.com',
+    :password => '33west26'
   )
 end
 
@@ -117,6 +126,11 @@ demo_lawyer = User.find_by(email: 'demo-lawyer@heatseeknyc.com')
 demo_lawyer.permissions = 50
 demo_lawyer.collaborators = [june]
 demo_lawyer.save
+
+other_lawyer = User.find_by(email: 'akeating@heatseeknyc.com')
+other_lawyer.permissions = 50
+other_lawyer.collaborators = [june, jake]
+other_lawyer.save
 
 team_member = User.find_by(email: 'team-member@heatseeknyc.com')
 team_member.permissions = 10
