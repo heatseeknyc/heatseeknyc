@@ -73,12 +73,13 @@ html body.body main div#form-id.col-md-4 form#edit_user.edit_user dl label {
 	border-radius: 0;
 	border: 3px solid $theme-black;
 	font-size: 14px;
-	background-color: white;
+  background-color: $theme-black;
+  color: $theme-white;
 }
 
 .btn-save:hover {
-	background-color: $theme-black;
-	color: $theme-white;
+  background-color: white;
+  color: $theme-black;
 }
 
 .btn-delete {
