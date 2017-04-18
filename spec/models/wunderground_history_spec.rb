@@ -98,20 +98,22 @@ describe WundergroundHistory, :vcr do
   end
 
   describe "populate_observations" do
-    it "stores an ObservationCollection object to observations attribute" do
+    it "attaches a collection of observations with an hour and a temperature" do
       subject.time = time
       subject.response = response
       expect(subject.observations).to be_nil
       subject.populate_observations
-      expect(subject.observations).to be_a ObservationCollection
+      observation = subject.observations.first
+      expect(observation.hour).to eq 0
+      expect(observation.temperature).to eq 37.9
     end
   end
 
   describe ".new_from_api" do
-    it "returns a WundergroundHistory object" do
+    it "returns a WundergroundHistory object that has a temperature" do
       response = wunderground.history_for(time, "knyc")
       return_object = WundergroundHistory.new_from_api(time,response)
-      expect(return_object).to be_a WundergroundHistory
+      expect(return_object.temperature).to eq 37.9
     end
 
     # don't make this one a Wunderground::Error, it's from us
