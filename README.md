@@ -51,7 +51,7 @@ email: super-user@heatseeknyc.com
 password: 33west26
 ```
 
-or you can login as Jane Doe for the more limited tennant experience:
+or you can login as Jane Doe for the more limited tenant experience:
 
 ```
 email: jane@heatseeknyc.com
