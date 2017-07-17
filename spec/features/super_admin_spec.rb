@@ -50,5 +50,70 @@ feature "Super User" do
         expect(page).to have_content("Oscar Grouch")
       end
     end
+
+    context "edit existing user" do
+      it "submit form " do
+        visit edit_user_path(tenant)
+        fill_in "First name", with: "Big"
+        fill_in "Last name", with: "Bird"
+        fill_in "Address", with: "321 Sesame St"
+        fill_in "Apartment", with: "1H"
+        fill_in "Phone number", with: "555-555-5555"
+        fill_in "Zip code", with: "99999"
+        select "team_member", from: "Permissions"
+        click_on "SAVE"
+
+        expect(page.current_path).to eq user_path(tenant)
+        visit users_path
+        expect(page).to have_content("Big Bird")
+      end
+    end
+
+    context "set permission level of another user" do
+      it "can set permission level to super user" do
+        visit edit_user_path(advocate)
+        select "super_user", from: "Permissions"
+        expect(page).to have_select("Permissions", selected: 'super_user')
+        click_on "SAVE"
+        visit edit_user_path(advocate)
+        assert has_no_select?("Permissions")
+      end
+
+      it "can set permission level to team member" do
+        visit edit_user_path(advocate)
+        select "team_member", from: "Permissions"
+        expect(page).to have_select("Permissions", selected: 'team_member')
+        click_on "SAVE"
+        visit edit_user_path(advocate)
+        expect(page).to have_select("Permissions", selected: 'team_member')
+      end
+
+      it "can set permission level to admin" do
+        visit edit_user_path(advocate)
+        select "admin", from: "Permissions"
+        expect(page).to have_select("Permissions", selected: 'admin')
+        click_on "SAVE"
+        visit edit_user_path(advocate)
+        expect(page).to have_select("Permissions", selected: 'admin')
+      end
+
+      it "can set permission level to advocate" do
+        visit edit_user_path(tenant)
+        select "advocate", from: "Permissions"
+        expect(page).to have_select("Permissions", selected: 'advocate')
+        click_on "SAVE"
+        visit edit_user_path(tenant)
+        expect(page).to have_select("Permissions", selected: 'advocate')
+      end
+
+      it "can set permission level to user" do
+        visit edit_user_path(advocate)
+        select "user", from: "Permissions"
+        expect(page).to have_select("Permissions", selected: 'user')
+        click_on "SAVE"
+        visit edit_user_path(advocate)
+        expect(page).to have_select("Permissions", selected: 'user')
+      end
+    end
   end
 end
