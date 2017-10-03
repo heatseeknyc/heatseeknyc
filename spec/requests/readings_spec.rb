@@ -54,6 +54,8 @@ describe "readings API" do
   end
 
   it "returns 200 for valid readings", :vcr do
+    allow(WeatherMan).to receive(:outdoor_temp_for).and_return 75
+
     user = create(:user)
     sensor = create(:sensor, name: sensor_name)
     user.sensors << sensor
