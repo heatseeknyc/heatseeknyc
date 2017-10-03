@@ -59,10 +59,10 @@ module Regulatable
       law_change_date = DateTime.new(2017, 10, 1, 0, 0, 0, ActiveSupport::TimeZone['America/New_York'].formatted_offset)
 
       if DateTime.now > law_change_date
+        indoor_temp < night_time_legal_requirement
+      else
         indoor_temp < old_night_time_legal_requirement &&
           (outdoor_temp == nil || outdoor_temp < night_time_outdoor_legal_requirement)
-      else
-        indoor_temp < night_time_legal_requirement
       end
     end
 
