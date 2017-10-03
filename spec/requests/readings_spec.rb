@@ -53,7 +53,7 @@ describe "readings API" do
     expect(Reading.count).to eq 1
   end
 
-  it "returns 200 for valid readings", :vcr do
+  it "returns 200 for valid readings" do
     allow(WeatherMan).to receive(:outdoor_temp_for).and_return 75
 
     user = create(:user)
