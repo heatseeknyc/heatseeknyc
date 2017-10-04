@@ -1,0 +1,11 @@
+<div class="bg-blue">
+  <div class="container">
+    <div class="row">
+      <h1 class="styled-header col-md-6">Assigned Sensors</h1>
+    </div>
+    <div class="row subheader-links">
+      [<%= link_to "view all", sensors_path %>]
+    </div>
+    <%= render "list", sensors: @sensors %>
+  </div>
+</div>

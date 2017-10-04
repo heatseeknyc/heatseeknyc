@@ -1,0 +1,41 @@
+<div class="table-container">
+  <table class="table styled-table">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Short Code</th>
+      <th>User</th>
+      <th>Manage</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% sensors.each do |s| %>
+        <tr>
+          <td><%= link_to s.name, s %></td>
+          <td><%= link_to s.nick_name, s %></td>
+          <td>
+            <% if s.user %>
+                <%= link_to s.user.name_and_email, s.user %>
+            <% else %>
+              unassigned
+            <% end %>
+          </td>
+          <td>
+            <%= link_to "", edit_sensor_path(s),
+              class: "fa fa-wrench fa-lg",
+              title: "Edit" %>
+            <%= link_to "",
+              unassign_sensor_path(s),
+              method: :put,
+              :class => "fa fa-minus-circle fa-lg red",
+              data: {
+                  confirm: "You are about to unassign a sensor.  Are you sure you want to do this?",
+              },
+              title: "Unassign Sensor"
+            %>
+          </td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

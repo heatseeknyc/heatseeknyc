@@ -8,6 +8,8 @@ Twinenyc::Application.routes.draw do
   resources :articles
   resources :sensors do
     get :not_reporting, on: :collection
+    get :assigned, on: :collection
+    put :unassign, on: :member
   end
   resources :twines, only: [:show, :new, :create]
 
