@@ -4,7 +4,7 @@ rvm:
 cache: bundler
 env:
   global:
-    - DATBASE_USERNAME="postgres"
+    - DATABASE_USERNAME="postgres"
     - DATABASE_PASSWORD=""
     - secure: wMOkyOiC7B9wCoStmW7FvoMqAn7h8GXzt1WOOKQutLIVdoI0dvhrIRViT5ZICvgHIqUoIdRx42AUfXIxC4y+FOatJTmo2GCa4SsctqWLOjX9lQSn1wqaflIfgi5mYoYSKJzJ6KSxIdMQsWA6PLlhSlHLVyKJsINoIADcrxh1Hw0=
     - secure: il0FXkyOk8iPr5sk4SE/TVAapZZiZjiELkPrm4Z1T4FAqbUCKDILQHMAms6wbzt2qYNFx2SmDs/Z5odMg94ll/PlvsmZx/IBJC87hiPVjao6PBxzscNcBGK+sPtkmM0hcjpJLrpqZYLL4EtN8UMZN7Ck2yS1R5Xsg7VXrMia5+g=
