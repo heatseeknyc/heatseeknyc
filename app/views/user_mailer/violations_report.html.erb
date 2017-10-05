@@ -1,0 +1,22 @@
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Address</th>
+    <th>Violation Start</th>
+    <th>Violation Duration</th>
+    <th>Violation End</th>
+    <th></th>
+  </tr>
+
+  <% @violations.each do |violation| %>
+    <% collaboration = Collaboration.find_by!(user: @recipient.id, collaborator_id: violation.user.id) %>
+    <tr>
+      <td><%= violation.user.name %></td>
+      <td><%= violation.user.address %></td>
+      <td><%= violation.data["start_at"] %></td>
+      <td><%= violation.data["duration"] %></td>
+      <td><%= violation.data["end_at"] %></td>
+      <td><%= link_to "view", user_collaboration_url(@recipient, collaboration) %></td>
+    </tr>
+  <% end %>
+</table>

@@ -156,6 +156,8 @@ GEM
     json (1.8.3)
     launchy (2.4.3)
       addressable (~> 2.3)
+    letter_opener (1.4.1)
+      launchy (~> 2.2)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -167,9 +169,6 @@ GEM
     lumberjack (1.0.11)
     mail (2.6.4)
       mime-types (>= 1.16, < 4)
-    memory_test_fix (1.3.0)
-      activerecord (>= 4.0.0, < 4.99.0)
-      railties (>= 4.0.0, < 4.99.0)
     method_source (0.8.2)
     mime-types (2.99.3)
     mini_portile2 (2.1.0)
@@ -327,7 +326,6 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
-    sqlite3 (1.3.10)
     stripe (1.18.0)
       json (~> 1.8.1)
       mime-types (>= 1.25, < 3.0)
@@ -412,8 +410,8 @@ DEPENDENCIES
   jquery-ui-rails
   json
   launchy
+  letter_opener
   lograge
-  memory_test_fix
   nokogiri
   pdf-inspector
   pg
@@ -437,7 +435,6 @@ DEPENDENCIES
   spork-rails
   spring
   spring-commands-rspec
-  sqlite3
   stripe
   timecop
   travis

@@ -36,7 +36,6 @@ gem 'lograge'
 gem 'jquery-ui-rails'
 
 group :test do
-  gem 'memory_test_fix'
   gem 'timecop'
   gem 'vcr'
   gem 'webmock'
@@ -44,6 +43,7 @@ group :test do
 end
 
 group :test, :development do
+  gem 'letter_opener'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'capybara', '~> 2.13'
@@ -64,7 +64,7 @@ group :test, :development do
   gem 'travis'
   gem 'spring' # keeps the rails process running for faster init times
   gem 'spring-commands-rspec'
-  gem 'sqlite3'
+  # gem 'sqlite3'
   #gem 'bullet' # detect n+1 errors
   #gem 'brakeman' # auto security testing
   #gem 'hakiri' # more automagic security
