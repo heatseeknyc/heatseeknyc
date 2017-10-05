@@ -13,7 +13,7 @@ class DailyViolationEmailWorker
     advocate_ids = Collaboration.where(collaborator_id: results_by_user.keys).pluck(:user_id).uniq
 
     User.where(id: advocate_ids).find_each do |advocate|
-      next if advocate.permissions > User::PERMISSIONS[:lawyer]
+      next if advocate.permissions > User::PERMISSIONS[:advocate]
 
       tenants = advocate.collaborators.where(id: results_by_user.keys)
 
