@@ -10,3 +10,6 @@ env:
   - secure: zxqE3f9RpwU7PdIWb6e2NmfBqrxmeTABgfHzjKNEZEpctEWuLF/AU1IwR8/nbQ0Jl51wyGADFfT8ss/ZRCMLiQmjJsDl1CLyiPTGOJbNr+7c5jlcwed9oJutSL0Ix0yij4KT22hyJvvd9wQ3Ire0WQhDUvv+bX38LxaMhOR9gSk=
 notifications:
   email: false
+script:
+  - RAILS_ENV=test bundle exec rake db:test:prepare
+  - bundle exec rspec spec
