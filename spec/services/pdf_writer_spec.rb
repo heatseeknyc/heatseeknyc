@@ -6,24 +6,26 @@ describe PDFWriter do
 
   describe "#generate_pdf" do
     it "generates a pdf for a user with readings" do
-      create(:reading, user: user)
-      writer = PDFWriter.new_from_user_id(user.id)
+      create(:reading, user: user, created_at: DateTime.new(2015, 12, 1))
+      writer = PDFWriter.new_from_user_id(user.id, years: [2015, 2016])
       expect(writer.generate_pdf).to be_an_instance_of(String)
     end
 
     it "generates a pdf for a user with no readings" do
-      writer = PDFWriter.new_from_user_id(user.id)
+      writer = PDFWriter.new_from_user_id(user.id, years: [2015, 2016])
       expect(writer.generate_pdf).to be_an_instance_of(String)
     end
 
     it "generates a cover page" do
-      begin_date = DateTime.now.change(hour: 15) - 5.days
+      begin_date = DateTime.new(2015, 12, 1).change(hour: 15) - 5.days
       first_reading = create(:reading, :violation, user: user, created_at: begin_date)
       create(:reading, :violation, user: user, created_at: begin_date + 1.day)
       create(:reading, user: user, created_at: begin_date + 3.days)
       last_reading = create(:reading, user: user, created_at: begin_date + 5.days)
 
-      writer = PDFWriter.new_from_user_id(user.id)
+      excluded_reading = create(:reading, user: user, created_at: DateTime.new(2017, 11, 1))
+
+      writer = PDFWriter.new_from_user_id(user.id, years: [2015, 2016])
       rendered_pdf = writer.generate_pdf
       pdf_analysis = PDF::Inspector::Text.analyze(rendered_pdf)
 

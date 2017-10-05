@@ -325,4 +325,25 @@ class User < ActiveRecord::Base
   def get_collaboration_with_user(user)
     self.collaborations.find_by(collaborator: user)
   end
+
+  def available_pdf_reports
+    ActiveRecord::Base.connection.execute(
+      <<-SQL
+        SELECT
+          CASE WHEN (EXTRACT(month from created_at)) > 9
+               THEN extract(year from created_at)+1
+               ELSE extract(year from created_at)
+            END
+        FROM readings
+        WHERE user_id = #{id}
+        GROUP BY
+          CASE WHEN (EXTRACT(month from created_at)) > 9
+               THEN extract(year from created_at)+1
+               ELSE extract(year from created_at)
+            END;
+      SQL
+    ).to_a.map { |r| r["date_part"].to_i }.map do |year|
+      [year-1, year]
+    end
+  end
 end

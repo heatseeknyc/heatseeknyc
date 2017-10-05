@@ -24,10 +24,15 @@
           <div class="download-label">
             Download Report
           </div>
-          <div class="download-buttons">
-            <%= link_to 'CSV', csv_download_path(user), class: "btn btn-primary btn-download" %>
-            <%= link_to 'PDF', pdf_download_path(user), class: "btn btn-primary btn-download" %>
-          </div>
+          <% if user.readings.count > 0 %>
+            <div class="download-buttons">
+              <%= link_to 'CSV (all data)', csv_download_path(user), class: "btn btn-primary btn-download" %>
+              <% user.available_pdf_reports.each do |years| %>
+                <br>
+                <%= link_to "PDF #{years[0]} - #{years[1]}", pdf_download_path(user, years: years), class: "btn btn-primary btn-download" %>
+              <% end %>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>

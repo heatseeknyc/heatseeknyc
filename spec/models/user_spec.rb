@@ -338,4 +338,21 @@ describe User, :vcr do
       end
     end
   end
+
+  describe "#available_pdf_reports" do
+    let(:user) { create(:user) }
+
+    it "handles no readings" do
+      skip
+      expect(user.available_pdf_reports).to eq []
+    end
+
+    context "readings across one year" do
+
+    end
+
+    context "readings across multiple years" do
+
+    end
+  end
 end
