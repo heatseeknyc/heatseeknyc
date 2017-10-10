@@ -88,7 +88,8 @@ class UsersController < ApplicationController
   end
 
   def download_pdf
-    writer = PDFWriter.new_from_user_id(params[:id])
+    years = params[:years].map(&:to_i)
+    writer = PDFWriter.new_from_user_id(params[:id], years: years)
 
     file = writer.generate_pdf
     filename = writer.filename

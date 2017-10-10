@@ -27,8 +27,8 @@ module Measurable
         readings.pluck(:created_at, *measurements).compact
       end
 
-      define_method("reverse_reading_nested_array") do 
-        readings.order(created_at: :desc).pluck(:created_at, *measurements).compact
+      define_method("reverse_reading_nested_array") do |_readings|
+        _readings.order(created_at: :desc).pluck(:created_at, *measurements).compact
       end
     end
 

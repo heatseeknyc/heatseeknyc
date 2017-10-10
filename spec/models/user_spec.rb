@@ -338,4 +338,30 @@ describe User, :vcr do
       end
     end
   end
+
+  describe "#available_pdf_reports" do
+    let(:user) { create(:user) }
+    let(:other_user) { create(:user) }
+
+    it "handles no readings" do
+      expect(user.available_pdf_reports).to eq []
+    end
+
+    it "handles readings across one year" do
+      create(:reading, user: user, created_at: DateTime.new(2016, 2, 1))
+      create(:reading, user: user, created_at: DateTime.new(2015, 10, 2))
+      create(:reading, user: other_user, created_at: DateTime.new(2013, 10, 2))
+
+      expect(user.available_pdf_reports).to eq [[2015, 2016]]
+    end
+
+    it "handles readings across multiple years" do
+      create(:reading, user: user, created_at: DateTime.new(2019, 2, 1))
+      create(:reading, user: user, created_at: DateTime.new(2016, 2, 1))
+      create(:reading, user: user, created_at: DateTime.new(2015, 10, 2))
+      create(:reading, user: other_user, created_at: DateTime.new(2013, 10, 2))
+
+      expect(user.available_pdf_reports).to match_array [[2015, 2016], [2018, 2019]]
+    end
+  end
 end

@@ -44,8 +44,8 @@ module Graphable
       readings.pluck(:created_at)
     end
 
-    def table_array
-      self.reverse_reading_nested_array.each_with_object([]) do |row_cells, arr|
+    def table_array(readings)
+      self.reverse_reading_nested_array(readings).each_with_object([]) do |row_cells, arr|
         arr << build_row(row_cells)
       end
     end
