@@ -7,6 +7,10 @@ class SensorsController < ApplicationController
     @sensors = Sensor.order(created_at: :desc).all
   end
 
+  def assigned
+    @sensors = Sensor.order(created_at: :desc).where.not(user_id: nil)
+  end
+
   # GET /sensors/1
   # GET /sensors/1.json
   def show
@@ -27,8 +31,29 @@ class SensorsController < ApplicationController
   # POST /sensors
   # POST /sensors.json
   def create
-    @sensor = Sensor.find_or_create_from_params(sensor_params)
-    redirect_to sensor_path(@sensor)
+    @sensor = Sensor.new(sensor_params)
+
+    if @sensor.save
+      redirect_to sensor_path(@sensor), notice: "Sensor created"
+    else
+      render :new
+    end
+  end
+
+  def unassign
+    @sensor = Sensor.find(params[:id])
+    @sensor.update!(user_id: nil)
+    redirect_to :back, notice: "Sensor unassigned"
+  end
+
+  def update
+    @sensor = Sensor.find(params[:id])
+
+    if @sensor.update(update_sensor_params)
+      redirect_to sensors_path, notice: "updated sensor"
+    else
+      render :edit
+    end
   end
 
   # DELETE /sensors/1
@@ -60,7 +85,11 @@ class SensorsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def sensor_params
       # TODO: fix this anti-pattern and figure out how to do nested model strong params
-      params.require(:sensor).permit(:name, :email)
+      params.require(:sensor).permit(:name, :nick_name, :user_id)
+    end
+
+    def update_sensor_params
+      params.require(:sensor).permit(:user_id)
     end
 
     def authenticate_admin!

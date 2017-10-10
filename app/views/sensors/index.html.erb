@@ -3,50 +3,18 @@
     <div class="row">
       <h1 class="styled-header col-md-6">Sensors</h1>
       <div class="admin-button-container pull-right">
-        <%= link_to new_sensor_path, class: "admin-button" do %>
-            Add Sensor
-            <div class="admin-button-icon">+</div>
+        <% if false # disabled for now %>
+          <%= link_to new_sensor_path, class: "admin-button" do %>
+              Add Sensor
+              <div class="admin-button-icon">+</div>
+          <% end %>
         <% end %>
       </div>
     </div>
-    <div class="table-container">
-      <table class="table styled-table">
-        <thead>
-        <tr>
-          <th>Name</th>
-          <th>User</th>
-          <th>Manage</th>
-        </tr>
-        </thead>
-        <tbody>
-        <% @sensors.each do |s| %>
-            <tr>
-              <td><%= link_to s.name, s %></td>
-              <td>
-                <% if s.user %>
-                    <%= link_to s.user.email, s.user %>
-                <% else %>
-                  unassigned
-                <% end %>
-              </td>
-              <td>
-                <%= link_to "", edit_sensor_path(s),
-                  class: "fa fa-wrench fa-lg",
-                  title: "Edit" %>
-                <%= link_to "",
-                  s,
-                  method: :delete,
-                  :class => "fa fa-times fa-lg red",
-                  data: {
-                      confirm: "You are deleting this sensor from the database. Are you sure you want to do this? This action cannot be undone.",
-                  },
-                  title: "Delete Sensor"
-                %>
-              </td>
-            </tr>
-        <% end %>
-        </tbody>
-      </table>
+    <div class="row subheader-links">
+      [<%= link_to "view assigned only", assigned_sensors_path %>]
     </div>
+
+    <%= render "list", sensors: @sensors %>
   </div>
 </div>

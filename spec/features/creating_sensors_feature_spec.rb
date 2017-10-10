@@ -4,6 +4,7 @@ describe "creating a sensor", type: :feature do
   before(:each) do
     @admin = create(:user, {
       first_name: "Jason", 
+      last_name: "Smith", 
       email: "jason@email.com", 
       password: "password",
       permissions: 0
@@ -11,6 +12,7 @@ describe "creating a sensor", type: :feature do
 
     @tenant = create(:user, {
       first_name: "Rebecca", 
+      last_name: "Jones",
       email: "rebecca@email.com", 
       password: "password",
       permissions: 100
@@ -23,9 +25,10 @@ describe "creating a sensor", type: :feature do
   it "displays the sensor after creation" do
     visit new_sensor_path
     fill_in :sensor_name, with: "12345678"
-    fill_in :sensor_email, with: "rebecca@email.com"
+    fill_in :sensor_nick_name, with: "ABCD"
+    select "Jones, Rebecca <rebecca@email.com>", from: "sensor_user_id"
     click_on "Create Sensor"
-    
+
     sensor = Sensor.last
     expect(sensor.name).to eq "12345678"
     expect(sensor.user.email).to eq "rebecca@email.com"
@@ -39,10 +42,11 @@ describe "creating a sensor", type: :feature do
     sensor = FactoryGirl.create(:sensor)
 
     visit edit_sensor_path(id: sensor.id)
-    fill_in :sensor_name, with: "New Sensor Name"
+    select "Jones, Rebecca <rebecca@email.com>", from: "sensor_user_id"
     click_on "Update Sensor"
 
-    expect(page.current_path).to eq sensor_path(sensor)
-    expect(page).to have_content "New Sensor Name"
+    expect(page.current_path).to eq sensors_path
+    expect(page).to have_content sensor.name
+    expect(page).to have_content "Jones, Rebecca"
   end
 end

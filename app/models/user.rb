@@ -262,6 +262,10 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
+  def name_and_email
+    "#{last_name}, #{first_name} <#{email}>"
+  end
+
   def self.published_addresses(date_range)
     joins(:readings).where(permissions: 100, dummy: [nil, false]).
       order(address: :asc).where(readings: { created_at: date_range }).

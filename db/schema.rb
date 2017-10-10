@@ -113,6 +113,12 @@ ActiveRecord::Schema.define(version: 20170316204420) do
   add_index "units", ["building_id", "name"], name: "index_units_on_building_id_and_name", unique: true, using: :btree
   add_index "units", ["building_id"], name: "index_units_on_building_id", using: :btree
 
+  create_table "user_collaborators", force: true do |t|
+    t.integer "user_id"
+    t.integer "collaborator_id"
+    t.integer "permissions"
+  end
+
   create_table "users", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
