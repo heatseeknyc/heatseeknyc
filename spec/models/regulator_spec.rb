@@ -37,8 +37,44 @@ describe Regulator do
       end
     end
 
-    context "during the night" do
+    context "during the night (NEW LAW)" do
+      before(:each) do
+        Timecop.travel(Time.zone.parse('Nov 1, 2017 05:00:00 -0400'))
+      end
 
+      after(:each) do
+        Timecop.travel(Time.zone.parse('Nov 1, 2017 00:00:00 -0400'))
+      end
+
+      it "returns violation status of a single reading" do
+        reading = create(:reading, temp: 54, outdoor_temp: 39)
+        regulator = Regulator.new(reading)
+        expect(regulator).to have_detected_violation
+        reading.outdoor_temp = 40
+        expect(regulator).to have_detected_violation
+        reading.outdoor_temp = 39
+        reading.temp = 62
+        expect(regulator).to_not have_detected_violation
+        reading.outdoor_temp = 40
+        expect(regulator).to_not have_detected_violation
+      end
+
+      it "returns violation status of multiple readings" do
+        reading1 = create(:reading, temp: 54, outdoor_temp: 39)
+        reading2 = create(:reading, temp: 55, outdoor_temp: 39)
+        readings = [reading1, reading2]
+
+        regulator = Regulator.new(readings)
+        expect(regulator).to have_detected_violation
+        reading1.outdoor_temp = 65
+        expect(regulator).to have_detected_violation
+        reading1.temp = 63
+        reading2.temp = 70
+        expect(regulator).to_not have_detected_violation
+      end
+    end
+
+    context "during the night (OLD LAW)" do
       before(:each) do
         Timecop.travel(Time.zone.parse('March 1, 2015 05:00:00 -0400'))
       end
