@@ -42,12 +42,20 @@ class Reading < ActiveRecord::Base
     user = sensor.user
     time = Time.at params[:time].to_i
     temp = params[:temp].to_f.round
+
+    if params[:humidity].present?
+      humidity = params[:humidity].to_f
+    else
+      humidity = nil
+    end
+
     outdoor_temp = WeatherMan.outdoor_temp_for(time, user.zip_code, 0.1)
 
     create!(
       sensor: sensor,
       user: user,
       temp: temp,
+      humidity: humidity,
       outdoor_temp: outdoor_temp,
       created_at: time
     )

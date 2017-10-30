@@ -30,7 +30,7 @@ class ReadingsController < ApplicationController
   private
 
   def strong_params
-    params.require(:reading).permit(:sensor_name, :temp, :time, :verification)
+    params.require(:reading).permit(:sensor_name, :temp, :time, :verification, :humidity)
   end
 
   def handle_dupe

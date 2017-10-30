@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170316204420) do
+ActiveRecord::Schema.define(version: 20171030171818) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(version: 20170316204420) do
     t.integer  "outdoor_temp"
     t.integer  "sensor_id"
     t.boolean  "violation"
+    t.float    "humidity"
   end
 
   create_table "sensors", force: true do |t|
