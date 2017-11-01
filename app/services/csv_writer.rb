@@ -11,12 +11,13 @@ class CSVWriter
 
   def generate_csv
     CSV.generate do |csv|
-      csv << ["TIME","DATE","TEMP INSIDE","TEMP OUTSIDE","TEMP OF HOT WATER","NOTES"]
+      csv << ["TIME","DATE","TEMP INSIDE","HUMIDITY INSIDE (%)", "TEMP OUTSIDE","TEMP OF HOT WATER","NOTES"]
       self.user.readings.each do |reading|
         csv << [
             reading.created_at.strftime(TIME_FORMAT),
             reading.created_at.strftime(DATE_FORMAT),
             reading.temp,
+            reading.humidity.present? ? sprintf('%.1f', reading.humidity) : nil,
             reading.outdoor_temp,
             nil,
             reading.violation ? "violation" : nil
