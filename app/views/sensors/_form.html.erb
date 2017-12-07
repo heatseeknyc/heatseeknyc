@@ -20,7 +20,8 @@
     </div>
     <div class="field">
       <label for="sensor_email">Associated User</label><br>
-      <%= f.select :user_id, User.all.collect {|u| [ u.name_and_email, u.id ] }, { include_blank: true }, class: "styled-select" %>
+      <% select_values = User.all.order("LOWER(last_name)").map {|u| [ u.name_and_email, u.id ] } %>
+      <%= f.select :user_id, select_values, { include_blank: true }, class: "styled-select" %>
     </div>
     <div class="actions">
       <%= f.submit action_label, class: "btn-save" %>
