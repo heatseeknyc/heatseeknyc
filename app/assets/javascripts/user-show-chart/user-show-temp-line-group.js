@@ -44,7 +44,7 @@ UserShowTempChartLine.prototype.drawDataLineWithTransitions = function() {
         .delay(this.transitionDuration / 2)
         .duration(this.transitionDuration)
         .style('opacity', 1);
-      if (nextDataPoint.date - currentDataPoint.date > 3600000) {
+      if (nextDataPoint.date - currentDataPoint.date > 3660000) {
         line.style('stroke', 'gray');
       }
     }

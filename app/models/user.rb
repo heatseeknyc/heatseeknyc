@@ -320,6 +320,12 @@ class User < ActiveRecord::Base
     end
   end
 
+  def first_reading_this_year(format)
+    if last_reading = self.readings.this_year.order(:created_at, :id).limit(1).first
+      last_reading.created_at.strftime(format)
+    end
+  end
+
   def get_newest_reading_date(format)
     if newest_reading = self.readings.order(:created_at => :desc, :id => :desc).limit(1).first
       newest_reading.created_at.strftime(format)

@@ -60,4 +60,18 @@ describe Reading do
       expect(reading.outdoor_temp).to be_nil
     end
   end
+
+  describe ".current_heating_year_start" do
+    it "selects oct of this year if after oct" do
+      Timecop.freeze(DateTime.new(2016, 11, 2)) do
+        expect(Reading.current_heating_year_start).to eq DateTime.new(2016, 10, 1)
+      end
+    end
+
+    it "selects oct of last year if before oct" do
+      Timecop.freeze(DateTime.new(2016, 9, 30)) do
+        expect(Reading.current_heating_year_start).to eq DateTime.new(2015, 10, 1)
+      end
+    end
+  end
 end
