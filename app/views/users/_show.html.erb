@@ -81,9 +81,9 @@
 
         <div class="col-md-2"></div>
         <div class="violations col-xs-12 col-sm-6 col-md-3 col-lg-2">
-          <h3 class="stat-num"><%= user.violation_count %></h3>
-          <h5 class="stat-description">Violations</h5>
-          <h5 class="stat-description violation-label"><%= user.get_oldest_reading_date("(since %m/%d/%y)") %></h5>
+          <h3 class="stat-num"><%= user.readings.this_year.in_violation.count %></h3>
+          <h5 class="stat-description">Hours of violation</h5>
+          <h5 class="stat-description violation-label"><%= user.first_reading_this_year("(since %m/%d/%y)") %></h5>
         </div>
       </div>
     </div>
@@ -98,7 +98,7 @@
       </div>
     <% else %>
       <div class="row show-bottom chart-title">
-        <h3 class="text-center">No Indoor Temperature Readings</h3>
+        <h3 class="text-center">No Indoor Temperature Readings This Week</h3>
       </div>
     <% end %>
   </div>

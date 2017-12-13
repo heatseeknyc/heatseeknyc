@@ -8,6 +8,9 @@ class Reading < ActiveRecord::Base
 
   before_create :set_violation_boolean
 
+  scope :in_violation, -> { where(violation: true) }
+  scope :this_year, -> { where("created_at >= ?", current_heating_year_start) }
+
   def set_violation_boolean
     time = created_at || Time.now
     self.violation = user.in_violation?(time, temp, outdoor_temp)
@@ -65,4 +68,9 @@ class Reading < ActiveRecord::Base
     true #placeholder for hash algorithm
   end
 
+  def self.current_heating_year_start
+    now = DateTime.now
+    year = now.month > 9 ? now.year : now.year - 1
+    DateTime.new(year, 10, 1)
+  end
 end
