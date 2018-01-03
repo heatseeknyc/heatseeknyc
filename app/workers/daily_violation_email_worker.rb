@@ -30,11 +30,11 @@ class DailyViolationEmailWorker
 
   def violations_periods_query
     query = <<-SQL
-      SELECT 
+      SELECT
         user_id,
         MAX(created_at) AS end_at,
         MIN(created_at) AS start_at,
-        MAX(created_at)-MIN(created_at) AS duration
+        extract(epoch from (MAX(created_at)-MIN(created_at))) AS duration
 
       FROM (
         WITH readings_day AS (

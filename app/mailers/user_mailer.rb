@@ -5,6 +5,6 @@ class UserMailer < ActionMailer::Base
     @recipient = recipient
     @violations = violations
 
-    mail to: @recipient.email, subject: "Violations Report"
+    mail to: @recipient.email, subject: "Heat Seek Daily Violations Report"
   end
 end

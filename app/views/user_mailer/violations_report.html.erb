@@ -1,3 +1,9 @@
+The following tenants experienced 3 or more hours in the past day where the
+temperature in their apartment violated NYC's heat laws.
+
+<br>
+<br>
+
 <table>
   <tr>
     <th>Name</th>
@@ -7,15 +13,14 @@
     <th>Violation End</th>
     <th></th>
   </tr>
-
-  <% @violations.each do |violation| %>
+  <% @violations.sort_by{ |v| v.data["start_at"] }.each do |violation| %>
     <% collaboration = Collaboration.find_by!(user: @recipient.id, collaborator_id: violation.user.id) %>
     <tr>
       <td><%= violation.user.name %></td>
       <td><%= violation.user.address %></td>
-      <td><%= violation.data["start_at"] %></td>
-      <td><%= violation.data["duration"] %></td>
-      <td><%= violation.data["end_at"] %></td>
+      <td><%= violation.data["start_at"].in_time_zone('Eastern Time (US & Canada)').strftime("%m/%d/%Y @ %I:%M%P %Z") %></td>
+      <td><%= violation.data["duration"].to_i/3600 %> hrs</td>
+      <td><%= violation.data["end_at"].in_time_zone('Eastern Time (US & Canada)').strftime("%m/%d/%Y @ %I:%M%P %Z") %></td>
       <td><%= link_to "view", user_collaboration_url(@recipient, collaboration) %></td>
     </tr>
   <% end %>
