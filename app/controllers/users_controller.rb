@@ -5,6 +5,9 @@ class UsersController < ApplicationController
   before_action :authenticate_super_user!, only: [:new, :create]
   before_action :load_user, only: [:edit, :update, :show]
 
+  def edit
+  end
+
   def update
     if user_params[:permissions] &&
        user_params[:permissions].to_i < current_user.permissions

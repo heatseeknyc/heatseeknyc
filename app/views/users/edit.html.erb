@@ -48,8 +48,8 @@
               <dl class="settings-input"><%= f.label :phone_number %>
               <%= f.text_field :phone_number, class: "form-control short-field" %></dl>
 
-              <dl class="settings-input"><%= f.label :twine_name %>
-              <%= f.text_field :twine_name, class: "form-control" %></dl>
+              <dl class="settings-input"><%= f.label :email %>
+              <%= f.text_field :email, class: "form-control" %></dl>
 
               <% if @user.permissions > 0 && !@user.is_demo_user? %>
                 <dl class="settings-input settings-permissions"><%= f.label :permissions %>
