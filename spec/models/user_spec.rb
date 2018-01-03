@@ -149,7 +149,7 @@ describe User, :vcr do
       create(:reading, :violation, user: tenant_with_violations)
 
       create(:collaboration, :user_id => advocate.id, :collaborator_id => tenant_with_old_violations.id)
-      create(:reading, :violation, user: tenant_with_old_violations, created_at: 5.days.ago)
+      create(:reading, :violation, user: tenant_with_old_violations, created_at: 8.days.ago)
     end
 
     it "finds all collaborations" do

@@ -298,7 +298,7 @@ class User < ActiveRecord::Base
 
   def collaborations_with_violations
     recent_violations = Reading
-                       .where("readings.created_at > ?", 3.days.ago)
+                       .where("readings.created_at > ?", 7.days.ago)
                        .where(violation: true).to_sql
 
     users_with_recent_violations = User.select("users.id, COUNT(readings.id) as violations_count")

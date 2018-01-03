@@ -14,9 +14,9 @@ describe "Advocate's Tenant Dashboard", type: :feature do
     FactoryGirl.create(:collaboration, user: admin, collaborator: user_with_recent_violations2)
     FactoryGirl.create(:collaboration, user: admin, collaborator: user_with_old_violations)
 
-    FactoryGirl.create(:reading, :violation, user: user_with_old_violations, created_at: 5.days.ago)
+    FactoryGirl.create(:reading, :violation, user: user_with_old_violations, created_at: 8.days.ago)
 
-    FactoryGirl.create(:reading, :violation, user: user_with_recent_violations1, created_at: 5.days.ago)
+    FactoryGirl.create(:reading, :violation, user: user_with_recent_violations1, created_at: 8.days.ago)
     FactoryGirl.create(:reading, :violation, user: user_with_recent_violations1, created_at: 2.days.ago)
     FactoryGirl.create(:reading, :violation, user: user_with_recent_violations1, created_at: 2.days.ago)
     FactoryGirl.create(:reading, :violation, user: user_with_recent_violations1, created_at: 1.days.ago)
