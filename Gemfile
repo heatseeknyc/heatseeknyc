@@ -34,6 +34,7 @@ gem 'psych', '= 2.0.5'
 gem 'quiet_assets'
 gem 'lograge'
 gem 'jquery-ui-rails'
+gem 'aws-sdk'
 
 group :test do
   gem 'timecop'
