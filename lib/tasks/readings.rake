@@ -35,13 +35,15 @@ namespace :readings do
       else
         puts "adding: #{created_at}, #{temperature_f}, #{humidity}"
 
-        reading = Reading.create!(
-          created_at: created_at,
-          sensor_id: sensor_id,
-          user_id: user_id,
-          temp: temperature_f,
-          humidity: humidity
-        )
+        if perform
+          reading = Reading.create!(
+            created_at: created_at,
+            sensor_id: sensor_id,
+            user_id: user_id,
+            temp: temperature_f,
+            humidity: humidity
+          )
+        end
       end
     end
 
