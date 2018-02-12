@@ -11,6 +11,7 @@ Twinenyc::Application.routes.draw do
     get :assigned, on: :collection
     put :unassign, on: :member
   end
+  resources :calibrations, only: [:index]
   resources :twines, only: [:show, :new, :create]
 
   get 'users/search' => 'users#search', as: :search_user

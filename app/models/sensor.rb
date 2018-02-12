@@ -9,16 +9,16 @@ class Sensor < ActiveRecord::Base
   end
 
   def self.create_from_params(params)
-	user = User.find_by email: params[:email]
-	name = params[:name]
-	
-	sensor = new.tap do |s| 
-		s.name = params[:name]
-		s.user = user
-	end	
+    user = User.find_by email: params[:email]
+    name = params[:name]
 
-	sensor.save
-	return sensor
+    sensor = new.tap do |s|
+      s.name = params[:name]
+      s.user = user
+    end
+
+    sensor.save
+    return sensor
   end
 
   def self.find_or_create_from_params(params)
