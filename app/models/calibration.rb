@@ -18,7 +18,8 @@ class Calibration < ActiveRecord::Base
   end
 
   def apply!(reading)
-    unless sensor_calibrations.map(&:sensor_id).include?(reading.sensor_id)
+    unless sensor_calibrations.map(&:sensor_id).include?(reading.sensor_id) &&
+        reading.created_at > start_at && reading.created_at < end_at
       raise ArgumentError.new('calibration does not apply to reading')
     end
 
@@ -44,7 +45,11 @@ class Calibration < ActiveRecord::Base
 
         readings.find_each do |reading|
           reading_n += 1
-          puts "applying calibration to reading id #{reading.id}.  Cal #{calibration_n}/#{calibration_count} - Sensor #{sensor_n}/#{sensor_count} - Reading #{reading_n}/#{reading_count}"
+
+          if log
+            puts "applying calibration to reading id #{reading.id}.  Cal #{calibration_n}/#{calibration_count} - Sensor #{sensor_n}/#{sensor_count} - Reading #{reading_n}/#{reading_count}"
+          end
+
           calibration.apply!(reading)
         end
       end
