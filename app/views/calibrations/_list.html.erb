@@ -17,8 +17,8 @@
           <td><%= friendly_est_datetime(c.end_at) %></td>
           <td><%= c.offset %></td>
           <td>
-            <% c.sensors.each do |sensor| %>
-              <%= link_to sensor.name, sensor %>
+            <% c.sensors.each_with_index do |sensor, i| %>
+              <%= link_to sensor.name, sensor %><%= "," if i < c.sensors.count - 1 %>
             <% end %>
           </td>
         </tr>
