@@ -27,7 +27,7 @@ namespace :readings do
         created_at: created_at,
         sensor_id: Integer(ENV['SENSOR_ID']),
         user_id: Integer(ENV['USER_ID']),
-        temp: temperature_f
+        original_temp: temperature_f,
       )
 
       if reading
@@ -41,8 +41,10 @@ namespace :readings do
             sensor_id: sensor_id,
             user_id: user_id,
             temp: temperature_f,
-            humidity: humidity
+            original_temp: temperature_f,
+            humidity: humidity,
           )
+          Calibration.apply!(reading)
         end
       end
     end
@@ -51,5 +53,11 @@ namespace :readings do
       puts "this was a dry run, no data added to DB"
       puts "data would be added to user #{User.find(user_id).name} and sensor #{Sensor.find(sensor_id).name}"
     end
+  end
+
+  desc 'recalibrate readings'
+  task :recalibrate => :environment do
+    calibrations = Calibration.all
+    Calibration.recalibrate!(calibrations, log: true)
   end
 end

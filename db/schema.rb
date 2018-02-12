@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171030171818) do
+ActiveRecord::Schema.define(version: 20180207212441) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_stat_statements"
 
   create_table "articles", force: true do |t|
     t.string   "title"
@@ -43,6 +44,13 @@ ActiveRecord::Schema.define(version: 20171030171818) do
   end
 
   add_index "buildings", ["street_address", "zip_code"], name: "index_buildings_on_street_address_and_zip_code", unique: true, using: :btree
+
+  create_table "calibrations", force: true do |t|
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.integer  "offset"
+    t.text     "name"
+  end
 
   create_table "canonical_temperatures", force: true do |t|
     t.integer  "zip_code"
@@ -86,7 +94,22 @@ ActiveRecord::Schema.define(version: 20171030171818) do
     t.integer  "sensor_id"
     t.boolean  "violation"
     t.float    "humidity"
+    t.integer  "original_temp"
   end
+
+  add_index "readings", ["created_at"], name: "index_readings_on_created_at", using: :btree
+  add_index "readings", ["sensor_id"], name: "index_readings_on_sensor_id", using: :btree
+  add_index "readings", ["temp"], name: "index_readings_on_temp", using: :btree
+  add_index "readings", ["user_id"], name: "index_readings_on_user_id", using: :btree
+  add_index "readings", ["violation"], name: "index_readings_on_violation", using: :btree
+
+  create_table "sensor_calibrations", force: true do |t|
+    t.integer "calibration_id", null: false
+    t.integer "sensor_id",      null: false
+  end
+
+  add_index "sensor_calibrations", ["calibration_id"], name: "index_sensor_calibrations_on_calibration_id", using: :btree
+  add_index "sensor_calibrations", ["sensor_id"], name: "index_sensor_calibrations_on_sensor_id", using: :btree
 
   create_table "sensors", force: true do |t|
     t.string   "name"

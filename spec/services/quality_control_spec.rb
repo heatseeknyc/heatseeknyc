@@ -10,13 +10,14 @@ describe QualityControl do
   describe ".dedupe" do
     it "dedupes a users's readings" do
       10.times do
-        Reading.create({
+        FactoryGirl.create(
+          :reading,
           sensor: @sensor,
           user: @user,
           temp: 45,
           outdoor_temp: 20,
           created_at: Time.now.to_i
-        })
+        )
       end
 
       expect(@user.readings.count).to eq 10
@@ -29,7 +30,14 @@ describe QualityControl do
     before(:each) do
       sunday_afternoon = DateTime.parse("August 1, 2014 at 12pm")
       10.times do
-        @user.readings.create(temp: 45, created_at: sunday_afternoon)
+        FactoryGirl.create(
+          :reading,
+          sensor: @sensor,
+          user: @user,
+          temp: 45,
+          created_at: sunday_afternoon,
+          outdoor_temp: nil,
+        )
       end
     end
 

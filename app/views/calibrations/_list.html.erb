@@ -1,0 +1,28 @@
+<div class="table-container">
+  <table class="table styled-table">
+    <thead>
+    <tr>
+      <th>Description</th>
+      <th>Start at</th>
+      <th>End at</th>
+      <th>Offset</th>
+      <th>Sensors</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% calibrations.each do |c| %>
+        <tr>
+          <td><%= c.name %></td>
+          <td><%= friendly_est_datetime(c.start_at) %></td>
+          <td><%= friendly_est_datetime(c.end_at) %></td>
+          <td><%= c.offset %></td>
+          <td>
+            <% c.sensors.each do |sensor| %>
+              <%= link_to sensor.name, sensor %>
+            <% end %>
+          </td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

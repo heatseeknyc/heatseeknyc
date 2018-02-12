@@ -5,6 +5,7 @@ class Reading < ActiveRecord::Base
 
   validates :user_id, presence: true
   validates :temp, presence: true
+  validates :original_temp, presence: true
 
   before_create :set_violation_boolean
 
@@ -35,7 +36,7 @@ class Reading < ActiveRecord::Base
     find_by(
       sensor: sensor,
       user: user,
-      temp: temp,
+      original_temp: temp,
       created_at: time
     )
   end
@@ -54,14 +55,19 @@ class Reading < ActiveRecord::Base
 
     outdoor_temp = WeatherMan.outdoor_temp_for(time, user.zip_code, 0.1)
 
-    create!(
+    reading = create!(
       sensor: sensor,
       user: user,
       temp: temp,
+      original_temp: temp,
       humidity: humidity,
       outdoor_temp: outdoor_temp,
       created_at: time
     )
+
+    Calibration.apply!(reading)
+
+    reading
   end
 
   def self.verification_valid?(code)
