@@ -57,6 +57,7 @@ namespace :readings do
 
   desc 'recalibrate readings'
   task :recalibrate => :environment do
+    ActiveRecord::Base.connection.execute("UPDATE readings SET temp = original_temp")
     calibrations = Calibration.all
     Calibration.recalibrate!(calibrations, log: true)
   end

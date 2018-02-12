@@ -23,7 +23,9 @@ class Calibration < ActiveRecord::Base
       raise ArgumentError.new('calibration does not apply to reading')
     end
 
-    reading.update!(temp: reading.original_temp + offset)
+    reading.temp = reading.original_temp + offset
+    reading.set_violation_boolean
+    reading.save!
   end
 
   def self.recalibrate!(calibrations, log: false)
