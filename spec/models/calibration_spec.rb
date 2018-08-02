@@ -60,8 +60,8 @@ describe Calibration do
     end
 
     it "updates violation boolean" do
-      reading = FactoryGirl.create(:reading, sensor: sensor1, temp: 60, outdoor_temp: 30)
-      calibration1.update(offset: -10)
+      reading = FactoryGirl.create(:reading, sensor: sensor1, temp: 70, outdoor_temp: 30)
+      calibration1.update(offset: -20)
 
       expect(reading.violation).to equal(false)
 
@@ -69,7 +69,7 @@ describe Calibration do
       reading.reload
 
       expect(reading.temp).to equal(50)
-      expect(reading.original_temp).to equal(60)
+      expect(reading.original_temp).to equal(70)
       expect(reading.violation).to equal(true)
     end
   end
