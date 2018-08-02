@@ -112,6 +112,10 @@ class User < ActiveRecord::Base
     is_demo_user? ? result.demo_users : result
   end
 
+  def role
+    PERMISSIONS.invert[permissions]
+  end
+
   def self.tenants_only
     where(permissions: 100)
   end
