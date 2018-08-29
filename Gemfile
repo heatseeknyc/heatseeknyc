@@ -35,6 +35,7 @@ gem 'quiet_assets'
 gem 'lograge'
 gem 'jquery-ui-rails'
 gem 'aws-sdk'
+gem 'mixpanel-ruby'
 
 group :test do
   gem 'timecop'

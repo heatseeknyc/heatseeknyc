@@ -29,3 +29,5 @@ vendor/bundle
 # dotenv
 .env.*.local
 latest.dump
+
+.env

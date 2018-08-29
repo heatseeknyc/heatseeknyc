@@ -14,6 +14,7 @@ class UsersController < ApplicationController
       render text: "Unauthorized", status: :unauthorized
     else
       @user.update_without_password(user_params)
+      MixpanelSyncWorker.new.perform(@user.id, 'is_new_user' => false) # TODO background
       @collaboration = current_user.collaborations
                                   .where(collaborator_id: @user.id)
                                   .first
@@ -47,6 +48,7 @@ class UsersController < ApplicationController
 
     if @user.valid?
       @user.save
+      MixpanelSyncWorker.new.perform(@user.id, 'is_new_user' => true) # TODO background
       redirect_to users_path
     else
       @user
@@ -183,7 +185,9 @@ class UsersController < ApplicationController
         :password_confirmation,
         :permissions,
         :sensor_codes_string,
-        :set_location_data
+        :set_location_data,
+        :paying_user,
+        :at_risk,
       ])
     end
 

@@ -67,6 +67,18 @@
                 <%= f.text_field :phone_number, class: "form-control short-field" %>
               </dl>
 
+              <% if current_user.permissions <= 25 && !@user.is_demo_user? %>
+                <%= f.label :at_risk do %>
+                  <%= f.check_box :at_risk %>
+                  At risk?
+                <% end %>
+                <br />
+                <%= f.label :paying_user do %>
+                  <%= f.check_box :paying_user %>
+                  Paying user?
+                <% end %>
+              <% end %>
+
               <dl>
                 <%= f.label :permissions, "Permissions Level" %>:
                 <%= f.select :permissions, options_for_select(

@@ -9,9 +9,10 @@
     mixpanel.init('<%= ENV["MIXPANEL_TOKEN"] %>');
 
     mixpanel.people.set({
-      first_name: '<%= current_user.first_name %>',
-      last_name: '<%= current_user.last_name %>',
+      '$first_name': '<%= current_user.first_name %>',
+      '$last_name': '<%= current_user.last_name %>',
       role: '<%= current_user.role %>',
+      '$email': '<%= current_user.email %>',
     });
 
     mixpanel.identify('<%= current_user.id %>');

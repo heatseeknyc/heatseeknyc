@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180207212441) do
+ActiveRecord::Schema.define(version: 20180829140715) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -169,6 +169,8 @@ ActiveRecord::Schema.define(version: 20180207212441) do
     t.boolean  "dummy",                  default: false, null: false
     t.integer  "building_id"
     t.integer  "unit_id"
+    t.boolean  "paying_user",            default: false, null: false
+    t.boolean  "at_risk",                default: false, null: false
   end
 
   add_index "users", ["building_id"], name: "index_users_on_building_id", using: :btree

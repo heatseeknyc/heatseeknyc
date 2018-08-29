@@ -51,7 +51,19 @@
               <dl class="settings-input"><%= f.label :email %>
               <%= f.text_field :email, class: "form-control" %></dl>
 
-              <% if @user.permissions > 0 && !@user.is_demo_user? %>
+              <% if current_user.permissions <= 25 && !@user.is_demo_user? %>
+                <%= f.label :at_risk do %>
+                  <%= f.check_box :at_risk %>
+                  At risk?
+                <% end %>
+                <br />
+                <%= f.label :paying_user do %>
+                  <%= f.check_box :paying_user %>
+                  Paying user?
+                <% end %>
+              <% end %>
+
+              <% if current_user.permissions <= 25 && @user.permissions > 0 && !@user.is_demo_user? %>
                 <dl class="settings-input settings-permissions"><%= f.label :permissions %>
                   <%= f.select :permissions,
                                current_user.list_permission_level_and_lower,

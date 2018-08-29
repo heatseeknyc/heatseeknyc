@@ -705,6 +705,7 @@ GEM
     mime-types (2.99.3)
     mini_portile2 (2.1.0)
     minitest (5.9.1)
+    mixpanel-ruby (2.2.0)
     multi_json (1.12.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
@@ -945,6 +946,7 @@ DEPENDENCIES
   launchy
   letter_opener
   lograge
+  mixpanel-ruby
   nokogiri
   pdf-inspector
   pg
@@ -984,4 +986,4 @@ RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.14.6
+   1.16.1
