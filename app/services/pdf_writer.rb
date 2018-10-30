@@ -12,7 +12,7 @@ class PDFWriter
   end
 
   def filename
-    "#{user.last_name}.pdf"
+    user.last_name
   end
 
   def readings
