@@ -9,7 +9,7 @@ gem 'bootstrap-datepicker-rails'
 gem 'chartkick'
 gem 'coveralls', require: false
 gem 'devise'
-gem 'ffi', '= 1.9.0'
+gem 'ffi', '~> 1.9.24'
 gem 'figaro'
 gem 'font-awesome-rails'
 gem 'formtastic'
