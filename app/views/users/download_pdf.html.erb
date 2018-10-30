@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <%= stylesheet_link_tag wicked_pdf_asset_base64("pdf_styles") -%>
+  </head>
+  <body>
+    <div class="cover-page">
+      <div>Tenant: <%= @writer.user.name %></div>
+      <div><%= "Address: #{@writer.user.address}#{@writer.unit}, #{@writer.user.zip_code}" %></div>
+      <div>Phone Number: <%= @writer.user.phone_number %></div>
+
+      <% if @writer.readings_count > 0 %>
+        <div><%= "Begin: #{@writer.readings.order(:created_at, :id).first.created_at.strftime("%b %d, %Y%l:%M %p")}" %></div>
+        <div><%= "End: #{@writer.readings.order(created_at: :desc, id: :desc).first.created_at.strftime("%b %d, %Y%l:%M %p")}" %></div>
+      <% end %>
+
+      <div>Total Temperature Readings: <%= @writer.readings_count  %></div>
+      <div>Total Violations: <%= @writer.violation_count  %></div>
+      <div>Percentage: <%= (@writer.violation_count.to_f / @writer.readings_count.to_f * 100).round(1) %>%</div>
+    </div>
+
+    <div class="alwaysbreak"></div>
+
+    <div class="tenant-name">Tenant: <%= @writer.user.name %></div>
+    <%= image_tag wicked_pdf_asset_base64("pdf_header.png"), class: "law-image"  %>
+    <table class="readings-table">
+      <tr>
+        <th>TIME</th>
+        <th>DATE</th>
+        <th>TEMP INSIDE</th>
+        <th>TEMP OUTSIDE</th>
+        <th>TEMP OF HOT WATER</th>
+        <th>NOTES</th>
+      </tr>
+      <% @writer.table_array.each do |row| %>
+        <tr>
+          <% row.each do |cell| %>
+            <td><%= cell %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
+  </body>
+</html>

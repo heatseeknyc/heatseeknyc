@@ -94,13 +94,14 @@ class UsersController < ApplicationController
 
   def download_pdf
     years = params[:years].map(&:to_i)
-    writer = PDFWriter.new_from_user_id(params[:id], years: years)
 
-    file = writer.generate_pdf
-    filename = writer.filename
-    type = writer.content_type
+    @writer = PDFWriter.new_from_user_id(params[:id], years: years)
+    filename = @writer.filename
 
-    send_data(file, filename: filename, type: type)
+    puts @writer.table_array
+
+    render pdf: filename,
+      disposition: "attachment"
   end
 
   def download_csv

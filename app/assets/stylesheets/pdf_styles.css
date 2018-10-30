@@ -1,0 +1,45 @@
+.cover-page {
+  padding-top: 200px;
+  font-size: 22px;
+}
+
+table, tr, td, th, tbody, thead, tfoot {
+  page-break-inside: avoid !important;
+}
+
+div.alwaysbreak { page-break-before: always; }
+
+.tenant-name {
+  font-size: 24px;
+}
+
+.law-image {
+  width: 100%;
+}
+
+.readings-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.readings-table th {
+  background-color: #DDD;
+}
+
+.readings-table, th, td {
+  border:1px solid #000;
+}
+
+.readings-table {
+  border-bottom:0;
+  border-left:0;
+}
+
+.readings-table td, .readings-table th {
+  border-top:0;
+  border-right:0;
+  width: 16.66%;
+  text-align: center;
+  padding: 5px;
+}

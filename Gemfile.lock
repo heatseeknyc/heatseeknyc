@@ -722,7 +722,6 @@ GEM
     orm_adapter (0.5.0)
     parser (2.3.0.1)
       ast (~> 2.2)
-    pdf-core (0.2.5)
     pdf-inspector (1.3.0)
       pdf-reader (>= 1.0, < 3.0.a)
     pdf-reader (2.0.0)
@@ -738,9 +737,6 @@ GEM
       multi_json (~> 1.0)
       websocket-driver (>= 0.2.0)
     powerpack (0.1.1)
-    prawn (1.0.0)
-      pdf-core (~> 0.2.2)
-      ttfunk (~> 1.1.1)
     pry (0.10.4)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -881,7 +877,7 @@ GEM
       pry (~> 0.9)
       pusher-client (~> 0.4)
       typhoeus (~> 0.6, >= 0.6.8)
-    ttfunk (1.1.1)
+    ttfunk (1.5.1)
     tumblr_client (0.8.5)
       faraday (~> 0.9.0)
       faraday_middleware (~> 0.9.0)
@@ -906,7 +902,9 @@ GEM
     websocket-driver (0.5.1)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.1)
+    wicked_pdf (1.1.0)
     will_paginate (3.0.7)
+    wkhtmltopdf-binary (0.12.4)
     xpath (2.0.0)
       nokogiri (~> 1.3)
     yajl-ruby (1.2.1)
@@ -951,7 +949,6 @@ DEPENDENCIES
   pdf-inspector
   pg
   poltergeist
-  prawn (= 1.0.0)
   pry-nav
   psych (= 2.0.5)
   puma
@@ -978,7 +975,9 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   vcr
   webmock
+  wicked_pdf
   will_paginate
+  wkhtmltopdf-binary
   yajl-ruby
   zip
 
