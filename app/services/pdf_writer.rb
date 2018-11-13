@@ -4,7 +4,7 @@ class PDFWriter
   def initialize(user, years:)
     @user = user
     @years = years
-    @table_array = user.table_array(readings.limit(1000))
+    @table_array = user.table_array(readings)
   end
 
   def self.new_from_user_id(user_id, years:)
