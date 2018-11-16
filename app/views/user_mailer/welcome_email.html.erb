@@ -1,5 +1,13 @@
-<p>Hello <%= @user.email %>!</p>
+<p>Welcome to Heat Seek! In order to finish setting up your account, we’ll need you to set a secure password. </p>
 
-<p>Welcome to HeatSeek!</p>
+<p><%= link_to 'Set your password', edit_password_url(@user, :reset_password_token => @token) %></p>
 
-<p><%= link_to 'Change my password', edit_password_url(@user, :reset_password_token => @token) %></p>
+<p>
+  Thank you for joining Heat Seek and we look forward to working with you this winter.
+  If you have any questions, feel free to give me a call at (757) 619-9808 or email me
+  at noelle@heatseek.org.
+</p>
+
+<p>Best,</p>
+
+<p>Noelle</p>

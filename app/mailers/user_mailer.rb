@@ -12,6 +12,6 @@ class UserMailer < ActionMailer::Base
     @user = User.find(recipient_id)
     @token = password_reset_token
 
-    mail to: @user.email, subject: "Welcome to Heat Seek!"
+    mail to: @user.email, subject: "Welcome to your Heat Seek account!"
   end
 end
