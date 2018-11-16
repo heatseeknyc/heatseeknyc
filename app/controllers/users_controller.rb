@@ -48,7 +48,11 @@ class UsersController < ApplicationController
 
     if @user.valid?
       @user.save
+
       MixpanelSyncWorker.new.perform(@user.id, 'is_new_user' => true) # TODO background
+      password_reset_token = @user.generate_password_reset_token
+      UserMailer.welcome_email(recipient_id: @user.id, password_reset_token: password_reset_token).deliver
+
       redirect_to users_path
     else
       @user

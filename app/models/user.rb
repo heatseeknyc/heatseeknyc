@@ -360,4 +360,9 @@ class User < ActiveRecord::Base
       [year-1, year]
     end
   end
+
+  def generate_password_reset_token
+    raw_token = set_reset_password_token # this is protected, so we have to create another method
+    raw_token
+  end
 end
