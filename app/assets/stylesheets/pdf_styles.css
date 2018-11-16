@@ -43,3 +43,9 @@ div.alwaysbreak { page-break-before: always; }
   text-align: center;
   padding: 5px;
 }
+
+.heat-law {
+  margin-top: 25px;
+  margin-bottom: 25px;
+  margin-right: 100px;
+}

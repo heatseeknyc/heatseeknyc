@@ -23,7 +23,17 @@
     <div class="alwaysbreak"></div>
 
     <div class="tenant-name">Tenant: <%= @writer.user.name %></div>
-    <%= image_tag wicked_pdf_asset_base64("pdf_header.png"), class: "law-image"  %>
+
+    <div class="heat-law">
+      <strong>THE LAW</strong> requires your landlord provide heat and hot water at the following levels
+      from October 1 through May 31:
+      <ul>
+        <li>From 6am to 10pm: If the outside temperature falls below 55 degrees, the inside temperature must be at least 68 degrees everywhere in your apartment.</li>
+        <li>From 10pm to 6am: The inside temperature must be at least 62 degrees everywhere in your apartment, regardless of the outside temperature.</li>
+        <li>Hot water at a minimum 120 degrees at the tap must be provided 24 hours a day, year round.</li>
+      </ul>
+    </div>
+
     <table class="readings-table">
       <tr>
         <th>TIME</th>
