@@ -323,7 +323,10 @@ describe UsersController, type: :controller do
   describe "POST /users/create" do
     let(:super_user) { create(:super_user) }
 
-    before { sign_in super_user }
+    before {
+      sign_in super_user
+      allow(UserMailer).to receive(:welcome_email).and_return double('UserMailer', deliver: true)
+    }
 
     it "redirects to users index on create success", :vcr do
       new_user = build(:user)

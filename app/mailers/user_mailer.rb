@@ -12,6 +12,9 @@ class UserMailer < ActionMailer::Base
     @user = User.find(recipient_id)
     @token = password_reset_token
 
+    attachments['Heat-Seek-Enrollment-Agreement.pdf'] = File.read(Rails.root.join('app', 'assets', 'documents', 'Heat-Seek-Enrollment-Agreement.pdf'))
+    attachments['how-it-works.pdf'] = File.read(Rails.root.join('app', 'assets', 'documents', 'how-it-works.pdf'))
+
     mail to: @user.email, subject: "Welcome to your Heat Seek account!"
   end
 end

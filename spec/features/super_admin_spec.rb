@@ -46,8 +46,8 @@ feature "Super User" do
         fill_in "Password confirmation", with: "password"
         click_on "Create User"
 
-        expect(page.current_path).to eq users_path
         expect(page).to have_content("Oscar Grouch")
+        expect(page.current_path).to eq users_path
       end
     end
   end
