@@ -19,7 +19,7 @@
             <h2><%= user.phone_number %></h2>
         <% end %>
       </div>
-      <div class="col-xs-6 text-right">
+      <div class="col-xs-4 text-right">
         <div class="download-container text-center">
           <div class="download-label">
             Download Report
@@ -33,6 +33,16 @@
               <% end %>
             </div>
           <% end %>
+        </div>
+      </div>
+      <div class="col-xs-2 text-right">
+        <div class="download-container text-center">
+          <div class="download-label">
+            Take Action
+          </div>
+          <div class="download-buttons">
+            <%= link_to 'Resources', 'https://heatseek.org/take-action', class: "btn btn-primary btn-download", data: {'mixpanel-event' => "Clicked Resources", 'mixpanel-data' => {user_id: user.id}}, target: '_blank' %>
+          </div>
         </div>
       </div>
     </div>
