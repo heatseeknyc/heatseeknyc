@@ -8,6 +8,11 @@ namespace :weather do
     end
   end
 
+  desc "backfill missed readings from meteoblue"
+  task meteoblue_import: :environment do
+    CanonicalTemperature.import_meteoblue_readings("./lib/history_export_2019-03-15T15_23_10.csv")
+  end
+
   desc "update any readings without outdoor temperatures"
   task update: :environment do
     readings = Reading.where(outdoor_temp: nil).where("created_at > ?", 1.week.ago)
