@@ -876,6 +876,7 @@ GEM
       simplecov-html (~> 0.8.0)
     simplecov-html (0.8.0)
     slop (3.6.0)
+    snitcher (0.4.1)
     spork (1.0.0rc4)
     spork-rails (4.0.0)
       rails (>= 3.0.0, < 5)
@@ -1007,6 +1008,7 @@ DEPENDENCIES
   select2-rails
   selenium-webdriver
   simplecov
+  snitcher
   spork-rails
   spring
   spring-commands-rspec

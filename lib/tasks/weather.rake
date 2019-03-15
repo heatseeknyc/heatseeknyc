@@ -34,5 +34,7 @@ namespace :weather do
       CanonicalTemperature.create!(zip_code: zip_code, outdoor_temp: current_temp, record_time: time)
       puts "recorded temp for #{zip_code}"
     end
+
+    Snitcher.snitch(ENV['TEMPERATURE_UPDATE_SNITCH']) if ENV['TEMPERATURE_UPDATE_SNITCH']
   end
 end
