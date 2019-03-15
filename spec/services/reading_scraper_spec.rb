@@ -3,6 +3,10 @@ require 'scrape_driver'
 require 'reading_scraper'
 
 describe ReadingScraper do
+  before do
+    skip "unused"
+  end
+
   let(:twine) { create(:twine) }
 
   describe "#get_reading" do

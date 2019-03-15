@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe QualityControl do
-  let(:throttle) { 0 }
   before(:each) do
     @user = FactoryGirl.create(:user)
     @sensor = @user.sensors.create(name: '1234abcd')
@@ -39,22 +38,28 @@ describe QualityControl do
           outdoor_temp: nil,
         )
       end
+
+      CanonicalTemperature.create!(
+        record_time: sunday_afternoon.beginning_of_hour,
+        zip_code: '10004',
+        outdoor_temp: 70.12,
+      )
     end
 
-    it "updates missing outdoor temps", :vcr do
+    it "updates missing outdoor temps" do
       partial_readings = @user.readings.where(outdoor_temp: nil)
       expect(partial_readings.count).to eq 10
-      QualityControl.update_outdoor_temps_for(@user.readings, throttle, :silent)
+      QualityControl.update_outdoor_temps_for(@user.readings)
 
       partial_readings = @user.readings.where(outdoor_temp: nil)
       expect(partial_readings.count).to eq 0
     end
 
-    it "updates violation status", :vcr do
+    it "updates violation status" do
       violation_readings = @user.readings.where(violation: true)
       expect(violation_readings.count).to eq 10
 
-      QualityControl.update_outdoor_temps_for(@user.readings, throttle, :silent)
+      QualityControl.update_outdoor_temps_for(@user.readings)
 
       violation_readings = @user.readings.where(violation: true)
       expect(violation_readings.count).to eq 0

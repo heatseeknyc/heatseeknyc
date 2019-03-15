@@ -16,22 +16,21 @@ class QualityControl
     end
   end
 
-  def self.update_outdoor_temps_for(readings, throttle = nil, silent = nil)
+  def self.update_outdoor_temps_for(readings)
     readings.find_each do |r|
       time = r.created_at
       location = r.user.zip_code
       throttle = throttle
-      updated_temp = WeatherMan.outdoor_temp_for(time, location, throttle)
+
+      updated_temp = CanonicalTemperature.find_by(zip_code: location, record_time: time.beginning_of_hour).outdoor_temp
 
       if updated_temp.is_a? Numeric
         r.outdoor_temp = updated_temp
         regulator = Regulator.new(r)
         r.violation = regulator.has_detected_violation?
-        r.save
-        puts 'save successful' unless silent
+        r.save!
       else
-        puts 'API not returning valid data'
-        puts updated_temp
+        puts "no canonical temp for #{time}"
       end
     end
   end

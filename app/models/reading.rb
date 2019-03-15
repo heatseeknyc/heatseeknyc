@@ -53,7 +53,7 @@ class Reading < ActiveRecord::Base
       humidity = nil
     end
 
-    ct = CanonicalTemperature.find_by(record_time: time.beginning_of_hour, zipcode: user.zip_code)
+    ct = CanonicalTemperature.find_by(record_time: time.beginning_of_hour, zip_code: user.zip_code)
     outdoor_temp = ct.nil? ? nil : ct.outdoor_temp
     
     reading = create!(
