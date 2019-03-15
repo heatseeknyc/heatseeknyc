@@ -16,12 +16,14 @@ class OpenWeatherMap
     # digits of a zip code, putting those in a range, and mapping those ranges to stations
 
     # Toronto starts with M4C
-    return "6167865" if z[0..2] == "M4C"
+    return "6167865" if zipcode[0..2] == "M4C"
 
     # Montreal starts with H1
-    return "6077243" if z[0..1] == "H1"
+    return "6077243" if zipcode[0..1] == "H1"
 
-    # USA Zips 
+    raise ArgumentError.new("invalid zip code #{zipcode}") if zipcode.length != 5
+
+    # USA Zips
     z = zipcode[0..2].to_i
 
     if (100..102).include?(z)
@@ -54,7 +56,7 @@ class OpenWeatherMap
     elsif (120..129).include?(z)
       # Albany, NY area (way too wide, need to narrow this in the future if we're really up there)
       "5106841"
-    elsif (150..196).include(z)
+    elsif (150..196).include?(z)
       # PA, station in philly
       "4560349"
     elsif (300..319).include?(z)

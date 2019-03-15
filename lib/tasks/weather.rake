@@ -18,4 +18,21 @@ namespace :weather do
     readings = Reading.where(outdoor_temp: nil).where("created_at > ?", 1.week.ago)
     QualityControl.update_outdoor_temps_for(readings)
   end
+
+  desc "fetch current temperatures"
+  task fetch_current_temperatures: :environment do
+    zip_codes = User.pluck(:zip_code).uniq
+    time = DateTime.now.beginning_of_hour
+
+    zip_codes.each do |zip_code|
+      if CanonicalTemperature.exists?(zip_code: zip_code, record_time: time)
+        puts "already have temp for #{zip_code}"
+        next
+      end
+
+      current_temp = WeatherMan.current_outdoor_temp(zip_code)
+      CanonicalTemperature.create!(zip_code: zip_code, outdoor_temp: current_temp, record_time: time)
+      puts "recorded temp for #{zip_code}"
+    end
+  end
 end
