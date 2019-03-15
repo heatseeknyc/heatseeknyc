@@ -53,8 +53,9 @@ class Reading < ActiveRecord::Base
       humidity = nil
     end
 
-    outdoor_temp = WeatherMan.outdoor_temp_for(time, user.zip_code, 0.1)
-
+    ct = CanonicalTemperature.find_by(record_time: time.beginning_of_hour, zipcode: user.zip_code)
+    outdoor_temp = ct.nil? ? nil : ct.outdoor_temp
+    
     reading = create!(
       sensor: sensor,
       user: user,
