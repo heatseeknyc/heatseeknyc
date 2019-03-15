@@ -11,7 +11,7 @@ describe "users API", type: :request do
   end
 
   it "returns list of addresses" do
-    get "addresses.json"
+    get "/addresses.json"
 
     expect(response.code).to eq "200"
     expect(response.body).to eq [
@@ -24,7 +24,7 @@ describe "users API", type: :request do
   it "excludes dummy accounts" do
     user3 = create(:user, dummy: true, address: "100 Fake st")
     user3.readings << create(:reading, created_at: time)
-    get "addresses.json"
+    get "/addresses.json"
 
     expect(response.code).to eq "200"
     expect(response.body).to eq [
@@ -37,7 +37,7 @@ describe "users API", type: :request do
   it "excludes non-tenant accounts" do
     user3 = create(:user, permissions: 50, address: "123 Advocate St")
     user3.readings << create(:reading, created_at: time)
-    get "addresses.json"
+    get "/addresses.json"
 
     expect(response.code).to eq "200"
     expect(response.body).to eq [

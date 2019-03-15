@@ -1,14 +1,15 @@
 source 'https://rubygems.org'
-ruby '2.3.1'
+ruby '2.4.5'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.16'
+gem 'rails', '4.2.11.1'
 
 gem 'airbrake'
 gem 'bootstrap-datepicker-rails'
 gem 'chartkick'
 gem 'coveralls', require: false
-gem 'devise'
+gem 'devise', '~> 3.4.1'
+gem 'responders', '~> 2.4.1'
 gem 'ffi', '~> 1.9.24'
 gem 'figaro'
 gem 'font-awesome-rails'
@@ -41,7 +42,7 @@ gem 'wkhtmltopdf-binary'
 group :test do
   gem 'timecop'
   gem 'vcr'
-  gem 'webmock'
+  gem 'webmock', '~> 2.3.2'
   gem 'pdf-inspector', require: 'pdf/inspector'
 end
 
@@ -79,13 +80,13 @@ group :production do
 end
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0'
+gem 'sass-rails'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
+# gem 'coffee-rails', '~> 4.0.0'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
