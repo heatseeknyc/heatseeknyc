@@ -1,9 +1,10 @@
 language: ruby
 rvm:
-- 2.3.1
+- 2.4.5
 cache: bundler
 env:
   global:
+    - EMAIL_FROM_ADDRESS="heatseek@test.com"
     - DATABASE_USERNAME="postgres"
     - DATABASE_PASSWORD=""
     - secure: wMOkyOiC7B9wCoStmW7FvoMqAn7h8GXzt1WOOKQutLIVdoI0dvhrIRViT5ZICvgHIqUoIdRx42AUfXIxC4y+FOatJTmo2GCa4SsctqWLOjX9lQSn1wqaflIfgi5mYoYSKJzJ6KSxIdMQsWA6PLlhSlHLVyKJsINoIADcrxh1Hw0=
