@@ -40,6 +40,7 @@ gem 'aws-sdk'
 gem 'mixpanel-ruby'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
+gem 'twilio-ruby'
 
 group :test do
   gem 'timecop'

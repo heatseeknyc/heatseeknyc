@@ -53,6 +53,11 @@
           <%= f.text_field :phone_number, class: "form-control short-field" %>
         </dl>
 
+        <dl>
+          <%= f.label :sms_alert_number %>
+          <%= f.text_field :sms_alert_number, class: "form-control short-field" %>
+        </dl>
+
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
           <dl>
             Currently waiting confirmation for: <%= resource.unconfirmed_email %>

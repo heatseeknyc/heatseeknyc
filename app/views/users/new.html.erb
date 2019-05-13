@@ -67,6 +67,11 @@
                 <%= f.text_field :phone_number, class: "form-control short-field" %>
               </dl>
 
+              <dl>
+                <%= f.label :sms_alert_number %>:
+                <%= f.text_field :sms_alert_number, class: "form-control short-field" %>
+              </dl>
+
               <% if current_user.permissions <= 25 && !@user.is_demo_user? %>
                 <%= f.label :at_risk do %>
                   <%= f.check_box :at_risk %>
@@ -76,6 +81,11 @@
                 <%= f.label :paying_user do %>
                   <%= f.check_box :paying_user %>
                   Paying user?
+                <% end %>
+                <br />
+                <%= f.label :summer_user do %>
+                  <%= f.check_box :summer_user %>
+                  Summer user?
                 <% end %>
               <% end %>
 

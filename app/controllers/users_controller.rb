@@ -196,6 +196,8 @@ class UsersController < ApplicationController
         :set_location_data,
         :paying_user,
         :at_risk,
+        :sms_alert_number,
+        :summer_user,
       ])
     end
 

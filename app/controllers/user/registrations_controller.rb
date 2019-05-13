@@ -58,7 +58,8 @@ class User::RegistrationsController < Devise::RegistrationsController
         :current_password,
         :password,
         :password_confirmation,
-        :apartment
+        :apartment,
+        :sms_alert_number
       )
     end
 
@@ -75,7 +76,8 @@ class User::RegistrationsController < Devise::RegistrationsController
         :phone_number,
         :password,
         :password_confirmation,
-        :apartment
+        :apartment,
+        :sms_alert_number
       )
     end
   end
