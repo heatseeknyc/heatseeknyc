@@ -4,8 +4,8 @@ class SetupSmsAlerts < ActiveRecord::Migration
     add_column :users, :summer_user, :boolean, default: false, null: false
 
     create_table :sms_alerts do |t|
-      t.integer :alert_type, null: false
-      t.references :users, null: false
+      t.string :alert_type, null: false
+      t.references :user, null: false
       t.timestamps
     end
   end

@@ -120,8 +120,8 @@ ActiveRecord::Schema.define(version: 20190509191629) do
   end
 
   create_table "sms_alerts", force: :cascade do |t|
-    t.integer  "alert_type", null: false
-    t.integer  "users_id",   null: false
+    t.string   "alert_type", null: false
+    t.integer  "user_id",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
