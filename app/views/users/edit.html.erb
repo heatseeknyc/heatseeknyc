@@ -48,6 +48,9 @@
               <dl class="settings-input"><%= f.label :phone_number %>
               <%= f.text_field :phone_number, class: "form-control short-field" %></dl>
 
+              <dl class="settings-input"><%= f.label :sms_alert_number %>
+              <%= f.text_field :sms_alert_number, class: "form-control short-field" %></dl>
+
               <dl class="settings-input"><%= f.label :email %>
               <%= f.text_field :email, class: "form-control" %></dl>
 
@@ -60,6 +63,11 @@
                 <%= f.label :paying_user do %>
                   <%= f.check_box :paying_user %>
                   Paying user?
+                <% end %>
+                <br />
+                <%= f.label :summer_user do %>
+                  <%= f.check_box :summer_user %>
+                  Summer user?
                 <% end %>
               <% end %>
 

@@ -24,6 +24,10 @@ class User < ActiveRecord::Base
                       with: /\A\d{5}-\d{4}|\A\d{5}\z/,
                       message: "should be 12345 or 12345-1234",
                       allow_blank: true
+  validates :sms_alert_number,
+            format: { with: /\A\+?[1-9]\d{1,14}\z/,
+                      message: 'must be E.164 format, e.g. +17241134455',
+                      allow_blank: true }
 
   before_save :create_search_names
   # before_validation :associate_sensors
