@@ -27,6 +27,8 @@ class HighTemperatureSmsAlertWorker
         maybe_send_sms(user)
       end
     end
+
+    Snitcher.snitch(ENV['HIGH_TEMP_ALERT_SNITCH']) if ENV['HIGH_TEMP_ALERT_SNITCH']
   end
 
   def alerted_today?(user)
