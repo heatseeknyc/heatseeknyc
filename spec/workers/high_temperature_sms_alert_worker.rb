@@ -42,6 +42,15 @@ describe DailyViolationEmailWorker do
     HighTemperatureSmsAlertWorker.new.perform
   end
 
+  it "does not send message for older readings" do
+    create(:reading, sensor: sensor1, user: user1, temp: 86, created_at: 4.hours.ago)
+    create(:reading, sensor: sensor1, user: user1, temp: 87, created_at: 5.hours.ago)
+
+    expect(message_sender).to_not receive(:create)
+
+    HighTemperatureSmsAlertWorker.new.perform
+  end
+
   it "does not send message if user has no sms_alert_number" do
     create(:reading, sensor: sensor1, user: user2, temp: 85)
     create(:reading, sensor: sensor1, user: user2, temp: 87, created_at: 45.minutes.ago)
