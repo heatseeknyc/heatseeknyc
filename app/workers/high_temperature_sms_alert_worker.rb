@@ -9,7 +9,10 @@ class HighTemperatureSmsAlertWorker
   def perform
      # only send between 9am and 9pm
     now = DateTime.now.in_time_zone(TIME_ZONE)
-    return if now.hour < 9 || now.hour >= 21
+    if now.hour < 9 || now.hour >= 21
+      update_snitch
+      return
+    end
 
     temp_threshold = Integer(ENV.fetch("HIGH_TEMP_ALERT_THRESHOLD"))
 
@@ -28,6 +31,10 @@ class HighTemperatureSmsAlertWorker
       end
     end
 
+    update_snitch
+  end
+
+  def update_snitch
     Snitcher.snitch(ENV['HIGH_TEMP_ALERT_SNITCH']) if ENV['HIGH_TEMP_ALERT_SNITCH']
   end
 
