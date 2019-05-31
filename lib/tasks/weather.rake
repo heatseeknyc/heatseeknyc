@@ -17,6 +17,8 @@ namespace :weather do
   task update: :environment do
     readings = Reading.where(outdoor_temp: nil).where("created_at > ?", 1.week.ago)
     QualityControl.update_outdoor_temps_for(readings)
+
+    Snitcher.snitch(ENV['UPDATE_MISSING_OUTDOOR_TEMPS_SNITCH']) if ENV['UPDATE_MISSING_OUTDOOR_TEMPS_SNITCH']
   end
 
   desc "fetch current temperatures"
