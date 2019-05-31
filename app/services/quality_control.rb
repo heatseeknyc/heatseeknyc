@@ -22,10 +22,10 @@ class QualityControl
       location = r.user.zip_code
       throttle = throttle
 
-      updated_temp = CanonicalTemperature.find_by(zip_code: location, record_time: time.beginning_of_hour).outdoor_temp
+      updated_temp = CanonicalTemperature.find_by(zip_code: location, record_time: time.beginning_of_hour)
 
-      if updated_temp.is_a? Numeric
-        r.outdoor_temp = updated_temp
+      if updated_temp && updated_temp.outdoor_temp.is_a? Numeric
+        r.outdoor_temp = updated_temp.outdoor_temp
         regulator = Regulator.new(r)
         r.violation = regulator.has_detected_violation?
         r.save!
