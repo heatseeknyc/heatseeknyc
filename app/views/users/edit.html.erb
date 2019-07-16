@@ -22,6 +22,17 @@
           <br/>
 
           <div id="form-id">
+            <% if @user.errors.any? %>
+              <div id="error_explanation" style="margin-bottom: 50px;">
+                <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+                <ul>
+                  <% @user.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+
             <%= form_for(@user) do |f| %>
               <dl class="settings-input"><%= f.label :first_name %>
               <%= f.text_field :first_name, :autofocus => true, class: "form-control" %></dl>

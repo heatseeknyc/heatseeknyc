@@ -23,9 +23,18 @@ UserShowTempChartSvg.prototype.setX = function(){
 };
 
 UserShowTempChartSvg.prototype.setY = function(){
+  var startDate = this.startDate
+  var hasHighTemp = this.data.filter(function(d) {
+    return moment(d.created_at).isAfter(startDate)
+  }).some(function(d) {
+    return d.temp >= 80
+  })
+  debugger
+  var max = hasHighTemp ? 100 : 80;
+
   return d3.scale.linear()
     .range([this.height - this.margin * 2, 0])
-    .domain([0, 80]);
+    .domain([0, max]);
 };
 
 UserShowTempChartSvg.prototype.setSvg = function(){
