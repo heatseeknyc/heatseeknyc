@@ -104,10 +104,17 @@ body.tenant {
       padding-bottom: 30px;
     }
 
+    .large-stat-items {
+      display: flex;
+      justify-content: center;
+    }
+
     .current-temp, .violations {
       min-width: 260px;
+      margin-left: 50px;
+      margin-right: 50px;
     }
-    
+
     .stat-num {
       font-size: 133px;
       border-bottom: solid 3px $theme-black;

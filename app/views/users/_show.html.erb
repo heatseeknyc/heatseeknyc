@@ -85,19 +85,21 @@
             </div>
           </div>
         </div>
-        <div class="col-md-2 col-lg-3"></div>
-        <div class="current-temp col-xs-12 col-sm-6 col-md-3 col-lg-2">
-          <h3 class="stat-num temp-num"><%= user.current_temp_string %></h3>
-          <h5 class="stat-description">Indoor temperature</h5>
-        </div>
 
-        <div class="col-md-2"></div>
-        <div class="violations col-xs-12 col-sm-6 col-md-3 col-lg-2">
+        <div class="large-stat-items">
+          <div class="current-temp">
+            <h3 class="stat-num temp-num"><%= user.current_temp_string %></h3>
+            <h5 class="stat-description">Current indoor <br> temperature</h5>
+          </div>
+
           <% if User.in_heating_season? %>
-            <h3 class="stat-num"><%= user.readings.this_year.in_violation.count %></h3>
-            <h5 class="stat-description">Hours of violation</h5>
+            <div class="violations">
+              <h3 class="stat-num"><%= user.readings.this_year.in_violation.count %></h3>
+              <h5 class="stat-description">Hours of violation</h5>
+            </div>
           <% end %>
         </div>
+
       </div>
     </div>
     <% if user.last_weeks_readings.any? %>
