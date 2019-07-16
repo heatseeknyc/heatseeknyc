@@ -39,6 +39,7 @@ class User < ActiveRecord::Base
   extend Measurable::ClassMethods
   include Graphable::InstanceMethods
   include Regulatable::InstanceMethods
+  extend Regulatable::ClassMethods
   include Permissionable::InstanceMethods
   include Messageable::InstanceMethods
 

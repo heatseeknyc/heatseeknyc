@@ -18,6 +18,7 @@
         <% if user.phone_number.present? %>
             <h2><%= user.phone_number %></h2>
         <% end %>
+        <h2><%= user.first_reading_this_year("(since %m/%d/%y)") %></h2>
       </div>
       <div class="col-xs-4 text-right">
         <div class="download-container text-center">
@@ -68,6 +69,7 @@
               <% if user.phone_number.present? %>
                   <h4><%= user.phone_number %></h4>
               <% end %>
+              <h4><%= user.first_reading_this_year("(since %m/%d/%y)") %></h4>
             </div>
             <div class="col-xs-2"></div>
           </div>
@@ -91,9 +93,10 @@
 
         <div class="col-md-2"></div>
         <div class="violations col-xs-12 col-sm-6 col-md-3 col-lg-2">
-          <h3 class="stat-num"><%= user.readings.this_year.in_violation.count %></h3>
-          <h5 class="stat-description">Hours of violation</h5>
-          <h5 class="stat-description violation-label"><%= user.first_reading_this_year("(since %m/%d/%y)") %></h5>
+          <% if User.in_heating_season? %>
+            <h3 class="stat-num"><%= user.readings.this_year.in_violation.count %></h3>
+            <h5 class="stat-description">Hours of violation</h5>
+          <% end %>
         </div>
       </div>
     </div>

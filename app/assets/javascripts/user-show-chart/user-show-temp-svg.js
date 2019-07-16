@@ -29,7 +29,6 @@ UserShowTempChartSvg.prototype.setY = function(){
   }).some(function(d) {
     return d.temp >= 80
   })
-  debugger
   var max = hasHighTemp ? 100 : 80;
 
   return d3.scale.linear()

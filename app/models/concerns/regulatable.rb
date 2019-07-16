@@ -1,6 +1,8 @@
 module Regulatable
   module ClassMethods
-
+    def in_heating_season?
+      DateTime.now.month < 6 || DateTime.now.month >= 10
+    end
   end
 
   module InstanceMethods
