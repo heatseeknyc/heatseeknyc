@@ -4,8 +4,13 @@ class OpenWeatherMap
   base_uri "https://api.openweathermap.org/data/2.5/weather?APPID=#{@api_key}&units=imperial"
 
   def conditions_for(zipcode)
-    return nil if OpenWeatherMap.get_loc_by_zip(zipcode).nil?
-    self.class.get("&id=#{OpenWeatherMap.get_loc_by_zip(zipcode)}")
+    loc = OpenWeatherMap.get_loc_by_zip(zipcode)
+
+    if loc
+      self.class.get("&id=#{loc}")
+    else
+      self.class.get("&zip=#{zipcode},us")
+    end
   end
 
   def self.get_loc_by_zip(zipcode)
@@ -56,15 +61,6 @@ class OpenWeatherMap
     elsif (120..129).include?(z)
       # Albany, NY area (way too wide, need to narrow this in the future if we're really up there)
       "5106841"
-    elsif (150..196).include?(z)
-      # PA, station in philly
-      "4560349"
-    elsif (300..319).include?(z)
-       # ATLANTA, GA
-      "4180439"
-    elsif (711..711).include?(z)
-       # Shriveport, LA
-      "4341513"
     else
       nil
     end
