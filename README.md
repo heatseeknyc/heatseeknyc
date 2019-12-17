@@ -58,6 +58,32 @@ email: jane@heatseeknyc.com
 password: 33west26
 ```
 
+## Adding new sensor IDs
+
+Example of adding new sensor IDs 251-400.
+
+### On the rails app
+
+```
+heroku run rails c -a heatseek-prod
+(251..400).each{|i| puts "feather0#{i.to_s}"; Sensor.create(name: "feather0#{i.to_s}")};0
+```
+
+### On the relay server
+
+```
+heroku pg:psql -a hs-relay-prod
+
+hs-relay-prod::DATABASE-> DO $$
+BEGIN
+FOR counter IN 251..400 LOOP
+insert into cells values (concat('feather0', counter::text), 'n/a');
+END LOOP;
+END; $
+$
+;
+```
+
 ## Rake Tasks
 
 There are a couple rake tasks that require API tokens.
