@@ -24,16 +24,17 @@ UserShowTempChartSvg.prototype.setX = function(){
 
 UserShowTempChartSvg.prototype.setY = function(){
   var startDate = this.startDate
-  var hasHighTemp = this.data.filter(function(d) {
+  var filteredData = this.data.filter(function(d) {
     return moment(d.created_at).isAfter(startDate)
-  }).some(function(d) {
-    return d.temp >= 80
   })
+  var hasHighTemp = filteredData.some(function(d) { return d.temp >= 80 })
+  var hasLowTemp = filteredData.some(function(d) { return d.temp <= 0 })
   var max = hasHighTemp ? 100 : 80;
+  var min = hasLowTemp ? -20 : 0;
 
   return d3.scale.linear()
     .range([this.height - this.margin * 2, 0])
-    .domain([0, max]);
+    .domain([min, max]);
 };
 
 UserShowTempChartSvg.prototype.setSvg = function(){
