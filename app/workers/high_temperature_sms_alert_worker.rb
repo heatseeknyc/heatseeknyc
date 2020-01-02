@@ -61,7 +61,7 @@ class HighTemperatureSmsAlertWorker
   end
 
   def alerted_today?(user)
-    SmsAlert.where(user_id: user.id, alert_type: "high_temperature")
+    SmsAlert.where(user_id: user.id, alert_type: alert_type)
       .where("created_at > ?", DateTime.now.in_time_zone(TIME_ZONE).beginning_of_day).exists?
   end
 
