@@ -949,7 +949,7 @@ GEM
     websocket (1.2.1)
     websocket-driver (0.5.1)
       websocket-extensions (>= 0.1.0)
-    websocket-extensions (0.1.1)
+    websocket-extensions (0.1.5)
     wicked_pdf (1.1.0)
     will_paginate (3.0.7)
     wkhtmltopdf-binary (0.12.4)
