@@ -8,6 +8,8 @@ temperature in their apartment violated NYC's heat laws.
   <tr>
     <th>Name</th>
     <th>Address</th>
+    <th>Apartment</th>
+    <th>Phone number</th>
     <th>Violation Start</th>
     <th>Violation Duration</th>
     <th>Violation End</th>
@@ -18,6 +20,8 @@ temperature in their apartment violated NYC's heat laws.
     <tr>
       <td><%= violation.user.name %></td>
       <td><%= violation.user.address %></td>
+      <td><%= violation.user.apartment %></td>
+      <td><%= violation.user.phone_number %></td>
       <td><%= violation.data["start_at"].in_time_zone('Eastern Time (US & Canada)').strftime("%m/%d/%Y @ %I:%M%P %Z") %></td>
       <td><%= violation.data["duration"].to_i/3600 %> hrs</td>
       <td><%= violation.data["end_at"].in_time_zone('Eastern Time (US & Canada)').strftime("%m/%d/%Y @ %I:%M%P %Z") %></td>

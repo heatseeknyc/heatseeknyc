@@ -751,7 +751,7 @@ GEM
       hashery (~> 2.0)
       ruby-rc4
       ttfunk
-    pg (0.18.1)
+    pg (0.21.0)
     poltergeist (1.5.1)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
@@ -995,7 +995,7 @@ DEPENDENCIES
   mixpanel-ruby
   nokogiri
   pdf-inspector
-  pg
+  pg (= 0.21.0)
   poltergeist
   pry-nav
   psych (= 2.0.5)
