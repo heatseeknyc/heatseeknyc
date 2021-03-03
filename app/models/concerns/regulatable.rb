@@ -42,6 +42,10 @@ module Regulatable
       40
     end
 
+    def violation_possible?(datetime, outdoor_temp)
+      !during_the_day?(datetime) || (outdoor_temp == nil || outdoor_temp < day_time_outdoor_legal_requirement)
+    end
+
     def day_time_temps_below_minimum?(indoor_temp, outdoor_temp)
       indoor_temp < day_time_legal_requirement &&
       (outdoor_temp == nil || outdoor_temp < day_time_outdoor_legal_requirement)

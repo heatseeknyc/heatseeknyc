@@ -16,8 +16,9 @@
       <% end %>
 
       <div>Total Temperature Readings: <%= @writer.readings_count  %></div>
+      <div>Total Temperature Readings in which a violation is possible: <%= @writer.readings_where_violation_is_possible_count %></div>
       <div>Total Violations: <%= @writer.violation_count  %></div>
-      <div>Percentage: <%= (@writer.violation_count.to_f / @writer.readings_count.to_f * 100).round(1) %>%</div>
+      <div>Percentage: <%= (@writer.violation_count.to_f / @writer.readings_where_violation_is_possible_count.to_f * 100).round(1) %>%</div>
     </div>
 
     <div class="alwaysbreak"></div>

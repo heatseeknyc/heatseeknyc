@@ -27,6 +27,10 @@ class PDFWriter
     @readings_count ||= readings.count
   end
 
+  def readings_where_violation_is_possible_count
+    readings.select { |r| r.user.violation_possible?(r.created_at, r.outdoor_temp) }.count
+  end
+
   def violation_count
     @violation_count ||= readings.where(violation: true).count
   end
