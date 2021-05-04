@@ -2,8 +2,8 @@ Twinenyc::Application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     domain: ENV['SMTP_DOMAIN'],
-    user_name: ENV["SMPT_USERNAME"],
-    password: ENV["SMPT_PASSWORD"],
+    user_name: ENV["SMTP_USERNAME"],
+    password: ENV["SMTP_PASSWORD"],
     address: "smtp.postmarkapp.com",
     port: 587,
     authentication: "plain",
