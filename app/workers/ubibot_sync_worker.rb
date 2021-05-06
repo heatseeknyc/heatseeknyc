@@ -24,10 +24,12 @@ class UbibotSyncWorker
           next
         end
 
-        puts "[#{sensor.name}] recording temp at #{time}"
+        temp = temp_entry["field1"]["avg"] * 9 / 5 + 32
+
+        puts "[#{sensor.name}] recording temp at #{time} - #{temp}"
         Reading.create_from_params(
           sensor_name: sensor.name,
-          temp: temp_entry["field1"]["avg"],
+          temp: temp,
           humidity: temp_entry["field2"]["avg"],
           time: time.to_i,
         )
