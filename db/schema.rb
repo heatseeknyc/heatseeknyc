@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190509191629) do
+ActiveRecord::Schema.define(version: 20210506145512) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,12 +112,15 @@ ActiveRecord::Schema.define(version: 20190509191629) do
   add_index "sensor_calibrations", ["sensor_id"], name: "index_sensor_calibrations_on_sensor_id", using: :btree
 
   create_table "sensors", force: :cascade do |t|
-    t.string   "name",       limit: 255
+    t.string   "name",                  limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.string   "nick_name",  limit: 255
+    t.string   "nick_name",             limit: 255
+    t.string   "ubibot_sensor_channel"
   end
+
+  add_index "sensors", ["ubibot_sensor_channel"], name: "index_sensors_on_ubibot_sensor_channel", using: :btree
 
   create_table "sms_alerts", force: :cascade do |t|
     t.string   "alert_type", null: false

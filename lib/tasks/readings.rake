@@ -61,4 +61,10 @@ namespace :readings do
     calibrations = Calibration.all
     Calibration.recalibrate!(calibrations, log: true)
   end
+
+  desc "sync data from ubibot"
+  task ubibot_sync: :environment do
+    UbibotSyncWorker.new.perform
+    Snitcher.snitch(ENV['UBIBOT_SYNC_SNITCH']) if ENV['UBIBOT_SYNC_SNITCH']
+  end
 end

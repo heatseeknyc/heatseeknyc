@@ -1,0 +1,19 @@
+
+Bakery Vanss472
+
+Bug: React console warning
+- Looks good!
+
+Feature: Add a loading indicator
+- Looks good.  There is no error handing here, but we don’t have any in the template to begin with.  Could ask how they might implement error handling.
+
+Feature: Marking orders fulfilled
+- Nice creation of button component
+- Direct mutation of `order.fulfilled` on line 44 rather than updating the state.
+- created a local `isFulfilled` state which seems unnecessary
+- There is no error handling, so the order gets marked fulfilled regardless of whether the API request is successful.
+- A PUT request was used rather than a PATCH request.  This isn’t great because we’re updating more data than necessary.
+
+General notes:
+- The PR commits aren’t separated, so the final PR has all of the commits.  Not a huge deal but found it a bit weird.
+- I would expect a senior level developer to get through at minimum 4 of 6 tickets, preferably 5 of 6 in 4-5 hours.
