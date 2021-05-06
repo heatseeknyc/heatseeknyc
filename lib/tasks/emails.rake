@@ -5,5 +5,7 @@ namespace :emails do
       start_at: 24.hours.ago,
       end_at: DateTime.now
     ).perform
+
+    Snitcher.snitch(ENV['DAILY_VIOLATIONS_EMAIL_SNITCH']) if ENV['DAILY_VIOLATIONS_EMAIL_SNITCH']
   end
 end
