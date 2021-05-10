@@ -5,6 +5,8 @@ class UbibotSyncWorker
     access_token = access_token_body["token_id"]
 
     Sensor.where("ubibot_sensor_channel IS NOT NULL").find_each do |sensor|
+      next unless sensor.user_id
+
       start = 12.hours.ago.strftime('%Y-%m-%d %H:00:00')
       response = HTTParty.get("https://api.ubibot.com/channels/#{sensor.ubibot_sensor_channel}/summary.json?token_id=#{access_token}&results=100&start=#{start}")
       parsed = JSON.parse(response.body)
@@ -25,8 +27,8 @@ class UbibotSyncWorker
         end
 
         temp = temp_entry["field1"]["avg"] * 9 / 5 + 32
-
         puts "[#{sensor.name}] recording temp at #{time} - #{temp}"
+
         Reading.create_from_params(
           sensor_name: sensor.name,
           temp: temp,
