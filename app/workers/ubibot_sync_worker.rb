@@ -10,7 +10,12 @@ class UbibotSyncWorker
       start = 12.hours.ago.strftime('%Y-%m-%d %H:00:00')
       response = HTTParty.get("https://api.ubibot.com/channels/#{sensor.ubibot_sensor_channel}/summary.json?token_id=#{access_token}&results=100&start=#{start}")
       parsed = JSON.parse(response.body)
-      # puts parsed
+
+      if response.code != 200
+        puts "non-success response for sensor #{sensor.user_id}: #{response.code}"
+        puts parsed
+        next
+      end
 
       if parsed["channel"]["field1"] != "Temperature"
         raise "Unexpected field1 #{parsed["channel"]["field1"]}"
