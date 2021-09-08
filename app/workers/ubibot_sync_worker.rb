@@ -41,6 +41,8 @@ class UbibotSyncWorker
           time: time.to_i,
         )
       end
+
+      sleep 5
     end
   end
 end
