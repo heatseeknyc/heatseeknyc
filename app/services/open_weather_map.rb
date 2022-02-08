@@ -33,7 +33,7 @@ class OpenWeatherMap
 
     if (100..102).include?(z)
       # NEW YORK, NY
-      "5128638"
+      "5125771"
     elsif 103 == z
       # Staten Island, NY doesn't seem to have one, we use Brooklyn here instead
       "5110302"
