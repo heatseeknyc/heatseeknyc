@@ -9,7 +9,7 @@ gem 'airbrake'
 gem 'bootstrap-datepicker-rails'
 gem 'chartkick'
 gem 'coveralls', require: false
-gem 'devise', '~> 3.4.1'
+gem 'devise', '~> 4.7.1'
 gem 'responders', '~> 2.4.1'
 gem 'ffi', '~> 1.15.0'
 gem 'figaro'
