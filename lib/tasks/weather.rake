@@ -39,4 +39,39 @@ namespace :weather do
 
     Snitcher.snitch(ENV['TEMPERATURE_UPDATE_SNITCH']) if ENV['TEMPERATURE_UPDATE_SNITCH']
   end
+
+  desc "update manhattan outdoor temps"
+  task update_manhattan_outdoor_temps: :environment do
+    perform = !!ENV['PERFORM']
+    not_found_count = 0
+
+    rows = CSV.read(Rails.root.join("data", "manhattan_outdoor.csv"), headers: true)
+      .select { |r| r["dt"].to_i > DateTime.new(2021,6).to_i }
+
+    parsed = rows.inject({}) do |hash, value|
+      hash[value["dt"].to_i] = Float(value["temp"])
+      hash
+    end
+
+    affected_zipcodes = User.all.pluck(:zip_code).select { |z| (100..102).include?(z[0..2].to_i) }.uniq
+    users = User.where(zip_code: affected_zipcodes)
+    readings = Reading.where(user_id: users).where("created_at > ?", DateTime.new(2021, 6))
+
+    puts "updating #{readings.count} readings"
+
+    readings.find_each do |reading|
+      time = reading.created_at.change(min: 0, sec: 0, usec: 0).to_i
+
+      if parsed[time]
+        puts "updating reading temp ID #{reading.id}, #{reading.outdoor_temp}-#{parsed[time].round}"
+
+        reading.update!(outdoor_temp: parsed[time].round) if perform
+      else
+        puts "unable to find temp for #{reading.id}, #{time}"
+        not_found_count += 1
+      end
+    end
+
+    puts "done, not found: #{not_found_count}"
+  end
 end
