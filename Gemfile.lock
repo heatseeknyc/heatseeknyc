@@ -414,7 +414,7 @@ GEM
       nokogiri (>= 1.6, < 2.0)
     typhoeus (0.7.0)
       ethon (>= 0.7.1)
-    tzinfo (1.2.5)
+    tzinfo (1.2.10)
       thread_safe (~> 0.1)
     uglifier (2.7.0)
       execjs (>= 0.3.0)
