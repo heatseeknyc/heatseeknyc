@@ -76,8 +76,8 @@ jobs:
           RAILS_ENV: test
           DATABASE_URL: "postgres://postgres:password@localhost:5432/twinedb_test"
         run: |
-          bin/rails db:create
-          bin/rails db:test:prepare
+          bin/rake db:create
+          bin/rake db:test:prepare
       # - name: Compile assets
       #   env:
       #     RAILS_ENV: test
