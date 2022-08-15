@@ -352,7 +352,7 @@ class User < ActiveRecord::Base
           CASE WHEN (EXTRACT(month from created_at))::int > 9
                THEN extract(year from created_at)::int + 1
                ELSE extract(year from created_at)::int
-            END
+            END as date_part
         FROM readings
         WHERE user_id = #{id}
         GROUP BY
