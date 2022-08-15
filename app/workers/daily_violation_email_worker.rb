@@ -34,7 +34,7 @@ class DailyViolationEmailWorker
         user_id,
         MAX(created_at) AS end_at,
         MIN(created_at) AS start_at,
-        extract(epoch from (MAX(created_at)-MIN(created_at))) AS duration
+        extract(epoch from (MAX(created_at)-MIN(created_at)))::int AS duration
 
       FROM (
         WITH readings_day AS (

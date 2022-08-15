@@ -1,0 +1,80 @@
+name: rails
+on: push
+jobs:
+  rspec:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:14
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      chrome:
+        image: selenium/standalone-chrome:latest
+        volumes:
+          - /dev/shm:/dev/shm
+
+    steps:
+      - name: check temp dir
+        run: echo $RUNNER_TEMP
+      - name: Rails Tmp Cache
+        id: rails-tmp-cache
+        uses: actions/cache@v1
+        with:
+          path: tmp/cache
+          key: ${{ runner.os }}-rails-tmp-${{ steps.extract_branch.outputs.branch }}
+          restore-keys: |
+            ${{ runner.os }}-rails-tmp-
+      - name: Rails Assets Cache
+        id: rails-assets-cache
+        uses: actions/cache@v1
+        with:
+          path: public/assets
+          key: ${{ runner.os }}-rails-assets-${{ steps.extract_branch.outputs.branch }}
+          restore-keys: |
+            ${{ runner.os }}-rails-assets-
+      - name: Webpacker Assets Cache
+        id: webpacker-assets-cache
+        uses: actions/cache@v1
+        with:
+          path: public/packs-test
+          key: ${{ runner.os }}-webpacker-assets-${{ steps.extract_branch.outputs.branch }}
+          restore-keys: |
+            ${{ runner.os }}-webpacker-assets-
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      # - uses: actions/setup-node@v2
+      #   with:
+      #     node-version: "14"
+      #     cache: "yarn"
+
+      - name: Setup test database
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: "postgres://postgres:password@localhost:5432/twinedb_test"
+        run: |
+          bin/rake db:create
+          bin/rake db:test:prepare
+      # - name: Compile assets
+      #   env:
+      #     RAILS_ENV: test
+      #   run: |
+      #     yarn install --frozen-lockfile
+      #     bin/rails assets:precompile
+      - name: Run tests
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: "postgres://postgres:password@localhost:5432/twinedb_test"
+        run: bundle exec rspec
