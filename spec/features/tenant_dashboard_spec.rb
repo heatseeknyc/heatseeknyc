@@ -3,6 +3,9 @@ require 'spec_helper'
 feature "Tenant Dashboard" do
   scenario "viewing after successful login" do
     user = login_as_tenant
+    FactoryGirl.create(:reading, user: user, created_at: DateTime.new(2018, 12, 1))
+
+    visit user_path(user)
 
     expect(page).to have_content user.name
     expect(page).to have_content user.address
@@ -10,7 +13,7 @@ feature "Tenant Dashboard" do
     expect(page).to have_content user.current_temp
     expect(page).to have_content user.violation_count
 
-    expect(page).to have_link("PDF", href: pdf_download_path(user))
+    expect(page).to have_link("PDF 2018 - 2019")
     expect(page).to have_link("CSV", href: csv_download_path(user))
 
     # Tried testing rendered js chart using the poltergeist driver, but

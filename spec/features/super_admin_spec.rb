@@ -7,6 +7,7 @@ feature "Super User" do
   context "login" do
     before(:each) do
       FactoryGirl.create(:collaboration, user: advocate, collaborator: tenant)
+      FactoryGirl.create(:reading, user: tenant, created_at: DateTime.new(2018, 12, 1))
       login_as_super_user
     end
 
@@ -14,8 +15,8 @@ feature "Super User" do
       it "shows tenant name and export links" do
         visit user_path(tenant)
         expect(page).to have_content tenant.name
-        expect(page).to have_link("PDF", href: pdf_download_path(tenant))
         expect(page).to have_link("CSV", href: csv_download_path(tenant))
+        expect(page).to have_link("PDF 2018 - 2019")
       end
     end
 
