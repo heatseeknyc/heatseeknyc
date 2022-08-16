@@ -1,4 +1,4 @@
-class Reading < ActiveRecord::Base
+class Reading < ApplicationRecord
   belongs_to :twine
   belongs_to :sensor
   belongs_to :user

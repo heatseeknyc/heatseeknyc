@@ -1,4 +1,4 @@
-class Building < ActiveRecord::Base
+class Building < ApplicationRecord
   has_many :units
   has_many :tenants, class_name: User.name
 

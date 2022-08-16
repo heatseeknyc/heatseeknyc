@@ -21,7 +21,7 @@
         <div class="settings-form-fields" id="form-id">
           <br/>
           <%= form_for @user, url: create_user_path do |f| %>
-              <%= devise_error_messages! %>
+              <%= render "devise/shared/error_messages", resource: resource %>
 
               <dl>
                 <%= f.label :first_name %>:

@@ -14,7 +14,7 @@ feature "Giving Tuesday" do
     video_embed = "https://www.youtube.com/embed/15hh8EL13FM"
 
     visit giving_tuesday_path
-    expect(page).to have_xpath(xpath_for_image("giving_tuesday_banner.png"))
+    expect(page).to have_xpath(xpath_for_image("giving_tuesday_banner"))
     expect(page).to have_link("Donate Now", count: 2, href: nycharities_url)
     expect(page).to have_text("Winter is coming")
     expect(page).to have_text("#GivingTuesday")

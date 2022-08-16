@@ -62,7 +62,7 @@ def geocode_response
 end
 
 def geoclient_response
-  {address: {bbl: Faker::Number.number(10)}}.to_json
+  {address: {bbl: Faker::Number.number(digits: 10)}}.to_json
 end
 
 Spork.each_run do

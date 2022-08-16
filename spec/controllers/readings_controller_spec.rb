@@ -27,9 +27,10 @@ describe ReadingsController, type: :controller do
       end
 
       it "instantiates a ReadingsExporter using the provided query parameters" do
+        params = ActionController::Parameters.new("filter" => { "user_id" => "1"})
         expect(ReadingsExporter)
           .to receive(:new)
-          .with("filter" => { "user_id" => 1 }) { exporter }
+          .with(params) { exporter }
         get :index, format: :csv, readings: { filter: { user_id: 1 } }
       end
     end

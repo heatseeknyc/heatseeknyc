@@ -1,4 +1,4 @@
-class SensorCalibration < ActiveRecord::Base
+class SensorCalibration < ApplicationRecord
   belongs_to :sensor
   belongs_to :calibration
 end

@@ -1,4 +1,4 @@
-class Twine < ActiveRecord::Base
+class Twine < ApplicationRecord
   has_many :readings
   belongs_to :user
 

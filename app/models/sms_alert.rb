@@ -1,4 +1,4 @@
-class SmsAlert < ActiveRecord::Base
+class SmsAlert < ApplicationRecord
   ALERT_TYPES = ['high_temperature', 'low_temperature']
 
   belongs_to :user

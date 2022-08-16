@@ -1,4 +1,4 @@
-class Sensor < ActiveRecord::Base
+class Sensor < ApplicationRecord
   belongs_to :user
   has_many :readings
 

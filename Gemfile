@@ -9,7 +9,7 @@ gem 'airbrake'
 gem 'bootstrap-datepicker-rails'
 gem 'chartkick'
 gem 'coveralls', require: false
-gem 'devise', '~> 4.0.3'
+gem 'devise', '~> 4.8.1'
 gem 'responders', '~> 2.4.1'
 gem 'ffi', '~> 1.15.0'
 gem 'figaro'
@@ -46,6 +46,7 @@ group :test do
   gem 'vcr'
   gem 'webmock', '~> 2.3.2'
   gem 'pdf-inspector', require: 'pdf/inspector'
+  gem 'rails-controller-testing'
 end
 
 group :test, :development do
@@ -67,7 +68,7 @@ group :test, :development do
   gem 'selenium-webdriver'
   gem 'simplecov'
   gem 'travis'
-  gem 'spring' # keeps the rails process running for faster init times
+  gem 'spring', '~> 3.0.0' # keeps the rails process running for faster init times
   gem 'spring-commands-rspec'
   # gem 'sqlite3'
   #gem 'bullet' # detect n+1 errors
