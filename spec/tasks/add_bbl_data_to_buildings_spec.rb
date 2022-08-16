@@ -77,8 +77,8 @@ describe ScrubDataForBuildingsAndUsers do
           .to_return(body: bbl1).then
           .to_return(body: bbl2)
       ScrubDataForBuildingsAndUsers.exec(TIMEOUT)
-      expect(building1.reload.bbl).to eq JSON.parse(bbl1)["address"]["bbl"]
-      expect(building2.reload.bbl).to eq JSON.parse(bbl2)["address"]["bbl"]
+      expect(building1.reload.bbl).to eq JSON.parse(bbl1)["address"]["bbl"].to_s
+      expect(building2.reload.bbl).to eq JSON.parse(bbl2)["address"]["bbl"].to_s
     end
   end
 
@@ -103,7 +103,7 @@ describe ScrubDataForBuildingsAndUsers do
 
       expect { ScrubDataForBuildingsAndUsers.exec(TIMEOUT) }.not_to raise_error
       expect(building1.reload.bbl).to be_nil
-      expect(building2.reload.bbl).to eq JSON.parse(bbl2)["address"]["bbl"]
+      expect(building2.reload.bbl).to eq JSON.parse(bbl2)["address"]["bbl"].to_s
     end
   end
 end

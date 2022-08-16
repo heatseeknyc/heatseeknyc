@@ -47,7 +47,7 @@ class Building < ApplicationRecord
     begin
       payload = JSON.parse(response.body)["address"]
 
-      self.bbl = payload["bbl"].gsub(/\D/, '')
+      self.bbl = payload["bbl"].to_s.gsub(/\D/, '')
     rescue
     end
   end
