@@ -5,7 +5,8 @@
                as: resource_name,
                url: password_path(resource_name),
                html: { method: :post, class: "settings-form-fields" }) do |f| %>
-    <%= devise_error_messages! %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+    
 
     <dl>
       <%= f.label :email %>:

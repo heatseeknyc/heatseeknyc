@@ -2,7 +2,8 @@
   <h2>Sign up</h2>
 
   <%= form_for(resource, :as => resource_name, :url => users_path) do |f| %>
-    <%= devise_error_messages! %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+    
 
     <dl><%= f.label :first_name %>:
     <%= f.text_field :first_name, :autofocus => true, class: "form-control" %></dl>

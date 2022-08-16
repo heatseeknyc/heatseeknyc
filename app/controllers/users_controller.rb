@@ -116,7 +116,7 @@ class UsersController < ApplicationController
   end
 
   def download_csv
-    writer = CSVWriter.new(params[:id])
+    writer = CsvWriter.new(params[:id])
 
     file = writer.generate_csv
     send_data(file, filename: writer.filename, type: "text/csv")
