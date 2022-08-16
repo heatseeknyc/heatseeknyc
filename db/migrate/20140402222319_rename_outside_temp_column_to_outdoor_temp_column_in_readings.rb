@@ -1,4 +1,4 @@
-class RenameOutsideTempColumnToOutdoorTempColumnInReadings < ActiveRecord::Migration
+class RenameOutsideTempColumnToOutdoorTempColumnInReadings < ActiveRecord::Migration[4.2]
   def up
     rename_column :readings, :outside_temp, :outdoor_temp
   end

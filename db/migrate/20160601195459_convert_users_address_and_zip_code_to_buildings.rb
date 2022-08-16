@@ -1,4 +1,4 @@
-class ConvertUsersAddressAndZipCodeToBuildings < ActiveRecord::Migration
+class ConvertUsersAddressAndZipCodeToBuildings < ActiveRecord::Migration[4.2]
   def up
     User.where("address is not null and zip_code is not null").each do |user|
       match = Building.find_by(street_address: user.address.downcase,

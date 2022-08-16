@@ -1,4 +1,4 @@
-class CSVWriter
+class CsvWriter
 
   attr_reader :user
 

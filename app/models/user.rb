@@ -203,7 +203,6 @@ class User < ActiveRecord::Base
   def twine_name=(twine_name)
     return nil if twine_name == ""
     temp_twine = Twine.find_by(:name => twine_name)
-    temp_twine.user(id)
     update(twine: temp_twine)
   end
 
@@ -346,7 +345,7 @@ class User < ActiveRecord::Base
   end
 
   def available_pdf_reports
-    ActiveRecord::Base.connection.execute(
+    query = ActiveRecord::Base.connection.execute(
       <<-SQL
         SELECT
           CASE WHEN (EXTRACT(month from created_at)) > 9
@@ -361,7 +360,8 @@ class User < ActiveRecord::Base
                ELSE extract(year from created_at)
             END;
       SQL
-    ).to_a.map { |r| r["date_part"].to_i }.map do |year|
+    )
+    query.to_a.map { |r| r["extract"].to_i }.map do |year|
       [year-1, year]
     end
   end

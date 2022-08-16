@@ -13,10 +13,11 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    [:first_name, :last_name, :address, :email, :zip_code].each do |param|
-      devise_parameter_sanitizer.for(:sign_up) << param
-      devise_parameter_sanitizer.for(:account_update) << param
-    end
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
+    
+    keys = [:first_name, :last_name, :address, :email, :zip_code]
+    devise_parameter_sanitizer.permit(:sign_up, keys: keys)
+    devise_parameter_sanitizer.permit(:account_update, keys: keys)
   end
 
   def require_basic_auth?

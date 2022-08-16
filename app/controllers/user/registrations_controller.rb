@@ -44,27 +44,9 @@ class User::RegistrationsController < Devise::RegistrationsController
   # end
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:account_update) do |p|
-      p.permit(
-        :first_name,
-        :last_name,
-        :address,
-        :sensor_codes_string,
-        :email,
-        :zip_code,
-        :permissions,
-        :twine_name,
-        :phone_number,
-        :current_password,
-        :password,
-        :password_confirmation,
-        :apartment,
-        :sms_alert_number
-      )
-    end
-
-    devise_parameter_sanitizer.for(:sign_up) do |p|
-      p.permit(
+    devise_parameter_sanitizer.permit(
+      :sign_up, 
+      keys: [
         :first_name,
         :last_name,
         :address,
@@ -78,8 +60,7 @@ class User::RegistrationsController < Devise::RegistrationsController
         :password_confirmation,
         :apartment,
         :sms_alert_number
-      )
-    end
+      ])
   end
 
   protected

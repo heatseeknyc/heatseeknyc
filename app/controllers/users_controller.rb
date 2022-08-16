@@ -43,7 +43,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    stripped_params = user_params.inject({}) do |params, (key, value)|
+    stripped_params = user_params.to_unsafe_h.inject({}) do |params, (key, value)|
       params[key.try(:to_sym) || key] = value.try(:strip) || value
       params
     end

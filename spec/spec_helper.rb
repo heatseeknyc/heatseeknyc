@@ -1,7 +1,7 @@
 ENV["RAILS_ENV"] ||= "test"
 
-require "coveralls"
-Coveralls.wear!
+#require "coveralls"
+#Coveralls.wear!
 
 require "rubygems"
 require "spork"
@@ -9,7 +9,7 @@ require "simplecov"
 require "timecop"
 require "webmock/rspec"
 
-SimpleCov.start
+#SimpleCov.start
 Timecop.travel(DateTime.parse("2015-03-01 00:00:00 -0500"))
 
 Spork.prefork do
@@ -62,7 +62,7 @@ def geocode_response
 end
 
 def geoclient_response
-  {address: {bbl: Faker::Number.number(10)}}.to_json
+  {address: {bbl: Faker::Number.number(digits: 10)}}.to_json
 end
 
 Spork.each_run do

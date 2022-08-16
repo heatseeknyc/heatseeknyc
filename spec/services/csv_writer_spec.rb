@@ -1,9 +1,9 @@
 require 'spec_helper'
 require 'csv_writer'
 
-describe CSVWriter do
+describe CsvWriter do
   let(:user) { create(:user) }
-  let(:writer) { CSVWriter.new(user.id) }
+  let(:writer) { CsvWriter.new(user.id) }
 
   describe "#generate_csv" do
     it "generates a csv for a user with readings" do

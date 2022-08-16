@@ -1,4 +1,4 @@
-class CreateUnits < ActiveRecord::Migration
+class CreateUnits < ActiveRecord::Migration[4.2]
   def change
     create_table :units do |t|
       t.integer :building_id
