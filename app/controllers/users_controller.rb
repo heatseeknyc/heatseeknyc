@@ -43,12 +43,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    stripped_params = user_params.inject({}) do |params, (key, value)|
-      params[key.try(:to_sym) || key] = value.try(:strip) || value
-      params
-    end
-
-    @user = User.new_with_building(stripped_params)
+    @user = User.new_with_building(user_params)
 
     if @user.valid?
       @user.save
