@@ -203,7 +203,7 @@ class User < ApplicationRecord
   def twine_name=(twine_name)
     return nil if twine_name == ""
     temp_twine = Twine.find_by(:name => twine_name)
-    temp_twine.user(id)
+    temp_twine.reload_user
     update(twine: temp_twine)
   end
 

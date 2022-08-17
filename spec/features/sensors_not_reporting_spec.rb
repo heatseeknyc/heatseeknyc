@@ -35,8 +35,8 @@ describe "sensors not reporting spec", type: :feature do
   end
 
   def create_sensor(nick_name, time)
-    sensor = FactoryGirl.create(:sensor, :with_user, nick_name: nick_name)
-    sensor.readings << FactoryGirl.create(:reading, created_at: time)
+    sensor = FactoryBot.create(:sensor, :with_user, nick_name: nick_name)
+    sensor.readings << FactoryBot.create(:reading, created_at: time)
     sensor
   end
 end

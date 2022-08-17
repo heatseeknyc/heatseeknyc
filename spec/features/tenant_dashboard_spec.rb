@@ -3,7 +3,7 @@ require 'spec_helper'
 feature "Tenant Dashboard" do
   scenario "viewing after successful login" do
     user = login_as_tenant
-    FactoryGirl.create(:reading, user: user, created_at: DateTime.new(2018, 12, 1))
+    FactoryBot.create(:reading, user: user, created_at: DateTime.new(2018, 12, 1))
 
     visit user_path(user)
 

@@ -39,7 +39,7 @@ describe "creating a sensor", type: :feature do
   end
 
   it "displays sensor after updating" do
-    sensor = FactoryGirl.create(:sensor)
+    sensor = FactoryBot.create(:sensor)
 
     visit edit_sensor_path(id: sensor.id)
     select "Jones, Rebecca <rebecca@email.com>", from: "sensor_user_id"

@@ -1,6 +1,6 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :wunderground_history do
     observations { build(:observation_collection) }
     time { Time.zone.parse('March 2, 2015 14:00:00 -04:00') }

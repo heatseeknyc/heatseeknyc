@@ -1,13 +1,13 @@
 require "spec_helper"
 
 feature "Super User" do
-  let(:tenant) { FactoryGirl.create(:user) }
-  let(:advocate) { FactoryGirl.create(:user, :advocate) }
+  let(:tenant) { FactoryBot.create(:user) }
+  let(:advocate) { FactoryBot.create(:user, :advocate) }
 
   context "login" do
     before(:each) do
-      FactoryGirl.create(:collaboration, user: advocate, collaborator: tenant)
-      FactoryGirl.create(:reading, user: tenant, created_at: DateTime.new(2018, 12, 1))
+      FactoryBot.create(:collaboration, user: advocate, collaborator: tenant)
+      FactoryBot.create(:reading, user: tenant, created_at: DateTime.new(2018, 12, 1))
       login_as_super_user
     end
 

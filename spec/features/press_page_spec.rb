@@ -8,7 +8,7 @@ feature "Press" do
 
   scenario "viewing article" do
     5.times do
-      FactoryGirl.create(:article)
+      FactoryBot.create(:article)
     end
 
     visit press_path

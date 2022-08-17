@@ -56,7 +56,7 @@ group :test, :development do
   gem 'capybara', '~> 2.13'
   gem 'database_cleaner'
   gem 'dotenv-rails', '~> 2.7.1'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails', '~> 4.11.1'
   gem 'faker'
   gem 'guard-rspec', '4.7.3'
   gem 'guard-spork'

@@ -1,6 +1,6 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :observation do
     sequence(:hour) { |n| (n % 24).to_s.rjust(2,'0') }
     sequence(:temperature) { |n| (n + 30) % 80 }

@@ -18,14 +18,14 @@ describe UsersController, type: :controller do
 
       context "and they visit their own page" do
         it "shows their graph page" do
-          get :show, id: tenant.id
+          get :show, params: { id: tenant.id }
           expect(response.status).to eq(200)
         end
       end
 
       context "and they visit another user" do
         it "shows their graph page" do
-          get :show, id: stranger.id
+          get :show, params: { id: stranger.id }
           expect(response).to redirect_to(user_path(tenant))
         end
       end
@@ -40,7 +40,7 @@ describe UsersController, type: :controller do
 
       context "and they visit a tenant with whom they collaborate" do
         it "shows the tenant's show page" do
-          get :show, id: tenant.id
+          get :show, params: { id: tenant.id }
           expect(response.status).to eq(200)
           expect(response).to render_template "show"
         end
@@ -48,7 +48,7 @@ describe UsersController, type: :controller do
 
       context "and they visit a tenant with whom they do not collaborate" do
         it "redirects to their own page" do
-          get :show, id: stranger.id
+          get :show, params: { id: stranger.id }
           expect(response).to redirect_to(user_path(advocate))
         end
       end
@@ -61,7 +61,7 @@ describe UsersController, type: :controller do
 
       context "and they visit their page" do
         it "shows their page" do
-          get :show, id: admin.id
+          get :show, params: { id: admin.id }
           expect(response.status).to eq(200)
           expect(response).to render_template "permissions_show"
         end
@@ -69,7 +69,7 @@ describe UsersController, type: :controller do
 
       context "and they visit a tenant's page" do
         it "shows the tenant's show page" do
-          get :show, id: tenant.id
+          get :show, params: { id: tenant.id }
           expect(response.status).to eq(200)
           expect(response).to render_template "show"
         end
@@ -77,7 +77,7 @@ describe UsersController, type: :controller do
 
       context "and they visit an advocate's page" do
         it "shows the advocate page" do
-          get :show, id: advocate.id
+          get :show, params: { id: advocate.id }
           expect(response.status).to eq(200)
           expect(response).to render_template "permissions_show"
         end
@@ -85,7 +85,7 @@ describe UsersController, type: :controller do
 
       context "and they visit an admin's page" do
         it "redirects to the original admin's page" do
-          get :show, id: stranger_admin.id
+          get :show, params: { id: stranger_admin.id }
           expect(response).to redirect_to(user_path(admin))
         end
       end
@@ -98,7 +98,7 @@ describe UsersController, type: :controller do
 
       context "and they visit their page" do
         it "shows their page" do
-          get :show, id: team_member.id
+          get :show, params: { id: team_member.id }
           expect(response.status).to eq(200)
           expect(response).to render_template "permissions_show"
         end
@@ -106,7 +106,7 @@ describe UsersController, type: :controller do
 
       context "and they visit a tenant's page" do
         it "shows the tenant's show page" do
-          get :show, id: tenant.id
+          get :show, params: { id: tenant.id }
           expect(response.status).to eq(200)
           expect(response).to render_template "show"
         end
@@ -114,7 +114,7 @@ describe UsersController, type: :controller do
 
       context "and they visit an advocate's page" do
         it "shows the advocate page" do
-          get :show, id: advocate.id
+          get :show, params: { id: advocate.id }
           expect(response.status).to eq(200)
           expect(response).to render_template "permissions_show"
         end
@@ -122,7 +122,7 @@ describe UsersController, type: :controller do
 
       context "and they visit an admin's page" do
         it "redirects to their page" do
-          get :show, id: admin.id
+          get :show, params: { id: admin.id }
           expect(response).to redirect_to(user_path(team_member))
         end
       end
@@ -135,7 +135,7 @@ describe UsersController, type: :controller do
 
       context "and they visit their page" do
         it "shows their page" do
-          get :show, id: super_user.id
+          get :show, params: { id: super_user.id }
           expect(response.status).to eq(200)
           expect(response).to render_template "permissions_show"
         end
@@ -143,7 +143,7 @@ describe UsersController, type: :controller do
 
       context "and they visit a tenant's page" do
         it "shows the tenant's show page" do
-          get :show, id: tenant.id
+          get :show, params: { id: tenant.id }
           expect(response.status).to eq(200)
           expect(response).to render_template "show"
         end
@@ -151,7 +151,7 @@ describe UsersController, type: :controller do
 
       context "and they visit an advocate's page" do
         it "shows the advocate's page" do
-          get :show, id: advocate.id
+          get :show, params: { id: advocate.id }
           expect(response.status).to eq(200)
           expect(response).to render_template "permissions_show"
         end
@@ -159,7 +159,7 @@ describe UsersController, type: :controller do
 
       context "and they visit an admin's page" do
         it "shows the admin's page" do
-          get :show, id: admin.id
+          get :show, params: { id: admin.id }
           expect(response.status).to eq(200)
           expect(response).to render_template "permissions_show"
         end
@@ -167,7 +167,7 @@ describe UsersController, type: :controller do
 
       context "and they visit an team members's page" do
         it "shows the admin's page" do
-          get :show, id: team_member.id
+          get :show, params: { id: team_member.id }
           expect(response.status).to eq(200)
           expect(response).to render_template "permissions_show"
         end
@@ -192,21 +192,21 @@ describe UsersController, type: :controller do
 
     it "instantiates a csv writer" do
       expect(CSVWriter).to receive(:new).with("1").and_return csv_writer
-      get :download_csv, id: 1
+      get :download_csv, params: { id: 1 }
     end
 
     it "sends the data" do
       expect(csv_writer).to receive(:filename).and_return filename
       expect(controller).to receive(:send_data).
         with(file, filename: filename, type: "text/csv") { controller.render :nothing => true }
-      get :download_csv, id: 1
+      get :download_csv, params: { id: 1 }
     end
   end
 
   describe "GET /users/:id/edit" do
     it "should render the edit view for an admin user" do
       sign_in admin
-      get :edit, id: tenant
+      get :edit, params: { id: tenant }
 
       expect(response.status).to eq(200)
       expect(response).to render_template("edit")
@@ -214,12 +214,12 @@ describe UsersController, type: :controller do
 
     it "should redirect a non-admin user to the root path" do
       sign_in tenant
-      get :edit, id: tenant
+      get :edit, params: { id: tenant }
 
       expect(response).to redirect_to(root_path)
 
       sign_in advocate
-      get :edit, id: tenant
+      get :edit, params: { id: tenant }
 
       expect(response).to redirect_to(root_path)
     end
@@ -231,7 +231,7 @@ describe UsersController, type: :controller do
     it "should update the resource if the request comes from an admin user" do
       admin.collaborations.create(collaborator: tenant)
       sign_in admin
-      put :update, params
+      put :update, params: params
 
       expect(response).to redirect_to user_path(id: tenant.id)
       expect(tenant.reload.first_name).to eq("Updated")
@@ -239,12 +239,12 @@ describe UsersController, type: :controller do
 
     it "should redirect a request from a non-admin user" do
       sign_in tenant
-      put :update, params
+      put :update, params: params
 
       expect(response).to redirect_to(root_path)
 
       sign_in advocate
-      put :update, params
+      put :update, params: params
 
       expect(response).to redirect_to(root_path)
     end
@@ -253,7 +253,7 @@ describe UsersController, type: :controller do
       it "restricts setting permissions level higher than ones own" do
         sign_in admin
         params[:user][:permissions] = User::PERMISSIONS[:team_member]
-        put :update, params
+        put :update, params: params
         expect(response.status).to eq(401)
         expect(response.body).to eq("Unauthorized")
       end
@@ -261,7 +261,7 @@ describe UsersController, type: :controller do
       it "permits setting the same permission level as the admin user's" do
         sign_in admin
         params[:user][:permissions] = User::PERMISSIONS[:admin]
-        put :update, params
+        put :update, params: params
         expect(response).to redirect_to user_path(tenant)
         expect(tenant.reload.permissions).to eq(User::PERMISSIONS[:admin])
       end
@@ -300,13 +300,13 @@ describe UsersController, type: :controller do
       before { sign_in user }
 
       it "redirects to users path on update success" do
-        patch :update_password, user: password_params
+        patch :update_password, params: { user: password_params }
         expect(response).to redirect_to root_path
       end
 
       it "re-renders the edit form on update failure" do
         password_params[:current_password] = "bad password"
-        patch :update_password, user: password_params
+        patch :update_password, params: { user: password_params }
         expect(response.status).to eq(401)
         expect(response).to render_template("edit_password")
       end
@@ -330,7 +330,7 @@ describe UsersController, type: :controller do
 
     it "redirects to users index on create success", :vcr do
       new_user = build(:user)
-      post :create, user: new_user.attributes.merge(password: 'password', password_confirmation: 'password')
+      post :create, params: { user: new_user.attributes.merge(password: 'password', password_confirmation: 'password') }
 
       expect(response).to redirect_to(users_path)
     end
@@ -338,7 +338,7 @@ describe UsersController, type: :controller do
     it "creates user and associates with existing building", :vcr do
       building = create(:building)
       new_user = build(:user, address: building.street_address, zip_code: building.zip_code)
-      post :create, user: new_user.attributes.merge(password: 'password', password_confirmation: 'password')
+      post :create, params: { user: new_user.attributes.merge(password: 'password', password_confirmation: 'password') }
 
       user = User.last
       expect(user.first_name).to eq(new_user.first_name)
@@ -348,7 +348,7 @@ describe UsersController, type: :controller do
 
     it "creates user and trims whitespace from user input" do
       new_user = build(:user, address: " 123 Fake St ", first_name: "Kevin  ", last_name: "Tenant  ")
-      post :create, user: new_user.attributes.merge(password: 'password', password_confirmation: 'password')
+      post :create, params: { user: new_user.attributes.merge(password: 'password', password_confirmation: 'password') }
 
       user = User.last
       expect(user.first_name).to eq("Kevin")
@@ -360,10 +360,10 @@ describe UsersController, type: :controller do
       context "set_location_data param is missing or false" do
         it "associates the user with a new building but does not geolocate", :vcr do
           new_user = build(:user)
-          post :create, user: new_user.attributes.merge(
+          post :create, params: { user: new_user.attributes.merge(
               password: 'password',
               password_confirmation: 'password'
-          )
+          )}
 
           user = User.last
           expect(user.first_name).to eq(new_user.first_name)
@@ -376,7 +376,7 @@ describe UsersController, type: :controller do
 
       context "set_location_data param is true" do
         it "associates the user with a new building but does not geolocate", :vcr do
-          post :create, user: {
+          post :create, params: { user: {
             first_name: 'Jane',
             last_name: 'Doe',
             email: 'jane@heatseeknyc.com',
@@ -385,7 +385,7 @@ describe UsersController, type: :controller do
             address: '40 Broad St',
             zip_code: '10004',
             set_location_data: 'true'
-          }
+          }}
 
           user = User.last
           expect(user.first_name).to eq('Jane')

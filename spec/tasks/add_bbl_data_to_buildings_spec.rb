@@ -7,8 +7,8 @@ describe ScrubDataForBuildingsAndUsers do
 
   let!(:bbl1) { geoclient_response }
   let!(:bbl2) { geoclient_response }
-  let!(:building1) { FactoryGirl.build(:building, {street_address: "212-13 N 52nd St", zip_code: "10001"}) }
-  let!(:building2) { FactoryGirl.build(:building, {street_address: "12 St John's Pl", zip_code: "10001"}) }
+  let!(:building1) { FactoryBot.build(:building, {street_address: "212-13 N 52nd St", zip_code: "10001"}) }
+  let!(:building2) { FactoryBot.build(:building, {street_address: "12 St John's Pl", zip_code: "10001"}) }
 
   before :all do
     @original_stdout = $stdout
@@ -28,7 +28,7 @@ describe ScrubDataForBuildingsAndUsers do
   context "when everything is fine" do
     let!(:access_params) { {app_id: ENV["GEOCLIENT_APP_ID"], app_key: ENV["GEOCLIENT_APP_KEY"]} }
     let!(:building_not_in_new_york_city) do
-      FactoryGirl.create(:building,
+      FactoryBot.create(:building,
         {
           street_address: "885 S Garrison St",
           zip_code:       "80226",

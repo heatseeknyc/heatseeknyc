@@ -29,8 +29,8 @@ Spork.prefork do
   ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
 
   RSpec.configure do |config|
-    config.include FactoryGirl::Syntax::Methods
-    config.include Devise::TestHelpers, type: :controller
+    config.include FactoryBot::Syntax::Methods
+    config.include Devise::Test::ControllerHelpers, type: :controller
     config.include Requests::JsonHelpers, type: :request
 
     config.filter_run focus: true
@@ -66,5 +66,5 @@ def geoclient_response
 end
 
 Spork.each_run do
-  FactoryGirl.reload
+  FactoryBot.reload
 end
