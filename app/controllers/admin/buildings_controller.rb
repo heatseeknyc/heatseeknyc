@@ -24,7 +24,7 @@ module Admin
     end
 
     def update
-      if @building.update_attributes(building_params)
+      if @building.update(building_params)
         @building.set_location_data
         @building.save
         flash[:notice] = "Successfully updated."
