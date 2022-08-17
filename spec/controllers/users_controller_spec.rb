@@ -187,7 +187,7 @@ describe UsersController, type: :controller do
       allow(csv_writer).to receive(:generate_csv).and_return file
       allow(csv_writer).to receive(:filename)
       allow(controller).to receive(:send_data).
-        with(file, filename: csv_writer.filename, type: "text/csv") { controller.render :nothing => true }
+        with(file, filename: csv_writer.filename, type: "text/csv") { controller.render :body => nil }
     end
 
     it "instantiates a csv writer" do
@@ -198,7 +198,7 @@ describe UsersController, type: :controller do
     it "sends the data" do
       expect(csv_writer).to receive(:filename).and_return filename
       expect(controller).to receive(:send_data).
-        with(file, filename: filename, type: "text/csv") { controller.render :nothing => true }
+        with(file, filename: filename, type: "text/csv") { controller.render :body => nil }
       get :download_csv, params: { id: 1 }
     end
   end

@@ -2,9 +2,9 @@
 
 FactoryBot.define do
   factory :calibration do
-    offset -1
+    offset { -1 }
     start_at { 1.year.ago }
     end_at { 1.year.from_now }
-    name 'cell'
+    name { 'cell' }
   end
 end

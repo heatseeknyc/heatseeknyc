@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :building do
     street_address { Faker::Address.street_address }
-    zip_code "10004"
+    zip_code { "10004" }
   end
 end

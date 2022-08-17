@@ -2,9 +2,9 @@
 
 FactoryBot.define do
   factory :reading do
-    temp 68
+    temp { 68 }
     original_temp { temp }
-    outdoor_temp 40
+    outdoor_temp { 40 }
     association :user
     association :twine
 
@@ -17,8 +17,8 @@ FactoryBot.define do
     end
 
     trait :violation do
-      outdoor_temp 30
-      temp 30
+      outdoor_temp { 30 }
+      temp { 30 }
     end
   end
 end

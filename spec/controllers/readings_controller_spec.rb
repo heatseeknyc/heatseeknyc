@@ -10,7 +10,7 @@ describe ReadingsController, type: :controller do
 
     it "returns a 401 error for unauthorized users" do
       sign_in create(:advocate)
-      get :index, format: :csv
+      get :index, params: { format: :csv }
       expect(response.status).to eq(401)
     end
 
@@ -22,8 +22,8 @@ describe ReadingsController, type: :controller do
           .to receive(:send_data)
           .with("#{ReadingsExporter::HEADERS.join(',')}\n",
                 filename: "sensor_readings.csv",
-                type: "text/csv; charset=utf-8; header=present") { controller.render nothing: true }
-        get :index, format: :csv
+                type: "text/csv; charset=utf-8; header=present") { controller.render body: nil }
+        get :index, params: { format: :csv }
       end
 
       it "instantiates a ReadingsExporter using the provided query parameters" do
@@ -31,7 +31,7 @@ describe ReadingsController, type: :controller do
         expect(ReadingsExporter)
           .to receive(:new)
           .with(params) { exporter }
-        get :index, format: :csv, readings: { filter: { user_id: 1 } }
+        get :index, params: { format: :csv, readings: { filter: { user_id: 1 } } }
       end
     end
   end
