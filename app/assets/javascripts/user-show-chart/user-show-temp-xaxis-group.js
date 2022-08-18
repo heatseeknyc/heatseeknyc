@@ -1,16 +1,14 @@
 function UserShowTempChartXAxisGroup(svgObj, optionsObj) {
-  console.log("x axis options")
-  console.log(svgObj)
-  console.log(optionsObj)
   this.data = svgObj.data;
   this.svg = svgObj.svg;
   this.margin = optionsObj.margin;
   this.x = svgObj.x;
   this.startDate = svgObj.startDate;
   this.endDate = svgObj.endDate;
+  this.length_days = optionsObj.length_days;
   this.height = optionsObj.height;
   this.xAxis = this.setXAxis();
-  this.strokeWidth = svgObj.width / 168;
+  this.strokeWidth = svgObj.width / (this.length_days*24);
 }
 
 UserShowTempChartXAxisGroup.prototype.setXAxis = function(){
@@ -26,7 +24,7 @@ UserShowTempChartXAxisGroup.prototype.addLineStylingToXTicks = function(){
       $textEl;
   $($lines[0]).attr({ 'stroke-width': this.strokeWidth * 1.9 });
 
-  for(var i = 1; i <= 168; i++){
+  for(var i = 1; i <= (this.length_days*24); i++){
     date = moment(this.startDate).add(i, 'hours');
     //Draw shading to indicate night hours
     if(date.hours() < 7 || date.hours() > 21){

@@ -1,5 +1,4 @@
 function UserShowTempChartDrawer(chartOptions){
-  console.log(chartOptions);
   this.chartOptions = chartOptions;
   this.violations = 0;
   this.url = this.setUrl();
@@ -39,17 +38,15 @@ UserShowTempChartDrawer.prototype.addViolationCountToLegend = function() {
 };
 
 
-//TODO: Mark Here
 UserShowTempChartDrawer.prototype.selectDataBasedOnScreenSize = function(){
   if (window.innerWidth < 450 && this.response.length > 45) {
-    return this.response.slice(this.response.length - 46);
+    this.chartOptions.length_days = 1
   }else if(window.innerWidth < 720 && this.response.length > 90){
-    return this.response.slice(this.response.length - 91);
+    this.chartOptions.length_days = 3
   }else if(window.innerWidth < 1080 && this.response.length > 135){
-    return this.response.slice(this.response.length - 136);
-  } else {
-    return this.response;
+    this.chartOptions.length_days = 5
   }
+  return this.response;
 };
 
 UserShowTempChartDrawer.prototype.createAndDrawChartSvg = function(){

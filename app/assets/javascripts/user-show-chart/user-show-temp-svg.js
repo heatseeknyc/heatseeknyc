@@ -17,9 +17,8 @@ function UserShowTempChartSvg(dataObj, violationCount, optionsObj) {
 
 //TODO: input/outpyt
 UserShowTempChartSvg.prototype.setX = function(){
-  this.endDate = moment().startOf('hour')//.subtract(this.end_days_ago, 'day');
-  this.startDate = moment(this.endDate).subtract(1, 'week');
-  //this.startDate = moment(this.endDate).subtract(this.length_days, 'day');
+  this.endDate = moment().startOf('hour').subtract(this.end_days_ago, 'day');
+  this.startDate = moment(this.endDate).subtract(this.length_days, 'day');
 
   return d3.time.scale()
     .range([0, this.width - this.margin * 2])
