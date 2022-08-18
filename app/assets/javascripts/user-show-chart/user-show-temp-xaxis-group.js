@@ -1,4 +1,7 @@
 function UserShowTempChartXAxisGroup(svgObj, optionsObj) {
+  console.log("x axis options")
+  console.log(svgObj)
+  console.log(optionsObj)
   this.data = svgObj.data;
   this.svg = svgObj.svg;
   this.margin = optionsObj.margin;
@@ -14,7 +17,7 @@ UserShowTempChartXAxisGroup.prototype.setXAxis = function(){
   return d3.svg.axis().scale(this.x)
     .tickSize(this.height - this.margin * 2)
     .tickPadding(0)
-    .ticks(moment.duration(1, 'week').asHours());
+    .ticks(this.endDate.diff(this.startDate, 'hours'));
 };
 
 UserShowTempChartXAxisGroup.prototype.addLineStylingToXTicks = function(){
@@ -25,6 +28,7 @@ UserShowTempChartXAxisGroup.prototype.addLineStylingToXTicks = function(){
 
   for(var i = 1; i <= 168; i++){
     date = moment(this.startDate).add(i, 'hours');
+    //Draw shading to indicate night hours
     if(date.hours() < 7 || date.hours() > 21){
       $($lines[i]).attr(
         { 'stroke-width': this.strokeWidth, 'stroke': '#90ABB0' }

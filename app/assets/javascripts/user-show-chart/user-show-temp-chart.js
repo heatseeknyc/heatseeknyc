@@ -1,4 +1,5 @@
 function UserShowTempChartDrawer(chartOptions){
+  console.log(chartOptions);
   this.chartOptions = chartOptions;
   this.violations = 0;
   this.url = this.setUrl();
@@ -37,6 +38,8 @@ UserShowTempChartDrawer.prototype.addViolationCountToLegend = function() {
     .text().replace(/\d+/, this.violations));
 };
 
+
+//TODO: Mark Here
 UserShowTempChartDrawer.prototype.selectDataBasedOnScreenSize = function(){
   if (window.innerWidth < 450 && this.response.length > 45) {
     return this.response.slice(this.response.length - 46);
@@ -80,6 +83,7 @@ UserShowTempChartDrawer.prototype.updateTempForLiveUpdate = function(response){
 
 UserShowTempChartDrawer.prototype.drawChart = function() {
   var self = this;
+  console.log(this.url)
   $.getJSON(this.url + ".json", function(response){
     self.response = self.fixData(response);
     self.drawChartOnWindowResize();

@@ -77,6 +77,7 @@ class UsersController < ApplicationController
         end
       end
       f.json do
+        #There are 168 hours in a week
         @readings = @user.get_latest_readings(168)
         render json: @readings
       end

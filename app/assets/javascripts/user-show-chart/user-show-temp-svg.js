@@ -3,16 +3,23 @@ function UserShowTempChartSvg(dataObj, violationCount, optionsObj) {
   this.width = window.innerWidth;
   this.height = optionsObj.height;
   this.margin = optionsObj.margin;
+  //How many days we want graph to span
+  this.length_days = optionsObj.length_days;
+  //How many days ago the end day was
+  this.end_days_ago = optionsObj.end_days_ago;
   this.optionsObj = optionsObj;
   this.violations = violationCount;
+  //TODO: input/outpyt
   this.x = this.setX();
   this.y = this.setY();
   this.svg = this.setSvg();
 }
 
+//TODO: input/outpyt
 UserShowTempChartSvg.prototype.setX = function(){
-  this.endDate = moment().startOf('hour');
+  this.endDate = moment().startOf('hour')//.subtract(this.end_days_ago, 'day');
   this.startDate = moment(this.endDate).subtract(1, 'week');
+  //this.startDate = moment(this.endDate).subtract(this.length_days, 'day');
 
   return d3.time.scale()
     .range([0, this.width - this.margin * 2])
