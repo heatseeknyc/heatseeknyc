@@ -59,13 +59,15 @@ UserShowTempChartDrawer.prototype.createAndDrawChartSvg = function(){
 
 UserShowTempChartDrawer.prototype.setForwardBackButtons = function(){
   let that = this
-  $('#back').on('click', function() {
+  $('#d3-back-button').on('click', function() {
     that.chartOptions.end_days_ago = that.chartOptions.end_days_ago + that.chartOptions.length_days;
+    that.violations = 0;
     that.drawChart();
   });
-  $('#forward').on('click', function() {
+  $('#d3-forward-button').on('click', function() {
     let diff = that.chartOptions.end_days_ago - that.chartOptions.length_days;
     that.chartOptions.end_days_ago = diff > 0 ? diff : 0
+    that.violations = 0;
     that.drawChart();
   });
 }
