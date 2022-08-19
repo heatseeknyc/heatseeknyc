@@ -4,6 +4,7 @@ function UserShowTempChartDrawer(chartOptions){
   this.url = this.setUrl();
   this.response = null;
   this.chart = null;
+  this.setForwardBackButtons();
 }
 
 UserShowTempChartDrawer.prototype.setUrl = function(){
@@ -56,6 +57,19 @@ UserShowTempChartDrawer.prototype.createAndDrawChartSvg = function(){
   this.chart.addChartElements();
 };
 
+UserShowTempChartDrawer.prototype.setForwardBackButtons = function(){
+  let that = this
+  $('#back').on('click', function() {
+    that.chartOptions.end_days_ago = that.chartOptions.end_days_ago + that.chartOptions.length_days;
+    that.drawChart();
+  });
+  $('#forward').on('click', function() {
+    let diff = that.chartOptions.end_days_ago - that.chartOptions.length_days;
+    that.chartOptions.end_days_ago = diff > 0 ? diff : 0
+    that.drawChart();
+  });
+}
+
 UserShowTempChartDrawer.prototype.drawChartOnWindowResize = function(){
   var resizeTimer = 0,
       self = this;
@@ -80,8 +94,9 @@ UserShowTempChartDrawer.prototype.updateTempForLiveUpdate = function(response){
 
 UserShowTempChartDrawer.prototype.drawChart = function() {
   var self = this;
-  console.log(this.url)
-  $.getJSON(this.url + ".json", function(response){
+  e = this.chartOptions.end_days_ago
+  l = this.chartOptions.length_days
+  $.getJSON(this.url + ".json?end_days_ago="+e+"&length_days="+l, function(response){
     self.response = self.fixData(response);
     self.drawChartOnWindowResize();
     self.updateTempForLiveUpdate(response);

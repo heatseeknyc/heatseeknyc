@@ -78,7 +78,11 @@ class UsersController < ApplicationController
       end
       f.json do
         #There are 168 hours in a week
-        @readings = @user.get_latest_readings(168)
+        length_days = params[:length_days].to_i || 7
+        length_hours = (length_days )  * 24
+        end_days_ago = params[:end_days_ago].to_i || 0
+        end_hours_ago = end_days_ago * 24
+        @readings = @user.get_latest_readings(length_hours, end_hours_ago)
         render json: @readings
       end
     end
