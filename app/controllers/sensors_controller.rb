@@ -70,6 +70,7 @@ class SensorsController < ApplicationController
     @sensors = Sensor.joins(:user)
                 .joins(:readings)
                 .group("sensors.id")
+                .where("users.id = readings.user_id")
                 .select("sensors.*, MAX(readings.created_at) AS last_reading_date")
                 .having("MAX(readings.created_at) > ?", 6.months.ago)
                 .having("MAX(readings.created_at) <= ?", 6.hours.ago)
