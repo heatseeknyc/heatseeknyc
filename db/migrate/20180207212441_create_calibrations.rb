@@ -1,4 +1,4 @@
-class CreateCalibrations < ActiveRecord::Migration
+class CreateCalibrations < ActiveRecord::Migration[4.2]
   def up
     add_column(:readings, :original_temp, :integer)
 
