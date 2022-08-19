@@ -6,6 +6,13 @@
 
 #chart-and-legend {
 
+  #d3-back-button, #d3-forward-button {
+    background: transparent;
+    border: 2px solid $theme-blue-darken-2;
+    color: $theme-black;
+    padding: 2px 5px;
+  }
+
   #d3-chart {
     margin: 0;
 

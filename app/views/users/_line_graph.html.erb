@@ -1,6 +1,4 @@
 <div id="chart-and-legend">
-  <div id="d3-back-button">Back</div>
-  <div id="d3-forward-button">Forward</div>
   <div id="d3-chart">
   </div>
   <span id="legend">
@@ -15,6 +13,10 @@
     </span>
     <span class="pull-left">
       <%= image_tag 'tenantPage_chartKey_night.svg' %> Night (10pm-6am)
+    </span>
+    <span class="pull-left" id="btn-container">
+      <button id="d3-back-button" class="btn">Go Back</button>
+      <button id="d3-forward-button" class="btn">Go Forward</button>
     </span>
     <span class="pull-right" id="violations">
       <span>0 Violations</span>
