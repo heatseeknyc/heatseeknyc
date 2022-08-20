@@ -364,6 +364,14 @@ class User < ApplicationRecord
     self.collaborations.find_by(collaborator: user)
   end
 
+  #emails of tenants added within 24 hrs for advocate
+  def get_recent_tenant_emails
+    self.collaborations
+      .where('collaborations.created_at > ?', 1.day.ago)
+      .joins(:collaborator).select('users.email as email')
+      .map(&:email)
+  end
+
   def available_pdf_reports
     ActiveRecord::Base.connection.execute(
       <<-SQL

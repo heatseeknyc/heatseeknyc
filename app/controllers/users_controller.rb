@@ -176,6 +176,18 @@ class UsersController < ApplicationController
     )
   end
 
+  def notify_advocate
+    @user = User.find(params[:id])
+    new_tenants = @user.get_recent_tenant_emails
+    if new_tenants.any?
+      UserMailer.new_tenant_notification(recipient: @user, tenants: new_tenants).deliver
+      flash[:notification] = "Email sent notifying of #{new_tenants.join(", ")}"
+    else
+      flash[:error] = "No new tenants for this user"
+    end
+    redirect_to user_path(@user)
+  end
+
   private
     def user_params
       params.require(:user).permit([

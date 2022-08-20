@@ -19,4 +19,11 @@ class UserMailer < ActionMailer::Base
 
     mail to: @user.email, subject: "Welcome to your Heat Seek account!"
   end
+
+  def new_tenant_notification(recipient:, tenants:)
+    @recipient = recipient
+    @new_tenants = tenants
+
+    mail to: @recipient.email, subject: "List of your new tenants"
+  end
 end
