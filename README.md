@@ -1,7 +1,3 @@
-[![CodeShip](https://www.codeship.io/projects/13e8e870-b9be-0131-0742-5af5088413f2/status)](https://codeship.com/projects/20839)
-[![Code Climate](https://codeclimate.com/github/heatseeknyc/heatseeknyc.png)](https://codeclimate.com/github/heatseeknyc/heatseeknyc)
-[![Coverage Status](https://coveralls.io/repos/wfjeff/twinenyc/badge.png)](https://coveralls.io/r/wfjeff/twinenyc)
-
 # Heat Seek NYC
 
 ## Description
@@ -10,10 +6,10 @@ We’re a team of New Yorkers who believes no New Yorker should have to spend th
 
 At Heat Seek NYC, we’re using temperature sensors to empower tenants, landlords, community organizations, and the justice system to tackle our city’s heating crisis. We:
 
-* Provide unbiased evidence to verify heating code abuse claims in housing court
-* Help landlords heat their buildings more effectively while reducing costs
-* Create transparency in heating data to educate the community and inform housing policy
-* Our affordable temperature sensors can be installed in any number of apartments per building. They talk to each other via mesh network to periodically collect and transmit ambient temperature data to Heat Seek NYC’s servers. Our powerful web app integrates this data with public 311 heating complaint information to deliver a better picture of New York City’s heating crisis than ever before.
+- Provide unbiased evidence to verify heating code abuse claims in housing court
+- Help landlords heat their buildings more effectively while reducing costs
+- Create transparency in heating data to educate the community and inform housing policy
+- Our affordable temperature sensors can be installed in any number of apartments per building. They talk to each other via mesh network to periodically collect and transmit ambient temperature data to Heat Seek NYC’s servers. Our powerful web app integrates this data with public 311 heating complaint information to deliver a better picture of New York City’s heating crisis than ever before.
 
 We are working closely with community organizations, landlords, and the HPD to make our technology available to thousands of New Yorkers in time for the cold.
 
@@ -24,7 +20,6 @@ Heat Seek staff and volunteers install the temperature sensors at the beginning 
 ## Screenshots
 
 ![dashboard screenshot](app/assets/images/readme-assets/dashboard_screenshot.png)
-
 
 ![search screenshot](app/assets/images/readme-assets/dashboard_advocate.png)
 

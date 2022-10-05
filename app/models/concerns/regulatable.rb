@@ -1,7 +1,8 @@
 module Regulatable
   module ClassMethods
-    def in_heating_season?
-      DateTime.now.month < 6 || DateTime.now.month >= 10
+    def in_heating_season?(date = nil)
+      date ||= DateTime.now
+      date.month < 6 || date.month >= 10
     end
   end
 
@@ -43,6 +44,7 @@ module Regulatable
     end
 
     def violation_possible?(datetime, outdoor_temp)
+      return false unless self.class.in_heating_season?(datetime)
       !during_the_day?(datetime) || (outdoor_temp == nil || outdoor_temp < day_time_outdoor_legal_requirement)
     end
 
@@ -52,6 +54,8 @@ module Regulatable
     end
 
     def in_violation?(datetime, indoor_temp, outdoor_temp)
+      return false unless self.class.in_heating_season?(datetime)
+
       if during_the_day?(datetime)
         day_time_temps_below_minimum?(indoor_temp, outdoor_temp)
       else

@@ -1,15 +1,10 @@
 ENV["RAILS_ENV"] ||= "test"
 
-require "coveralls"
-Coveralls.wear!
-
 require "rubygems"
 require "spork"
-require "simplecov"
 require "timecop"
 require "webmock/rspec"
 
-SimpleCov.start
 Timecop.travel(DateTime.parse("2015-03-01 00:00:00 -0500"))
 
 Spork.prefork do
