@@ -278,8 +278,12 @@ class User < ApplicationRecord
     Collaboration.where("user_id = ? OR collaborator_id = ?", id, id).destroy_all
   end
 
-  def get_latest_readings(num)
-    readings.order(created_at: :asc).last(num)
+  def get_latest_readings(count, offset)
+    r = readings.order(created_at: :desc).offset(offset).first(count)
+    puts r.first.created_at
+    puts r.last.created_at
+    r
+
   end
 
   def last_weeks_readings

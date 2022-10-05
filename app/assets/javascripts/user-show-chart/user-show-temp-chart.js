@@ -4,6 +4,7 @@ function UserShowTempChartDrawer(chartOptions){
   this.url = this.setUrl();
   this.response = null;
   this.chart = null;
+  this.setForwardBackButtons();
 }
 
 UserShowTempChartDrawer.prototype.setUrl = function(){
@@ -37,16 +38,16 @@ UserShowTempChartDrawer.prototype.addViolationCountToLegend = function() {
     .text().replace(/\d+/, this.violations));
 };
 
+
 UserShowTempChartDrawer.prototype.selectDataBasedOnScreenSize = function(){
   if (window.innerWidth < 450 && this.response.length > 45) {
-    return this.response.slice(this.response.length - 46);
+    this.chartOptions.length_days = 1
   }else if(window.innerWidth < 720 && this.response.length > 90){
-    return this.response.slice(this.response.length - 91);
+    this.chartOptions.length_days = 3
   }else if(window.innerWidth < 1080 && this.response.length > 135){
-    return this.response.slice(this.response.length - 136);
-  } else {
-    return this.response;
+    this.chartOptions.length_days = 5
   }
+  return this.response;
 };
 
 UserShowTempChartDrawer.prototype.createAndDrawChartSvg = function(){
@@ -55,6 +56,21 @@ UserShowTempChartDrawer.prototype.createAndDrawChartSvg = function(){
   );
   this.chart.addChartElements();
 };
+
+UserShowTempChartDrawer.prototype.setForwardBackButtons = function(){
+  let that = this
+  $('#d3-back-button').on('click', function() {
+    that.chartOptions.end_days_ago = that.chartOptions.end_days_ago + that.chartOptions.length_days;
+    that.violations = 0;
+    that.drawChart();
+  });
+  $('#d3-forward-button').on('click', function() {
+    let diff = that.chartOptions.end_days_ago - that.chartOptions.length_days;
+    that.chartOptions.end_days_ago = diff > 0 ? diff : 0
+    that.violations = 0;
+    that.drawChart();
+  });
+}
 
 UserShowTempChartDrawer.prototype.drawChartOnWindowResize = function(){
   var resizeTimer = 0,
@@ -80,7 +96,9 @@ UserShowTempChartDrawer.prototype.updateTempForLiveUpdate = function(response){
 
 UserShowTempChartDrawer.prototype.drawChart = function() {
   var self = this;
-  $.getJSON(this.url + ".json", function(response){
+  e = this.chartOptions.end_days_ago
+  l = this.chartOptions.length_days
+  $.getJSON(this.url + ".json?end_days_ago="+e+"&length_days="+l, function(response){
     self.response = self.fixData(response);
     self.drawChartOnWindowResize();
     self.updateTempForLiveUpdate(response);
