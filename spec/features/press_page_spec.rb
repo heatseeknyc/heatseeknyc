@@ -7,8 +7,8 @@ feature "Press" do
   end
 
   scenario "viewing article" do
-    5.times do
-      FactoryGirl.create(:article)
+    5.times do |n|
+      FactoryBot.create(:article, title: "Fantastic title #{n}", published_date: n.days.ago)
     end
 
     visit press_path
@@ -17,7 +17,7 @@ feature "Press" do
     source = page.first(".source").text
     description = page.first(".description").text
 
-    article = Article.order(published_date: :desc).first
+    article = Article.order(created_at: :desc).first
 
     expect(title).to eq article.title
     expect(source).to include article.company

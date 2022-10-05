@@ -3,28 +3,28 @@ require "spec_helper"
 describe "Advocate's Tenant Dashboard", type: :feature do
   let!(:admin) { login_as_admin }
 
-  let(:user_with_no_violations) { FactoryGirl.create(:user) }
-  let(:user_with_recent_violations1) { FactoryGirl.create(:user) }
-  let(:user_with_recent_violations2) { FactoryGirl.create(:user) }
-  let(:user_with_old_violations) { FactoryGirl.create(:user) }
+  let(:user_with_no_violations) { FactoryBot.create(:user) }
+  let(:user_with_recent_violations1) { FactoryBot.create(:user) }
+  let(:user_with_recent_violations2) { FactoryBot.create(:user) }
+  let(:user_with_old_violations) { FactoryBot.create(:user) }
 
   before do
-    FactoryGirl.create(:collaboration, user: admin, collaborator: user_with_no_violations)
-    FactoryGirl.create(:collaboration, user: admin, collaborator: user_with_recent_violations1)
-    FactoryGirl.create(:collaboration, user: admin, collaborator: user_with_recent_violations2)
-    FactoryGirl.create(:collaboration, user: admin, collaborator: user_with_old_violations)
+    FactoryBot.create(:collaboration, user: admin, collaborator: user_with_no_violations)
+    FactoryBot.create(:collaboration, user: admin, collaborator: user_with_recent_violations1)
+    FactoryBot.create(:collaboration, user: admin, collaborator: user_with_recent_violations2)
+    FactoryBot.create(:collaboration, user: admin, collaborator: user_with_old_violations)
 
-    FactoryGirl.create(:reading, :violation, user: user_with_old_violations, created_at: 8.days.ago)
+    FactoryBot.create(:reading, :violation, user: user_with_old_violations, created_at: 8.days.ago)
 
-    FactoryGirl.create(:reading, :violation, user: user_with_recent_violations1, created_at: 8.days.ago)
-    FactoryGirl.create(:reading, :violation, user: user_with_recent_violations1, created_at: 2.days.ago)
-    FactoryGirl.create(:reading, :violation, user: user_with_recent_violations1, created_at: 2.days.ago)
-    FactoryGirl.create(:reading, :violation, user: user_with_recent_violations1, created_at: 1.days.ago)
+    FactoryBot.create(:reading, :violation, user: user_with_recent_violations1, created_at: 8.days.ago)
+    FactoryBot.create(:reading, :violation, user: user_with_recent_violations1, created_at: 2.days.ago)
+    FactoryBot.create(:reading, :violation, user: user_with_recent_violations1, created_at: 2.days.ago)
+    FactoryBot.create(:reading, :violation, user: user_with_recent_violations1, created_at: 1.days.ago)
 
-    FactoryGirl.create(:reading, user: user_with_recent_violations1, temp: 77)
+    FactoryBot.create(:reading, user: user_with_recent_violations1, temp: 77)
 
-    FactoryGirl.create(:reading, :violation, user: user_with_recent_violations2, created_at: 2.days.ago)
-    FactoryGirl.create(:reading, user: user_with_recent_violations2, temp: 78)
+    FactoryBot.create(:reading, :violation, user: user_with_recent_violations2, created_at: 2.days.ago)
+    FactoryBot.create(:reading, user: user_with_recent_violations2, temp: 78)
   end
 
   context "violation table" do
@@ -40,9 +40,9 @@ describe "Advocate's Tenant Dashboard", type: :feature do
     end
 
     it "does not show users you are not associated with" do
-      other_user = FactoryGirl.create(:user)
-      FactoryGirl.create(:reading, :violation, user: other_user, created_at: 2.days.ago)
-      FactoryGirl.create(:reading, :violation, user: other_user, created_at: 1.days.ago)
+      other_user = FactoryBot.create(:user)
+      FactoryBot.create(:reading, :violation, user: other_user, created_at: 2.days.ago)
+      FactoryBot.create(:reading, :violation, user: other_user, created_at: 1.days.ago)
 
       visit user_path(admin)
 

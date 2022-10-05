@@ -1,10 +1,10 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :reading do
-    temp 68
+    temp { 68 }
     original_temp { temp }
-    outdoor_temp 40
+    outdoor_temp { 40 }
     association :user
     association :twine
 
@@ -17,8 +17,8 @@ FactoryGirl.define do
     end
 
     trait :violation do
-      outdoor_temp 30
-      temp 30
+      outdoor_temp { 30 }
+      temp { 30 }
     end
   end
 end

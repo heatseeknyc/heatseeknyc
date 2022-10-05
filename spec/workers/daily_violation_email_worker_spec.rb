@@ -59,20 +59,20 @@ describe DailyViolationEmailWorker do
     expect(results.size).to eq 3
     results = results.sort_by { |r| [r['user_id'], r['start_at']] }
 
-    expect(results[0]).to include("user_id" => user1.id.to_s, "duration" => (4*60*60).to_s)
-    expect(results[1]).to include("user_id" => user2.id.to_s, "duration" => (3*60*60).to_s)
-    expect(results[2]).to include("user_id" => user2.id.to_s, "duration" => (3*60*60).to_s)
+    expect(results[0]).to include("user_id" => user1.id, "duration" => (4*60*60))
+    expect(results[1]).to include("user_id" => user2.id, "duration" => (3*60*60))
+    expect(results[2]).to include("user_id" => user2.id, "duration" => (3*60*60))
 
     expect(UserMailer).to receive(:violations_report).with(hash_including(recipient: advocate1)) do |args|
       violations = args[:violations]
       expect(violations.size).to eq 3
 
       expect(violations[0].user).to eq user1
-      expect(violations[0].data["duration"]).to eq (4*60*60).to_s
+      expect(violations[0].data["duration"]).to eq (4*60*60)
       expect(violations[1].user).to eq user2
-      expect(violations[1].data["duration"]).to eq (3*60*60).to_s
+      expect(violations[1].data["duration"]).to eq (3*60*60)
       expect(violations[2].user).to eq user2
-      expect(violations[2].data["duration"]).to eq (3*60*60).to_s
+      expect(violations[2].data["duration"]).to eq (3*60*60)
 
       double(deliver: true)
     end
@@ -82,7 +82,8 @@ describe DailyViolationEmailWorker do
       expect(violations.size).to eq 1
 
       expect(violations[0].user).to eq user1
-      expect(violations[0].data["duration"]).to eq (4*60*60).to_s
+      expect(violations[0].data["duration"]).to eq (4*60*60)
+      expect(violations[0].data["duration"]).to eq (4*60*60)
 
       double(deliver: true)
     end

@@ -1,4 +1,4 @@
-class Complaint < ActiveRecord::Base
+class Complaint < ApplicationRecord
 
   BOROUGHS = ["BROOKLYN", "BRONX", "MANHATTAN", "QUEENS", "STATEN ISLAND"]
   

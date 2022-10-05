@@ -1,12 +1,12 @@
 require 'spec_helper'
 
 feature "Managing articles" do
-  let(:article) { FactoryGirl.build(:article) }
+  let(:article) { FactoryBot.build(:article) }
 
   scenario "Viewing articles" do
-    article1 = FactoryGirl.create(:article, published_date: 3.days.ago)
-    article2 = FactoryGirl.create(:article, published_date: 2.days.ago)
-    article3 = FactoryGirl.create(:article, published_date: 1.day.ago)
+    article1 = FactoryBot.create(:article, published_date: 3.days.ago)
+    article2 = FactoryBot.create(:article, published_date: 2.days.ago)
+    article3 = FactoryBot.create(:article, published_date: 1.day.ago)
 
     login_as_team_member
     click_link "Articles"

@@ -1,4 +1,4 @@
-class Calibration < ActiveRecord::Base
+class Calibration < ApplicationRecord
   validates :start_at, presence: true
   validates :end_at, presence: true
   validates :offset, presence: true

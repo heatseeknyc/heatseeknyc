@@ -1,15 +1,10 @@
 ENV["RAILS_ENV"] ||= "test"
 
-require "coveralls"
-Coveralls.wear!
-
 require "rubygems"
 require "spork"
-require "simplecov"
 require "timecop"
 require "webmock/rspec"
 
-SimpleCov.start
 Timecop.travel(DateTime.parse("2015-03-01 00:00:00 -0500"))
 
 Spork.prefork do
@@ -29,8 +24,8 @@ Spork.prefork do
   ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
 
   RSpec.configure do |config|
-    config.include FactoryGirl::Syntax::Methods
-    config.include Devise::TestHelpers, type: :controller
+    config.include FactoryBot::Syntax::Methods
+    config.include Devise::Test::ControllerHelpers, type: :controller
     config.include Requests::JsonHelpers, type: :request
 
     config.filter_run focus: true
@@ -62,9 +57,9 @@ def geocode_response
 end
 
 def geoclient_response
-  {address: {bbl: Faker::Number.number(10)}}.to_json
+  {address: {bbl: Faker::Number.number(digits: 10)}}.to_json
 end
 
 Spork.each_run do
-  FactoryGirl.reload
+  FactoryBot.reload
 end

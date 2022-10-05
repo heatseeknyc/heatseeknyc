@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   def update
     if user_params[:permissions] &&
        user_params[:permissions].to_i < current_user.permissions
-      render text: "Unauthorized", status: :unauthorized
+      render plain: "Unauthorized", status: :unauthorized
     else
       @user.update_without_password(user_params)
       MixpanelSyncWorker.new.perform(@user.id, 'is_new_user' => false) # TODO background
@@ -43,12 +43,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    stripped_params = user_params.inject({}) do |params, (key, value)|
-      params[key.try(:to_sym) || key] = value.try(:strip) || value
-      params
-    end
-
-    @user = User.new_with_building(stripped_params)
+    @user = User.new_with_building(user_params)
 
     if @user.valid?
       @user.save
@@ -95,7 +90,7 @@ class UsersController < ApplicationController
   def update_password
     @user = User.find(current_user.id)
     if @user.update_with_password(password_params)
-      sign_in @user, bypass: true
+      bypass_sign_in @user
       flash[:notice] = "Password changed."
       redirect_to root_path
     else

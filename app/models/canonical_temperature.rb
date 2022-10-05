@@ -1,4 +1,4 @@
-class CanonicalTemperature < ActiveRecord::Base
+class CanonicalTemperature < ApplicationRecord
   def self.get_hourly_reading(zip_code)
     datetime = DateTime.now
     canonical_temp = find_by({

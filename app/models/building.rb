@@ -1,4 +1,4 @@
-class Building < ActiveRecord::Base
+class Building < ApplicationRecord
   has_many :units
   has_many :tenants, class_name: User.name
 
@@ -47,7 +47,7 @@ class Building < ActiveRecord::Base
     begin
       payload = JSON.parse(response.body)["address"]
 
-      self.bbl = payload["bbl"].gsub(/\D/, '')
+      self.bbl = payload["bbl"].to_s.gsub(/\D/, '')
     rescue
     end
   end

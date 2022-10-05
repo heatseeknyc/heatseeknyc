@@ -2,14 +2,14 @@ require 'spec_helper'
 
 describe QualityControl do
   before(:each) do
-    @user = FactoryGirl.create(:user)
+    @user = FactoryBot.create(:user)
     @sensor = @user.sensors.create(name: '1234abcd')
   end
 
   describe ".dedupe" do
     it "dedupes a users's readings" do
       10.times do
-        FactoryGirl.create(
+        FactoryBot.create(
           :reading,
           sensor: @sensor,
           user: @user,
@@ -29,7 +29,7 @@ describe QualityControl do
     before(:each) do
       sunday_afternoon = DateTime.parse("April 1, 2014 at 12pm")
       10.times do
-        FactoryGirl.create(
+        FactoryBot.create(
           :reading,
           sensor: @sensor,
           user: @user,

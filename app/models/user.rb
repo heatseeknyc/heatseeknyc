@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
                       message: 'must be E.164 format, e.g. +17241134455',
                       allow_blank: true }
 
-  before_save :create_search_names
+  before_save :clean_input
   # before_validation :associate_sensors
 
   before_destroy :destroy_all_collaborations
@@ -202,8 +202,9 @@ class User < ActiveRecord::Base
 
   def twine_name=(twine_name)
     return nil if twine_name == ""
+    twine_name = twine_name.strip
     temp_twine = Twine.find_by(:name => twine_name)
-    temp_twine.user(id)
+    temp_twine.reload_user
     update(twine: temp_twine)
   end
 
@@ -225,6 +226,24 @@ class User < ActiveRecord::Base
 
   def find_collaboration(collaboration_id)
     collaborations.where(id: collaboration_id)
+  end
+
+  def clean_input
+    strip_fields
+    create_search_names
+  end
+
+  def strip_fields
+    self.first_name = self.first_name.try(:strip) || self.first_name
+    self.last_name = self.last_name.try(:strip) || self.last_name
+    self.address = self.address.try(:strip) || self.address
+    self.email = self.email.try(:strip) || self.email
+    self.phone_number = self.phone_number.try(:strip) || self.phone_number
+    self.zip_code = self.zip_code.try(:strip) || self.zip_code
+    self.permissions = self.permissions.try(:strip) || self.permissions
+    self.apartment = self.apartment.try(:strip) || self.apartment
+    self.sms_alert_number = self.sms_alert_number.try(:strip) || self.sms_alert_number
+    self.sensor_codes_string = self.sensor_codes_string.try(:strip) || self.sensor_codes_string
   end
 
   def create_search_names

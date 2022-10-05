@@ -22,7 +22,7 @@ describe Unit, :vcr do
   describe "associations" do
     it "belongs to a building" do
       building = create(:building)
-      unit.update_attributes!(building: building)
+      unit.update(building: building)
       expect(unit.reload.building).to eq(building)
     end
 

@@ -14,7 +14,7 @@ describe "readings API", type: :request do
   end
 
   it "returns 400 for readings with no sensor" do
-    post "/readings.json", reading_params
+    post "/readings.json", params: reading_params
 
     expect(json).to eq(
       "code" => 400,
@@ -26,7 +26,7 @@ describe "readings API", type: :request do
   it "returns 400 and error message for readings with no user" do
     create(:sensor, name: sensor_name)
 
-    post "/readings.json", reading_params
+    post "/readings.json", params: reading_params
     expect(json).to eq(
       "code" => 400,
       "error" => "No user associated with that sensor"
@@ -43,7 +43,7 @@ describe "readings API", type: :request do
     user.readings << reading
     sensor.readings << reading
 
-    post "/readings.json", reading_params
+    post "/readings.json", params: reading_params
     expect(json["temp"]).to eq(reading.temp)
     expect(Time.zone.parse(json["created_at"])).to eq(reading.created_at)
     expect(json["user_id"]).to eq(user.id)
@@ -60,7 +60,7 @@ describe "readings API", type: :request do
     sensor = create(:sensor, name: sensor_name)
     user.sensors << sensor
 
-    post "/readings.json", reading_params
+    post "/readings.json", params: reading_params
     expect(response.body).to eq(Reading.first.to_json)
     expect(response.code).to eq "200"
   end
