@@ -17,11 +17,7 @@ feature "Press" do
     source = page.first(".source").text
     description = page.first(".description").text
 
-    #TODO: This test passes if you do .last instead of .first
-    #but not sure is expected behavior; upgradeing to FactoryBot
-    #revealed a test that would always pass, so unclear what
-    #desired behavior is
-    article = Article.order(published_date: :desc).first
+    article = Article.order(created_at: :desc).first
 
     expect(title).to eq article.title
     expect(source).to include article.company

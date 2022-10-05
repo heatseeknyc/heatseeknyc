@@ -63,14 +63,26 @@ describe DailyViolationEmailWorker do
     expect(results[1]).to include("user_id" => user2.id, "duration" => (3*60*60))
     expect(results[2]).to include("user_id" => user2.id, "duration" => (3*60*60))
 
-    #TODO: This is failing because it is called multiple times 
-    #I'm not sure if this is expected behavior that has changed with an update to 
-    #the mocking library, or if this is a regression of some kind
     expect(UserMailer).to receive(:violations_report).with(hash_including(recipient: advocate1)) do |args|
       violations = args[:violations]
       expect(violations.size).to eq 3
 
       expect(violations[0].user).to eq user1
+      expect(violations[0].data["duration"]).to eq (4*60*60)
+      expect(violations[1].user).to eq user2
+      expect(violations[1].data["duration"]).to eq (3*60*60)
+      expect(violations[2].user).to eq user2
+      expect(violations[2].data["duration"]).to eq (3*60*60)
+
+      double(deliver: true)
+    end
+
+    expect(UserMailer).to receive(:violations_report).with(hash_including(recipient: advocate2)) do |args|
+      violations = args[:violations]
+      expect(violations.size).to eq 1
+
+      expect(violations[0].user).to eq user1
+      expect(violations[0].data["duration"]).to eq (4*60*60)
       expect(violations[0].data["duration"]).to eq (4*60*60)
 
       double(deliver: true)
