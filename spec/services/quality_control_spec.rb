@@ -27,7 +27,7 @@ describe QualityControl do
 
   describe ".update_outdoor_temps_for" do
     before(:each) do
-      sunday_afternoon = DateTime.parse("August 1, 2014 at 12pm")
+      sunday_afternoon = DateTime.parse("April 1, 2014 at 12pm")
       10.times do
         FactoryBot.create(
           :reading,

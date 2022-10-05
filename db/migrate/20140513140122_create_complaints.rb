@@ -1,4 +1,4 @@
-class CreateComplaints < ActiveRecord::Migration
+class CreateComplaints < ActiveRecord::Migration[4.2]
   def change
     create_table :complaints do |t|
       t.date    "created_date"

@@ -8,7 +8,6 @@ gem 'snitcher'
 gem 'airbrake'
 gem 'bootstrap-datepicker-rails'
 gem 'chartkick'
-gem 'coveralls', require: false
 gem 'devise', '~> 4.8.1'
 gem 'responders', '~> 3.0.1'
 gem 'ffi', '~> 1.15.0'
@@ -67,7 +66,6 @@ group :test, :development do
   gem 'rspec-rails', '5.1.2'
   gem 'rubocop', '~> 0.87'
   gem 'selenium-webdriver'
-  gem 'simplecov'
   gem 'spring', '~> 3.0.0' # keeps the rails process running for faster init times
   gem 'spring-commands-rspec'
   # gem 'sqlite3'
