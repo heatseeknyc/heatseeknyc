@@ -13,6 +13,8 @@ describe "sensors not reporting spec", type: :feature do
     create_sensor("A006", 7.months.ago)
 
     create_sensor("A007", 1.month.ago).update(user: nil)
+    create_sensor("A008", 3.months.ago)
+    reassign_sensor("A008")
 
     visit not_reporting_sensors_path
   end
@@ -34,9 +36,21 @@ describe "sensors not reporting spec", type: :feature do
     expect(page).to_not have_text "A007"
   end
 
+  it "excludes readings not associated with its current owner user" do
+    expect(page).to_not have_text "A008"
+  end
+
   def create_sensor(nick_name, time)
-    sensor = FactoryBot.create(:sensor, :with_user, nick_name: nick_name)
-    sensor.readings << FactoryBot.create(:reading, created_at: time)
+    user = FactoryBot.create(:user)
+    sensor = FactoryBot.create(:sensor, :with_user, nick_name: nick_name, user: user)
+    sensor.readings << FactoryBot.create(:reading, created_at: time, user: user)
+    sensor
+  end
+
+  def reassign_sensor(nick_name)
+    sensor = Sensor.find_by(nick_name: nick_name)
+    user = FactoryBot.create(:user)
+    sensor.update(user: user)
     sensor
   end
 end
