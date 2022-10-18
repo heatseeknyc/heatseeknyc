@@ -34,6 +34,10 @@ feature "Super User" do
     end
 
     context "create new user" do
+      before do
+        allow_any_instance_of(User).to receive(:add_to_get_response)
+      end
+
       it "submit form " do
         visit new_user_path
         fill_in "First name", with: "Oscar"

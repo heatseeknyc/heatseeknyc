@@ -233,6 +233,20 @@ class User < ApplicationRecord
     create_search_names
   end
 
+  def add_to_get_response
+    auth_token = "api-key #{ENV['GET_RESPONSE_API_KEY']}"
+    response = HTTParty.post("https://api.getresponse.com/v3/contacts",
+                  headers: {
+                    "Content-Type": "application/json",
+                    "X-Auth-Token": auth_token
+                  },
+                  body: {
+                    name: "#{self.first_name} #{self.last_name}",
+                    email: self.email,
+                    campaign: { campaignId: ENV['GET_RESPONSE_LIST_TOKEN'] }
+                  }.to_json)
+  end
+
   def strip_fields
     self.first_name = self.first_name.try(:strip) || self.first_name
     self.last_name = self.last_name.try(:strip) || self.last_name

@@ -49,6 +49,7 @@ class UsersController < ApplicationController
       @user.save
 
       MixpanelSyncWorker.new.perform(@user.id, 'is_new_user' => true) # TODO background
+      @user.add_to_get_response if @user.tenant?
 
       if @user.email !~ /heatseek\.org$/
         password_reset_token = @user.generate_password_reset_token
