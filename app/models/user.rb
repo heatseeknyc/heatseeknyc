@@ -31,7 +31,6 @@ class User < ApplicationRecord
 
   before_save :clean_input
   # before_validation :associate_sensors
-  after_create :add_to_get_response
 
   before_destroy :destroy_all_collaborations
 

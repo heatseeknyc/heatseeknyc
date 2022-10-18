@@ -326,6 +326,7 @@ describe UsersController, type: :controller do
     before {
       sign_in super_user
       allow(UserMailer).to receive(:welcome_email).and_return double('UserMailer', deliver: true)
+      allow_any_instance_of(User).to receive(:add_to_get_response)
     }
 
     it "redirects to users index on create success", :vcr do
@@ -354,6 +355,20 @@ describe UsersController, type: :controller do
       expect(user.first_name).to eq("Kevin")
       expect(user.last_name).to eq("Tenant")
       expect(user.address).to eq("123 Fake St")
+    end
+
+    describe "GetResponse" do
+      it "adds tenant users to GetResponse" do
+        expect_any_instance_of(User).to receive(:add_to_get_response)
+        new_user = build(:user, address: " 123 Fake St ", first_name: "Kevin  ", last_name: "Tenant  ")
+        post :create, params: { user: new_user.attributes.merge(password: 'password', password_confirmation: 'password') }
+      end
+
+      it "does not add non-tenant users to GetResponse" do
+        expect_any_instance_of(User).to_not receive(:add_to_get_response)
+        new_user = build(:user, address: " 123 Fake St ", first_name: "Kevin  ", last_name: "Tenant  ", permissions: 25)
+        post :create, params: { user: new_user.attributes.merge(password: 'password', password_confirmation: 'password') }
+      end
     end
 
     context "creates user and associates with a new building" do
