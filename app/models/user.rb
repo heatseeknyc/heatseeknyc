@@ -243,7 +243,11 @@ class User < ApplicationRecord
                   body: {
                     name: "#{self.first_name} #{self.last_name}",
                     email: self.email,
-                    campaign: { campaignId: ENV['GET_RESPONSE_LIST_TOKEN'] }
+                    campaign: { campaignId: ENV['GET_RESPONSE_LIST_TOKEN'] },
+                    customFieldValues: [
+                      { customFieldId: "pMnvrJ", value: [self.first_name] },
+                      { customFieldId: "pMKFRN", value: [self.last_name] },
+                    ]
                   }.to_json)
   end
 
