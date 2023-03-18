@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_06_145512) do
+ActiveRecord::Schema.define(version: 2023_03_12_040059) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,6 +92,9 @@ ActiveRecord::Schema.define(version: 2021_05_06_145512) do
     t.boolean "violation"
     t.float "humidity"
     t.integer "original_temp"
+    t.datetime "relay_received_at"
+    t.datetime "hs_received_at"
+    t.datetime "device_recorded_at"
     t.index ["created_at"], name: "index_readings_on_created_at"
     t.index ["sensor_id"], name: "index_readings_on_sensor_id"
     t.index ["temp"], name: "index_readings_on_temp"
