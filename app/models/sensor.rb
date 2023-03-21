@@ -47,10 +47,42 @@ class Sensor < ApplicationRecord
     # created_at gets set to the time from the device
     # If that's after relay_received_at, we know the time on the device was wrong
     # in that case, use the time the relay received the data, as that was close to the reading time
+    u = self.user
+    z = u.zip_code
+    s = self
 
-    self.readings.where("created_at > relay_received_at").each do |sensor_reading|
-      puts "Updating created_at for #{self.name} reading at #{sensor_reading.created_at} to #{sensor_reading.relay_received_at}"
-      sensor_reading.update(created_at: sensor_reading.relay_received_at)
+    s.readings.where("created_at > relay_received_at").each do |r|
+      # get the outdoor temp at that time or outdoor temp now if it's close enough to current time
+      if (r.relay_received_at - Time.now).abs < 2.hours
+        ct = CanonicalTemperature.get_hourly_reading(z)
+      else
+        ct = CanonicalTemperature.find_by(record_time: r.created_at.beginning_of_hour, zip_code: z)
+      end
+
+      if ct.nil?
+        puts "couldn't find CanonicalTemperature for #{r.created_at.beginning_of_hour} #{z} "
+        puts "Updating #{s.name} | #{r.created_at} to #{r.relay_received_at}"
+        r.update(created_at: r.relay_received_at)
+      else
+        v = u.in_violation?(r.created_at, r.temp, ct.outdoor_temp)
+        puts "Updating #{s.name} | #{r.created_at} to #{r.relay_received_at} outdoor temp: #{ct.outdoor_temp} and violation: #{v}"
+        r.update(created_at: r.relay_received_at, outdoor_temp: ct.outdoor_temp, violation: v)
+      end
+    end
+  end
+
+  def recompute_all_outdoor_temp_and_violations
+    u = self.user
+    z = u.zip_code
+    self.readings.order(created_at: :desc).each do |r| 
+      ct = CanonicalTemperature.find_by(record_time: r.created_at.beginning_of_hour, zip_code: z)
+      if ct.nil?
+        puts "couldn't find CanonicalTemperature for #{r.created_at.beginning_of_hour} #{z} "
+      else
+        v = u.in_violation?(r.created_at, r.temp, ct.outdoor_temp)
+        r.update(outdoor_temp: ct.outdoor_temp, violation: v)
+        puts "Updated #{r.created_at} to outdoor temp: #{ct.outdoor_temp} and violation: #{v}"
+      end
     end
   end
 
