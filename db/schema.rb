@@ -10,16 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_06_145512) do
+ActiveRecord::Schema.define(version: 2023_03_12_040059) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
 
   create_table "articles", id: :serial, force: :cascade do |t|
-    t.string "title"
-    t.string "company"
-    t.string "company_link"
-    t.string "article_link"
+    t.string "title", limit: 255
+    t.string "company", limit: 255
+    t.string "company_link", limit: 255
+    t.string "article_link", limit: 255
     t.text "description"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -27,16 +28,16 @@ ActiveRecord::Schema.define(version: 2021_05_06_145512) do
   end
 
   create_table "buildings", id: :serial, force: :cascade do |t|
-    t.string "property_name"
+    t.string "property_name", limit: 255
     t.text "description"
-    t.string "street_address"
-    t.string "zip_code"
+    t.string "street_address", limit: 255
+    t.string "zip_code", limit: 255
     t.integer "bin"
-    t.string "bbl"
+    t.string "bbl", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string "city"
-    t.string "state"
+    t.string "city", limit: 255
+    t.string "state", limit: 255
     t.float "latitude"
     t.float "longitude"
     t.index ["street_address", "zip_code"], name: "index_buildings_on_street_address_and_zip_code", unique: true
@@ -67,16 +68,16 @@ ActiveRecord::Schema.define(version: 2021_05_06_145512) do
   create_table "complaints", id: :serial, force: :cascade do |t|
     t.date "created_date"
     t.date "closed_date"
-    t.string "agency"
-    t.string "agency_name"
-    t.string "complaint_type"
-    t.string "descriptor"
-    t.string "location_type"
+    t.string "agency", limit: 255
+    t.string "agency_name", limit: 255
+    t.string "complaint_type", limit: 255
+    t.string "descriptor", limit: 255
+    t.string "location_type", limit: 255
     t.integer "incident_zip"
-    t.string "incident_address"
-    t.string "street_name"
-    t.string "community_board"
-    t.string "borough"
+    t.string "incident_address", limit: 255
+    t.string "street_name", limit: 255
+    t.string "community_board", limit: 255
+    t.string "borough", limit: 255
     t.decimal "latitude", precision: 15, scale: 13
     t.decimal "longitude", precision: 15, scale: 13
   end
@@ -92,6 +93,9 @@ ActiveRecord::Schema.define(version: 2021_05_06_145512) do
     t.boolean "violation"
     t.float "humidity"
     t.integer "original_temp"
+    t.datetime "relay_received_at"
+    t.datetime "hs_received_at"
+    t.datetime "device_recorded_at"
     t.index ["created_at"], name: "index_readings_on_created_at"
     t.index ["sensor_id"], name: "index_readings_on_sensor_id"
     t.index ["temp"], name: "index_readings_on_temp"
@@ -107,11 +111,11 @@ ActiveRecord::Schema.define(version: 2021_05_06_145512) do
   end
 
   create_table "sensors", id: :serial, force: :cascade do |t|
-    t.string "name"
+    t.string "name", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "user_id"
-    t.string "nick_name"
+    t.string "nick_name", limit: 255
     t.string "ubibot_sensor_channel"
     t.index ["ubibot_sensor_channel"], name: "index_sensors_on_ubibot_sensor_channel"
   end
@@ -124,14 +128,14 @@ ActiveRecord::Schema.define(version: 2021_05_06_145512) do
   end
 
   create_table "twines", id: :serial, force: :cascade do |t|
-    t.string "name"
+    t.string "name", limit: 255
     t.integer "user_id"
-    t.string "email"
+    t.string "email", limit: 255
   end
 
   create_table "units", id: :serial, force: :cascade do |t|
     t.integer "building_id"
-    t.string "name"
+    t.string "name", limit: 255
     t.integer "floor"
     t.text "description"
     t.datetime "created_at"
@@ -140,29 +144,35 @@ ActiveRecord::Schema.define(version: 2021_05_06_145512) do
     t.index ["building_id"], name: "index_units_on_building_id"
   end
 
+  create_table "user_collaborators", id: :serial, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "collaborator_id"
+    t.integer "permissions"
+  end
+
   create_table "users", id: :serial, force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string "address"
-    t.string "first_name"
-    t.string "last_name"
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
+    t.string "address", limit: 255
+    t.string "first_name", limit: 255
+    t.string "last_name", limit: 255
+    t.string "encrypted_password", limit: 255, default: "", null: false
+    t.string "reset_password_token", limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string "current_sign_in_ip"
-    t.string "last_sign_in_ip"
-    t.string "email", default: "", null: false
+    t.string "current_sign_in_ip", limit: 255
+    t.string "last_sign_in_ip", limit: 255
+    t.string "email", limit: 255, default: "", null: false
     t.integer "permissions", default: 100
-    t.string "search_first_name"
-    t.string "search_last_name"
-    t.string "zip_code"
-    t.string "sensor_codes_string"
-    t.string "phone_number"
-    t.string "apartment"
+    t.string "search_first_name", limit: 255
+    t.string "search_last_name", limit: 255
+    t.string "zip_code", limit: 255
+    t.string "sensor_codes_string", limit: 255
+    t.string "phone_number", limit: 255
+    t.string "apartment", limit: 255
     t.boolean "dummy", default: false, null: false
     t.integer "building_id"
     t.integer "unit_id"
