@@ -56,7 +56,7 @@ class Sensor < ApplicationRecord
       if (r.relay_received_at - Time.now).abs < 2.hours
         ct = CanonicalTemperature.get_hourly_reading(z)
       else
-        ct = CanonicalTemperature.find_by(record_time: r.created_at.beginning_of_hour, zip_code: z)
+        ct = CanonicalTemperature.find_by(record_time: r.relay_received_at.beginning_of_hour, zip_code: z)
       end
 
       if ct.nil?
