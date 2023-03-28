@@ -71,6 +71,34 @@ class Sensor < ApplicationRecord
     end
   end
 
+  def import_manually_fixed_times(file_path)
+    require 'csv'
+    parsed_data = CSV.read(file_path, headers: true)
+    s = self
+    u = self.user
+    z = u.zip_code
+    tz = 'America/New_York'
+    parsed_data.each do |row|
+      r = Reading.find_by(id: row['id'])
+      if r.present?
+        new_time = Time.at(row['ts'].to_i).in_time_zone(tz)
+        ct = CanonicalTemperature.find_by(record_time: new_time.beginning_of_hour, zip_code: z)
+        if ct.nil?
+          v = u.in_violation?(new_time, r.temp, r.outdoor_temp)
+          puts "couldn't find CanonicalTemperature for #{new_time.beginning_of_hour} #{z} "
+          puts "Updating #{s.name} | #{r.created_at} to #{new_time} from CSV with violation: #{v}"
+          r.update(created_at: new_time, violation: v)
+        else
+          v = u.in_violation?(new_time, r.temp, ct.outdoor_temp)
+          puts "Updating #{s.name} | #{r.created_at} to #{new_time} from CSV. Outdoor: #{ct.outdoor_temp} violation: #{v}"
+          r.update(created_at: new_time, outdoor_temp: ct.outdoor_temp, violation: v)
+        end
+      else
+        puts "COULDN'T FIND READING ID: #{row['id']}"
+      end
+    end
+  end
+
   def recompute_all_outdoor_temp_and_violations
     u = self.user
     z = u.zip_code

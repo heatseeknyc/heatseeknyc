@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_12_040059) do
+ActiveRecord::Schema.define(version: 2023_03_28_232812) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 2023_03_12_040059) do
     t.float "outdoor_temp"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["zip_code", "record_time"], name: "index_canonical_temperatures_on_zip_code_and_record_time"
   end
 
   create_table "collaborations", id: :serial, force: :cascade do |t|
