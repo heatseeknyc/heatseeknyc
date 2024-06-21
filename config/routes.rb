@@ -16,6 +16,7 @@ Twinenyc::Application.routes.draw do
 
   get 'users/search' => 'users#search', as: :search_user
   post "users/create" => "users#create", as: :create_user
+  post "users/notify_advocate/:id" => "users#notify_advocate", as: :notify_advocate
   resources :users, except: [:create] do
     resources :collaborations
     collection do

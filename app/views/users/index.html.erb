@@ -64,6 +64,13 @@
                       class: "fa fa-plus fa-lg",
                       title: "Add Tenant"
                     %>
+                  <% elsif u.permissions <= 50 && u.get_recent_tenant_emails.any? && current_user.super_user? %>
+                    <%= link_to "",
+                      notify_advocate_path(u),
+                      method: :post,
+                      class: "fa fa-envelope fa-lg",
+                      title: "Add Tenant"
+                    %>
                   <% end %>
                 </td>
               </tr>
